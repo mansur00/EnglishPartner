@@ -9,7 +9,7 @@ import {
   ArrowRight01Icon,
 } from "@hugeicons/core-free-icons";
 import { CompleteLineExercise } from "@/content/seed/exercises";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 interface CompleteLineCardProps {
   exercises: CompleteLineExercise[];

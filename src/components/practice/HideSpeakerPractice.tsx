@@ -11,8 +11,8 @@ import {
   RefreshIcon,
 } from "@hugeicons/core-free-icons";
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface HideSpeakerPracticeProps {
   lines: LadderDialogueLine[];

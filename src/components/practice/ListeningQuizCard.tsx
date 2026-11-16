@@ -10,7 +10,7 @@ import {
   ArrowRight01Icon,
 } from "@hugeicons/core-free-icons";
 import { ListeningQuizQuestion } from "@/content/seed/exercises";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 interface ListeningQuizCardProps {
   questions: ListeningQuizQuestion[];

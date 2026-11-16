@@ -15,7 +15,7 @@ import { getExercisesForStep, ListeningQuizQuestion, CompleteLineExercise } from
 import { ListeningQuizCard } from "./ListeningQuizCard";
 import { HideSpeakerPractice } from "./HideSpeakerPractice";
 import { CompleteLineCard } from "./CompleteLineCard";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 interface PracticeWorkspaceProps {
   stepSlug: string;

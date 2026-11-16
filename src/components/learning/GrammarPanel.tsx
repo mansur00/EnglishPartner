@@ -10,7 +10,7 @@ import {
   Book01Icon,
 } from "@hugeicons/core-free-icons";
 import { SentenceGrammarEntry } from "@/content/seed/vocabulary";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 
 interface GrammarPanelProps {
   entry: SentenceGrammarEntry | null;

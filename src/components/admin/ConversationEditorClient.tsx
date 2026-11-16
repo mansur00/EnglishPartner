@@ -18,9 +18,9 @@ import { ScenarioItem } from "@/content/seed/scenarios";
 import { ConversationVersionData, DialogueLineItem } from "@/content/seed/dialogues";
 import { validateForPublish } from "@/lib/content/validator";
 import { canEditScenario, UserRole } from "@/lib/auth/roles";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 
 interface ConversationEditorClientProps {
   scenario: ScenarioItem;

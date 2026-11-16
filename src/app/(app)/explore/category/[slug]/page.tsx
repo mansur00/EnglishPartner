@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { NicheLadderRoadmap } from "@/components/learning/NicheLadderRoadmap";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS, CATEGORIES_LIST } from "@/content/seed/scenarios";

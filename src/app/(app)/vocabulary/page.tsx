@@ -12,8 +12,8 @@ import {
   Search01Icon,
   Login01Icon,
 } from "@hugeicons/core-free-icons";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import {

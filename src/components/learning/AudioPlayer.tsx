@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, PauseIcon, ReloadIcon } from "@hugeicons/core-free-icons";
 import type { DialogueLineItem } from "@/content/seed/dialogues";

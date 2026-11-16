@@ -9,8 +9,8 @@ import {
   Book01Icon,
 } from "@hugeicons/core-free-icons";
 import { LadderStepItem } from "@/content/seed/niche_shopping_money";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 interface NicheLadderRoadmapProps {
   steps: LadderStepItem[];

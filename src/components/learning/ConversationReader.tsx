@@ -8,7 +8,7 @@ import { WordDetailPopover } from "./WordDetailPopover";
 import { GrammarPanel } from "./GrammarPanel";
 import { ReviewSummary } from "./ReviewSummary";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ViewIcon,

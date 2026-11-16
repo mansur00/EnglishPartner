@@ -5,7 +5,7 @@ import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { CategoryPills } from "@/components/discovery/CategoryPills";
 import { FilterBar } from "@/components/discovery/FilterBar";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Search01Icon, SearchXIcon } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";

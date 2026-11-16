@@ -9,7 +9,7 @@ import {
   Bookmark01Icon,
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 interface AuthPromptModalProps {
   isOpen: boolean;

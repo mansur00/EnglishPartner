@@ -12,7 +12,7 @@ import {
   RefreshIcon,
 } from "@hugeicons/core-free-icons";
 import { VocabularyEntry } from "@/content/seed/vocabulary";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 interface ReviewSummaryProps {
   scenarioTitleEn: string;

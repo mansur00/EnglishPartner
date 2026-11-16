@@ -10,7 +10,7 @@ import {
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import { VocabularyEntry } from "@/content/seed/vocabulary";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 
 interface WordDetailPopoverProps {
   entry: VocabularyEntry | null;

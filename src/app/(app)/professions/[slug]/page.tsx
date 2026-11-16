@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon, Briefcase01Icon, CheckmarkCircle02Icon } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon, SparklesIcon, CheckmarkCircle01Icon } from "@hugeicons/core-free-icons";
 
