@@ -36,3 +36,4 @@
 | 3 | Explaining Design Decisions to Stakeholders | B2 | Medium/Long |
 | 4 | Receiving Design Feedback & Politely Defending Scope | B2 | Medium/Long |
 | 5 | Developer Handoff & Implementation Review | B1 | Medium |
+

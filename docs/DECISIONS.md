@@ -53,3 +53,4 @@
 | **GitHub** | Free | 2,000 CI minutes/month, unlimited public/private repos | 2026-11-16 | Used for CI workflows & source code |
 | **Piper TTS** | Open Source (MIT) | 100% Free, runs offline / batch on CPU | 2026-11-16 | Pre-generates English sentence audio |
 | **spaCy** | Open Source (MIT) | 100% Free | 2026-11-16 | Python NLP helper service |
+

@@ -9,3 +9,4 @@
 | `SUPABASE_SERVICE_ROLE_KEY` | Server only | Admin access for backend operations | Only for admin/seeding |
 | `DATABASE_URL` | Server only | Direct Postgres connection for Drizzle ORM | Yes |
 | `NEXT_PUBLIC_APP_URL` | Client & Server | Base URL of deployed application (e.g. `http://localhost:3000`) | Yes |
+

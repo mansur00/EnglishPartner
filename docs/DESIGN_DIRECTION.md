@@ -27,3 +27,4 @@
 | `--ecp-text-muted` (`#777580`) | `--ecp-surface` (`#FFFFFF`) | **4.6 : 1** | >= 4.5 : 1 (Normal text) | ✅ PASS (Double-A) |
 | `--ecp-brand-800` (`#563B91`) | `--ecp-surface` (`#FFFFFF`) | **7.5 : 1** | >= 4.5 : 1 (Interactive) | ✅ PASS (Triple-A) |
 | White (`#FFFFFF`) | `--ecp-brand-800` (`#563B91`) | **7.5 : 1** | >= 4.5 : 1 (Primary button) | ✅ PASS (Triple-A) |
+

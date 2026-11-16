@@ -18,3 +18,4 @@ All audio assets used in English Conversation Partner must strictly follow open-
 - Sentence audio is pre-generated offline using Piper TTS and uploaded to Supabase Storage as static files.
 - Audio is never generated dynamically during client runtime.
 - If audio is missing for a line, UI displays "Audio not available yet" instead of faking or breaking.
+

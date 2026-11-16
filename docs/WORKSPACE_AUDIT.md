@@ -42,3 +42,4 @@
 - **ORM:** Drizzle ORM (lightweight, relational, excellent type-safety for Supabase Postgres).
 - **Auth:** Supabase Auth (magic link / OAuth), strictly enforced server-side.
 - **Hosting:** Vercel (seamless preview and production deployments).
+

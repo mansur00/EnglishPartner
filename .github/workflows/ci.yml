@@ -31,3 +31,4 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: "https://ijlrseclqymuzdcrruoz.supabase.co"
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "sb_publishable_7wtqx3FnO8osRGGHR7BiWA_R-pfsErM"
+
