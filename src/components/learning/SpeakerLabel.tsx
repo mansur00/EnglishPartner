@@ -27,7 +27,7 @@ export function SpeakerLabel({ speaker }: SpeakerLabelProps) {
         <span className="text-xs font-bold text-[var(--ecp-brand-950)] leading-tight">
           {speaker.name}
         </span>
-        <span className="text-[10px] text-[var(--ecp-text-muted)] font-[var(--ecp-font-bangla)] leading-none">
+        <span className="text-xs text-muted-foreground font-bangla leading-none">
           {speaker.roleBn}
         </span>
       </div>

@@ -205,7 +205,7 @@ export function AdminDashboardClient() {
         {/* Scenarios Table */}
         <div className="overflow-x-auto border border-ecp-border rounded-xl">
           <table className="w-full text-left text-xs sm:text-sm">
-            <thead className="bg-ecp-bg-canvas text-ecp-text-muted border-b border-ecp-border text-[11px] uppercase tracking-wider font-semibold">
+            <thead className="bg-ecp-bg-canvas text-ecp-text-muted border-b border-ecp-border text-xs uppercase tracking-wider font-semibold">
               <tr>
                 <th className="p-3.5">দৃশ্যপট ও শিরোনাম (Scenario)</th>
                 <th className="p-3.5">ক্যাটাগরি</th>
@@ -229,7 +229,7 @@ export function AdminDashboardClient() {
                       <div className="text-xs text-ecp-text-secondary font-bangla">
                         {scenario.titleBn}
                       </div>
-                      <span className="text-[11px] font-mono text-ecp-text-muted">
+                      <span className="text-xs font-mono text-ecp-text-muted">
                         /{scenario.slug}
                       </span>
                     </td>
@@ -248,7 +248,7 @@ export function AdminDashboardClient() {
                       <Badge variant="brand" size="sm">
                         {scenario.level}
                       </Badge>
-                      <span className="block text-[11px] text-ecp-text-muted mt-0.5 capitalize">
+                      <span className="block text-xs text-ecp-text-muted mt-0.5 capitalize">
                         {scenario.communicationStyle}
                       </span>
                     </td>
@@ -264,7 +264,7 @@ export function AdminDashboardClient() {
                           US/UK
                         </span>
                       </div>
-                      <span className="text-[11px] text-ecp-text-muted block mt-1">
+                      <span className="text-xs text-ecp-text-muted block mt-1">
                         {turnsCount} turns
                       </span>
                     </td>

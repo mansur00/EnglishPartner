@@ -277,7 +277,7 @@ export default function VocabularyPage() {
 
               {/* Word Forms / Synonyms footer */}
               {item.wordForms && (
-                <div className="pt-2 text-[11px] text-ecp-text-muted flex flex-wrap gap-2">
+                <div className="pt-2 text-xs text-muted-foreground flex flex-wrap gap-2">
                   {item.wordForms.past && <span>Past: {item.wordForms.past}</span>}
                   {item.wordForms.plural && <span>Plural: {item.wordForms.plural}</span>}
                 </div>

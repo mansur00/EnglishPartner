@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!",
+  "group/badge inline-flex h-6 w-fit shrink-0 items-center justify-center gap-1.5 overflow-hidden rounded-full border border-transparent px-2.5 text-xs font-semibold whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3.5!",
   {
     variants: {
       variant: {
@@ -21,22 +21,22 @@ const badgeVariants = cva(
         brand:
           "bg-primary/10 text-primary border border-primary/20 dark:bg-primary/20 dark:text-primary-foreground",
         accent:
-          "bg-[var(--ecp-accent-100)] text-[#8A6318] border border-[var(--ecp-accent-400)]/40 dark:bg-[#352B18] dark:text-[#F7D98E] dark:border-[#8A6318]/50",
+          "bg-[var(--sun-100)] text-[var(--brand-950)] border border-[var(--sun-300)] dark:bg-[#352500] dark:text-[var(--sun-300)] dark:border-[var(--sun-700)]",
         peach:
-          "bg-[var(--ecp-peach-100)] text-[#A34E39] border border-[var(--ecp-peach-400)]/30 dark:bg-[#3B1F18] dark:text-[#F3A58F] dark:border-[#A34E39]/40",
+          "bg-[#FFE3C2] text-[#8A4A06] border border-[#F7CFA0] dark:bg-[#3D2E1C] dark:text-[#FFD9A8] dark:border-[#5A4327]",
         neutral:
           "bg-muted text-muted-foreground border border-border",
         success:
-          "bg-[var(--ecp-success-surface)] text-[var(--ecp-success)] border border-[var(--ecp-success)]/30 dark:bg-[#142B20] dark:text-[#4ADE80] dark:border-[#27845D]/40",
+          "bg-emerald-500/10 text-emerald-800 border border-emerald-500/30 dark:bg-emerald-400/15 dark:text-emerald-300 dark:border-emerald-400/30",
         warning:
-          "bg-[var(--ecp-warning-surface)] text-[var(--ecp-warning)] border border-[var(--ecp-warning)]/30 dark:bg-[#302412] dark:text-[#FBBF24] dark:border-[#B7791F]/40",
+          "bg-amber-500/10 text-amber-800 border border-amber-500/30 dark:bg-amber-400/15 dark:text-amber-300 dark:border-amber-400/30",
         error:
           "bg-destructive/10 text-destructive border border-destructive/20 dark:bg-destructive/20",
       },
       size: {
-        default: "px-2.5 py-0.5 text-xs",
-        sm: "px-2 py-0.5 text-[11px] rounded-md",
-        md: "px-2.5 py-0.5 text-xs rounded-full",
+        default: "h-6 px-2.5 text-xs rounded-full",
+        sm: "h-5 px-2 text-xs rounded-md",
+        md: "h-6 px-3 text-xs rounded-full",
       },
     },
     defaultVariants: {

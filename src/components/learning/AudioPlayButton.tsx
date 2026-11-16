@@ -98,7 +98,7 @@ export function AudioPlayButton({
   if (!isAvailable) {
     return (
       <span
-        className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium text-[var(--ecp-text-muted)] bg-[var(--ecp-surface-muted)] cursor-not-allowed select-none"
+        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold text-muted-foreground bg-muted cursor-not-allowed select-none"
         title="Audio asset is being generated"
       >
         <HugeiconsIcon icon={VolumeMute01Icon} size={13} />

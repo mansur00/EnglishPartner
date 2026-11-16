@@ -76,7 +76,7 @@ export function AuthPromptModal({
           </Button>
         </div>
 
-        <p className="text-center text-[11px] text-muted-foreground mt-2">
+        <p className="text-center text-xs text-muted-foreground mt-2">
           {actionText} • শেখার স্থান কখনো হারাবে না
         </p>
       </DialogContent>

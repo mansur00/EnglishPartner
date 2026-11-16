@@ -7,14 +7,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs",
-        primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs",
+        cta: "bg-[var(--sun-500)] text-[var(--brand-950)] hover:bg-[var(--sun-400)] active:bg-[var(--sun-600)] shadow-sm font-bold",
+        default: "bg-primary text-primary-foreground hover:bg-[var(--brand-900)] active:bg-[var(--brand-950)] shadow-xs font-semibold",
+        primary: "bg-primary text-primary-foreground hover:bg-[var(--brand-900)] active:bg-[var(--brand-950)] shadow-xs font-semibold",
         accent:
-          "bg-[var(--ecp-accent-500)] text-[var(--ecp-brand-950)] hover:bg-[var(--ecp-accent-400)] shadow-xs font-semibold",
+          "bg-[var(--sun-500)] text-[var(--brand-950)] hover:bg-[var(--sun-400)] shadow-xs font-bold",
         outline:
           "border border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-[var(--brand-100)] text-[var(--brand-800)] hover:bg-[var(--brand-200)] active:bg-[var(--brand-300)] dark:bg-[var(--accent)] dark:text-[var(--accent-foreground)] font-semibold",
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
@@ -22,18 +23,14 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default:
-          "h-8 gap-1.5 px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        md: "h-9 gap-2 px-4 text-sm",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1.5 rounded-[min(var(--radius-md),12px)] px-2.5 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-10 gap-2 px-5 text-base",
-        icon: "size-8",
-        "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-9",
+        default: "h-11 gap-2 px-5 text-base rounded-full",
+        md: "h-11 gap-2 px-5 text-base rounded-full",
+        sm: "h-9 gap-1.5 px-3.5 text-sm rounded-full",
+        xs: "h-7 gap-1 px-2.5 text-xs rounded-full",
+        lg: "h-13 gap-2.5 px-7 text-lg rounded-full",
+        icon: "size-11 rounded-full",
+        "icon-sm": "size-9 rounded-full",
+        "icon-lg": "size-13 rounded-full",
       },
     },
     defaultVariants: {

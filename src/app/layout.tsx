@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Hind_Siliguri, Geist } from "next/font/google";
+import { Inter, Poppins, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--ecp-font-sans",
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
   display: "swap",
 });
 
 const hindSiliguri = Hind_Siliguri({
-  weight: ["300", "400", "500", "600", "700"],
   subsets: ["bengali"],
-  variable: "--ecp-font-bangla",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-bangla",
   display: "swap",
 });
 
@@ -33,9 +39,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(inter.variable, hindSiliguri.variable, "font-sans", geist.variable)}
+      className={cn(poppins.variable, inter.variable, hindSiliguri.variable)}
     >
-      <body className="antialiased min-h-screen bg-background text-foreground transition-colors duration-200">
+      <body className="antialiased min-h-screen font-sans bg-background text-foreground transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>

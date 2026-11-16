@@ -92,20 +92,20 @@ export default function ExplorePage() {
     <div className="space-y-6 max-w-5xl mx-auto pb-16">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+        <h1 className="text-3xl md:text-4xl font-bold font-heading text-foreground tracking-tight">
           Explore Conversations
         </h1>
-        <p className="text-sm text-muted-foreground mt-1 font-[var(--ecp-font-bangla)]">
+        <p className="text-sm md:text-base text-muted-foreground mt-1.5 font-bangla">
           বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন (EN + BN)
         </p>
       </div>
 
       {/* Search Input with Rainbow Border on Focus & Clear Button */}
-      <div className={cn("rounded-2xl transition-all duration-200", isSearchFocused && "rainbow-border")}>
-        <div className="relative bg-card rounded-2xl border border-border shadow-xs">
+      <div className={cn("rounded-[14px] transition-all duration-200", isSearchFocused && "rainbow-border")}>
+        <div className="relative bg-card rounded-[14px] border border-border shadow-xs">
           <HugeiconsIcon
             icon={Search01Icon}
-            size={18}
+            size={20}
             className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
           <Input
@@ -120,16 +120,16 @@ export default function ExplorePage() {
               });
             }}
             placeholder="Search by topic, keyword, or role (e.g. 'airport', 'এয়ারপোর্ট', 'doctor', 'refund')..."
-            className="w-full h-12 pl-11 pr-11 border-0 shadow-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
+            className="w-full h-12 pl-12 pr-12 border-0 shadow-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
               aria-label="Clear search"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
-              <HugeiconsIcon icon={Cancel01Icon} size={16} />
+              <HugeiconsIcon icon={Cancel01Icon} size={18} />
             </button>
           )}
         </div>
@@ -155,30 +155,30 @@ export default function ExplorePage() {
 
       {/* Results Count Summary */}
       <div className="flex items-center justify-between pt-1">
-        <p className="text-xs font-semibold text-muted-foreground">
+        <p className="text-sm font-semibold text-muted-foreground">
           Showing <span className="text-primary font-bold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
         </p>
       </div>
 
       {/* Scenarios Grid / Skeletons / Empty State */}
       {isPending ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="p-6 rounded-2xl bg-card border border-border space-y-4">
+            <div key={i} className="p-7 rounded-2xl bg-card border border-border space-y-4">
               <div className="flex items-center gap-3">
-                <Skeleton className="w-10 h-10 rounded-xl" />
-                <div className="space-y-1.5 flex-1">
-                  <Skeleton className="h-4 w-1/3" />
-                  <Skeleton className="h-3 w-1/4" />
+                <Skeleton className="w-12 h-12 rounded-2xl" />
+                <div className="space-y-2 flex-1">
+                  <Skeleton className="h-5 w-1/3" />
+                  <Skeleton className="h-4 w-1/4" />
                 </div>
               </div>
-              <Skeleton className="h-5 w-3/4" />
-              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-6 w-3/4" />
+              <Skeleton className="h-11 w-full rounded-full" />
             </div>
           ))}
         </div>
       ) : filteredScenarios.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {filteredScenarios.map((scenario) => (
             <ScenarioCard key={scenario.id} scenario={scenario} />
           ))}
@@ -187,9 +187,9 @@ export default function ExplorePage() {
         <EmptyState
           title="No conversations found"
           description={`We couldn't find any situation matching "${searchQuery}". Try different keywords in English or বাংলা.`}
-          icon={<HugeiconsIcon icon={SearchXIcon} size={24} />}
+          icon={<HugeiconsIcon icon={SearchXIcon} size={28} />}
           action={
-            <Button variant="outline" size="sm" onClick={handleResetFilters} className="btn-press">
+            <Button variant="outline" size="md" onClick={handleResetFilters} className="btn-press">
               Reset All Filters
             </Button>
           }

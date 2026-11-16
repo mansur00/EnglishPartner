@@ -28,38 +28,31 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
     C1: "bg-purple-500/10 text-purple-800 border-purple-500/30 dark:bg-purple-400/15 dark:text-purple-300",
   };
 
-  const categoryEmoji: Record<string, string> = {
-    "shopping-and-money": "🛍️",
-    "travel-transport": "✈️",
-    "health-medical": "🏥",
-    "social-daily": "☕",
-    "workplace-business": "💼",
-  };
-
-  const emoji = categoryEmoji[primaryCat] || "💬";
-
   return (
-    <Card className="card-hover flex flex-col justify-between border-border bg-card p-5 md:p-6 shadow-xs group">
-      <div className="space-y-3.5">
+    <Card
+      data-topic={theme.topic}
+      className="card-hover flex flex-col justify-between border-border bg-card p-6 md:p-7 shadow-xs group"
+    >
+      <div className="space-y-4">
         {/* Header: Category Icon Tile + Tags */}
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <div
-              className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0 border ${theme.iconBgLight} ${theme.iconBgDark}`}
+              className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border border-[var(--topic-border)] bg-[var(--topic-tile)] text-[var(--topic-ink)] shadow-2xs"
               title={theme.name}
             >
-              {emoji}
+              {theme.emoji}
             </div>
 
             <div>
-              <span className={`text-xs font-bold ${theme.textColorLight} ${theme.textColorDark}`}>
+              <span className="text-sm font-bold text-[var(--topic-ink)]">
                 {scenario.categories[0]?.name || "Conversation"}
               </span>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className={`px-2 py-0.5 rounded-md text-[11px] font-bold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>
+              <div className="flex items-center gap-2 mt-1">
+                <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>
                   {scenario.level}
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-muted text-muted-foreground px-1.5 py-0.5 rounded border border-border">
+                <span className="text-xs font-bold uppercase tracking-wider bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border">
                   EN + BN
                 </span>
               </div>
@@ -67,8 +60,8 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
           </div>
 
           {scenario.profession && (
-            <Badge variant="secondary" size="sm" className="gap-1 text-[11px] shrink-0">
-              <HugeiconsIcon icon={Briefcase01Icon} size={11} />
+            <Badge variant="secondary" size="md" className="gap-1.5 shrink-0">
+              <HugeiconsIcon icon={Briefcase01Icon} size={14} />
               {scenario.profession.name}
             </Badge>
           )}
@@ -76,36 +69,36 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
 
         {/* Title & Bangla Subtitle */}
         <div>
-          <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+          <h3 className="text-xl font-bold font-heading text-foreground group-hover:text-primary transition-colors line-clamp-1">
             {scenario.title}
           </h3>
-          <p className="text-xs font-medium text-muted-foreground font-[var(--ecp-font-bangla)] mt-1 line-clamp-1">
+          <p className="text-sm font-medium text-muted-foreground font-bangla mt-1 line-clamp-1">
             {scenario.titleBn}
           </p>
         </div>
 
         {/* Sample Line Preview or Description */}
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
           {scenario.description}
         </p>
       </div>
 
       {/* Footer Info & Action */}
-      <div className="pt-4 mt-4 border-t border-border flex items-center justify-between">
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1 font-medium">
-            <HugeiconsIcon icon={Clock01Icon} size={13} className="text-primary" />
+      <div className="pt-4 mt-5 border-t border-border flex items-center justify-between">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <span className="flex items-center gap-1.5 font-medium">
+            <HugeiconsIcon icon={Clock01Icon} size={15} className="text-primary" />
             {scenario.estimatedMinutes}m
           </span>
-          <span className="flex items-center gap-1 font-medium">
-            <HugeiconsIcon icon={BookOpen01Icon} size={13} className="text-primary" />
+          <span className="flex items-center gap-1.5 font-medium">
+            <HugeiconsIcon icon={BookOpen01Icon} size={15} className="text-primary" />
             {scenario.exchangesCount} turns
           </span>
         </div>
 
         <Link href={`/conversations/${scenario.slug}`}>
-          <Button variant="secondary" size="sm" className="btn-press gap-1.5 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-            <HugeiconsIcon icon={PlayCircleIcon} size={15} />
+          <Button variant="secondary" size="md" className="btn-press gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+            <HugeiconsIcon icon={PlayCircleIcon} size={18} />
             <span>Practice</span>
           </Button>
         </Link>

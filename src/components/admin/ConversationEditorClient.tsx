@@ -383,7 +383,7 @@ export function ConversationEditorClient({
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="inline-flex items-center gap-1 text-[11px] text-ecp-violet font-semibold bg-ecp-violet-surface px-2 py-1 rounded-md">
+                  <span className="inline-flex items-center gap-1 text-xs text-ecp-violet font-semibold bg-ecp-violet-surface px-2 py-1 rounded-md">
                     <HugeiconsIcon icon={VolumeHighIcon} size={13} />
                     Piper TTS Synthesized
                   </span>

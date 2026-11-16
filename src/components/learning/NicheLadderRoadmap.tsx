@@ -140,7 +140,7 @@ export function NicheLadderRoadmap({
                             <HugeiconsIcon icon={Book01Icon} size={13} />
                             Step {step.stepNumber.toString().padStart(2, "0")}
                           </span>
-                          <span className="text-[11px] font-semibold text-ecp-text-muted">
+                          <span className="text-xs font-semibold text-ecp-text-muted">
                             {step.linesCount} lines · {step.level}
                           </span>
                         </div>
@@ -155,7 +155,7 @@ export function NicheLadderRoadmap({
                         </div>
 
                         {/* Grammar Focus Pill */}
-                        <div className="bg-ecp-bg-canvas p-2.5 rounded-xl border border-ecp-border text-[11px] text-ecp-text-secondary">
+                        <div className="bg-ecp-bg-canvas p-2.5 rounded-xl border border-ecp-border text-xs text-ecp-text-secondary">
                           <span className="font-semibold text-ecp-text-primary block mb-0.5">
                             Grammar Focus:
                           </span>
@@ -167,7 +167,7 @@ export function NicheLadderRoadmap({
 
                       {/* Speakers & Action */}
                       <div className="pt-3.5 mt-3 border-t border-ecp-border flex items-center justify-between gap-2">
-                        <div className="text-[11px] text-ecp-text-muted truncate">
+                        <div className="text-xs text-ecp-text-muted truncate">
                           বক্তা: {step.speakers.map((s) => s.name).join(", ")}
                         </div>
 

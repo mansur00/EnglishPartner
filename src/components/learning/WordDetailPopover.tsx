@@ -76,11 +76,11 @@ export function WordDetailPopover({
             <DialogTitle className="text-2xl font-bold text-foreground tracking-tight font-sans">
               {entry.word}
             </DialogTitle>
-            <Badge variant={posBadgeVariant(entry.partOfSpeech)} size="sm" className="uppercase text-[10px]">
+            <Badge variant={posBadgeVariant(entry.partOfSpeech)} size="sm" className="uppercase text-xs">
               {entry.partOfSpeech}
             </Badge>
             {grammarRole && (
-              <Badge variant="accent" size="sm" className="font-semibold text-[10px]">
+              <Badge variant="accent" size="sm" className="font-semibold text-xs">
                 Role: {grammarRole}
               </Badge>
             )}

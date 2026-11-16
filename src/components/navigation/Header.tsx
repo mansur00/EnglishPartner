@@ -45,28 +45,28 @@ export function Header() {
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger
             aria-label="Open navigation menu"
-            className="md:hidden inline-flex items-center justify-center w-8 h-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
           >
-            <HugeiconsIcon icon={Menu01Icon} size={20} />
+            <HugeiconsIcon icon={Menu01Icon} size={22} />
           </SheetTrigger>
-          <SheetContent side="left" className="w-72 bg-card border-r border-border p-5">
+          <SheetContent side="left" className="w-72 bg-card border-r border-border p-6">
             <SheetHeader className="pb-4 border-b border-border text-left">
-              <SheetTitle className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-base shadow-xs">
+              <SheetTitle className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold font-heading text-lg shadow-xs">
                   E
                 </div>
                 <div>
-                  <div className="font-bold text-sm leading-tight text-foreground">
+                  <div className="font-bold font-heading text-base leading-tight text-foreground">
                     English Partner
                   </div>
-                  <div className="text-[11px] text-muted-foreground">
+                  <div className="text-xs text-muted-foreground">
                     Menu & Learning Paths
                   </div>
                 </div>
               </SheetTitle>
             </SheetHeader>
 
-            <nav className="space-y-1.5 mt-5">
+            <nav className="space-y-2 mt-6">
               {mobileNavLinks.map((link) => {
                 const isActive = pathname === link.href || (link.href !== "/dashboard" && pathname.startsWith(link.href));
                 return (
@@ -75,13 +75,13 @@ export function Header() {
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors",
+                      "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors",
                       isActive
                         ? "bg-primary/10 text-primary dark:bg-primary/20"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     )}
                   >
-                    <HugeiconsIcon icon={link.icon} size={18} />
+                    <HugeiconsIcon icon={link.icon} size={20} />
                     <span>{link.name}</span>
                   </Link>
                 );
@@ -91,15 +91,15 @@ export function Header() {
         </Sheet>
 
         {/* Logo */}
-        <Link href="/dashboard" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold text-lg shadow-xs group-hover:opacity-90 transition-opacity">
+        <Link href="/dashboard" className="flex items-center gap-3 group">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity">
             E
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-sm leading-tight text-foreground">
+            <span className="font-bold font-heading text-base leading-tight text-foreground">
               English Partner
             </span>
-            <span className="text-[11px] text-muted-foreground font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               Conversation Practice
             </span>
           </div>
@@ -107,16 +107,16 @@ export function Header() {
       </div>
 
       {/* Right Controls: Grammar Toggle Slot, Language, Theme, User Profile */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2.5">
         {/* Language Badge */}
         <button
           type="button"
           aria-haspopup="true"
           aria-expanded="false"
           title="Bilingual mode: English & বাংলা"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
+          className="btn-press inline-flex items-center gap-1.5 h-10 px-3.5 rounded-full border border-border bg-card text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
         >
-          <HugeiconsIcon icon={Globe02Icon} size={14} className="text-primary" />
+          <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary" />
           <span>বাংলা</span>
         </button>
 
@@ -125,8 +125,8 @@ export function Header() {
 
         {/* User Avatar */}
         <Link href="/dashboard" aria-label="Learner Profile">
-          <Button variant="ghost" size="icon" className="w-8 h-8 rounded-full text-muted-foreground hover:text-foreground">
-            <HugeiconsIcon icon={UserIcon} size={18} />
+          <Button variant="ghost" size="icon" className="size-11 rounded-full text-muted-foreground hover:text-foreground">
+            <HugeiconsIcon icon={UserIcon} size={20} />
           </Button>
         </Link>
       </div>

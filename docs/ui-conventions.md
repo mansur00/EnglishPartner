@@ -21,3 +21,4 @@
 - **Interactive Elements:**
   - All button tap targets on mobile must have a minimum height of `36px` to `44px`.
   - Footers separated by a thin 1px border (`border-t border-border pt-4 mt-4`).
+

@@ -55,7 +55,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
         <div className="p-5 sm:p-6 space-y-6 flex-1">
           {/* Target Sentence Banner */}
           <div className="bg-muted/40 p-4 rounded-xl border border-border">
-            <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">
+            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">
               মূল বাক্য (Target Sentence)
             </span>
             <p className="text-base font-medium text-foreground italic leading-relaxed">

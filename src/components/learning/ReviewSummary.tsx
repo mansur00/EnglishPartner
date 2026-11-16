@@ -112,7 +112,7 @@ export function ReviewSummary({
                       <span className="font-bold text-ecp-text-primary text-sm font-sans truncate">
                         {item.word}
                       </span>
-                      <span className="text-[11px] font-mono text-ecp-text-muted">
+                      <span className="text-xs font-mono text-muted-foreground">
                         {item.ipa}
                       </span>
                     </div>

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:ui": "bash scripts/check-ui-sizes.sh",
     "test": "node --experimental-strip-types --test tests/learning-loop.test.mjs"
   },
   "dependencies": {
