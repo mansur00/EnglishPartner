@@ -1,120 +1,148 @@
-import Link from "next/link";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
+"use client";
+
+import { useState, useMemo } from "react";
+import { ScenarioCard } from "@/components/discovery/ScenarioCard";
+import { CategoryPills } from "@/components/discovery/CategoryPills";
+import { FilterBar } from "@/components/discovery/FilterBar";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { Button } from "@/components/ui/Button";
 import { HugeiconsIcon } from "@hugeicons/react";
-import {
-  Search01Icon,
-  FilterIcon,
-  PlayCircleIcon,
-  BookOpen01Icon,
-} from "@hugeicons/core-free-icons";
+import { Search01Icon, SearchXIcon } from "@hugeicons/core-free-icons";
+import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 
 export default function ExplorePage() {
-  const sampleScenarios = [
-    {
-      id: "1",
-      title: "Asking for a Price & Product Details",
-      category: "Shopping & Money",
-      level: "A1 • Beginner",
-      turns: "4 exchanges",
-      description: "Learn how to ask store clerks about item pricing and available colors.",
-    },
-    {
-      id: "2",
-      title: "Hotel Check-in & Inquiring About Amenities",
-      category: "Travel & Transportation",
-      level: "A2 • Elementary",
-      turns: "6 exchanges",
-      description: "Check in with the receptionist, request your room key, and ask about Wi-Fi.",
-    },
-    {
-      id: "3",
-      title: "Describing Symptoms to a Doctor",
-      category: "Health & Hospital",
-      level: "B1 • Intermediate",
-      turns: "8 exchanges",
-      description: "Explain how you feel, describe aches, and understand prescription instructions.",
-    },
-    {
-      id: "4",
-      title: "Introducing Design Role & Kickoff Questions",
-      category: "UI/UX Designer Path",
-      level: "B1 • Intermediate",
-      turns: "8 exchanges",
-      description: "Introduce your role to client stakeholders and ask key project discovery questions.",
-    },
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [level, setLevel] = useState("all");
+  const [lengthType, setLengthType] = useState("all");
+  const [style, setStyle] = useState("all");
+
+  // Filtering Logic (English + Bangla Search & Multi-criteria)
+  const filteredScenarios = useMemo(() => {
+    return SEED_SCENARIOS.filter((item) => {
+      // 1. Text Search (English title, Bangla title, description, or keywords)
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase().trim();
+        const matchesTitle = item.title.toLowerCase().includes(query);
+        const matchesTitleBn = item.titleBn.includes(query);
+        const matchesDesc = item.description.toLowerCase().includes(query);
+        const matchesDescBn = item.descriptionBn.includes(query);
+        const matchesKeyword = item.keywords.some((k) => k.toLowerCase().includes(query));
+
+        if (!matchesTitle && !matchesTitleBn && !matchesDesc && !matchesDescBn && !matchesKeyword) {
+          return false;
+        }
+      }
+
+      // 2. Category Filter
+      if (selectedCategory !== "all") {
+        const inCategory = item.categories.some((c) => c.slug === selectedCategory);
+        if (!inCategory) return false;
+      }
+
+      // 3. Level Filter
+      if (level !== "all" && item.level !== level) {
+        return false;
+      }
+
+      // 4. Length Type Filter
+      if (lengthType !== "all" && item.lengthType !== lengthType) {
+        return false;
+      }
+
+      // 5. Communication Style Filter
+      if (style !== "all" && item.communicationStyle !== style) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [searchQuery, selectedCategory, level, lengthType, style]);
+
+  const isFiltered = Boolean(
+    searchQuery || selectedCategory !== "all" || level !== "all" || lengthType !== "all" || style !== "all"
+  );
+
+  const handleResetFilters = () => {
+    setSearchQuery("");
+    setSelectedCategory("all");
+    setLevel("all");
+    setLengthType("all");
+    setStyle("all");
+  };
 
   return (
     <div className="space-y-6 max-w-5xl">
+      {/* Page Header */}
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
           Explore Conversations
         </h1>
         <p className="text-sm text-[var(--ecp-text-secondary)] mt-1">
-          Browse realistic everyday situations and professional dialogues.
+          Search and practice real-life English dialogues in English & বাংলা.
         </p>
       </div>
 
-      {/* Search & Filter Bar */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <HugeiconsIcon
-            icon={Search01Icon}
-            size={18}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--ecp-text-muted)]"
-          />
-          <input
-            type="text"
-            placeholder="Search situations (e.g. airport, doctor, refund, interview)..."
-            className="w-full h-11 pl-10 pr-4 rounded-xl border border-[var(--ecp-border-strong)] bg-[var(--ecp-surface)] text-sm text-[var(--ecp-text-primary)] placeholder:text-[var(--ecp-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)]"
-          />
-        </div>
-        <Button variant="outline" className="h-11 gap-2 shrink-0">
-          <HugeiconsIcon icon={FilterIcon} size={16} />
-          Filters (All Levels)
-        </Button>
+      {/* Search Input Bar */}
+      <div className="relative">
+        <HugeiconsIcon
+          icon={Search01Icon}
+          size={18}
+          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--ecp-text-muted)]"
+        />
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by situation, topic, or keyword (e.g. 'airport', 'এয়ারপোর্ট', 'doctor', 'refund')..."
+          className="w-full h-12 pl-10 pr-4 rounded-xl border border-[var(--ecp-border-strong)] bg-[var(--ecp-surface)] text-sm text-[var(--ecp-text-primary)] placeholder:text-[var(--ecp-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] shadow-sm"
+        />
+      </div>
+
+      {/* Category Horizontal Pills */}
+      <CategoryPills
+        selectedCategory={selectedCategory}
+        onSelectCategory={setSelectedCategory}
+      />
+
+      {/* Advanced Filter Bar */}
+      <FilterBar
+        level={level}
+        setLevel={setLevel}
+        lengthType={lengthType}
+        setLengthType={setLengthType}
+        style={style}
+        setStyle={setStyle}
+        onReset={handleResetFilters}
+        isFiltered={isFiltered}
+      />
+
+      {/* Scenarios Header & Results Count */}
+      <div className="flex items-center justify-between pt-2">
+        <p className="text-xs font-semibold text-[var(--ecp-text-secondary)]">
+          Showing <span className="text-[var(--ecp-brand-800)] font-bold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
+        </p>
       </div>
 
       {/* Scenarios Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-        {sampleScenarios.map((scenario) => (
-          <Card
-            key={scenario.id}
-            className="flex flex-col justify-between hover:border-[var(--ecp-brand-800)]/40 transition-all hover:shadow-md"
-          >
-            <div className="space-y-3">
-              <div className="flex items-center justify-between gap-2">
-                <Badge variant="brand">{scenario.category}</Badge>
-                <Badge variant="neutral">{scenario.level}</Badge>
-              </div>
-
-              <h2 className="text-base font-bold text-[var(--ecp-text-primary)] leading-snug">
-                {scenario.title}
-              </h2>
-
-              <p className="text-xs text-[var(--ecp-text-secondary)] leading-relaxed">
-                {scenario.description}
-              </p>
-            </div>
-
-            <div className="pt-4 mt-4 border-t border-[var(--ecp-border)] flex items-center justify-between">
-              <span className="text-xs text-[var(--ecp-text-muted)] flex items-center gap-1.5">
-                <HugeiconsIcon icon={BookOpen01Icon} size={15} />
-                {scenario.turns}
-              </span>
-
-              <Link href="/">
-                <Button variant="secondary" size="sm" className="gap-1.5">
-                  <HugeiconsIcon icon={PlayCircleIcon} size={16} />
-                  Practice
-                </Button>
-              </Link>
-            </div>
-          </Card>
-        ))}
-      </div>
+      {filteredScenarios.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredScenarios.map((scenario) => (
+            <ScenarioCard key={scenario.id} scenario={scenario} />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          title="No conversations found"
+          description={`We couldn't find any situation matching "${searchQuery}". Try different keywords in English or বাংলা.`}
+          icon={<HugeiconsIcon icon={SearchXIcon} size={24} />}
+          action={
+            <Button variant="outline" size="sm" onClick={handleResetFilters}>
+              Reset All Filters
+            </Button>
+          }
+        />
+      )}
     </div>
   );
 }

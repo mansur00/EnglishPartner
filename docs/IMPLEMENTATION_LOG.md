@@ -31,7 +31,32 @@ This log tracks every completed milestone and its test, accessibility, and archi
 
 ---
 
-## Next: Milestone 1B — Discovery
-- Explore Page full category and profession lists
-- Scenario cards with level, turns, and style tags
-- Full-text search and filtering logic
+## Phase 1 — Milestone 1B: Discovery
+**Date:** 16 November 2026  
+**Status:** Completed (Gate 1B Passed)
+
+### Completed Tasks
+- [x] **Seed Data Library (`src/content/seed/scenarios.ts`):**
+  - 12 Daily Life scenarios across Shopping, Travel, Health, and Social categories.
+  - 5 Professional UI/UX Designer career scenarios with step-by-step career path order.
+  - Bilingual metadata & search indexes (English + বাংলা).
+  - Multi-category mapping on shared records without duplicating content (Brief §3.3).
+- [x] **Discovery UI Components:**
+  - `ScenarioCard.tsx`: CEFR Level (A1-B2), turns count, duration, Hugeicons, and language badges.
+  - `CategoryPills.tsx`: Horizontal scrollable category pill selector.
+  - `FilterBar.tsx`: Dynamic CEFR level, turns length, communication style, and clear filters action.
+- [x] **Search & Dynamic Routing:**
+  - Realtime bilingual search on `/explore`: "airport" and "এয়ারপোর্ট" both locate the same scenario.
+  - Category detail routing at `/explore/category/[slug]`.
+  - Professional path track at `/professions/[slug]`.
+  - Scenario details at `/conversations/[slug]` with `generateStaticParams` for pre-rendered performance.
+  - Friendly `EmptyState` when queries return zero results.
+- [x] **Verification:** `npm run lint` and `npm run build` passed with zero errors (37 pre-rendered static routes). All code committed and pushed to GitHub.
+
+---
+
+## Next: Milestone 1C — Learning Page and Audio Pipeline
+- Conversation reader with sequential ConversationTurn rows
+- Translation reveal/hide per line and 'Show All'
+- Piper TTS sentence audio integration and AudioPlayButton states
+- Full conversation AudioPlayer with playback speeds (0.75x to 2x)
