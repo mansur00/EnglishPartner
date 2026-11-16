@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import { SEED_SCENARIOS } from "../src/content/seed/scenarios.ts";
 import { SEED_DIALOGUES } from "../src/content/seed/dialogues.ts";
 import { SEED_VOCABULARY, SEED_GRAMMAR_EXPLANATIONS } from "../src/content/seed/vocabulary.ts";
+import { SHOPPING_MONEY_LADDER_STEPS } from "../src/content/seed/niche_shopping_money.ts";
 import {
   hasMinimumRole,
   canViewAdminPanel,
@@ -148,5 +149,47 @@ describe("Milestone 1E: Core Learning Loop & System Integrity", () => {
       Object.keys(SEED_GRAMMAR_EXPLANATIONS).length >= 3,
       "Grammar explanations seed must contain entries"
     );
+  });
+
+  test("7. 20-Step Progressive Conversation Ladder (Niche 01)", () => {
+    assert.equal(
+      SHOPPING_MONEY_LADDER_STEPS.length,
+      20,
+      "Niche 01 must have exactly 20 progressive steps"
+    );
+
+    SHOPPING_MONEY_LADDER_STEPS.forEach((step, idx) => {
+      assert.equal(step.stepNumber, idx + 1, `Step sequence mismatch at index ${idx}`);
+      assert.ok(step.title.length > 0, `Step ${step.stepNumber} missing title`);
+      assert.ok(step.titleBn.length > 0, `Step ${step.stepNumber} missing Bengali title`);
+      assert.ok(step.focus.length > 0, `Step ${step.stepNumber} missing grammar focus`);
+      assert.ok(step.lines.length >= 5, `Step ${step.stepNumber} must have at least 5 lines`);
+      assert.equal(
+        step.lines.length,
+        step.linesCount,
+        `Step ${step.stepNumber} declared linesCount does not match parsed lines length`
+      );
+
+      // Verify continuous step linking
+      if (idx > 0) {
+        assert.equal(
+          step.prevStepSlug,
+          SHOPPING_MONEY_LADDER_STEPS[idx - 1].stepSlug,
+          `Step ${step.stepNumber} prevStepSlug must point to step ${idx}`
+        );
+      }
+      if (idx < 19) {
+        assert.equal(
+          step.nextStepSlug,
+          SHOPPING_MONEY_LADDER_STEPS[idx + 1].stepSlug,
+          `Step ${step.stepNumber} nextStepSlug must point to step ${idx + 2}`
+        );
+      }
+    });
+
+    // Step 20 is the C1 Story
+    const step20 = SHOPPING_MONEY_LADDER_STEPS[19];
+    assert.ok(step20.linesCount >= 50, "Step 20 story must have at least 50 lines");
+    assert.equal(step20.title, "The Shop on Sheikh Mujib Road");
   });
 });

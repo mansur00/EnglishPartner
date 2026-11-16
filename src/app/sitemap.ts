@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
+import { SHOPPING_MONEY_LADDER_STEPS } from "@/content/seed/niche_shopping_money";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://englishpartner.vercel.app";
@@ -25,5 +26,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticRoutes, ...scenarioRoutes];
+  const ladderRoutes: MetadataRoute.Sitemap = SHOPPING_MONEY_LADDER_STEPS.map((step) => ({
+    url: `${baseUrl}/conversations/${step.stepSlug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.9,
+  }));
+
+  return [...staticRoutes, ...scenarioRoutes, ...ladderRoutes];
 }
+

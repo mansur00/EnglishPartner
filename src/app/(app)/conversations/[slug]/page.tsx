@@ -8,9 +8,14 @@ import {
   ArrowLeft01Icon,
   Bookmark02Icon,
   CheckmarkCircle02Icon,
+  Book01Icon,
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
-import { SEED_DIALOGUES } from "@/content/seed/dialogues";
+import { SEED_DIALOGUES, ConversationVersionData } from "@/content/seed/dialogues";
+import {
+  SHOPPING_MONEY_LADDER_STEPS,
+  getShoppingMoneyStepBySlug,
+} from "@/content/seed/niche_shopping_money";
 import { ConversationReader } from "@/components/learning/ConversationReader";
 
 interface ScenarioDetailPageProps {
@@ -18,20 +23,143 @@ interface ScenarioDetailPageProps {
 }
 
 export function generateStaticParams() {
-  return SEED_SCENARIOS.map((scenario) => ({
+  const scenarioSlugs = SEED_SCENARIOS.map((scenario) => ({
     slug: scenario.slug,
   }));
+  const ladderSlugs = SHOPPING_MONEY_LADDER_STEPS.map((step) => ({
+    slug: step.stepSlug,
+  }));
+  return [...scenarioSlugs, ...ladderSlugs];
 }
 
 export default async function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
   const { slug } = await params;
+
+  // 1. Check if slug is a 20-Step Conversation Ladder Item
+  const ladderStep = getShoppingMoneyStepBySlug(slug);
+
+  if (ladderStep) {
+    const ladderVersion: ConversationVersionData = {
+      versionId: ladderStep.stepSlug,
+      versionName: `Step ${ladderStep.stepNumber.toString().padStart(2, "0")}`,
+      level: ladderStep.level.startsWith("A1") ? "A1" : ladderStep.level.startsWith("A2") ? "A2" : "B1",
+      lengthType: ladderStep.linesCount <= 6 ? "short" : ladderStep.linesCount <= 12 ? "medium" : "long",
+      communicationStyle: "neutral",
+      speakers: ladderStep.speakers.map((s) => ({
+        id: s.id,
+        name: s.name,
+        nameBn: s.nameBn,
+        role: s.role,
+        roleBn: s.roleBn,
+        avatarChar: s.avatarChar,
+        colorScheme: s.colorScheme,
+      })),
+      lines: ladderStep.lines.map((l) => ({
+        id: l.id,
+        sequenceNumber: l.sequenceNumber,
+        speakerId: l.speakerId,
+        englishText: l.englishText,
+        translationBn: l.translationBn,
+        wordHighlights: [],
+      })),
+    };
+
+    return (
+      <div className="space-y-6 max-w-4xl mx-auto pb-12">
+        {/* Top Breadcrumb & Action */}
+        <div className="flex items-center justify-between">
+          <Link href="/explore/category/shopping-and-money">
+            <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-xs">
+              <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+              Shopping Ladder (সব ধাপ)
+            </Button>
+          </Link>
+
+          <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+            <HugeiconsIcon icon={Bookmark02Icon} size={14} />
+            Bookmark
+          </Button>
+        </div>
+
+        {/* Step Header Card */}
+        <Card className="space-y-3.5 p-6 md:p-7 bg-[var(--ecp-surface)] border-[var(--ecp-border)]">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="brand" size="sm">
+              Niche 01: Shopping & Money
+            </Badge>
+            <Badge variant="neutral" size="sm" className="font-mono">
+              ধাপ {ladderStep.stepNumber.toString().padStart(2, "0")} / 20
+            </Badge>
+            <Badge variant="accent" size="sm">
+              {ladderStep.level} • CEFR
+            </Badge>
+            <span className="text-xs text-ecp-text-muted font-medium ml-1">
+              {ladderStep.linesCount} Turns
+            </span>
+          </div>
+
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+              {ladderStep.title}
+            </h1>
+            <p className="text-sm md:text-base text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1 font-medium">
+              {ladderStep.titleBn}
+            </p>
+          </div>
+
+          {/* Grammar Focus Callout */}
+          <div className="flex items-start gap-2 pt-2 text-xs text-[var(--ecp-text-secondary)] border-t border-[var(--ecp-border)]/60">
+            <HugeiconsIcon
+              icon={Book01Icon}
+              size={16}
+              className="text-ecp-violet shrink-0 mt-0.5"
+            />
+            <span>
+              <strong className="text-[var(--ecp-text-primary)]">Grammar Focus: </strong>
+              {ladderStep.focus}
+            </span>
+          </div>
+        </Card>
+
+        {/* Step-by-Step Interactive Conversation Reader */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-bold text-[var(--ecp-brand-950)]">
+              Dialogue Turns & Listening Practice
+            </h2>
+            <span className="text-xs text-[var(--ecp-text-muted)] font-medium">
+              Tap words to explore meaning
+            </span>
+          </div>
+
+          <ConversationReader
+            versions={[ladderVersion]}
+            scenarioTitleEn={ladderStep.title}
+            scenarioTitleBn={ladderStep.titleBn}
+            scenarioSlug={ladderStep.stepSlug}
+            stepNumber={ladderStep.stepNumber}
+            totalSteps={20}
+            stepFocus={ladderStep.focus}
+            prevStepSlug={ladderStep.prevStepSlug}
+            nextStepSlug={ladderStep.nextStepSlug}
+            nextStepTitle={
+              ladderStep.nextStepSlug
+                ? `ধাপ ${(ladderStep.stepNumber + 1).toString().padStart(2, "0")}`
+                : undefined
+            }
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Regular Scenario fallback
   const scenario = SEED_SCENARIOS.find((s) => s.slug === slug);
 
   if (!scenario) {
     notFound();
   }
 
-  // Fetch dialogue versions for this scenario, or provide fallback
   const versions = SEED_DIALOGUES[slug] || [
     {
       versionId: `${slug}-short`,
@@ -134,7 +262,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
       </Card>
 
-      {/* Interactive Conversation Reader (The Hero Learning Loop) */}
+      {/* Interactive Conversation Reader */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-bold text-[var(--ecp-brand-950)]">

@@ -62,3 +62,4 @@ export function canArchiveContent(role: UserRole): boolean {
 export function canManageUsers(role: UserRole): boolean {
   return role === "admin";
 }
+

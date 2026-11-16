@@ -25,9 +25,9 @@ export interface DialogueLineItem {
 
 export interface ConversationVersionData {
   versionId: string;
-  versionName: string; // "Short" | "Medium"
+  versionName: string; // e.g. "Short" | "Medium" | "Step 01"
   level: string;
-  lengthType: "short" | "medium";
+  lengthType: "short" | "medium" | "long" | "story";
   communicationStyle: "casual" | "neutral" | "formal";
   speakers: DialogueSpeaker[];
   lines: DialogueLineItem[];

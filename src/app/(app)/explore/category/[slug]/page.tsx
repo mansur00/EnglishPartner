@@ -1,10 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
+import { NicheLadderRoadmap } from "@/components/learning/NicheLadderRoadmap";
 import { Button } from "@/components/ui/Button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS, CATEGORIES_LIST } from "@/content/seed/scenarios";
+import {
+  NICHE_01_SHOPPING_MONEY,
+  SHOPPING_MONEY_LADDER_STEPS,
+} from "@/content/seed/niche_shopping_money";
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -28,8 +33,11 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
     slug === "all" ? true : item.categories.some((c) => c.slug === slug)
   );
 
+  // If this is the Shopping category, render the 20-Step Conversation Ladder Roadmap!
+  const isShoppingCategory = slug === "shopping-and-money" || slug === "shopping-money";
+
   return (
-    <div className="space-y-6 max-w-5xl">
+    <div className="space-y-6 max-w-5xl mx-auto pb-16">
       <div className="space-y-3">
         <Link href="/explore">
           <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-xs">
@@ -37,26 +45,55 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
             Back to All Topics
           </Button>
         </Link>
+      </div>
 
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
-            {category?.name || "Category"}
-          </h1>
-          <p className="text-sm text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1">
-            {category?.nameBn} — বাস্তব কথোপকথন চর্চা করুন
-          </p>
+      {isShoppingCategory ? (
+        <div className="space-y-10">
+          {/* Niche 01: 20-Step Progressive Learning Ladder Roadmap */}
+          <NicheLadderRoadmap
+            steps={SHOPPING_MONEY_LADDER_STEPS}
+            nicheTitle={NICHE_01_SHOPPING_MONEY.name}
+            nicheTitleBn={NICHE_01_SHOPPING_MONEY.nameBn}
+            description={NICHE_01_SHOPPING_MONEY.description}
+            descriptionBn={NICHE_01_SHOPPING_MONEY.descriptionBn}
+          />
+
+          {/* Additional standalone scenarios in this category */}
+          {categoryScenarios.length > 0 && (
+            <div className="space-y-4 pt-4 border-t border-ecp-border">
+              <h3 className="text-base font-bold text-ecp-text-primary font-bangla">
+                অন্যান্য প্রাসঙ্গিক দৃশ্যপট (Additional Practice Scenarios)
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {categoryScenarios.map((scenario) => (
+                  <ScenarioCard key={scenario.id} scenario={scenario} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      ) : (
+        <div className="space-y-6">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+              {category?.name || "Category"}
+            </h1>
+            <p className="text-sm text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1">
+              {category?.nameBn} — বাস্তব কথোপকথন চর্চা করুন
+            </p>
+          </div>
 
-      <div className="flex items-center justify-between text-xs font-semibold text-[var(--ecp-text-muted)] border-b border-[var(--ecp-border)] pb-3">
-        <span>{categoryScenarios.length} Scenarios Available</span>
-      </div>
+          <div className="flex items-center justify-between text-xs font-semibold text-[var(--ecp-text-muted)] border-b border-[var(--ecp-border)] pb-3">
+            <span>{categoryScenarios.length} Scenarios Available</span>
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {categoryScenarios.map((scenario) => (
-          <ScenarioCard key={scenario.id} scenario={scenario} />
-        ))}
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {categoryScenarios.map((scenario) => (
+              <ScenarioCard key={scenario.id} scenario={scenario} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

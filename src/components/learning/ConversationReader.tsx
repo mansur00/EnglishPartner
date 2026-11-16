@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { ConversationTurn } from "./ConversationTurn";
 import { AudioPlayer } from "./AudioPlayer";
 import { WordDetailPopover } from "./WordDetailPopover";
@@ -14,6 +15,8 @@ import {
   ViewOffIcon,
   Layers01Icon,
   CheckmarkBadge01Icon,
+  ArrowRight01Icon,
+  ArrowLeft01Icon,
 } from "@hugeicons/core-free-icons";
 import type { ConversationVersionData } from "@/content/seed/dialogues";
 import {
@@ -28,6 +31,12 @@ interface ConversationReaderProps {
   scenarioTitleEn?: string;
   scenarioTitleBn?: string;
   scenarioSlug?: string;
+  stepNumber?: number;
+  totalSteps?: number;
+  stepFocus?: string;
+  prevStepSlug?: string;
+  nextStepSlug?: string;
+  nextStepTitle?: string;
 }
 
 export function ConversationReader({
@@ -35,6 +44,12 @@ export function ConversationReader({
   scenarioTitleEn = "English Conversation Practice",
   scenarioTitleBn = "ইংরেজি কথোপকথন অনুশীলন",
   scenarioSlug,
+  stepNumber,
+  totalSteps = 20,
+  stepFocus,
+  prevStepSlug,
+  nextStepSlug,
+  nextStepTitle,
 }: ConversationReaderProps) {
   const [selectedVersionId, setSelectedVersionId] = useState<string>(
     versions[0]?.versionId || ""
@@ -43,7 +58,7 @@ export function ConversationReader({
   const [accent, setAccent] = useState<"en-US" | "en-GB">("en-US");
   const [activeLineIndex, setActiveLineIndex] = useState<number | null>(null);
 
-  // Milestone 1D states: Active Word Popover, Grammar Panel, Auth Prompt Modal
+  // Active Word Popover, Grammar Panel, Auth Prompt Modal
   const [selectedWordEntry, setSelectedWordEntry] = useState<VocabularyEntry | null>(null);
   const [isWordPopoverOpen, setIsWordPopoverOpen] = useState(false);
 
@@ -115,7 +130,7 @@ export function ConversationReader({
         lemma: clean,
         ipa: `/${clean}/`,
         partOfSpeech: "noun",
-        contextualMeaningBn: `"${word}" শব্দটির অর্থ ও ব্যাকরণগত ব্যাখ্যা`,
+        contextualMeaningBn: `"${word}" শব্দটির অর্থ ও ব্যাকরণগত প্রয়োগ`,
         generalMeaningBn: `প্রসঙ্গ অনুযায়ী এর প্রয়োগ লক্ষ্য করুন।`,
         exampleSentence: `Practice using "${word}" in your daily conversations.`,
       };
@@ -214,37 +229,69 @@ export function ConversationReader({
 
   return (
     <div className="space-y-6 relative pb-16">
-      {/* Control Header: Version Switch & Global Translation Toggle */}
+      {/* Control Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl shadow-2xs">
-        {/* Version Switcher */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
-            <HugeiconsIcon icon={Layers01Icon} size={14} />
-            সংস্করণ (Version):
-          </span>
-          <div className="flex items-center gap-1.5 bg-[var(--ecp-surface-muted)] p-1 rounded-xl border border-[var(--ecp-border)]">
-            {versions.map((ver) => (
-              <button
-                key={ver.versionId}
-                type="button"
-                onClick={() => {
-                  setSelectedVersionId(ver.versionId);
-                  setActiveLineIndex(null);
-                }}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  selectedVersionId === ver.versionId
-                    ? "bg-[var(--ecp-brand-800)] text-white shadow-xs"
-                    : "text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]"
-                }`}
-              >
-                {ver.versionName} ({ver.lines.length} turns)
-              </button>
-            ))}
+        {/* Step-by-Step Badge (when on ladder track) or Version Switcher (fallback) */}
+        {stepNumber ? (
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-bold text-xs font-mono border border-ecp-violet/20">
+              <HugeiconsIcon icon={Layers01Icon} size={14} />
+              ধাপ {stepNumber.toString().padStart(2, "0")} / {totalSteps}
+            </span>
+            {stepFocus && (
+              <span className="text-xs text-ecp-text-secondary bg-ecp-bg-canvas px-3 py-1.5 rounded-xl border border-ecp-border hidden md:inline">
+                <strong className="text-ecp-text-primary">Focus:</strong> {stepFocus}
+              </span>
+            )}
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+              <HugeiconsIcon icon={Layers01Icon} size={14} />
+              সংস্করণ (Version):
+            </span>
+            <div className="flex items-center gap-1.5 bg-[var(--ecp-surface-muted)] p-1 rounded-xl border border-[var(--ecp-border)]">
+              {versions.map((ver) => (
+                <button
+                  key={ver.versionId}
+                  type="button"
+                  onClick={() => {
+                    setSelectedVersionId(ver.versionId);
+                    setActiveLineIndex(null);
+                  }}
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                    selectedVersionId === ver.versionId
+                      ? "bg-[var(--ecp-brand-800)] text-white shadow-xs"
+                      : "text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]"
+                  }`}
+                >
+                  {ver.versionName} ({ver.lines.length} turns)
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
-        {/* Global Translation Toggle & Completion Action */}
-        <div className="flex items-center gap-2.5">
+        {/* Global Translation Toggle & Step Navigation */}
+        <div className="flex flex-wrap items-center gap-2">
+          {prevStepSlug && (
+            <Link href={`/conversations/${prevStepSlug}`}>
+              <Button variant="outline" size="sm" className="text-xs font-bangla gap-1">
+                <HugeiconsIcon icon={ArrowLeft01Icon} size={13} />
+                <span>আগের ধাপ</span>
+              </Button>
+            </Link>
+          )}
+
+          {nextStepSlug && (
+            <Link href={`/conversations/${nextStepSlug}`}>
+              <Button size="sm" className="text-xs font-bangla gap-1">
+                <span>পরের ধাপ</span>
+                <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
+              </Button>
+            </Link>
+          )}
+
           <Button
             variant="outline"
             size="sm"
@@ -254,8 +301,8 @@ export function ConversationReader({
             <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
             <span>
               {isGlobalTranslationVisible
-                ? "অনুবাদ লুকান (Hide)"
-                : "সব অনুবাদ (Show All)"}
+                ? "অনুবাদ লুকান"
+                : "সব অনুবাদ"}
             </span>
           </Button>
 
@@ -266,7 +313,7 @@ export function ConversationReader({
             className="text-xs gap-1.5 font-bangla"
           >
             <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
-            <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত করুন"}</span>
+            <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত"}</span>
           </Button>
         </div>
       </div>
@@ -317,6 +364,8 @@ export function ConversationReader({
         isScenarioBookmarked={isScenarioBookmarked}
         savedWords={savedWords}
         onSaveWordToggle={handleSaveWordToggle}
+        nextScenarioSlug={nextStepSlug}
+        nextScenarioTitle={nextStepTitle}
       />
 
       {/* Word Detail Popover */}
