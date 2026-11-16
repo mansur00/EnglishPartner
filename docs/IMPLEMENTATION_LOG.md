@@ -78,8 +78,34 @@ This log tracks every completed milestone and its test, accessibility, and archi
 
 ---
 
-## Next: Milestone 1D — Learning Tools and Personal Data
-- Word-level Vocabulary Popover (IPA, part of speech, contextual definition in current sentence)
-- Contextual Grammar Drawer (Sentence grammar breakdown first, progressive details on demand)
-- Bookmarks and My Vocabulary notebook persistence (A-01/A-02 authenticated guardrails)
-- Completed conversation progress tracking
+## Phase 1 — Milestone 1D: Learning Tools and Personal Data
+**Date:** 16 November 2026  
+**Status:** Completed (Gate 1D Ready for Owner Review)
+
+### Completed Tasks
+- [x] **Vocabulary Seed & Grammar Data (`src/content/seed/vocabulary.ts`):**
+  - Rich vocabulary items with IPA, Part-of-Speech, contextual Bengali gloss, general Bengali meaning, example sentence, word forms (past, past participle, plural), and synonyms.
+  - Sentence-level grammar entries with SVO structure breakdown (Subject, Verb, Object/Complement, Tense Name, Tense Pattern, Why Used in Bengali), polite natural alternatives, and common learner mistakes with corrections.
+- [x] **WordDetailPopover (`src/components/learning/WordDetailPopover.tsx`):**
+  - Interactive modal displaying IPA, POS badge, contextual & general Bengali meanings, example sentence, word forms, synonyms, and pronunciation audio button via Web Speech API.
+  - Word saving toggle with bookmark state and non-blocking auth prompt (A-01).
+- [x] **GrammarPanel (`src/components/learning/GrammarPanel.tsx`):**
+  - Accessible slide-over drawer displaying SVO structure, tense pattern, why used in Bengali, polite alternatives, and common learner mistakes with clear explanations.
+  - Keyboard accessible (`Escape` listener, smooth close).
+- [x] **ReviewSummary (`src/components/learning/ReviewSummary.tsx`):**
+  - Post-conversation review card celebrating completion, showing key vocabulary practiced, quick audio pronunciation & bookmarking, restart action, and next scenario navigation.
+- [x] **AuthPromptModal (`src/components/auth/AuthPromptModal.tsx`):**
+  - Non-blocking inline modal implementing Decision A-01: informs guest learners to log in for cloud sync without clearing page position or scroll state.
+- [x] **Personal Vocabulary Notebook (`/vocabulary`):**
+  - `/vocabulary` page with search, Part-of-Speech filters, audio playback, saved word management, and cloud sync trigger.
+- [x] **Offline NLP Helper (`services/nlp/nlp_helper.py`):**
+  - Python tool for tokenization, lemmatization, POS tagging, and content vocabulary candidate extraction.
+- [x] **Verification:** `npm run lint` and `npm run build` passed with zero errors and zero warnings across 38 pre-rendered static routes. All Hugeicons strictly match the outlined style guideline.
+
+---
+
+## Next: Milestone 1E — Polish & Launch Gate 1
+- Full responsive accessibility audit (keyboard navigation, focus states, screen reader labels)
+- Comprehensive test suite & smoke testing
+- Performance & bundle optimization
+- Final Gate 1 review and deployment readiness

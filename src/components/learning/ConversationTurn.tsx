@@ -5,7 +5,12 @@ import { cn } from "@/lib/utils";
 import { SpeakerLabel } from "./SpeakerLabel";
 import { AudioPlayButton } from "./AudioPlayButton";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ViewIcon, ViewOffIcon, InformationCircleIcon } from "@hugeicons/core-free-icons";
+import {
+  ViewIcon,
+  ViewOffIcon,
+  InformationCircleIcon,
+  BookOpen01Icon,
+} from "@hugeicons/core-free-icons";
 import type { DialogueSpeaker, DialogueLineItem } from "@/content/seed/dialogues";
 
 interface ConversationTurnProps {
@@ -17,6 +22,8 @@ interface ConversationTurnProps {
   onLinePlayStart?: () => void;
   onLinePlayEnd?: () => void;
   onWordClick?: (word: string) => void;
+  onGrammarClick?: (lineId: string) => void;
+  hasGrammarExplanation?: boolean;
 }
 
 export function ConversationTurn({
@@ -28,6 +35,8 @@ export function ConversationTurn({
   onLinePlayStart,
   onLinePlayEnd,
   onWordClick,
+  onGrammarClick,
+  hasGrammarExplanation = false,
 }: ConversationTurnProps) {
   const [localTranslationVisible, setLocalTranslationVisible] = useState<boolean | null>(null);
 
@@ -49,11 +58,11 @@ export function ConversationTurn({
           : "bg-[var(--ecp-surface)] border-[var(--ecp-border)]"
       )}
     >
-      {/* Top Bar: Speaker & Audio Controls */}
+      {/* Top Bar: Speaker & Controls */}
       <div className="flex items-center justify-between gap-3">
         <SpeakerLabel speaker={speaker} />
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Individual Sentence Audio Play */}
           <AudioPlayButton
             textToSpeak={line.englishText}
@@ -67,6 +76,19 @@ export function ConversationTurn({
             }}
             ariaLabel={`Play line ${line.sequenceNumber} by ${speaker.name}`}
           />
+
+          {/* Grammar Explanation Button */}
+          {hasGrammarExplanation && (
+            <button
+              type="button"
+              onClick={() => onGrammarClick?.(line.id)}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer"
+              title="বাক্যের ব্যাকরণ ও গঠন বিশ্লেষণ দেখুন"
+            >
+              <HugeiconsIcon icon={BookOpen01Icon} size={14} />
+              <span className="hidden sm:inline font-bangla">ব্যাকরণ</span>
+            </button>
+          )}
 
           {/* Translation Toggle per Line */}
           <button
@@ -85,9 +107,9 @@ export function ConversationTurn({
       <div className="pt-1">
         <p className="text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-relaxed tracking-tight">
           {words.map((word, idx) => {
-            const cleanWord = word.replace(/[^a-zA-Z]/g, "");
+            const cleanWord = word.replace(/[^a-zA-Z]/g, "").toLowerCase();
             const isHighlighted = line.wordHighlights?.some(
-              (h) => h.toLowerCase() === cleanWord.toLowerCase()
+              (h) => h.toLowerCase() === cleanWord
             );
 
             return (
@@ -95,12 +117,12 @@ export function ConversationTurn({
                 key={idx}
                 onClick={() => cleanWord && onWordClick?.(cleanWord)}
                 className={cn(
-                  "inline-block mr-1.5 transition-colors rounded px-0.5",
+                  "inline-block mr-1.5 transition-colors rounded px-0.5 cursor-pointer",
                   isHighlighted
-                    ? "font-semibold text-[var(--ecp-brand-950)] underline decoration-[var(--ecp-accent-500)] decoration-2 underline-offset-4 cursor-pointer hover:bg-[var(--ecp-accent-100)]"
-                    : "cursor-default"
+                    ? "font-semibold text-ecp-violet underline decoration-ecp-warm decoration-2 underline-offset-4 hover:bg-ecp-violet-surface/70"
+                    : "hover:bg-ecp-bg-canvas hover:text-ecp-violet"
                 )}
-                title={isHighlighted ? `Explore '${cleanWord}' meaning & grammar` : undefined}
+                title={isHighlighted ? `Click to see meaning & grammar for '${word}'` : `Click to see meaning for '${word}'`}
               >
                 {word}
               </span>

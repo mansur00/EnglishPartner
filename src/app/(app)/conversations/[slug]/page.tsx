@@ -145,7 +145,12 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           </span>
         </div>
 
-        <ConversationReader versions={versions} />
+        <ConversationReader
+          versions={versions}
+          scenarioTitleEn={scenario.title}
+          scenarioTitleBn={scenario.titleBn}
+          scenarioSlug={slug}
+        />
       </div>
     </div>
   );
