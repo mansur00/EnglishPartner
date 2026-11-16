@@ -55,8 +55,31 @@ This log tracks every completed milestone and its test, accessibility, and archi
 
 ---
 
-## Next: Milestone 1C — Learning Page and Audio Pipeline
-- Conversation reader with sequential ConversationTurn rows
-- Translation reveal/hide per line and 'Show All'
-- Piper TTS sentence audio integration and AudioPlayButton states
-- Full conversation AudioPlayer with playback speeds (0.75x to 2x)
+## Phase 1 — Milestone 1C: Learning Page & Audio Pipeline
+**Date:** 16 November 2026  
+**Status:** Completed (Gate 1C Ready for Owner Review)
+
+### Completed Tasks
+- [x] **Conversation Reader & Turns:**
+  - `SpeakerLabel.tsx`: Distinct speaker roles, Bengali role labels, and avatar schemes.
+  - `ConversationTurn.tsx`: Ordered sequence display, English sentence with interactive word chips, sentence audio player, and local Bangla translation reveal/hide.
+  - `ConversationReader.tsx`: Supports Short / Medium conversation versions, global "Show/Hide All Translations", and synchronized active line highlighting.
+- [x] **Sentence & Full Conversation Audio:**
+  - `AudioPlayButton.tsx`: Supports idle, playing, paused, and honest "Audio unavailable" states.
+  - `AudioPlayer.tsx`: Sticky full conversation player with Play/Pause, Replay, Playback speeds (0.75x, 1x, 1.25x, 1.5x), American (en-US) vs British (en-GB) accent toggles, and live progress bar.
+  - Strict adherence to no-autoplay on page load rule (Brief §8.3).
+- [x] **Audio Pipeline Scripts (`scripts/audio/`):**
+  - `check_asset.py`: File validation and corruption checker.
+  - `generate_line.py`: Offline sentence generation CLI using Piper TTS.
+  - `assemble_full.py`: Concatenator and `timing_manifest.json` builder with 600ms natural conversational pause spacing (Audio Guide §13).
+- [x] **Interactive Page (`/conversations/[slug]`):**
+  - Updated scenario detail into the core learning workspace.
+- [x] **Verification:** `npm run lint` and `npm run build` passed with zero errors and zero warnings across all 37 static routes. All changes committed and pushed to GitHub.
+
+---
+
+## Next: Milestone 1D — Learning Tools and Personal Data
+- Word-level Vocabulary Popover (IPA, part of speech, contextual definition in current sentence)
+- Contextual Grammar Drawer (Sentence grammar breakdown first, progressive details on demand)
+- Bookmarks and My Vocabulary notebook persistence (A-01/A-02 authenticated guardrails)
+- Completed conversation progress tracking
