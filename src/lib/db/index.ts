@@ -8,3 +8,4 @@ const connectionString = process.env.DATABASE_URL || "";
 const client = connectionString ? postgres(connectionString, { prepare: false }) : null;
 
 export const db = client ? drizzle(client, { schema }) : null;
+

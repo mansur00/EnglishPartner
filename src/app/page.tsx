@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { VolumeMute01Icon } from "@hugeicons/core-free-icons";
 
 export default function Home() {
   const [showTranslation, setShowTranslation] = useState(true);
@@ -93,10 +95,7 @@ export default function Home() {
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-muted)] bg-[var(--ecp-surface-muted)] cursor-not-allowed"
                 title="Audio will be generated via Piper TTS in Milestone 1C"
               >
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                </svg>
+                <HugeiconsIcon icon={VolumeMute01Icon} size={15} />
                 Audio not available yet
               </button>
             </div>
@@ -127,10 +126,7 @@ export default function Home() {
                 type="button"
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-muted)] bg-[var(--ecp-surface-muted)] cursor-not-allowed"
               >
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                </svg>
+                <HugeiconsIcon icon={VolumeMute01Icon} size={15} />
                 Audio not available yet
               </button>
             </div>

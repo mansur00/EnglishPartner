@@ -27,6 +27,7 @@
 | **D-16** | Search Scope | Phase 1B uses Postgres full-text (`english` config + Bangla translation titles). Trigram & embeddings deferred to Phase 2+. | Approved | 2026-11-16 |
 | **D-17** | Motion Libraries | No Rive in MVP (free-only rule). Native CSS + Motion for React. GSAP only with licence check. | Approved | 2026-11-16 |
 | **D-18** | Platform Stack | Next.js 16 + TypeScript + Tailwind v4 + Supabase Postgres + Supabase Auth + Vercel. | Confirmed via Audit | 2026-11-16 |
+| **D-19** | Icon Library | **Hugeicons Outlined (`@hugeicons/react` + `@hugeicons/core-free-icons`)** for full visual consistency across all components. Lucide-react retired. | Approved | 2026-11-16 |
 
 ---
 

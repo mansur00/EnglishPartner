@@ -3,21 +3,23 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { HugeiconsIcon } from "@hugeicons/react";
+import type { IconSvgElement } from "@hugeicons/react";
 import {
-  LayoutDashboard,
-  Compass,
-  CalendarCheck2,
-  Briefcase,
-  BotMessageSquare,
-  BookMarked,
-  TrendingUp,
-  Settings,
-} from "lucide-react";
+  DashboardSquare01Icon,
+  CompassIcon,
+  Calendar03Icon,
+  Briefcase01Icon,
+  BotIcon,
+  Bookmark02Icon,
+  Analytics01Icon,
+  Settings01Icon,
+} from "@hugeicons/core-free-icons";
 
 interface NavItem {
   name: string;
   href: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: IconSvgElement;
   active: boolean;
   comingSoon?: boolean;
 }
@@ -29,53 +31,53 @@ export function Sidebar() {
     {
       name: "Dashboard",
       href: "/dashboard",
-      icon: LayoutDashboard,
+      icon: DashboardSquare01Icon,
       active: pathname === "/dashboard",
     },
     {
       name: "Explore",
       href: "/explore",
-      icon: Compass,
+      icon: CompassIcon,
       active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
     },
     {
       name: "Daily Practice",
       href: "#",
-      icon: CalendarCheck2,
+      icon: Calendar03Icon,
       active: false,
       comingSoon: true,
     },
     {
       name: "Professional English",
       href: "/explore?category=professional",
-      icon: Briefcase,
+      icon: Briefcase01Icon,
       active: false,
     },
     {
       name: "AI Partner",
       href: "#",
-      icon: BotMessageSquare,
+      icon: BotIcon,
       active: false,
       comingSoon: true,
     },
     {
       name: "My Vocabulary",
       href: "#",
-      icon: BookMarked,
+      icon: Bookmark02Icon,
       active: false,
       comingSoon: true,
     },
     {
       name: "My Progress",
       href: "#",
-      icon: TrendingUp,
+      icon: Analytics01Icon,
       active: false,
       comingSoon: true,
     },
     {
       name: "Settings",
       href: "#",
-      icon: Settings,
+      icon: Settings01Icon,
       active: false,
       comingSoon: true,
     },
@@ -89,7 +91,6 @@ export function Sidebar() {
         </span>
         <nav className="space-y-1 pt-1">
           {navItems.map((item) => {
-            const Icon = item.icon;
             if (item.comingSoon) {
               return (
                 <div
@@ -97,7 +98,7 @@ export function Sidebar() {
                   className="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg text-[var(--ecp-text-muted)] cursor-not-allowed select-none opacity-70"
                 >
                   <div className="flex items-center gap-2.5">
-                    <Icon className="w-4 h-4" />
+                    <HugeiconsIcon icon={item.icon} size={18} />
                     <span>{item.name}</span>
                   </div>
                   <span className="text-[10px] font-medium bg-[var(--ecp-surface-muted)] text-[var(--ecp-text-muted)] px-1.5 py-0.5 rounded border border-[var(--ecp-border)]">
@@ -118,9 +119,10 @@ export function Sidebar() {
                     : "text-[var(--ecp-text-secondary)] hover:bg-[var(--ecp-surface-muted)] hover:text-[var(--ecp-text-primary)]"
                 )}
               >
-                <Icon
+                <HugeiconsIcon
+                  icon={item.icon}
+                  size={18}
                   className={cn(
-                    "w-4 h-4",
                     item.active ? "text-[var(--ecp-brand-800)]" : "text-[var(--ecp-text-secondary)]"
                   )}
                 />

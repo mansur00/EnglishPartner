@@ -2,7 +2,14 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { PlayCircle, ArrowRight, Sparkles, BookOpen, Clock } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  PlayCircleIcon,
+  ArrowRight01Icon,
+  SparklesIcon,
+  BookOpen01Icon,
+  Clock01Icon,
+} from "@hugeicons/core-free-icons";
 
 export default function DashboardPage() {
   return (
@@ -43,11 +50,11 @@ export default function DashboardPage() {
               Learn how to order your meal, request recommendations from the server, and politely ask for the check.
             </p>
             <div className="flex items-center gap-4 text-xs text-[var(--ecp-text-muted)] pt-1">
-              <span className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" /> 5-8 minutes
+              <span className="flex items-center gap-1.5">
+                <HugeiconsIcon icon={Clock01Icon} size={15} /> 5-8 minutes
               </span>
-              <span className="flex items-center gap-1">
-                <BookOpen className="w-3.5 h-3.5" /> 8 dialogue turns
+              <span className="flex items-center gap-1.5">
+                <HugeiconsIcon icon={BookOpen01Icon} size={15} /> 8 dialogue turns
               </span>
             </div>
           </div>
@@ -55,7 +62,7 @@ export default function DashboardPage() {
           <div className="shrink-0">
             <Link href="/explore">
               <Button variant="primary" size="lg" className="w-full md:w-auto shadow-md">
-                <PlayCircle className="w-5 h-5 mr-1" />
+                <HugeiconsIcon icon={PlayCircleIcon} size={20} className="mr-1.5" />
                 Start Conversation
               </Button>
             </Link>
@@ -82,7 +89,7 @@ export default function DashboardPage() {
           <Link href="/explore">
             <Button variant="outline" size="sm" className="w-full justify-between">
               Browse Everyday Library
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <HugeiconsIcon icon={ArrowRight01Icon} size={16} className="ml-1" />
             </Button>
           </Link>
         </Card>
@@ -104,7 +111,7 @@ export default function DashboardPage() {
           <Link href="/explore">
             <Button variant="outline" size="sm" className="w-full justify-between">
               Explore Professional Paths
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <HugeiconsIcon icon={ArrowRight01Icon} size={16} className="ml-1" />
             </Button>
           </Link>
         </Card>
@@ -112,8 +119,8 @@ export default function DashboardPage() {
 
       {/* 4. Continue Learning / Saved Progress */}
       <Card variant="muted">
-        <div className="flex items-center gap-3 mb-2">
-          <Sparkles className="w-5 h-5 text-[var(--ecp-brand-800)]" />
+        <div className="flex items-center gap-2.5 mb-2">
+          <HugeiconsIcon icon={SparklesIcon} size={18} className="text-[var(--ecp-brand-800)]" />
           <h3 className="text-base font-bold text-[var(--ecp-text-primary)]">
             Your Progress & Saved Material
           </h3>

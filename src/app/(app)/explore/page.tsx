@@ -2,7 +2,13 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Search, Filter, PlayCircle, BookOpen } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Search01Icon,
+  FilterIcon,
+  PlayCircleIcon,
+  BookOpen01Icon,
+} from "@hugeicons/core-free-icons";
 
 export default function ExplorePage() {
   const sampleScenarios = [
@@ -54,7 +60,11 @@ export default function ExplorePage() {
       {/* Search & Filter Bar */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--ecp-text-muted)]" />
+          <HugeiconsIcon
+            icon={Search01Icon}
+            size={18}
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--ecp-text-muted)]"
+          />
           <input
             type="text"
             placeholder="Search situations (e.g. airport, doctor, refund, interview)..."
@@ -62,7 +72,7 @@ export default function ExplorePage() {
           />
         </div>
         <Button variant="outline" className="h-11 gap-2 shrink-0">
-          <Filter className="w-4 h-4" />
+          <HugeiconsIcon icon={FilterIcon} size={16} />
           Filters (All Levels)
         </Button>
       </div>
@@ -90,14 +100,14 @@ export default function ExplorePage() {
             </div>
 
             <div className="pt-4 mt-4 border-t border-[var(--ecp-border)] flex items-center justify-between">
-              <span className="text-xs text-[var(--ecp-text-muted)] flex items-center gap-1">
-                <BookOpen className="w-3.5 h-3.5" />
+              <span className="text-xs text-[var(--ecp-text-muted)] flex items-center gap-1.5">
+                <HugeiconsIcon icon={BookOpen01Icon} size={15} />
                 {scenario.turns}
               </span>
 
               <Link href="/">
                 <Button variant="secondary" size="sm" className="gap-1.5">
-                  <PlayCircle className="w-4 h-4" />
+                  <HugeiconsIcon icon={PlayCircleIcon} size={16} />
                   Practice
                 </Button>
               </Link>

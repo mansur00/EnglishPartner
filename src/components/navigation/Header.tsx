@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Globe, User } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Globe02Icon, UserIcon } from "@hugeicons/core-free-icons";
 
 export function Header() {
   return (
@@ -28,13 +29,13 @@ export function Header() {
           type="button"
           className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface)] text-xs font-semibold text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:border-[var(--ecp-brand-800)]/30 transition-all cursor-pointer"
         >
-          <Globe className="w-3.5 h-3.5 text-[var(--ecp-brand-800)]" />
+          <HugeiconsIcon icon={Globe02Icon} size={15} className="text-[var(--ecp-brand-800)]" />
           <span>বাংলা</span>
         </button>
 
         <Link href="/dashboard">
           <Button variant="ghost" size="icon" className="rounded-full">
-            <User className="w-4 h-4" />
+            <HugeiconsIcon icon={UserIcon} size={18} />
           </Button>
         </Link>
       </div>

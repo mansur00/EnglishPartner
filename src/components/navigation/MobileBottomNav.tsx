@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Compass, BookMarked, User } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  DashboardSquare01Icon,
+  CompassIcon,
+  Bookmark02Icon,
+  UserIcon,
+} from "@hugeicons/core-free-icons";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -12,25 +18,25 @@ export function MobileBottomNav() {
     {
       name: "Dashboard",
       href: "/dashboard",
-      icon: LayoutDashboard,
+      icon: DashboardSquare01Icon,
       active: pathname === "/dashboard",
     },
     {
       name: "Explore",
       href: "/explore",
-      icon: Compass,
+      icon: CompassIcon,
       active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
     },
     {
       name: "Vocabulary",
       href: "/dashboard",
-      icon: BookMarked,
+      icon: Bookmark02Icon,
       active: false,
     },
     {
       name: "Profile",
       href: "/dashboard",
-      icon: User,
+      icon: UserIcon,
       active: false,
     },
   ];
@@ -38,7 +44,6 @@ export function MobileBottomNav() {
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-16 w-full items-center justify-around border-t border-[var(--ecp-border)] bg-[var(--ecp-surface)]/95 backdrop-blur px-2 shadow-lg">
       {navItems.map((item) => {
-        const Icon = item.icon;
         return (
           <Link
             key={item.name}
@@ -50,7 +55,7 @@ export function MobileBottomNav() {
                 : "text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]"
             )}
           >
-            <Icon className="w-5 h-5" />
+            <HugeiconsIcon icon={item.icon} size={20} />
             <span className="text-[10px] leading-none">{item.name}</span>
           </Link>
         );
