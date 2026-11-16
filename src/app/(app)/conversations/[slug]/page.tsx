@@ -17,6 +17,7 @@ import {
   getShoppingMoneyStepBySlug,
 } from "@/content/seed/niche_shopping_money";
 import { ConversationReader } from "@/components/learning/ConversationReader";
+import { LadderStepContainer } from "@/components/learning/LadderStepContainer";
 
 interface ScenarioDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -121,34 +122,11 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           </div>
         </Card>
 
-        {/* Step-by-Step Interactive Conversation Reader */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-[var(--ecp-brand-950)]">
-              Dialogue Turns & Listening Practice
-            </h2>
-            <span className="text-xs text-[var(--ecp-text-muted)] font-medium">
-              Tap words to explore meaning
-            </span>
-          </div>
-
-          <ConversationReader
-            versions={[ladderVersion]}
-            scenarioTitleEn={ladderStep.title}
-            scenarioTitleBn={ladderStep.titleBn}
-            scenarioSlug={ladderStep.stepSlug}
-            stepNumber={ladderStep.stepNumber}
-            totalSteps={20}
-            stepFocus={ladderStep.focus}
-            prevStepSlug={ladderStep.prevStepSlug}
-            nextStepSlug={ladderStep.nextStepSlug}
-            nextStepTitle={
-              ladderStep.nextStepSlug
-                ? `ধাপ ${(ladderStep.stepNumber + 1).toString().padStart(2, "0")}`
-                : undefined
-            }
-          />
-        </div>
+        {/* Step-by-Step Interactive Learning & Practice Container */}
+        <LadderStepContainer
+          step={ladderStep}
+          ladderVersion={ladderVersion}
+        />
       </div>
     );
   }

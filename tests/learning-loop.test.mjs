@@ -6,6 +6,7 @@ import { SEED_SCENARIOS } from "../src/content/seed/scenarios.ts";
 import { SEED_DIALOGUES } from "../src/content/seed/dialogues.ts";
 import { SEED_VOCABULARY, SEED_GRAMMAR_EXPLANATIONS } from "../src/content/seed/vocabulary.ts";
 import { SHOPPING_MONEY_LADDER_STEPS } from "../src/content/seed/niche_shopping_money.ts";
+import { SEED_EXERCISES_MAP } from "../src/content/seed/exercises.ts";
 import {
   hasMinimumRole,
   canViewAdminPanel,
@@ -191,5 +192,33 @@ describe("Milestone 1E: Core Learning Loop & System Integrity", () => {
     const step20 = SHOPPING_MONEY_LADDER_STEPS[19];
     assert.ok(step20.linesCount >= 50, "Step 20 story must have at least 50 lines");
     assert.equal(step20.title, "The Shop on Sheikh Mujib Road");
+  });
+
+  test("8. Phase 2 Milestone 2A: Exercises & Quizzes Integrity", () => {
+    assert.ok(Object.keys(SEED_EXERCISES_MAP).length > 0, "Exercises map must contain entries");
+
+    for (const [slug, exerciseSet] of Object.entries(SEED_EXERCISES_MAP)) {
+      assert.equal(slug, exerciseSet.stepSlug);
+
+      // Validate listening quizzes
+      for (const quiz of exerciseSet.listeningQuizzes) {
+        assert.ok(quiz.question.length > 0, "Quiz question missing");
+        assert.ok(quiz.options.length >= 2, "Quiz must have at least 2 options");
+        assert.ok(
+          quiz.options.some((o) => o.id === quiz.correctOptionId),
+          `Correct option ${quiz.correctOptionId} not found in options`
+        );
+        assert.ok(quiz.explanationBn.length > 0, "Bengali explanation missing");
+      }
+
+      // Validate complete line items
+      for (const item of exerciseSet.completeLines) {
+        assert.ok(item.maskedSentence.includes("___"), "Masked sentence must contain blank");
+        assert.ok(item.blanks.length > 0, "Must contain at least 1 blank");
+        item.blanks.forEach((b) => {
+          assert.ok(b.options.includes(b.correctAnswer), "Correct answer must be among options");
+        });
+      }
+    }
   });
 });

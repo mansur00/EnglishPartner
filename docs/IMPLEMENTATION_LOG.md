@@ -157,7 +157,34 @@ This log tracks every completed milestone and its test, accessibility, and archi
 
 ---
 
-## Next: Phase 2 — Active Learning
-- **Milestone 2A:** Listening & Recall (Listening comprehension quizzes, "Hide one speaker" mode, "Complete missing lines" mode).
-- **Milestone 2B:** Sentence Builder (Shuffled words puzzle → grammatically correct conversational English sentence).
-- **Milestone 2C:** "What Should I Say?" Interactive Intent Prompt (Intent in English/Bangla/Banglish → natural English responses).
+## Phase 2 — Milestone 2A: Listening & Recall (Active Learning)
+**Date:** 17 November 2026  
+**Status:** Completed (Milestone 2A Passed)
+
+### Completed Tasks
+- [x] **Database Schema Expansion (`src/lib/db/schema.ts`):**
+  - Added Phase 2 practice tables per `ECP_Exercises_SRS_Spec.md` §3: `exercises`, `exercise_items`, `practice_sessions`, and SM-2 fields on `user_vocabulary`.
+- [x] **Exercise Content Data Layer (`src/content/seed/exercises.ts`):**
+  - Curated exercises for 20-step conversation ladder:
+    - Multiple-choice listening comprehension questions with audio cues, answer keys, and Bengali pedagogical explanations.
+    - Missing word / complete line exercises with masked text and target options.
+    - Dialogue turn ordering exercises.
+- [x] **Interactive Practice Components (`src/components/practice/`):**
+  - `ListeningQuizCard.tsx`: Instant feedback upon selection, positive encouragement, and Bengali explanations.
+  - `HideSpeakerPractice.tsx`: Roleplay dialogue simulator where the learner chooses a role, partner's turns are spoken, and learner's turns are hidden for active recall with "Reveal & Listen" self-check.
+  - `CompleteLineCard.tsx`: Interactive fill-the-blanks with word chips.
+  - `PracticeWorkspace.tsx`: Multi-tab workspace with automatic fallback generation for any conversation line and quick Next Step advancement banner.
+- [x] **Learning Container Integration (`LadderStepContainer.tsx`):**
+  - Added primary section switcher on conversation steps: "📖 সংলাপ ও অডিও পাঠ (Dialogue)" and "🎯 অনুশীলন ও কুইজ (Practice & Quiz)".
+- [x] **Automated Test Suite (`tests/learning-loop.test.mjs`):**
+  - Added Test #8 verifying exercise integrity, option validation, and blank checking. 8/8 tests pass.
+- [x] **Build & Route Verification:**
+  - `npm test`, `npm run lint`, and `npm run build` compiled with 100% success across all **80 static pre-rendered routes**.
+
+---
+
+## Next: Milestone 2B — Sentence Builder (Interactive Word Ordering)
+- Draggable / tappable shuffled word chips
+- Multiple accepted word orders with normalization
+- Keyboard accessible (arrow keys, Space, Enter)
+- Immediate grammar breakdown of the reordered sentence

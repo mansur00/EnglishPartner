@@ -219,6 +219,12 @@ export const userVocabulary = pgTable("user_vocabulary", {
   vocabularyId: uuid("vocabulary_id").references(() => vocabulary.id, { onDelete: "cascade" }).notNull(),
   savedAt: timestamp("saved_at").defaultNow().notNull(),
   reviewStatus: text("review_status").default("learning"),
+  reviewStage: integer("review_stage").default(0),
+  easeFactor: text("ease_factor").default("2.50"),
+  intervalDays: integer("interval_days").default(0),
+  nextReviewAt: timestamp("next_review_at"),
+  lastReviewedAt: timestamp("last_reviewed_at"),
+  lapseCount: integer("lapse_count").default(0),
 });
 
 export const bookmarks = pgTable("bookmarks", {
@@ -226,4 +232,53 @@ export const bookmarks = pgTable("bookmarks", {
   userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
   scenarioId: uuid("scenario_id").references(() => scenarios.id, { onDelete: "cascade" }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// --- 12. EXERCISES & PRACTICE SESSIONS (Phase 2, ECP_Exercises_SRS_Spec.md §3) ---
+export const exerciseTypeEnum = pgEnum("exercise_type", [
+  "listening_quiz",
+  "sentence_builder",
+  "dialogue_order",
+  "hide_speaker",
+  "complete_line",
+  "read_aloud",
+  "flashcard"
+]);
+
+export const exercises = pgTable("exercises", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  conversationVersionId: uuid("conversation_version_id").references(() => conversationVersions.id, { onDelete: "cascade" }),
+  scenarioSlug: text("scenario_slug").notNull(),
+  exerciseType: exerciseTypeEnum("exercise_type").notNull(),
+  title: text("title").notNull(),
+  instructions: text("instructions").notNull(),
+  displayOrder: integer("display_order").notNull().default(0),
+  difficulty: text("difficulty").default("normal"),
+  status: contentStatusEnum("status").notNull().default("published"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const exerciseItems = pgTable("exercise_items", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  exerciseId: uuid("exercise_id").references(() => exercises.id, { onDelete: "cascade" }).notNull(),
+  position: integer("position").notNull().default(1),
+  dialogueLineId: uuid("dialogue_line_id").references(() => dialogueLines.id, { onDelete: "set null" }),
+  promptText: text("prompt_text"),
+  promptAudioUrl: text("prompt_audio_url"),
+  itemData: jsonb("item_data").notNull(),
+  explanation: text("explanation"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const practiceSessions = pgTable("practice_sessions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+  exerciseType: exerciseTypeEnum("exercise_type").notNull(),
+  status: text("status").notNull().default("in_progress"),
+  scoreCorrect: integer("score_correct").default(0),
+  scoreTotal: integer("score_total").default(0),
+  lastItemPosition: integer("last_item_position").default(1),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
