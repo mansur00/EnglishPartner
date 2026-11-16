@@ -104,8 +104,60 @@ This log tracks every completed milestone and its test, accessibility, and archi
 
 ---
 
-## Next: Milestone 1E — Polish & Launch Gate 1
-- Full responsive accessibility audit (keyboard navigation, focus states, screen reader labels)
-- Comprehensive test suite & smoke testing
-- Performance & bundle optimization
-- Final Gate 1 review and deployment readiness
+## Phase 1 — Milestone 1E: Admin, Content Validation & Release (Phase 1 Exit)
+**Date:** 17 November 2026  
+**Status:** Completed (Gate 1E Ready for Owner Review & Sign-Off)
+
+### Completed Tasks
+- [x] **Role-Based Access Control System (`src/lib/auth/roles.ts`):**
+  - Complies with Decision D-11 and Brief §14.
+  - Implements 5 hierarchical roles: `learner`, `translator`, `editor`, `reviewer`, `admin`.
+  - Server and client-side guards: unauthorised users receive 403 Forbidden screens.
+- [x] **Admin Console & Dashboard (`/admin`, `AdminDashboardClient.tsx`):**
+  - Content metrics: total scenarios (17), dialogue turns count, translation coverage (100%), and offline audio asset status.
+  - Interactive scenario list with status tabs (All, Published, In Review, Draft, Archived).
+  - Language coverage matrix report (scenarios × Bengali translations × audio accents).
+  - Chronological audit log tracking content changes.
+  - Role test switcher allowing live switching between Learner (403), Translator, Editor, Reviewer, and Admin.
+- [x] **Conversation & Dialogue Turn Editor (`/admin/conversations/[slug]/edit`):**
+  - Interactive turns editor: add turns, reorder sequence numbers with up/down controls, delete turns.
+  - Speaker selector mapped to valid conversation speakers.
+  - English dialogue textarea, Bengali translation textarea, and learning notes input.
+- [x] **Pre-Publish Integrity Guard (`src/lib/content/validator.ts`):**
+  - Enforces DB §5.1 & Brief §14.3 constraints: checks required fields, sequence continuity, speaker references, translation completeness, and audio links.
+  - Real-time pre-publish checklist banner alerting editors before publishing.
+- [x] **SEO & Discoverability Infrastructure:**
+  - Dynamic `sitemap.ts` generating URLs for all static pages and conversation scenarios.
+  - `robots.ts` configured with crawler permissions and disallowing admin routes.
+- [x] **Security Hardening (`next.config.ts`):**
+  - Strict security headers: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: origin-when-cross-origin`, and `Permissions-Policy`.
+- [x] **Learner Privacy & Terms Pages:**
+  - Transparent `/privacy` policy page emphasizing no creepy tracking and guest local storage.
+  - Educational `/terms` of service page.
+- [x] **Automated Test Suite (`tests/learning-loop.test.mjs`):**
+  - Integrated via `npm test` using Node.js native test runner.
+  - 6 comprehensive tests covering:
+    1. Seed Scenarios Data Integrity
+    2. Bilingual Discovery & Search Matching
+    3. Dialogue Turns & Sequence Continuity
+    4. RBAC Security Guards
+    5. Pre-Publish Validation Guard Checks
+    6. Vocabulary & Contextual Meaning Mapping
+- [x] **Verification:** `npm test`, `npm run lint`, and `npm run build` passed with 100% success across all **60 static pre-rendered routes**.
+
+---
+
+## 🛑 Gate 1 (Phase 1 Exit) Summary & Verification:
+- **Milestone 1A (Foundation):** Responsive App Shell (desktop sidebar, mobile bottom nav), Design Tokens, Drizzle DB schema (18 tables), Bengali Typography.
+- **Milestone 1B (Discovery):** 17 Scenarios (12 Daily Life + 5 UI/UX Designer path), Bilingual Real-Time Search, Filter Bar, Category & Profession Routing.
+- **Milestone 1C (Learning Page & Audio):** Conversation Reader, Audio Player, Piper TTS offline pipeline, accent switching (en-US / en-GB), zero autoplay rule enforced.
+- **Milestone 1D (Learning Tools):** Interactive Word Detail Popover, SVO Grammar Slide-over Panel, Review Summary, My Vocabulary Notebook, Non-blocking Auth Prompt (A-01).
+- **Milestone 1E (Admin & Release):** RBAC (5 roles), Admin Console, Dialogue Editor with Pre-Publish Guard, Security Headers, Privacy & Terms, Automated Test Suite.
+- **Icon Consistency:** 100% Hugeicons Outlined (`@hugeicons/react` + `@hugeicons/core-free-icons`).
+
+---
+
+## Next: Phase 2 — Active Learning
+- **Milestone 2A:** Listening & Recall (Listening comprehension quizzes, "Hide one speaker" mode, "Complete missing lines" mode).
+- **Milestone 2B:** Sentence Builder (Shuffled words puzzle → grammatically correct conversational English sentence).
+- **Milestone 2C:** "What Should I Say?" Interactive Intent Prompt (Intent in English/Bangla/Banglish → natural English responses).
