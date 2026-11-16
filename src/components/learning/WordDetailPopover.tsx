@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
   Bookmark01Icon,
   BookmarkCheck01Icon,
-  Cancel01Icon,
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import { VocabularyEntry } from "@/content/seed/vocabulary";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface WordDetailPopoverProps {
   entry: VocabularyEntry | null;
@@ -18,6 +24,7 @@ interface WordDetailPopoverProps {
   onClose: () => void;
   onSaveToggle: (wordKey: string) => void;
   isSaved?: boolean;
+  grammarRole?: string;
 }
 
 export function WordDetailPopover({
@@ -26,24 +33,11 @@ export function WordDetailPopover({
   onClose,
   onSaveToggle,
   isSaved = false,
+  grammarRole,
 }: WordDetailPopoverProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    if (isOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen || !entry) return null;
+  if (!entry) return null;
 
   const playPronunciation = () => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -74,88 +68,69 @@ export function WordDetailPopover({
   };
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="word-popover-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150"
-      onClick={onClose}
-    >
-      <div
-        role="document"
-        className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-ecp-border p-5 sm:p-6 text-left max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header with Close */}
-        <div className="flex items-start justify-between pb-3 border-b border-ecp-border">
-          <div className="flex items-center gap-3 flex-wrap">
-            <h3
-              id="word-popover-title"
-              className="text-2xl font-bold text-ecp-text-primary tracking-tight font-sans"
-            >
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="w-full sm:max-w-lg bg-card border-border p-5 sm:p-6 text-left max-h-[90vh] overflow-y-auto">
+        {/* Header with Title, POS and Grammar Role */}
+        <DialogHeader className="pb-3 border-b border-border text-left">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <DialogTitle className="text-2xl font-bold text-foreground tracking-tight font-sans">
               {entry.word}
-            </h3>
-            <Badge variant={posBadgeVariant(entry.partOfSpeech)} size="sm">
+            </DialogTitle>
+            <Badge variant={posBadgeVariant(entry.partOfSpeech)} size="sm" className="uppercase text-[10px]">
               {entry.partOfSpeech}
             </Badge>
+            {grammarRole && (
+              <Badge variant="accent" size="sm" className="font-semibold text-[10px]">
+                Role: {grammarRole}
+              </Badge>
+            )}
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="বন্ধ করুন (Close)"
-            className="p-1.5 rounded-lg text-ecp-text-muted hover:text-ecp-text-primary hover:bg-ecp-bg-canvas transition-colors"
-          >
-            <HugeiconsIcon icon={Cancel01Icon} size={18} />
-          </button>
-        </div>
+        </DialogHeader>
 
         {/* Pronunciation & Audio */}
-        <div className="flex items-center gap-3 py-3">
-          <span className="text-sm font-mono text-ecp-text-secondary bg-ecp-bg-canvas px-2.5 py-1 rounded-md border border-ecp-border">
+        <div className="flex items-center gap-3 py-2">
+          <span className="text-xs font-mono text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-md border border-border">
             {entry.ipa}
           </span>
-          <button
-            type="button"
+          <Button
+            variant={isPlayingAudio ? "default" : "secondary"}
+            size="sm"
             onClick={playPronunciation}
             aria-label={`উচ্চারণ শুনুন: ${entry.word}`}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-              isPlayingAudio
-                ? "bg-ecp-violet text-white shadow-xs"
-                : "bg-ecp-violet-surface text-ecp-violet hover:bg-ecp-violet-surface/80"
-            }`}
+            className="btn-press text-xs gap-1.5 h-8"
           >
             <HugeiconsIcon icon={VolumeHighIcon} size={15} />
             <span>উচ্চারণ শুনুন</span>
-          </button>
+          </Button>
         </div>
 
-        {/* Meaning in context */}
-        <div className="space-y-3.5 my-2">
-          <div className="bg-ecp-violet-surface/40 p-3.5 rounded-xl border border-ecp-violet/15">
-            <div className="text-xs font-semibold text-ecp-violet font-bangla mb-1 flex items-center gap-1.5">
+        {/* Contextual Meaning */}
+        <div className="space-y-3 my-2">
+          <div className="bg-primary/5 dark:bg-primary/10 p-3.5 rounded-xl border border-primary/15">
+            <div className="text-xs font-semibold text-primary font-[var(--ecp-font-bangla)] mb-1 flex items-center gap-1.5">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>এই প্রসঙ্গের অর্থ (Contextual Meaning):</span>
             </div>
-            <p className="text-sm font-bangla text-ecp-text-primary leading-relaxed font-medium">
+            <p className="text-sm font-[var(--ecp-font-bangla)] text-foreground leading-relaxed font-medium">
               {entry.contextualMeaningBn}
             </p>
           </div>
 
           <div>
-            <span className="text-xs font-semibold text-ecp-text-muted font-bangla uppercase tracking-wider block mb-1">
+            <span className="text-xs font-semibold text-muted-foreground font-[var(--ecp-font-bangla)] uppercase tracking-wider block mb-1">
               সাধারণ অর্থ (General Meaning):
             </span>
-            <p className="text-sm font-bangla text-ecp-text-secondary">
+            <p className="text-sm font-[var(--ecp-font-bangla)] text-muted-foreground">
               {entry.generalMeaningBn}
             </p>
           </div>
 
           {/* Example Sentence */}
-          <div className="bg-ecp-bg-canvas p-3 rounded-xl border border-ecp-border">
-            <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider block mb-1">
+          <div className="bg-muted/40 p-3 rounded-xl border border-border">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1">
               Example Sentence:
             </span>
-            <p className="text-sm text-ecp-text-primary italic font-sans leading-relaxed">
+            <p className="text-sm text-foreground italic font-sans leading-relaxed">
               &ldquo;{entry.exampleSentence}&rdquo;
             </p>
           </div>
@@ -163,23 +138,23 @@ export function WordDetailPopover({
           {/* Word Forms if available */}
           {entry.wordForms && (
             <div className="pt-1">
-              <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider block mb-1.5">
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
                 Word Forms:
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
                 {entry.wordForms.past && (
-                  <span className="px-2.5 py-1 bg-ecp-bg-canvas border border-ecp-border rounded-md text-ecp-text-secondary">
-                    <strong className="text-ecp-text-primary">Past:</strong> {entry.wordForms.past}
+                  <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground">
+                    <strong className="text-foreground">Past:</strong> {entry.wordForms.past}
                   </span>
                 )}
                 {entry.wordForms.pastParticiple && (
-                  <span className="px-2.5 py-1 bg-ecp-bg-canvas border border-ecp-border rounded-md text-ecp-text-secondary">
-                    <strong className="text-ecp-text-primary">Past Participle:</strong> {entry.wordForms.pastParticiple}
+                  <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground">
+                    <strong className="text-foreground">Past Participle:</strong> {entry.wordForms.pastParticiple}
                   </span>
                 )}
                 {entry.wordForms.plural && (
-                  <span className="px-2.5 py-1 bg-ecp-bg-canvas border border-ecp-border rounded-md text-ecp-text-secondary">
-                    <strong className="text-ecp-text-primary">Plural:</strong> {entry.wordForms.plural}
+                  <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground">
+                    <strong className="text-foreground">Plural:</strong> {entry.wordForms.plural}
                   </span>
                 )}
               </div>
@@ -189,14 +164,14 @@ export function WordDetailPopover({
           {/* Synonyms if available */}
           {entry.synonyms && entry.synonyms.length > 0 && (
             <div className="pt-1">
-              <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider block mb-1.5">
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
                 Synonyms / বিকল্প শব্দ:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {entry.synonyms.map((syn, idx) => (
                   <span
                     key={idx}
-                    className="text-xs px-2 py-0.5 rounded-full bg-ecp-bg-canvas border border-ecp-border text-ecp-text-secondary"
+                    className="text-xs px-2.5 py-0.5 rounded-full bg-muted/60 border border-border text-muted-foreground"
                   >
                     {syn}
                   </span>
@@ -207,38 +182,36 @@ export function WordDetailPopover({
         </div>
 
         {/* Footer Actions */}
-        <div className="mt-5 pt-4 border-t border-ecp-border flex items-center justify-between gap-3">
-          <button
-            type="button"
+        <div className="mt-4 pt-3.5 border-t border-border flex items-center justify-between gap-3">
+          <Button
+            variant={isSaved ? "secondary" : "default"}
+            size="sm"
             onClick={() => onSaveToggle(entry.lemma)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all shadow-xs cursor-pointer ${
-              isSaved
-                ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                : "bg-ecp-violet text-white hover:bg-ecp-violet-hover"
-            }`}
+            className="btn-press gap-2 font-[var(--ecp-font-bangla)]"
           >
             {isSaved ? (
               <>
-                <HugeiconsIcon icon={BookmarkCheck01Icon} size={16} />
-                <span className="font-bangla">সংরক্ষিত (Saved)</span>
+                <HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className="text-emerald-600 dark:text-emerald-400" />
+                <span>সংরক্ষিত (Saved)</span>
               </>
             ) : (
               <>
                 <HugeiconsIcon icon={Bookmark01Icon} size={16} />
-                <span className="font-bangla">নোটবুকে সেভ করুন (Save Word)</span>
+                <span>নোটবুকে সেভ করুন (Save Word)</span>
               </>
             )}
-          </button>
+          </Button>
 
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onClose}
-            className="text-xs text-ecp-text-muted hover:text-ecp-text-secondary font-bangla px-3 py-2 cursor-pointer"
+            className="btn-press text-xs text-muted-foreground font-[var(--ecp-font-bangla)]"
           >
             বন্ধ করুন
-          </button>
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

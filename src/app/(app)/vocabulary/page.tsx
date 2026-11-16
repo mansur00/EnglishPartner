@@ -14,7 +14,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { EmptyState } from "@/components/ui/empty-state";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import {
   SEED_VOCABULARY,

@@ -52,10 +52,10 @@ export function ConversationTurn({
       className={cn(
         "rounded-2xl p-5 md:p-6 transition-all duration-200 border space-y-3.5",
         isCurrentlyPlaying
-          ? "bg-[var(--ecp-brand-50)] border-[var(--ecp-brand-700)] shadow-sm ring-1 ring-[var(--ecp-brand-700)]/30"
+          ? "bg-primary/10 border-primary shadow-xs ring-1 ring-primary/30"
           : speaker.colorScheme === "accent"
-          ? "bg-[var(--ecp-surface-warm)] border-[var(--ecp-border)]"
-          : "bg-[var(--ecp-surface)] border-[var(--ecp-border)]"
+          ? "bg-card border-border"
+          : "bg-card border-border"
       )}
     >
       {/* Top Bar: Speaker & Controls */}

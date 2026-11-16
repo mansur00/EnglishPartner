@@ -1,14 +1,21 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useTransition } from "react";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { CategoryPills } from "@/components/discovery/CategoryPills";
 import { FilterBar } from "@/components/discovery/FilterBar";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Search01Icon, SearchXIcon } from "@hugeicons/core-free-icons";
+import {
+  Search01Icon,
+  SearchXIcon,
+  Cancel01Icon,
+} from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
+import { cn } from "@/lib/utils";
 
 export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,8 +23,10 @@ export default function ExplorePage() {
   const [level, setLevel] = useState("all");
   const [lengthType, setLengthType] = useState("all");
   const [style, setStyle] = useState("all");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  // Filtering Logic (English + Bangla Search & Multi-criteria)
+  // Multi-criteria Filtering
   const filteredScenarios = useMemo(() => {
     return SEED_SCENARIOS.filter((item) => {
       // 1. Text Search (English title, Bangla title, description, or keywords)
@@ -64,68 +73,111 @@ export default function ExplorePage() {
   );
 
   const handleResetFilters = () => {
-    setSearchQuery("");
-    setSelectedCategory("all");
-    setLevel("all");
-    setLengthType("all");
-    setStyle("all");
+    startTransition(() => {
+      setSearchQuery("");
+      setSelectedCategory("all");
+      setLevel("all");
+      setLengthType("all");
+      setStyle("all");
+    });
+  };
+
+  const handleCategorySelect = (slug: string) => {
+    startTransition(() => {
+      setSelectedCategory(slug);
+    });
   };
 
   return (
-    <div className="space-y-6 max-w-5xl">
+    <div className="space-y-6 max-w-5xl mx-auto pb-16">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground">
           Explore Conversations
         </h1>
-        <p className="text-sm text-[var(--ecp-text-secondary)] mt-1">
-          Search and practice real-life English dialogues in English & বাংলা.
+        <p className="text-sm text-muted-foreground mt-1 font-[var(--ecp-font-bangla)]">
+          বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন (EN + BN)
         </p>
       </div>
 
-      {/* Search Input Bar */}
-      <div className="relative">
-        <HugeiconsIcon
-          icon={Search01Icon}
-          size={18}
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--ecp-text-muted)]"
-        />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search by situation, topic, or keyword (e.g. 'airport', 'এয়ারপোর্ট', 'doctor', 'refund')..."
-          className="w-full h-12 pl-10 pr-4 rounded-xl border border-[var(--ecp-border-strong)] bg-[var(--ecp-surface)] text-sm text-[var(--ecp-text-primary)] placeholder:text-[var(--ecp-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] shadow-sm"
-        />
+      {/* Search Input with Rainbow Border on Focus & Clear Button */}
+      <div className={cn("rounded-2xl transition-all duration-200", isSearchFocused && "rainbow-border")}>
+        <div className="relative bg-card rounded-2xl border border-border shadow-xs">
+          <HugeiconsIcon
+            icon={Search01Icon}
+            size={18}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
+          />
+          <Input
+            type="text"
+            value={searchQuery}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setIsSearchFocused(false)}
+            onChange={(e) => {
+              const val = e.target.value;
+              startTransition(() => {
+                setSearchQuery(val);
+              });
+            }}
+            placeholder="Search by topic, keyword, or role (e.g. 'airport', 'এয়ারপোর্ট', 'doctor', 'refund')..."
+            className="w-full h-12 pl-11 pr-11 border-0 shadow-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              aria-label="Clear search"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            >
+              <HugeiconsIcon icon={Cancel01Icon} size={16} />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Category Horizontal Pills */}
       <CategoryPills
         selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
+        onSelectCategory={handleCategorySelect}
       />
 
-      {/* Advanced Filter Bar */}
+      {/* Sticky Advanced Filter Bar */}
       <FilterBar
         level={level}
-        setLevel={setLevel}
+        setLevel={(l) => startTransition(() => setLevel(l))}
         lengthType={lengthType}
-        setLengthType={setLengthType}
+        setLengthType={(len) => startTransition(() => setLengthType(len))}
         style={style}
-        setStyle={setStyle}
+        setStyle={(st) => startTransition(() => setStyle(st))}
         onReset={handleResetFilters}
         isFiltered={isFiltered}
       />
 
-      {/* Scenarios Header & Results Count */}
-      <div className="flex items-center justify-between pt-2">
-        <p className="text-xs font-semibold text-[var(--ecp-text-secondary)]">
-          Showing <span className="text-[var(--ecp-brand-800)] font-bold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
+      {/* Results Count Summary */}
+      <div className="flex items-center justify-between pt-1">
+        <p className="text-xs font-semibold text-muted-foreground">
+          Showing <span className="text-primary font-bold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
         </p>
       </div>
 
-      {/* Scenarios Grid */}
-      {filteredScenarios.length > 0 ? (
+      {/* Scenarios Grid / Skeletons / Empty State */}
+      {isPending ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="p-6 rounded-2xl bg-card border border-border space-y-4">
+              <div className="flex items-center gap-3">
+                <Skeleton className="w-10 h-10 rounded-xl" />
+                <div className="space-y-1.5 flex-1">
+                  <Skeleton className="h-4 w-1/3" />
+                  <Skeleton className="h-3 w-1/4" />
+                </div>
+              </div>
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-10 w-full" />
+            </div>
+          ))}
+        </div>
+      ) : filteredScenarios.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredScenarios.map((scenario) => (
             <ScenarioCard key={scenario.id} scenario={scenario} />
@@ -137,7 +189,7 @@ export default function ExplorePage() {
           description={`We couldn't find any situation matching "${searchQuery}". Try different keywords in English or বাংলা.`}
           icon={<HugeiconsIcon icon={SearchXIcon} size={24} />}
           action={
-            <Button variant="outline" size="sm" onClick={handleResetFilters}>
+            <Button variant="outline" size="sm" onClick={handleResetFilters} className="btn-press">
               Reset All Filters
             </Button>
           }

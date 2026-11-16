@@ -2,6 +2,14 @@
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FilterIcon, Cancel01Icon } from "@hugeicons/core-free-icons";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 interface FilterBarProps {
   level: string;
@@ -25,60 +33,72 @@ export function FilterBar({
   isFiltered,
 }: FilterBarProps) {
   return (
-    <div className="flex flex-wrap items-center gap-3 p-3.5 bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-xl text-xs">
-      <div className="flex items-center gap-1.5 text-[var(--ecp-text-muted)] font-semibold uppercase tracking-wider text-[11px] mr-1">
-        <HugeiconsIcon icon={FilterIcon} size={14} />
+    <div className="sticky top-16 z-10 flex flex-wrap items-center gap-2.5 p-3 rounded-2xl bg-card/95 backdrop-blur border border-border shadow-2xs">
+      <div className="flex items-center gap-1.5 text-muted-foreground font-semibold uppercase tracking-wider text-[11px] mr-1">
+        <HugeiconsIcon icon={FilterIcon} size={14} className="text-primary" />
         <span>Filters:</span>
       </div>
 
       {/* Level Filter */}
-      <select
+      <Select
         value={level}
-        onChange={(e) => setLevel(e.target.value)}
-        className="h-8 px-2.5 rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface)] text-[var(--ecp-text-primary)] font-medium focus:outline-none focus:ring-1 focus:ring-[var(--ecp-brand-800)] cursor-pointer"
+        onValueChange={(val) => setLevel((val as string) || "all")}
       >
-        <option value="all">All Levels (CEFR)</option>
-        <option value="A1">A1 • Beginner</option>
-        <option value="A2">A2 • Elementary</option>
-        <option value="B1">B1 • Intermediate</option>
-        <option value="B2">B2 • Upper Intermediate</option>
-      </select>
+        <SelectTrigger className="w-[145px] h-8 text-xs bg-card border-border">
+          <SelectValue placeholder="All Levels (CEFR)" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Levels (CEFR)</SelectItem>
+          <SelectItem value="A1">A1 • Beginner</SelectItem>
+          <SelectItem value="A2">A2 • Elementary</SelectItem>
+          <SelectItem value="B1">B1 • Intermediate</SelectItem>
+          <SelectItem value="B2">B2 • Upper Intermediate</SelectItem>
+        </SelectContent>
+      </Select>
 
       {/* Length Filter */}
-      <select
+      <Select
         value={lengthType}
-        onChange={(e) => setLengthType(e.target.value)}
-        className="h-8 px-2.5 rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface)] text-[var(--ecp-text-primary)] font-medium focus:outline-none focus:ring-1 focus:ring-[var(--ecp-brand-800)] cursor-pointer"
+        onValueChange={(val) => setLengthType((val as string) || "all")}
       >
-        <option value="all">Any Length</option>
-        <option value="short">Short (4-6 turns)</option>
-        <option value="medium">Medium (7-10 turns)</option>
-      </select>
+        <SelectTrigger className="w-[145px] h-8 text-xs bg-card border-border">
+          <SelectValue placeholder="Any Length" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">Any Length</SelectItem>
+          <SelectItem value="short">Short (4-6 turns)</SelectItem>
+          <SelectItem value="medium">Medium (7-10 turns)</SelectItem>
+        </SelectContent>
+      </Select>
 
       {/* Style Filter */}
-      <select
+      <Select
         value={style}
-        onChange={(e) => setStyle(e.target.value)}
-        className="h-8 px-2.5 rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface)] text-[var(--ecp-text-primary)] font-medium focus:outline-none focus:ring-1 focus:ring-[var(--ecp-brand-800)] cursor-pointer"
+        onValueChange={(val) => setStyle((val as string) || "all")}
       >
-        <option value="all">Any Style</option>
-        <option value="casual">Casual / Friendly</option>
-        <option value="neutral">Neutral Everyday</option>
-        <option value="formal">Formal / Professional</option>
-      </select>
+        <SelectTrigger className="w-[155px] h-8 text-xs bg-card border-border">
+          <SelectValue placeholder="Any Register" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">Any Style</SelectItem>
+          <SelectItem value="casual">Casual / Friendly</SelectItem>
+          <SelectItem value="neutral">Neutral Everyday</SelectItem>
+          <SelectItem value="formal">Formal / Professional</SelectItem>
+        </SelectContent>
+      </Select>
 
       {/* Reset Filter Button */}
       {isFiltered && (
-        <button
-          type="button"
+        <Button
+          variant="destructive"
+          size="sm"
           onClick={onReset}
-          className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-[var(--ecp-error)] bg-[var(--ecp-error-surface)] rounded-md hover:opacity-90 transition-opacity ml-auto cursor-pointer"
+          className="btn-press h-8 text-xs gap-1 ml-auto"
         >
-          <HugeiconsIcon icon={Cancel01Icon} size={12} />
-          Reset Filters
-        </button>
+          <HugeiconsIcon icon={Cancel01Icon} size={13} />
+          <span>Reset Filters</span>
+        </Button>
       )}
     </div>
   );
 }
-

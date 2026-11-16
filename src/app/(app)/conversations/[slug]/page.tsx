@@ -83,7 +83,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
 
         {/* Step Header Card */}
-        <Card className="space-y-3.5 p-6 md:p-7 bg-[var(--ecp-surface)] border-[var(--ecp-border)]">
+        <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="brand" size="sm">
               Niche 01: Shopping & Money
@@ -94,29 +94,29 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
             <Badge variant="accent" size="sm">
               {ladderStep.level} • CEFR
             </Badge>
-            <span className="text-xs text-ecp-text-muted font-medium ml-1">
+            <span className="text-xs text-muted-foreground font-medium ml-1">
               {ladderStep.linesCount} Turns
             </span>
           </div>
 
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground">
               {ladderStep.title}
             </h1>
-            <p className="text-sm md:text-base text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1 font-medium">
+            <p className="text-sm md:text-base text-muted-foreground font-[var(--ecp-font-bangla)] mt-1 font-medium">
               {ladderStep.titleBn}
             </p>
           </div>
 
           {/* Grammar Focus Callout */}
-          <div className="flex items-start gap-2 pt-2 text-xs text-[var(--ecp-text-secondary)] border-t border-[var(--ecp-border)]/60">
+          <div className="flex items-start gap-2 pt-2 text-xs text-muted-foreground border-t border-border">
             <HugeiconsIcon
               icon={Book01Icon}
               size={16}
-              className="text-ecp-violet shrink-0 mt-0.5"
+              className="text-primary shrink-0 mt-0.5"
             />
             <span>
-              <strong className="text-[var(--ecp-text-primary)]">Grammar Focus: </strong>
+              <strong className="text-foreground">Grammar Focus: </strong>
               {ladderStep.focus}
             </span>
           </div>
@@ -202,7 +202,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
       </div>
 
       {/* Scenario Header Card */}
-      <Card className="space-y-3.5 p-6 md:p-7 bg-[var(--ecp-surface)] border-[var(--ecp-border)]">
+      <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs">
         <div className="flex flex-wrap items-center gap-2">
           {scenario.categories.map((cat) => (
             <Badge key={cat.id} variant="neutral" size="sm">
@@ -218,23 +218,23 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground">
             {scenario.title}
           </h1>
-          <p className="text-sm md:text-base text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1">
+          <p className="text-sm md:text-base text-muted-foreground font-[var(--ecp-font-bangla)] mt-1">
             {scenario.titleBn}
           </p>
         </div>
 
         {/* Learning Objective Callout */}
-        <div className="flex items-start gap-2 pt-2 text-xs text-[var(--ecp-text-secondary)] border-t border-[var(--ecp-border)]/60">
+        <div className="flex items-start gap-2 pt-2 text-xs text-muted-foreground border-t border-border">
           <HugeiconsIcon
             icon={CheckmarkCircle02Icon}
             size={16}
-            className="text-[var(--ecp-success)] shrink-0 mt-0.5"
+            className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5"
           />
           <span>
-            <strong className="text-[var(--ecp-text-primary)]">Goal: </strong>
+            <strong className="text-foreground">Goal: </strong>
             {scenario.learningObjective}
           </span>
         </div>

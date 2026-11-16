@@ -49,7 +49,7 @@ export function Sidebar() {
     },
     {
       name: "Professional English",
-      href: "/explore?category=professional",
+      href: "/explore?category=workplace-business",
       icon: Briefcase01Icon,
       active: false,
     },
@@ -62,10 +62,9 @@ export function Sidebar() {
     },
     {
       name: "My Vocabulary",
-      href: "#",
+      href: "/vocabulary",
       icon: Bookmark02Icon,
-      active: false,
-      comingSoon: true,
+      active: pathname === "/vocabulary",
     },
     {
       name: "My Progress",
@@ -84,24 +83,26 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="hidden md:flex w-64 flex-col border-r border-[var(--ecp-border)] bg-[var(--ecp-surface)] p-4 space-y-6 shrink-0 min-h-[calc(100vh-4rem)]">
+    <aside className="hidden md:flex w-64 flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 min-h-[calc(100vh-4rem)]">
       <div className="space-y-1">
-        <span className="px-3 text-[11px] font-bold uppercase tracking-wider text-[var(--ecp-text-muted)]">
-          Menu
+        <span className="px-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+          Navigation
         </span>
-        <nav className="space-y-1 pt-1">
+        <nav className="space-y-1 pt-1.5" aria-label="Main navigation">
           {navItems.map((item) => {
             if (item.comingSoon) {
               return (
                 <div
                   key={item.name}
-                  className="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg text-[var(--ecp-text-muted)] cursor-not-allowed select-none opacity-70"
+                  aria-disabled="true"
+                  title={`${item.name} (Coming soon in future release)`}
+                  className="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-xl text-muted-foreground/60 cursor-not-allowed select-none transition-colors"
                 >
                   <div className="flex items-center gap-2.5">
                     <HugeiconsIcon icon={item.icon} size={18} />
                     <span>{item.name}</span>
                   </div>
-                  <span className="text-[10px] font-medium bg-[var(--ecp-surface-muted)] text-[var(--ecp-text-muted)] px-1.5 py-0.5 rounded border border-[var(--ecp-border)]">
+                  <span className="text-[10px] font-semibold bg-muted text-muted-foreground px-1.5 py-0.5 rounded border border-border">
                     Soon
                   </span>
                 </div>
@@ -113,18 +114,16 @@ export function Sidebar() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2.5 px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150",
+                  "flex items-center gap-2.5 px-3 py-2 text-sm font-medium rounded-xl transition-all duration-150 btn-press",
                   item.active
-                    ? "bg-[var(--ecp-brand-100)] text-[var(--ecp-brand-800)] font-semibold"
-                    : "text-[var(--ecp-text-secondary)] hover:bg-[var(--ecp-surface-muted)] hover:text-[var(--ecp-text-primary)]"
+                    ? "bg-primary/10 text-primary font-bold dark:bg-primary/20"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
                 <HugeiconsIcon
                   icon={item.icon}
                   size={18}
-                  className={cn(
-                    item.active ? "text-[var(--ecp-brand-800)]" : "text-[var(--ecp-text-secondary)]"
-                  )}
+                  className={cn(item.active ? "text-primary" : "text-muted-foreground")}
                 />
                 <span>{item.name}</span>
               </Link>
@@ -133,13 +132,13 @@ export function Sidebar() {
         </nav>
       </div>
 
-      <div className="pt-4 border-t border-[var(--ecp-border)] mt-auto">
-        <div className="p-3 bg-[var(--ecp-brand-50)] rounded-xl border border-[var(--ecp-brand-100)] space-y-1.5">
-          <p className="text-xs font-bold text-[var(--ecp-brand-900)]">
+      <div className="pt-4 border-t border-border mt-auto">
+        <div className="p-3.5 bg-muted/50 rounded-xl border border-border space-y-1">
+          <p className="text-xs font-bold text-foreground">
             Active Learning Path
           </p>
-          <p className="text-[11px] text-[var(--ecp-brand-800)] leading-relaxed">
-            Everyday Essentials & Conversations
+          <p className="text-[11px] text-muted-foreground leading-relaxed">
+            Niche 01: Shopping & Money (20 Steps)
           </p>
         </div>
       </div>

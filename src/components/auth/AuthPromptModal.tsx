@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Cancel01Icon,
   Login01Icon,
   Bookmark01Icon,
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
-import { Button } from "@/components/ui/button";
 
 interface AuthPromptModalProps {
   isOpen: boolean;
@@ -26,79 +32,37 @@ export function AuthPromptModal({
   description = "কথোপকথন শোনা এবং পড়া সম্পূর্ণ ফ্রি। তবে আপনার ব্যক্তিগত শব্দভান্ডার এবং শেখার অগ্রগতি ক্লাউডে সংরক্ষণ করতে সাইন-ইন প্রয়োজন।",
   actionText = "শব্দটি সংরক্ষণ করতে সাইন-ইন করুন",
 }: AuthPromptModalProps) {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    if (isOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="auth-prompt-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200"
-      onClick={onClose}
-    >
-      <div
-        role="document"
-        className="relative w-full max-w-md bg-white rounded-2xl shadow-xl border border-ecp-border p-6 sm:p-7 text-left"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close Button */}
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="বন্ধ করুন (Close)"
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-ecp-text-muted hover:text-ecp-text-primary hover:bg-ecp-bg-canvas transition-colors"
-        >
-          <HugeiconsIcon icon={Cancel01Icon} size={18} />
-        </button>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="sm:max-w-md bg-card border-border p-6 sm:p-7">
+        <DialogHeader className="text-left space-y-2">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-1">
+            <HugeiconsIcon icon={Bookmark01Icon} size={22} />
+          </div>
+          <DialogTitle className="text-lg sm:text-xl font-bold text-foreground font-[var(--ecp-font-bangla)]">
+            {title}
+          </DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground leading-relaxed font-[var(--ecp-font-bangla)]">
+            {description}
+          </DialogDescription>
+        </DialogHeader>
 
-        {/* Modal Header Icon */}
-        <div className="w-12 h-12 rounded-xl bg-ecp-violet-surface text-ecp-violet flex items-center justify-center mb-4">
-          <HugeiconsIcon icon={Bookmark01Icon} size={24} className="text-ecp-violet" />
-        </div>
-
-        <h3
-          id="auth-prompt-title"
-          className="text-lg sm:text-xl font-bold text-ecp-text-primary mb-2 font-bangla"
-        >
-          {title}
-        </h3>
-
-        <p className="text-sm text-ecp-text-secondary leading-relaxed mb-5 font-bangla">
-          {description}
-        </p>
-
-        {/* Value Prop Highlights */}
-        <div className="bg-ecp-bg-canvas rounded-xl p-3.5 mb-6 space-y-2 border border-ecp-border">
-          <div className="flex items-center gap-2.5 text-xs sm:text-sm text-ecp-text-primary font-bangla">
-            <HugeiconsIcon icon={SparklesIcon} size={16} className="text-ecp-violet shrink-0" />
+        {/* Feature Benefits */}
+        <div className="bg-muted/50 rounded-xl p-3.5 my-3 space-y-2 border border-border">
+          <div className="flex items-center gap-2.5 text-xs sm:text-sm text-foreground font-[var(--ecp-font-bangla)]">
+            <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary shrink-0" />
             <span>যেকোনো সময় সেভ করা শব্দের তালিকা রিভিশন দিন</span>
           </div>
-          <div className="flex items-center gap-2.5 text-xs sm:text-sm text-ecp-text-primary font-bangla">
-            <HugeiconsIcon icon={SparklesIcon} size={16} className="text-ecp-violet shrink-0" />
+          <div className="flex items-center gap-2.5 text-xs sm:text-sm text-foreground font-[var(--ecp-font-bangla)]">
+            <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary shrink-0" />
             <span>মোবাইল ও কম্পিউটার সব ডিভাইসে সিংক্রোনাইজড থাকবে</span>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-2.5">
+        <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
           <Link href="/auth/login?reason=save" className="w-full">
-            <Button
-              className="w-full justify-center gap-2 font-bangla"
-            >
+            <Button className="btn-press w-full justify-center gap-2 font-[var(--ecp-font-bangla)]">
               <HugeiconsIcon icon={Login01Icon} size={16} />
               <span>লগইন / সাইন-আপ করুন</span>
             </Button>
@@ -106,16 +70,16 @@ export function AuthPromptModal({
           <Button
             variant="outline"
             onClick={onClose}
-            className="w-full justify-center font-bangla text-ecp-text-secondary"
+            className="btn-press w-full justify-center font-[var(--ecp-font-bangla)] text-muted-foreground"
           >
             পরে করব (Continue)
           </Button>
         </div>
 
-        <p className="text-center text-[11px] text-ecp-text-muted mt-4">
+        <p className="text-center text-[11px] text-muted-foreground mt-2">
           {actionText} • শেখার স্থান কখনো হারাবে না
         </p>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -29,9 +29,9 @@ export function MobileBottomNav() {
     },
     {
       name: "Vocabulary",
-      href: "/dashboard",
+      href: "/vocabulary",
       icon: Bookmark02Icon,
-      active: false,
+      active: pathname === "/vocabulary",
     },
     {
       name: "Profile",
@@ -42,17 +42,17 @@ export function MobileBottomNav() {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-16 w-full items-center justify-around border-t border-[var(--ecp-border)] bg-[var(--ecp-surface)]/95 backdrop-blur px-2 shadow-lg">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-16 w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs">
       {navItems.map((item) => {
         return (
           <Link
             key={item.name}
             href={item.href}
             className={cn(
-              "flex flex-col items-center justify-center gap-1 w-16 py-1 text-xs font-medium transition-colors",
+              "flex flex-col items-center justify-center gap-1 w-16 py-1 text-xs font-medium transition-all btn-press",
               item.active
-                ? "text-[var(--ecp-brand-800)] font-bold"
-                : "text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]"
+                ? "text-primary font-bold"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <HugeiconsIcon icon={item.icon} size={20} />
