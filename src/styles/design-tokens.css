@@ -1,0 +1,174 @@
+/* English Conversation Practice — Design Tokens
+   Source of truth for visual variables.
+   Keep component styles token-driven; avoid hardcoded palette values.
+   Font files should be loaded by the application, not fetched from this file.
+*/
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --ecp-brand-950: #35215F;
+  --ecp-brand-900: #432B78;
+  --ecp-brand-800: #563B91;
+  --ecp-brand-700: #684BA7;
+  --ecp-brand-100: #EEE9F8;
+  --ecp-brand-50: #F7F4FC;
+
+  /* Accent */
+  --ecp-accent-500: #F2C96D;
+  --ecp-accent-400: #F7D98E;
+  --ecp-accent-100: #FFF4D8;
+  --ecp-peach-400: #F3A58F;
+  --ecp-peach-100: #FCE9E2;
+
+  /* Neutrals */
+  --ecp-canvas: #F7F7F8;
+  --ecp-surface: #FFFFFF;
+  --ecp-surface-muted: #F4F4F6;
+  --ecp-surface-warm: #FFFAF6;
+  --ecp-border: #E9E8ED;
+  --ecp-border-strong: #D8D6DF;
+  --ecp-text-primary: #24232A;
+  --ecp-text-secondary: #6F6D78;
+  --ecp-text-muted: #777580;
+  --ecp-white: #FFFFFF;
+
+  /* Semantic */
+  --ecp-success: #27845D;
+  --ecp-success-surface: #EAF6EF;
+  --ecp-warning: #B7791F;
+  --ecp-warning-surface: #FFF5DF;
+  --ecp-error: #C94A4A;
+  --ecp-error-surface: #FDEEEE;
+  --ecp-info: #4775B8;
+  --ecp-info-surface: #EDF3FC;
+
+  /* Typography */
+  --ecp-font-sans: "Inter", "Hind Siliguri", "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  --ecp-font-bangla: "Hind Siliguri", "Noto Sans Bengali", ui-sans-serif, sans-serif;
+  --ecp-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ecp-text-xs: 0.75rem;       /* 12px */
+  --ecp-text-sm: 0.875rem;      /* 14px */
+  --ecp-text-base: 1rem;        /* 16px */
+  --ecp-text-lg: 1.125rem;      /* 18px */
+  --ecp-text-xl: 1.25rem;       /* 20px */
+  --ecp-text-2xl: 1.5rem;       /* 24px */
+  --ecp-text-3xl: 1.875rem;     /* 30px */
+  --ecp-text-4xl: 2rem;         /* 32px */
+
+  --ecp-leading-tight: 1.2;
+  --ecp-leading-normal: 1.5;
+  --ecp-leading-relaxed: 1.65;
+  --ecp-dialogue-leading: 1.7;
+
+  /* Spacing: 4px base */
+  --ecp-space-1: 0.25rem;
+  --ecp-space-2: 0.5rem;
+  --ecp-space-3: 0.75rem;
+  --ecp-space-4: 1rem;
+  --ecp-space-5: 1.25rem;
+  --ecp-space-6: 1.5rem;
+  --ecp-space-8: 2rem;
+  --ecp-space-10: 2.5rem;
+  --ecp-space-12: 3rem;
+  --ecp-space-16: 4rem;
+  --ecp-space-20: 5rem;
+
+  /* Radius */
+  --ecp-radius-sm: 0.625rem;
+  --ecp-radius-md: 0.75rem;
+  --ecp-radius-card: 1rem;
+  --ecp-radius-panel: 1.25rem;
+  --ecp-radius-xl: 1.5rem;
+  --ecp-radius-pill: 9999px;
+
+  /* Shadows */
+  --ecp-shadow-xs: 0 1px 2px rgb(31 25 48 / 0.04);
+  --ecp-shadow-sm: 0 2px 10px rgb(31 25 48 / 0.04);
+  --ecp-shadow-md: 0 8px 24px rgb(31 25 48 / 0.07);
+  --ecp-shadow-lg: 0 16px 48px rgb(31 25 48 / 0.14);
+
+  /* Layout */
+  --ecp-content-max: 90rem; /* 1440px */
+  --ecp-reading-max: 48rem; /* 768px */
+  --ecp-sidebar-width: 15rem; /* 240px */
+  --ecp-context-panel-width: 18.75rem; /* 300px */
+  --ecp-page-gutter: 1rem;
+  --ecp-control-height: 2.75rem; /* 44px */
+  --ecp-control-height-lg: 3rem; /* 48px */
+
+  /* Motion */
+  --ecp-duration-fast: 150ms;
+  --ecp-duration-normal: 200ms;
+  --ecp-duration-slow: 280ms;
+  --ecp-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Layering */
+  --ecp-z-base: 0;
+  --ecp-z-sticky: 20;
+  --ecp-z-dropdown: 30;
+  --ecp-z-overlay: 40;
+  --ecp-z-modal: 50;
+  --ecp-z-toast: 60;
+}
+
+/* Semantic aliases make component CSS concise. */
+:root {
+  --ecp-bg: var(--ecp-canvas);
+  --ecp-fg: var(--ecp-text-primary);
+  --ecp-primary: var(--ecp-brand-800);
+  --ecp-primary-hover: var(--ecp-brand-900);
+  --ecp-focus-ring: var(--ecp-brand-700);
+}
+
+/* Global baseline: import this file before application component styles. */
+html {
+  font-family: var(--ecp-font-sans);
+  background: var(--ecp-canvas);
+  color: var(--ecp-text-primary);
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--ecp-canvas);
+}
+
+:lang(bn),
+[lang="bn"] {
+  font-family: var(--ecp-font-bangla);
+  line-height: var(--ecp-leading-relaxed);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ecp-focus-ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  color: var(--ecp-brand-950);
+  background: var(--ecp-brand-100);
+}
+
+@media (min-width: 640px) {
+  :root { --ecp-page-gutter: 1.25rem; }
+}
+@media (min-width: 1024px) {
+  :root { --ecp-page-gutter: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

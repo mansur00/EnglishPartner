@@ -1,0 +1,52 @@
+/* Tailwind CSS v4 theme adapter.
+   Import after Tailwind and the neutral CSS variable source:
+   @import "tailwindcss";
+   @import "./design-tokens.css";
+   @import "./tailwind-theme-v4.css";
+*/
+@theme {
+  --color-brand-950: var(--ecp-brand-950);
+  --color-brand-900: var(--ecp-brand-900);
+  --color-brand-800: var(--ecp-brand-800);
+  --color-brand-700: var(--ecp-brand-700);
+  --color-brand-100: var(--ecp-brand-100);
+  --color-brand-50: var(--ecp-brand-50);
+
+  --color-accent-500: var(--ecp-accent-500);
+  --color-accent-400: var(--ecp-accent-400);
+  --color-accent-100: var(--ecp-accent-100);
+  --color-peach-400: var(--ecp-peach-400);
+  --color-peach-100: var(--ecp-peach-100);
+
+  --color-canvas: var(--ecp-canvas);
+  --color-surface: var(--ecp-surface);
+  --color-surface-muted: var(--ecp-surface-muted);
+  --color-surface-warm: var(--ecp-surface-warm);
+  --color-border: var(--ecp-border);
+  --color-border-strong: var(--ecp-border-strong);
+  --color-text-primary: var(--ecp-text-primary);
+  --color-text-secondary: var(--ecp-text-secondary);
+  --color-text-muted: var(--ecp-text-muted);
+
+  --color-success: var(--ecp-success);
+  --color-success-surface: var(--ecp-success-surface);
+  --color-warning: var(--ecp-warning);
+  --color-warning-surface: var(--ecp-warning-surface);
+  --color-error: var(--ecp-error);
+  --color-error-surface: var(--ecp-error-surface);
+  --color-info: var(--ecp-info);
+  --color-info-surface: var(--ecp-info-surface);
+
+  --font-sans: var(--ecp-font-sans);
+  --font-bangla: var(--ecp-font-bangla);
+  --font-mono: var(--ecp-font-mono);
+
+  --radius-control: var(--ecp-radius-md);
+  --radius-card: var(--ecp-radius-card);
+  --radius-panel: var(--ecp-radius-panel);
+  --radius-pill: var(--ecp-radius-pill);
+
+  --shadow-card: var(--ecp-shadow-sm);
+  --shadow-raised: var(--ecp-shadow-md);
+  --shadow-overlay: var(--ecp-shadow-lg);
+}

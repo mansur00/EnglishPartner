@@ -1,69 +1,176 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+  const [showTranslation, setShowTranslation] = useState(true);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-[var(--ecp-canvas)] text-[var(--ecp-text-primary)] font-[var(--ecp-font-sans)] flex flex-col">
+      {/* Top Navigation Bar */}
+      <header className="border-b border-[var(--ecp-border)] bg-[var(--ecp-surface)] sticky top-0 z-10 px-6 py-4 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-[var(--ecp-brand-800)] flex items-center justify-center text-white font-bold text-lg shadow-sm">
+            E
+          </div>
+          <div>
+            <h1 className="font-semibold text-lg leading-tight text-[var(--ecp-brand-950)]">
+              English Conversation Partner
+            </h1>
+            <p className="text-xs text-[var(--ecp-text-secondary)] font-medium">
+              Phase 0 Foundation & Design System Verification
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[var(--ecp-brand-100)] text-[var(--ecp-brand-800)]">
+            বাংলা / English
+          </span>
+          <a
+            href="/api/health"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-[var(--ecp-success-surface)] text-[var(--ecp-success)] border border-[var(--ecp-success)]/20 hover:opacity-90 transition-opacity"
+          >
+            <span className="w-2 h-2 rounded-full bg-[var(--ecp-success)] animate-pulse" />
+            API Health Check
+          </a>
+        </div>
+      </header>
+
+      {/* Main Container */}
+      <main className="flex-1 max-w-4xl w-full mx-auto p-6 md:p-8 space-y-8">
+        {/* Banner Section */}
+        <section className="bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl p-6 shadow-sm">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-accent-100)] text-[#8A6318] border border-[var(--ecp-accent-400)]/40">
+              CEFR A2 • Elementary
+            </span>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-peach-100)] text-[#A34E39]">
+              Everyday • Shopping & Money
+            </span>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-surface-muted)] text-[var(--ecp-text-secondary)]">
+              4 exchanges • Short
+            </span>
+          </div>
+
+          <h2 className="text-2xl font-bold text-[var(--ecp-brand-950)] mb-2">
+            Asking for a Price & Product Details
+          </h2>
+          <p className="text-sm text-[var(--ecp-text-secondary)] max-w-2xl">
+            Learn how to naturally inquire about items, ask about pricing in a store, and verify payment methods without hesitation.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        </section>
+
+        {/* Conversation Turn Verification Component */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-bold text-[var(--ecp-text-primary)]">
+              Conversation Turn Preview (Component Contract Test)
+            </h3>
+            <button
+              onClick={() => setShowTranslation(!showTranslation)}
+              className="text-xs font-medium px-3 py-1.5 rounded-md bg-[var(--ecp-surface)] border border-[var(--ecp-border)] text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:border-[var(--ecp-brand-800)]/30 transition-colors"
+            >
+              {showTranslation ? "Hide Translations" : "Show Translations (অনুবাদ দেখুন)"}
+            </button>
+          </div>
+
+          {/* Turn 1 */}
+          <div className="bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-xl p-5 shadow-sm space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-7 h-7 rounded-full bg-[var(--ecp-brand-100)] text-[var(--ecp-brand-800)] flex items-center justify-center font-bold text-xs">
+                  C
+                </span>
+                <span className="text-sm font-bold text-[var(--ecp-brand-900)]">
+                  Customer (ক্রেতা)
+                </span>
+              </div>
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-muted)] bg-[var(--ecp-surface-muted)] cursor-not-allowed"
+                title="Audio will be generated via Piper TTS in Milestone 1C"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+                Audio not available yet
+              </button>
+            </div>
+
+            <p className="text-lg font-medium text-[var(--ecp-text-primary)]">
+              &ldquo;Excuse me, could you tell me how much this blue jacket costs?&rdquo;
+            </p>
+
+            {showTranslation && (
+              <p className="text-sm text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] pt-1 border-t border-[var(--ecp-border)]/60">
+                মাফ করবেন, আপনি কি বলতে পারেন এই নীল জ্যাকেটটির দাম কত?
+              </p>
+            )}
+          </div>
+
+          {/* Turn 2 */}
+          <div className="bg-[var(--ecp-surface-warm)] border border-[var(--ecp-border)] rounded-xl p-5 shadow-sm space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-7 h-7 rounded-full bg-[var(--ecp-accent-100)] text-[#8A6318] flex items-center justify-center font-bold text-xs">
+                  S
+                </span>
+                <span className="text-sm font-bold text-[var(--ecp-text-primary)]">
+                  Shop Assistant (দোকানদার)
+                </span>
+              </div>
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-muted)] bg-[var(--ecp-surface-muted)] cursor-not-allowed"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+                Audio not available yet
+              </button>
+            </div>
+
+            <p className="text-lg font-medium text-[var(--ecp-text-primary)]">
+              &ldquo;Certainly! It is forty-five dollars, and today we have a ten percent discount on it.&rdquo;
+            </p>
+
+            {showTranslation && (
+              <p className="text-sm text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] pt-1 border-t border-[var(--ecp-border)]/60">
+                অবশ্যই! এটার দাম ৪৫ ডলার, এবং আজ এটার ওপর ১০ শতাংশ ছাড় চলছে।
+              </p>
+            )}
+          </div>
+        </section>
+
+        {/* Design System Primitives Test Grid */}
+        <section className="bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl p-6 shadow-sm space-y-4">
+          <h3 className="text-base font-bold text-[var(--ecp-brand-950)]">
+            UI Primitives & Token Verification
+          </h3>
+
+          <div className="flex flex-wrap gap-3">
+            <button className="px-4 py-2 rounded-lg bg-[var(--ecp-brand-800)] text-white font-semibold text-sm hover:bg-[var(--ecp-brand-700)] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] focus:ring-offset-2">
+              Primary Brand Button
+            </button>
+            <button className="px-4 py-2 rounded-lg bg-[var(--ecp-accent-500)] text-[var(--ecp-brand-950)] font-semibold text-sm hover:bg-[var(--ecp-accent-400)] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--ecp-accent-500)] focus:ring-offset-2">
+              Warm Accent Action
+            </button>
+            <button className="px-4 py-2 rounded-lg bg-[var(--ecp-surface)] border border-[var(--ecp-border-strong)] text-[var(--ecp-text-primary)] font-semibold text-sm hover:bg-[var(--ecp-surface-muted)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--ecp-border-strong)]">
+              Secondary Outline
+            </button>
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-[var(--ecp-border)] bg-[var(--ecp-surface)] py-4 text-center text-xs text-[var(--ecp-text-muted)]">
+        English Conversation Partner • Phase 0 Setup Verified • All Systems Operational
+      </footer>
     </div>
   );
 }
