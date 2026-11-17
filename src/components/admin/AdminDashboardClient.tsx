@@ -218,7 +218,10 @@ export function AdminDashboardClient() {
             <tbody className="divide-y divide-ecp-border">
               {filteredScenarios.map((scenario) => {
                 const dialogue = SEED_DIALOGUES[scenario.slug];
-                const turnsCount = dialogue?.[0]?.lines.length || 0;
+                const lines = dialogue?.[0]?.lines || [];
+                const turnsCount = lines.length;
+                const translatedTurns = lines.filter((l) => Boolean(l.translationBn)).length;
+                const coveragePct = turnsCount > 0 ? Math.round((translatedTurns / turnsCount) * 100) : 100;
 
                 return (
                   <tr key={scenario.id} className="hover:bg-ecp-bg-canvas/50 transition-colors">
@@ -257,7 +260,7 @@ export function AdminDashboardClient() {
                       <div className="flex items-center gap-2">
                         <span className="inline-flex items-center gap-1 text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
                           <HugeiconsIcon icon={CheckmarkCircle01Icon} size={12} />
-                          বাংলা (100%)
+                          বাংলা ({coveragePct}%)
                         </span>
                         <span className="inline-flex items-center gap-1 text-xs text-ecp-violet font-medium bg-ecp-violet-surface px-2 py-0.5 rounded-md border border-ecp-violet/20">
                           <HugeiconsIcon icon={VolumeHighIcon} size={12} />
