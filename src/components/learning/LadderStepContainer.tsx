@@ -21,10 +21,10 @@ export function LadderStepContainer({ step, ladderVersion }: LadderStepContainer
   return (
     <Tabs defaultValue="dialogue" className="space-y-6">
       {/* Primary Section Switcher */}
-      <TabsList className="w-full sm:w-auto h-11 p-1 bg-muted/60 border border-border rounded-xl">
+      <TabsList className="w-full sm:w-auto h-11 p-1 bg-muted/60 border border-border rounded-[12px]">
         <TabsTrigger
           value="dialogue"
-          className="flex-1 sm:flex-initial gap-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
+          className="flex-1 sm:flex-initial gap-2 text-xs sm:text-sm font-semibold rounded-[10px] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
         >
           <HugeiconsIcon icon={Book01Icon} size={16} />
           <span className="font-[var(--ecp-font-bangla)]">সংলাপ ও অডিও পাঠ (Dialogue)</span>
@@ -32,7 +32,7 @@ export function LadderStepContainer({ step, ladderVersion }: LadderStepContainer
 
         <TabsTrigger
           value="practice"
-          className="flex-1 sm:flex-initial gap-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
+          className="flex-1 sm:flex-initial gap-2 text-xs sm:text-sm font-semibold rounded-[10px] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
         >
           <HugeiconsIcon icon={SparklesIcon} size={16} />
           <span className="font-[var(--ecp-font-bangla)]">অনুশীলন ও কুইজ (Practice & Quiz)</span>

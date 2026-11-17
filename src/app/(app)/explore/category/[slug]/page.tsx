@@ -61,7 +61,7 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
           {/* Additional standalone scenarios in this category */}
           {categoryScenarios.length > 0 && (
             <div className="space-y-4 pt-4 border-t border-ecp-border">
-              <h3 className="text-base font-bold text-ecp-text-primary font-bangla">
+              <h3 className="text-base font-semibold text-ecp-text-primary font-bangla">
                 অন্যান্য প্রাসঙ্গিক দৃশ্যপট (Additional Practice Scenarios)
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -75,7 +75,7 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
       ) : (
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+            <h1 className="text-2xl md:text-3xl font-semibold text-[var(--ecp-brand-950)]">
               {category?.name || "Category"}
             </h1>
             <p className="text-sm text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1">

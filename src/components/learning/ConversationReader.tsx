@@ -234,7 +234,7 @@ export function ConversationReader({
         {/* Step-by-Step Badge (when on ladder track) or Version Switcher (fallback) */}
         {stepNumber ? (
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-bold text-xs font-mono border border-ecp-violet/20">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-semibold text-xs font-mono border border-ecp-violet/20">
               <HugeiconsIcon icon={Layers01Icon} size={14} />
               ধাপ {stepNumber.toString().padStart(2, "0")} / {totalSteps}
             </span>
@@ -246,7 +246,7 @@ export function ConversationReader({
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-semibold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
               <HugeiconsIcon icon={Layers01Icon} size={14} />
               সংস্করণ (Version):
             </span>

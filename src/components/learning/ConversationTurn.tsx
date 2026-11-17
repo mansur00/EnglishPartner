@@ -50,7 +50,7 @@ export function ConversationTurn({
   return (
     <div
       className={cn(
-        "rounded-2xl p-5 md:p-6 transition-all duration-200 border space-y-3.5",
+        "rounded-[16px] p-5 md:p-6 transition-all duration-200 border space-y-3.5",
         isCurrentlyPlaying
           ? "bg-primary/10 border-primary shadow-xs ring-1 ring-primary/30"
           : speaker.colorScheme === "accent"
@@ -105,7 +105,7 @@ export function ConversationTurn({
 
       {/* English Dialogue Line with Interactive Words */}
       <div className="pt-1">
-        <p className="text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-relaxed tracking-tight">
+        <p className="text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight">
           {words.map((word, idx) => {
             const cleanWord = word.replace(/[^a-zA-Z]/g, "").toLowerCase();
             const isHighlighted = line.wordHighlights?.some(
@@ -134,7 +134,7 @@ export function ConversationTurn({
       {/* Contextual Bangla Translation (Sentence-by-sentence) */}
       {isTranslationShown && (
         <div className="pt-2 border-t border-[var(--ecp-border)]/60 animate-in fade-in duration-200">
-          <p className="text-sm md:text-base text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] leading-relaxed">
+          <p className="text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla leading-[1.75]">
             {line.translationBn}
           </p>
         </div>
@@ -142,7 +142,7 @@ export function ConversationTurn({
 
       {/* Optional Learning Note */}
       {line.learningNote && (
-        <div className="flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-lg border border-[var(--ecp-brand-100)]">
+        <div className="flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-[12px] border border-[var(--ecp-brand-100)]">
           <HugeiconsIcon icon={InformationCircleIcon} size={15} className="shrink-0 mt-0.5" />
           <span className="leading-snug">{line.learningNote}</span>
         </div>

@@ -21,9 +21,9 @@ const badgeVariants = cva(
         brand:
           "bg-primary/10 text-primary border border-primary/20 dark:bg-primary/20 dark:text-primary-foreground",
         accent:
-          "bg-[var(--sun-100)] text-[var(--brand-950)] border border-[var(--sun-300)] dark:bg-[#352500] dark:text-[var(--sun-300)] dark:border-[var(--sun-700)]",
+          "bg-[var(--sun-100)] text-[var(--brand-950)] border border-[var(--sun-300)] dark:bg-amber-950/40 dark:text-[var(--sun-300)] dark:border-[var(--sun-700)]",
         peach:
-          "bg-[#FFE3C2] text-[#8A4A06] border border-[#F7CFA0] dark:bg-[#3D2E1C] dark:text-[#FFD9A8] dark:border-[#5A4327]",
+          "bg-[var(--topic-tile)] text-[var(--topic-ink)] border border-[var(--topic-border)]",
         neutral:
           "bg-muted text-muted-foreground border border-border",
         success:

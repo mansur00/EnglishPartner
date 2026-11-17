@@ -100,7 +100,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           </div>
 
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+            <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
               {ladderStep.title}
             </h1>
             <p className="text-sm md:text-base text-muted-foreground font-[var(--ecp-font-bangla)] mt-1 font-medium">
@@ -218,7 +218,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+          <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
             {scenario.title}
           </h1>
           <p className="text-sm md:text-base text-muted-foreground font-[var(--ecp-font-bangla)] mt-1">
@@ -243,7 +243,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
       {/* Interactive Conversation Reader */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-[var(--ecp-brand-950)]">
+          <h2 className="text-base font-semibold text-[var(--ecp-brand-950)]">
             Dialogue Turns & Listening Practice
           </h2>
           <span className="text-xs text-[var(--ecp-text-muted)] font-medium">

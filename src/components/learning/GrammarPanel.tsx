@@ -41,7 +41,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
               <HugeiconsIcon icon={Book01Icon} size={20} />
             </div>
             <div>
-              <SheetTitle className="font-bold text-foreground text-base sm:text-lg font-[var(--ecp-font-bangla)]">
+              <SheetTitle className="font-semibold text-foreground text-base sm:text-lg font-[var(--ecp-font-bangla)]">
                 ব্যাকরণ বিশ্লেষণ ও গঠন (Grammar Insights)
               </SheetTitle>
               <SheetDescription className="text-xs text-muted-foreground mt-0.5">
@@ -55,7 +55,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
         <div className="p-5 sm:p-6 space-y-6 flex-1">
           {/* Target Sentence Banner */}
           <div className="bg-muted/40 p-4 rounded-xl border border-border">
-            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1">
               মূল বাক্য (Target Sentence)
             </span>
             <p className="text-base font-medium text-foreground italic leading-relaxed">
@@ -67,7 +67,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={SparklesIcon} size={16} className="text-primary" />
-              <h4 className="text-sm font-bold text-foreground font-[var(--ecp-font-bangla)]">
+              <h4 className="text-sm font-semibold text-foreground font-[var(--ecp-font-bangla)]">
                 বাক্যের গঠন ও উপাংশ (S-V-O Breakdown)
               </h4>
             </div>
@@ -128,7 +128,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
             <div className="space-y-2.5">
               <div className="flex items-center gap-2">
                 <HugeiconsIcon icon={CheckmarkCircle01Icon} size={16} className="text-emerald-600 dark:text-emerald-400" />
-                <h4 className="text-sm font-bold text-foreground font-[var(--ecp-font-bangla)]">
+                <h4 className="text-sm font-semibold text-foreground font-[var(--ecp-font-bangla)]">
                   বিকল্প মার্জিত প্রকাশভঙ্গি (Polite Alternatives)
                 </h4>
               </div>
@@ -138,7 +138,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
                     key={idx}
                     className="p-3 bg-muted/40 rounded-xl border border-border text-xs sm:text-sm text-foreground italic flex items-center gap-2"
                   >
-                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">•</span>
                     <span>&ldquo;{alt}&rdquo;</span>
                   </div>
                 ))}
@@ -151,7 +151,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <HugeiconsIcon icon={InformationCircleIcon} size={16} className="text-destructive" />
-                <h4 className="text-sm font-bold text-foreground font-[var(--ecp-font-bangla)]">
+                <h4 className="text-sm font-semibold text-foreground font-[var(--ecp-font-bangla)]">
                   সাধারণ ভুল ও সতর্কতা (Common Mistakes)
                 </h4>
               </div>
@@ -162,13 +162,13 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
                     className="p-3.5 rounded-xl border border-destructive/20 bg-destructive/5 space-y-2"
                   >
                     <div className="flex items-start gap-2 text-xs sm:text-sm">
-                      <span className="font-bold text-destructive shrink-0">ভুল:</span>
+                      <span className="font-semibold text-destructive shrink-0">ভুল:</span>
                       <span className="line-through text-destructive italic">
                         &ldquo;{mistake.mistake}&rdquo;
                       </span>
                     </div>
                     <div className="flex items-start gap-2 text-xs sm:text-sm">
-                      <span className="font-bold text-emerald-600 dark:text-emerald-400 shrink-0">সঠিক:</span>
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400 shrink-0">সঠিক:</span>
                       <span className="font-medium text-foreground italic">
                         &ldquo;{mistake.correction}&rdquo;
                       </span>

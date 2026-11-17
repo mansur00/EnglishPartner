@@ -54,7 +54,7 @@ export function ConversationEditorClient({
             <HugeiconsIcon icon={Alert02Icon} size={24} />
           </div>
 
-          <h1 className="text-xl font-bold text-[var(--ecp-text-primary)]">
+          <h1 className="text-xl font-semibold text-[var(--ecp-text-primary)]">
             403 — Edit Access Restricted
           </h1>
 
@@ -170,7 +170,7 @@ export function ConversationEditorClient({
           </Link>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-lg sm:text-xl font-bold text-ecp-text-primary font-sans">
+              <h1 className="text-lg sm:text-xl font-semibold text-ecp-text-primary font-sans">
                 {scenario.title} — Dialogue Editor
               </h1>
               <Badge variant="brand" size="sm">
@@ -229,7 +229,7 @@ export function ConversationEditorClient({
               size={18}
               className={validation.isValid ? "text-emerald-600" : "text-rose-600"}
             />
-            <h3 className="text-sm font-bold text-ecp-text-primary font-bangla">
+            <h3 className="text-sm font-semibold text-ecp-text-primary font-bangla">
               প্রি-পাবলিশ ভ্যালিডেশন চেকলিস্ট (Pre-Publish Integrity Guard)
             </h3>
           </div>
@@ -264,7 +264,7 @@ export function ConversationEditorClient({
       {/* Dialogue Lines List */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-ecp-text-primary font-bangla">
+          <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
             কথোপকথনের বাক্যসমূহ (Turns)
           </h2>
           <Button
@@ -287,7 +287,7 @@ export function ConversationEditorClient({
               {/* Turn Top Meta */}
               <div className="flex items-center justify-between pb-3 border-b border-ecp-border">
                 <div className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-lg bg-ecp-violet-surface text-ecp-violet font-bold text-xs flex items-center justify-center font-mono">
+                  <span className="w-7 h-7 rounded-lg bg-ecp-violet-surface text-ecp-violet font-semibold text-xs flex items-center justify-center font-mono">
                     #{line.sequenceNumber}
                   </span>
 

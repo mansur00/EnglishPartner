@@ -78,7 +78,7 @@ export function NicheLadderRoadmap({
         </div>
 
         <div>
-          <h1 className="text-3xl font-bold text-ecp-text-primary tracking-[-0.01em] font-sans">
+          <h1 className="text-3xl font-semibold text-ecp-text-primary tracking-[-0.01em] font-sans">
             {nicheTitle}
           </h1>
           <p className="text-base sm:text-lg font-bangla text-ecp-text-secondary mt-1 font-medium">
@@ -121,7 +121,7 @@ export function NicheLadderRoadmap({
                 <Badge variant={tier.badgeVariant} size="sm">
                   {tier.group}
                 </Badge>
-                <h3 className="text-sm font-bold text-ecp-text-primary font-bangla">
+                <h3 className="text-sm font-semibold text-ecp-text-primary font-bangla">
                   {tier.titleBn}
                 </h3>
               </div>
@@ -136,7 +136,7 @@ export function NicheLadderRoadmap({
                     >
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-lg">
+                          <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-lg">
                             <HugeiconsIcon icon={Book01Icon} size={13} />
                             Step {step.stepNumber.toString().padStart(2, "0")}
                           </span>
@@ -146,7 +146,7 @@ export function NicheLadderRoadmap({
                         </div>
 
                         <div>
-                          <h4 className="text-base font-bold text-ecp-text-primary group-hover:text-ecp-violet transition-colors font-sans">
+                          <h4 className="text-base font-semibold text-ecp-text-primary group-hover:text-ecp-violet transition-colors font-sans">
                             {step.title}
                           </h4>
                           <p className="text-xs font-bangla text-ecp-text-secondary mt-0.5 line-clamp-1">

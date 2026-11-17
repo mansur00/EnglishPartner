@@ -12,7 +12,7 @@ export default function Home() {
       {/* Top Navigation Bar */}
       <header className="border-b border-[var(--ecp-border)] bg-[var(--ecp-surface)] sticky top-0 z-10 px-6 py-4 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-[var(--ecp-brand-800)] flex items-center justify-center text-white font-bold text-lg shadow-sm">
+          <div className="w-9 h-9 rounded-lg bg-[var(--ecp-brand-800)] flex items-center justify-center text-white font-semibold text-lg shadow-sm">
             E
           </div>
           <div>
@@ -46,10 +46,10 @@ export default function Home() {
         {/* Banner Section */}
         <section className="bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl p-6 shadow-sm">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-accent-100)] text-[#8A6318] border border-[var(--ecp-accent-400)]/40">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-accent-100)] text-[var(--ecp-brand-950)] border border-[var(--ecp-accent-400)]/40">
               CEFR A2 • Elementary
             </span>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-peach-100)] text-[#A34E39]">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--topic-tile)] text-[var(--topic-ink)] border border-[var(--topic-border)]">
               Everyday • Shopping & Money
             </span>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--ecp-surface-muted)] text-[var(--ecp-text-secondary)]">
@@ -57,7 +57,7 @@ export default function Home() {
             </span>
           </div>
 
-          <h2 className="text-2xl font-bold text-[var(--ecp-brand-950)] mb-2">
+          <h2 className="text-2xl font-semibold text-[var(--ecp-brand-950)] mb-2">
             Asking for a Price & Product Details
           </h2>
           <p className="text-sm text-[var(--ecp-text-secondary)] max-w-2xl">
@@ -68,7 +68,7 @@ export default function Home() {
         {/* Conversation Turn Verification Component */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-bold text-[var(--ecp-text-primary)]">
+            <h3 className="text-base font-semibold text-[var(--ecp-text-primary)]">
               Conversation Turn Preview (Component Contract Test)
             </h3>
             <button
@@ -83,10 +83,10 @@ export default function Home() {
           <div className="bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-xl p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-7 h-7 rounded-full bg-[var(--ecp-brand-100)] text-[var(--ecp-brand-800)] flex items-center justify-center font-bold text-xs">
+                <span className="w-7 h-7 rounded-full bg-[var(--ecp-brand-100)] text-[var(--ecp-brand-800)] flex items-center justify-center font-semibold text-xs">
                   C
                 </span>
-                <span className="text-sm font-bold text-[var(--ecp-brand-900)]">
+                <span className="text-sm font-semibold text-[var(--ecp-brand-900)]">
                   Customer (ক্রেতা)
                 </span>
               </div>
@@ -115,10 +115,10 @@ export default function Home() {
           <div className="bg-[var(--ecp-surface-warm)] border border-[var(--ecp-border)] rounded-xl p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-7 h-7 rounded-full bg-[var(--ecp-accent-100)] text-[#8A6318] flex items-center justify-center font-bold text-xs">
+                <span className="w-7 h-7 rounded-full bg-[var(--ecp-accent-100)] text-[var(--ecp-brand-950)] flex items-center justify-center font-semibold text-xs">
                   S
                 </span>
-                <span className="text-sm font-bold text-[var(--ecp-text-primary)]">
+                <span className="text-sm font-semibold text-[var(--ecp-text-primary)]">
                   Shop Assistant (দোকানদার)
                 </span>
               </div>
@@ -145,7 +145,7 @@ export default function Home() {
 
         {/* Design System Primitives Test Grid */}
         <section className="bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl p-6 shadow-sm space-y-4">
-          <h3 className="text-base font-bold text-[var(--ecp-brand-950)]">
+          <h3 className="text-base font-semibold text-[var(--ecp-brand-950)]">
             UI Primitives & Token Verification
           </h3>
 

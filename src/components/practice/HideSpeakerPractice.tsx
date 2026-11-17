@@ -73,7 +73,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
         </div>
 
         <div>
-          <h3 className="text-xl font-bold text-ecp-text-primary font-bangla">
+          <h3 className="text-xl font-semibold text-ecp-text-primary font-bangla">
             রোলপ্লে অনুশীলন সম্পন্ন হয়েছে!
           </h3>
           <p className="text-xs sm:text-sm text-ecp-text-secondary mt-1 font-bangla">
@@ -97,7 +97,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-ecp-border">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={UserGroupIcon} size={16} className="text-ecp-violet" />
-          <span className="text-xs font-bold text-ecp-text-primary font-bangla">
+          <span className="text-xs font-semibold text-ecp-text-primary font-bangla">
             আপনার চরিত্র বেছে নিন:
           </span>
         </div>
@@ -127,7 +127,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
 
       {/* Turn Progress */}
       <div className="flex items-center justify-between text-xs text-ecp-text-muted">
-        <span className="font-mono font-bold text-ecp-violet">
+        <span className="font-mono font-semibold text-ecp-violet">
           বাক্য {currentLineIndex + 1} / {lines.length}
         </span>
         <Badge variant={isLearnerTurn ? "accent" : "neutral"} size="sm">
@@ -140,7 +140,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
         /* Learner Turn: Hidden until revealed */
         <div className="p-6 rounded-2xl bg-ecp-warm-surface/40 border border-ecp-warm/30 text-center space-y-4">
           <div className="space-y-1">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-200">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>আপনার বলার পালা! Speak your line in English</span>
             </span>
@@ -169,7 +169,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
             /* Revealed Answer & Audio */
             <div className="space-y-3 pt-2 animate-in fade-in">
               <div className="p-3.5 rounded-xl bg-white border border-ecp-border shadow-2xs">
-                <p className="text-lg font-bold text-ecp-text-primary font-sans italic">
+                <p className="text-lg font-semibold text-ecp-text-primary font-sans italic">
                   &ldquo;{currentLine.englishText}&rdquo;
                 </p>
               </div>
@@ -189,7 +189,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
         /* Partner Turn: Visible with Audio */
         <div className="p-6 rounded-2xl bg-ecp-bg-canvas border border-ecp-border space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-ecp-text-primary">
+            <span className="text-xs font-semibold text-ecp-text-primary">
               {currentLine.speakerName} ({currentLine.speakerRole}):
             </span>
             <button

@@ -92,7 +92,7 @@ export default function ExplorePage() {
     <div className="space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-bold font-heading text-foreground tracking-[-0.01em]">
+        <h1 className="text-3xl font-semibold font-heading text-foreground tracking-[-0.01em]">
           Explore Conversations
         </h1>
         <p className="text-sm md:text-base text-muted-foreground mt-1.5 font-bangla">
@@ -156,7 +156,7 @@ export default function ExplorePage() {
       {/* Results Count Summary */}
       <div className="flex items-center justify-between pt-1">
         <p className="text-sm font-semibold text-muted-foreground">
-          Showing <span className="text-primary font-bold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
+          Showing <span className="text-primary font-semibold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
         </p>
       </div>
 

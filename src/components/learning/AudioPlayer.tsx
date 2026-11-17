@@ -154,7 +154,7 @@ export function AudioPlayer({
         {/* Center: Current Line Position Indicator */}
         <div className="text-xs font-semibold text-[var(--ecp-text-secondary)]">
           {isPlaying && activeLineIndex !== null ? (
-            <span className="flex items-center gap-1.5 text-[var(--ecp-brand-800)] font-bold">
+            <span className="flex items-center gap-1.5 text-[var(--ecp-brand-800)] font-semibold">
               <span className="w-2 h-2 rounded-full bg-[var(--ecp-brand-800)] animate-pulse" />
               Playing Line {activeLineIndex + 1} of {lines.length}
             </span>
@@ -169,7 +169,7 @@ export function AudioPlayer({
           <button
             type="button"
             onClick={handleSpeedToggle}
-            className="px-2.5 py-1 rounded-md text-xs font-bold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors"
+            className="px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors"
             title="Cycle playback speed (0.75x, 1x, 1.25x, 1.5x)"
           >
             {playbackSpeed}x

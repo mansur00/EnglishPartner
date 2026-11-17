@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["500", "600"],
   variable: "--font-heading",
   display: "swap",
 });
@@ -20,7 +20,7 @@ const inter = Inter({
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-bangla",
   display: "swap",
 });

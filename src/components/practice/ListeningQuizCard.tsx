@@ -79,7 +79,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
         </div>
 
         <div>
-          <h3 className="text-xl font-bold text-ecp-text-primary font-bangla">
+          <h3 className="text-xl font-semibold text-ecp-text-primary font-bangla">
             কুইজ সম্পন্ন হয়েছে! (Quiz Completed)
           </h3>
           <p className="text-sm text-ecp-text-secondary mt-1">
@@ -108,7 +108,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
     <div className="p-6 rounded-2xl bg-white border border-ecp-border space-y-5 shadow-2xs">
       {/* Progress & Audio Cue */}
       <div className="flex items-center justify-between pb-3 border-b border-ecp-border">
-        <span className="text-xs font-mono font-bold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-md">
+        <span className="text-xs font-mono font-semibold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-md">
           প্রশ্ন {currentIndex + 1} / {questions.length}
         </span>
 
@@ -127,7 +127,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
 
       {/* Question Text */}
       <div className="space-y-1">
-        <h4 className="text-base sm:text-lg font-bold text-ecp-text-primary font-sans leading-snug">
+        <h4 className="text-base sm:text-lg font-semibold text-ecp-text-primary font-sans leading-snug">
           {currentQ.question}
         </h4>
         <p className="text-xs sm:text-sm text-ecp-text-secondary font-bangla">
@@ -142,11 +142,11 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
 
           if (hasAnswered) {
             if (opt.id === currentQ.correctOptionId) {
-              btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold ring-1 ring-emerald-500/30";
+              btnStyle = "border-success bg-success/10 text-foreground font-semibold";
             } else if (opt.id === selectedOptionId) {
-              btnStyle = "border-rose-400 bg-rose-50 text-rose-900";
+              btnStyle = "border-destructive bg-destructive/10 text-destructive";
             } else {
-              btnStyle = "border-ecp-border bg-ecp-bg-canvas/50 text-ecp-text-muted opacity-60";
+              btnStyle = "border-border bg-muted/40 text-muted-foreground opacity-60";
             }
           }
 
@@ -156,7 +156,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
               type="button"
               disabled={hasAnswered}
               onClick={() => handleSelectOption(opt.id)}
-              className={`w-full p-3.5 rounded-xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${btnStyle}`}
+              className={`w-full p-3.5 rounded-[12px] border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${btnStyle}`}
             >
               <div>
                 <span className="font-semibold text-sm font-sans block">
@@ -187,7 +187,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
               : "bg-amber-50 border-amber-200 text-amber-900"
           }`}
         >
-          <div className="font-bold mb-1 flex items-center gap-1.5">
+          <div className="font-semibold mb-1 flex items-center gap-1.5">
             <HugeiconsIcon
               icon={isCorrect ? CheckmarkCircle01Icon : SparklesIcon}
               size={16}

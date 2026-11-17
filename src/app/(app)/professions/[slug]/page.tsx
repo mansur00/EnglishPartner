@@ -52,7 +52,7 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
             <Badge variant="accent">5 Dialogue Modules</Badge>
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--ecp-brand-950)]">
+          <h1 className="text-2xl md:text-3xl font-semibold text-[var(--ecp-brand-950)]">
             UI/UX Designer Professional Track
           </h1>
 

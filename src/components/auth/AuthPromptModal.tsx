@@ -39,7 +39,7 @@ export function AuthPromptModal({
           <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-1">
             <HugeiconsIcon icon={Bookmark01Icon} size={22} />
           </div>
-          <DialogTitle className="text-lg sm:text-xl font-bold text-foreground font-[var(--ecp-font-bangla)]">
+          <DialogTitle className="text-lg sm:text-xl font-semibold text-foreground font-[var(--ecp-font-bangla)]">
             {title}
           </DialogTitle>
           <DialogDescription className="text-sm text-muted-foreground leading-relaxed font-[var(--ecp-font-bangla)]">

@@ -63,7 +63,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
         </div>
 
         <div>
-          <h3 className="text-xl font-bold text-ecp-text-primary font-bangla">
+          <h3 className="text-xl font-semibold text-ecp-text-primary font-bangla">
             শব্দ বসানোর অনুশীলন সম্পন্ন হয়েছে!
           </h3>
           <p className="text-xs sm:text-sm text-ecp-text-secondary mt-1 font-bangla">
@@ -86,7 +86,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
     <div className="p-6 rounded-2xl bg-white border border-ecp-border space-y-5 shadow-2xs">
       {/* Header Counter */}
       <div className="flex items-center justify-between pb-3 border-b border-ecp-border text-xs">
-        <span className="font-mono font-bold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-md">
+        <span className="font-mono font-semibold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-md">
           বাক্য {currentIndex + 1} / {exercises.length}
         </span>
         <span className="text-ecp-text-muted font-bangla">
@@ -96,13 +96,13 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
 
       {/* Masked Sentence Display */}
       <div className="p-5 rounded-2xl bg-ecp-bg-canvas border border-ecp-border space-y-2 text-center">
-        <p className="text-lg sm:text-xl font-bold text-ecp-text-primary font-sans leading-relaxed">
+        <p className="text-lg sm:text-xl font-semibold text-ecp-text-primary font-sans leading-relaxed">
           {currentItem.maskedSentence.split("___").map((part, idx, arr) => (
             <React.Fragment key={idx}>
               {part}
               {idx < arr.length - 1 && (
                 <span
-                  className={`inline-block min-w-16 px-2.5 py-0.5 mx-1 rounded-lg border font-mono text-base font-bold transition-all ${
+                  className={`inline-block min-w-16 px-2.5 py-0.5 mx-1 rounded-lg border font-mono text-base font-semibold transition-all ${
                     selectedWord
                       ? hasChecked
                         ? isCorrect
@@ -169,7 +169,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
               : "bg-amber-50 border-amber-200 text-amber-900"
           }`}
         >
-          <div className="font-bold mb-1 flex items-center gap-1.5">
+          <div className="font-semibold mb-1 flex items-center gap-1.5">
             <HugeiconsIcon
               icon={isCorrect ? CheckmarkCircle01Icon : Cancel01Icon}
               size={16}

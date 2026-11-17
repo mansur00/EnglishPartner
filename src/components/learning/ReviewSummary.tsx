@@ -61,7 +61,7 @@ export function ReviewSummary({
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-1">
               <span>অভিনন্দন! (Well Done)</span>
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-ecp-text-primary font-bangla">
+            <h3 className="text-lg sm:text-xl font-semibold text-ecp-text-primary font-bangla">
               আপনি {scenarioTitleBn} কথোপকথনটি সম্পন্ন করেছেন
             </h3>
             <p className="text-xs sm:text-sm text-ecp-text-muted font-sans">
@@ -96,7 +96,7 @@ export function ReviewSummary({
       {/* Vocabulary Learned Checklist */}
       {vocabularyList && vocabularyList.length > 0 && (
         <div className="py-6">
-          <h4 className="text-sm font-bold text-ecp-text-primary mb-3 font-bangla flex items-center gap-2">
+          <h4 className="text-sm font-semibold text-ecp-text-primary mb-3 font-bangla flex items-center gap-2">
             <span>এই পাঠের প্রয়োজনীয় শব্দভান্ডার ({vocabularyList.length}টি শব্দ)</span>
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -109,7 +109,7 @@ export function ReviewSummary({
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-ecp-text-primary text-sm font-sans truncate">
+                      <span className="font-semibold text-ecp-text-primary text-sm font-sans truncate">
                         {item.word}
                       </span>
                       <span className="text-xs font-mono text-muted-foreground">

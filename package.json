@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:ui": "bash scripts/check-ui-sizes.sh",
+    "check:frozen": "bash scripts/check-frozen.sh",
     "test": "node --experimental-strip-types --test tests/learning-loop.test.mjs"
   },
   "dependencies": {

@@ -73,7 +73,7 @@ export function WordDetailPopover({
         {/* Header with Title, POS and Grammar Role */}
         <DialogHeader className="pb-3 border-b border-border text-left">
           <div className="flex items-center gap-2.5 flex-wrap">
-            <DialogTitle className="text-2xl font-bold text-foreground tracking-tight font-sans">
+            <DialogTitle className="text-2xl font-semibold text-foreground tracking-tight font-sans">
               {entry.word}
             </DialogTitle>
             <Badge variant={posBadgeVariant(entry.partOfSpeech)} size="sm" className="uppercase text-xs">

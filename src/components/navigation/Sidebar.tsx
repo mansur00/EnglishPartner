@@ -83,9 +83,9 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="hidden md:flex w-64 flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 min-h-[calc(100vh-4rem)]">
+    <aside className="hidden md:flex w-64 flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 sticky top-16 h-[calc(100dvh-4rem)] overflow-y-auto">
       <div className="space-y-1.5">
-        <span className="px-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+        <span className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Navigation
         </span>
         <nav className="space-y-1 pt-1.5" aria-label="Main navigation">
@@ -116,7 +116,7 @@ export function Sidebar() {
                 className={cn(
                   "flex items-center gap-3 h-11 px-3 text-sm font-semibold rounded-xl transition-all duration-150 btn-press",
                   item.active
-                    ? "bg-primary/10 text-primary font-bold dark:bg-primary/20"
+                    ? "bg-primary/10 text-primary font-semibold dark:bg-primary/20"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
@@ -134,7 +134,7 @@ export function Sidebar() {
 
       <div className="pt-4 border-t border-border mt-auto">
         <div className="p-4 bg-muted/50 rounded-2xl border border-border space-y-1">
-          <p className="text-sm font-bold font-heading text-foreground">
+          <p className="text-sm font-semibold font-heading text-foreground">
             Active Learning Path
           </p>
           <p className="text-xs text-muted-foreground leading-relaxed">

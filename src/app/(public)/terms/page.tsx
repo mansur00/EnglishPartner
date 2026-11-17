@@ -22,7 +22,7 @@ export default function TermsPage() {
 
         <Card className="p-6 sm:p-8 bg-white border-ecp-border space-y-6 shadow-xs">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-ecp-text-primary font-sans">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-ecp-text-primary font-sans">
               Terms of Service (ব্যবহারের শর্তাবলী)
             </h1>
             <p className="text-xs sm:text-sm text-ecp-text-muted mt-1">
@@ -32,7 +32,7 @@ export default function TermsPage() {
 
           <div className="space-y-4 text-sm text-ecp-text-secondary leading-relaxed">
             <section className="space-y-2">
-              <h2 className="text-base font-bold text-ecp-text-primary font-bangla">
+              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
                 ১. শিক্ষামূলক উদ্দেশ্যে ব্যবহারের অধিকার (Educational Purpose)
               </h2>
               <p>
@@ -41,7 +41,7 @@ export default function TermsPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-bold text-ecp-text-primary font-bangla">
+              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
                 ২. বুদ্ধিবৃত্তিক সম্পত্তি ও অডিও লাইসেন্সিং (Licenses)
               </h2>
               <p>
@@ -50,7 +50,7 @@ export default function TermsPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-bold text-ecp-text-primary font-bangla">
+              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
                 ৩. ব্যবহারকারীর আচরণ ও অপব্যবহার রোধ
               </h2>
               <p>

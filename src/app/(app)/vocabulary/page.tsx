@@ -119,16 +119,16 @@ export default function VocabularyPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16">
       {/* Top Banner / Heading */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl bg-white border border-ecp-border shadow-2xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 md:p-6 rounded-[16px] bg-card border border-border shadow-2xs">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-xl bg-ecp-violet-surface text-ecp-violet flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-[12px] bg-brand-50 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300 flex items-center justify-center shrink-0">
             <HugeiconsIcon icon={Book01Icon} size={24} />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-ecp-text-primary font-bangla">
+            <h1 className="text-xl sm:text-2xl font-semibold text-foreground font-bangla">
               আমার শব্দভান্ডার (My Vocabulary Notebook)
             </h1>
-            <p className="text-xs sm:text-sm text-ecp-text-secondary mt-0.5">
+            <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
               কথোপকথন থেকে সংরক্ষিত শব্দ এবং ব্যাকরণগত অর্থ
             </p>
           </div>
@@ -139,17 +139,17 @@ export default function VocabularyPage() {
           variant="outline"
           size="sm"
           onClick={() => setIsAuthModalOpen(true)}
-          className="text-xs gap-2 font-bangla"
+          className="text-xs gap-2 font-bangla rounded-[12px]"
         >
-          <HugeiconsIcon icon={Login01Icon} size={16} className="text-ecp-violet" />
+          <HugeiconsIcon icon={Login01Icon} size={16} className="text-brand-800 dark:text-brand-300" />
           <span>ক্লাউডে সিঙ্ক করুন</span>
         </Button>
       </div>
 
       {/* Guest Mode Notice */}
-      <div className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-ecp-warm-surface/60 border border-ecp-warm/20 text-xs text-ecp-text-secondary font-bangla">
+      <div className="flex items-center justify-between gap-3 p-4 rounded-[12px] bg-brand-50/60 dark:bg-brand-950/40 border border-brand-200/50 dark:border-brand-800/40 text-xs text-muted-foreground font-bangla">
         <div className="flex items-center gap-2">
-          <HugeiconsIcon icon={SparklesIcon} size={16} className="text-ecp-warm shrink-0" />
+          <HugeiconsIcon icon={SparklesIcon} size={16} className="text-sun-500 shrink-0" />
           <span>
             আপনি বর্তমানে গেস্ট হিসেবে শব্দ সংরক্ষণ করছেন ({savedLemmas.length}টি শব্দ সংরক্ষিত)।
           </span>
@@ -157,7 +157,7 @@ export default function VocabularyPage() {
         <button
           type="button"
           onClick={() => setIsAuthModalOpen(true)}
-          className="font-semibold text-ecp-violet hover:underline shrink-0 cursor-pointer"
+          className="font-semibold text-brand-800 dark:text-brand-300 hover:underline shrink-0 cursor-pointer"
         >
           লগইন করে সুরক্ষিত রাখুন
         </button>
@@ -167,21 +167,21 @@ export default function VocabularyPage() {
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Search Input */}
         <div className="relative flex-1">
-          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ecp-text-muted">
-            <HugeiconsIcon icon={Search01Icon} size={16} />
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground">
+            <HugeiconsIcon icon={Search01Icon} size={18} />
           </div>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="শব্দ বা অর্থ দিয়ে খুঁজুন (Search English or Bangla)..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ecp-border bg-white text-sm text-ecp-text-primary placeholder:text-ecp-text-muted focus:outline-hidden focus:border-ecp-violet focus:ring-1 focus:ring-ecp-violet transition-all"
+            className="w-full h-12 pl-10 pr-4 rounded-[12px] border border-border bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-brand-600 focus:ring-1 focus:ring-brand-600 transition-all"
           />
         </div>
 
         {/* Part of Speech Filter */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-          <div className="text-ecp-text-muted shrink-0 hidden sm:block ml-2">
+          <div className="text-muted-foreground shrink-0 hidden sm:block ml-2">
             <HugeiconsIcon icon={FilterIcon} size={16} />
           </div>
           {[
@@ -196,10 +196,10 @@ export default function VocabularyPage() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedPos(cat.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              className={`h-10 px-4 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 selectedPos === cat.id
-                  ? "bg-ecp-violet text-white shadow-xs"
-                  : "bg-white border border-ecp-border text-ecp-text-secondary hover:text-ecp-text-primary"
+                  ? "bg-brand-800 text-white shadow-xs dark:bg-brand-700"
+                  : "bg-card border border-border text-muted-foreground hover:text-foreground"
               }`}
             >
               {cat.label}
@@ -214,21 +214,21 @@ export default function VocabularyPage() {
           {filteredEntries.map((item) => (
             <div
               key={item.lemma}
-              className="p-5 rounded-2xl bg-white border border-ecp-border shadow-2xs hover:shadow-xs hover:border-ecp-violet/30 transition-all flex flex-col justify-between"
+              className="p-5 rounded-[16px] bg-card border border-border shadow-2xs hover:shadow-xs hover:border-brand-500/40 transition-all flex flex-col justify-between"
             >
               <div>
                 {/* Word & Audio */}
-                <div className="flex items-start justify-between gap-3 pb-3 border-b border-ecp-border">
+                <div className="flex items-start justify-between gap-3 pb-3 border-b border-border">
                   <div>
                     <div className="flex items-center gap-2.5 flex-wrap">
-                      <h3 className="text-xl font-bold text-ecp-text-primary font-sans">
+                      <h3 className="text-xl font-semibold text-foreground font-sans">
                         {item.word}
                       </h3>
                       <Badge variant={posBadgeVariant(item.partOfSpeech)} size="sm">
                         {item.partOfSpeech}
                       </Badge>
                     </div>
-                    <span className="text-xs font-mono text-ecp-text-muted mt-1 block">
+                    <span className="text-xs font-mono text-muted-foreground mt-1 block">
                       {item.ipa}
                     </span>
                   </div>
@@ -238,37 +238,37 @@ export default function VocabularyPage() {
                       type="button"
                       onClick={() => playWord(item.word)}
                       aria-label={`উচ্চারণ শুনুন: ${item.word}`}
-                      className="p-2 rounded-lg text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer"
+                      className="w-11 h-11 rounded-[10px] text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 dark:hover:bg-brand-900 transition-colors cursor-pointer flex items-center justify-center"
                       title="উচ্চারণ শুনুন"
                     >
-                      <HugeiconsIcon icon={VolumeHighIcon} size={16} />
+                      <HugeiconsIcon icon={VolumeHighIcon} size={18} />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleRemoveWord(item.lemma)}
                       aria-label={`তালিকা থেকে মুছুন: ${item.word}`}
-                      className="p-2 rounded-lg text-ecp-text-muted hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                      className="w-11 h-11 rounded-[10px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center"
                       title="তালিকা থেকে বাদ দিন"
                     >
-                      <HugeiconsIcon icon={BookmarkRemove01Icon} size={16} />
+                      <HugeiconsIcon icon={BookmarkRemove01Icon} size={18} />
                     </button>
                   </div>
                 </div>
 
                 {/* Meanings */}
                 <div className="py-3 space-y-2">
-                  <div className="text-xs sm:text-sm font-bangla text-ecp-text-primary font-medium leading-relaxed">
+                  <div className="text-xs sm:text-sm font-bangla text-foreground font-medium leading-relaxed">
                     {item.contextualMeaningBn}
                   </div>
                   {item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn && (
-                    <div className="text-xs font-bangla text-ecp-text-muted">
+                    <div className="text-xs font-bangla text-muted-foreground">
                       সাধারণ অর্থ: {item.generalMeaningBn}
                     </div>
                   )}
 
                   {/* Example Sentence */}
                   {item.exampleSentence && (
-                    <p className="text-xs text-ecp-text-secondary italic pt-1 border-t border-ecp-border/60">
+                    <p className="text-xs text-muted-foreground italic pt-1 border-t border-border/60">
                       &ldquo;{item.exampleSentence}&rdquo;
                     </p>
                   )}

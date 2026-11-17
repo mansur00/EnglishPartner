@@ -38,7 +38,7 @@ export function AdminDashboardClient() {
             <HugeiconsIcon icon={Alert02Icon} size={24} />
           </div>
 
-          <h1 className="text-xl font-bold text-[var(--ecp-text-primary)]">
+          <h1 className="text-xl font-semibold text-[var(--ecp-text-primary)]">
             403 — অননুমোদিত অ্যাক্সেস (Unauthorized)
           </h1>
 
@@ -88,7 +88,7 @@ export function AdminDashboardClient() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl sm:text-2xl font-bold text-ecp-text-primary font-bangla">
+              <h1 className="text-xl sm:text-2xl font-semibold text-ecp-text-primary font-bangla">
                 কন্টেন্ট ম্যানেজমেন্ট ও অ্যাডমিন কনসোল
               </h1>
               <Badge variant="brand" size="sm">
@@ -130,7 +130,7 @@ export function AdminDashboardClient() {
           <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider">
             Total Scenarios
           </span>
-          <div className="text-2xl sm:text-3xl font-bold text-ecp-text-primary">
+          <div className="text-2xl sm:text-3xl font-semibold text-ecp-text-primary">
             {totalScenarios}
           </div>
           <span className="text-xs text-emerald-600 font-medium">100% Active in Library</span>
@@ -140,7 +140,7 @@ export function AdminDashboardClient() {
           <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider">
             Dialogue Turns
           </span>
-          <div className="text-2xl sm:text-3xl font-bold text-ecp-text-primary">
+          <div className="text-2xl sm:text-3xl font-semibold text-ecp-text-primary">
             {totalDialogueLines}+
           </div>
           <span className="text-xs text-ecp-text-secondary">Short & Medium Versions</span>
@@ -150,7 +150,7 @@ export function AdminDashboardClient() {
           <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider">
             Bangla Translations
           </span>
-          <div className="text-2xl sm:text-3xl font-bold text-emerald-600">
+          <div className="text-2xl sm:text-3xl font-semibold text-emerald-600">
             100%
           </div>
           <span className="text-xs text-emerald-700 font-medium">All lines fully glossed</span>
@@ -160,7 +160,7 @@ export function AdminDashboardClient() {
           <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider">
             Audio Asset Pipeline
           </span>
-          <div className="text-2xl sm:text-3xl font-bold text-ecp-violet">
+          <div className="text-2xl sm:text-3xl font-semibold text-ecp-violet">
             Piper TTS
           </div>
           <span className="text-xs text-ecp-text-secondary">en-US + en-GB offline audio</span>
@@ -172,7 +172,7 @@ export function AdminDashboardClient() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <HugeiconsIcon icon={FilterIcon} size={16} className="text-ecp-violet" />
-            <h2 className="text-base font-bold text-ecp-text-primary font-bangla">
+            <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
               দৃশ্যপট তালিকা ও প্রকাশনা স্থিতি (Scenarios)
             </h2>
           </div>
@@ -301,14 +301,14 @@ export function AdminDashboardClient() {
       <Card className="p-6 bg-white border-ecp-border space-y-4">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={SparklesIcon} size={18} className="text-ecp-violet" />
-          <h3 className="text-base font-bold text-ecp-text-primary font-bangla">
+          <h3 className="text-base font-semibold text-ecp-text-primary font-bangla">
             ভাষা ও কভারেজ ম্যাট্রিক্স (Language Coverage Report)
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           <div className="p-4 rounded-xl bg-ecp-bg-canvas border border-ecp-border space-y-2">
-            <div className="font-bold text-ecp-text-primary">English Source Texts</div>
+            <div className="font-semibold text-ecp-text-primary">English Source Texts</div>
             <div className="text-emerald-700 font-semibold flex items-center gap-1.5">
               <HugeiconsIcon icon={CheckmarkCircle01Icon} size={15} />
               17 of 17 Scenarios Certified
@@ -319,7 +319,7 @@ export function AdminDashboardClient() {
           </div>
 
           <div className="p-4 rounded-xl bg-ecp-bg-canvas border border-ecp-border space-y-2">
-            <div className="font-bold text-ecp-text-primary font-bangla">বাংলা অনুবাদ (Bengali Glosses)</div>
+            <div className="font-semibold text-ecp-text-primary font-bangla">বাংলা অনুবাদ (Bengali Glosses)</div>
             <div className="text-emerald-700 font-semibold flex items-center gap-1.5 font-bangla">
               <HugeiconsIcon icon={CheckmarkCircle01Icon} size={15} />
               ১৭টি দৃশ্যপটের সব বাক্য অনুবাদকৃত
@@ -330,7 +330,7 @@ export function AdminDashboardClient() {
           </div>
 
           <div className="p-4 rounded-xl bg-ecp-bg-canvas border border-ecp-border space-y-2">
-            <div className="font-bold text-ecp-text-primary">Accents & Audio Assets</div>
+            <div className="font-semibold text-ecp-text-primary">Accents & Audio Assets</div>
             <div className="text-ecp-violet font-semibold flex items-center gap-1.5">
               <HugeiconsIcon icon={VolumeHighIcon} size={15} />
               en-US & en-GB Accents Ready
@@ -344,21 +344,21 @@ export function AdminDashboardClient() {
 
       {/* Audit Log */}
       <Card className="p-6 bg-white border-ecp-border space-y-3">
-        <h3 className="text-sm font-bold text-ecp-text-primary font-bangla">
+        <h3 className="text-sm font-semibold text-ecp-text-primary font-bangla">
           সাম্প্রতিক অডিট লগ (Audit Log)
         </h3>
         <div className="space-y-2 text-xs font-mono text-ecp-text-secondary">
           <div className="p-2.5 rounded-lg bg-ecp-bg-canvas border border-ecp-border flex items-center justify-between">
             <span>[2026-11-16 23:45] Phase 1 Milestone 1D Learning Tools verified by Admin</span>
-            <span className="text-emerald-600 font-bold">VERIFIED</span>
+            <span className="text-emerald-600 font-semibold">VERIFIED</span>
           </div>
           <div className="p-2.5 rounded-lg bg-ecp-bg-canvas border border-ecp-border flex items-center justify-between">
             <span>[2026-11-16 22:30] Audio timing manifest and pause spacing synchronized</span>
-            <span className="text-emerald-600 font-bold">PASSED</span>
+            <span className="text-emerald-600 font-semibold">PASSED</span>
           </div>
           <div className="p-2.5 rounded-lg bg-ecp-bg-canvas border border-ecp-border flex items-center justify-between">
             <span>[2026-11-16 17:15] 17 Bilingual seed scenarios pre-rendered into static pages</span>
-            <span className="text-emerald-600 font-bold">PUBLISHED</span>
+            <span className="text-emerald-600 font-semibold">PUBLISHED</span>
           </div>
         </div>
       </Card>

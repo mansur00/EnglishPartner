@@ -38,7 +38,7 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
+    <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
       {/* Brand & Mobile Hamburger */}
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}
@@ -52,11 +52,11 @@ export function Header() {
           <SheetContent side="left" className="w-72 bg-card border-r border-border p-6">
             <SheetHeader className="pb-4 border-b border-border text-left">
               <SheetTitle className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold font-heading text-lg shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs">
                   E
                 </div>
                 <div>
-                  <div className="font-bold font-heading text-base leading-tight text-foreground">
+                  <div className="font-semibold font-heading text-base leading-tight text-foreground">
                     English Partner
                   </div>
                   <div className="text-xs text-muted-foreground">
@@ -92,11 +92,11 @@ export function Header() {
 
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity">
             E
           </div>
           <div className="flex flex-col">
-            <span className="font-bold font-heading text-base leading-tight text-foreground">
+            <span className="font-semibold font-heading text-base leading-tight text-foreground">
               English Partner
             </span>
             <span className="text-xs text-muted-foreground font-medium">

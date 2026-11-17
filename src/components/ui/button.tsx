@@ -7,11 +7,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        cta: "bg-sun-500 text-brand-950 hover:bg-sun-400 active:bg-sun-600 shadow-sm font-bold",
+        cta: "bg-sun-500 text-brand-950 hover:bg-sun-400 active:bg-sun-600 shadow-sm font-semibold",
         default: "bg-primary text-primary-foreground hover:bg-[var(--brand-900)] active:bg-[var(--brand-950)] shadow-xs font-semibold",
         primary: "bg-primary text-primary-foreground hover:bg-[var(--brand-900)] active:bg-[var(--brand-950)] shadow-xs font-semibold",
         accent:
-          "bg-[var(--sun-500)] text-[var(--brand-950)] hover:bg-[var(--sun-400)] shadow-xs font-bold",
+          "bg-[var(--sun-500)] text-[var(--brand-950)] hover:bg-[var(--sun-400)] shadow-xs font-semibold",
         outline:
           "border border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -23,14 +23,14 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-11 gap-2 px-5 text-base rounded-full",
-        md: "h-11 gap-2 px-5 text-base rounded-full",
-        sm: "h-9 gap-1.5 px-3.5 text-sm rounded-full",
-        xs: "h-7 gap-1 px-2.5 text-xs rounded-full",
-        lg: "h-13 gap-2.5 px-7 text-lg rounded-full",
-        icon: "size-11 rounded-full",
-        "icon-sm": "size-9 rounded-full",
-        "icon-lg": "size-13 rounded-full",
+        default: "h-11 gap-2 px-5 text-base rounded-[12px]",
+        md: "h-11 gap-2 px-5 text-base rounded-[12px]",
+        sm: "h-9 gap-1.5 px-3.5 text-sm rounded-[10px]",
+        xs: "h-7 gap-1 px-2.5 text-xs rounded-[8px]",
+        lg: "h-13 gap-2.5 px-7 text-lg rounded-[12px]",
+        icon: "size-11 rounded-[12px]",
+        "icon-sm": "size-9 rounded-[10px]",
+        "icon-lg": "size-13 rounded-[12px]",
       },
     },
     defaultVariants: {

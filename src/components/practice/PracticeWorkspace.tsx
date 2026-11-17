@@ -146,7 +146,7 @@ export function PracticeWorkspace({
               <HugeiconsIcon icon={SparklesIcon} size={20} />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-ecp-text-primary font-bangla">
+              <h4 className="text-sm font-semibold text-ecp-text-primary font-bangla">
                 ধাপ {stepNumber.toString().padStart(2, "0")} অনুশীলন শেষ?
               </h4>
               <p className="text-xs text-ecp-text-muted">

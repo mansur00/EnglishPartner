@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -45,11 +46,11 @@ export function DashboardClient() {
   return (
     <div className="w-full pb-16">
       {/* 1. Curved Deep-Violet Header Band (Reference 1 Layout Motif: Full Width of Main Area) */}
-      <div className="w-full bg-gradient-to-b from-[#4A1D6E] to-[#3B1560] dark:from-[#3B1560] dark:to-[#2A0F44] text-white rounded-b-[32px] pt-8 pb-12 md:pt-10 md:pb-14 shadow-sm">
+      <div className="w-full bg-gradient-to-b from-brand-800 to-brand-900 dark:from-brand-900 dark:to-brand-950 text-white rounded-b-[24px] pt-8 pb-12 md:pt-10 md:pb-14 shadow-sm">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-3xl font-bold font-heading text-white tracking-[-0.01em]">
+              <h1 className="text-3xl font-semibold font-heading text-white tracking-[-0.01em]">
                 Good day, Learner! 👋
               </h1>
               <p className="text-sm md:text-base text-white/80 mt-1.5 font-medium">
@@ -57,65 +58,61 @@ export function DashboardClient() {
               </p>
             </div>
 
-            {/* Gamification Stats: Streak & Goal Ring inside Header Band */}
-            <div className="flex items-center gap-3.5 flex-wrap">
-              {/* Streak Tracker with 7-Day Dots */}
-              <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-amber-400 text-[var(--brand-950)] flex items-center justify-center shrink-0 shadow-xs">
-                  <HugeiconsIcon icon={FireIcon} size={20} />
+            {/* Gamification Stats: Single Combined "Today" Panel (Section 3.5) */}
+            <div className="w-full md:w-auto bg-white/10 border border-white/15 rounded-[12px] p-4 text-white shadow-xs space-y-3.5 min-w-[320px] sm:min-w-[360px]">
+              {/* Row 1: Streak Number + Label + 7 Weekday Markers */}
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <HugeiconsIcon icon={FireIcon} size={20} className="text-sun-500 shrink-0" />
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl font-semibold leading-none text-white">1</span>
+                    <span className="text-sm font-medium text-white/90">day streak</span>
+                  </div>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-white">1 Day Streak</span>
-                    <span className="text-sm font-medium text-white/80">• Active</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-1.5">
-                    {daysOfWeek.map((day, idx) => {
-                      const isDone = idx === currentDayIndex;
-                      return (
-                        <span
-                          key={idx}
-                          title={`${day}: ${isDone ? "Completed" : "Upcoming"}`}
-                          className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold transition-all ${
-                            isDone
-                              ? "bg-amber-400 text-[var(--brand-950)] shadow-xs scale-105"
-                              : "bg-white/20 text-white/80"
-                          }`}
-                        >
-                          {day}
-                        </span>
-                      );
-                    })}
-                  </div>
+
+                {/* 7 Weekday Markers (28px) */}
+                <div className="flex items-center gap-1.5">
+                  {daysOfWeek.map((day, idx) => {
+                    const isDone = idx === currentDayIndex;
+                    const isPast = idx < currentDayIndex;
+                    const isToday = idx === currentDayIndex;
+                    const isFuture = idx > currentDayIndex;
+
+                    return (
+                      <span
+                        key={idx}
+                        title={`${day}: ${isToday ? "Today" : isDone ? "Completed" : "Upcoming"}`}
+                        className={cn(
+                          "inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-semibold transition-all select-none",
+                          isDone && "bg-sun-500 text-brand-950 shadow-xs",
+                          !isDone && isPast && "bg-white/20 text-white/80",
+                          isFuture && "border border-dashed border-white/30 text-white/50"
+                        )}
+                      >
+                        {day}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
-              {/* Daily Goal Progress Ring */}
-              <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-xs">
-                <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
-                  <svg className="w-10 h-10 -rotate-90" viewBox="0 0 36 36">
-                    <path
-                      className="text-white/20"
-                      strokeWidth="3.5"
-                      stroke="currentColor"
-                      fill="none"
-                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <path
-                      className="text-amber-300 transition-all duration-500"
-                      strokeDasharray="70, 100"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      stroke="currentColor"
-                      fill="none"
-                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                  </svg>
-                  <span className="absolute text-xs font-bold text-white">70%</span>
+              {/* Row 2: Daily Goal with 10-Segment Minute Bar */}
+              <div className="space-y-1.5 pt-1 border-t border-white/10">
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-semibold text-white">7 / 10 min</span>
+                  <span className="text-sm font-medium text-white/80">3 min to go</span>
                 </div>
-                <div>
-                  <p className="text-sm font-bold text-white">Daily Goal</p>
-                  <p className="text-sm text-white/80 font-medium">7 / 10 mins</p>
+                {/* 10-Segment Minute Bar (8px tall, 3px gaps, rounded 2px) */}
+                <div className="flex items-center gap-[3px] w-full" role="progressbar" aria-valuenow={7} aria-valuemin={0} aria-valuemax={10}>
+                  {Array.from({ length: 10 }).map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={cn(
+                        "h-2 flex-1 rounded-[2px] transition-colors",
+                        idx < 7 ? "bg-sun-500" : "bg-white/20"
+                      )}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -126,10 +123,10 @@ export function DashboardClient() {
       {/* Main Content Area Overlapping Header Band by 24px */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 -mt-6 relative z-10 space-y-8">
         {/* 2. Today's Recommended Conversation (Hero with Rainbow Border & Sunny Yellow CTA) */}
-        <div className="rainbow-border rounded-2xl">
+        <div className="rainbow-border rounded-[16px]">
           <Card
             data-topic="shopping"
-            className="relative overflow-hidden border border-border bg-card shadow-sm p-6 md:p-8"
+            className="relative overflow-hidden border border-border bg-card shadow-sm p-6 md:p-8 rounded-[16px]"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               {/* Left Column: Recommendation Info & CTA */}
@@ -141,13 +138,13 @@ export function DashboardClient() {
                   <Badge variant="secondary" size="md">
                     A2 • Elementary
                   </Badge>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border border-[var(--topic-border)] bg-[var(--topic-tile)] text-[var(--topic-ink)] shadow-2xs">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border border-[var(--topic-border)] bg-[var(--topic-tile)] text-[var(--topic-ink)] shadow-2xs">
                     Shopping & Money
                   </span>
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-bold font-heading text-foreground tracking-tight">
+                  <h2 className="text-2xl font-semibold font-heading text-foreground tracking-tight">
                     Asking for a Price & Product Details
                   </h2>
                   <p className="text-base font-medium text-muted-foreground font-bangla mt-1">
@@ -179,8 +176,8 @@ export function DashboardClient() {
               </div>
 
               {/* Right Column: Mini Interactive Dialogue Preview (Replaces Empty Space) */}
-              <div className="lg:col-span-5 bg-[var(--topic-surface)] rounded-2xl p-5 border border-border space-y-3">
-                <div className="flex items-center justify-between text-sm font-bold text-[var(--topic-ink)] uppercase tracking-wider pb-2 border-b border-border">
+              <div className="lg:col-span-5 bg-[var(--topic-surface)] rounded-[12px] p-5 border border-border space-y-3">
+                <div className="flex items-center justify-between text-sm font-semibold text-[var(--topic-ink)] uppercase tracking-wider pb-2 border-b border-border">
                   <span className="flex items-center gap-1.5">
                     <HugeiconsIcon icon={Message01Icon} size={16} />
                     Dialogue Preview
@@ -190,10 +187,10 @@ export function DashboardClient() {
 
                 {/* Bubble 1: Customer (Speaker 1) */}
                 <div className="flex items-start gap-2.5 text-left">
-                  <span className="w-8 h-8 rounded-full bg-[var(--brand-800)] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-xs">
+                  <span className="w-8 h-8 rounded-full bg-[var(--brand-800)] text-white flex items-center justify-center text-xs font-semibold shrink-0 mt-0.5 shadow-xs">
                     C
                   </span>
-                  <div className="bg-[var(--brand-100)] border border-border rounded-2xl rounded-tl-none p-3.5 shadow-2xs text-sm max-w-[88%]">
+                  <div className="bg-[var(--brand-100)] border border-border rounded-[12px] rounded-tl-[4px] p-3.5 shadow-2xs text-sm max-w-[88%]">
                     <p className="font-semibold text-[var(--brand-950)]">
                       &ldquo;Excuse me, could you tell me how much this costs?&rdquo;
                     </p>
@@ -205,7 +202,7 @@ export function DashboardClient() {
 
                 {/* Bubble 2: Shop Assistant (Speaker 2) */}
                 <div className="flex items-start gap-2.5 justify-end text-right">
-                  <div className="bg-[var(--topic-tile)] border border-border rounded-2xl rounded-tr-none p-3.5 shadow-2xs text-sm max-w-[88%] text-left">
+                  <div className="bg-[var(--topic-tile)] border border-border rounded-[12px] rounded-tr-[4px] p-3.5 shadow-2xs text-sm max-w-[88%] text-left">
                     <p className="font-semibold text-[var(--topic-ink)]">
                       &ldquo;Certainly! It is forty-five dollars with a 10% discount.&rdquo;
                     </p>
@@ -213,7 +210,7 @@ export function DashboardClient() {
                       অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।
                     </p>
                   </div>
-                  <span className="w-8 h-8 rounded-full bg-sun-500 text-brand-950 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-xs">
+                  <span className="w-8 h-8 rounded-full bg-sun-500 text-brand-950 flex items-center justify-center text-xs font-semibold shrink-0 mt-0.5 shadow-xs">
                     S
                   </span>
                 </div>
@@ -231,12 +228,12 @@ export function DashboardClient() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl emoji-tile flex items-center justify-center text-2xl font-bold shadow-2xs">
+                <div className="w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-2xl font-semibold shadow-2xs">
                   ☕
                 </div>
                 <Badge variant="brand" size="md">20 Real Scenarios</Badge>
               </div>
-              <h3 className="text-xl font-bold font-heading text-foreground">
+              <h3 className="text-xl font-semibold font-heading text-foreground">
                 Everyday & Social English
               </h3>
               <p className="text-sm md:text-base text-muted-foreground mt-1.5 leading-relaxed">
@@ -272,12 +269,12 @@ export function DashboardClient() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl emoji-tile flex items-center justify-center text-2xl font-bold shadow-2xs">
+                <div className="w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-2xl font-semibold shadow-2xs">
                   💼
                 </div>
                 <Badge variant="accent" size="md">30+ Job Roles</Badge>
               </div>
-              <h3 className="text-xl font-bold font-heading text-foreground">
+              <h3 className="text-xl font-semibold font-heading text-foreground">
                 Professional Conversations
               </h3>
               <p className="text-sm md:text-base text-muted-foreground mt-1.5 leading-relaxed">
@@ -312,12 +309,12 @@ export function DashboardClient() {
           <Card data-topic="shopping" className="card-hover p-6 md:p-7 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl emoji-tile flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center shrink-0">
                   <HugeiconsIcon icon={CheckmarkCircle02Icon} size={24} />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold font-heading text-foreground">
+                    <h3 className="text-lg font-semibold font-heading text-foreground">
                       Continue Where You Left Off
                     </h3>
                     <Badge variant="success" size="md">
@@ -342,11 +339,11 @@ export function DashboardClient() {
           <Card className="border border-dashed border-border bg-card p-6 md:p-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-[12px] bg-primary/10 text-primary flex items-center justify-center shrink-0">
                   <HugeiconsIcon icon={CompassIcon} size={28} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold font-heading text-foreground">
+                  <h3 className="text-lg font-semibold font-heading text-foreground">
                     Start Your First Conversation
                   </h3>
                   <p className="text-sm text-muted-foreground mt-1 max-w-lg">

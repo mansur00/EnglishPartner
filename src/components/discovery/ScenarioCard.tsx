@@ -38,21 +38,21 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
             <div
-              className="w-12 h-12 rounded-2xl emoji-tile flex items-center justify-center text-xl shrink-0 shadow-2xs"
+              className="w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl shrink-0 shadow-2xs"
               title={theme.name}
             >
               {theme.emoji}
             </div>
 
             <div>
-              <span className="text-sm font-bold text-[var(--topic-ink)]">
+              <span className="text-sm font-semibold text-[var(--topic-ink)]">
                 {scenario.categories[0]?.name || "Conversation"}
               </span>
               <div className="flex items-center gap-2 mt-1">
-                <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>
+                <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>
                   {scenario.level}
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border">
+                <span className="text-xs font-semibold uppercase tracking-wider bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border">
                   EN + BN
                 </span>
               </div>
@@ -69,7 +69,7 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
 
         {/* Title & Bangla Subtitle */}
         <div>
-          <h3 className="text-xl font-bold font-heading text-foreground group-hover:text-primary transition-colors line-clamp-1">
+          <h3 className="text-xl font-semibold font-heading text-foreground group-hover:text-primary transition-colors line-clamp-1">
             {scenario.title}
           </h3>
           <p className="text-sm font-medium text-muted-foreground font-bangla mt-1 line-clamp-1">

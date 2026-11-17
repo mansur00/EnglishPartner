@@ -22,7 +22,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col rounded-2xl p-5 md:p-6 transition-all duration-200 text-sm",
+        "group/card flex flex-col rounded-[16px] p-5 md:p-6 transition-all duration-200 text-sm",
         "data-[size=sm]:p-4",
         "has-data-[slot=card-header]:p-0 has-data-[slot=card-content]:p-0",
         variantStyles[variant] || variantStyles.default,
