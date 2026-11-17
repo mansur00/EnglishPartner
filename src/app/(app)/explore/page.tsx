@@ -92,7 +92,7 @@ export default function ExplorePage() {
     <div className="space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl md:text-4xl font-bold font-heading text-foreground tracking-tight">
+        <h1 className="text-3xl font-bold font-heading text-foreground tracking-[-0.01em]">
           Explore Conversations
         </h1>
         <p className="text-sm md:text-base text-muted-foreground mt-1.5 font-bangla">

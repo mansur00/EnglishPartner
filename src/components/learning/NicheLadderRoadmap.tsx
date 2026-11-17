@@ -78,7 +78,7 @@ export function NicheLadderRoadmap({
         </div>
 
         <div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-ecp-text-primary tracking-tight font-sans">
+          <h1 className="text-3xl font-bold text-ecp-text-primary tracking-[-0.01em] font-sans">
             {nicheTitle}
           </h1>
           <p className="text-base sm:text-lg font-bangla text-ecp-text-secondary mt-1 font-medium">

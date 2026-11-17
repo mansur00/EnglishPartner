@@ -45,11 +45,11 @@ export function DashboardClient() {
   return (
     <div className="w-full pb-16">
       {/* 1. Curved Deep-Violet Header Band (Reference 1 Layout Motif: Full Width of Main Area) */}
-      <div className="w-full bg-primary text-primary-foreground rounded-b-[32px] pt-8 pb-14 md:pt-10 md:pb-16 shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+      <div className="w-full bg-gradient-to-b from-[#4A1D6E] to-[#3B1560] dark:from-[#3B1560] dark:to-[#2A0F44] text-white rounded-b-[32px] pt-8 pb-12 md:pt-10 md:pb-14 shadow-sm">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold font-heading text-white tracking-tight">
+              <h1 className="text-3xl font-bold font-heading text-white tracking-[-0.01em]">
                 Good day, Learner! 👋
               </h1>
               <p className="text-sm md:text-base text-white/80 mt-1.5 font-medium">
@@ -76,7 +76,7 @@ export function DashboardClient() {
                         <span
                           key={idx}
                           title={`${day}: ${isDone ? "Completed" : "Upcoming"}`}
-                          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold transition-all ${
+                          className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold transition-all ${
                             isDone
                               ? "bg-amber-400 text-[var(--brand-950)] shadow-xs scale-105"
                               : "bg-white/20 text-white/80"
@@ -124,7 +124,7 @@ export function DashboardClient() {
       </div>
 
       {/* Main Content Area Overlapping Header Band by 24px */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 -mt-6 relative z-10 space-y-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 -mt-6 relative z-10 space-y-8">
         {/* 2. Today's Recommended Conversation (Hero with Rainbow Border & Sunny Yellow CTA) */}
         <div className="rainbow-border rounded-2xl">
           <Card
@@ -141,13 +141,13 @@ export function DashboardClient() {
                   <Badge variant="secondary" size="md">
                     A2 • Elementary
                   </Badge>
-                  <Badge variant="neutral" size="md">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border border-[var(--topic-border)] bg-[var(--topic-tile)] text-[var(--topic-ink)] shadow-2xs">
                     Shopping & Money
-                  </Badge>
+                  </span>
                 </div>
 
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-heading text-foreground tracking-tight">
+                  <h2 className="text-2xl font-bold font-heading text-foreground tracking-tight">
                     Asking for a Price & Product Details
                   </h2>
                   <p className="text-base font-medium text-muted-foreground font-bangla mt-1">
