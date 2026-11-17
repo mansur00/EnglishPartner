@@ -1328,7 +1328,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "আমি চল্লিশ মিনিট ধরে অপেক্ষা করছি (Waiting for Forty Minutes)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 15,
+    "linesCount": 14,
     "level": "B1",
     "cefrGroup": "B1 Intermediate",
     "focus": "complaints — \"I've been waiting…\", \"I'd like to speak to…\"",
@@ -1464,15 +1464,6 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
       {
         "id": "shopping-money-step-13-t12",
         "sequenceNumber": 12,
-        "speakerId": "rafi",
-        "speakerName": "Rafi",
-        "speakerRole": "shop assistant",
-        "englishText": "Here is a chair. Please sit down while you wait.",
-        "translationBn": "এখানে একটা চেয়ার আছে। অপেক্ষা করার সময় বসুন।"
-      },
-      {
-        "id": "shopping-money-step-13-t13",
-        "sequenceNumber": 13,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -1480,8 +1471,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ধন্যবাদ। আপনাদের সাহায্যের জন্য কৃতজ্ঞ।"
       },
       {
-        "id": "shopping-money-step-13-t14",
-        "sequenceNumber": 14,
+        "id": "shopping-money-step-13-t13",
+        "sequenceNumber": 13,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -1489,8 +1480,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "এখন তৈরি। দয়া করে পাতাগুলো দেখে নিন।"
       },
       {
-        "id": "shopping-money-step-13-t15",
-        "sequenceNumber": 15,
+        "id": "shopping-money-step-13-t14",
+        "sequenceNumber": 14,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -1508,7 +1499,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "আমি হলে এখনই রসিদ চাইতাম (Ask for a Receipt)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 15,
+    "linesCount": 16,
     "level": "B1",
     "cefrGroup": "B1 Intermediate",
     "focus": "second conditional and advice — \"If I were you, I'd…\"",
@@ -1676,6 +1667,15 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerRole": "shop assistant",
         "englishText": "Next time, please check the bill before you leave the counter.",
         "translationBn": "পরের বার, কাউন্টার ছাড়ার আগে বিলটা একটু দেখে নেবেন।"
+      },
+      {
+        "id": "shopping-money-step-14-t16",
+        "sequenceNumber": 16,
+        "speakerId": "nadia",
+        "speakerName": "Nadia",
+        "speakerRole": "customer",
+        "englishText": "I will definitely do that. Have a good day.",
+        "translationBn": "আমি অবশ্যই তা করব। আপনার দিনটি ভালো কাটুক।"
       }
     ],
     "prevStepSlug": "shopping-money-step-13",
@@ -1688,7 +1688,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "ভুল সাইজের পণ্য এসেছে (Order Arrived in Wrong Size)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 19,
+    "linesCount": 18,
     "level": "B1+",
     "cefrGroup": "B1 Intermediate",
     "focus": "phone and email language; reported speech",
@@ -1872,17 +1872,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "customer service",
-        "englishText": "You're welcome. Is there anything else I can do for you?",
-        "translationBn": "স্বাগতম। আর কিছু কি করতে পারি?"
-      },
-      {
-        "id": "shopping-money-step-15-t19",
-        "sequenceNumber": 19,
-        "speakerId": "nadia",
-        "speakerName": "Nadia",
-        "speakerRole": "customer",
-        "englishText": "No, that's all. Have a good day.",
-        "translationBn": "না, এটুকুই। ভালো থাকবেন।"
+        "englishText": "You're welcome. Have a wonderful day.",
+        "translationBn": "আপনাকে স্বাগতম। আপনার দিনটি চমৎকার কাটুক।"
       }
     ],
     "prevStepSlug": "shopping-money-step-14",
@@ -1895,7 +1886,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "মানসম্মত জিনিসের জন্য কেন বেশি খরচ করব (Pay More for Quality)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 18,
+    "linesCount": 20,
     "level": "B1+",
     "cefrGroup": "B1 Intermediate",
     "focus": "giving opinions and reasons; passive — \"It was made in…\"",
@@ -2090,6 +2081,24 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerRole": "shop owner",
         "englishText": "Excellent choice. It was a good decision.",
         "translationBn": "চমৎকার পছন্দ। এটা একটা ভালো সিদ্ধান্ত।"
+      },
+      {
+        "id": "shopping-money-step-16-t19",
+        "sequenceNumber": 19,
+        "speakerId": "rafi",
+        "speakerName": "Rafi",
+        "speakerRole": "shop assistant",
+        "englishText": "Let me pack it carefully in a dust bag for you.",
+        "translationBn": "আমি আপনার জন্য এটি যত্নসহকারে একটি ডাস্ট ব্যাগে প্যাক করে দিচ্ছি।"
+      },
+      {
+        "id": "shopping-money-step-16-t20",
+        "sequenceNumber": 20,
+        "speakerId": "nadia",
+        "speakerName": "Nadia",
+        "speakerRole": "customer",
+        "englishText": "That is wonderful, thank you so much.",
+        "translationBn": "দারুণ ব্যাপার, আপনাকে অনেক ধন্যবাদ।"
       }
     ],
     "prevStepSlug": "shopping-money-step-15",
@@ -2102,7 +2111,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "আমাদের পণ্য ফেরত নীতিমালা (Our Return Policy)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 20,
+    "linesCount": 22,
     "level": "B2",
     "cefrGroup": "B2 Upper-Intermediate",
     "focus": "policies and negotiation; \"You have to…\", \"You don't need to…\"",
@@ -2315,6 +2324,24 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerRole": "customer",
         "englishText": "Done. Thank you both for your help.",
         "translationBn": "হয়ে গেছে। দুজনকেই সাহায্যের জন্য ধন্যবাদ।"
+      },
+      {
+        "id": "shopping-money-step-17-t21",
+        "sequenceNumber": 21,
+        "speakerId": "karim",
+        "speakerName": "Karim",
+        "speakerRole": "shop owner",
+        "englishText": "Here is your customer receipt copy. We will call you within twenty minutes.",
+        "translationBn": "এই নিন আপনার গ্রাহক রসিদের কপি। আমরা বিশ মিনিটের মধ্যে আপনাকে ফোন করব।"
+      },
+      {
+        "id": "shopping-money-step-17-t22",
+        "sequenceNumber": 22,
+        "speakerId": "nadia",
+        "speakerName": "Nadia",
+        "speakerRole": "customer",
+        "englishText": "Perfect. I look forward to your phone call.",
+        "translationBn": "চমৎকার। আমি আপনাদের ফোনের অপেক্ষায় থাকব।"
       }
     ],
     "prevStepSlug": "shopping-money-step-16",
@@ -2327,7 +2354,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "কার্ড ডিক্লাইন বা বাতিল হয়েছে (The Card Was Declined)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 24,
+    "linesCount": 25,
     "level": "B2",
     "cefrGroup": "B2 Upper-Intermediate",
     "focus": "a complication; past perfect — \"I'd already paid…\"",
@@ -2576,6 +2603,15 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerRole": "customer",
         "englishText": "I will. Have a lovely evening.",
         "translationBn": "আসব। সন্ধ্যাটা ভালো কাটুক।"
+      },
+      {
+        "id": "shopping-money-step-18-t25",
+        "sequenceNumber": 25,
+        "speakerId": "karim",
+        "speakerName": "Karim",
+        "speakerRole": "shop owner",
+        "englishText": "Thank you Nadia, have a great evening too!",
+        "translationBn": "ধন্যবাদ নাদিয়া, আপনার সন্ধ্যাটিও খুব ভালো কাটুক!"
       }
     ],
     "prevStepSlug": "shopping-money-step-17",
@@ -2588,7 +2624,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "তাকের শেষ পণ্যটি (The Last One on the Shelf)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 33,
+    "linesCount": 30,
     "level": "B2",
     "cefrGroup": "B2 Upper-Intermediate",
     "focus": "two people with different needs; mixed tenses; softening disagreement",
@@ -2817,30 +2853,12 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
-        "englishText": "We could do that, but I'd prefer a fair solution. What if you both share the information?",
-        "translationBn": "আমরা তা করতে পারি, তবে আমি একটা ন্যায্য সমাধান চাই। আপনারা দুজনেই যদি তথ্যটা ভাগ করে নেন কেমন হয়?"
+        "englishText": "What if Nadia takes the grey one from the branch, and Mina takes the blue one here with a discount?",
+        "translationBn": "নাদিয়া শাখা থেকে ধূসরটা নেবেন, আর মিনা এখানে নীলটা নেবেন ছাড় সহ, কেমন হয়?"
       },
       {
         "id": "shopping-money-step-19-t22",
         "sequenceNumber": 22,
-        "speakerId": "mina",
-        "speakerName": "Mina",
-        "speakerRole": "customer",
-        "englishText": "How do you mean? I don't understand.",
-        "translationBn": "কীভাবে? আমি বুঝতে পারছি না।"
-      },
-      {
-        "id": "shopping-money-step-19-t23",
-        "sequenceNumber": 23,
-        "speakerId": "karim",
-        "speakerName": "Karim",
-        "speakerRole": "shop owner",
-        "englishText": "Nadia takes the grey one from the branch, and Mina takes the blue one here, with a discount.",
-        "translationBn": "নাদিয়া শাখা থেকে ধূসরটা নেবেন, আর মিনা এখানে নীলটা নেবেন, ছাড় সহ।"
-      },
-      {
-        "id": "shopping-money-step-19-t24",
-        "sequenceNumber": 24,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -2848,8 +2866,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "এটা খারাপ না। তবে শাখায় সাইজটা ঠিক আছে কি না আমার নিশ্চিত হওয়া দরকার।"
       },
       {
-        "id": "shopping-money-step-19-t25",
-        "sequenceNumber": 25,
+        "id": "shopping-money-step-19-t23",
+        "sequenceNumber": 23,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -2857,8 +2875,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আমি এখনই ওদের সাথে নিশ্চিত করছি। একটু অপেক্ষা করুন।"
       },
       {
-        "id": "shopping-money-step-19-t26",
-        "sequenceNumber": 26,
+        "id": "shopping-money-step-19-t24",
+        "sequenceNumber": 24,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -2866,8 +2884,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ঠিক আছে। সত্যি বলতে, আমার মনে হয় এটা একটা ভালো মীমাংসা।"
       },
       {
-        "id": "shopping-money-step-19-t27",
-        "sequenceNumber": 27,
+        "id": "shopping-money-step-19-t25",
+        "sequenceNumber": 25,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -2875,8 +2893,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ওরা নিশ্চিত করেছে। ধূসরটা মিডিয়াম, আর আপনার জন্য রাখা হয়েছে।"
       },
       {
-        "id": "shopping-money-step-19-t28",
-        "sequenceNumber": 28,
+        "id": "shopping-money-step-19-t26",
+        "sequenceNumber": 26,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -2884,8 +2902,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "অনেক ধন্যবাদ। আর আপনি খুব ভালো, মিনা।"
       },
       {
-        "id": "shopping-money-step-19-t29",
-        "sequenceNumber": 29,
+        "id": "shopping-money-step-19-t27",
+        "sequenceNumber": 27,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -2893,26 +2911,17 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ধন্যবাদ। আমি হলেও একই করতাম। দুজনেই ভালো কিছু নিই।"
       },
       {
-        "id": "shopping-money-step-19-t30",
-        "sequenceNumber": 30,
-        "speakerId": "karim",
-        "speakerName": "Karim",
-        "speakerRole": "shop owner",
-        "englishText": "Good. I'll make sure the discount is on your bills.",
-        "translationBn": "ভালো। নিশ্চিত করব যেন ছাড়টা আপনাদের বিলেই থাকে।"
-      },
-      {
-        "id": "shopping-money-step-19-t31",
-        "sequenceNumber": 31,
+        "id": "shopping-money-step-19-t28",
+        "sequenceNumber": 28,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
-        "englishText": "Here's the blue one, with the discount. Thank you for being patient.",
-        "translationBn": "এই নিন নীল জ্যাকেট, ছাড় সহ। ধৈর্য ধরার জন্য ধন্যবাদ।"
+        "englishText": "Here's the blue one, with the discount included. Thank you both for being patient.",
+        "translationBn": "এই নিন ছাড়সহ নীল জ্যাকেট। আপনাদের দুজনেরই ধৈর্য ধরার জন্য অনেক ধন্যবাদ।"
       },
       {
-        "id": "shopping-money-step-19-t32",
-        "sequenceNumber": 32,
+        "id": "shopping-money-step-19-t29",
+        "sequenceNumber": 29,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -2920,8 +2929,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ধন্যবাদ। আমি বন্ধুদের এই দোকানের কথা বলব।"
       },
       {
-        "id": "shopping-money-step-19-t33",
-        "sequenceNumber": 33,
+        "id": "shopping-money-step-19-t30",
+        "sequenceNumber": 30,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -2939,7 +2948,7 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
     "titleBn": "শেখ মুজিব রোডের দোকানটি (The Shop on Sheikh Mujib Road — Full Story)",
     "nicheName": "Shopping & Money",
     "nicheSlug": "shopping-money",
-    "linesCount": 60,
+    "linesCount": 55,
     "level": "B2/C1",
     "cefrGroup": "C1 Advanced Story",
     "focus": "**story**. A full arc: beginning, problem, attempt, turn, ending. All grammar from steps 1–19 appears naturally.",
@@ -3186,8 +3195,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
-        "englishText": "That's fair, as long as the customer knows the condition. Would you like me to help write the note?",
-        "translationBn": "এটা ন্যায্য, যদি ক্রেতা অবস্থাটা জানে। আপনি চাইলে নোটটা লিখতে আমি সাহায্য করতে পারি?"
+        "englishText": "That's fair. If you write \"Used once, strap replaced, full warranty for six months\", that sounds completely honest.",
+        "translationBn": "এটা ঠিক। আপনি যদি লেখেন \"একবার ব্যবহৃত, স্ট্র্যাপ বদলানো, ছয় মাসের পূর্ণ ওয়ারেন্টি\", তবে এটি সম্পূর্ণ সৎ শোনাবে।"
       },
       {
         "id": "shopping-money-step-20-t24",
@@ -3195,30 +3204,12 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
-        "englishText": "That would be very kind. Maybe you could check whether the wording is clear.",
-        "translationBn": "সেটা খুব ভালো হবে। আপনি একটু দেখে দিতে পারেন শব্দগুলো স্পষ্ট হচ্ছে কি না।"
-      },
-      {
-        "id": "shopping-money-step-20-t25",
-        "sequenceNumber": 25,
-        "speakerId": "nadia",
-        "speakerName": "Nadia",
-        "speakerRole": "customer",
-        "englishText": "Of course. Let me see... \"Used once. Strap replaced. Full warranty for six months.\"",
-        "translationBn": "অবশ্যই। দেখি... \"একবার ব্যবহৃত। স্ট্র্যাপ বদলানো। ছয় মাসের পূর্ণ ওয়ারেন্টি।\""
-      },
-      {
-        "id": "shopping-money-step-20-t26",
-        "sequenceNumber": 26,
-        "speakerId": "karim",
-        "speakerName": "Karim",
-        "speakerRole": "shop owner",
         "englishText": "Excellent. People deserve to know exactly what they're buying.",
         "translationBn": "চমৎকার। মানুষের জানার অধিকার আছে তারা ঠিক কী কিনছে।"
       },
       {
-        "id": "shopping-money-step-20-t27",
-        "sequenceNumber": 27,
+        "id": "shopping-money-step-20-t25",
+        "sequenceNumber": 25,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3226,8 +3217,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আমার সাইজে থাকলে আমি কিনতাম। মিডিয়াম আছে?"
       },
       {
-        "id": "shopping-money-step-20-t28",
-        "sequenceNumber": 28,
+        "id": "shopping-money-step-20-t26",
+        "sequenceNumber": 26,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -3235,8 +3226,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "দেখি। হ্যাঁ, পেছনের ঘরে একটা মিডিয়াম আছে।"
       },
       {
-        "id": "shopping-money-step-20-t29",
-        "sequenceNumber": 29,
+        "id": "shopping-money-step-20-t27",
+        "sequenceNumber": 27,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3244,8 +3235,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ওহ, দারুণ! আমি কি একটু পরে দেখতে পারি?"
       },
       {
-        "id": "shopping-money-step-20-t30",
-        "sequenceNumber": 30,
+        "id": "shopping-money-step-20-t28",
+        "sequenceNumber": 28,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -3253,8 +3244,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "অবশ্যই। ফিটিং রুম ওখানে, বাঁ দিকে।"
       },
       {
-        "id": "shopping-money-step-20-t31",
-        "sequenceNumber": 31,
+        "id": "shopping-money-step-20-t29",
+        "sequenceNumber": 29,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3262,8 +3253,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ধন্যবাদ। আমাকে দুই মিনিট দিন।"
       },
       {
-        "id": "shopping-money-step-20-t32",
-        "sequenceNumber": 32,
+        "id": "shopping-money-step-20-t30",
+        "sequenceNumber": 30,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3271,8 +3262,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ও যখন দেখছে, আমি কি বাড়ি নিয়ে যাওয়া ব্যাগটার কথা জিজ্ঞেস করতে পারি? ওটা বোনের জন্মদিনের উপহার ছিল।"
       },
       {
-        "id": "shopping-money-step-20-t33",
-        "sequenceNumber": 33,
+        "id": "shopping-money-step-20-t31",
+        "sequenceNumber": 31,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3280,8 +3271,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "অবশ্যই। ভালো অবস্থায় পৌঁছেছিল?"
       },
       {
-        "id": "shopping-money-step-20-t34",
-        "sequenceNumber": 34,
+        "id": "shopping-money-step-20-t32",
+        "sequenceNumber": 32,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3289,8 +3280,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "হ্যাঁ, পৌঁছেছিল। সে খুব পছন্দ করেছে। কিন্তু আমার চিন্তা, স্ট্র্যাপটা আবার ভেঙে যেতে পারে।"
       },
       {
-        "id": "shopping-money-step-20-t35",
-        "sequenceNumber": 35,
+        "id": "shopping-money-step-20-t33",
+        "sequenceNumber": 33,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3298,8 +3289,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "তাহলে শনিবার নিয়ে আসুন। আমরা স্ট্র্যাপটা শক্ত করে দেব আর সেলাই চেক করব, বিনামূল্যে।"
       },
       {
-        "id": "shopping-money-step-20-t36",
-        "sequenceNumber": 36,
+        "id": "shopping-money-step-20-t34",
+        "sequenceNumber": 34,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3307,8 +3298,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "এটা খুব উদার। আশা করি আপনাদের বেশি সময় নিচ্ছি না।"
       },
       {
-        "id": "shopping-money-step-20-t37",
-        "sequenceNumber": 37,
+        "id": "shopping-money-step-20-t35",
+        "sequenceNumber": 35,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -3316,8 +3307,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "একেবারেই না। আপনাদের মতামত আমাদের উন্নতিতে সাহায্য করছে।"
       },
       {
-        "id": "shopping-money-step-20-t38",
-        "sequenceNumber": 38,
+        "id": "shopping-money-step-20-t36",
+        "sequenceNumber": 36,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3325,8 +3316,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আমি ফিরে এসেছি! ভালো ফিট করেছে, তবে হাতা একটু লম্বা।"
       },
       {
-        "id": "shopping-money-step-20-t39",
-        "sequenceNumber": 39,
+        "id": "shopping-money-step-20-t37",
+        "sequenceNumber": 37,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3334,8 +3325,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আমরা আজকেই ছোট করে দিতে পারি। রফিকে দিন, এক ঘণ্টার মধ্যে তৈরি হবে।"
       },
       {
-        "id": "shopping-money-step-20-t40",
-        "sequenceNumber": 40,
+        "id": "shopping-money-step-20-t38",
+        "sequenceNumber": 38,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3343,44 +3334,17 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আমি এখানেই অপেক্ষা করতে পারি। সত্যি বলতে, এখন এটা ছাড়া যেতে আমার ইচ্ছে নেই।"
       },
       {
-        "id": "shopping-money-step-20-t41",
-        "sequenceNumber": 41,
-        "speakerId": "rafi",
-        "speakerName": "Rafi",
-        "speakerRole": "shop assistant",
-        "englishText": "Good choice. While you wait, would you like some tea?",
-        "translationBn": "ভালো পছন্দ। অপেক্ষার সময় চা খাবেন?"
-      },
-      {
-        "id": "shopping-money-step-20-t42",
-        "sequenceNumber": 42,
-        "speakerId": "mina",
-        "speakerName": "Mina",
-        "speakerRole": "customer",
-        "englishText": "Yes, please. And maybe a biscuit too.",
-        "translationBn": "হ্যাঁ, দিন। আর একটা বিস্কুটও।"
-      },
-      {
-        "id": "shopping-money-step-20-t43",
-        "sequenceNumber": 43,
-        "speakerId": "nadia",
-        "speakerName": "Nadia",
-        "speakerRole": "customer",
-        "englishText": "I'll have some tea as well. It's been a long day.",
-        "translationBn": "আমিও একটু চা নেব। দিনটা খুব লম্বা গেছে।"
-      },
-      {
-        "id": "shopping-money-step-20-t44",
-        "sequenceNumber": 44,
+        "id": "shopping-money-step-20-t39",
+        "sequenceNumber": 39,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
-        "englishText": "Let's sit together, then. I'll tell you how this shop started.",
-        "translationBn": "তাহলে একসাথে বসি। এই দোকানটা কীভাবে শুরু হয়েছিল বলি।"
+        "englishText": "While Rafi alters the sleeves, let's sit together and have some tea. I'll tell you how this shop started.",
+        "translationBn": "রফি হাতা ঠিক করার সময়ে আসুন একসাথে বসে চা খাই। এই দোকানটা কীভাবে শুরু হয়েছিল আমি আপনাদের বলব।"
       },
       {
-        "id": "shopping-money-step-20-t45",
-        "sequenceNumber": 45,
+        "id": "shopping-money-step-20-t40",
+        "sequenceNumber": 40,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3388,8 +3352,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "শুনতে ভালো লাগবে। আমি তো শুরু থেকেই আসছি।"
       },
       {
-        "id": "shopping-money-step-20-t46",
-        "sequenceNumber": 46,
+        "id": "shopping-money-step-20-t41",
+        "sequenceNumber": 41,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3397,8 +3361,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "দশ বছর আগে বাসস্টেশনের কাছে আমার একটা ছোট স্টল ছিল। শুধু ব্যাগ বিক্রি করতাম, আর কম মানের জিনিস দেখে প্রায়ই হতাশ হতাম।"
       },
       {
-        "id": "shopping-money-step-20-t47",
-        "sequenceNumber": 47,
+        "id": "shopping-money-step-20-t42",
+        "sequenceNumber": 42,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3406,8 +3370,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "তাহলে আপনি একটা ঠিকঠাক দোকান খোলার সিদ্ধান্ত নিলেন?"
       },
       {
-        "id": "shopping-money-step-20-t48",
-        "sequenceNumber": 48,
+        "id": "shopping-money-step-20-t43",
+        "sequenceNumber": 43,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3415,8 +3379,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "হ্যাঁ। এমন জিনিস বিক্রি করতে চেয়েছিলাম যা নিজের পরিবারকে দিতে গর্ব হয়।"
       },
       {
-        "id": "shopping-money-step-20-t49",
-        "sequenceNumber": 49,
+        "id": "shopping-money-step-20-t44",
+        "sequenceNumber": 44,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -3424,8 +3388,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "সেজন্যই তো আমাকে নিয়োগ দিয়েছিলেন। আমি একটা বড় দোকানে কাজ করতাম, আর এমন একটা জায়গা চেয়েছিলাম যেখানে কাস্টমার আগে।"
       },
       {
-        "id": "shopping-money-step-20-t50",
-        "sequenceNumber": 50,
+        "id": "shopping-money-step-20-t45",
+        "sequenceNumber": 45,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3433,8 +3397,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আপনাদের মানুষের সাথে ব্যবহারে সেটা বুঝতে পারি। এটা বিরল।"
       },
       {
-        "id": "shopping-money-step-20-t51",
-        "sequenceNumber": 51,
+        "id": "shopping-money-step-20-t46",
+        "sequenceNumber": 46,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3442,8 +3406,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ধন্যবাদ। সত্যি বলতে, আমাদের যে ভুলগুলো হয়, সেগুলোই আমাদের উন্নতির কারণ।"
       },
       {
-        "id": "shopping-money-step-20-t52",
-        "sequenceNumber": 52,
+        "id": "shopping-money-step-20-t47",
+        "sequenceNumber": 47,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3451,8 +3415,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "এই যে জ্যাকেট। তৈরি! দয়া করে মুড়িয়ে দেবেন?"
       },
       {
-        "id": "shopping-money-step-20-t53",
-        "sequenceNumber": 53,
+        "id": "shopping-money-step-20-t48",
+        "sequenceNumber": 48,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -3460,8 +3424,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "অবশ্যই। রসিদ আর ওয়ারেন্টি কার্ড সহ ব্যাগে ভরে দিচ্ছি।"
       },
       {
-        "id": "shopping-money-step-20-t54",
-        "sequenceNumber": 54,
+        "id": "shopping-money-step-20-t49",
+        "sequenceNumber": 49,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3469,8 +3433,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "ধন্যবাদ। নাদিয়া, চলো। আমাদের চা শেষ।"
       },
       {
-        "id": "shopping-money-step-20-t55",
-        "sequenceNumber": 55,
+        "id": "shopping-money-step-20-t50",
+        "sequenceNumber": 50,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3478,8 +3442,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "হ্যাঁ, আসছি। শনিবার বোনকে নিয়ে স্ট্র্যাপের জন্য আসব।"
       },
       {
-        "id": "shopping-money-step-20-t56",
-        "sequenceNumber": 56,
+        "id": "shopping-money-step-20-t51",
+        "sequenceNumber": 51,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
@@ -3487,8 +3451,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আমরা থাকব। আজকে আপনাদের সততার জন্য দুজনকেই ধন্যবাদ।"
       },
       {
-        "id": "shopping-money-step-20-t57",
-        "sequenceNumber": 57,
+        "id": "shopping-money-step-20-t52",
+        "sequenceNumber": 52,
         "speakerId": "mina",
         "speakerName": "Mina",
         "speakerRole": "customer",
@@ -3496,8 +3460,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "চায়ের জন্য ধন্যবাদ। আর জ্যাকেটের জন্য। আমি এই দোকানের কথা মনে রাখব।"
       },
       {
-        "id": "shopping-money-step-20-t58",
-        "sequenceNumber": 58,
+        "id": "shopping-money-step-20-t53",
+        "sequenceNumber": 53,
         "speakerId": "rafi",
         "speakerName": "Rafi",
         "speakerRole": "shop assistant",
@@ -3505,8 +3469,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "বাড়ি ফেরার পথে সাবধানে যাবেন। শিগগিরই আবার আসবেন।"
       },
       {
-        "id": "shopping-money-step-20-t59",
-        "sequenceNumber": 59,
+        "id": "shopping-money-step-20-t54",
+        "sequenceNumber": 54,
         "speakerId": "nadia",
         "speakerName": "Nadia",
         "speakerRole": "customer",
@@ -3514,8 +3478,8 @@ export const SHOPPING_MONEY_LADDER_STEPS: LadderStepItem[] = [
         "translationBn": "আসব। এখনকার মতো বিদায়।"
       },
       {
-        "id": "shopping-money-step-20-t60",
-        "sequenceNumber": 60,
+        "id": "shopping-money-step-20-t55",
+        "sequenceNumber": 55,
         "speakerId": "karim",
         "speakerName": "Karim",
         "speakerRole": "shop owner",
