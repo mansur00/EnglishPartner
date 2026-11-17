@@ -54,8 +54,8 @@ export function ConversationTurn({
         isCurrentlyPlaying
           ? "bg-primary/10 border-primary shadow-xs ring-1 ring-primary/30"
           : speaker.colorScheme === "accent"
-          ? "bg-card border-border"
-          : "bg-card border-border"
+            ? "bg-card border-border"
+            : "bg-card border-border"
       )}
     >
       {/* Top Bar: Speaker & Controls */}

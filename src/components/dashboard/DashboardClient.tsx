@@ -8,40 +8,40 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  PlayCircleIcon,
-  ArrowRight01Icon,
-  BookOpen01Icon,
-  Clock01Icon,
-  FireIcon,
-  CheckmarkCircle02Icon,
-  CompassIcon,
-  Message01Icon,
+    PlayCircleIcon,
+    ArrowRight01Icon,
+    BookOpen01Icon,
+    Clock01Icon,
+    FireIcon,
+    CheckmarkCircle02Icon,
+    CompassIcon,
+    Message01Icon,
 } from "@hugeicons/core-free-icons";
 
 export function DashboardClient() {
-  const [completedSteps, setCompletedSteps] = useState<string[]>([]);
-  const [isClient, setIsClient] = useState(false);
+    const [completedSteps, setCompletedSteps] = useState<string[]>([]);
+    const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    let resolvedCompleted: string[] = [];
-    try {
-      const storedCompleted = localStorage.getItem("ecp_completed_steps");
-      if (storedCompleted) {
-        const parsed = JSON.parse(storedCompleted);
-        if (Array.isArray(parsed)) resolvedCompleted = parsed;
-      }
-    } catch {
-      // LocalStorage unavailable
-    }
+    useEffect(() => {
+        let resolvedCompleted: string[] = [];
+        try {
+            const storedCompleted = localStorage.getItem("ecp_completed_steps");
+            if (storedCompleted) {
+                const parsed = JSON.parse(storedCompleted);
+                if (Array.isArray(parsed)) resolvedCompleted = parsed;
+            }
+        } catch {
+            // LocalStorage unavailable
+        }
 
-    queueMicrotask(() => {
-      setCompletedSteps(resolvedCompleted);
-      setIsClient(true);
-    });
-  }, []);
+        queueMicrotask(() => {
+            setCompletedSteps(resolvedCompleted);
+            setIsClient(true);
+        });
+    }, []);
 
-  const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
-  const currentDayIndex = (new Date().getDay() + 6) % 7; // Monday = 0
+    const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
+    const currentDayIndex = (new Date().getDay() + 6) % 7; // Monday = 0
 
   return (
     <div className="w-full pb-16">
@@ -152,28 +152,28 @@ export function DashboardClient() {
                   </p>
                 </div>
 
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  Master natural retail phrases to inquire about sizes, verify discount offers, and confirm prices without hesitation.
-                </p>
+                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                                    Master natural retail phrases to inquire about sizes, verify discount offers, and confirm prices without hesitation.
+                                </p>
 
-                <div className="flex items-center gap-5 text-sm text-muted-foreground pt-1">
-                  <span className="flex items-center gap-1.5 font-medium">
-                    <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" /> 5-8 minutes
-                  </span>
-                  <span className="flex items-center gap-1.5 font-medium">
-                    <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" /> 8 dialogue turns
-                  </span>
-                </div>
+                                <div className="flex items-center gap-5 text-sm text-muted-foreground pt-1">
+                                    <span className="flex items-center gap-1.5 font-medium">
+                                        <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" /> 5-8 minutes
+                                    </span>
+                                    <span className="flex items-center gap-1.5 font-medium">
+                                        <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" /> 8 dialogue turns
+                                    </span>
+                                </div>
 
-                <div className="pt-2">
-                  <Link href="/conversations/asking-price-product-details">
-                    <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-sm gap-2">
-                      <HugeiconsIcon icon={PlayCircleIcon} size={20} />
-                      <span>Start Conversation</span>
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+                                <div className="pt-2">
+                                    <Link href="/conversations/asking-price-product-details">
+                                        <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-sm gap-2">
+                                            <HugeiconsIcon icon={PlayCircleIcon} size={20} />
+                                            <span>Start Conversation</span>
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
 
               {/* Right Column: Mini Interactive Dialogue Preview (Replaces Empty Space) */}
               <div className="lg:col-span-5 bg-[var(--topic-surface)] rounded-[12px] p-5 border border-border space-y-3">
@@ -240,27 +240,27 @@ export function DashboardClient() {
                 Shopping, public transport, airport navigation, dining out, and daily social communications.
               </p>
 
-              {/* Progress bar motif */}
-              <div className="mt-4 pt-3 border-t border-border">
-                <div className="flex items-center justify-between text-sm font-semibold text-[var(--topic-ink)] mb-1.5">
-                  <span>Active Track Progress</span>
-                  <span>40% complete</span>
-                </div>
-                <div className="h-2 w-full bg-[var(--topic-tile)] rounded-full overflow-hidden">
-                  <div className="h-full bg-[var(--topic-accent)] rounded-full w-[40%]" />
-                </div>
-              </div>
-            </div>
+                            {/* Progress bar motif */}
+                            <div className="mt-4 pt-3 border-t border-border">
+                                <div className="flex items-center justify-between text-sm font-semibold text-[var(--topic-ink)] mb-1.5">
+                                    <span>Active Track Progress</span>
+                                    <span>40% complete</span>
+                                </div>
+                                <div className="h-2 w-full bg-[var(--topic-tile)] rounded-full overflow-hidden">
+                                    <div className="h-full bg-[var(--topic-accent)] rounded-full w-[40%]" />
+                                </div>
+                            </div>
+                        </div>
 
-            <div className="pt-5 mt-5 border-t border-border">
-              <Link href="/explore">
-                <Button variant="default" size="md" className="btn-press w-full justify-between">
-                  <span>Browse Everyday Library</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
-                </Button>
-              </Link>
-            </div>
-          </Card>
+                        <div className="pt-5 mt-5 border-t border-border">
+                            <Link href="/explore">
+                                <Button variant="default" size="md" className="btn-press w-full justify-between">
+                                    <span>Browse Everyday Library</span>
+                                    <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                                </Button>
+                            </Link>
+                        </div>
+                    </Card>
 
           {/* Professional English Module (Lilac Topic) */}
           <Card
@@ -281,61 +281,61 @@ export function DashboardClient() {
                 Job-specific dialogues: UI/UX Designer, Software Engineer, Product Manager, Doctor, and Client Calls.
               </p>
 
-              {/* Progress bar motif */}
-              <div className="mt-4 pt-3 border-t border-border">
-                <div className="flex items-center justify-between text-sm font-semibold text-[var(--topic-ink)] mb-1.5">
-                  <span>Professional Track</span>
-                  <span>15% complete</span>
-                </div>
-                <div className="h-2 w-full bg-[var(--topic-tile)] rounded-full overflow-hidden">
-                  <div className="h-full bg-[var(--topic-accent)] rounded-full w-[15%]" />
-                </div>
-              </div>
-            </div>
+                            {/* Progress bar motif */}
+                            <div className="mt-4 pt-3 border-t border-border">
+                                <div className="flex items-center justify-between text-sm font-semibold text-[var(--topic-ink)] mb-1.5">
+                                    <span>Professional Track</span>
+                                    <span>15% complete</span>
+                                </div>
+                                <div className="h-2 w-full bg-[var(--topic-tile)] rounded-full overflow-hidden">
+                                    <div className="h-full bg-[var(--topic-accent)] rounded-full w-[15%]" />
+                                </div>
+                            </div>
+                        </div>
 
-            <div className="pt-5 mt-5 border-t border-border">
-              <Link href="/explore?category=workplace-business">
-                <Button variant="outline" size="md" className="btn-press w-full justify-between">
-                  <span>Explore Professional Paths</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
-                </Button>
-              </Link>
-            </div>
-          </Card>
-        </div>
-
-        {/* 4. Active Progress or Actionable Empty State */}
-        {isClient && completedSteps.length > 0 ? (
-          <Card data-topic="shopping" className="card-hover p-6 md:p-7 shadow-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center shrink-0">
-                  <HugeiconsIcon icon={CheckmarkCircle02Icon} size={24} />
+                        <div className="pt-5 mt-5 border-t border-border">
+                            <Link href="/explore?category=workplace-business">
+                                <Button variant="outline" size="md" className="btn-press w-full justify-between">
+                                    <span>Explore Professional Paths</span>
+                                    <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                                </Button>
+                            </Link>
+                        </div>
+                    </Card>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-semibold font-heading text-foreground">
-                      Continue Where You Left Off
-                    </h3>
-                    <Badge variant="success" size="md">
-                      {completedSteps.length} Completed
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Step 02: Asking for a Discount & Payment Method
-                  </p>
-                </div>
-              </div>
 
-              <Link href="/explore/category/shopping-and-money">
-                <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2 shrink-0">
-                  <span>Resume Practice</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
-                </Button>
-              </Link>
-            </div>
-          </Card>
-        ) : (
+                {/* 4. Active Progress or Actionable Empty State */}
+                {isClient && completedSteps.length > 0 ? (
+                  <Card data-topic="shopping" className="card-hover p-6 md:p-7 shadow-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center shrink-0">
+                          <HugeiconsIcon icon={CheckmarkCircle02Icon} size={24} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-lg font-semibold font-heading text-foreground">
+                              Continue Where You Left Off
+                            </h3>
+                            <Badge variant="success" size="md">
+                              {completedSteps.length} Completed
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Step 02: Asking for a Discount & Payment Method
+                          </p>
+                        </div>
+                      </div>
+
+                      <Link href="/conversations/asking-discount-and-payment" className="w-full sm:w-auto">
+                        <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2">
+                          <HugeiconsIcon icon={PlayCircleIcon} size={18} />
+                          <span>Continue Step 02</span>
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                ) : (
           <Card className="border border-dashed border-border bg-card p-6 md:p-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-4">
