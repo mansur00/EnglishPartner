@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -15,19 +15,57 @@ import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Globe02Icon,
-  UserIcon,
   Menu01Icon,
   DashboardSquare01Icon,
   CompassIcon,
   Briefcase01Icon,
   Bookmark02Icon,
   SparklesIcon,
+  Logout01Icon,
+  Login01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
+import { getHeaderAccountState, type HeaderUser } from "./header-state";
 
-export function Header() {
+export type { HeaderUser };
+
+export interface HeaderProps {
+  user?: HeaderUser | null;
+}
+
+export function Header({ user: initialUser }: HeaderProps = {}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<HeaderUser | null>(initialUser ?? null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user: liveUser } }) => {
+      if (liveUser) {
+        setUser({
+          id: liveUser.id,
+          name: (liveUser.user_metadata?.name as string) || liveUser.email?.split("@")[0],
+          email: liveUser.email,
+        });
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          name: (session.user.user_metadata?.name as string) || session.user.email?.split("@")[0],
+          email: session.user.email,
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [initialUser]);
+
+  const account = getHeaderAccountState(user);
 
   const mobileNavLinks = [
     { name: "Dashboard", href: "/dashboard", icon: DashboardSquare01Icon },
@@ -123,12 +161,47 @@ export function Header() {
         {/* Theme Toggle (Dark / Light) */}
         <ThemeToggle />
 
-        {/* User Avatar */}
-        <Link href="/dashboard" aria-label="Learner Profile">
-          <Button variant="ghost" size="icon" className="size-tap rounded-pill text-muted-foreground hover:text-foreground">
-            <HugeiconsIcon icon={UserIcon} size={20} />
-          </Button>
-        </Link>
+        {/* Account State: Logged-in Avatar & Log out vs Log in */}
+        {account.isLoggedIn ? (
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <Link
+              href="/dashboard"
+              aria-label={account.profileLabel}
+              className="flex items-center gap-2 h-control-sm px-2 sm:px-3 rounded-pill bg-muted/60 hover:bg-muted text-foreground transition-colors"
+            >
+              <div className="flex h-6 w-6 items-center justify-center rounded-pill bg-primary text-primary-foreground font-semibold text-chip">
+                {account.initial}
+              </div>
+              <span className="hidden md:inline-block max-w-[100px] truncate text-label font-medium text-foreground">
+                {account.displayName}
+              </span>
+            </Link>
+            <form action={account.signoutAction} method="POST" className="inline-flex">
+              <Button
+                type="submit"
+                variant="ghost"
+                size="sm"
+                aria-label={account.logoutLabel}
+                title={account.logoutLabel}
+                className="h-control-sm px-2 sm:px-2.5 rounded-control text-muted-foreground hover:text-foreground text-label"
+              >
+                <HugeiconsIcon icon={Logout01Icon} size={16} />
+                <span className="hidden sm:inline-block ml-1">{account.logoutLabel}</span>
+              </Button>
+            </form>
+          </div>
+        ) : (
+          <Link href={account.loginHref}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-control-sm px-3 rounded-control text-label font-semibold text-foreground border-border hover:bg-muted"
+            >
+              <HugeiconsIcon icon={Login01Icon} size={16} className="mr-1.5" />
+              <span>{account.loginLabel}</span>
+            </Button>
+          </Link>
+        )}
       </div>
     </header>
   );

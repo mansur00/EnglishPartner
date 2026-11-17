@@ -1,0 +1,91 @@
+{
+  "auth": {
+    "login": "লগইন",
+    "logout": "লগআউট",
+    "profile": "শিক্ষার্থীর প্রোফাইল",
+    "account": "অ্যাকাউন্ট",
+    "guest": "অতিথি শিক্ষার্থী",
+    "welcome": "স্বাগতম"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "explore": "এক্সপ্লোর",
+    "shoppingLadder": "কেনাকাটার ল্যাডার (২০ ধাপ)",
+    "professionalEnglish": "কর্মক্ষেত্রে ইংরেজি",
+    "vocabulary": "আমার শব্দভাণ্ডার",
+    "menu": "মেনু ও শেখার পথ",
+    "admin": "অ্যাডমিন স্টুডিও",
+    "settings": "সেটিংস"
+  },
+  "header": {
+    "title": "ইংলিশ পার্টনার",
+    "subtitle": "কথোপকথন অনুশীলন",
+    "bilingualMode": "দ্বিভাষিক মোড: English ও বাংলা",
+    "themeToggle": "থিম পরিবর্তন"
+  },
+  "landing": {
+    "heroTitle": "প্রতিদিনের স্পোকেন ইংলিশে আত্মবিশ্বাসী হয়ে উঠুন",
+    "heroSubtitle": "বাঙালি শিক্ষার্থীদের জন্য তৈরি বাস্তব জীবনের কথোপকথন, ইন্টারেক্টিভ অডিও সংলাপ এবং ধারাবাহিক ল্যাডার।",
+    "startLearning": "শেখা শুরু করুন",
+    "browseTopics": "টপিক দেখুন",
+    "soon": "শীঘ্রই",
+    "categoriesTitle": "বাস্তব জীবনের কথা বলার জন্য প্রস্তুত",
+    "categoriesSubtitle": "বাজারের কেনাকাটা থেকে অফিসের আলোচনা—নেটিভ স্পিকারদের মতো স্বাভাবিক কথোপকথন শিখুন।"
+  },
+  "dashboard": {
+    "greeting": "শুভ দিন, শিক্ষার্থী!",
+    "dayStreak": "দিনের ধারাবাহিকতা",
+    "minutesToGo": "মিনিট বাকি",
+    "goalReached": "আজকের লক্ষ্য পূরণ হয়েছে!",
+    "continuePractice": "অনুশীলন চালিয়ে যান",
+    "activeConversation": "চলমান কথোপকথন",
+    "dialoguePreview": "সংলাপের প্রিভিউ",
+    "exploreTopics": "সব দৃশ্যপট দেখুন",
+    "viewVocabulary": "সংরক্ষিত শব্দ দেখুন",
+    "completedSteps": "সম্পূর্ণ ধাপ",
+    "dailyGoal": "দৈনিক লক্ষ্য"
+  },
+  "reader": {
+    "listen": "শুনুন",
+    "speed": "গতি",
+    "saveWord": "শব্দ সংরক্ষণ করুন",
+    "translationComingSoon": "Bangla translation coming soon",
+    "approvedTranslation": "অনুমোদিত অনুবাদ",
+    "grammarColors": "ব্যাকরণ রঙ",
+    "stepProgress": "ধাপ",
+    "previousStep": "পূর্ববর্তী ধাপ",
+    "nextStep": "পরবর্তী ধাপ",
+    "practiceScenario": "এই দৃশ্যপট অনুশীলন করুন"
+  },
+  "vocabulary": {
+    "title": "আমার শব্দভাণ্ডার খাতা",
+    "subtitle": "কথোপকথন অনুশীলনের সময় সংরক্ষিত ব্যক্তিগত শব্দের সংগ্রহ।",
+    "searchPlaceholder": "সংরক্ষিত শব্দ বা অর্থ অনুসন্ধান করুন...",
+    "filterAll": "সব শব্দ",
+    "filterLearning": "শিখছি",
+    "filterMastered": "আয়ত্ত হয়েছে",
+    "emptyTitle": "এখনো কোনো শব্দ সংরক্ষণ করা হয়নি",
+    "emptyDescription": "আপনার খাতায় যোগ করতে কথোপকথনের যেকোনো হাইলাইট করা শব্দ ট্যাপ করুন।"
+  },
+  "admin": {
+    "title": "কনটেন্ট ম্যানেজমেন্ট ও দৃশ্যপট স্টুডিও",
+    "subtitle": "দৃশ্যপট পর্যালোচনা করুন, দ্বিভাষিক অনুবাদ সম্পাদনা করুন এবং অডিও ফাইল পরিচালনা করুন।",
+    "tableTitle": "দৃশ্যপটের শিরোনাম",
+    "tableNiche": "বিষয়",
+    "tableLevel": "লেভেল",
+    "tableLines": "লাইন সংখ্যা",
+    "tableCoverage": "অনুবাদ কভারেজ",
+    "tableStatus": "অবস্থা"
+  },
+  "common": {
+    "save": "সংরক্ষণ",
+    "cancel": "বাতিল",
+    "back": "পেছনে",
+    "next": "পরবর্তী",
+    "loading": "লোড হচ্ছে...",
+    "error": "একটি ত্রুটি ঘটেছে",
+    "englishApproved": "English ✓",
+    "banglaApproved": "বাংলা ✓",
+    "banglaDraft": "Bangla —"
+  }
+}

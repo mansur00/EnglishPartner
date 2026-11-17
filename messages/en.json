@@ -1,0 +1,91 @@
+{
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "profile": "Learner Profile",
+    "account": "Account",
+    "guest": "Guest Learner",
+    "welcome": "Welcome back"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "explore": "Explore",
+    "shoppingLadder": "Shopping Ladder (20 Steps)",
+    "professionalEnglish": "Professional English",
+    "vocabulary": "My Vocabulary",
+    "menu": "Menu & Learning Paths",
+    "admin": "Admin Studio",
+    "settings": "Settings"
+  },
+  "header": {
+    "title": "English Partner",
+    "subtitle": "Conversation Practice",
+    "bilingualMode": "Bilingual mode: English & বাংলা",
+    "themeToggle": "Toggle theme"
+  },
+  "landing": {
+    "heroTitle": "Master Everyday Spoken English with Confidence",
+    "heroSubtitle": "Real-world conversations, interactive audio dialogues, and progressive ladders crafted for Bengali speakers.",
+    "startLearning": "Start Learning",
+    "browseTopics": "Explore Topics",
+    "soon": "Soon",
+    "categoriesTitle": "Designed for Real-World Speaking Scenarios",
+    "categoriesSubtitle": "From street markets to workplace negotiations, learn how native speakers actually converse."
+  },
+  "dashboard": {
+    "greeting": "Good day, Learner!",
+    "dayStreak": "day streak",
+    "minutesToGo": "min to go",
+    "goalReached": "Goal reached today!",
+    "continuePractice": "Continue Practice",
+    "activeConversation": "Active Conversation",
+    "dialoguePreview": "Dialogue Preview",
+    "exploreTopics": "Explore All Scenarios",
+    "viewVocabulary": "View Saved Words",
+    "completedSteps": "Completed Steps",
+    "dailyGoal": "Daily Goal"
+  },
+  "reader": {
+    "listen": "Listen",
+    "speed": "Speed",
+    "saveWord": "Save Word",
+    "translationComingSoon": "Bangla translation coming soon",
+    "approvedTranslation": "Approved translation",
+    "grammarColors": "Grammar colors",
+    "stepProgress": "Step",
+    "previousStep": "Previous Step",
+    "nextStep": "Next Step",
+    "practiceScenario": "Practice This Scenario"
+  },
+  "vocabulary": {
+    "title": "My Vocabulary Notebook",
+    "subtitle": "Personal collection of vocabulary items saved during conversation practice.",
+    "searchPlaceholder": "Search saved words or definitions...",
+    "filterAll": "All Words",
+    "filterLearning": "Learning",
+    "filterMastered": "Mastered",
+    "emptyTitle": "No vocabulary items saved yet",
+    "emptyDescription": "Tap any highlighted word in conversation dialogues to save it to your notebook."
+  },
+  "admin": {
+    "title": "Content Management & Scenario Studio",
+    "subtitle": "Review scenarios, edit bilingual translations, and manage audio assets.",
+    "tableTitle": "Scenario Title",
+    "tableNiche": "Niche",
+    "tableLevel": "Level",
+    "tableLines": "Lines",
+    "tableCoverage": "Translation Coverage",
+    "tableStatus": "Status"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "englishApproved": "English ✓",
+    "banglaApproved": "বাংলা ✓",
+    "banglaDraft": "Bangla —"
+  }
+}
