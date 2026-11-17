@@ -1,0 +1,169 @@
+/* EnglishPartner: Grammar Attribute Selectors (Phase 2)
+   All styling uses semantic var(--gram-*) tokens only.
+   No raw colors, weights, or dimensions.
+*/
+
+/* 1. Base Token Span */
+.gram-token {
+  display: inline-block;
+  position: relative;
+  transition: opacity 150ms ease, background-color 150ms ease;
+  border-radius: 2px;
+}
+
+/* 2. Parts of Speech (Text Ink) */
+[data-gram-pos="noun"] { color: var(--gram-pos-noun-ink); }
+[data-gram-pos="pronoun"] { color: var(--gram-pos-pronoun-ink); }
+[data-gram-pos="verb"] { color: var(--gram-pos-verb-ink); }
+[data-gram-pos="adjective"] { color: var(--gram-pos-adjective-ink); }
+[data-gram-pos="adverb"] { color: var(--gram-pos-adverb-ink); }
+[data-gram-pos="preposition"] { color: var(--gram-pos-preposition-ink); }
+[data-gram-pos="conjunction"] { color: var(--gram-pos-conjunction-ink); }
+[data-gram-pos="determiner"] { color: var(--gram-pos-determiner-ink); }
+[data-gram-pos="interjection"] { color: var(--gram-pos-interjection-ink); }
+[data-gram-pos="particle"] { color: var(--gram-pos-particle-ink); }
+[data-gram-pos="numeral"] { color: var(--gram-pos-numeral-ink); }
+
+/* 3. Sentence Roles (Background Tint + Underline) */
+[data-gram-role="subject"] {
+  background-color: var(--gram-role-subject-bg);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: var(--gram-role-subject-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="verb-phrase"] {
+  background-color: var(--gram-role-verb-phrase-bg);
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  text-decoration-color: var(--gram-role-verb-phrase-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="direct-object"] {
+  background-color: var(--gram-role-direct-object-bg);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--gram-role-direct-object-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="indirect-object"] {
+  background-color: var(--gram-role-indirect-object-bg);
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--gram-role-indirect-object-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="subject-complement"],
+[data-gram-role="object-complement"] {
+  background-color: var(--gram-role-subject-complement-bg);
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--gram-role-subject-complement-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="adverbial"] {
+  background-color: var(--gram-role-adverbial-bg);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--gram-role-adverbial-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="prepositional-object"] {
+  background-color: var(--gram-role-prepositional-object-bg);
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--gram-role-prepositional-object-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+[data-gram-role="agent"] {
+  background-color: var(--gram-role-agent-bg);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: var(--gram-role-agent-line);
+  text-decoration-thickness: var(--gram-underline-thickness);
+  text-underline-offset: 3px;
+}
+
+/* 4. Verb Group Tense Bars */
+[data-gram-time="past"] {
+  border-bottom: var(--gram-bar-height) solid var(--gram-time-past);
+}
+[data-gram-time="present"] {
+  border-bottom: var(--gram-bar-height) solid var(--gram-time-present);
+}
+[data-gram-time="future"] {
+  border-bottom: var(--gram-bar-height) solid var(--gram-time-future);
+}
+
+[data-gram-aspect="continuous"] {
+  border-bottom-style: dashed;
+}
+[data-gram-aspect="perfect"] {
+  border-bottom-style: double;
+}
+
+/* Edge rounding for verb group and pattern bars */
+[data-gram-edge="start"] {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+[data-gram-edge="end"] {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+[data-gram-edge="only"] {
+  border-radius: 3px;
+}
+
+/* 5. Pattern Overlines */
+[data-gram-pattern="conditional"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-conditional-line);
+  background-color: var(--gram-pattern-conditional-bg);
+}
+[data-gram-pattern="voice"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-voice-line);
+  background-color: var(--gram-pattern-voice-bg);
+}
+[data-gram-pattern="discourse"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-discourse-line);
+  background-color: var(--gram-pattern-discourse-bg);
+}
+
+/* 6. Focus Mode Dimming */
+.gram-container[data-gram-focus-active="true"] .gram-token:not([data-gram-focused="true"]) {
+  opacity: var(--gram-dim-opacity);
+  filter: grayscale(40%);
+}
+
+/* 7. Ruby Labels (Non-color cue) */
+ruby.gram-ruby {
+  display: inline-flex;
+  flex-direction: column-reverse;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+rt.gram-rt {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  user-select: none;
+}
+

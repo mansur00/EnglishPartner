@@ -1,0 +1,22 @@
+[
+  {
+    "phrase": "make a decision",
+    "category": "verb+noun",
+    "meaning_bn": "সিদ্ধান্ত নেওয়া"
+  },
+  {
+    "phrase": "take a break",
+    "category": "verb+noun",
+    "meaning_bn": "বিরতি নেওয়া"
+  },
+  {
+    "phrase": "heavy rain",
+    "category": "adjective+noun",
+    "meaning_bn": "ভারী বৃষ্টিপাত"
+  },
+  {
+    "phrase": "deeply concerned",
+    "category": "adverb+adjective",
+    "meaning_bn": "গভীরভাবে উদ্বিগ্ন"
+  }
+]

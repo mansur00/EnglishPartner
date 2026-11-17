@@ -1,0 +1,443 @@
+{
+  "present-simple": {
+    "key": "present-simple",
+    "title": "Present Simple Tense",
+    "formula": "Subject + Base Verb (V1) (+ s/es for he/she/it)",
+    "explanation": "Used to describe habitual actions, universal truths, unchanging situations, and scheduled events.",
+    "usage": [
+      "Habits and routines",
+      "Universal facts",
+      "Fixed schedules"
+    ],
+    "examples": [
+      {
+        "text": "I work in London.",
+        "note": "General fact"
+      },
+      {
+        "text": "The sun rises in the east.",
+        "note": "Universal truth"
+      },
+      {
+        "text": "The train leaves at 6 PM.",
+        "note": "Scheduled event"
+      }
+    ],
+    "commonMistakes": [
+      "Forgetting -s/-es with third-person singular (e.g. 'He go' instead of 'He goes')."
+    ],
+    "related": [
+      "present-continuous",
+      "past-simple"
+    ]
+  },
+  "present-continuous": {
+    "key": "present-continuous",
+    "title": "Present Continuous Tense",
+    "formula": "Subject + am/is/are + V-ing",
+    "explanation": "Used for actions happening right now at the moment of speaking or temporary situations.",
+    "usage": [
+      "Happening now",
+      "Temporary actions",
+      "Definite future plans"
+    ],
+    "examples": [
+      {
+        "text": "She is reading a book.",
+        "note": "Action in progress"
+      },
+      {
+        "text": "I am staying with my friend this week.",
+        "note": "Temporary state"
+      }
+    ],
+    "commonMistakes": [
+      "Using continuous tense with stative verbs like 'know', 'like', 'want' (e.g. 'I am knowing')."
+    ],
+    "related": [
+      "present-simple",
+      "past-continuous"
+    ]
+  },
+  "present-perfect": {
+    "key": "present-perfect",
+    "title": "Present Perfect Tense",
+    "formula": "Subject + have/has + Past Participle (V3)",
+    "explanation": "Connects the past with the present: past actions with present consequences, life experiences, or unfinished time.",
+    "usage": [
+      "Life experience",
+      "Recent event with present effect",
+      "Unfinished time period"
+    ],
+    "examples": [
+      {
+        "text": "I have lost my passport.",
+        "note": "Present result: I don't have it now"
+      },
+      {
+        "text": "She has visited Paris twice.",
+        "note": "Life experience"
+      }
+    ],
+    "commonMistakes": [
+      "Using specific past time expressions like 'yesterday' or 'in 2020' with present perfect."
+    ],
+    "related": [
+      "past-simple",
+      "present-perfect-continuous"
+    ]
+  },
+  "present-perfect-continuous": {
+    "key": "present-perfect-continuous",
+    "title": "Present Perfect Continuous",
+    "formula": "Subject + have/has been + V-ing",
+    "explanation": "Emphasizes the duration of an activity that began in the past and is still continuing now.",
+    "usage": [
+      "Duration from past to present",
+      "Recent action explaining current state"
+    ],
+    "examples": [
+      {
+        "text": "I have been waiting for two hours.",
+        "note": "Ongoing duration"
+      }
+    ],
+    "commonMistakes": [
+      "Confusing 'for' (duration) and 'since' (starting point)."
+    ],
+    "related": [
+      "present-perfect",
+      "past-perfect-continuous"
+    ]
+  },
+  "past-simple": {
+    "key": "past-simple",
+    "title": "Past Simple Tense",
+    "formula": "Subject + Past Form (V2)",
+    "explanation": "Used for completed actions at a specific time in the past.",
+    "usage": [
+      "Finished actions in the past",
+      "Past habits",
+      "Historical events"
+    ],
+    "examples": [
+      {
+        "text": "We bought a new jacket yesterday.",
+        "note": "Finished past action"
+      }
+    ],
+    "commonMistakes": [
+      "Using did + V2 in negatives or questions (e.g. 'did went' instead of 'did go')."
+    ],
+    "related": [
+      "present-perfect",
+      "past-continuous"
+    ]
+  },
+  "past-continuous": {
+    "key": "past-continuous",
+    "title": "Past Continuous Tense",
+    "formula": "Subject + was/were + V-ing",
+    "explanation": "Describes actions that were in progress at a specific time in the past.",
+    "usage": [
+      "Action in progress in the past",
+      "Background scene setting",
+      "Interrupted actions"
+    ],
+    "examples": [
+      {
+        "text": "I was cooking when the phone rang.",
+        "note": "Interrupted action"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'were' with singular subjects (e.g. 'he were')."
+    ],
+    "related": [
+      "past-simple",
+      "present-continuous"
+    ]
+  },
+  "past-perfect": {
+    "key": "past-perfect",
+    "title": "Past Perfect Tense",
+    "formula": "Subject + had + Past Participle (V3)",
+    "explanation": "Shows that an action happened before another action in the past ('the past of the past').",
+    "usage": [
+      "Earlier of two past events",
+      "Reported speech backshift"
+    ],
+    "examples": [
+      {
+        "text": "The train had left before I reached the station.",
+        "note": "Train left first"
+      }
+    ],
+    "commonMistakes": [
+      "Overusing past perfect when a simple past sequence with 'then' is sufficient."
+    ],
+    "related": [
+      "past-simple",
+      "present-perfect"
+    ]
+  },
+  "past-perfect-continuous": {
+    "key": "past-perfect-continuous",
+    "title": "Past Perfect Continuous",
+    "formula": "Subject + had been + V-ing",
+    "explanation": "Highlights the duration of an action up to a certain point in the past.",
+    "usage": [
+      "Duration before a past point in time"
+    ],
+    "examples": [
+      {
+        "text": "She had been studying for 3 hours before she took a break.",
+        "note": "Studied continuously"
+      }
+    ],
+    "commonMistakes": [
+      "Confusing with past continuous when duration is key."
+    ],
+    "related": [
+      "past-perfect",
+      "present-perfect-continuous"
+    ]
+  },
+  "future-simple": {
+    "key": "future-simple",
+    "title": "Future Simple Tense",
+    "formula": "Subject + will/shall + Base Verb (V1)",
+    "explanation": "Used for spontaneous decisions, predictions without present evidence, and promises.",
+    "usage": [
+      "Instant decisions",
+      "Predictions",
+      "Promises and offers"
+    ],
+    "examples": [
+      {
+        "text": "I will call you tomorrow.",
+        "note": "Promise / intention"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'will' for already planned arrangements instead of present continuous or going to."
+    ],
+    "related": [
+      "future-going-to",
+      "future-continuous"
+    ]
+  },
+  "future-continuous": {
+    "key": "future-continuous",
+    "title": "Future Continuous Tense",
+    "formula": "Subject + will be + V-ing",
+    "explanation": "Used for actions that will be in progress at a specific moment in the future.",
+    "usage": [
+      "In progress at a future time",
+      "Polite inquiries about plans"
+    ],
+    "examples": [
+      {
+        "text": "This time tomorrow I will be flying to London.",
+        "note": "In progress future action"
+      }
+    ],
+    "commonMistakes": [
+      "Forgetting 'be' (e.g. 'will flying')."
+    ],
+    "related": [
+      "future-simple",
+      "future-perfect"
+    ]
+  },
+  "future-perfect": {
+    "key": "future-perfect",
+    "title": "Future Perfect Tense",
+    "formula": "Subject + will have + Past Participle (V3)",
+    "explanation": "Describes an action that will be completed before a specific point in the future.",
+    "usage": [
+      "Action completed before a future deadline"
+    ],
+    "examples": [
+      {
+        "text": "By next month, I will have finished my degree.",
+        "note": "Completed before deadline"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'has' with will (e.g. 'will has completed' is always wrong; must be 'will have')."
+    ],
+    "related": [
+      "future-simple",
+      "future-perfect-continuous"
+    ]
+  },
+  "future-perfect-continuous": {
+    "key": "future-perfect-continuous",
+    "title": "Future Perfect Continuous",
+    "formula": "Subject + will have been + V-ing",
+    "explanation": "Emphasizes the duration of an activity up to a specific time in the future.",
+    "usage": [
+      "Duration up to a future point"
+    ],
+    "examples": [
+      {
+        "text": "By 2027, she will have been teaching here for 10 years.",
+        "note": "10-year duration"
+      }
+    ],
+    "commonMistakes": [
+      "Extremely complex form; ensure 'will have been + ing' structure is preserved."
+    ],
+    "related": [
+      "future-perfect"
+    ]
+  },
+  "voice-passive": {
+    "key": "voice-passive",
+    "title": "Passive Voice",
+    "formula": "Subject (Recipient) + be + Past Participle (V3) (+ by Agent)",
+    "explanation": "Used when the focus is on the action or the receiver of the action rather than who performed it.",
+    "usage": [
+      "Unknown or unimportant agent",
+      "Formal and scientific writing",
+      "Emphasizing the result"
+    ],
+    "examples": [
+      {
+        "text": "English is spoken worldwide.",
+        "note": "Agent unstated (by people)"
+      },
+      {
+        "text": "The bill was paid by my father.",
+        "note": "With agent"
+      }
+    ],
+    "commonMistakes": [
+      "Using base verb instead of V3 (e.g. 'was write' instead of 'was written')."
+    ],
+    "related": [
+      "voice-active",
+      "causative-have-get"
+    ]
+  },
+  "conditional-zero": {
+    "key": "conditional-zero",
+    "title": "Zero Conditional",
+    "formula": "If/When + Present Simple, Present Simple",
+    "explanation": "Expresses general truths, scientific facts, and automatic results.",
+    "usage": [
+      "Scientific laws",
+      "Certain automatic outcomes"
+    ],
+    "examples": [
+      {
+        "text": "If you heat water to 100 degrees, it boils.",
+        "note": "Scientific fact"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'will' in the result clause when expressing universal facts."
+    ],
+    "related": [
+      "conditional-first"
+    ]
+  },
+  "conditional-first": {
+    "key": "conditional-first",
+    "title": "First Conditional",
+    "formula": "If + Present Simple, will/can/may/should + Base Verb (V1)",
+    "explanation": "Expresses a real, likely condition in the present or future with a probable outcome.",
+    "usage": [
+      "Real future possibilities",
+      "Warnings and promises"
+    ],
+    "examples": [
+      {
+        "text": "If it rains tomorrow, we will stay at home.",
+        "note": "Likely condition"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'will' in the if-clause (e.g. 'If it will rain' is incorrect)."
+    ],
+    "related": [
+      "conditional-zero",
+      "conditional-second"
+    ]
+  },
+  "conditional-second": {
+    "key": "conditional-second",
+    "title": "Second Conditional",
+    "formula": "If + Past Simple (were for be), would/could/might + Base Verb",
+    "explanation": "Expresses an unreal, hypothetical, or improbable situation in the present or future.",
+    "usage": [
+      "Hypothetical situations",
+      "Giving advice ('If I were you...')"
+    ],
+    "examples": [
+      {
+        "text": "If I won the lottery, I would travel the world.",
+        "note": "Unreal daydream"
+      },
+      {
+        "text": "If I were you, I would take that offer.",
+        "note": "Advice"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'would' in both clauses (e.g. 'If I would have money, I would buy')."
+    ],
+    "related": [
+      "conditional-first",
+      "conditional-third"
+    ]
+  },
+  "conditional-third": {
+    "key": "conditional-third",
+    "title": "Third Conditional",
+    "formula": "If + Past Perfect (had + V3), would/could/might have + Past Participle (V3)",
+    "explanation": "Refers to an impossible condition in the past and its imaginary past result (regret or relief).",
+    "usage": [
+      "Regrets about the past",
+      "Missed opportunities"
+    ],
+    "examples": [
+      {
+        "text": "If you had told me earlier, I would have helped you.",
+        "note": "Past regret"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'would have' in the if-clause."
+    ],
+    "related": [
+      "conditional-second",
+      "conditional-mixed"
+    ]
+  },
+  "polite-request": {
+    "key": "polite-request",
+    "title": "Polite Request Pattern",
+    "formula": "Could you / Would you (mind) + Verb ...",
+    "explanation": "Used to ask for help, information, or permission respectfully.",
+    "usage": [
+      "Customer service",
+      "Formal interactions",
+      "Polite everyday inquiries"
+    ],
+    "examples": [
+      {
+        "text": "Could you tell me how much this costs?",
+        "note": "Polite question"
+      }
+    ],
+    "commonMistakes": [
+      "Using 'Would you mind' followed by base verb instead of gerund (must be 'Would you mind helping')."
+    ],
+    "related": [
+      "modal-request",
+      "question-indirect"
+    ]
+  }
+}

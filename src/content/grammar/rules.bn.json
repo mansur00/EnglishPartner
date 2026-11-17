@@ -1,0 +1,459 @@
+{
+  "present-simple": {
+    "key": "present-simple",
+    "title": "সাধারণ বর্তমান কাল (Present Simple)",
+    "formula": "Subject + Base Verb (V1) (+ s/es for he/she/it)",
+    "explanation": "নিয়মিত অভ্যাস, সাধারণ বা চিরন্তন সত্য এবং সময়সূচি অনুযায়ী ঘটা কাজ বোঝাতে ব্যবহৃত হয়।",
+    "usage": [
+      "দৈনন্দিন অভ্যাস",
+      "চিরন্তন সত্য",
+      "নির্দিষ্ট সময়সূচি"
+    ],
+    "examples": [
+      {
+        "text": "I work in London.",
+        "note": "সাধারণ তথ্য"
+      },
+      {
+        "text": "The sun rises in the east.",
+        "note": "চিরন্তন সত্য"
+      },
+      {
+        "text": "The train leaves at 6 PM.",
+        "note": "পূর্বনির্ধারিত সময়সূচি"
+      }
+    ],
+    "commonMistakes": [
+      "He/She/It এর সাথে মূল ক্রিয়ায় s/es যোগ করতে ভুলে যাওয়া (যেমন 'He work' এর পরিবর্তে 'He works')।"
+    ],
+    "related": [
+      "present-continuous",
+      "past-simple"
+    ],
+    "reviewed": true
+  },
+  "present-continuous": {
+    "key": "present-continuous",
+    "title": "ঘটমান বর্তমান কাল (Present Continuous)",
+    "formula": "Subject + am/is/are + V-ing",
+    "explanation": "কথা বলার মুহূর্তে যা ঘটছে বা সাময়িকভাবে চলমান কোনো কাজ বোঝাতে ব্যবহৃত হয়।",
+    "usage": [
+      "বর্তমানে চলমান কাজ",
+      "সাময়িক অবস্থা",
+      "ভবিষ্যতের নিশ্চিত পরিকল্পনা"
+    ],
+    "examples": [
+      {
+        "text": "She is reading a book.",
+        "note": "কাজটি এখন চলছে"
+      },
+      {
+        "text": "I am staying with my friend this week.",
+        "note": "সাময়িক অবস্থান"
+      }
+    ],
+    "commonMistakes": [
+      "Stative verb (like, know, want) ইত্যাদিতে continuous ব্যবহার করা।"
+    ],
+    "related": [
+      "present-simple",
+      "past-continuous"
+    ],
+    "reviewed": true
+  },
+  "present-perfect": {
+    "key": "present-perfect",
+    "title": "পুরাঘটিত বর্তমান কাল (Present Perfect)",
+    "formula": "Subject + have/has + Past Participle (V3)",
+    "explanation": "অতীত ও বর্তমানের সংযোগকারী: অতীতে সংঘটিত কাজের ফল এখনও বিদ্যমান এমন বোঝাতে।",
+    "usage": [
+      "জীবনের অভিজ্ঞতা",
+      "বর্তমানে ফলাফল বিদ্যমান",
+      "অসমাপ্ত সময়কাল"
+    ],
+    "examples": [
+      {
+        "text": "I have lost my passport.",
+        "note": "বর্তমান ফল: পাসপোর্টটি এখনও খুঁজে পাইনি"
+      },
+      {
+        "text": "She has visited Paris twice.",
+        "note": "জীবনের অভিজ্ঞতা"
+      }
+    ],
+    "commonMistakes": [
+      "নির্দিষ্ট অতীত সময় (yesterday, last year) উল্লেখ থাকলে present perfect ব্যবহার করা ভুল।"
+    ],
+    "related": [
+      "past-simple",
+      "present-perfect-continuous"
+    ],
+    "reviewed": true
+  },
+  "present-perfect-continuous": {
+    "key": "present-perfect-continuous",
+    "title": "পুরাঘটিত ঘটমান বর্তমান (Present Perfect Continuous)",
+    "formula": "Subject + have/has been + V-ing",
+    "explanation": "অতীতে শুরু হয়ে বর্তমান পর্যন্ত একটানা চলছে এমন কাজের স্থিতিকাল বোঝাতে।",
+    "usage": [
+      "অতীতে শুরু হয়ে বর্তমান পর্যন্ত চলমান",
+      "সাম্প্রতিক কর্মকাণ্ডের প্রত্যক্ষ ফলাফল"
+    ],
+    "examples": [
+      {
+        "text": "I have been waiting for two hours.",
+        "note": "দুই ঘণ্টা ধরে অপেক্ষা চলছে"
+      }
+    ],
+    "commonMistakes": [
+      "for (সময়কাল) এবং since (শুরুর নির্দিষ্ট সময়) এর ব্যবহারে বিভ্রান্তি।"
+    ],
+    "related": [
+      "present-perfect",
+      "past-perfect-continuous"
+    ],
+    "reviewed": true
+  },
+  "past-simple": {
+    "key": "past-simple",
+    "title": "সাধারণ অতীত কাল (Past Simple)",
+    "formula": "Subject + Past Form (V2)",
+    "explanation": "অতীতে নির্দিষ্ট সময়ে সম্পন্ন হয়ে যাওয়া কাজ বোঝাতে ব্যবহৃত হয়।",
+    "usage": [
+      "অতীতে সমাপ্ত কাজ",
+      "অতীতের অভ্যাস",
+      "ঐতিহাসিক ঘটনা"
+    ],
+    "examples": [
+      {
+        "text": "We bought a new jacket yesterday.",
+        "note": "গতকাল সম্পন্ন কাজ"
+      }
+    ],
+    "commonMistakes": [
+      "did এর সাথে আবার V2 বসানো (যেমন 'did bought' এর বদলে 'did buy' হবে)।"
+    ],
+    "related": [
+      "present-perfect",
+      "past-continuous"
+    ],
+    "reviewed": true
+  },
+  "past-continuous": {
+    "key": "past-continuous",
+    "title": "ঘটমান অতীত কাল (Past Continuous)",
+    "formula": "Subject + was/were + V-ing",
+    "explanation": "অতীতে কোনো নির্দিষ্ট সময়ে কোনো কাজ চলছিল বোঝাতে ব্যবহৃত হয়।",
+    "usage": [
+      "অতীতে চলমান কাজ",
+      "অন্য একটি কাজের কারণে ব্যাহত হওয়া কাজ"
+    ],
+    "examples": [
+      {
+        "text": "I was cooking when the phone rang.",
+        "note": "রান্না চলছিল যখন ফোন বেজে উঠল"
+      }
+    ],
+    "commonMistakes": [
+      "একবচনে was এর স্থলে were ব্যবহার করা।"
+    ],
+    "related": [
+      "past-simple",
+      "present-continuous"
+    ],
+    "reviewed": true
+  },
+  "past-perfect": {
+    "key": "past-perfect",
+    "title": "পুরাঘটিত অতীত কাল (Past Perfect)",
+    "formula": "Subject + had + Past Participle (V3)",
+    "explanation": "অতীতে দুটি কাজের মধ্যে যে কাজটি আগে সম্পন্ন হয়েছিল তা বোঝাতে had + V3 বসে।",
+    "usage": [
+      "অতীতের দুটি ঘটনার মধ্যে পূর্ববর্তী ঘটনা",
+      "পরোক্ষ উক্তিতে কাল পরিবর্তন"
+    ],
+    "examples": [
+      {
+        "text": "The train had left before I reached the station.",
+        "note": "ট্রেনটি আগেই চলে গিয়েছিল"
+      }
+    ],
+    "commonMistakes": [
+      "অপ্রয়োজনীয় স্থানে past perfect ব্যবহার করা।"
+    ],
+    "related": [
+      "past-simple",
+      "present-perfect"
+    ],
+    "reviewed": true
+  },
+  "past-perfect-continuous": {
+    "key": "past-perfect-continuous",
+    "title": "পুরাঘটিত ঘটমান অতীত (Past Perfect Continuous)",
+    "formula": "Subject + had been + V-ing",
+    "explanation": "অতীতে কোনো নির্দিষ্ট ঘটনার পূর্ব পর্যন্ত একটানা চলছিল এমন কাজের মেয়াদ বোঝাতে।",
+    "usage": [
+      "অতীতের ঘটনার পূর্ববর্তী অব্যাহত মেয়াদ"
+    ],
+    "examples": [
+      {
+        "text": "She had been studying for 3 hours before she took a break.",
+        "note": "বিশ্রামের পূর্বে ৩ ঘণ্টা ধরে পড়ছিল"
+      }
+    ],
+    "commonMistakes": [
+      "সময়কালের উল্লেখ থাকা সত্ত্বেও past continuous ব্যবহার করা।"
+    ],
+    "related": [
+      "past-perfect",
+      "present-perfect-continuous"
+    ],
+    "reviewed": true
+  },
+  "future-simple": {
+    "key": "future-simple",
+    "title": "সাধারণ ভবিষ্যৎ কাল (Future Simple)",
+    "formula": "Subject + will/shall + Base Verb (V1)",
+    "explanation": "তাৎক্ষণিক সিদ্ধান্ত, ভবিষ্যদ্বাণী বা প্রতিজ্ঞা বোঝাতে will + V1 ব্যবহৃত হয়।",
+    "usage": [
+      "তাৎক্ষণিক সিদ্ধান্ত",
+      "ভবিষ্যদ্বাণী",
+      "প্রতিশ্রুতি"
+    ],
+    "examples": [
+      {
+        "text": "I will call you tomorrow.",
+        "note": "প্রতিশ্রুতি"
+      }
+    ],
+    "commonMistakes": [
+      "আগে থেকে পরিকল্পিত সিদ্ধান্তের ক্ষেত্রে going to এর বদলে will ব্যবহার করা।"
+    ],
+    "related": [
+      "future-going-to",
+      "future-continuous"
+    ],
+    "reviewed": true
+  },
+  "future-continuous": {
+    "key": "future-continuous",
+    "title": "ঘটমান ভবিষ্যৎ কাল (Future Continuous)",
+    "formula": "Subject + will be + V-ing",
+    "explanation": "ভবিষ্যতে কোনো নির্দিষ্ট সময়ে কোনো কাজ চলতে থাকবে বোঝাতে।",
+    "usage": [
+      "ভবিষ্যতে চলমান কাজ",
+      "কারো পরিকল্পনা জানতে বিনম্র প্রশ্ন"
+    ],
+    "examples": [
+      {
+        "text": "This time tomorrow I will be flying to London.",
+        "note": "কাল এই সময়ে বিমানে থাকব"
+      }
+    ],
+    "commonMistakes": [
+      "will এর পর be দিতে ভুলে যাওয়া।"
+    ],
+    "related": [
+      "future-simple",
+      "future-perfect"
+    ],
+    "reviewed": true
+  },
+  "future-perfect": {
+    "key": "future-perfect",
+    "title": "পুরাঘটিত ভবিষ্যৎ কাল (Future Perfect)",
+    "formula": "Subject + will have + Past Participle (V3)",
+    "explanation": "ভবিষ্যতে কোনো নির্দিষ্ট সময়ের পূর্বে একটি কাজ সম্পন্ন হয়ে যাবে বোঝাতে।",
+    "usage": [
+      "ভবিষ্যতের নির্দিষ্ট সময়ের আগেই সম্পন্ন হওয়া"
+    ],
+    "examples": [
+      {
+        "text": "By next month, I will have finished my degree.",
+        "note": "আগামী মাসের আগেই শেষ হবে"
+      }
+    ],
+    "commonMistakes": [
+      "will এর পর has ব্যবহার করা (সবসময় 'will have' হবে)।"
+    ],
+    "related": [
+      "future-simple",
+      "future-perfect-continuous"
+    ],
+    "reviewed": true
+  },
+  "future-perfect-continuous": {
+    "key": "future-perfect-continuous",
+    "title": "পুরাঘটিত ঘটমান ভবিষ্যৎ (Future Perfect Continuous)",
+    "formula": "Subject + will have been + V-ing",
+    "explanation": "ভবিষ্যতে কোনো নির্দিষ্ট সময় পর্যন্ত কোনো কাজ একটানা কতক্ষণ চলবে তা প্রকাশ করতে।",
+    "usage": [
+      "ভবিষ্যতের কোনো বিন্দু পর্যন্ত অবিচ্ছিন্ন স্থায়িত্বকাল"
+    ],
+    "examples": [
+      {
+        "text": "By 2027, she will have been teaching here for 10 years.",
+        "note": "১০ বছর পূর্ণ হবে"
+      }
+    ],
+    "commonMistakes": [
+      "will have been বাদ দিয়ে সংক্ষেপে লিখতে গিয়ে ভুল গঠন তৈরি করা।"
+    ],
+    "related": [
+      "future-perfect"
+    ],
+    "reviewed": true
+  },
+  "voice-passive": {
+    "key": "voice-passive",
+    "title": "কর্মবাচ্য (Passive Voice)",
+    "formula": "Subject (Recipient) + be + Past Participle (V3) (+ by Agent)",
+    "explanation": "যখন কাজটি কে করেছে তার চেয়ে কাজটির ফলাফল বা কর্মের গুরুত্ব বেশি থাকে তখন কর্মবাচ্য হয়।",
+    "usage": [
+      "কর্তা অজ্ঞাত বা কম গুরুত্বপূর্ণ হলে",
+      "অফিসিয়াল ও বৈজ্ঞানিক লেখায়",
+      "ফলাফলকে প্রাধান্য দিতে"
+    ],
+    "examples": [
+      {
+        "text": "English is spoken worldwide.",
+        "note": "কর্তা উহ্য"
+      },
+      {
+        "text": "The bill was paid by my father.",
+        "note": "কর্তা সহ"
+      }
+    ],
+    "commonMistakes": [
+      "be এর পর V3 না বসিয়ে V1 বসানো।"
+    ],
+    "related": [
+      "voice-active",
+      "causative-have-get"
+    ],
+    "reviewed": true
+  },
+  "conditional-zero": {
+    "key": "conditional-zero",
+    "title": "জিরো কন্ডিশনাল (Zero Conditional)",
+    "formula": "If/When + Present Simple, Present Simple",
+    "explanation": "সাধারণ সত্য, বৈজ্ঞানিক বাস্তবতা বা স্বাভাবিক ফলাফল প্রকাশ করতে ব্যবহৃত হয়।",
+    "usage": [
+      "প্রাকৃতিক নিয়ম",
+      "নিশ্চিত ফলাফল"
+    ],
+    "examples": [
+      {
+        "text": "If you heat water to 100 degrees, it boils.",
+        "note": "বৈজ্ঞানিক সত্য"
+      }
+    ],
+    "commonMistakes": [
+      "চিরন্তন তথ্যে will ব্যবহার করা।"
+    ],
+    "related": [
+      "conditional-first"
+    ],
+    "reviewed": true
+  },
+  "conditional-first": {
+    "key": "conditional-first",
+    "title": "ফার্স্ট কন্ডিশনাল (First Conditional)",
+    "formula": "If + Present Simple, will/can/may/should + Base Verb (V1)",
+    "explanation": "ভবিষ্যতে ঘটতে পারে এমন বাস্তব শর্ত ও তার সম্ভাব্য ফলাফল প্রকাশ করে।",
+    "usage": [
+      "ভবিষ্যতের বাস্তব সম্ভাবনা",
+      "সতর্কবার্তা ও প্রতিশ্রুতি"
+    ],
+    "examples": [
+      {
+        "text": "If it rains tomorrow, we will stay at home.",
+        "note": "সম্ভাব্য বাস্তব শর্ত"
+      }
+    ],
+    "commonMistakes": [
+      "If যুক্ত অংশে will বসানো (যেমন 'If it will rain' ভুল; 'If it rains' হবে)।"
+    ],
+    "related": [
+      "conditional-zero",
+      "conditional-second"
+    ],
+    "reviewed": true
+  },
+  "conditional-second": {
+    "key": "conditional-second",
+    "title": "সেকেন্ড কন্ডিশনাল (Second Conditional)",
+    "formula": "If + Past Simple (were for be), would/could/might + Base Verb",
+    "explanation": "বর্তমান বা ভবিষ্যতের কাল্পনিক, অবাস্তব বা অসম্ভাব্য শর্ত প্রকাশ করে।",
+    "usage": [
+      "কাল্পনিক পরিস্থিতি",
+      "পরামর্শ দেওয়া ('আমি যদি তুমি হতাম...')"
+    ],
+    "examples": [
+      {
+        "text": "If I won the lottery, I would travel the world.",
+        "note": "কাল্পনিক কল্পনা"
+      },
+      {
+        "text": "If I were you, I would take that offer.",
+        "note": "পরামর্শ"
+      }
+    ],
+    "commonMistakes": [
+      "উভয় অংশে would ব্যবহার করা।"
+    ],
+    "related": [
+      "conditional-first",
+      "conditional-third"
+    ],
+    "reviewed": true
+  },
+  "conditional-third": {
+    "key": "conditional-third",
+    "title": "থার্ড কন্ডিশনাল (Third Conditional)",
+    "formula": "If + Past Perfect (had + V3), would/could/might have + Past Participle (V3)",
+    "explanation": "অতীতে কোনো ঘটনা না ঘটার আক্ষেপ বা কাল্পনিক অতীতের ফলাফল বোঝাতে।",
+    "usage": [
+      "অতীতের আক্ষেপ",
+      "হাতছাড়া হওয়া সুযোগ"
+    ],
+    "examples": [
+      {
+        "text": "If you had told me earlier, I would have helped you.",
+        "note": "অতীতের আক্ষেপ (তুমি বলোনি তাই সাহায্য করতে পারিনি)"
+      }
+    ],
+    "commonMistakes": [
+      "If ক্লজে 'would have' ব্যবহার করা ভুল (সেখানে had + V3 হবে)।"
+    ],
+    "related": [
+      "conditional-second",
+      "conditional-mixed"
+    ],
+    "reviewed": true
+  },
+  "polite-request": {
+    "key": "polite-request",
+    "title": "বিনম্র অনুরোধের নিয়ম (Polite Request)",
+    "formula": "Could you / Would you (mind) + Verb ...",
+    "explanation": "সম্মানজনক ও বিনয়ীভাবে কারো কাছ থেকে তথ্য বা সাহায্য চাওয়ার প্রচলিত নিয়ম।",
+    "usage": [
+      "দোকানে বা অফিসে কথা বলা",
+      "ভদ্রভাবে প্রশ্ন করা"
+    ],
+    "examples": [
+      {
+        "text": "Could you tell me how much this costs?",
+        "note": "বিনয়ী প্রশ্ন"
+      }
+    ],
+    "commonMistakes": [
+      "Would you mind এর পর V1 বসানো (V-ing বসবে)।"
+    ],
+    "related": [
+      "modal-request",
+      "question-indirect"
+    ],
+    "reviewed": true
+  }
+}

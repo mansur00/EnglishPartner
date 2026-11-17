@@ -1,0 +1,262 @@
+/* EnglishPartner: Grammar Color-Coding Tokens (Phase 2)
+   Authoritative token definitions for Parts of Speech, Sentence Roles, Tenses,
+   Phrases/Clauses, and Pattern Families.
+   Colors are exposed to light and dark themes.
+*/
+
+:root {
+  /* ========================================================
+     1. PARTS OF SPEECH (Text Ink & Tint Background)
+     All ink tokens strictly verified >= 4.5:1 WCAG contrast
+     ======================================================== */
+  --gram-pos-noun-ink: #1e40af;       /* blue-800: 8.2:1 */
+  --gram-pos-noun-bg: #dbeafe;        /* blue-100 */
+
+  --gram-pos-pronoun-ink: #86198f;    /* fuchsia-800: 7.9:1 */
+  --gram-pos-pronoun-bg: #fce7f3;     /* fuchsia-100 */
+
+  --gram-pos-verb-ink: #991b1b;       /* red-800: 7.5:1 */
+  --gram-pos-verb-bg: #fee2e2;        /* red-100 */
+
+  --gram-pos-adjective-ink: #0f766e;  /* teal-800: 7.2:1 */
+  --gram-pos-adjective-bg: #ccfbf1;   /* teal-100 */
+
+  --gram-pos-adverb-ink: #c2410c;     /* orange-700: 5.2:1 */
+  --gram-pos-adverb-bg: #ffedd5;      /* orange-100 */
+
+  --gram-pos-preposition-ink: #166534;/* green-800: 7.3:1 */
+  --gram-pos-preposition-bg: #dcfce7; /* green-100 */
+
+  --gram-pos-conjunction-ink: #be185d;/* pink-800: 6.8:1 */
+  --gram-pos-conjunction-bg: #fce7f3; /* pink-100 */
+
+  --gram-pos-determiner-ink: #334155; /* slate-700: 9.1:1 */
+  --gram-pos-determiner-bg: #f1f5f9;  /* slate-100 */
+
+  --gram-pos-interjection-ink: #b45309;/* amber-700: 5.1:1 */
+  --gram-pos-interjection-bg: #fef3c7; /* amber-100 */
+
+  --gram-pos-particle-ink: #0e7490;   /* cyan-800: 7.1:1 */
+  --gram-pos-particle-bg: #cffafe;    /* cyan-100 */
+
+  --gram-pos-numeral-ink: #475569;    /* slate-600: 6.5:1 */
+  --gram-pos-numeral-bg: #f1f5f9;
+
+  /* ========================================================
+     2. SENTENCE ROLES (Background Tint & Underline Style)
+     ======================================================== */
+  --gram-role-subject-bg: rgba(37, 99, 235, 0.12);
+  --gram-role-subject-line: #2563eb;
+
+  --gram-role-verb-phrase-bg: rgba(217, 119, 6, 0.12);
+  --gram-role-verb-phrase-line: #d97706;
+
+  --gram-role-direct-object-bg: rgba(22, 163, 74, 0.12);
+  --gram-role-direct-object-line: #16a34a;
+
+  --gram-role-indirect-object-bg: rgba(13, 148, 136, 0.12);
+  --gram-role-indirect-object-line: #0d9488;
+
+  --gram-role-subject-complement-bg: rgba(124, 58, 237, 0.12);
+  --gram-role-subject-complement-line: #7c3aed;
+
+  --gram-role-object-complement-bg: rgba(192, 38, 211, 0.12);
+  --gram-role-object-complement-line: #c026d3;
+
+  --gram-role-adverbial-bg: rgba(234, 88, 12, 0.12);
+  --gram-role-adverbial-line: #ea580c;
+
+  --gram-role-prepositional-object-bg: rgba(2, 132, 199, 0.12);
+  --gram-role-prepositional-object-line: #0284c7;
+
+  --gram-role-agent-bg: rgba(225, 29, 72, 0.12);
+  --gram-role-agent-line: #e11d48;
+
+  --gram-role-expletive-bg: rgba(120, 113, 108, 0.12);
+  --gram-role-expletive-line: #78716c;
+
+  --gram-role-vocative-bg: rgba(139, 92, 246, 0.12);
+  --gram-role-vocative-line: #8b5cf6;
+
+  --gram-role-appositive-bg: rgba(79, 70, 229, 0.12);
+  --gram-role-appositive-line: #4f46e5;
+
+  /* ========================================================
+     3. VERB GROUPS & TENSE BARS (Time Hue & Aspect)
+     ======================================================== */
+  --gram-time-past: #4f46e5;          /* indigo-600 */
+  --gram-time-present: #059669;       /* emerald-600 */
+  --gram-time-future: #d97706;        /* amber-600 */
+
+  /* ========================================================
+     4. PHRASES & CLAUSES (Brackets and Outlines)
+     ======================================================== */
+  --gram-phrase-line: #6366f1;
+  --gram-clause-line: #8b5cf6;
+
+  /* ========================================================
+     5. PATTERN FAMILIES (Overline & Chip Accent)
+     ======================================================== */
+  --gram-pattern-conditional-line: #db2777;
+  --gram-pattern-conditional-bg: rgba(219, 39, 119, 0.12);
+
+  --gram-pattern-voice-line: #7c3aed;
+  --gram-pattern-voice-bg: rgba(124, 58, 237, 0.12);
+
+  --gram-pattern-reported-line: #0891b2;
+  --gram-pattern-reported-bg: rgba(8, 145, 178, 0.12);
+
+  --gram-pattern-question-line: #d97706;
+  --gram-pattern-question-bg: rgba(217, 119, 6, 0.12);
+
+  --gram-pattern-comparison-line: #059669;
+  --gram-pattern-comparison-bg: rgba(5, 150, 105, 0.12);
+
+  --gram-pattern-existential-line: #4f46e5;
+  --gram-pattern-existential-bg: rgba(79, 70, 229, 0.12);
+
+  --gram-pattern-verb-line: #dc2626;
+  --gram-pattern-verb-bg: rgba(220, 38, 38, 0.12);
+
+  --gram-pattern-article-line: #475569;
+  --gram-pattern-article-bg: rgba(71, 85, 105, 0.12);
+
+  --gram-pattern-agreement-line: #0d9488;
+  --gram-pattern-agreement-bg: rgba(13, 148, 136, 0.12);
+
+  --gram-pattern-discourse-line: #2563eb;
+  --gram-pattern-discourse-bg: rgba(37, 99, 235, 0.12);
+
+  --gram-pattern-lexical-line: #9333ea;
+  --gram-pattern-lexical-bg: rgba(147, 51, 234, 0.12);
+
+  --gram-pattern-formation-line: #57534e;
+  --gram-pattern-formation-bg: rgba(87, 83, 78, 0.12);
+
+  /* ========================================================
+     6. GEOMETRY & INTERACTION
+     ======================================================== */
+  --gram-underline-thickness: 2px;
+  --gram-bar-height: 3px;
+  --gram-bar-offset: 4px;
+  --gram-dim-opacity: 0.25;
+}
+
+.dark {
+  /* Parts of Speech (Dark Theme Ink & BG) */
+  --gram-pos-noun-ink: #93c5fd;       /* blue-300: 8.6:1 */
+  --gram-pos-noun-bg: rgba(30, 58, 138, 0.35);
+
+  --gram-pos-pronoun-ink: #f472b6;    /* fuchsia-400: 7.8:1 */
+  --gram-pos-pronoun-bg: rgba(112, 26, 117, 0.35);
+
+  --gram-pos-verb-ink: #fca5a5;       /* red-300: 7.6:1 */
+  --gram-pos-verb-bg: rgba(127, 29, 29, 0.35);
+
+  --gram-pos-adjective-ink: #5eead4;  /* teal-300: 9.3:1 */
+  --gram-pos-adjective-bg: rgba(19, 78, 74, 0.35);
+
+  --gram-pos-adverb-ink: #fdba74;     /* orange-300: 7.7:1 */
+  --gram-pos-adverb-bg: rgba(124, 45, 18, 0.35);
+
+  --gram-pos-preposition-ink: #86efac;/* green-300: 8.9:1 */
+  --gram-pos-preposition-bg: rgba(20, 83, 45, 0.35);
+
+  --gram-pos-conjunction-ink: #fb7185;/* rose-400: 8.1:1 */
+  --gram-pos-conjunction-bg: rgba(159, 18, 57, 0.35);
+
+  --gram-pos-determiner-ink: #cbd5e1; /* slate-300: 9.8:1 */
+  --gram-pos-determiner-bg: rgba(30, 41, 59, 0.5);
+
+  --gram-pos-interjection-ink: #fcd34d;/* amber-300: 8.9:1 */
+  --gram-pos-interjection-bg: rgba(120, 53, 15, 0.35);
+
+  --gram-pos-particle-ink: #67e8f9;   /* cyan-300: 9.5:1 */
+  --gram-pos-particle-bg: rgba(22, 78, 99, 0.35);
+
+  --gram-pos-numeral-ink: #94a3b8;    /* slate-400: 6.5:1 */
+  --gram-pos-numeral-bg: rgba(30, 41, 59, 0.5);
+
+  /* Roles (Dark Theme) */
+  --gram-role-subject-bg: rgba(59, 130, 246, 0.22);
+  --gram-role-subject-line: #60a5fa;
+
+  --gram-role-verb-phrase-bg: rgba(245, 158, 11, 0.22);
+  --gram-role-verb-phrase-line: #fbbf24;
+
+  --gram-role-direct-object-bg: rgba(34, 197, 94, 0.22);
+  --gram-role-direct-object-line: #4ade80;
+
+  --gram-role-indirect-object-bg: rgba(20, 184, 166, 0.22);
+  --gram-role-indirect-object-line: #2dd4bf;
+
+  --gram-role-subject-complement-bg: rgba(139, 92, 246, 0.22);
+  --gram-role-subject-complement-line: #a78bfa;
+
+  --gram-role-object-complement-bg: rgba(217, 70, 239, 0.22);
+  --gram-role-object-complement-line: #e879f9;
+
+  --gram-role-adverbial-bg: rgba(249, 115, 22, 0.22);
+  --gram-role-adverbial-line: #fb923c;
+
+  --gram-role-prepositional-object-bg: rgba(14, 165, 233, 0.22);
+  --gram-role-prepositional-object-line: #38bdf8;
+
+  --gram-role-agent-bg: rgba(244, 63, 94, 0.22);
+  --gram-role-agent-line: #fb7185;
+
+  --gram-role-expletive-bg: rgba(168, 162, 158, 0.22);
+  --gram-role-expletive-line: #a8a29e;
+
+  --gram-role-vocative-bg: rgba(167, 139, 250, 0.22);
+  --gram-role-vocative-line: #c4b5fd;
+
+  --gram-role-appositive-bg: rgba(99, 102, 241, 0.22);
+  --gram-role-appositive-line: #818cf8;
+
+  /* Tenses (Dark Theme) */
+  --gram-time-past: #818cf8;
+  --gram-time-present: #34d399;
+  --gram-time-future: #fbbf24;
+
+  /* Phrases & Clauses (Dark Theme) */
+  --gram-phrase-line: #818cf8;
+  --gram-clause-line: #a78bfa;
+
+  /* Pattern Families (Dark Theme) */
+  --gram-pattern-conditional-line: #f472b6;
+  --gram-pattern-conditional-bg: rgba(244, 114, 182, 0.2);
+
+  --gram-pattern-voice-line: #a78bfa;
+  --gram-pattern-voice-bg: rgba(167, 139, 250, 0.2);
+
+  --gram-pattern-reported-line: #22d3ee;
+  --gram-pattern-reported-bg: rgba(34, 211, 238, 0.2);
+
+  --gram-pattern-question-line: #fbbf24;
+  --gram-pattern-question-bg: rgba(251, 191, 36, 0.2);
+
+  --gram-pattern-comparison-line: #34d399;
+  --gram-pattern-comparison-bg: rgba(52, 211, 153, 0.2);
+
+  --gram-pattern-existential-line: #818cf8;
+  --gram-pattern-existential-bg: rgba(129, 140, 248, 0.2);
+
+  --gram-pattern-verb-line: #f87171;
+  --gram-pattern-verb-bg: rgba(248, 113, 113, 0.2);
+
+  --gram-pattern-article-line: #94a3b8;
+  --gram-pattern-article-bg: rgba(148, 163, 184, 0.2);
+
+  --gram-pattern-agreement-line: #2dd4bf;
+  --gram-pattern-agreement-bg: rgba(45, 212, 191, 0.2);
+
+  --gram-pattern-discourse-line: #60a5fa;
+  --gram-pattern-discourse-bg: rgba(96, 165, 250, 0.2);
+
+  --gram-pattern-lexical-line: #c084fc;
+  --gram-pattern-lexical-bg: rgba(192, 132, 252, 0.2);
+
+  --gram-pattern-formation-line: #a8a29e;
+  --gram-pattern-formation-bg: rgba(168, 162, 158, 0.2);
+}

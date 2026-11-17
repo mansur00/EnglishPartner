@@ -1,0 +1,1209 @@
+{
+  "taxonomyVersion": 1,
+  "taggerVersion": "spacy-en_core_web_sm+rules-1.0",
+  "sourceId": "conversations/designer-client-kickoff-questions",
+  "lines": [
+    {
+      "lineId": "line-ux-01",
+      "text": "Thanks for meeting today! Before we draft wireframes, could you clarify your primary target persona?",
+      "textHash": "b0c29699d4aa53fb",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Thanks",
+          "start": 0,
+          "end": 6,
+          "lemma": "thank",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "ROOT",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "for",
+          "start": 7,
+          "end": 10,
+          "lemma": "for",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "meeting",
+          "start": 11,
+          "end": 18,
+          "lemma": "meeting",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "today",
+          "start": 19,
+          "end": 24,
+          "lemma": "today",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "npadvmod",
+          "role": "adverbial",
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "!",
+          "start": 24,
+          "end": 25,
+          "lemma": "!",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "Before",
+          "start": 26,
+          "end": 32,
+          "lemma": "before",
+          "pos": "conjunction",
+          "sub": null,
+          "tag": "IN",
+          "dep": "mark",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "we",
+          "start": 33,
+          "end": 35,
+          "lemma": "we",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "draft",
+          "start": 36,
+          "end": 41,
+          "lemma": "draft",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VBP",
+          "dep": "advcl",
+          "role": "verb-phrase",
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "wireframes",
+          "start": 42,
+          "end": 52,
+          "lemma": "wireframe",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": ",",
+          "start": 52,
+          "end": 53,
+          "lemma": ",",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ",",
+          "dep": "punct",
+          "role": null,
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "could",
+          "start": 54,
+          "end": 59,
+          "lemma": "could",
+          "pos": "verb",
+          "sub": "modal",
+          "tag": "MD",
+          "dep": "aux",
+          "role": "verb-phrase",
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "you",
+          "start": 60,
+          "end": 63,
+          "lemma": "you",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "clarify",
+          "start": 64,
+          "end": 71,
+          "lemma": "clarify",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "your",
+          "start": 72,
+          "end": 76,
+          "lemma": "your",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP$",
+          "dep": "poss",
+          "role": null,
+          "head": 16,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": "primary",
+          "start": 77,
+          "end": 84,
+          "lemma": "primary",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 16,
+          "confidence": 0.95
+        },
+        {
+          "i": 15,
+          "text": "target",
+          "start": 85,
+          "end": 91,
+          "lemma": "target",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "compound",
+          "role": null,
+          "head": 16,
+          "confidence": 0.95
+        },
+        {
+          "i": 16,
+          "text": "persona",
+          "start": 92,
+          "end": 99,
+          "lemma": "persona",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 17,
+          "text": "?",
+          "start": 99,
+          "end": 100,
+          "lemma": "?",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 12,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            7
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-2",
+          "type": "verb-group",
+          "tokens": [
+            10,
+            12
+          ],
+          "keys": [
+            "voice-active",
+            "modal-request"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "pat-1",
+          "type": "pattern",
+          "key": "polite-request",
+          "family": "discourse",
+          "tokens": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "confidence": 0.94
+        }
+      ],
+      "sentence": {
+        "function": "interrogative",
+        "structure": "complex"
+      }
+    },
+    {
+      "lineId": "line-ux-02",
+      "text": "Our core users are busy working professionals who need to manage their daily tasks in under five minutes.",
+      "textHash": "24f30fdce88508fb",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Our",
+          "start": 0,
+          "end": 3,
+          "lemma": "our",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP$",
+          "dep": "poss",
+          "role": null,
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "core",
+          "start": 4,
+          "end": 8,
+          "lemma": "core",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "compound",
+          "role": null,
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "users",
+          "start": 9,
+          "end": 14,
+          "lemma": "user",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "are",
+          "start": 15,
+          "end": 18,
+          "lemma": "be",
+          "pos": "verb",
+          "sub": "auxiliary",
+          "tag": "VBP",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "busy",
+          "start": 19,
+          "end": 23,
+          "lemma": "busy",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "working",
+          "start": 24,
+          "end": 31,
+          "lemma": "work",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VBG",
+          "dep": "amod",
+          "role": "verb-phrase",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "professionals",
+          "start": 32,
+          "end": 45,
+          "lemma": "professional",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "attr",
+          "role": "subject-complement",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "who",
+          "start": 46,
+          "end": 49,
+          "lemma": "who",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "WP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 8,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "need",
+          "start": 50,
+          "end": 54,
+          "lemma": "need",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VBP",
+          "dep": "relcl",
+          "role": "verb-phrase",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "to",
+          "start": 55,
+          "end": 57,
+          "lemma": "to",
+          "pos": "particle",
+          "sub": null,
+          "tag": "TO",
+          "dep": "aux",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "manage",
+          "start": 58,
+          "end": 64,
+          "lemma": "manage",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "xcomp",
+          "role": "verb-phrase",
+          "head": 8,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "their",
+          "start": 65,
+          "end": 70,
+          "lemma": "their",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP$",
+          "dep": "poss",
+          "role": null,
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "daily",
+          "start": 71,
+          "end": 76,
+          "lemma": "daily",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "tasks",
+          "start": 77,
+          "end": 82,
+          "lemma": "task",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": "in",
+          "start": 83,
+          "end": 85,
+          "lemma": "in",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 15,
+          "text": "under",
+          "start": 86,
+          "end": 91,
+          "lemma": "under",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 16,
+          "text": "five",
+          "start": 92,
+          "end": 96,
+          "lemma": "five",
+          "pos": "determiner",
+          "sub": "numeral",
+          "tag": "CD",
+          "dep": "nummod",
+          "role": null,
+          "head": 17,
+          "confidence": 0.95
+        },
+        {
+          "i": 17,
+          "text": "minutes",
+          "start": 97,
+          "end": 104,
+          "lemma": "minute",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 15,
+          "confidence": 0.95
+        },
+        {
+          "i": 18,
+          "text": ".",
+          "start": 104,
+          "end": 105,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 3,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            3
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-2",
+          "type": "verb-group",
+          "tokens": [
+            5
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-3",
+          "type": "verb-group",
+          "tokens": [
+            8
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-4",
+          "type": "verb-group",
+          "tokens": [
+            9,
+            10
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        }
+      ],
+      "sentence": {
+        "function": "declarative",
+        "structure": "complex"
+      }
+    },
+    {
+      "lineId": "line-ux-03",
+      "text": "Understood. That means we should prioritize an uncluttered mobile layout with minimal taps to complete tasks.",
+      "textHash": "e823a475fccb300b",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Understood",
+          "start": 0,
+          "end": 10,
+          "lemma": "understood",
+          "pos": "noun",
+          "sub": null,
+          "tag": "NNP",
+          "dep": "ROOT",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": ".",
+          "start": 10,
+          "end": 11,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "That",
+          "start": 12,
+          "end": 16,
+          "lemma": "that",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "DT",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "means",
+          "start": 17,
+          "end": 22,
+          "lemma": "mean",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VBZ",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "we",
+          "start": 23,
+          "end": 25,
+          "lemma": "we",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "should",
+          "start": 26,
+          "end": 32,
+          "lemma": "should",
+          "pos": "verb",
+          "sub": "modal",
+          "tag": "MD",
+          "dep": "aux",
+          "role": "verb-phrase",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "prioritize",
+          "start": 33,
+          "end": 43,
+          "lemma": "prioritize",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ccomp",
+          "role": "verb-phrase",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "an",
+          "start": 44,
+          "end": 46,
+          "lemma": "an",
+          "pos": "determiner",
+          "sub": null,
+          "tag": "DT",
+          "dep": "det",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "uncluttered",
+          "start": 47,
+          "end": 58,
+          "lemma": "uncluttered",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "mobile",
+          "start": 59,
+          "end": 65,
+          "lemma": "mobile",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "layout",
+          "start": 66,
+          "end": 72,
+          "lemma": "layout",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "with",
+          "start": 73,
+          "end": 77,
+          "lemma": "with",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "minimal",
+          "start": 78,
+          "end": 85,
+          "lemma": "minimal",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "taps",
+          "start": 86,
+          "end": 90,
+          "lemma": "tap",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 11,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": "to",
+          "start": 91,
+          "end": 93,
+          "lemma": "to",
+          "pos": "particle",
+          "sub": null,
+          "tag": "TO",
+          "dep": "aux",
+          "role": null,
+          "head": 15,
+          "confidence": 0.95
+        },
+        {
+          "i": 15,
+          "text": "complete",
+          "start": 94,
+          "end": 102,
+          "lemma": "complete",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "advcl",
+          "role": "verb-phrase",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 16,
+          "text": "tasks",
+          "start": 103,
+          "end": 108,
+          "lemma": "task",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 15,
+          "confidence": 0.95
+        },
+        {
+          "i": 17,
+          "text": ".",
+          "start": 108,
+          "end": 109,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 3,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            3
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-2",
+          "type": "verb-group",
+          "tokens": [
+            5,
+            6
+          ],
+          "keys": [
+            "voice-active",
+            "modal-obligation"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-3",
+          "type": "verb-group",
+          "tokens": [
+            14,
+            15
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        }
+      ],
+      "sentence": {
+        "function": "declarative",
+        "structure": "complex"
+      }
+    },
+    {
+      "lineId": "line-ux-04",
+      "text": "Exactly! Simplicity and high contrast are our top priorities for this initial launch.",
+      "textHash": "3625531f9d103ac2",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Exactly",
+          "start": 0,
+          "end": 7,
+          "lemma": "exactly",
+          "pos": "adverb",
+          "sub": null,
+          "tag": "RB",
+          "dep": "ROOT",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "!",
+          "start": 7,
+          "end": 8,
+          "lemma": "!",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "Simplicity",
+          "start": 9,
+          "end": 19,
+          "lemma": "simplicity",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "and",
+          "start": 20,
+          "end": 23,
+          "lemma": "and",
+          "pos": "conjunction",
+          "sub": null,
+          "tag": "CC",
+          "dep": "cc",
+          "role": null,
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "high",
+          "start": 24,
+          "end": 28,
+          "lemma": "high",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "contrast",
+          "start": 29,
+          "end": 37,
+          "lemma": "contrast",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "conj",
+          "role": null,
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "are",
+          "start": 38,
+          "end": 41,
+          "lemma": "be",
+          "pos": "verb",
+          "sub": "auxiliary",
+          "tag": "VBP",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "our",
+          "start": 42,
+          "end": 45,
+          "lemma": "our",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP$",
+          "dep": "poss",
+          "role": null,
+          "head": 9,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "top",
+          "start": 46,
+          "end": 49,
+          "lemma": "top",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 9,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "priorities",
+          "start": 50,
+          "end": 60,
+          "lemma": "priority",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NNS",
+          "dep": "attr",
+          "role": "subject-complement",
+          "head": 6,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "for",
+          "start": 61,
+          "end": 64,
+          "lemma": "for",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 9,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "this",
+          "start": 65,
+          "end": 69,
+          "lemma": "this",
+          "pos": "determiner",
+          "sub": null,
+          "tag": "DT",
+          "dep": "det",
+          "role": null,
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "initial",
+          "start": 70,
+          "end": 77,
+          "lemma": "initial",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "launch",
+          "start": 78,
+          "end": 84,
+          "lemma": "launch",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": ".",
+          "start": 84,
+          "end": 85,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 6,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            6
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        }
+      ],
+      "sentence": {
+        "function": "declarative",
+        "structure": "compound"
+      }
+    }
+  ]
+}

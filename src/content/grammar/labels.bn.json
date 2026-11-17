@@ -1,0 +1,912 @@
+{
+  "noun": {
+    "name": "বিশেষ্য (Noun)",
+    "description": "ব্যক্তি, বস্তু, স্থান বা ধারণার নাম নির্দেশ করে।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "pronoun": {
+    "name": "সর্বনাম (Pronoun)",
+    "description": "বিশেষ্যের পরিবর্তে ব্যবহৃত শব্দ (যেমন he, she, it)।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "verb": {
+    "name": "ক্রিয়া (Verb)",
+    "description": "কাজ, অবস্থা বা ঘটনা প্রকাশ করে।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "adjective": {
+    "name": "বিশেষণ (Adjective)",
+    "description": "বিশেষ্য বা সর্বনামের দোষ, গুণ বা অবস্থা প্রকাশ করে।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "adverb": {
+    "name": "ক্রিয়াবিশেষণ (Adverb)",
+    "description": "ক্রিয়া, বিশেষণ বা অন্য ক্রিয়াবিশেষণকে বিশেষায়িত করে।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "preposition": {
+    "name": "পদান্বয়ী অব্যয় (Preposition)",
+    "description": "স্থান, সময় বা দিক নির্দেশ করে বিশেষ্যের আগে বসে।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "conjunction": {
+    "name": "সংযোজক অব্যয় (Conjunction)",
+    "description": "শব্দ বা বাক্যকে যুক্ত করে (and, but, because)।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "determiner": {
+    "name": "নির্ধারক (Determiner)",
+    "description": "বিশেষ্যকে নির্দিষ্ট বা অনির্দিষ্টভাবে চিহ্নিত করে (the, a, this)।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "interjection": {
+    "name": "আবেগসূচক অব্যয় (Interjection)",
+    "description": "আকস্মিক আবেগ বা অনুভূতি প্রকাশ করে (oh, wow, hey)।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "particle": {
+    "name": "অনুসর্গ / কণা (Particle)",
+    "description": "ক্রিয়ার সাথে যুক্ত হয়ে অর্থ তৈরি করে (to, not, up)।",
+    "layer": "pos",
+    "level": "basic",
+    "reviewed": true
+  },
+  "numeral": {
+    "name": "সংখ্যাবাচক শব্দ (Numeral)",
+    "description": "সংখ্যা বা ক্রম নির্দেশ করে (one, first, 20)।",
+    "layer": "pos",
+    "level": "advanced",
+    "reviewed": true
+  },
+  "subject": {
+    "name": "কর্তা (Subject)",
+    "description": "যে বা যা বাক্যের কাজটি সম্পাদন করে।",
+    "layer": "role",
+    "level": "basic",
+    "reviewed": true
+  },
+  "verb-phrase": {
+    "name": "ক্রিয়া পদগুচ্ছ (Verb Phrase)",
+    "description": "বাক্যের মূল ক্রিয়াপদ ও সাহায্যকারী ক্রিয়ার সমষ্টি।",
+    "layer": "role",
+    "level": "basic",
+    "reviewed": true
+  },
+  "direct-object": {
+    "name": "মুখ্য কর্ম (Direct Object)",
+    "description": "ক্রিয়া যাকে সরাসরি আশ্রয় করে সংঘটিত হয়।",
+    "layer": "role",
+    "level": "basic",
+    "reviewed": true
+  },
+  "indirect-object": {
+    "name": "গৌণ কর্ম (Indirect Object)",
+    "description": "যাকে উদ্দেশ্য করে বা যার জন্য কাজটি করা হয়।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "subject-complement": {
+    "name": "কর্তা পরিপূরক (Subject Complement)",
+    "description": "লিংকিং ভার্বের পর বসে কর্তাকে ব্যাখ্যা করে।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "object-complement": {
+    "name": "কর্ম পরিপূরক (Object Complement)",
+    "description": "কর্মের অবস্থা বা পরিচয় প্রকাশ করে।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "adverbial": {
+    "name": "ভাবসম্প্রসারক (Adverbial)",
+    "description": "কখন, কোথায়, কীভাবে কাজটি ঘটেছে তা প্রকাশ করে।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "prepositional-object": {
+    "name": "অব্যয়বদ্ধ কর্ম (Prepositional Object)",
+    "description": "পদান্বয়ী অব্যয়ের পর বসা বিশেষ্য পদ।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "agent": {
+    "name": "প্রকৃত কর্তা (Agent)",
+    "description": "কর্মবাচ্যে 'by' এর পর উল্লেখিত মূল কর্তা।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "expletive": {
+    "name": "অর্থহীন প্রারম্ভিক শব্দ (Expletive)",
+    "description": "there/it যা ব্যাকরণগতভাবে কর্তা হিসেবে শুরু হয়।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "vocative": {
+    "name": "সম্বোধন পদ (Vocative)",
+    "description": "কাউকে সরাসরি সম্বোধন করে বলা শব্দ।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "appositive": {
+    "name": "পুনঃনামকরণ পদ (Appositive)",
+    "description": "পাশাপাশি বসে পূর্ববর্তী বিশেষ্যের পরিচয় স্পষ্ট করে।",
+    "layer": "role",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "present-simple": {
+    "name": "সাধারণ বর্তমান (Present Simple)",
+    "description": "চিরন্তন সত্য ও নিয়মিত অভ্যাস বোঝাতে ব্যবহৃত হয়।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "present-continuous": {
+    "name": "ঘটমান বর্তমান (Present Continuous)",
+    "description": "বর্তমানে যা ঘটছে বা চলমান রয়েছে।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "present-perfect": {
+    "name": "পুরাঘটিত বর্তমান (Present Perfect)",
+    "description": "কাজটি শেষ হয়েছে কিন্তু তার ফলাফল এখনও বিদ্যমান।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "present-perfect-continuous": {
+    "name": "পুরাঘটিত ঘটমান বর্তমান (Present Perfect Continuous)",
+    "description": "অতীতে শুরু হয়ে এখনও চলছে এমন কাজ।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "past-simple": {
+    "name": "সাধারণ অতীত (Past Simple)",
+    "description": "অতীতে নির্দিষ্ট সময়ে সম্পন্ন হওয়া কাজ।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "past-continuous": {
+    "name": "ঘটমান অতীত (Past Continuous)",
+    "description": "অতীতে কিছু সময় ধরে চলছিল এমন কাজ।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "past-perfect": {
+    "name": "পুরাঘটিত অতীত (Past Perfect)",
+    "description": "অতীতের দুটি কাজের মধ্যে পূর্বে ঘটা কাজটি।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "past-perfect-continuous": {
+    "name": "পুরাঘটিত ঘটমান অতীত (Past Perfect Continuous)",
+    "description": "অতীতে একটি কাজের পূর্বে দীর্ঘ সময় চলছিল।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "future-simple": {
+    "name": "সাধারণ ভবিষ্যৎ (Future Simple)",
+    "description": "ভবিষ্যতে কোনো কাজ ঘটবে বোঝাতে।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "future-continuous": {
+    "name": "ঘটমান ভবিষ্যৎ (Future Continuous)",
+    "description": "ভবিষ্যতে কোনো কাজ চলতে থাকবে বোঝাতে।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "future-perfect": {
+    "name": "পুরাঘটিত ভবিষ্যৎ (Future Perfect)",
+    "description": "ভবিষ্যতে নির্দিষ্ট সময়ের পূর্বে শেষ হবে।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "future-perfect-continuous": {
+    "name": "পুরাঘটিত ঘটমান ভবিষ্যৎ (Future Perfect Continuous)",
+    "description": "ভবিষ্যতের একটি নির্দিষ্ট সময় পর্যন্ত চলতে থাকবে।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "future-going-to": {
+    "name": "Future Going To (বাংলা)",
+    "description": "Future Going To সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "future-present-continuous": {
+    "name": "Future Present Continuous (বাংলা)",
+    "description": "Future Present Continuous সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "future-present-simple": {
+    "name": "Future Present Simple (বাংলা)",
+    "description": "Future Present Simple সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "future-in-the-past": {
+    "name": "Future In The Past (বাংলা)",
+    "description": "Future In The Past সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "used-to": {
+    "name": "Used To (বাংলা)",
+    "description": "Used To সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "would-habitual": {
+    "name": "Would Habitual (বাংলা)",
+    "description": "Would Habitual সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "voice-active": {
+    "name": "কর্তৃবাচ্য (Active Voice)",
+    "description": "যেখানে কর্তা সরাসরি কাজটি সম্পাদন করে।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "voice-passive": {
+    "name": "কর্মবাচ্য (Passive Voice)",
+    "description": "যেখানে কর্মের ওপর গুরুত্ব দেওয়া হয়।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": true
+  },
+  "mood-indicative": {
+    "name": "Mood Indicative (বাংলা)",
+    "description": "Mood Indicative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "mood-imperative": {
+    "name": "Mood Imperative (বাংলা)",
+    "description": "Mood Imperative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "mood-subjunctive": {
+    "name": "Mood Subjunctive (বাংলা)",
+    "description": "Mood Subjunctive সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "modal-ability": {
+    "name": "Modal Ability (বাংলা)",
+    "description": "Modal Ability সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-permission": {
+    "name": "Modal Permission (বাংলা)",
+    "description": "Modal Permission সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-obligation": {
+    "name": "Modal Obligation (বাংলা)",
+    "description": "Modal Obligation সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-advice": {
+    "name": "Modal Advice (বাংলা)",
+    "description": "Modal Advice সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-possibility": {
+    "name": "Modal Possibility (বাংলা)",
+    "description": "Modal Possibility সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-prediction": {
+    "name": "Modal Prediction (বাংলা)",
+    "description": "Modal Prediction সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-request": {
+    "name": "Modal Request (বাংলা)",
+    "description": "Modal Request সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "modal-perfect": {
+    "name": "Modal Perfect (বাংলা)",
+    "description": "Modal Perfect সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "infinitive-to": {
+    "name": "Infinitive To (বাংলা)",
+    "description": "Infinitive To সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "infinitive-bare": {
+    "name": "Infinitive Bare (বাংলা)",
+    "description": "Infinitive Bare সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "gerund": {
+    "name": "Gerund (বাংলা)",
+    "description": "Gerund সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "participle-present": {
+    "name": "Participle Present (বাংলা)",
+    "description": "Participle Present সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "participle-past": {
+    "name": "Participle Past (বাংলা)",
+    "description": "Participle Past সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "irregular-verb": {
+    "name": "Irregular Verb (বাংলা)",
+    "description": "Irregular Verb সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "phrasal-verb": {
+    "name": "Phrasal Verb (বাংলা)",
+    "description": "Phrasal Verb সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "prepositional-verb": {
+    "name": "Prepositional Verb (বাংলা)",
+    "description": "Prepositional Verb সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "linking-verb": {
+    "name": "Linking Verb (বাংলা)",
+    "description": "Linking Verb সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "negation": {
+    "name": "Negation (বাংলা)",
+    "description": "Negation সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "do-support": {
+    "name": "Do Support (বাংলা)",
+    "description": "Do Support সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "basic",
+    "reviewed": false
+  },
+  "emphatic-do": {
+    "name": "Emphatic Do (বাংলা)",
+    "description": "Emphatic Do সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "tense",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "noun-phrase": {
+    "name": "Noun Phrase (বাংলা)",
+    "description": "Noun Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "verb-phrase-structure": {
+    "name": "Verb Phrase Structure (বাংলা)",
+    "description": "Verb Phrase Structure সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "adjective-phrase": {
+    "name": "Adjective Phrase (বাংলা)",
+    "description": "Adjective Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "adverb-phrase": {
+    "name": "Adverb Phrase (বাংলা)",
+    "description": "Adverb Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "prepositional-phrase": {
+    "name": "Prepositional Phrase (বাংলা)",
+    "description": "Prepositional Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "infinitive-phrase": {
+    "name": "Infinitive Phrase (বাংলা)",
+    "description": "Infinitive Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "gerund-phrase": {
+    "name": "Gerund Phrase (বাংলা)",
+    "description": "Gerund Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "participial-phrase": {
+    "name": "Participial Phrase (বাংলা)",
+    "description": "Participial Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "absolute-phrase": {
+    "name": "Absolute Phrase (বাংলা)",
+    "description": "Absolute Phrase সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "independent-clause": {
+    "name": "Independent Clause (বাংলা)",
+    "description": "Independent Clause সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "dependent-clause": {
+    "name": "Dependent Clause (বাংলা)",
+    "description": "Dependent Clause সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "noun-clause": {
+    "name": "Noun Clause (বাংলা)",
+    "description": "Noun Clause সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "relative-clause": {
+    "name": "Relative Clause (বাংলা)",
+    "description": "Relative Clause সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "adverbial-clause": {
+    "name": "Adverbial Clause (বাংলা)",
+    "description": "Adverbial Clause সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "sentence-simple": {
+    "name": "Sentence Simple (বাংলা)",
+    "description": "Sentence Simple সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "sentence-compound": {
+    "name": "Sentence Compound (বাংলা)",
+    "description": "Sentence Compound সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "sentence-complex": {
+    "name": "Sentence Complex (বাংলা)",
+    "description": "Sentence Complex সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "sentence-compound-complex": {
+    "name": "Sentence Compound Complex (বাংলা)",
+    "description": "Sentence Compound Complex সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "function-declarative": {
+    "name": "Function Declarative (বাংলা)",
+    "description": "Function Declarative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "function-interrogative": {
+    "name": "Function Interrogative (বাংলা)",
+    "description": "Function Interrogative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "function-imperative": {
+    "name": "Function Imperative (বাংলা)",
+    "description": "Function Imperative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "function-exclamatory": {
+    "name": "Function Exclamatory (বাংলা)",
+    "description": "Function Exclamatory সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "phrase",
+    "level": "basic",
+    "reviewed": false
+  },
+  "conditional-zero": {
+    "name": "জিরো কন্ডিশনাল (Zero Conditional)",
+    "description": "সাধারণ বৈজ্ঞানিক বা শাশ্বত সত্যের শর্ত।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "conditional-first": {
+    "name": "ফার্স্ট কন্ডিশনাল (First Conditional)",
+    "description": "ভবিষ্যতে ঘটতে পারে এমন বাস্তব শর্ত।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "conditional-second": {
+    "name": "সেকেন্ড কন্ডিশনাল (Second Conditional)",
+    "description": "বর্তমান বা ভবিষ্যতের কাল্পনিক / অসম্ভব শর্ত।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "conditional-third": {
+    "name": "থার্ড কন্ডিশনাল (Third Conditional)",
+    "description": "অতীতের কোনো ঘটনা যা আর পরিবর্তন সম্ভব নয়।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": true
+  },
+  "conditional-mixed": {
+    "name": "মিক্সড কন্ডিশনাল (Mixed Conditional)",
+    "description": "অতীতের শর্ত এবং বর্তমানে তার ফলাফল।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "wish-if-only": {
+    "name": "আকাঙ্ক্ষাবোধক শর্ত (Wish / If only)",
+    "description": "কোনো অপূর্ণ ইচ্ছা বা আকাঙ্ক্ষা প্রকাশ।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "passive-voice": {
+    "name": "Passive Voice (বাংলা)",
+    "description": "Passive Voice সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "causative-have-get": {
+    "name": "Causative Have Get (বাংলা)",
+    "description": "Causative Have Get সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "reported-statement": {
+    "name": "Reported Statement (বাংলা)",
+    "description": "Reported Statement সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "reported-question": {
+    "name": "Reported Question (বাংলা)",
+    "description": "Reported Question সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "reported-command": {
+    "name": "Reported Command (বাংলা)",
+    "description": "Reported Command সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "question-yes-no": {
+    "name": "হ্যাঁ/না প্রশ্ন (Yes/No Question)",
+    "description": "যে প্রশ্নের উত্তর Yes বা No দিয়ে দেওয়া যায়।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "question-wh": {
+    "name": "Wh-প্রশ্ন (Wh-Question)",
+    "description": "তথ্য জানতে চাওয়া প্রশ্ন (What, Where, Why ইত্যাদি)।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "question-tag": {
+    "name": "ট্যাগ প্রশ্ন (Question Tag)",
+    "description": "বাক্যের শেষে সম্মতি যাচাইয়ের ছোট প্রশ্ন।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "question-indirect": {
+    "name": "Question Indirect (বাংলা)",
+    "description": "Question Indirect সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "comparative": {
+    "name": "Comparative (বাংলা)",
+    "description": "Comparative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "superlative": {
+    "name": "Superlative (বাংলা)",
+    "description": "Superlative সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "equal-comparison": {
+    "name": "Equal Comparison (বাংলা)",
+    "description": "Equal Comparison সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "too-enough": {
+    "name": "Too Enough (বাংলা)",
+    "description": "Too Enough সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "the-more-the-more": {
+    "name": "The More The More (বাংলা)",
+    "description": "The More The More সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "there-is-are": {
+    "name": "There Is Are (বাংলা)",
+    "description": "There Is Are সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "it-cleft": {
+    "name": "It Cleft (বাংলা)",
+    "description": "It Cleft সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "inversion": {
+    "name": "Inversion (বাংলা)",
+    "description": "Inversion সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "phrasal-verb-pattern": {
+    "name": "Phrasal Verb Pattern (বাংলা)",
+    "description": "Phrasal Verb Pattern সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "verb-pattern-gerund-or-infinitive": {
+    "name": "Verb Pattern Gerund Or Infinitive (বাংলা)",
+    "description": "Verb Pattern Gerund Or Infinitive সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "dependent-preposition": {
+    "name": "Dependent Preposition (বাংলা)",
+    "description": "Dependent Preposition সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "article-a-an": {
+    "name": "Article A An (বাংলা)",
+    "description": "Article A An সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "article-the": {
+    "name": "Article The (বাংলা)",
+    "description": "Article The সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "article-zero": {
+    "name": "Article Zero (বাংলা)",
+    "description": "Article Zero সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "countable-quantifier": {
+    "name": "Countable Quantifier (বাংলা)",
+    "description": "Countable Quantifier সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "uncountable-quantifier": {
+    "name": "Uncountable Quantifier (বাংলা)",
+    "description": "Uncountable Quantifier সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "possessive-s": {
+    "name": "Possessive S (বাংলা)",
+    "description": "Possessive S সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "subject-verb-agreement": {
+    "name": "Subject Verb Agreement (বাংলা)",
+    "description": "Subject Verb Agreement সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "there-agreement": {
+    "name": "There Agreement (বাংলা)",
+    "description": "There Agreement সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "linking-word": {
+    "name": "Linking Word (বাংলা)",
+    "description": "Linking Word সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "discourse-marker": {
+    "name": "Discourse Marker (বাংলা)",
+    "description": "Discourse Marker সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "polite-request": {
+    "name": "বিনম্র অনুরোধ (Polite Request)",
+    "description": "বিনয়ী ভঙ্গিতে কিছু চাওয়া বা জিজ্ঞাসা করা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": true
+  },
+  "suggestion": {
+    "name": "Suggestion (বাংলা)",
+    "description": "Suggestion সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "idiom-fixed-expression": {
+    "name": "Idiom Fixed Expression (বাংলা)",
+    "description": "Idiom Fixed Expression সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "collocation": {
+    "name": "Collocation (বাংলা)",
+    "description": "Collocation সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  },
+  "contraction": {
+    "name": "Contraction (বাংলা)",
+    "description": "Contraction সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "basic",
+    "reviewed": false
+  },
+  "word-formation": {
+    "name": "Word Formation (বাংলা)",
+    "description": "Word Formation সম্পর্কিত ব্যাকরণগত ধারণা।",
+    "layer": "pattern",
+    "level": "advanced",
+    "reviewed": false
+  }
+}

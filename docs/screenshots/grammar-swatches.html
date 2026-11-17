@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Grammar Color Palette Swatch Sheet</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Inter:wght@400;500;600&family=Hind+Siliguri:wght@500;600&display=swap');
+    
+    :root {
+      --gram-pos-noun-ink: #1e40af;
+--gram-pos-noun-bg: #dbeafe;
+--gram-pos-pronoun-ink: #86198f;
+--gram-pos-pronoun-bg: #fce7f3;
+--gram-pos-verb-ink: #991b1b;
+--gram-pos-verb-bg: #fee2e2;
+--gram-pos-adjective-ink: #0f766e;
+--gram-pos-adjective-bg: #ccfbf1;
+--gram-pos-adverb-ink: #c2410c;
+--gram-pos-adverb-bg: #ffedd5;
+--gram-pos-preposition-ink: #166534;
+--gram-pos-preposition-bg: #dcfce7;
+--gram-pos-conjunction-ink: #be185d;
+--gram-pos-conjunction-bg: #fce7f3;
+--gram-pos-determiner-ink: #334155;
+--gram-pos-determiner-bg: #f1f5f9;
+--gram-pos-interjection-ink: #b45309;
+--gram-pos-interjection-bg: #fef3c7;
+--gram-pos-particle-ink: #0e7490;
+--gram-pos-particle-bg: #cffafe;
+--gram-pos-numeral-ink: #475569;
+--gram-pos-numeral-bg: #f1f5f9;
+--gram-role-subject-bg: rgba(37, 99, 235, 0.12);
+--gram-role-subject-line: #2563eb;
+--gram-role-verb-phrase-bg: rgba(217, 119, 6, 0.12);
+--gram-role-verb-phrase-line: #d97706;
+--gram-role-direct-object-bg: rgba(22, 163, 74, 0.12);
+--gram-role-direct-object-line: #16a34a;
+--gram-role-indirect-object-bg: rgba(13, 148, 136, 0.12);
+--gram-role-indirect-object-line: #0d9488;
+--gram-role-subject-complement-bg: rgba(124, 58, 237, 0.12);
+--gram-role-subject-complement-line: #7c3aed;
+--gram-role-object-complement-bg: rgba(192, 38, 211, 0.12);
+--gram-role-object-complement-line: #c026d3;
+--gram-role-adverbial-bg: rgba(234, 88, 12, 0.12);
+--gram-role-adverbial-line: #ea580c;
+--gram-role-prepositional-object-bg: rgba(2, 132, 199, 0.12);
+--gram-role-prepositional-object-line: #0284c7;
+--gram-role-agent-bg: rgba(225, 29, 72, 0.12);
+--gram-role-agent-line: #e11d48;
+--gram-role-expletive-bg: rgba(120, 113, 108, 0.12);
+--gram-role-expletive-line: #78716c;
+--gram-role-vocative-bg: rgba(139, 92, 246, 0.12);
+--gram-role-vocative-line: #8b5cf6;
+--gram-role-appositive-bg: rgba(79, 70, 229, 0.12);
+--gram-role-appositive-line: #4f46e5;
+--gram-time-past: #4f46e5;
+--gram-time-present: #059669;
+--gram-time-future: #d97706;
+--gram-phrase-line: #6366f1;
+--gram-clause-line: #8b5cf6;
+--gram-pattern-conditional-line: #db2777;
+--gram-pattern-conditional-bg: rgba(219, 39, 119, 0.12);
+--gram-pattern-voice-line: #7c3aed;
+--gram-pattern-voice-bg: rgba(124, 58, 237, 0.12);
+--gram-pattern-reported-line: #0891b2;
+--gram-pattern-reported-bg: rgba(8, 145, 178, 0.12);
+--gram-pattern-question-line: #d97706;
+--gram-pattern-question-bg: rgba(217, 119, 6, 0.12);
+--gram-pattern-comparison-line: #059669;
+--gram-pattern-comparison-bg: rgba(5, 150, 105, 0.12);
+--gram-pattern-existential-line: #4f46e5;
+--gram-pattern-existential-bg: rgba(79, 70, 229, 0.12);
+--gram-pattern-verb-line: #dc2626;
+--gram-pattern-verb-bg: rgba(220, 38, 38, 0.12);
+--gram-pattern-article-line: #475569;
+--gram-pattern-article-bg: rgba(71, 85, 105, 0.12);
+--gram-pattern-agreement-line: #0d9488;
+--gram-pattern-agreement-bg: rgba(13, 148, 136, 0.12);
+--gram-pattern-discourse-line: #2563eb;
+--gram-pattern-discourse-bg: rgba(37, 99, 235, 0.12);
+--gram-pattern-lexical-line: #9333ea;
+--gram-pattern-lexical-bg: rgba(147, 51, 234, 0.12);
+--gram-pattern-formation-line: #57534e;
+--gram-pattern-formation-bg: rgba(87, 83, 78, 0.12);
+--gram-underline-thickness: 2px;
+--gram-bar-height: 3px;
+--gram-bar-offset: 4px;
+--gram-dim-opacity: 0.25;
+      --bg: #FAFAFD;
+      --card-bg: #FFFFFF;
+      --card-border: #E6DDF0;
+      --text: #2A0F44;
+      --text-muted: #6B7280;
+    }
+    
+    .dark {
+      --gram-pos-noun-ink: #93c5fd;
+--gram-pos-noun-bg: rgba(30, 58, 138, 0.35);
+--gram-pos-pronoun-ink: #f472b6;
+--gram-pos-pronoun-bg: rgba(112, 26, 117, 0.35);
+--gram-pos-verb-ink: #fca5a5;
+--gram-pos-verb-bg: rgba(127, 29, 29, 0.35);
+--gram-pos-adjective-ink: #5eead4;
+--gram-pos-adjective-bg: rgba(19, 78, 74, 0.35);
+--gram-pos-adverb-ink: #fdba74;
+--gram-pos-adverb-bg: rgba(124, 45, 18, 0.35);
+--gram-pos-preposition-ink: #86efac;
+--gram-pos-preposition-bg: rgba(20, 83, 45, 0.35);
+--gram-pos-conjunction-ink: #fb7185;
+--gram-pos-conjunction-bg: rgba(159, 18, 57, 0.35);
+--gram-pos-determiner-ink: #cbd5e1;
+--gram-pos-determiner-bg: rgba(30, 41, 59, 0.5);
+--gram-pos-interjection-ink: #fcd34d;
+--gram-pos-interjection-bg: rgba(120, 53, 15, 0.35);
+--gram-pos-particle-ink: #67e8f9;
+--gram-pos-particle-bg: rgba(22, 78, 99, 0.35);
+--gram-pos-numeral-ink: #94a3b8;
+--gram-pos-numeral-bg: rgba(30, 41, 59, 0.5);
+--gram-role-subject-bg: rgba(59, 130, 246, 0.22);
+--gram-role-subject-line: #60a5fa;
+--gram-role-verb-phrase-bg: rgba(245, 158, 11, 0.22);
+--gram-role-verb-phrase-line: #fbbf24;
+--gram-role-direct-object-bg: rgba(34, 197, 94, 0.22);
+--gram-role-direct-object-line: #4ade80;
+--gram-role-indirect-object-bg: rgba(20, 184, 166, 0.22);
+--gram-role-indirect-object-line: #2dd4bf;
+--gram-role-subject-complement-bg: rgba(139, 92, 246, 0.22);
+--gram-role-subject-complement-line: #a78bfa;
+--gram-role-object-complement-bg: rgba(217, 70, 239, 0.22);
+--gram-role-object-complement-line: #e879f9;
+--gram-role-adverbial-bg: rgba(249, 115, 22, 0.22);
+--gram-role-adverbial-line: #fb923c;
+--gram-role-prepositional-object-bg: rgba(14, 165, 233, 0.22);
+--gram-role-prepositional-object-line: #38bdf8;
+--gram-role-agent-bg: rgba(244, 63, 94, 0.22);
+--gram-role-agent-line: #fb7185;
+--gram-role-expletive-bg: rgba(168, 162, 158, 0.22);
+--gram-role-expletive-line: #a8a29e;
+--gram-role-vocative-bg: rgba(167, 139, 250, 0.22);
+--gram-role-vocative-line: #c4b5fd;
+--gram-role-appositive-bg: rgba(99, 102, 241, 0.22);
+--gram-role-appositive-line: #818cf8;
+--gram-time-past: #818cf8;
+--gram-time-present: #34d399;
+--gram-time-future: #fbbf24;
+--gram-phrase-line: #818cf8;
+--gram-clause-line: #a78bfa;
+--gram-pattern-conditional-line: #f472b6;
+--gram-pattern-conditional-bg: rgba(244, 114, 182, 0.2);
+--gram-pattern-voice-line: #a78bfa;
+--gram-pattern-voice-bg: rgba(167, 139, 250, 0.2);
+--gram-pattern-reported-line: #22d3ee;
+--gram-pattern-reported-bg: rgba(34, 211, 238, 0.2);
+--gram-pattern-question-line: #fbbf24;
+--gram-pattern-question-bg: rgba(251, 191, 36, 0.2);
+--gram-pattern-comparison-line: #34d399;
+--gram-pattern-comparison-bg: rgba(52, 211, 153, 0.2);
+--gram-pattern-existential-line: #818cf8;
+--gram-pattern-existential-bg: rgba(129, 140, 248, 0.2);
+--gram-pattern-verb-line: #f87171;
+--gram-pattern-verb-bg: rgba(248, 113, 113, 0.2);
+--gram-pattern-article-line: #94a3b8;
+--gram-pattern-article-bg: rgba(148, 163, 184, 0.2);
+--gram-pattern-agreement-line: #2dd4bf;
+--gram-pattern-agreement-bg: rgba(45, 212, 191, 0.2);
+--gram-pattern-discourse-line: #60a5fa;
+--gram-pattern-discourse-bg: rgba(96, 165, 250, 0.2);
+--gram-pattern-lexical-line: #c084fc;
+--gram-pattern-lexical-bg: rgba(192, 132, 252, 0.2);
+--gram-pattern-formation-line: #a8a29e;
+--gram-pattern-formation-bg: rgba(168, 162, 158, 0.2);
+      --bg: #140C1D;
+      --card-bg: #1E1528;
+      --card-border: #332442;
+      --text: #F3EEF8;
+      --text-muted: #9CA3AF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 0;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .swatch-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .swatch-pill {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .swatch-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .swatch-bn {
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .swatch-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    .sentence-demo {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      font-size: 18px;
+      line-height: 2.2;
+      margin-top: 16px;
+    }
+
+    .token {
+      display: inline-block;
+      padding: 0 4px;
+      margin: 0 2px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h1>EnglishPartner: Grammar Palette Swatch Sheet</h1>
+  <p class="subtitle">Authoritative design token palette with WCAG >= 4.5:1 contrast and multi-channel cues.</p>
+
+  <div class="section-title">1. Parts of Speech (Text Ink & Tint Background)</div>
+  <div class="grid">
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-noun-ink); background: var(--gram-pos-noun-bg);">
+          NOUN
+        </div>
+        <div class="swatch-title">Noun</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-noun-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-pronoun-ink); background: var(--gram-pos-pronoun-bg);">
+          PRONOUN
+        </div>
+        <div class="swatch-title">Pronoun</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-pronoun-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-verb-ink); background: var(--gram-pos-verb-bg);">
+          VERB
+        </div>
+        <div class="swatch-title">Verb</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-verb-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-adjective-ink); background: var(--gram-pos-adjective-bg);">
+          ADJECTIVE
+        </div>
+        <div class="swatch-title">Adjective</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-adjective-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-adverb-ink); background: var(--gram-pos-adverb-bg);">
+          ADVERB
+        </div>
+        <div class="swatch-title">Adverb</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-adverb-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-preposition-ink); background: var(--gram-pos-preposition-bg);">
+          PREPOSITION
+        </div>
+        <div class="swatch-title">Preposition</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-preposition-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-conjunction-ink); background: var(--gram-pos-conjunction-bg);">
+          CONJUNCTION
+        </div>
+        <div class="swatch-title">Conjunction</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-conjunction-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-determiner-ink); background: var(--gram-pos-determiner-bg);">
+          DETERMINER
+        </div>
+        <div class="swatch-title">Determiner</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-determiner-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-interjection-ink); background: var(--gram-pos-interjection-bg);">
+          INTERJECTION
+        </div>
+        <div class="swatch-title">Interjection</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-interjection-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-particle-ink); background: var(--gram-pos-particle-bg);">
+          PARTICLE
+        </div>
+        <div class="swatch-title">Particle</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-particle-ink)</div>
+      </div>
+    
+      <div class="swatch-card">
+        <div class="swatch-pill" style="color: var(--gram-pos-numeral-ink); background: var(--gram-pos-numeral-bg);">
+          NUMERAL
+        </div>
+        <div class="swatch-title">Numeral</div>
+        <div class="swatch-meta">Ink: var(--gram-pos-numeral-ink)</div>
+      </div>
+    
+  </div>
+
+  <div class="section-title">2. Sentence Roles (Underline & Tint Cues)</div>
+  <div class="grid">
+    <div class="swatch-card">
+      <div style="background: var(--gram-role-subject-bg); text-decoration: underline solid var(--gram-role-subject-line); text-decoration-thickness: 2px; text-underline-offset: 4px; padding: 8px; font-weight: 600;">
+        Subject (Solid)
+      </div>
+      <div class="swatch-meta" style="margin-top: 8px;">Blue tint + solid line</div>
+    </div>
+    <div class="swatch-card">
+      <div style="background: var(--gram-role-verb-phrase-bg); text-decoration: underline double var(--gram-role-verb-phrase-line); text-decoration-thickness: 2px; text-underline-offset: 4px; padding: 8px; font-weight: 600;">
+        Verb Phrase (Double)
+      </div>
+      <div class="swatch-meta" style="margin-top: 8px;">Amber tint + double line</div>
+    </div>
+    <div class="swatch-card">
+      <div style="background: var(--gram-role-direct-object-bg); text-decoration: underline dotted var(--gram-role-direct-object-line); text-decoration-thickness: 2px; text-underline-offset: 4px; padding: 8px; font-weight: 600;">
+        Direct Object (Dotted)
+      </div>
+      <div class="swatch-meta" style="margin-top: 8px;">Green tint + dotted line</div>
+    </div>
+    <div class="swatch-card">
+      <div style="background: var(--gram-role-adverbial-bg); text-decoration: underline dashed var(--gram-role-adverbial-line); text-decoration-thickness: 2px; text-underline-offset: 4px; padding: 8px; font-weight: 600;">
+        Adverbial (Dashed)
+      </div>
+      <div class="swatch-meta" style="margin-top: 8px;">Orange tint + dashed line</div>
+    </div>
+  </div>
+
+  <div class="section-title">3. Full Sentence Interactive Simulation</div>
+  <div class="sentence-demo">
+    <span class="token" style="color: var(--gram-pos-verb-ink); background: var(--gram-pos-verb-bg); text-decoration: underline double var(--gram-role-verb-phrase-line);">Excuse</span>
+    <span class="token" style="color: var(--gram-pos-pronoun-ink); background: var(--gram-pos-pronoun-bg); text-decoration: underline dotted var(--gram-role-direct-object-line);">me</span>,
+    <span class="token" style="color: var(--gram-pos-verb-ink); border-bottom: 3px solid var(--gram-time-present);">could</span>
+    <span class="token" style="color: var(--gram-pos-pronoun-ink); text-decoration: underline solid var(--gram-role-subject-line);">you</span>
+    <span class="token" style="color: var(--gram-pos-verb-ink); text-decoration: underline double var(--gram-role-verb-phrase-line);">tell</span>
+    <span class="token" style="color: var(--gram-pos-pronoun-ink); text-decoration: underline dotted var(--gram-role-direct-object-line);">me</span>
+    <span class="token" style="color: var(--gram-pos-adverb-ink);">how</span>
+    <span class="token" style="color: var(--gram-pos-determiner-ink);">much</span>
+    <span class="token" style="color: var(--gram-pos-determiner-ink);">this</span>
+    <span class="token" style="color: var(--gram-pos-adjective-ink); background: var(--gram-pos-adjective-bg);">blue</span>
+    <span class="token" style="color: var(--gram-pos-noun-ink); background: var(--gram-pos-noun-bg); text-decoration: underline dotted var(--gram-role-direct-object-line);">jacket</span>
+    <span class="token" style="color: var(--gram-pos-verb-ink); text-decoration: underline double var(--gram-role-verb-phrase-line); border-bottom: 3px solid var(--gram-time-present);">costs</span>?
+  </div>
+</body>
+</html>

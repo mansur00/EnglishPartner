@@ -11,7 +11,8 @@
     "lint:ui": "bash scripts/check-ui-sizes.sh",
     "check:frozen": "bash scripts/check-frozen.sh",
     "test": "node --experimental-strip-types --test tests/learning-loop.test.mjs",
-    "test:layout": "node scripts/layout-invariants.mjs"
+    "test:layout": "node scripts/layout-invariants.mjs",
+    "grammar:palette": "node scripts/grammar-palette.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

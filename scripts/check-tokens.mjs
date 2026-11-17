@@ -86,10 +86,10 @@ const classStringMap = new Map();
 for (const filePath of allFiles) {
   const relPath = path.relative(process.cwd(), filePath);
   const isUiPrimitive = relPath.startsWith('src/components/ui/');
-  const isGlobalsCss = relPath === 'src/app/globals.css';
+  const isTokenDefFile = relPath === 'src/app/globals.css' || relPath === 'src/styles/design-tokens.css' || relPath === 'src/styles/grammar-tokens.css';
   const isTsData = relPath.startsWith('src/content/') || relPath.endsWith('theme.ts') || relPath.endsWith('category-theme.ts');
 
-  if (isGlobalsCss) continue;
+  if (isTokenDefFile) continue;
 
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split('\n');

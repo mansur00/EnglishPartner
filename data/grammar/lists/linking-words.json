@@ -1,0 +1,38 @@
+[
+  {
+    "word": "however",
+    "type": "concession",
+    "meaning_en": "despite this",
+    "meaning_bn": "তবে / যাই হোক"
+  },
+  {
+    "word": "therefore",
+    "type": "result",
+    "meaning_en": "as a result",
+    "meaning_bn": "অতএব / সুতরাং"
+  },
+  {
+    "word": "in addition",
+    "type": "addition",
+    "meaning_en": "furthermore",
+    "meaning_bn": "এছাড়াও"
+  },
+  {
+    "word": "furthermore",
+    "type": "addition",
+    "meaning_en": "moreover",
+    "meaning_bn": "অধিকন্তু"
+  },
+  {
+    "word": "meanwhile",
+    "type": "time",
+    "meaning_en": "at the same time",
+    "meaning_bn": "ইতিমধ্যে"
+  },
+  {
+    "word": "on the other hand",
+    "type": "contrast",
+    "meaning_en": "conversely",
+    "meaning_bn": "অন্যদিকে"
+  }
+]

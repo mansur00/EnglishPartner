@@ -1,0 +1,1206 @@
+{
+  "taxonomyVersion": 1,
+  "taggerVersion": "spacy-en_core_web_sm+rules-1.0",
+  "sourceId": "conversations/airport-checkin-baggage-drop",
+  "lines": [
+    {
+      "lineId": "line-air-01",
+      "text": "Good morning. I would like to check in for flight EK-582 to London.",
+      "textHash": "93c1774e64962a75",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Good",
+          "start": 0,
+          "end": 4,
+          "lemma": "good",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "morning",
+          "start": 5,
+          "end": 12,
+          "lemma": "morning",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "ROOT",
+          "role": null,
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": ".",
+          "start": 12,
+          "end": 13,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "I",
+          "start": 14,
+          "end": 15,
+          "lemma": "i",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "would",
+          "start": 16,
+          "end": 21,
+          "lemma": "would",
+          "pos": "verb",
+          "sub": "modal",
+          "tag": "MD",
+          "dep": "aux",
+          "role": "verb-phrase",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "like",
+          "start": 22,
+          "end": 26,
+          "lemma": "like",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "to",
+          "start": 27,
+          "end": 29,
+          "lemma": "to",
+          "pos": "particle",
+          "sub": null,
+          "tag": "TO",
+          "dep": "aux",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "check",
+          "start": 30,
+          "end": 35,
+          "lemma": "check",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "xcomp",
+          "role": "verb-phrase",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "in",
+          "start": 36,
+          "end": 38,
+          "lemma": "in",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "RP",
+          "dep": "prt",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "for",
+          "start": 39,
+          "end": 42,
+          "lemma": "for",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "flight",
+          "start": 43,
+          "end": 49,
+          "lemma": "flight",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "compound",
+          "role": null,
+          "head": 11,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "EK-582",
+          "start": 50,
+          "end": 56,
+          "lemma": "ek-582",
+          "pos": "noun",
+          "sub": null,
+          "tag": "NNP",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 9,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "to",
+          "start": 57,
+          "end": 59,
+          "lemma": "to",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 11,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "London",
+          "start": 60,
+          "end": 66,
+          "lemma": "london",
+          "pos": "noun",
+          "sub": null,
+          "tag": "NNP",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 12,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": ".",
+          "start": 66,
+          "end": 67,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 5,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            4,
+            5
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-2",
+          "type": "verb-group",
+          "tokens": [
+            6,
+            7,
+            8
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        }
+      ],
+      "sentence": {
+        "function": "declarative",
+        "structure": "simple"
+      }
+    },
+    {
+      "lineId": "line-air-02",
+      "text": "Good morning! May I see your passport and ticket confirmation, please?",
+      "textHash": "c5b41585d6c1af55",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Good",
+          "start": 0,
+          "end": 4,
+          "lemma": "good",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "amod",
+          "role": null,
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "morning",
+          "start": 5,
+          "end": 12,
+          "lemma": "morning",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "ROOT",
+          "role": null,
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "!",
+          "start": 12,
+          "end": 13,
+          "lemma": "!",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 1,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "May",
+          "start": 14,
+          "end": 17,
+          "lemma": "may",
+          "pos": "verb",
+          "sub": "modal",
+          "tag": "MD",
+          "dep": "aux",
+          "role": "verb-phrase",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "I",
+          "start": 18,
+          "end": 19,
+          "lemma": "i",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "see",
+          "start": 20,
+          "end": 23,
+          "lemma": "see",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "your",
+          "start": 24,
+          "end": 28,
+          "lemma": "your",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP$",
+          "dep": "poss",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "passport",
+          "start": 29,
+          "end": 37,
+          "lemma": "passport",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "nmod",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "and",
+          "start": 38,
+          "end": 41,
+          "lemma": "and",
+          "pos": "conjunction",
+          "sub": null,
+          "tag": "CC",
+          "dep": "cc",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "ticket",
+          "start": 42,
+          "end": 48,
+          "lemma": "ticket",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "conj",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "confirmation",
+          "start": 49,
+          "end": 61,
+          "lemma": "confirmation",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 5,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": ",",
+          "start": 61,
+          "end": 62,
+          "lemma": ",",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ",",
+          "dep": "punct",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "please",
+          "start": 63,
+          "end": 69,
+          "lemma": "please",
+          "pos": "interjection",
+          "sub": null,
+          "tag": "UH",
+          "dep": "intj",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "?",
+          "start": 69,
+          "end": 70,
+          "lemma": "?",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 5,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            3,
+            5
+          ],
+          "keys": [
+            "voice-active",
+            "modal-possibility"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "pat-1",
+          "type": "pattern",
+          "key": "polite-request",
+          "family": "discourse",
+          "tokens": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "confidence": 0.94
+        }
+      ],
+      "sentence": {
+        "function": "interrogative",
+        "structure": "compound"
+      }
+    },
+    {
+      "lineId": "line-air-03",
+      "text": "Here you go. Could I please get a window seat if one is available?",
+      "textHash": "5484fc0fa2ec3b7e",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Here",
+          "start": 0,
+          "end": 4,
+          "lemma": "here",
+          "pos": "adverb",
+          "sub": null,
+          "tag": "RB",
+          "dep": "advmod",
+          "role": "adverbial",
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "you",
+          "start": 5,
+          "end": 8,
+          "lemma": "you",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "go",
+          "start": 9,
+          "end": 11,
+          "lemma": "go",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VBP",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": ".",
+          "start": 11,
+          "end": 12,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "Could",
+          "start": 13,
+          "end": 18,
+          "lemma": "could",
+          "pos": "verb",
+          "sub": "modal",
+          "tag": "MD",
+          "dep": "aux",
+          "role": "verb-phrase",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": "I",
+          "start": 19,
+          "end": 20,
+          "lemma": "i",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "please",
+          "start": 21,
+          "end": 27,
+          "lemma": "please",
+          "pos": "interjection",
+          "sub": null,
+          "tag": "UH",
+          "dep": "intj",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": "get",
+          "start": 28,
+          "end": 31,
+          "lemma": "get",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "a",
+          "start": 32,
+          "end": 33,
+          "lemma": "a",
+          "pos": "determiner",
+          "sub": null,
+          "tag": "DT",
+          "dep": "det",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "window",
+          "start": 34,
+          "end": 40,
+          "lemma": "window",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "compound",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "seat",
+          "start": 41,
+          "end": 45,
+          "lemma": "seat",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "if",
+          "start": 46,
+          "end": 48,
+          "lemma": "if",
+          "pos": "conjunction",
+          "sub": null,
+          "tag": "IN",
+          "dep": "mark",
+          "role": null,
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": "one",
+          "start": 49,
+          "end": 52,
+          "lemma": "one",
+          "pos": "determiner",
+          "sub": "numeral",
+          "tag": "CD",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "is",
+          "start": 53,
+          "end": 55,
+          "lemma": "be",
+          "pos": "verb",
+          "sub": "auxiliary",
+          "tag": "VBZ",
+          "dep": "advcl",
+          "role": "verb-phrase",
+          "head": 7,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": "available",
+          "start": 56,
+          "end": 65,
+          "lemma": "available",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "acomp",
+          "role": "subject-complement",
+          "head": 13,
+          "confidence": 0.95
+        },
+        {
+          "i": 15,
+          "text": "?",
+          "start": 65,
+          "end": 66,
+          "lemma": "?",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 7,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            2
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-2",
+          "type": "verb-group",
+          "tokens": [
+            4,
+            7
+          ],
+          "keys": [
+            "voice-active",
+            "modal-request"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-3",
+          "type": "verb-group",
+          "tokens": [
+            13
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "pat-1",
+          "type": "pattern",
+          "key": "conditional-second",
+          "family": "conditional",
+          "tokens": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "confidence": 0.92
+        }
+      ],
+      "sentence": {
+        "function": "interrogative",
+        "structure": "complex"
+      }
+    },
+    {
+      "lineId": "line-air-04",
+      "text": "Let me check for you. Yes, seat 14A is open. Please place your checked bag on the scale.",
+      "textHash": "85b8ee5b478abc3f",
+      "override": false,
+      "tokens": [
+        {
+          "i": 0,
+          "text": "Let",
+          "start": 0,
+          "end": 3,
+          "lemma": "let",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 1,
+          "text": "me",
+          "start": 4,
+          "end": 6,
+          "lemma": "i",
+          "pos": "pronoun",
+          "sub": "personal-subject",
+          "tag": "PRP",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 2,
+          "text": "check",
+          "start": 7,
+          "end": 12,
+          "lemma": "check",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ccomp",
+          "role": "verb-phrase",
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 3,
+          "text": "for",
+          "start": 13,
+          "end": 16,
+          "lemma": "for",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "dative",
+          "role": "indirect-object",
+          "head": 2,
+          "confidence": 0.95
+        },
+        {
+          "i": 4,
+          "text": "you",
+          "start": 17,
+          "end": 20,
+          "lemma": "you",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 3,
+          "confidence": 0.95
+        },
+        {
+          "i": 5,
+          "text": ".",
+          "start": 20,
+          "end": 21,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 0,
+          "confidence": 0.95
+        },
+        {
+          "i": 6,
+          "text": "Yes",
+          "start": 22,
+          "end": 25,
+          "lemma": "yes",
+          "pos": "interjection",
+          "sub": null,
+          "tag": "UH",
+          "dep": "intj",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 7,
+          "text": ",",
+          "start": 25,
+          "end": 26,
+          "lemma": ",",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ",",
+          "dep": "punct",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 8,
+          "text": "seat",
+          "start": 27,
+          "end": 31,
+          "lemma": "seat",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "nsubj",
+          "role": "subject",
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 9,
+          "text": "14A",
+          "start": 32,
+          "end": 35,
+          "lemma": "14a",
+          "pos": "noun",
+          "sub": null,
+          "tag": "NNPS",
+          "dep": "appos",
+          "role": "appositive",
+          "head": 8,
+          "confidence": 0.95
+        },
+        {
+          "i": 10,
+          "text": "is",
+          "start": 36,
+          "end": 38,
+          "lemma": "be",
+          "pos": "verb",
+          "sub": "auxiliary",
+          "tag": "VBZ",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 11,
+          "text": "open",
+          "start": 39,
+          "end": 43,
+          "lemma": "open",
+          "pos": "adjective",
+          "sub": null,
+          "tag": "JJ",
+          "dep": "acomp",
+          "role": "subject-complement",
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 12,
+          "text": ".",
+          "start": 43,
+          "end": 44,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 10,
+          "confidence": 0.95
+        },
+        {
+          "i": 13,
+          "text": "Please",
+          "start": 45,
+          "end": 51,
+          "lemma": "please",
+          "pos": "interjection",
+          "sub": null,
+          "tag": "UH",
+          "dep": "intj",
+          "role": null,
+          "head": 14,
+          "confidence": 0.95
+        },
+        {
+          "i": 14,
+          "text": "place",
+          "start": 52,
+          "end": 57,
+          "lemma": "place",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VB",
+          "dep": "ROOT",
+          "role": "verb-phrase",
+          "head": 14,
+          "confidence": 0.95
+        },
+        {
+          "i": 15,
+          "text": "your",
+          "start": 58,
+          "end": 62,
+          "lemma": "your",
+          "pos": "pronoun",
+          "sub": "personal-object",
+          "tag": "PRP$",
+          "dep": "poss",
+          "role": null,
+          "head": 17,
+          "confidence": 0.95
+        },
+        {
+          "i": 16,
+          "text": "checked",
+          "start": 63,
+          "end": 70,
+          "lemma": "check",
+          "pos": "verb",
+          "sub": null,
+          "tag": "VBN",
+          "dep": "amod",
+          "role": "verb-phrase",
+          "head": 17,
+          "confidence": 0.95
+        },
+        {
+          "i": 17,
+          "text": "bag",
+          "start": 71,
+          "end": 74,
+          "lemma": "bag",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "dobj",
+          "role": "direct-object",
+          "head": 14,
+          "confidence": 0.95
+        },
+        {
+          "i": 18,
+          "text": "on",
+          "start": 75,
+          "end": 77,
+          "lemma": "on",
+          "pos": "preposition",
+          "sub": null,
+          "tag": "IN",
+          "dep": "prep",
+          "role": null,
+          "head": 14,
+          "confidence": 0.95
+        },
+        {
+          "i": 19,
+          "text": "the",
+          "start": 78,
+          "end": 81,
+          "lemma": "the",
+          "pos": "determiner",
+          "sub": null,
+          "tag": "DT",
+          "dep": "det",
+          "role": null,
+          "head": 20,
+          "confidence": 0.95
+        },
+        {
+          "i": 20,
+          "text": "scale",
+          "start": 82,
+          "end": 87,
+          "lemma": "scale",
+          "pos": "noun",
+          "sub": "common",
+          "tag": "NN",
+          "dep": "pobj",
+          "role": "prepositional-object",
+          "head": 18,
+          "confidence": 0.95
+        },
+        {
+          "i": 21,
+          "text": ".",
+          "start": 87,
+          "end": 88,
+          "lemma": ".",
+          "pos": "punctuation",
+          "sub": null,
+          "tag": ".",
+          "dep": "punct",
+          "role": null,
+          "head": 14,
+          "confidence": 0.95
+        }
+      ],
+      "groups": [
+        {
+          "id": "vg-1",
+          "type": "verb-group",
+          "tokens": [
+            0
+          ],
+          "keys": [
+            "mood-imperative",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-2",
+          "type": "verb-group",
+          "tokens": [
+            2
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-3",
+          "type": "verb-group",
+          "tokens": [
+            10
+          ],
+          "keys": [
+            "present-simple",
+            "voice-active"
+          ],
+          "time": "present",
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-4",
+          "type": "verb-group",
+          "tokens": [
+            14
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        },
+        {
+          "id": "vg-5",
+          "type": "verb-group",
+          "tokens": [
+            16
+          ],
+          "keys": [
+            "voice-active"
+          ],
+          "time": null,
+          "aspect": "simple",
+          "voice": "voice-active",
+          "confidence": 0.95
+        }
+      ],
+      "sentence": {
+        "function": "imperative",
+        "structure": "complex"
+      }
+    }
+  ]
+}

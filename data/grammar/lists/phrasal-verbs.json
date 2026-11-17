@@ -1,0 +1,50 @@
+[
+  {
+    "verb": "look for",
+    "meaning_en": "search for",
+    "meaning_bn": "খোঁজা",
+    "particle": "for"
+  },
+  {
+    "verb": "try on",
+    "meaning_en": "put on clothes to see if they fit",
+    "meaning_bn": "মাপ ঠিক আছে কিনা পরে দেখা",
+    "particle": "on"
+  },
+  {
+    "verb": "check out",
+    "meaning_en": "pay and leave a shop or hotel",
+    "meaning_bn": "মূল্য পরিশোধ করে প্রস্থান",
+    "particle": "out"
+  },
+  {
+    "verb": "give up",
+    "meaning_en": "stop trying",
+    "meaning_bn": "হাল ছেড়ে দেওয়া",
+    "particle": "up"
+  },
+  {
+    "verb": "look forward to",
+    "meaning_en": "await eagerly",
+    "meaning_bn": "আগ্রহভরে অপেক্ষা করা",
+    "particle": "to"
+  },
+  {
+    "verb": "carry on",
+    "meaning_en": "continue",
+    "meaning_bn": "চালিয়ে যাওয়া",
+    "particle": "on"
+  },
+  {
+    "verb": "pick up",
+    "meaning_en": "lift or collect",
+    "meaning_bn": "তুলে নেওয়া বা সংগ্রহ করা",
+    "particle": "up"
+  },
+  {
+    "verb": "run out of",
+    "meaning_en": "have none left",
+    "meaning_bn": "ফুরিয়ে যাওয়া",
+    "particle": "of"
+  }
+]

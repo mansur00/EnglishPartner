@@ -1,0 +1,782 @@
+{
+  "noun": {
+    "name": "Noun",
+    "description": "Grammar category representing noun.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "pronoun": {
+    "name": "Pronoun",
+    "description": "Grammar category representing pronoun.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "verb": {
+    "name": "Verb",
+    "description": "Grammar category representing verb.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "adjective": {
+    "name": "Adjective",
+    "description": "Grammar category representing adjective.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "adverb": {
+    "name": "Adverb",
+    "description": "Grammar category representing adverb.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "preposition": {
+    "name": "Preposition",
+    "description": "Grammar category representing preposition.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "conjunction": {
+    "name": "Conjunction",
+    "description": "Grammar category representing conjunction.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "determiner": {
+    "name": "Determiner",
+    "description": "Grammar category representing determiner.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "interjection": {
+    "name": "Interjection",
+    "description": "Grammar category representing interjection.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "particle": {
+    "name": "Particle",
+    "description": "Grammar category representing particle.",
+    "layer": "pos",
+    "level": "basic"
+  },
+  "numeral": {
+    "name": "Numeral",
+    "description": "Grammar category representing numeral.",
+    "layer": "pos",
+    "level": "advanced"
+  },
+  "subject": {
+    "name": "Subject",
+    "description": "Grammar category representing subject.",
+    "layer": "role",
+    "level": "basic"
+  },
+  "verb-phrase": {
+    "name": "Verb Phrase",
+    "description": "Grammar category representing verb phrase.",
+    "layer": "role",
+    "level": "basic"
+  },
+  "direct-object": {
+    "name": "Direct Object",
+    "description": "Grammar category representing direct object.",
+    "layer": "role",
+    "level": "basic"
+  },
+  "indirect-object": {
+    "name": "Indirect Object",
+    "description": "Grammar category representing indirect object.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "subject-complement": {
+    "name": "Subject Complement",
+    "description": "Grammar category representing subject complement.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "object-complement": {
+    "name": "Object Complement",
+    "description": "Grammar category representing object complement.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "adverbial": {
+    "name": "Adverbial",
+    "description": "Grammar category representing adverbial.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "prepositional-object": {
+    "name": "Prepositional Object",
+    "description": "Grammar category representing prepositional object.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "agent": {
+    "name": "Agent",
+    "description": "Grammar category representing agent.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "expletive": {
+    "name": "Expletive",
+    "description": "Grammar category representing expletive.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "vocative": {
+    "name": "Vocative",
+    "description": "Grammar category representing vocative.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "appositive": {
+    "name": "Appositive",
+    "description": "Grammar category representing appositive.",
+    "layer": "role",
+    "level": "advanced"
+  },
+  "present-simple": {
+    "name": "Present Simple",
+    "description": "Grammar category representing present simple.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "present-continuous": {
+    "name": "Present Continuous",
+    "description": "Grammar category representing present continuous.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "present-perfect": {
+    "name": "Present Perfect",
+    "description": "Grammar category representing present perfect.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "present-perfect-continuous": {
+    "name": "Present Perfect Continuous",
+    "description": "Grammar category representing present perfect continuous.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "past-simple": {
+    "name": "Past Simple",
+    "description": "Grammar category representing past simple.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "past-continuous": {
+    "name": "Past Continuous",
+    "description": "Grammar category representing past continuous.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "past-perfect": {
+    "name": "Past Perfect",
+    "description": "Grammar category representing past perfect.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "past-perfect-continuous": {
+    "name": "Past Perfect Continuous",
+    "description": "Grammar category representing past perfect continuous.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "future-simple": {
+    "name": "Future Simple",
+    "description": "Grammar category representing future simple.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "future-continuous": {
+    "name": "Future Continuous",
+    "description": "Grammar category representing future continuous.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "future-perfect": {
+    "name": "Future Perfect",
+    "description": "Grammar category representing future perfect.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "future-perfect-continuous": {
+    "name": "Future Perfect Continuous",
+    "description": "Grammar category representing future perfect continuous.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "future-going-to": {
+    "name": "Future Going To",
+    "description": "Grammar category representing future going to.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "future-present-continuous": {
+    "name": "Future Present Continuous",
+    "description": "Grammar category representing future present continuous.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "future-present-simple": {
+    "name": "Future Present Simple",
+    "description": "Grammar category representing future present simple.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "future-in-the-past": {
+    "name": "Future In The Past",
+    "description": "Grammar category representing future in the past.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "used-to": {
+    "name": "Used To",
+    "description": "Grammar category representing used to.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "would-habitual": {
+    "name": "Would Habitual",
+    "description": "Grammar category representing would habitual.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "voice-active": {
+    "name": "Voice Active",
+    "description": "Grammar category representing voice active.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "voice-passive": {
+    "name": "Voice Passive",
+    "description": "Grammar category representing voice passive.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "mood-indicative": {
+    "name": "Mood Indicative",
+    "description": "Grammar category representing mood indicative.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "mood-imperative": {
+    "name": "Mood Imperative",
+    "description": "Grammar category representing mood imperative.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "mood-subjunctive": {
+    "name": "Mood Subjunctive",
+    "description": "Grammar category representing mood subjunctive.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "modal-ability": {
+    "name": "Modal Ability",
+    "description": "Grammar category representing modal ability.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-permission": {
+    "name": "Modal Permission",
+    "description": "Grammar category representing modal permission.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-obligation": {
+    "name": "Modal Obligation",
+    "description": "Grammar category representing modal obligation.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-advice": {
+    "name": "Modal Advice",
+    "description": "Grammar category representing modal advice.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-possibility": {
+    "name": "Modal Possibility",
+    "description": "Grammar category representing modal possibility.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-prediction": {
+    "name": "Modal Prediction",
+    "description": "Grammar category representing modal prediction.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-request": {
+    "name": "Modal Request",
+    "description": "Grammar category representing modal request.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "modal-perfect": {
+    "name": "Modal Perfect",
+    "description": "Grammar category representing modal perfect.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "infinitive-to": {
+    "name": "Infinitive To",
+    "description": "Grammar category representing infinitive to.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "infinitive-bare": {
+    "name": "Infinitive Bare",
+    "description": "Grammar category representing infinitive bare.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "gerund": {
+    "name": "Gerund",
+    "description": "Grammar category representing gerund.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "participle-present": {
+    "name": "Participle Present",
+    "description": "Grammar category representing participle present.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "participle-past": {
+    "name": "Participle Past",
+    "description": "Grammar category representing participle past.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "irregular-verb": {
+    "name": "Irregular Verb",
+    "description": "Grammar category representing irregular verb.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "phrasal-verb": {
+    "name": "Phrasal Verb",
+    "description": "Grammar category representing phrasal verb.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "prepositional-verb": {
+    "name": "Prepositional Verb",
+    "description": "Grammar category representing prepositional verb.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "linking-verb": {
+    "name": "Linking Verb",
+    "description": "Grammar category representing linking verb.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "negation": {
+    "name": "Negation",
+    "description": "Grammar category representing negation.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "do-support": {
+    "name": "Do Support",
+    "description": "Grammar category representing do support.",
+    "layer": "tense",
+    "level": "basic"
+  },
+  "emphatic-do": {
+    "name": "Emphatic Do",
+    "description": "Grammar category representing emphatic do.",
+    "layer": "tense",
+    "level": "advanced"
+  },
+  "noun-phrase": {
+    "name": "Noun Phrase",
+    "description": "Grammar category representing noun phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "verb-phrase-structure": {
+    "name": "Verb Phrase Structure",
+    "description": "Grammar category representing verb phrase structure.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "adjective-phrase": {
+    "name": "Adjective Phrase",
+    "description": "Grammar category representing adjective phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "adverb-phrase": {
+    "name": "Adverb Phrase",
+    "description": "Grammar category representing adverb phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "prepositional-phrase": {
+    "name": "Prepositional Phrase",
+    "description": "Grammar category representing prepositional phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "infinitive-phrase": {
+    "name": "Infinitive Phrase",
+    "description": "Grammar category representing infinitive phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "gerund-phrase": {
+    "name": "Gerund Phrase",
+    "description": "Grammar category representing gerund phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "participial-phrase": {
+    "name": "Participial Phrase",
+    "description": "Grammar category representing participial phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "absolute-phrase": {
+    "name": "Absolute Phrase",
+    "description": "Grammar category representing absolute phrase.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "independent-clause": {
+    "name": "Independent Clause",
+    "description": "Grammar category representing independent clause.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "dependent-clause": {
+    "name": "Dependent Clause",
+    "description": "Grammar category representing dependent clause.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "noun-clause": {
+    "name": "Noun Clause",
+    "description": "Grammar category representing noun clause.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "relative-clause": {
+    "name": "Relative Clause",
+    "description": "Grammar category representing relative clause.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "adverbial-clause": {
+    "name": "Adverbial Clause",
+    "description": "Grammar category representing adverbial clause.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "sentence-simple": {
+    "name": "Sentence Simple",
+    "description": "Grammar category representing sentence simple.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "sentence-compound": {
+    "name": "Sentence Compound",
+    "description": "Grammar category representing sentence compound.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "sentence-complex": {
+    "name": "Sentence Complex",
+    "description": "Grammar category representing sentence complex.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "sentence-compound-complex": {
+    "name": "Sentence Compound Complex",
+    "description": "Grammar category representing sentence compound complex.",
+    "layer": "phrase",
+    "level": "advanced"
+  },
+  "function-declarative": {
+    "name": "Function Declarative",
+    "description": "Grammar category representing function declarative.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "function-interrogative": {
+    "name": "Function Interrogative",
+    "description": "Grammar category representing function interrogative.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "function-imperative": {
+    "name": "Function Imperative",
+    "description": "Grammar category representing function imperative.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "function-exclamatory": {
+    "name": "Function Exclamatory",
+    "description": "Grammar category representing function exclamatory.",
+    "layer": "phrase",
+    "level": "basic"
+  },
+  "conditional-zero": {
+    "name": "Conditional Zero",
+    "description": "Grammar category representing conditional zero.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "conditional-first": {
+    "name": "Conditional First",
+    "description": "Grammar category representing conditional first.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "conditional-second": {
+    "name": "Conditional Second",
+    "description": "Grammar category representing conditional second.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "conditional-third": {
+    "name": "Conditional Third",
+    "description": "Grammar category representing conditional third.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "conditional-mixed": {
+    "name": "Conditional Mixed",
+    "description": "Grammar category representing conditional mixed.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "wish-if-only": {
+    "name": "Wish If Only",
+    "description": "Grammar category representing wish if only.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "passive-voice": {
+    "name": "Passive Voice",
+    "description": "Grammar category representing passive voice.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "causative-have-get": {
+    "name": "Causative Have Get",
+    "description": "Grammar category representing causative have get.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "reported-statement": {
+    "name": "Reported Statement",
+    "description": "Grammar category representing reported statement.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "reported-question": {
+    "name": "Reported Question",
+    "description": "Grammar category representing reported question.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "reported-command": {
+    "name": "Reported Command",
+    "description": "Grammar category representing reported command.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "question-yes-no": {
+    "name": "Question Yes No",
+    "description": "Grammar category representing question yes no.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "question-wh": {
+    "name": "Question Wh",
+    "description": "Grammar category representing question wh.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "question-tag": {
+    "name": "Question Tag",
+    "description": "Grammar category representing question tag.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "question-indirect": {
+    "name": "Question Indirect",
+    "description": "Grammar category representing question indirect.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "comparative": {
+    "name": "Comparative",
+    "description": "Grammar category representing comparative.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "superlative": {
+    "name": "Superlative",
+    "description": "Grammar category representing superlative.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "equal-comparison": {
+    "name": "Equal Comparison",
+    "description": "Grammar category representing equal comparison.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "too-enough": {
+    "name": "Too Enough",
+    "description": "Grammar category representing too enough.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "the-more-the-more": {
+    "name": "The More The More",
+    "description": "Grammar category representing the more the more.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "there-is-are": {
+    "name": "There Is Are",
+    "description": "Grammar category representing there is are.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "it-cleft": {
+    "name": "It Cleft",
+    "description": "Grammar category representing it cleft.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "inversion": {
+    "name": "Inversion",
+    "description": "Grammar category representing inversion.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "phrasal-verb-pattern": {
+    "name": "Phrasal Verb Pattern",
+    "description": "Grammar category representing phrasal verb pattern.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "verb-pattern-gerund-or-infinitive": {
+    "name": "Verb Pattern Gerund Or Infinitive",
+    "description": "Grammar category representing verb pattern gerund or infinitive.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "dependent-preposition": {
+    "name": "Dependent Preposition",
+    "description": "Grammar category representing dependent preposition.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "article-a-an": {
+    "name": "Article A An",
+    "description": "Grammar category representing article a an.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "article-the": {
+    "name": "Article The",
+    "description": "Grammar category representing article the.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "article-zero": {
+    "name": "Article Zero",
+    "description": "Grammar category representing article zero.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "countable-quantifier": {
+    "name": "Countable Quantifier",
+    "description": "Grammar category representing countable quantifier.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "uncountable-quantifier": {
+    "name": "Uncountable Quantifier",
+    "description": "Grammar category representing uncountable quantifier.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "possessive-s": {
+    "name": "Possessive S",
+    "description": "Grammar category representing possessive s.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "subject-verb-agreement": {
+    "name": "Subject Verb Agreement",
+    "description": "Grammar category representing subject verb agreement.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "there-agreement": {
+    "name": "There Agreement",
+    "description": "Grammar category representing there agreement.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "linking-word": {
+    "name": "Linking Word",
+    "description": "Grammar category representing linking word.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "discourse-marker": {
+    "name": "Discourse Marker",
+    "description": "Grammar category representing discourse marker.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "polite-request": {
+    "name": "Polite Request",
+    "description": "Grammar category representing polite request.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "suggestion": {
+    "name": "Suggestion",
+    "description": "Grammar category representing suggestion.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "idiom-fixed-expression": {
+    "name": "Idiom Fixed Expression",
+    "description": "Grammar category representing idiom fixed expression.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "collocation": {
+    "name": "Collocation",
+    "description": "Grammar category representing collocation.",
+    "layer": "pattern",
+    "level": "advanced"
+  },
+  "contraction": {
+    "name": "Contraction",
+    "description": "Grammar category representing contraction.",
+    "layer": "pattern",
+    "level": "basic"
+  },
+  "word-formation": {
+    "name": "Word Formation",
+    "description": "Grammar category representing word formation.",
+    "layer": "pattern",
+    "level": "advanced"
+  }
+}

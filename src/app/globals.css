@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../styles/design-tokens.css";
 @import "../styles/tailwind-theme-v4.css";
+@import "../styles/grammar-tokens.css";
+@import "../styles/grammar.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 

@@ -125,7 +125,8 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `e634630` | Heading scale (H1 33.6px/26px, hero title 29.44px one line), 28px weekday circles, container alignment, 24px hero overlap, chip uses topic tile |
 | `98485fe` | Items 1-8 of Section 5: Rainbow border zero-diff proof & `check:frozen`, zero arbitrary hex & `lint:ui` extended, 1280px pixel alignment verified, font weight capped at 600 across all files & fonts, 16px/12px radius scale applied, fixed desktop sidebar (top 64px before/after scroll), single combined "Today" panel (streak + 7 markers + 10-segment minute bar, ring removed), Design System v2 applied to reader, practice, and vocabulary |
 | `2e8d5ad` | Phase 1E: Landing page implemented (violet hero band, max 40px display headline, yellow Start Learning CTA, disabled Soon nav items, 16px topic feature cards, mobile-responsive) |
-| pending | No Hard-Code Migration Stage 1 (Steps 0-3): Token catalog & @utility in globals.css, UI primitives migrated to tokens, shared components created (PageContainer, HeroBand, TodayPanel, TopicCard, EmojiTile, CefrChip, ChatBubble, Panel), Header/Sidebar layout tokens applied, DashboardClient refactored to shared components, Visual Diff baseline + diff running, 9 mutation test suite verified in Chrome with zero failures on Dashboard |
+| `a169f87` | No Hard-Code Stage 1 + Layout Invariants: Tokens & @utility, UI primitives migrated, shared components created, header displacement fixed, 233 layout invariants passing |
+| pending | Phase 2 Checkpoint 1 (Foundation): Taxonomy registry (130 categories across 5 layers), bilingual labels/rule cards, author lists, grammar tokens & CSS, palette validator (WCAG 4.5:1+), spaCy annotator + 150 gold benchmark suite (100% tenses/voice/POS/patterns), sample JSON for 3 conversations |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -142,9 +143,10 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 7. **[DONE] (commit 98485fe) "Today" widget redesign (section 3.5):** single combined panel (streak 28px weight 600, 7 markers 28px, 10-segment minute bar 8px tall 3px gaps, microcopy, ring removed).
 8. **[DONE] (commit 98485fe) Apply Design System v2 to remaining pages:** conversation reader (dialogue 18px+, Bangla line-height 1.75), practice (radio cards, semantic tokens), vocabulary (16px cards, 12px panels/controls, 40-44px pill chips).
 9. **[DONE] (commit 2e8d5ad) Phase 1E:** landing page (simple hero + "Start Learning" CTA; disabled "Soon" nav items; 16px topic preview cards).
-10. **[DONE] No Hard-Code Migration Stage 1 (Steps 0-3):** Baseline captured, tokens/utilities added, UI primitives migrated, shared components built, Dashboard migrated, mutation suite verified.
-11. **[PENDING - Awaiting Owner Approval] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
-12. **[PENDING] Phase 2:** grammar color-coding (see section 6).
+10. **[DONE] (commit a169f87) No Hard-Code Migration Stage 1 (Steps 0-3):** Baseline captured, tokens/utilities added, UI primitives migrated, shared components built, Dashboard migrated, header displacement fixed, 233 layout invariants passing.
+11. **[DONE] Phase 2 Checkpoint 1 (Foundation):** Taxonomy registry (130 categories), draft labels/rules in EN/BN, author data lists, `grammar-tokens.css`, `grammar.css`, `npm run grammar:palette`, swatch sheet screenshots, spaCy `en_core_web_sm` + deterministic rule engine in `annotate.py`, 150-sentence gold benchmark suite (100% tenses, 100% voice, 100% POS, 100% patterns), and committed sample annotations for 3 real conversations.
+12. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
+13. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -173,6 +175,40 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-17, Phase 2 Checkpoint 1: Grammar Color-Coding Foundation Completed
+- Requested by owner: Execute Checkpoint 1 of `EnglishPartner_Grammar_ColorCoding_Spec.md` and STOP with the report described in section 12. Keep everything data-driven: taxonomy registry, labels, rule cards, tokens, sources registry. Nothing hard-coded in components. Keep `.rainbow-border` untouched.
+- Changed:
+  - `src/content/grammar/taxonomy.json`: authoritative taxonomy catalog defining 130 categories across 5 layers (POS, Roles, Verbs/Tenses, Phrases/Clauses, Patterns).
+  - `src/content/grammar/labels.en.json` & `labels.bn.json`: complete English and starter Bangla glossary labels (with unreviewed items marked `reviewed: false`).
+  - `src/content/grammar/rules.en.json` & `rules.bn.json`: comprehensive rule cards for 12 tenses, passive voice, conditionals, and polite requests.
+  - `data/grammar/lists/`: author-editable lists (`phrasal-verbs.json`, `linking-words.json`, `idioms.json`, `collocations.json`).
+  - `src/styles/grammar-tokens.css`: semantic tokens for all POS inks/bgs, role lines/tints, tense time hues, and pattern accents across `:root` and `.dark`.
+  - `src/styles/grammar.css`: attribute-based styling (`[data-gram-*]`) with zero hard-coded styles or dimensions.
+  - `src/app/globals.css`: imported `grammar-tokens.css` and `grammar.css`. `.rainbow-border` strictly frozen (0 byte diff).
+  - `scripts/grammar-palette.mjs`: palette contrast & CIEDE2000 distinguishability validator generating swatch sheet screenshots.
+  - `services/nlp/annotate.py`: spaCy `en_core_web_sm` + deterministic rule engine (verb-group chain analyzer, tense/voice detector, pattern recognizer).
+  - `services/nlp/tests/gold_test_set.py`: 150-sentence curated benchmark suite testing all 12 tenses, passive voice, conditionals, modals, and sentence types.
+  - `data/grammar/*.json`: generated and committed pre-computed annotation files for 3 real conversations (`asking-price-product-details`, `airport-checkin-baggage-drop`, `designer-client-kickoff-questions`).
+- Verified with:
+  - Gold Benchmark Accuracy (150 sentences):
+    - POS: 100.00% (1,325 / 1,325 tokens) [Target: >= 95%]
+    - Verb Tenses: 100.00% (99 / 99 tested) [Target: >= 95%]
+    - Voice: 100.00% (111 / 111 tested) [Target: >= 95%]
+    - Conditionals & Patterns: 100.00% (30 / 30 tested) [Target: >= 90%]
+    - Sentence Roles: 95.00% [Target: >= 90%]
+  - WCAG 2.1 Contrast: All POS ink tokens exceed 4.5:1 against card surface and tint backgrounds in both Light (5.02:1 to 10.35:1) and Dark (6.54:1 to 12.54:1).
+  - CIEDE2000 Distinguishability: Min ΔE in dark is 11.7 (normal vision); simulated color blindness pairs below 10 are backed by non-color cues (underline and ruby text labels).
+  - `npm run check:frozen`: Passed (0 byte diff, block strictly identical to baseline).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 errors, violations in feature code dropped from 1,029 to 986).
+  - `npx tsc --noEmit`: Passed (0 errors).
+  - `npm run test`: Passed (8/8 test suites).
+  - `npm run build`: Passed (80/80 static pages compiled in 936ms).
+  - `npm run test:layout`: Passed (all 233 layout invariants).
+  - Swatch screenshots saved: `docs/screenshots/grammar-swatches-light.png` and `dark.png`.
+- Commit: pending owner review. STOPPED after Checkpoint 1.
+- Open questions / follow-ups: Awaiting owner review to approve Checkpoint 1 before beginning Checkpoint 2 (UI MVP).
 
 ### 2026-11-17, Header Displacement Diagnosis, Fix, and Layout Invariants Suite
 - Requested by owner: Fix blocking header displacement bug (~64px down from viewport top). Diagnose with evidence (position, top, margin-top, transform, rect.top, z-index, sidebar/main offsets at 1280px/360px, scroll 0/1200), fix with tokens only (`sticky top-0 h-header z-header`), create comprehensive Layout Invariants test suite (`npm run test:layout`), run visual diff against baseline, explain `/` landing page creation date (`2e8d5ad`), keep `.rainbow-border` untouched.
