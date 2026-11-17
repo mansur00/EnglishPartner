@@ -11,8 +11,8 @@ function Card({
   variant?: "default" | "warm" | "muted" | "bordered";
 }) {
   const variantStyles = {
-    default: "bg-card border border-border text-card-foreground shadow-xs",
-    warm: "bg-card border border-[var(--ecp-accent-400)]/40 text-card-foreground shadow-xs dark:border-[var(--ecp-accent-400)]/30",
+    default: "bg-card border border-border text-card-foreground shadow-card",
+    warm: "bg-card border border-sun-400/40 text-card-foreground shadow-card dark:border-sun-400/30",
     muted: "bg-muted/50 border border-border text-card-foreground",
     bordered: "bg-transparent border border-border text-card-foreground",
   };
@@ -22,7 +22,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col rounded-[16px] p-5 md:p-6 transition-all duration-200 text-sm",
+        "group/card flex flex-col rounded-card p-5 md:p-6 transition-all duration-base text-body",
         "data-[size=sm]:p-4",
         "has-data-[slot=card-header]:p-0 has-data-[slot=card-content]:p-0",
         variantStyles[variant] || variantStyles.default,

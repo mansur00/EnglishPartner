@@ -8,7 +8,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header />
       <div className="flex flex-1">
-        <Suspense fallback={<aside className="hidden md:flex w-64 border-r border-border bg-card sticky top-16 h-[calc(100dvh-4rem)]" />}>
+        <Suspense fallback={<aside className="hidden md:flex w-sidebar border-r border-border bg-card sticky top-header h-below-header z-sidebar" />}>
           <Sidebar />
         </Suspense>
         <main className="flex-1 pb-20 md:pb-8 w-full min-w-0">

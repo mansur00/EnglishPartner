@@ -1,0 +1,254 @@
+[
+  {
+    "route": "landing",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "landing_1280px_light.png",
+    "diffPercentage": 0.09,
+    "diffPixels": 1010,
+    "note": "0.09% visual diff"
+  },
+  {
+    "route": "landing",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "landing_1280px_dark.png",
+    "diffPercentage": 0.09,
+    "diffPixels": 1017,
+    "note": "0.09% visual diff"
+  },
+  {
+    "route": "landing",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "landing_360px_light.png",
+    "diffPercentage": 0.11,
+    "diffPixels": 656,
+    "note": "0.11% visual diff"
+  },
+  {
+    "route": "landing",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "landing_360px_dark.png",
+    "diffPercentage": 0.11,
+    "diffPixels": 656,
+    "note": "0.11% visual diff"
+  },
+  {
+    "route": "dashboard",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "dashboard_1280px_light.png",
+    "diffPercentage": 8.48,
+    "diffPixels": 142689,
+    "note": "Size shift: 1280x1277 vs 1280x1315 (8.48% diff)"
+  },
+  {
+    "route": "dashboard",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "dashboard_1280px_dark.png",
+    "diffPercentage": 10.47,
+    "diffPixels": 176262,
+    "note": "Size shift: 1280x1277 vs 1280x1315 (10.47% diff)"
+  },
+  {
+    "route": "dashboard",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "dashboard_360px_light.png",
+    "diffPercentage": 27.75,
+    "diffPixels": 293933,
+    "note": "Size shift: 394x2485 vs 360x2688 (27.75% diff)"
+  },
+  {
+    "route": "dashboard",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "dashboard_360px_dark.png",
+    "diffPercentage": 34.46,
+    "diffPixels": 364930,
+    "note": "Size shift: 394x2485 vs 360x2688 (34.46% diff)"
+  },
+  {
+    "route": "explore",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "explore_1280px_light.png",
+    "diffPercentage": 5.32,
+    "diffPixels": 244377,
+    "note": "Size shift: 1280x3561 vs 1280x3587 (5.32% diff)"
+  },
+  {
+    "route": "explore",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "explore_1280px_dark.png",
+    "diffPercentage": 9.68,
+    "diffPixels": 444619,
+    "note": "Size shift: 1280x3561 vs 1280x3587 (9.68% diff)"
+  },
+  {
+    "route": "explore",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "explore_360px_light.png",
+    "diffPercentage": 16.49,
+    "diffPixels": 431078,
+    "note": "Size shift: 394x6573 vs 360x6636 (16.49% diff)"
+  },
+  {
+    "route": "explore",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "explore_360px_dark.png",
+    "diffPercentage": 27,
+    "diffPixels": 706055,
+    "note": "Size shift: 394x6573 vs 360x6636 (27% diff)"
+  },
+  {
+    "route": "category",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "category_1280px_light.png",
+    "diffPercentage": 0.94,
+    "diffPixels": 54939,
+    "note": "Size shift: 1280x4559 vs 1280x4565 (0.94% diff)"
+  },
+  {
+    "route": "category",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "category_1280px_dark.png",
+    "diffPercentage": 1.19,
+    "diffPixels": 69584,
+    "note": "Size shift: 1280x4559 vs 1280x4565 (1.19% diff)"
+  },
+  {
+    "route": "category",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "category_360px_light.png",
+    "diffPercentage": 10.08,
+    "diffPixels": 321316,
+    "note": "Size shift: 394x8076 vs 360x8087 (10.08% diff)"
+  },
+  {
+    "route": "category",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "category_360px_dark.png",
+    "diffPercentage": 10.8,
+    "diffPixels": 344204,
+    "note": "Size shift: 394x8076 vs 360x8087 (10.8% diff)"
+  },
+  {
+    "route": "reader",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "reader_1280px_light.png",
+    "diffPercentage": 0.31,
+    "diffPixels": 9131,
+    "note": "0.31% visual diff"
+  },
+  {
+    "route": "reader",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "reader_1280px_dark.png",
+    "diffPercentage": 0.35,
+    "diffPixels": 10371,
+    "note": "0.35% visual diff"
+  },
+  {
+    "route": "reader",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "reader_360px_light.png",
+    "diffPercentage": 9.05,
+    "diffPixels": 110266,
+    "note": "Size shift: 394x3093 vs 360x3093 (9.05% diff)"
+  },
+  {
+    "route": "reader",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "reader_360px_dark.png",
+    "diffPercentage": 9.24,
+    "diffPixels": 112634,
+    "note": "Size shift: 394x3093 vs 360x3093 (9.24% diff)"
+  },
+  {
+    "route": "vocabulary",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "vocabulary_1280px_light.png",
+    "diffPercentage": 0.27,
+    "diffPixels": 4789,
+    "note": "0.27% visual diff"
+  },
+  {
+    "route": "vocabulary",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "vocabulary_1280px_dark.png",
+    "diffPercentage": 0.24,
+    "diffPixels": 4362,
+    "note": "0.24% visual diff"
+  },
+  {
+    "route": "vocabulary",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "vocabulary_360px_light.png",
+    "diffPercentage": 8.96,
+    "diffPixels": 83538,
+    "note": "Size shift: 394x2367 vs 360x2367 (8.96% diff)"
+  },
+  {
+    "route": "vocabulary",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "vocabulary_360px_dark.png",
+    "diffPercentage": 8.93,
+    "diffPixels": 83287,
+    "note": "Size shift: 394x2367 vs 360x2367 (8.93% diff)"
+  },
+  {
+    "route": "admin",
+    "viewport": "1280px",
+    "theme": "light",
+    "filename": "admin_1280px_light.png",
+    "diffPercentage": 9.84,
+    "diffPixels": 343468,
+    "note": "Size shift: 1280x2662 vs 1280x2726 (9.84% diff)"
+  },
+  {
+    "route": "admin",
+    "viewport": "1280px",
+    "theme": "dark",
+    "filename": "admin_1280px_dark.png",
+    "diffPercentage": 21.83,
+    "diffPixels": 761717,
+    "note": "Size shift: 1280x2662 vs 1280x2726 (21.83% diff)"
+  },
+  {
+    "route": "admin",
+    "viewport": "360px",
+    "theme": "light",
+    "filename": "admin_360px_light.png",
+    "diffPercentage": 26.51,
+    "diffPixels": 556349,
+    "note": "Size shift: 440x4657 vs 360x4769 (26.51% diff)"
+  },
+  {
+    "route": "admin",
+    "viewport": "360px",
+    "theme": "dark",
+    "filename": "admin_360px_dark.png",
+    "diffPercentage": 32.1,
+    "diffPixels": 673624,
+    "note": "Size shift: 440x4657 vs 360x4769 (32.1% diff)"
+  }
+]

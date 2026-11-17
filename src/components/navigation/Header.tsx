@@ -38,28 +38,28 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
+    <header className="sticky top-0 z-header flex h-header w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
       {/* Brand & Mobile Hamburger */}
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger
             aria-label="Open navigation menu"
-            className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="md:hidden inline-flex items-center justify-center size-tap rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
           >
             <HugeiconsIcon icon={Menu01Icon} size={22} />
           </SheetTrigger>
           <SheetContent side="left" className="w-72 bg-card border-r border-border p-6">
             <SheetHeader className="pb-4 border-b border-border text-left">
               <SheetTitle className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs">
                   E
                 </div>
                 <div>
                   <div className="font-semibold font-heading text-base leading-tight text-foreground">
                     English Partner
                   </div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-chip text-muted-foreground">
                     Menu & Learning Paths
                   </div>
                 </div>
@@ -75,7 +75,7 @@ export function Header() {
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors",
+                      "flex items-center gap-3 px-4 py-3 rounded-control text-label font-semibold transition-colors",
                       isActive
                         ? "bg-primary/10 text-primary dark:bg-primary/20"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -92,14 +92,14 @@ export function Header() {
 
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity">
+          <div className="flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity shrink-0">
             E
           </div>
-          <div className="flex flex-col">
+          <div className="hidden sm:flex flex-col">
             <span className="font-semibold font-heading text-base leading-tight text-foreground">
               English Partner
             </span>
-            <span className="text-xs text-muted-foreground font-medium">
+            <span className="text-chip text-muted-foreground font-medium">
               Conversation Practice
             </span>
           </div>
@@ -107,16 +107,16 @@ export function Header() {
       </div>
 
       {/* Right Controls: Grammar Toggle Slot, Language, Theme, User Profile */}
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
         {/* Language Badge */}
         <button
           type="button"
           aria-haspopup="true"
           aria-expanded="false"
           title="Bilingual mode: English & বাংলা"
-          className="btn-press inline-flex items-center gap-1.5 h-10 px-3.5 rounded-full border border-border bg-card text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
+          className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3.5 rounded-pill border border-border bg-card text-label font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
         >
-          <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary" />
+          <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary shrink-0" />
           <span>বাংলা</span>
         </button>
 
@@ -125,7 +125,7 @@ export function Header() {
 
         {/* User Avatar */}
         <Link href="/dashboard" aria-label="Learner Profile">
-          <Button variant="ghost" size="icon" className="size-11 rounded-full text-muted-foreground hover:text-foreground">
+          <Button variant="ghost" size="icon" className="size-tap rounded-pill text-muted-foreground hover:text-foreground">
             <HugeiconsIcon icon={UserIcon} size={20} />
           </Button>
         </Link>

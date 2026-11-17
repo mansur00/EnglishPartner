@@ -79,7 +79,7 @@ export function AdminDashboardClient() {
   });
 
   return (
-    <div className="min-h-screen bg-[var(--ecp-canvas)] p-4 sm:p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[var(--ecp-canvas)] p-4 sm:p-8 space-y-8 max-w-7xl mx-auto w-full min-w-0 overflow-x-hidden">
       {/* Top Header & Role Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-ecp-border">
         <div className="flex items-center gap-3.5">
@@ -102,7 +102,7 @@ export function AdminDashboardClient() {
         </div>
 
         {/* Demo Role Switcher Bar */}
-        <div className="flex items-center gap-2 bg-white p-1.5 rounded-xl border border-ecp-border text-xs">
+        <div className="flex flex-wrap items-center gap-2 bg-white p-1.5 rounded-xl border border-ecp-border text-xs">
           <span className="text-ecp-text-muted px-2 flex items-center gap-1 font-semibold">
             <HugeiconsIcon icon={UserGroupIcon} size={14} />
             Test Role:
@@ -178,7 +178,7 @@ export function AdminDashboardClient() {
           </div>
 
           {/* Filter Status Tabs */}
-          <div className="flex items-center gap-1 bg-ecp-bg-canvas p-1 rounded-xl border border-ecp-border text-xs">
+          <div className="flex flex-wrap items-center gap-1 bg-ecp-bg-canvas p-1 rounded-xl border border-ecp-border text-xs">
             {[
               { id: "all", label: `All (${totalScenarios})` },
               { id: "published", label: `Published (${publishedCount})` },

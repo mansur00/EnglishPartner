@@ -1,0 +1,23 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+
+export interface TopicCardProps extends React.ComponentProps<typeof Card> {
+  topic?: "shopping" | "travel" | "health" | "social" | "workplace" | "pro";
+}
+
+export function TopicCard({ topic, className, children, ...props }: TopicCardProps) {
+  return (
+    <Card
+      data-topic={topic}
+      className={cn(
+        "rounded-card border border-border bg-card shadow-card transition-all",
+        topic && "hover:border-topic-border",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </Card>
+  );
+}

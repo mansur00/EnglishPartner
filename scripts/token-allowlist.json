@@ -1,0 +1,76 @@
+{
+  "description": "Explicit allowlist for check-tokens.mjs with mandatory justifications.",
+  "entries": [
+    {
+      "file": "src/app/globals.css",
+      "rule": "all",
+      "reason": "Token definition stylesheet where raw values and design tokens originate."
+    },
+    {
+      "file": "src/components/ui/badge.tsx",
+      "rule": "primitives",
+      "reason": "Primitive component variant definition that maps to design system tokens."
+    },
+    {
+      "file": "src/components/ui/button.tsx",
+      "rule": "primitives",
+      "reason": "Primitive component variant definition that maps to design system tokens."
+    },
+    {
+      "file": "src/components/ui/card.tsx",
+      "rule": "primitives",
+      "reason": "Primitive component structure mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/input.tsx",
+      "rule": "primitives",
+      "reason": "Primitive input component mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/select.tsx",
+      "rule": "primitives",
+      "reason": "Primitive select component mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/dialog.tsx",
+      "rule": "primitives",
+      "reason": "Primitive modal dialog mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/sheet.tsx",
+      "rule": "primitives",
+      "reason": "Primitive drawer sheet mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/tabs.tsx",
+      "rule": "primitives",
+      "reason": "Primitive tabs component mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/tooltip.tsx",
+      "rule": "primitives",
+      "reason": "Primitive tooltip mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/popover.tsx",
+      "rule": "primitives",
+      "reason": "Primitive popover mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/switch.tsx",
+      "rule": "primitives",
+      "reason": "Primitive switch component mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/progress.tsx",
+      "rule": "primitives",
+      "reason": "Primitive progress bar mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/skeleton.tsx",
+      "rule": "primitives",
+      "reason": "Primitive skeleton component mapping to design system tokens."
+    }
+  ]
+}
+

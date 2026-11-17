@@ -1,0 +1,311 @@
+{
+  "landing": {
+    "h1": {
+      "fontSize": "40px",
+      "fontWeight": "600",
+      "lineHeight": "50px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(255, 255, 255)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "100px",
+      "width": "768px"
+    },
+    "heroCard": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgb(255, 244, 230)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "16px",
+      "borderColor": "rgb(247, 207, 160)",
+      "height": "240.797px",
+      "width": "306.656px"
+    },
+    "ctaButton": null,
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "65px",
+      "width": "1280px"
+    },
+    "todayPanel": {
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "lineHeight": "16.8px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+      "color": "rgb(255, 255, 255)",
+      "borderRadius": "3.35544e+07px",
+      "borderColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.2)",
+      "height": "30.7969px",
+      "width": "302.891px"
+    }
+  },
+  "dashboard": {
+    "h1": {
+      "fontSize": "33.6px",
+      "fontWeight": "600",
+      "lineHeight": "40.32px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(255, 255, 255)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "40.3125px",
+      "width": "364.031px"
+    },
+    "heroCard": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "16px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "368.391px",
+      "width": "960px"
+    },
+    "ctaButton": {
+      "fontSize": "18px",
+      "fontWeight": "600",
+      "lineHeight": "30.6px",
+      "backgroundColor": "rgb(255, 224, 102)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "12px",
+      "borderColor": "rgba(0, 0, 0, 0)",
+      "height": "52px",
+      "width": "245.078px"
+    },
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "64px",
+      "width": "1280px"
+    },
+    "todayPanel": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgba(255, 255, 255, 0.1)",
+      "color": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "borderColor": "rgba(255, 255, 255, 0.15)",
+      "height": "120.594px",
+      "width": "395.906px"
+    }
+  },
+  "explore": {
+    "h1": {
+      "fontSize": "33.6px",
+      "fontWeight": "600",
+      "lineHeight": "40.32px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "40.3125px",
+      "width": "960px"
+    },
+    "heroCard": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "3.35544e+07px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "40px",
+      "width": "129.047px"
+    },
+    "ctaButton": {
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "lineHeight": "19.6px",
+      "backgroundColor": "rgb(240, 229, 251)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "12px",
+      "borderColor": "rgba(0, 0, 0, 0)",
+      "height": "44px",
+      "width": "121.703px"
+    },
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "64px",
+      "width": "1280px"
+    },
+    "todayPanel": null
+  },
+  "category": {
+    "h1": {
+      "fontSize": "33.6px",
+      "fontWeight": "600",
+      "lineHeight": "40.32px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "40.3125px",
+      "width": "958px"
+    },
+    "heroCard": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgb(255, 244, 230)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "16px",
+      "borderColor": "rgb(247, 207, 160)",
+      "height": "319.297px",
+      "width": "504px"
+    },
+    "ctaButton": {
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "lineHeight": "19.6px",
+      "backgroundColor": "rgb(240, 229, 251)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "12px",
+      "borderColor": "rgba(0, 0, 0, 0)",
+      "height": "44px",
+      "width": "121.703px"
+    },
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "64px",
+      "width": "1280px"
+    },
+    "todayPanel": null
+  },
+  "reader": {
+    "h1": {
+      "fontSize": "33.6px",
+      "fontWeight": "600",
+      "lineHeight": "40.32px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "40.3125px",
+      "width": "838px"
+    },
+    "heroCard": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "16px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "202.906px",
+      "width": "896px"
+    },
+    "ctaButton": null,
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "64px",
+      "width": "1280px"
+    },
+    "todayPanel": null
+  },
+  "vocabulary": {
+    "h1": {
+      "fontSize": "29.44px",
+      "fontWeight": "600",
+      "lineHeight": "36.8px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "36.7969px",
+      "width": "557.781px"
+    },
+    "heroCard": null,
+    "ctaButton": null,
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "64px",
+      "width": "1280px"
+    },
+    "todayPanel": null
+  },
+  "admin": {
+    "h1": {
+      "fontSize": "29.44px",
+      "fontWeight": "600",
+      "lineHeight": "36.8px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "36.7969px",
+      "width": "470.453px"
+    },
+    "heroCard": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "16px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "131.906px",
+      "width": "292px"
+    },
+    "ctaButton": {
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "lineHeight": "16.8px",
+      "backgroundColor": "rgb(248, 245, 252)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "12px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "36px",
+      "width": "84.1406px"
+    },
+    "header": {
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "backgroundColor": "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+      "color": "rgb(30, 16, 48)",
+      "borderRadius": "0px",
+      "borderColor": "rgb(230, 221, 240)",
+      "height": "64px",
+      "width": "1280px"
+    },
+    "todayPanel": null
+  }
+}

@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint && node scripts/check-tokens.mjs",
+    "lint:tokens": "node scripts/check-tokens.mjs",
     "lint:ui": "bash scripts/check-ui-sizes.sh",
     "check:frozen": "bash scripts/check-frozen.sh",
-    "test": "node --experimental-strip-types --test tests/learning-loop.test.mjs"
+    "test": "node --experimental-strip-types --test tests/learning-loop.test.mjs",
+    "test:layout": "node scripts/layout-invariants.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -39,6 +41,8 @@
     "drizzle-kit": "^0.31.11",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "pixelmatch": "^8.0.0",
+    "pngjs": "^7.0.0",
     "puppeteer-core": "^25.17.0",
     "tailwindcss": "4.3.3",
     "typescript": "^5"
