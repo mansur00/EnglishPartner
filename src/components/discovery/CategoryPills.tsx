@@ -31,7 +31,7 @@ export function CategoryPills({
                 "btn-press h-10 px-4 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer border flex items-center gap-1.5",
                 isSelected
                   ? "bg-[var(--topic-tile)] text-[var(--topic-ink)] border-transparent shadow-xs font-bold"
-                  : "bg-card text-muted-foreground border-border hover:border-border hover:text-foreground hover:bg-muted/50"
+                  : "bg-[var(--topic-surface)] text-[var(--topic-ink)] border-[var(--topic-border)] hover:bg-[var(--topic-tile)]"
               )}
             >
               <span>{cat.name}</span>

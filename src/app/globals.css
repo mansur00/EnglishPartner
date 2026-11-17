@@ -101,6 +101,29 @@ body {
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+
+  /* Sun Colors */
+  --color-sun-700: var(--sun-700);
+  --color-sun-600: var(--sun-600);
+  --color-sun-500: var(--sun-500);
+  --color-sun-400: var(--sun-400);
+  --color-sun-300: var(--sun-300);
+  --color-sun-200: var(--sun-200);
+  --color-sun-100: var(--sun-100);
+
+  /* Brand Violet Colors */
+  --color-brand-950: var(--brand-950);
+  --color-brand-900: var(--brand-900);
+  --color-brand-800: var(--brand-800);
+  --color-brand-700: var(--brand-700);
+  --color-brand-600: var(--brand-600);
+  --color-brand-500: var(--brand-500);
+  --color-brand-400: var(--brand-400);
+  --color-brand-300: var(--brand-300);
+  --color-brand-200: var(--brand-200);
+  --color-brand-100: var(--brand-100);
+  --color-brand-50:  var(--brand-50);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -373,6 +396,19 @@ body {
   --topic-ink:     #E2D0FF;
 }
 
+/* Topic Card & Tile Global Application */
+[data-slot="card"][data-topic],
+.topic-card[data-topic] {
+  background-color: var(--topic-surface);
+  border-color: var(--topic-border);
+}
+
+.emoji-tile {
+  background-color: var(--topic-tile);
+  border: 1px solid var(--topic-border);
+  color: var(--topic-ink);
+}
+
 /* FROZEN: approved by owner. Do not modify. */
 @property --angle {
   syntax: "<angle>";
@@ -446,6 +482,12 @@ body {
 }
 
 @layer base {
+  *, ::after, ::before {
+    border-color: var(--border);
+  }
+  hr, .border-separator {
+    border-color: var(--border);
+  }
   * {
     @apply border-border outline-ring/50;
   }

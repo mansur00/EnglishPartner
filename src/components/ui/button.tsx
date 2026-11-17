@@ -7,7 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        cta: "bg-[var(--sun-500)] text-[var(--brand-950)] hover:bg-[var(--sun-400)] active:bg-[var(--sun-600)] shadow-sm font-bold",
+        cta: "bg-sun-500 text-brand-950 hover:bg-sun-400 active:bg-sun-600 shadow-sm font-bold",
         default: "bg-primary text-primary-foreground hover:bg-[var(--brand-900)] active:bg-[var(--brand-950)] shadow-xs font-semibold",
         primary: "bg-primary text-primary-foreground hover:bg-[var(--brand-900)] active:bg-[var(--brand-950)] shadow-xs font-semibold",
         accent:

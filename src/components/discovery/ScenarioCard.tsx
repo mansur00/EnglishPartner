@@ -31,14 +31,14 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
   return (
     <Card
       data-topic={theme.topic}
-      className="card-hover flex flex-col justify-between border-border bg-card p-6 md:p-7 shadow-xs group"
+      className="card-hover flex flex-col justify-between p-6 md:p-7 shadow-xs group"
     >
       <div className="space-y-4">
         {/* Header: Category Icon Tile + Tags */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border border-[var(--topic-border)] bg-[var(--topic-tile)] text-[var(--topic-ink)] shadow-2xs"
+              className="w-12 h-12 rounded-2xl emoji-tile flex items-center justify-center text-xl shrink-0 shadow-2xs"
               title={theme.name}
             >
               {theme.emoji}
