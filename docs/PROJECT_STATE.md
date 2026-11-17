@@ -126,7 +126,10 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `98485fe` | Items 1-8 of Section 5: Rainbow border zero-diff proof & `check:frozen`, zero arbitrary hex & `lint:ui` extended, 1280px pixel alignment verified, font weight capped at 600 across all files & fonts, 16px/12px radius scale applied, fixed desktop sidebar (top 64px before/after scroll), single combined "Today" panel (streak + 7 markers + 10-segment minute bar, ring removed), Design System v2 applied to reader, practice, and vocabulary |
 | `2e8d5ad` | Phase 1E: Landing page implemented (violet hero band, max 40px display headline, yellow Start Learning CTA, disabled Soon nav items, 16px topic feature cards, mobile-responsive) |
 | `a169f87` | No Hard-Code Stage 1 + Layout Invariants: Tokens & @utility, UI primitives migrated, shared components created, header displacement fixed, 233 layout invariants passing |
-| pending | Phase 2 Checkpoint 1 (Foundation): Taxonomy registry (130 categories across 5 layers), bilingual labels/rule cards, author lists, grammar tokens & CSS, palette validator (WCAG 4.5:1+), spaCy annotator + 150 gold benchmark suite (100% tenses/voice/POS/patterns), sample JSON for 3 conversations |
+| `588c1c2` | Phase 2 Checkpoint 1 (Foundation): Taxonomy registry (130 categories across 5 layers), bilingual labels/rule cards, author lists, grammar tokens & CSS, palette validator (WCAG 4.5:1+), spaCy annotator + 150 gold benchmark suite (100% tenses/voice/POS/patterns), sample JSON for 3 conversations |
+| `f58aa20` | Audit fix AUD-KI-14: add enter, exit, and emphasized motion easing tokens per MOTION §3.2 |
+| `f83a1b2` | Audit fix AUD-KI-11: convert landing page to static Server Component for SEO per Framework §5 |
+| `3b8d57d` | Audit fix AUD-KI-06: dynamically compute scenario dialogue translation coverage percentage |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -144,9 +147,10 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 8. **[DONE] (commit 98485fe) Apply Design System v2 to remaining pages:** conversation reader (dialogue 18px+, Bangla line-height 1.75), practice (radio cards, semantic tokens), vocabulary (16px cards, 12px panels/controls, 40-44px pill chips).
 9. **[DONE] (commit 2e8d5ad) Phase 1E:** landing page (simple hero + "Start Learning" CTA; disabled "Soon" nav items; 16px topic preview cards).
 10. **[DONE] (commit a169f87) No Hard-Code Migration Stage 1 (Steps 0-3):** Baseline captured, tokens/utilities added, UI primitives migrated, shared components built, Dashboard migrated, header displacement fixed, 233 layout invariants passing.
-11. **[DONE] Phase 2 Checkpoint 1 (Foundation):** Taxonomy registry (130 categories), draft labels/rules in EN/BN, author data lists, `grammar-tokens.css`, `grammar.css`, `npm run grammar:palette`, swatch sheet screenshots, spaCy `en_core_web_sm` + deterministic rule engine in `annotate.py`, 150-sentence gold benchmark suite (100% tenses, 100% voice, 100% POS, 100% patterns), and committed sample annotations for 3 real conversations.
-12. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
-13. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+11. **[DONE] (commit 588c1c2) Phase 2 Checkpoint 1 (Foundation):** Taxonomy registry (130 categories), draft labels/rules in EN/BN, author data lists, `grammar-tokens.css`, `grammar.css`, `npm run grammar:palette`, swatch sheet screenshots, spaCy `en_core_web_sm` + deterministic rule engine in `annotate.py`, 150-sentence gold benchmark suite (100% tenses, 100% voice, 100% POS, 100% patterns), and committed sample annotations for 3 real conversations.
+12. **[DONE] (commits f58aa20, f83a1b2, 3b8d57d) Full Project Audit & Conflict Resolution:** Complete audit against approved plans/specs across stack, schema, tokens, components, content, audio. Resolved 3 conflict bugs (KI-14 easing tokens, KI-11 landing Server Component, KI-06 dynamic admin coverage). Recorded all findings in `docs/AUDIT_REPORT.md`.
+13. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
+14. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -175,6 +179,25 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-18, Full Project Audit & Conflict Resolution Completed
+- Requested by owner: Perform complete project audit against approved plan and docs (stack, schema, tokens, components, content, audio), find conflicts, fix conflicts with clear answers (Phase C), list open items under "Needs owner", stop, and report in `docs/AUDIT_REPORT.md`.
+- Changed:
+  - `docs/AUDIT_REPORT.md`: Comprehensive audit report detailing snapshot, 17 known issue evaluations, 3 fixes, 5 ruled out, 6 planned for later milestones, and 3 items needing owner guidance.
+  - `src/styles/design-tokens.css`: Added `--ecp-ease-enter`, `--ecp-ease-exit`, and `--ecp-ease-emphasized` per `MOTION.md` §3.2 (commit `f58aa20`).
+  - `src/app/page.tsx`: Converted landing page to static Server Component (`○ /`) by removing `"use client"` per Framework §5 for optimal SEO & TTFB (commit `f83a1b2`).
+  - `src/components/admin/AdminDashboardClient.tsx`: Dynamically compute scenario dialogue translation coverage percentage instead of hardcoding static string (commit `3b8d57d`).
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 errors).
+  - `npx tsc --noEmit`: Passed (0 errors).
+  - `npm test`: Passed (8/8 test suites).
+  - `npm run test:layout`: Passed (all 233 layout assertions across 7 routes, 2 viewports, 2 themes, and scroll states).
+  - `npm run build`: Passed (80/80 static pages compiled in 784ms).
+  - spaCy Gold Test Set: Passed (100% tenses, 100% voice, 100% POS, 100% patterns, 95% roles).
+- Commit: `3b8d57d` and audit report commit.
+- Open questions / follow-ups: Awaiting owner review on KI-01 (dialogue line rebalancing), D-LLM provider, and data retention policy.
 
 ### 2026-11-17, Phase 2 Checkpoint 1: Grammar Color-Coding Foundation Completed
 - Requested by owner: Execute Checkpoint 1 of `EnglishPartner_Grammar_ColorCoding_Spec.md` and STOP with the report described in section 12. Keep everything data-driven: taxonomy registry, labels, rule cards, tokens, sources registry. Nothing hard-coded in components. Keep `.rainbow-border` untouched.
