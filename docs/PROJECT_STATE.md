@@ -107,6 +107,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `ed8ecf0` | Computed-style fixes: yellow CTA variant, topic-tinted cards and tiles, 1px borders, 12px font floor, full-width band, dialogue preview bubbles |
 | `e634630` | Heading scale (H1 33.6px/26px, hero title 29.44px one line), 28px weekday circles, container alignment, 24px hero overlap, chip uses topic tile |
 | `98485fe` | Items 1-8 of Section 5: Rainbow border zero-diff proof & `check:frozen`, zero arbitrary hex & `lint:ui` extended, 1280px pixel alignment verified, font weight capped at 600 across all files & fonts, 16px/12px radius scale applied, fixed desktop sidebar (top 64px before/after scroll), single combined "Today" panel (streak + 7 markers + 10-segment minute bar, ring removed), Design System v2 applied to reader, practice, and vocabulary |
+| `2e8d5ad` | Phase 1E: Landing page implemented (violet hero band, max 40px display headline, yellow Start Learning CTA, disabled Soon nav items, 16px topic feature cards, mobile-responsive) |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -122,10 +123,8 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 6. **[DONE] (commit 98485fe) Fixed sidebar (section 3.4):** header sticky at top-0 (z-40), desktop sidebar sticky at top-16 (`top: 64px`) before scroll and after 1200px scroll (`fixedVerified: true`).
 7. **[DONE] (commit 98485fe) "Today" widget redesign (section 3.5):** single combined panel (streak 28px weight 600, 7 markers 28px, 10-segment minute bar 8px tall 3px gaps, microcopy, ring removed).
 8. **[DONE] (commit 98485fe) Apply Design System v2 to remaining pages:** conversation reader (dialogue 18px+, Bangla line-height 1.75), practice (radio cards, semantic tokens), vocabulary (16px cards, 12px panels/controls, 40-44px pill chips).
-9. **[BLOCKED until owner approval] Phase 1E:** landing page (simple hero + "Start Learning" CTA; content from owner later).
-10. **[BLOCKED until owner approval] Phase 2:** grammar color-coding (see section 6).
-
-The agent must stop and report after item 8. Do not start 9 or 10 without approval.
+9. **[DONE] (commit 2e8d5ad) Phase 1E:** landing page (simple hero + "Start Learning" CTA; disabled "Soon" nav items; 16px topic preview cards).
+10. **[PENDING] Phase 2:** grammar color-coding (see section 6).
 
 ---
 
@@ -154,6 +153,24 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-17, Phase 1E Landing Page Implementation
+- Requested by owner: "next" -> execute Phase 1E (landing page with simple hero and "Start Learning" CTA, keeping "Soon" nav items properly disabled).
+- Changed:
+  - `src/app/page.tsx`: redesigned landing page with deep violet curved hero band, 40px display title, sun-yellow 52px CTA button, disabled "Soon" nav links with badges, 16px pastel topic preview cards, and minimalist footer.
+  - `scripts/verify-landing-page.mjs`: added automated Chrome inspection script for landing page.
+- Verified with:
+  - `scripts/verify-landing-page.mjs`:
+    - H1 size: `40px` (capped display size), weight: `600`, line-height: `50px`.
+    - Hero CTA: `bg: rgb(255, 217, 61)` (`--sun-500`), `color: rgb(42, 15, 68)` (`--brand-950`), `height: 52px`, `radius: 12px`, `weight: 600`, `fontSize: 18px`.
+    - Disabled buttons: `disabled: true`, `ariaDisabled: "true"`, `cursor: "not-allowed"`.
+    - Card radius: `16px`.
+    - Font audit: min font size `12px` (0 under 12px), max font weight `600` (0 over 600).
+  - `npm run check:frozen` -> Passed (0 diff).
+  - `npm run lint:ui` -> Passed (0 arbitrary hex, 0 font-bold, 0 under 12px).
+  - `npm run lint` & `npx tsc --noEmit` & `npm run test` & `npm run build` -> all passed with 0 errors.
+- Commit: `2e8d5ad`
+- Open questions / follow-ups: Ready to proceed to Phase 2 (Grammar color-coding feature).
 
 ### 2026-11-17, Design System v2 Owner Rules Implementation (Items 1-8)
 - Requested by owner: execute section 5 of PROJECT_STATE.md (items 1 through 8 in order), enforce weight cap 600, smaller radius scale, fixed desktop sidebar, redesign Today widget, provide proof and computed values, stop after item 8.
