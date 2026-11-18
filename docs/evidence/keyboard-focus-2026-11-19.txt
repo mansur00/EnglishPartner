@@ -1,0 +1,12 @@
+▶ KI-12 E2E: Keyboard focus navigation and accessibility in Conversation Reader
+  ✔ 1. Reader loads and interactive elements are focusable via keyboard Tab (1031.421291ms)
+  ✔ 2. WordDetailPopover: opens on word selection, closes on Escape, and returns focus (1729.356083ms)
+✔ KI-12 E2E: Keyboard focus navigation and accessibility in Conversation Reader (4517.543958ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4604.231208
