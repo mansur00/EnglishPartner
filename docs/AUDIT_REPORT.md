@@ -230,11 +230,18 @@ All verification commands executed cleanly on `main` (`4506917`):
    $ npm run lint:ui
    ✓ UI audit passed: strictly conforms to minimum font-size floor (12px), max font-weight 600, no arbitrary hex colors.
    ```
-3. **Layout Invariants Suite (All 233 Assertions Passing):**
+3. **Layout Invariants Suite (All 233 Assertions Passing, Exit Code 0):**
    ```bash
    $ npm run test:layout
+   # Exit code: 0
+   # Saved to: docs/evidence/layout-2026-11-19.txt
+   ======================================================
+          RUNNING LAYOUT INVARIANTS AUDIT SUITE          
+   ======================================================
+
    Testing dynamic mutation: --header-h -> 96px...
    Executed 233 assertions across 7 routes, 2 viewports, 2 themes, and 2 scroll states.
+
    ✅ ALL 233 LAYOUT INVARIANTS PASSED STRICTLY.
    ```
 4. **TypeScript & Test Suite (26/26 Tests Passing):**
