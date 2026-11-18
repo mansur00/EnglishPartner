@@ -45,9 +45,9 @@ body {
 }
 
 @theme inline {
-  --font-heading: var(--font-heading), var(--font-sans), sans-serif;
+  --font-heading: var(--font-sans), sans-serif;
   --font-sans: var(--font-sans), sans-serif;
-  --font-bangla: var(--font-bangla), sans-serif;
+  --font-bangla: var(--font-bangla), var(--font-bangla-fallback), sans-serif;
 
   /* Typography Scale (Section 2.3) */
   --text-xs: 0.75rem;

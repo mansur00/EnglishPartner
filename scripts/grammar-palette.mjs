@@ -327,7 +327,7 @@ async function main() {
   <meta charset="utf-8">
   <title>Grammar Color Palette Swatch Sheet</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Inter:wght@400;500;600&family=Hind+Siliguri:wght@500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Hind+Siliguri:wght@500;600&display=swap');
     
     :root {
       ${Object.entries(tokens.light).map(([k, v]) => `--${k}: ${v};`).join("\n")}
@@ -356,7 +356,7 @@ async function main() {
     }
 
     h1 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 26px;
       font-weight: 600;
       margin-bottom: 8px;
@@ -370,7 +370,7 @@ async function main() {
     }
 
     .section-title {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 18px;
       font-weight: 600;
       margin-top: 28px;

@@ -62,7 +62,7 @@ Optional: add a short root `AGENTS.md` saying "Read docs/PROJECT_STATE.md first 
 - **NEW (owner, this session): maximum font weight is 600 (semibold). No bold anywhere.** Allowed weights: 400, 500, 600.
   - Replace every `font-bold`, `font-extrabold`, `font-black`, `font-[700+]`, inline `font-weight: 700/800/900`.
   - Base CSS: `b, strong, th, h1, h2, h3, h4, h5, h6 { font-weight: 600; }` (headings never above 600).
-  - Load only 400/500/600 for Poppins, Inter, Hind Siliguri (drop 700 from `next/font` config).
+  - Load only 400/500/600 for Inter, Hind Siliguri, Noto Sans Bengali (unapproved fonts removed per D-02).
   - Buttons: 600 (the 52px CTA included; this supersedes the earlier "700").
   - Extend `lint:ui` to fail on `font-bold|font-extrabold|font-black|font-\[[7-9]00\]` and inline weights of 700 or more.
 - Sizes (unchanged): H1 `clamp(1.625rem, 1.3rem + 1vw, 2.125rem)` (26-34px), hero title `clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem)`, H3 20px, body 16px, secondary min 14px, **floor 12px** (badges, chips, nav labels, weekday letters only), learning text 18px+ at line-height 1.7, Bangla (Hind Siliguri) line-height 1.75. Letter-spacing -0.01em for headings.
@@ -339,7 +339,7 @@ Entry format:
 - Requested by owner: execute section 5 of PROJECT_STATE.md (items 1 through 8 in order), enforce weight cap 600, smaller radius scale, fixed desktop sidebar, redesign Today widget, provide proof and computed values, stop after item 8.
 - Changed:
   - `src/app/globals.css`: added semantic `--color-sun-*` and `--color-brand-*` tokens, base `font-weight: 600` for b/strong/headings, global `border-color: var(--border)`, zero diff in frozen `.rainbow-border` block.
-  - `src/app/layout.tsx`: removed weight 700 from font loaders (Poppins, Hind Siliguri).
+  - `src/app/layout.tsx`: removed weight 700 from font loaders (Hind Siliguri, Inter); unapproved fonts removed per D-02.
   - `scripts/check-frozen.sh`: snapshot verification script for `.rainbow-border` block.
   - `scripts/check-ui-sizes.sh`: extended with automated checks for arbitrary hex `[#hex]`, `font-bold|extrabold|black`, and inline `fontWeight >= 700`.
   - `src/components/ui/card.tsx`, `button.tsx`, `input.tsx`, `select.tsx`: radius scale updated (cards 16px, controls/nested panels 12px, badges/chips pill).

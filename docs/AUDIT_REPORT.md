@@ -53,7 +53,7 @@
 | **AUD-009** | Low | Database (B4) | DB Arch §5-9 | Advanced learner SRS tables (`review_events`, `daily_challenges`, `content_audit_logs`) not in schema | `src/lib/db/schema.ts` | **Not Built Yet** | Milestone 2 |
 | **AUD-010** | Low | Audio (B8) | Audio §5.2 | Line highlight seeking from audio timing manifest is drafted in schema but not wired in UI player | `src/components/learning/AudioPlayer.tsx` | **Not Built Yet** | Milestone 1C+ |
 | **AUD-011** | Info | Architecture (B1) | Register D-04 | Tailwind adapter verification: exactly one `@theme` adapter present | `src/styles/tailwind-theme-v4.css` | **Ruled Out (PASS)** | — |
-| **AUD-012** | Info | Architecture (B1) | Register D-02 | Font loading verification: Inter, Hind Siliguri, Poppins loaded at max 600 weight; no Literata/Figtree | `src/app/layout.tsx:7-26` | **Ruled Out (PASS)** | — |
+| **AUD-012** | Info | Architecture (B1) | Register D-02 | Font loading verification: Inter, Hind Siliguri, Noto Sans Bengali loaded at max 600 weight; unapproved font removed | `src/app/layout.tsx:7-26` | **Fixed** | AUD-D-02 |
 | **AUD-013** | Info | Architecture (B3) | Register D-13 | Component naming check: all retired names absent, modern names used | `src/components/learning/` | **Ruled Out (PASS)** | — |
 | **AUD-014** | Info | Architecture (B8) | Register A-11 | Gemini code isolation check: 0 imports in `src/`, provider restricted to offline scripts | `grep -rn "gemini" src/` (0 matches) | **Ruled Out (PASS)** | — |
 | **AUD-015** | Info | A11y (B11) | Framework §6 | GrammarPanel focus trap & return verified via Base UI / shadcn Dialog primitive | `src/components/learning/GrammarPanel.tsx` | **Ruled Out (PASS)** | — |
@@ -80,7 +80,7 @@
 | **KI-14** | **Fixed** | Added `--ecp-ease-enter: cubic-bezier(0.16, 1, 0.3, 1)`, `--ecp-ease-exit: cubic-bezier(0.4, 0, 1, 1)`, and `--ecp-ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1)` to `src/styles/design-tokens.css` per MOTION §3.2 (commit `f58aa20`). |
 | **KI-15** | **Ruled Out** | Dark theme tokens defined in `src/app/globals.css` and `src/styles/grammar-tokens.css` strictly match WCAG 4.5:1+ contrast criteria. |
 | **KI-16** | **Ruled Out** | Exactly one Tailwind adapter is active: Tailwind v4 `@theme` via `src/styles/tailwind-theme-v4.css`. Zero occurrences of v3 `theme.extend`. |
-| **KI-17** | **Ruled Out** | `src/app/layout.tsx` loads Inter, Hind Siliguri, and Poppins with weights capped at 600. Literata and Figtree are absent. |
+| **KI-17** | **Fixed** | `src/app/layout.tsx` loads Inter, Hind Siliguri, and Noto Sans Bengali with weights capped at 600. Unapproved font removed per D-02. |
 
 ---
 
