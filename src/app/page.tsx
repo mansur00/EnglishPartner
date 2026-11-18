@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PlayCircleIcon,
@@ -28,7 +29,7 @@ export default function LandingPage() {
             </div>
             <div>
               <span className="font-semibold text-base font-heading text-foreground tracking-tight leading-none block">
-                EnglishPartner
+                {t("header.title")}
               </span>
               <span className="text-xs text-muted-foreground font-bangla leading-none block mt-0.5">
                 কথোপকথনে ইংরেজি শিখুন
@@ -42,7 +43,7 @@ export default function LandingPage() {
               href="/explore"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              Conversations
+              {t("nav.explore")}
             </Link>
 
             {/* Soon Nav Items (properly disabled per spec) */}

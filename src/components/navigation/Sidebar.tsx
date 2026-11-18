@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import type { IconSvgElement } from "@hugeicons/react";
 import {
@@ -29,13 +30,13 @@ export function Sidebar() {
 
   const navItems: NavItem[] = [
     {
-      name: "Dashboard",
+      name: t("nav.dashboard"),
       href: "/dashboard",
       icon: DashboardSquare01Icon,
       active: pathname === "/dashboard",
     },
     {
-      name: "Explore",
+      name: t("nav.explore"),
       href: "/explore",
       icon: CompassIcon,
       active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
@@ -48,7 +49,7 @@ export function Sidebar() {
       comingSoon: true,
     },
     {
-      name: "Professional English",
+      name: t("nav.professionalEnglish"),
       href: "/explore?category=workplace-business",
       icon: Briefcase01Icon,
       active: false,
@@ -61,7 +62,7 @@ export function Sidebar() {
       comingSoon: true,
     },
     {
-      name: "My Vocabulary",
+      name: t("nav.vocabulary"),
       href: "/vocabulary",
       icon: Bookmark02Icon,
       active: pathname === "/vocabulary",
@@ -74,7 +75,7 @@ export function Sidebar() {
       comingSoon: true,
     },
     {
-      name: "Settings",
+      name: t("nav.settings"),
       href: "#",
       icon: Settings01Icon,
       active: false,
@@ -86,7 +87,7 @@ export function Sidebar() {
     <aside className="hidden md:flex w-sidebar flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 sticky top-header h-below-header overflow-y-auto z-sidebar">
       <div className="space-y-1.5">
         <span className="px-3 text-chip font-semibold uppercase tracking-wider text-muted-foreground">
-          Navigation
+          {t("nav.menu")}
         </span>
         <nav className="space-y-1 pt-1.5" aria-label="Main navigation">
           {navItems.map((item) => {
@@ -103,7 +104,7 @@ export function Sidebar() {
                     <span>{item.name}</span>
                   </div>
                   <span className="text-chip font-semibold bg-muted text-muted-foreground px-2 py-0.5 rounded-pill border border-border">
-                    Soon
+                    {t("landing.soon")}
                   </span>
                 </div>
               );

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FireIcon } from "@hugeicons/core-free-icons";
 
@@ -36,7 +37,7 @@ export function TodayPanel({
           <HugeiconsIcon icon={FireIcon} size={20} className="text-sun-500 shrink-0" />
           <div className="flex items-baseline gap-1.5">
             <span className="text-stat text-white">{streak}</span>
-            <span className="text-meta text-white/90">day streak</span>
+            <span className="text-meta text-white/90">{t("dashboard.dayStreak")}</span>
           </div>
         </div>
 
@@ -73,7 +74,7 @@ export function TodayPanel({
             {minutesCompleted} / {minutesGoal} min
           </span>
           <span className="text-meta text-white/80">
-            {remainingMinutes === 0 ? "Goal reached! 🎉" : `${remainingMinutes} min to go`}
+            {remainingMinutes === 0 ? t("dashboard.goalReached") : `${remainingMinutes} ${t("dashboard.minutesToGo")}`}
           </span>
         </div>
         {/* 10-Segment Minute Bar */}

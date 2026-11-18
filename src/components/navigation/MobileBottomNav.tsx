@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   DashboardSquare01Icon,
@@ -16,25 +17,25 @@ export function MobileBottomNav() {
 
   const navItems = [
     {
-      name: "Dashboard",
+      name: t("nav.dashboard"),
       href: "/dashboard",
       icon: DashboardSquare01Icon,
       active: pathname === "/dashboard",
     },
     {
-      name: "Explore",
+      name: t("nav.explore"),
       href: "/explore",
       icon: CompassIcon,
       active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
     },
     {
-      name: "Vocabulary",
+      name: t("nav.vocabulary"),
       href: "/vocabulary",
       icon: Bookmark02Icon,
       active: pathname === "/vocabulary",
     },
     {
-      name: "Profile",
+      name: t("auth.profile"),
       href: "/dashboard",
       icon: UserIcon,
       active: false,
