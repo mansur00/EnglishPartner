@@ -143,6 +143,16 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `fc5a752` | AUD-ICON: icon set matches style guide or is recorded as owner decision |
 | `9f74cc5` | AUD-A11: no Gemini in product code; scripts use approved model |
 | `cb05b69` | AUD-VERIFY: evidence for KI-07, KI-09, KI-12, KI-16 |
+| `28794fd` | AUD-A11: gemini provider gated on signed scope |
+| `40bc7f9` | AUD-ICON: record as owner decision, not confirmed |
+| `538cc6b` | AUD-LAYOUT: layout test evidence saved |
+| `2dea356` | AUD-KI-09: mark blocked pending clean test database |
+| `4b8f283` | AUD-KI-05: remaining hardcoded strings moved or justified |
+| `eefb447` | AUD-KI-02: bookmark persistence proven by integration test |
+| `d54d331` | AUD-D-02: historical docs restored with dated note |
+| `7372011` | AUD-MIGRATE: migration apply status recorded |
+| `4506917` | AUD-KI-12: record focus test blocked pending runner |
+| `9e2d018` | AUD-RECONCILE: summary matches table and git log |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -163,8 +173,9 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 11. **[DONE] (commit 588c1c2) Phase 2 Checkpoint 1 (Foundation):** Taxonomy registry (130 categories), draft labels/rules in EN/BN, author data lists, `grammar-tokens.css`, `grammar.css`, `npm run grammar:palette`, swatch sheet screenshots, spaCy `en_core_web_sm` + deterministic rule engine in `annotate.py`, 150-sentence gold benchmark suite (100% tenses, 100% voice, 100% POS, 100% patterns), and committed sample annotations for 3 real conversations.
 12. **[DONE] (commits f58aa20, f83a1b2, 3b8d57d) Full Project Audit & Conflict Resolution:** Complete audit against approved plans/specs across stack, schema, tokens, components, content, audio. Resolved 3 conflict bugs (KI-14 easing tokens, KI-11 landing Server Component, KI-06 dynamic admin coverage). Recorded all findings in `docs/AUDIT_REPORT.md`.
 13. **[DONE] (commits 0c6d6fd..cb05b69) Audit Report Findings Remediation (13 Items):** Executed all 13 fixes in dedicated commits: exact ladder counts, bookmark DB endpoint, Supabase Auth callback & session middleware, header session state, messages i18n dictionary with 100% key parity, dynamic language coverage, draft seed translations with learner notice, Poppins removed (Inter + Hind Siliguri + Noto Sans Bengali per D-02), 9 approved practice modes in schema & migration, privacy retention aligned with spec §4.1 (no server-side audio retention, P-3 recorded as owner decision), Style Guide §11 icon verification, zero Gemini in product code (`gemini-3.8-flash-tts` in offline configs), and full verification evidence for KI-07/09/12/16.
-14. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
-15. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+14. **[DONE] (commits 28794fd..9e2d018) Audit Report Correction Round (10 Items):** Gated Gemini offline provider on unsigned A-11 scope in `_pending_a11`, recorded AUD-ICON as owner decision in `docs/DECISIONS.md`, saved layout test evidence (233 assertions), marked KI-09 blocked pending clean test DB, audited hardcoded strings and added 30 keys to messages (98/98 keys, 100% parity), added integration test for KI-02 bookmark spoofing protection, restored historical docs mentions of Poppins with dated non-current note (AUD-D-02), recorded database migration apply status (AUD-MIGRATE), authored headless browser E2E test and marked KI-12 blocked pending Playwright runner, and reconciled AUDIT_REPORT summary, tables, and git log (AUD-RECONCILE).
+15. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
+16. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -193,6 +204,47 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-18, Audit Report 10 Correction Review Tasks Remediated in Dedicated Commits
+- Requested by owner: Fix 10 problems found in the review of `docs/AUDIT_REPORT.md` and `docs/PROJECT_STATE.md`. Evidence before PASS, do not rewrite history (use dated notes), small commits with finding IDs, and stop after completing all items.
+- Changed:
+  - `AUD-A11` (`28794fd`): Verified A-11 is an unsigned proposal in `ECP_Decisions_Register.md`. Gated `gemini_provider.py` and `voices.json` into `scripts/audio/_pending_a11/` with a README stating they await owner signature. Updated `tests/gemini-isolation.test.mjs`. Confirmed 0 imports of Gemini in `src/`.
+  - `AUD-ICON` (`40bc7f9`): Updated `docs/DECISIONS.md` to record Style Guide §11 iconography as "Needs owner: Style Guide §11 requires one outline icon family but does not name one. Current package: Hugeicons Outlined (in use, not confirmed)." Kept under "Needs owner" in `docs/AUDIT_REPORT.md`.
+  - `AUD-LAYOUT` (`538cc6b`): Saved full passing layout invariants test output (233 assertions across 7 routes, 2 viewports, 2 themes, and scroll states) to `docs/evidence/layout-test-2026-11-18.txt`.
+  - `AUD-KI-09` (`2dea356`): Marked KI-09 as Blocked: no clean test database available on host. Documented operator commands in `docs/AUDIT_REPORT.md`.
+  - `AUD-KI-05` (`4b8f283`): Audited all strings in `src/`. Migrated 30 user-facing UI strings across Navigation, Discovery, and Learning to `messages/en.json` and `messages/bn.json` (now 98/98 keys, 100% parity verified in `tests/i18n-coverage.test.mjs`). Documented justifications for 73 remaining technical/admin strings in `docs/evidence/hardcoded-strings-justification.md`.
+  - `AUD-KI-02` (`eefb447`): Added integration test in `tests/bookmarks-api.test.mjs` verifying that `POST /api/v1/me/bookmarks` ignores body `user_id` / `userId` spoofing and strictly persists rows under the authenticated session `user_id`.
+  - `AUD-D-02` (`d54d331`): Restored historical Poppins mentions in `docs/EnglishPartner_NoHardCode_Migration.md` and root `EnglishPartner_Design_System_v2.md` with dated non-current note at top. Created `scripts/check-poppins.mjs` and `tests/poppins-d02.test.mjs` ensuring 0 Poppins in code directories (`src/`, `public/`).
+  - `AUD-MIGRATE` (`7372011`): Recorded migration apply status in `docs/AUDIT_REPORT.md` and `docs/DECISIONS.md`: not applied to local database (no local DB); remote staging/production status unknown; recorded operator verification command.
+  - `AUD-KI-12` (`4506917`): Authored headless browser E2E test in `tests/e2e/keyboard-focus.spec.mjs` running against live Next.js app to verify Tab navigation, focus visible rings, and Escape dismissal. Marked KI-12 as Blocked: no browser test runner in CI dependencies pending owner approval to install Playwright.
+  - `AUD-RECONCILE` (`9e2d018`): Reconciled summary counts, master findings table, known issues table, and git log in `docs/AUDIT_REPORT.md`. All counts match: 4 PASS + 13 Fixed + 2 Blocked + 3 Not Built Yet + 2 Needs Owner = 24 evaluated items.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; token linter clean).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (26/26 tests passing).
+  - `npm run test:layout`: Passed (all 233 layout assertions passing).
+  - `npm run build`: Passed (83/83 static pages compiled).
+  - `node scripts/check-poppins.mjs`: Passed (0 Poppins in code directories).
+  - `npm run check:ladder`: Passed (all 20 ladder steps match exact counts).
+  - Gemini isolation check: Passed (0 matches in `src/`).
+- Commits:
+  - `28794fd` AUD-A11: gemini provider gated on signed scope
+  - `40bc7f9` AUD-ICON: record as owner decision, not confirmed
+  - `538cc6b` AUD-LAYOUT: layout test evidence saved
+  - `2dea356` AUD-KI-09: mark blocked pending clean test database
+  - `4b8f283` AUD-KI-05: remaining hardcoded strings moved or justified
+  - `eefb447` AUD-KI-02: bookmark persistence proven by integration test
+  - `d54d331` AUD-D-02: historical docs restored with dated note
+  - `7372011` AUD-MIGRATE: migration apply status recorded
+  - `4506917` AUD-KI-12: record focus test blocked pending runner
+  - `9e2d018` AUD-RECONCILE: summary matches table and git log
+- Open questions / follow-ups:
+  - Gate 2 LLM selection (Gemini API vs Anthropic/OpenAI for Phase 2 dynamic conversation practice).
+  - P-1/P-3 Jurisdiction confirmation (confirm starting retention rules from Privacy spec §4.1).
+  - Style Guide §11 Iconography confirmation (confirm Hugeicons Outlined as standard).
+  - Database Migration Apply Status verification on remote environments.
 
 ### 2026-11-18, Audit Report 13 Findings Remediated in Dedicated Commits
 - Requested by owner: Fix 13 findings from `docs/AUDIT_REPORT.md` in small, individual commits (one per fix with finding ID). Run lint, typecheck, tests, and build after each. Stop after all 13 items and write the report without starting next milestone.
