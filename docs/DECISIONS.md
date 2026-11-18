@@ -48,6 +48,19 @@
 - **Learner voice recordings:** Stored on learner's **device only** (IndexedDB per Privacy spec §2). Never uploaded or retained on the server by default.
 - **Server retention schedules (per Privacy spec §4.1):**
   - Roleplay transcripts: Auto-deleted 90 days after session end.
+  - Practice answer records: Retained 12 months for spaced repetition.
+  - Raw client analytics events: Retained 13 months, then aggregated and dropped.
+  - Technical / server logs: Retained 30 days.
+
+### M-01 — Database Migrations Apply Status
+- **Migrations:** `0000_round_puck.sql` (initial schema) and `0001_strange_gauntlet.sql` (practice mode enum update).
+- **Local environment:** Not applied to local database (no local database present).
+- **Staging / Production environments:** Unknown: cannot access remote environments from this sandbox.
+- **Operator verification command:**
+  ```bash
+  psql "$DATABASE_URL" -c "SELECT * FROM \"drizzle\".\"__drizzle_migrations\";"
+  ```
+- **Action:** Required operational step by owner prior to launch.
   - Practice answers: Auto-deleted 12 months after last activity.
   - Review events: Aggregated after 12 months (drop per-user rows).
   - Technical logs: 30 days.
