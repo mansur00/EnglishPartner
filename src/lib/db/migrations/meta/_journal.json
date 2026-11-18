@@ -8,6 +8,13 @@
       "when": 1795000691944,
       "tag": "0000_round_puck",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795002425125,
+      "tag": "0001_strange_gauntlet",
+      "breakpoints": true
     }
   ]
 }

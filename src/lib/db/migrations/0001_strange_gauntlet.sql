@@ -1,0 +1,2 @@
+ALTER TABLE "audio_assets" ADD CONSTRAINT "audio_assets_target_check" CHECK (("audio_assets"."dialogue_line_id" IS NOT NULL AND "audio_assets"."conversation_version_id" IS NULL) OR ("audio_assets"."dialogue_line_id" IS NULL AND "audio_assets"."conversation_version_id" IS NOT NULL));--> statement-breakpoint
+ALTER TABLE "translations" ADD CONSTRAINT "translations_target_check" CHECK (("translations"."scenario_id" IS NOT NULL AND "translations"."dialogue_line_id" IS NULL) OR ("translations"."scenario_id" IS NULL AND "translations"."dialogue_line_id" IS NOT NULL));

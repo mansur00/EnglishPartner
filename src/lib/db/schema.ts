@@ -7,7 +7,9 @@ import {
   uuid,
   jsonb,
   pgEnum,
+  check,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 // --- ENUMS ---
 export const roleEnum = pgEnum("user_role_type", ["admin", "editor", "reviewer", "learner", "translator"]);
@@ -132,19 +134,28 @@ export const dialogueLines = pgTable("dialogue_lines", {
 });
 
 // --- 7. TRANSLATIONS (D-07: Explicit FKs + Stale Detection) ---
-export const translations = pgTable("translations", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  scenarioId: uuid("scenario_id").references(() => scenarios.id, { onDelete: "cascade" }),
-  dialogueLineId: uuid("dialogue_line_id").references(() => dialogueLines.id, { onDelete: "cascade" }),
-  languageCode: text("language_code").references(() => languages.code).notNull(),
-  translatedText: text("translated_text").notNull(),
-  sourceVersion: integer("source_version").notNull().default(1),
-  sourceHash: text("source_hash"),
-  reviewStatus: reviewStatusEnum("review_status").notNull().default("draft"),
-  reviewedBy: uuid("reviewed_by"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+export const translations = pgTable(
+  "translations",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    scenarioId: uuid("scenario_id").references(() => scenarios.id, { onDelete: "cascade" }),
+    dialogueLineId: uuid("dialogue_line_id").references(() => dialogueLines.id, { onDelete: "cascade" }),
+    languageCode: text("language_code").references(() => languages.code).notNull(),
+    translatedText: text("translated_text").notNull(),
+    sourceVersion: integer("source_version").notNull().default(1),
+    sourceHash: text("source_hash"),
+    reviewStatus: reviewStatusEnum("review_status").notNull().default("draft"),
+    reviewedBy: uuid("reviewed_by"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (table) => [
+    check(
+      "translations_target_check",
+      sql`(${table.scenarioId} IS NOT NULL AND ${table.dialogueLineId} IS NULL) OR (${table.scenarioId} IS NULL AND ${table.dialogueLineId} IS NOT NULL)`
+    ),
+  ]
+);
 
 // --- 8. VOCABULARY & GLOSSES ---
 export const vocabulary = pgTable("vocabulary", {
@@ -186,20 +197,29 @@ export const grammarExplanations = pgTable("grammar_explanations", {
 });
 
 // --- 10. AUDIO ASSETS (D-08: Explicit FKs, timing manifest, BCP 47 accents) ---
-export const audioAssets = pgTable("audio_assets", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  dialogueLineId: uuid("dialogue_line_id").references(() => dialogueLines.id, { onDelete: "cascade" }),
-  conversationVersionId: uuid("conversation_version_id").references(() => conversationVersions.id, { onDelete: "cascade" }),
-  languageCode: text("language_code").references(() => languages.code).notNull().default("en"),
-  accent: accentEnum("accent").notNull().default("en-US"),
-  voiceId: text("voice_id").notNull(),
-  audioUrl: text("audio_url").notNull(),
-  durationMs: integer("duration_ms").notNull().default(0),
-  timingManifest: jsonb("timing_manifest"), // Word/turn timestamps for full conversations
-  status: audioStatusEnum("status").notNull().default("ready"),
-  sourceHash: text("source_hash").unique(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+export const audioAssets = pgTable(
+  "audio_assets",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    dialogueLineId: uuid("dialogue_line_id").references(() => dialogueLines.id, { onDelete: "cascade" }),
+    conversationVersionId: uuid("conversation_version_id").references(() => conversationVersions.id, { onDelete: "cascade" }),
+    languageCode: text("language_code").references(() => languages.code).notNull().default("en"),
+    accent: accentEnum("accent").notNull().default("en-US"),
+    voiceId: text("voice_id").notNull(),
+    audioUrl: text("audio_url").notNull(),
+    durationMs: integer("duration_ms").notNull().default(0),
+    timingManifest: jsonb("timing_manifest"), // Word/turn timestamps for full conversations
+    status: audioStatusEnum("status").notNull().default("ready"),
+    sourceHash: text("source_hash").unique(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    check(
+      "audio_assets_target_check",
+      sql`(${table.dialogueLineId} IS NOT NULL AND ${table.conversationVersionId} IS NULL) OR (${table.dialogueLineId} IS NULL AND ${table.conversationVersionId} IS NOT NULL)`
+    ),
+  ]
+);
 
 // --- 11. LEARNER PROGRESS & PERSONAL DATA (A-01, A-02) ---
 export const userProgress = pgTable("user_progress", {

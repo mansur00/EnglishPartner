@@ -120,9 +120,17 @@ export function ConversationTurn({
             return (
               <span
                 key={idx}
+                role={cleanWord ? "button" : undefined}
+                tabIndex={cleanWord ? 0 : undefined}
                 onClick={() => cleanWord && onWordClick?.(cleanWord)}
+                onKeyDown={(e) => {
+                  if (cleanWord && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                    onWordClick?.(cleanWord);
+                  }
+                }}
                 className={cn(
-                  "inline-block mr-1.5 transition-colors rounded px-0.5 cursor-pointer",
+                  "inline-block mr-1.5 transition-colors rounded px-0.5 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   isHighlighted
                     ? "font-semibold text-ecp-violet underline decoration-ecp-warm decoration-2 underline-offset-4 hover:bg-ecp-violet-surface/70"
                     : "hover:bg-ecp-bg-canvas hover:text-ecp-violet"
