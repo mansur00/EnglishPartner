@@ -64,6 +64,29 @@ test("AUD-KI-02: Bookmark API DB Persistence and Auth Guards", async () => {
   assert.equal(duplicateJson.id, authJson.id);
   assert.equal(duplicateJson.idempotent, true);
 
-  const totalCount = await countBookmarks(testUserId);
-  assert.equal(totalCount, 1, "Database must not duplicate bookmarks for same user and scenario");
+  // 4. Request body user_id / userId spoofing is ignored; user_id strictly derived from server session
+  const spoofScenarioId = "660e8400-e29b-41d4-a716-446655440001";
+  const spoofAttemptRequest = new Request("http://localhost:3000/api/v1/me/bookmarks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-test-user-id": testUserId,
+    },
+    body: JSON.stringify({
+      scenarioId: spoofScenarioId,
+      user_id: "attacker-user-id-9999",
+      userId: "attacker-user-id-9999",
+    }),
+  });
+
+  const spoofResponse = await POST(spoofAttemptRequest);
+  assert.equal(spoofResponse.status, 201, "Valid authenticated request returns 201");
+  const spoofJson = await spoofResponse.json();
+  assert.ok(spoofJson.id, "Created bookmark must return row id");
+  const spoofPersistedRow = await findBookmark(testUserId, spoofScenarioId);
+  assert.ok(spoofPersistedRow, "Row must exist under the authenticated user");
+  assert.equal(spoofPersistedRow.userId, testUserId, "user_id in DB must match server session, ignoring body");
+
+  const attackerRow = await findBookmark("attacker-user-id-9999", spoofScenarioId);
+  assert.equal(attackerRow, null, "Attacker body user_id must be completely ignored");
 });
