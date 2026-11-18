@@ -54,6 +54,11 @@
   - Raw analytics: 13 months, then aggregate.
 - The 30-day learner audio retention proposal was rejected as contrary to spec; no server audio retention exists in code.
 
+### Icon Library Verification (Style Guide §11)
+- **Needs owner: icon set not specified in Style Guide §11.**
+- Style Guide §11 specifies principles ("Use one consistent outline icon family throughout the product", consistent stroke width and optical size, no filled 3D icons), but does not name a specific package/library.
+- Hugeicons Outlined (`@hugeicons/react`, `@hugeicons/core-free-icons`) is currently used uniformly across all components and satisfies the outline family requirement. Retained pending owner confirmation.
+
 ---
 
 ## 3. Free-Tier Cost & Services Limits (Task 0.12)
