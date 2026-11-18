@@ -1,0 +1,28 @@
+{
+  "config_version": 2,
+  "approved_tts_model": "gemini-3.8-flash-tts",
+  "voices": [
+    {
+      "voice_key": "gemini:en-US:Kore",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash-tts",
+      "provider_voice_id": "Kore",
+      "language_code": "en",
+      "accent": "en-US",
+      "style_default": "neutral and polite",
+      "status": "candidate",
+      "licence": "CHECK_GEMINI_TERMS_DATE"
+    },
+    {
+      "voice_key": "gemini:en-GB:Puck",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash-tts",
+      "provider_voice_id": "Puck",
+      "language_code": "en",
+      "accent": "en-GB",
+      "style_default": "calm and friendly",
+      "status": "candidate",
+      "licence": "CHECK_GEMINI_TERMS_DATE"
+    }
+  ]
+}
