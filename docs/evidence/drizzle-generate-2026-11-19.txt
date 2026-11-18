@@ -1,0 +1,29 @@
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/Users/mdmansur/Desktop/apk/English learning/english-partner/drizzle.config.ts'
+◇ injected env (3) from .env.local
+23 tables
+audio_assets 12 columns 0 indexes 3 fks
+bookmarks 4 columns 0 indexes 2 fks
+categories 7 columns 0 indexes 0 fks
+conversation_versions 8 columns 0 indexes 1 fks
+dialogue_lines 6 columns 0 indexes 2 fks
+dialogue_vocabulary 5 columns 0 indexes 3 fks
+exercise_items 9 columns 0 indexes 2 fks
+exercises 11 columns 0 indexes 1 fks
+grammar_explanations 10 columns 0 indexes 4 fks
+languages 9 columns 0 indexes 0 fks
+practice_sessions 10 columns 0 indexes 1 fks
+professions 7 columns 0 indexes 0 fks
+scenario_categories 2 columns 0 indexes 2 fks
+scenario_professions 2 columns 0 indexes 2 fks
+scenarios 12 columns 0 indexes 1 fks
+speakers 5 columns 0 indexes 1 fks
+translations 11 columns 0 indexes 3 fks
+user_progress 8 columns 0 indexes 3 fks
+user_roles 5 columns 0 indexes 2 fks
+user_vocabulary 11 columns 0 indexes 2 fks
+users 12 columns 0 indexes 0 fks
+vocabulary 5 columns 0 indexes 0 fks
+vocabulary_glosses 5 columns 0 indexes 2 fks
+
+No schema changes, nothing to migrate 😴
