@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { t } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, PauseIcon, ReloadIcon } from "@hugeicons/core-free-icons";
@@ -144,7 +145,7 @@ export function AudioPlayer({
             variant="ghost"
             size="icon"
             onClick={handleReplay}
-            title="Replay from beginning"
+            title={t("audio.replay")}
             className="rounded-full text-[var(--ecp-text-secondary)]"
           >
             <HugeiconsIcon icon={ReloadIcon} size={16} />
@@ -159,7 +160,7 @@ export function AudioPlayer({
               Playing Line {activeLineIndex + 1} of {lines.length}
             </span>
           ) : (
-            <span>Full Conversation Audio</span>
+            <span>{t("audio.fullConversation")}</span>
           )}
         </div>
 
@@ -170,7 +171,7 @@ export function AudioPlayer({
             type="button"
             onClick={handleSpeedToggle}
             className="px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors"
-            title="Cycle playback speed (0.75x, 1x, 1.25x, 1.5x)"
+            title={t("audio.cycleSpeed")}
           >
             {playbackSpeed}x
           </button>

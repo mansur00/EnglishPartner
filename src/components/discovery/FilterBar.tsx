@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FilterIcon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import {
@@ -36,7 +37,7 @@ export function FilterBar({
     <div className="sticky top-16 z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-card/95 backdrop-blur border border-border shadow-2xs">
       <div className="flex items-center gap-2 text-muted-foreground font-semibold uppercase tracking-wider text-sm mr-1">
         <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
-        <span>Filters:</span>
+        <span>{t("discovery.filters")}</span>
       </div>
 
       {/* Level Filter */}
@@ -45,10 +46,10 @@ export function FilterBar({
         onValueChange={(val) => setLevel((val as string) || "all")}
       >
         <SelectTrigger className="w-[160px] h-11 text-sm bg-card border-border">
-          <SelectValue placeholder="All Levels (CEFR)" />
+          <SelectValue placeholder={t("discovery.allLevels")} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Levels (CEFR)</SelectItem>
+          <SelectItem value="all">{t("discovery.allLevels")}</SelectItem>
           <SelectItem value="A1">A1 • Beginner</SelectItem>
           <SelectItem value="A2">A2 • Elementary</SelectItem>
           <SelectItem value="B1">B1 • Intermediate</SelectItem>
@@ -62,12 +63,12 @@ export function FilterBar({
         onValueChange={(val) => setLengthType((val as string) || "all")}
       >
         <SelectTrigger className="w-[160px] h-11 text-sm bg-card border-border">
-          <SelectValue placeholder="Any Length" />
+          <SelectValue placeholder={t("discovery.anyLength")} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Any Length</SelectItem>
-          <SelectItem value="short">Short (4-6 turns)</SelectItem>
-          <SelectItem value="medium">Medium (7-10 turns)</SelectItem>
+          <SelectItem value="all">{t("discovery.anyLength")}</SelectItem>
+          <SelectItem value="short">{t("discovery.shortLength")}</SelectItem>
+          <SelectItem value="medium">{t("discovery.mediumLength")}</SelectItem>
         </SelectContent>
       </Select>
 
@@ -77,10 +78,10 @@ export function FilterBar({
         onValueChange={(val) => setStyle((val as string) || "all")}
       >
         <SelectTrigger className="w-[170px] h-11 text-sm bg-card border-border">
-          <SelectValue placeholder="Any Register" />
+          <SelectValue placeholder={t("discovery.anyStyle")} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Any Style</SelectItem>
+          <SelectItem value="all">{t("discovery.anyStyle")}</SelectItem>
           <SelectItem value="casual">Casual / Friendly</SelectItem>
           <SelectItem value="neutral">Neutral Everyday</SelectItem>
           <SelectItem value="formal">Formal / Professional</SelectItem>
@@ -96,7 +97,7 @@ export function FilterBar({
           className="btn-press h-11 text-sm gap-1.5 ml-auto px-4"
         >
           <HugeiconsIcon icon={Cancel01Icon} size={16} />
-          <span>Reset Filters</span>
+          <span>{t("discovery.resetFilters")}</span>
         </Button>
       )}
     </div>

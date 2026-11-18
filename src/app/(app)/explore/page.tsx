@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useTransition } from "react";
+import { t } from "@/lib/i18n";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { CategoryPills } from "@/components/discovery/CategoryPills";
 import { FilterBar } from "@/components/discovery/FilterBar";
@@ -119,7 +120,7 @@ export default function ExplorePage() {
                 setSearchQuery(val);
               });
             }}
-            placeholder="Search by topic, keyword, or role (e.g. 'airport', 'এয়ারপোর্ট', 'doctor', 'refund')..."
+            placeholder={t("discovery.searchPlaceholder")}
             className="w-full h-12 pl-12 pr-12 border-0 shadow-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
           />
           {searchQuery && (
@@ -185,7 +186,7 @@ export default function ExplorePage() {
         </div>
       ) : (
         <EmptyState
-          title="No conversations found"
+          title={t("discovery.noConversationsFound")}
           description={`We couldn't find any situation matching "${searchQuery}". Try different keywords in English or বাংলা.`}
           icon={<HugeiconsIcon icon={SearchXIcon} size={28} />}
           action={

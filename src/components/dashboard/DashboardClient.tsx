@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { t } from "@/lib/i18n";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -116,7 +117,7 @@ export function DashboardClient() {
                   <Link href="/conversations/asking-price-product-details">
                     <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-xs gap-2">
                       <HugeiconsIcon icon={PlayCircleIcon} size={20} />
-                      <span>Start Conversation</span>
+                      <span>{t("dashboard.startConversation")}</span>
                     </Button>
                   </Link>
                 </div>
@@ -200,7 +201,7 @@ export function DashboardClient() {
             <div className="pt-5 mt-5 border-t border-border">
               <Link href="/explore">
                 <Button variant="default" size="md" className="btn-press w-full justify-between">
-                  <span>Browse Everyday Library</span>
+                  <span>{t("dashboard.browseEveryday")}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
                 </Button>
               </Link>
@@ -239,7 +240,7 @@ export function DashboardClient() {
             <div className="pt-5 mt-5 border-t border-border">
               <Link href="/explore?category=workplace-business">
                 <Button variant="outline" size="md" className="btn-press w-full justify-between">
-                  <span>Explore Professional Paths</span>
+                  <span>{t("dashboard.exploreProfessional")}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
                 </Button>
               </Link>
@@ -298,7 +299,7 @@ export function DashboardClient() {
               <Link href="/explore" className="w-full sm:w-auto">
                 <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2">
                   <HugeiconsIcon icon={PlayCircleIcon} size={18} />
-                  <span>Start First Conversation</span>
+                  <span>{t("dashboard.startFirstConversation")}</span>
                 </Button>
               </Link>
             </div>

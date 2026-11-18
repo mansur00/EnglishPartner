@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -144,17 +145,17 @@ export function WordDetailPopover({
               <div className="flex flex-wrap gap-2 text-xs">
                 {entry.wordForms.past && (
                   <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground">
-                    <strong className="text-foreground">Past:</strong> {entry.wordForms.past}
+                    <strong className="text-foreground">{t("learning.past")}:</strong> {entry.wordForms.past}
                   </span>
                 )}
                 {entry.wordForms.pastParticiple && (
                   <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground">
-                    <strong className="text-foreground">Past Participle:</strong> {entry.wordForms.pastParticiple}
+                    <strong className="text-foreground">{t("learning.pastParticiple")}:</strong> {entry.wordForms.pastParticiple}
                   </span>
                 )}
                 {entry.wordForms.plural && (
                   <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground">
-                    <strong className="text-foreground">Plural:</strong> {entry.wordForms.plural}
+                    <strong className="text-foreground">{t("learning.plural")}:</strong> {entry.wordForms.plural}
                   </span>
                 )}
               </div>
@@ -192,12 +193,12 @@ export function WordDetailPopover({
             {isSaved ? (
               <>
                 <HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className="text-emerald-600 dark:text-emerald-400" />
-                <span>সংরক্ষিত (Saved)</span>
+                <span>{t("learning.saved")}</span>
               </>
             ) : (
               <>
                 <HugeiconsIcon icon={Bookmark01Icon} size={16} />
-                <span>নোটবুকে সেভ করুন (Save Word)</span>
+                <span>{t("learning.saveWord")}</span>
               </>
             )}
           </Button>

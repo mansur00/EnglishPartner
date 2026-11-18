@@ -15,7 +15,9 @@
     "vocabulary": "My Vocabulary",
     "menu": "Menu & Learning Paths",
     "admin": "Admin Studio",
-    "settings": "Settings"
+    "settings": "Settings",
+    "openMenu": "Open navigation menu",
+    "mainNav": "Main navigation"
   },
   "header": {
     "title": "English Partner",
@@ -43,7 +45,38 @@
     "exploreTopics": "Explore All Scenarios",
     "viewVocabulary": "View Saved Words",
     "completedSteps": "Completed Steps",
-    "dailyGoal": "Daily Goal"
+    "dailyGoal": "Daily Goal",
+    "startConversation": "Start Conversation",
+    "browseEveryday": "Browse Everyday Library",
+    "exploreProfessional": "Explore Professional Paths",
+    "startFirstConversation": "Start First Conversation"
+  },
+  "discovery": {
+    "filters": "Filters:",
+    "allLevels": "All Levels (CEFR)",
+    "anyLength": "Any Length",
+    "shortLength": "Short (4-6 turns)",
+    "mediumLength": "Medium (7-10 turns)",
+    "anyStyle": "Any Style",
+    "resetFilters": "Reset Filters",
+    "searchPlaceholder": "Search by topic, keyword, or role...",
+    "noConversationsFound": "No conversations found"
+  },
+  "audio": {
+    "generating": "Audio asset is being generated",
+    "unavailable": "Audio unavailable",
+    "replay": "Replay from beginning",
+    "fullConversation": "Full Conversation Audio",
+    "cycleSpeed": "Cycle playback speed (0.75x, 1x, 1.25x, 1.5x)"
+  },
+  "learning": {
+    "practice": "Practice",
+    "contextualMeaning": "Contextual Meaning",
+    "past": "Past",
+    "pastParticiple": "Past Participle",
+    "plural": "Plural",
+    "saved": "Saved",
+    "saveWord": "Save Word"
   },
   "reader": {
     "listen": "Listen",

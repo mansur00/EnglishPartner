@@ -89,7 +89,7 @@ export function Sidebar() {
         <span className="px-3 text-chip font-semibold uppercase tracking-wider text-muted-foreground">
           {t("nav.menu")}
         </span>
-        <nav className="space-y-1 pt-1.5" aria-label="Main navigation">
+        <nav className="space-y-1 pt-1.5" aria-label={t("nav.mainNav")}>
           {navItems.map((item) => {
             if (item.comingSoon) {
               return (

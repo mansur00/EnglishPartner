@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { t } from "@/lib/i18n";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -103,7 +104,7 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
         <Link href={`/conversations/${scenario.slug}`}>
           <Button variant="secondary" size="md" className="btn-press gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
             <HugeiconsIcon icon={PlayCircleIcon} size={18} />
-            <span>Practice</span>
+            <span>{t("learning.practice")}</span>
           </Button>
         </Link>
       </div>

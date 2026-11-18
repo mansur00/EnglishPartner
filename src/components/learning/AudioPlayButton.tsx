@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PlayIcon,
@@ -99,10 +100,10 @@ export function AudioPlayButton({
     return (
       <span
         className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold text-muted-foreground bg-muted cursor-not-allowed select-none"
-        title="Audio asset is being generated"
+        title={t("audio.generating")}
       >
         <HugeiconsIcon icon={VolumeMute01Icon} size={13} />
-        <span>Audio unavailable</span>
+        <span>{t("audio.unavailable")}</span>
       </span>
     );
   }

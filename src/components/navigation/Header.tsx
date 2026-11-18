@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { t } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -82,7 +83,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
         {/* Mobile Hamburger Drawer Trigger */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger
-            aria-label="Open navigation menu"
+            aria-label={t("nav.openMenu")}
             className="md:hidden inline-flex items-center justify-center size-tap rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
           >
             <HugeiconsIcon icon={Menu01Icon} size={22} />
@@ -151,7 +152,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
           type="button"
           aria-haspopup="true"
           aria-expanded="false"
-          title="Bilingual mode: English & বাংলা"
+          title={t("header.bilingualMode")}
           className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3.5 rounded-pill border border-border bg-card text-label font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
         >
           <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary shrink-0" />
