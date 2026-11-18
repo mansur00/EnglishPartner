@@ -234,22 +234,27 @@ export const bookmarks = pgTable("bookmarks", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// --- 12. EXERCISES & PRACTICE SESSIONS (Phase 2, ECP_Exercises_SRS_Spec.md §3) ---
-export const exerciseTypeEnum = pgEnum("exercise_type", [
+// --- 12. EXERCISES & PRACTICE SESSIONS (Phase 2, ECP_Exercises_SRS_Spec.md §3.4, Register D-12) ---
+export const practiceModeEnum = pgEnum("practice_mode", [
   "listening_quiz",
   "sentence_builder",
   "dialogue_order",
   "hide_speaker",
   "complete_line",
   "read_aloud",
+  "roleplay_text",
+  "roleplay_voice",
   "flashcard"
 ]);
+
+// Keep exerciseTypeEnum alias per D-12
+export const exerciseTypeEnum = practiceModeEnum;
 
 export const exercises = pgTable("exercises", {
   id: uuid("id").primaryKey().defaultRandom(),
   conversationVersionId: uuid("conversation_version_id").references(() => conversationVersions.id, { onDelete: "cascade" }),
   scenarioSlug: text("scenario_slug").notNull(),
-  exerciseType: exerciseTypeEnum("exercise_type").notNull(),
+  exerciseType: practiceModeEnum("exercise_type").notNull(),
   title: text("title").notNull(),
   instructions: text("instructions").notNull(),
   displayOrder: integer("display_order").notNull().default(0),
@@ -274,7 +279,8 @@ export const exerciseItems = pgTable("exercise_items", {
 export const practiceSessions = pgTable("practice_sessions", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
-  exerciseType: exerciseTypeEnum("exercise_type").notNull(),
+  mode: practiceModeEnum("mode").notNull(),
+  exerciseType: practiceModeEnum("exercise_type"),
   status: text("status").notNull().default("in_progress"),
   scoreCorrect: integer("score_correct").default(0),
   scoreTotal: integer("score_total").default(0),
