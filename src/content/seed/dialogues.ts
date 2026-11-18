@@ -14,6 +14,7 @@ export interface DialogueLineItem {
   speakerId: string;
   englishText: string;
   translationBn: string;
+  translationReviewStatus?: "draft" | "in_review" | "approved" | "stale" | "rejected";
   learningNote?: string;
   wordHighlights?: string[];
   audioUrl?: {

@@ -19,6 +19,7 @@ export interface LadderDialogueLine {
   speakerRole: string;
   englishText: string;
   translationBn: string;
+  translationReviewStatus?: "draft" | "in_review" | "approved" | "stale" | "rejected";
   wordHighlights?: string[];
   learningNote?: string;
   audioUrl?: {

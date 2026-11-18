@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { SpeakerLabel } from "./SpeakerLabel";
 import { AudioPlayButton } from "./AudioPlayButton";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -24,6 +25,7 @@ interface ConversationTurnProps {
   onWordClick?: (word: string) => void;
   onGrammarClick?: (lineId: string) => void;
   hasGrammarExplanation?: boolean;
+  isAdminPreview?: boolean;
 }
 
 export function ConversationTurn({
@@ -37,8 +39,11 @@ export function ConversationTurn({
   onWordClick,
   onGrammarClick,
   hasGrammarExplanation = false,
+  isAdminPreview = false,
 }: ConversationTurnProps) {
   const [localTranslationVisible, setLocalTranslationVisible] = useState<boolean | null>(null);
+
+  const translationDisplay = getLineTranslationDisplay(line, isAdminPreview);
 
   // If local toggle hasn't been clicked, follow global; otherwise follow local override
   const isTranslationShown =
@@ -131,12 +136,26 @@ export function ConversationTurn({
         </p>
       </div>
 
-      {/* Contextual Bangla Translation (Sentence-by-sentence) */}
+      {/* Contextual Bangla Translation (Multi-Language §6.2) */}
       {isTranslationShown && (
         <div className="pt-2 border-t border-[var(--ecp-border)]/60 animate-in fade-in duration-200">
-          <p className="text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla leading-[1.75]">
-            {line.translationBn}
-          </p>
+          <div>
+            <p
+              className={cn(
+                "leading-[1.75]",
+                translationDisplay.isComingSoon
+                  ? "text-sm text-muted-foreground italic font-sans"
+                  : "text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla"
+              )}
+            >
+              {translationDisplay.displayText}
+            </p>
+            {translationDisplay.isDraftPreview && (
+              <span className="inline-block mt-1 text-chip font-medium text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded border border-border">
+                Draft Preview (Unreviewed)
+              </span>
+            )}
+          </div>
         </div>
       )}
 
