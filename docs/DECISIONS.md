@@ -27,7 +27,7 @@
 | **D-16** | Search Scope | Phase 1B uses Postgres full-text (`english` config + Bangla translation titles). Trigram & embeddings deferred to Phase 2+. | Approved | 2026-11-16 |
 | **D-17** | Motion Libraries | No Rive in MVP (free-only rule). Native CSS + Motion for React. GSAP only with licence check. | Approved | 2026-11-16 |
 | **D-18** | Platform Stack | Next.js 16 + TypeScript + Tailwind v4 + Supabase Postgres + Supabase Auth + Vercel. | Confirmed via Audit | 2026-11-16 |
-| **D-19** | Icon Library | **Hugeicons Outlined (`@hugeicons/react` + `@hugeicons/core-free-icons`)** for full visual consistency across all components. Lucide-react retired. | Approved | 2026-11-16 |
+| **D-19** | Icon Library | Needs owner: Style Guide §11 requires one outline icon family but does not name one. Current package: Hugeicons Outlined (in use, not confirmed). | Needs owner | 2026-11-18 |
 
 ---
 
@@ -55,9 +55,7 @@
 - The 30-day learner audio retention proposal was rejected as contrary to spec; no server audio retention exists in code.
 
 ### Icon Library Verification (Style Guide §11)
-- **Needs owner: icon set not specified in Style Guide §11.**
-- Style Guide §11 specifies principles ("Use one consistent outline icon family throughout the product", consistent stroke width and optical size, no filled 3D icons), but does not name a specific package/library.
-- Hugeicons Outlined (`@hugeicons/react`, `@hugeicons/core-free-icons`) is currently used uniformly across all components and satisfies the outline family requirement. Retained pending owner confirmation.
+Needs owner: Style Guide §11 requires one outline icon family but does not name one. Current package: Hugeicons Outlined (in use, not confirmed).
 
 ---
 

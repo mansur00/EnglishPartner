@@ -121,7 +121,7 @@ $ python3 -c "import json; v=json.load(open('scripts/audio/voices.json')); print
 |:---|:---|:---|:---|
 | 1 | **D-LLM Provider at Gate 2:** Which provider should be selected for Phase 2 dynamic conversation practice? | **A.** Gemini API (native multi-modal)<br>**B.** Anthropic / OpenAI | **A (Recommended):** Gemini API per initial project brief. |
 | 2 | **P-1/P-3 Jurisdiction & Retention Policy:** Confirm jurisdiction (e.g. Bangladesh / GDPR) and confirm starting retention values from Privacy spec §4.1 (voice recordings device-only; roleplay transcripts 90 days; practice answers 12 months; raw analytics 13 months; technical logs 30 days). | **A.** Confirm Privacy spec §4.1 retention rules.<br>**B.** Custom retention schedule. | **Owner decision pending (no value chosen by agent).** |
-| 3 | **Icon Set Selection (Style Guide §11):** Style Guide §11 specifies "one consistent outline icon family throughout the product" but does not name a library. Hugeicons Outlined is currently integrated across all components. Confirm Hugeicons or designate an alternate outline icon library. | **A.** Confirm Hugeicons Outlined.<br>**B.** Specify alternative outline icon set. | **A (Recommended):** Keep Hugeicons Outlined as currently integrated. |
+| 3 | **Icon Set Selection (Style Guide §11):** Style Guide §11 specifies "one consistent outline icon family throughout the product" but does not name a library. Current package: Hugeicons Outlined (in use, not confirmed). Confirm Hugeicons or designate an alternate outline icon library. | **A.** Confirm Hugeicons Outlined.<br>**B.** Specify alternative outline icon set. | **Needs owner (no package named in style guide).** |
 
 ---
 
