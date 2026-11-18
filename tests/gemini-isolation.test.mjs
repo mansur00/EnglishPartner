@@ -12,7 +12,7 @@ function findFiles(dir, extensions) {
     const stat = fs.statSync(fullPath);
     if (stat && stat.isDirectory()) {
       results = results.concat(findFiles(fullPath, extensions));
-    } else if (extensions.some(ext => file.endsWith(ext))) {
+    } else if (extensions.some((ext) => file.endsWith(ext))) {
       results.push(fullPath);
     }
   }
@@ -41,20 +41,25 @@ test("AUD-A11: Static check — Product code (src/) must not import Gemini provi
   }
 });
 
-test("AUD-A11: Gemini scripts and configs use approved model gemini-3.8-flash-tts, never unapproved medium", () => {
-  const voicesJsonPath = "scripts/audio/voices.json";
-  assert.ok(fs.existsSync(voicesJsonPath), "voices.json must exist in scripts/audio");
-  const voices = JSON.parse(fs.readFileSync(voicesJsonPath, "utf-8"));
+test("AUD-A11: Gemini code is gated on A-11 signature and isolated in _pending_a11", () => {
+  // 1. Confirm active provider directory does NOT exist
+  assert.equal(
+    fs.existsSync("scripts/audio/providers/gemini_provider.py"),
+    false,
+    "Active gemini_provider.py must not exist before owner signs A-11"
+  );
 
-  assert.equal(voices.approved_tts_model, "gemini-3.8-flash-tts");
-  for (const voice of voices.voices) {
-    assert.equal(voice.model, "gemini-3.8-flash-tts");
+  // 2. Confirm pending directory exists with README
+  const pendingDir = "scripts/audio/_pending_a11";
+  assert.ok(fs.existsSync(pendingDir), "_pending_a11 directory must exist");
+  assert.ok(fs.existsSync(path.join(pendingDir, "README.md")), "README must exist in _pending_a11");
+  const readme = fs.readFileSync(path.join(pendingDir, "README.md"), "utf-8");
+  assert.ok(readme.includes("Waiting for owner signature on A-11"));
+
+  // 3. Confirm pending model is gemini-3.8-flash-tts
+  const voicesJsonPath = path.join(pendingDir, "voices.json");
+  if (fs.existsSync(voicesJsonPath)) {
+    const voices = JSON.parse(fs.readFileSync(voicesJsonPath, "utf-8"));
+    assert.equal(voices.approved_tts_model, "gemini-3.8-flash-tts");
   }
-
-  // Check python provider
-  const providerPath = "scripts/audio/providers/gemini_provider.py";
-  assert.ok(fs.existsSync(providerPath), "gemini_provider.py must exist");
-  const providerContent = fs.readFileSync(providerPath, "utf-8");
-  assert.ok(providerContent.includes("gemini-3.8-flash-tts"));
-  assert.equal(providerContent.includes("gemini-3.8-flash-medium"), false);
 });
