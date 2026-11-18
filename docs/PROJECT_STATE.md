@@ -153,6 +153,13 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `7372011` | AUD-MIGRATE: migration apply status recorded |
 | `4506917` | AUD-KI-12: record focus test blocked pending runner |
 | `9e2d018` | AUD-RECONCILE: summary matches table and git log |
+| `1759d60` | AUD-R3-KI12: focus test pass recorded; CI gate tracked separately |
+| `7c43c7a` | AUD-R3-KI09: migrate evidence or blocked with owner request |
+| `1dafc1e` | AUD-R3-KI02: bookmark before/after row counts recorded |
+| `8136072` | AUD-R3-KI05: hardcoded string counts recorded |
+| `7c165eb` | AUD-R3-LAYOUT: exit code and assertion count recorded |
+| `986c89e` | AUD-R3-TABLE: single findings table, counts computed from rows |
+| `27cfabd` | AUD-R3-RECONCILE: one commit per finding, all hashes verified |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -174,8 +181,9 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 12. **[DONE] (commits f58aa20, f83a1b2, 3b8d57d) Full Project Audit & Conflict Resolution:** Complete audit against approved plans/specs across stack, schema, tokens, components, content, audio. Resolved 3 conflict bugs (KI-14 easing tokens, KI-11 landing Server Component, KI-06 dynamic admin coverage). Recorded all findings in `docs/AUDIT_REPORT.md`.
 13. **[DONE] (commits 0c6d6fd..cb05b69) Audit Report Findings Remediation (13 Items):** Executed all 13 fixes in dedicated commits: exact ladder counts, bookmark DB endpoint, Supabase Auth callback & session middleware, header session state, messages i18n dictionary with 100% key parity, dynamic language coverage, draft seed translations with learner notice, Poppins removed (Inter + Hind Siliguri + Noto Sans Bengali per D-02), 9 approved practice modes in schema & migration, privacy retention aligned with spec §4.1 (no server-side audio retention, P-3 recorded as owner decision), Style Guide §11 icon verification, zero Gemini in product code (`gemini-3.8-flash-tts` in offline configs), and full verification evidence for KI-07/09/12/16.
 14. **[DONE] (commits 28794fd..9e2d018) Audit Report Correction Round (10 Items):** Gated Gemini offline provider on unsigned A-11 scope in `_pending_a11`, recorded AUD-ICON as owner decision in `docs/DECISIONS.md`, saved layout test evidence (233 assertions), marked KI-09 blocked pending clean test DB, audited hardcoded strings and added 30 keys to messages (98/98 keys, 100% parity), added integration test for KI-02 bookmark spoofing protection, restored historical docs mentions of Poppins with dated non-current note (AUD-D-02), recorded database migration apply status (AUD-MIGRATE), authored headless browser E2E test and marked KI-12 blocked pending Playwright runner, and reconciled AUDIT_REPORT summary, tables, and git log (AUD-RECONCILE).
-15. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
-16. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+15. **[DONE] (commits 1759d60..27cfabd) Audit Round 3 Remediation:** Single master findings table in `docs/AUDIT_REPORT.md` (25 rows: 6 PASS, 12 Fixed, 1 Blocked, 4 Not built yet, 2 Needs owner = 25 total); KI-12 verified locally (PASS) with CI gate tracked separately (KI-12-CI: Not built yet); KI-09 generate check verified (PASS) with live run blocked pending owner throwaway DB URL; KI-02 bookmark persistence verified with before/after row counts (0 -> 1 -> 1 -> 1 -> 2); KI-05 hardcoded strings audited (103 -> 30 moved to messages, 98/98 keys, 73 justified); layout invariants suite exit code 0 recorded (233 assertions); all commit hashes verified in git log.
+16. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
+17. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -204,6 +212,42 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-19, Audit Round 3 Verified Findings & Reconciliation Completed
+- Requested by owner: Make audit report accurate and verifiable. Build single master findings table with one row per finding and exact counts computed from rows. Separate KI-12 test result (PASS) from CI gate (Not built yet). Check `drizzle-kit generate` (PASS) and mark KI-09 live run blocked pending owner throwaway DB URL. Record bookmark row count before/after evidence (0 -> 1 -> 1 -> 1 -> 2). Record hardcoded string scanner counts (103 -> 30 moved to messages, 98/98 keys, 73 justified). Execute layout invariants test against production build, record exit code 0 and last lines. Ensure one commit per finding with verified git log hashes. Run final verification suite.
+- Changed:
+  - `docs/AUDIT_REPORT.md`: Master findings table unified into a single table with 25 rows (6 PASS, 12 Fixed, 1 Blocked, 4 Not built yet, 2 Needs owner). Replaced architectural category with explicit statuses.
+  - `docs/evidence/keyboard-focus-2026-11-19.txt`: Headless browser E2E test output saved (exit code 0; 3/3 passed).
+  - `docs/evidence/drizzle-generate-2026-11-19.txt`: Drizzle schema generation check output saved (exit code 0; 23 tables).
+  - `docs/evidence/bookmark-2026-11-19.txt`: Bookmark API before/after row count proof saved (exit code 0; initial=0, logged-in=1, duplicate=1, logged-out=1, spoof=2).
+  - `docs/evidence/hardcoded-strings-2026-11-19.txt`: Hardcoded string scanner output saved (73 candidate strings remaining, all justified).
+  - `docs/evidence/layout-2026-11-19.txt`: Layout invariants test suite output saved (exit code 0; 233 assertions).
+  - `.gitignore`: Explicitly added `.env.local`, `.env.*.local`, `logs/`, and `*.log`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; token linter clean).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (26/26 tests passing).
+  - `npm run test:layout`: Passed (all 233 layout assertions passing with exit code 0).
+  - `npm run build`: Passed (83/83 static pages compiled).
+  - `node scripts/check-poppins.mjs`: Passed (0 Poppins in code directories).
+  - `npm run check:ladder`: Passed (all 20 ladder steps match exact counts).
+  - Gemini isolation check: Passed (0 matches in `src/`).
+- Commits:
+  - `1759d60` AUD-R3-KI12: focus test pass recorded; CI gate tracked separately
+  - `7c43c7a` AUD-R3-KI09: migrate evidence or blocked with owner request
+  - `1dafc1e` AUD-R3-KI02: bookmark before/after row counts recorded
+  - `8136072` AUD-R3-KI05: hardcoded string counts recorded
+  - `7c165eb` AUD-R3-LAYOUT: exit code and assertion count recorded
+  - `986c89e` AUD-R3-TABLE: single findings table, counts computed from rows
+  - `27cfabd` AUD-R3-RECONCILE: one commit per finding, all hashes verified
+- Open questions / follow-ups:
+  - O-1: Throwaway database URL for live KI-09 migration execution and live KI-02 DB tests.
+  - O-2: Approval to add `@playwright/test` to `devDependencies` for automated CI browser runner.
+  - O-3: Signature on A-11 scope (voice testing only or production TTS).
+  - O-4: Confirmation on Style Guide §11 outline icon family (Hugeicons Outlined in use).
+  - O-5: Confirmation of migration status on remote staging and production databases.
 
 ### 2026-11-18, Audit Report 10 Correction Review Tasks Remediated in Dedicated Commits
 - Requested by owner: Fix 10 problems found in the review of `docs/AUDIT_REPORT.md` and `docs/PROJECT_STATE.md`. Evidence before PASS, do not rewrite history (use dated notes), small commits with finding IDs, and stop after completing all items.
