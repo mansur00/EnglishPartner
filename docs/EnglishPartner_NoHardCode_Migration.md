@@ -1,5 +1,7 @@
 # EnglishPartner: No Hard-Code Policy and Token Migration
 
+> Note (18 Nov 2026): Poppins was removed from the project per D-02. The lines below are the historical record and are not current.
+
 Detailed specification for making the whole UI driven by a single design system. Companion to `docs/PROJECT_STATE.md` (which wins if the two ever disagree), `EnglishPartner_Design_System_v2.md`, and `EnglishPartner_Agent_Spec.md`.
 
 Owner rule (permanent): **nothing visual is hard-coded anywhere.** Colors, font sizes, font weights, radius, layout sizes, shadows, motion, and z-index are defined once in the design system (tokens, Tailwind `@theme` / `@utility`, components, variants) and used from there. Changing one definition must change every place that uses it.
@@ -105,7 +107,7 @@ Mutation test baseline (token overridden at runtime, then check if every element
 #### Typography (family, weight)
 | Token | Value |
 | --- | --- |
-| `--font-heading` | Inter |
+| `--font-heading` | Poppins |
 | `--font-body` | Inter |
 | `--font-bangla` | Hind Siliguri |
 | `--font-weight-regular` | 400 |
@@ -116,7 +118,7 @@ Mutation test baseline (token overridden at runtime, then check if every element
 #### Semantic text styles (`@utility`, each bakes in size, line-height, weight, tracking, family)
 | Utility | Size | Line height | Weight | Notes |
 | --- | --- | --- | --- | --- |
-| `text-page-title` | `clamp(1.625rem, 1.3rem + 1vw, 2.125rem)` | 1.2 | heading | tracking -0.01em, Inter |
+| `text-page-title` | `clamp(1.625rem, 1.3rem + 1vw, 2.125rem)` | 1.2 | heading | tracking -0.01em, Poppins |
 | `text-hero-title` | `clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem)` | 1.25 | heading | tracking -0.01em |
 | `text-card-title` | 1.25rem | 1.35 | heading | |
 | `text-lead` | 1.125rem | 1.7 | **400** | learning content (dialogue). 500 only for a separate emphasis utility |
