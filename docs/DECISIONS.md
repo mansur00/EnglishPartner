@@ -43,6 +43,17 @@
 - **Phase 1:** No guest local-storage progress or complex account-merge workflows.
 - **Reconsideration:** Re-evaluated after Gate 1E based on learner metrics.
 
+### P-03 — Data Retention Policy (Privacy Spec §2 & §4.1)
+- **Status:** **Owner decision pending.** No retention value was chosen or invented by the agent.
+- **Learner voice recordings:** Stored on learner's **device only** (IndexedDB per Privacy spec §2). Never uploaded or retained on the server by default.
+- **Server retention schedules (per Privacy spec §4.1):**
+  - Roleplay transcripts: Auto-deleted 90 days after session end.
+  - Practice answers: Auto-deleted 12 months after last activity.
+  - Review events: Aggregated after 12 months (drop per-user rows).
+  - Technical logs: 30 days.
+  - Raw analytics: 13 months, then aggregate.
+- The 30-day learner audio retention proposal was rejected as contrary to spec; no server audio retention exists in code.
+
 ---
 
 ## 3. Free-Tier Cost & Services Limits (Task 0.12)
