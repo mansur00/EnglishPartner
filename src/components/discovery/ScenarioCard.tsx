@@ -10,7 +10,9 @@ import {
   Briefcase01Icon,
 } from "@hugeicons/core-free-icons";
 import type { ScenarioItem } from "@/content/seed/scenarios";
+import { SEED_DIALOGUES } from "@/content/seed/dialogues";
 import { getCategoryTheme } from "@/lib/theme/category-theme";
+import { formatLanguageCoverageLine } from "@/lib/content/language-coverage";
 
 interface ScenarioCardProps {
   scenario: ScenarioItem;
@@ -19,6 +21,8 @@ interface ScenarioCardProps {
 export function ScenarioCard({ scenario }: ScenarioCardProps) {
   const primaryCat = scenario.categories[0]?.slug || "social-daily";
   const theme = getCategoryTheme(primaryCat);
+  const scenarioLines = SEED_DIALOGUES[scenario.slug]?.[0]?.lines;
+  const coverageLine = formatLanguageCoverageLine(scenario.languages, scenarioLines);
 
   const cefrStyles: Record<string, string> = {
     A1: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30 dark:bg-emerald-400/15 dark:text-emerald-300",
@@ -52,8 +56,8 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
                 <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>
                   {scenario.level}
                 </span>
-                <span className="text-xs font-semibold uppercase tracking-wider bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border">
-                  EN + BN
+                <span className="text-xs font-medium bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border">
+                  {coverageLine}
                 </span>
               </div>
             </div>

@@ -25,6 +25,7 @@ import {
   VocabularyEntry,
   SentenceGrammarEntry,
 } from "@/content/seed/vocabulary";
+import { formatLanguageCoverageLine } from "@/lib/content/language-coverage";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
@@ -243,6 +244,9 @@ export function ConversationReader({
                 <strong className="text-ecp-text-primary">Focus:</strong> {stepFocus}
               </span>
             )}
+            <span className="text-xs font-medium text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-full border border-border">
+              {formatLanguageCoverageLine(["en", "bn"], currentVersion.lines)}
+            </span>
           </div>
         ) : (
           <div className="flex items-center gap-2">
