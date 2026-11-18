@@ -1,0 +1,29 @@
+(node:8699) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/mdmansur/Desktop/apk/English%20learning/english-partner/src/app/api/v1/me/bookmarks/route.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/mdmansur/Desktop/apk/English learning/english-partner/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+=================================================
+       BOOKMARK API ROW PERSISTENCE PROOF        
+=================================================
+
+[Step 1] Initial bookmark row count for user-audit-r3-test-123: 0
+[Step 2] POST /api/v1/me/bookmarks (logged-in):
+         Status: 201 (expected: 201)
+         Body:   {"id":"dddb8e6e-9807-4cb6-b967-5eecd3fd182f","saved":true}
+         Row count after call: 1 (expected: +1, was 0 -> 1)
+[Step 3] POST /api/v1/me/bookmarks (repeat call):
+         Status: 200 (expected: 200)
+         Body:   {"id":"dddb8e6e-9807-4cb6-b967-5eecd3fd182f","saved":true,"idempotent":true}
+         Row count after duplicate: 1 (expected: unchanged, count=1)
+[Step 4] POST /api/v1/me/bookmarks (logged-out):
+         Status: 401 (expected: 401)
+         Body:   {"error":"AUTH_REQUIRED","message":"Authentication is required to bookmark scenarios"}
+         Row count after logged-out: 1 (expected: unchanged, count=1)
+[Step 5] POST /api/v1/me/bookmarks (spoof attempt in body):
+         Status: 201 (expected: 201)
+         Body:   {"id":"304f2420-4723-4080-877a-51b656353bc6","saved":true}
+         Row written under session user (user-audit-r3-test-123): true
+         Row written under attacker user (attacker-spoofed-user-999): false
+         Final row count for user-audit-r3-test-123: 2
+
+✅ ALL BOOKMARK ROW COUNT & AUTH INTEGRITY CHECKS PASSED.
