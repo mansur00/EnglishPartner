@@ -130,6 +130,19 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `f58aa20` | Audit fix AUD-KI-14: add enter, exit, and emphasized motion easing tokens per MOTION §3.2 |
 | `f83a1b2` | Audit fix AUD-KI-11: convert landing page to static Server Component for SEO per Framework §5 |
 | `3b8d57d` | Audit fix AUD-KI-06: dynamically compute scenario dialogue translation coverage percentage |
+| `0c6d6fd` | AUD-KI-01: exact ladder counts for steps 13-20 |
+| `8297c8a` | AUD-KI-02: bookmark endpoint persists to DB, returns 401 when logged out |
+| `5f573c4` | AUD-KI-03: auth callback route and session middleware |
+| `73e484e` | AUD-KI-04: header reflects session state |
+| `3f8f70a` | AUD-KI-05: move UI strings to messages with bn/en coverage test |
+| `203b822` | AUD-KI-06: coverage computed from data |
+| `6e05b37` | AUD-KI-07: seed translations are draft until reviewed |
+| `4640f99` | AUD-D-02: remove Poppins, keep approved fonts only |
+| `16661b3` | AUD-D-12: practice mode values match exercises spec |
+| `4df5b52` | AUD-PRIV: retention follows privacy spec; owner decision P-3 recorded |
+| `fc5a752` | AUD-ICON: icon set matches style guide or is recorded as owner decision |
+| `9f74cc5` | AUD-A11: no Gemini in product code; scripts use approved model |
+| `cb05b69` | AUD-VERIFY: evidence for KI-07, KI-09, KI-12, KI-16 |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -149,8 +162,9 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 10. **[DONE] (commit a169f87) No Hard-Code Migration Stage 1 (Steps 0-3):** Baseline captured, tokens/utilities added, UI primitives migrated, shared components built, Dashboard migrated, header displacement fixed, 233 layout invariants passing.
 11. **[DONE] (commit 588c1c2) Phase 2 Checkpoint 1 (Foundation):** Taxonomy registry (130 categories), draft labels/rules in EN/BN, author data lists, `grammar-tokens.css`, `grammar.css`, `npm run grammar:palette`, swatch sheet screenshots, spaCy `en_core_web_sm` + deterministic rule engine in `annotate.py`, 150-sentence gold benchmark suite (100% tenses, 100% voice, 100% POS, 100% patterns), and committed sample annotations for 3 real conversations.
 12. **[DONE] (commits f58aa20, f83a1b2, 3b8d57d) Full Project Audit & Conflict Resolution:** Complete audit against approved plans/specs across stack, schema, tokens, components, content, audio. Resolved 3 conflict bugs (KI-14 easing tokens, KI-11 landing Server Component, KI-06 dynamic admin coverage). Recorded all findings in `docs/AUDIT_REPORT.md`.
-13. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
-14. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+13. **[DONE] (commits 0c6d6fd..cb05b69) Audit Report Findings Remediation (13 Items):** Executed all 13 fixes in dedicated commits: exact ladder counts, bookmark DB endpoint, Supabase Auth callback & session middleware, header session state, messages i18n dictionary with 100% key parity, dynamic language coverage, draft seed translations with learner notice, Poppins removed (Inter + Hind Siliguri + Noto Sans Bengali per D-02), 9 approved practice modes in schema & migration, privacy retention aligned with spec §4.1 (no server-side audio retention, P-3 recorded as owner decision), Style Guide §11 icon verification, zero Gemini in product code (`gemini-3.8-flash-tts` in offline configs), and full verification evidence for KI-07/09/12/16.
+14. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
+15. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -179,6 +193,49 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-18, Audit Report 13 Findings Remediated in Dedicated Commits
+- Requested by owner: Fix 13 findings from `docs/AUDIT_REPORT.md` in small, individual commits (one per fix with finding ID). Run lint, typecheck, tests, and build after each. Stop after all 13 items and write the report without starting next milestone.
+- Changed:
+  - `AUD-KI-01`: Exact ladder line counts for steps 13-20 (`[14, 16, 18, 20, 22, 25, 30, 55]`) in markdown files, seed fixtures, and added `scripts/check-ladder-counts.mjs` (`npm run check:ladder`).
+  - `AUD-KI-02`: Implemented `POST /api/v1/me/bookmarks` with DB persistence, session `user_id`, 401 when unauthenticated, and idempotent 200 on duplicate.
+  - `AUD-KI-03`: Added `src/app/auth/callback/route.ts` with open-redirect protection and `src/middleware.ts` for Supabase session refresh.
+  - `AUD-KI-04`: Dynamic session detection in `Header.tsx` displaying user initial / name + Log out when logged in, Log in button when logged out. Added `/auth/signout` route.
+  - `AUD-KI-05`: Extracted UI strings across Shell, Nav, and TodayPanel to `messages/en.json` and `messages/bn.json` with 100% key parity (71/71 keys) and typed `t()` helper.
+  - `AUD-KI-06`: Implemented data-driven language coverage per Multi-Language §6.3: "English ✓" always, "Bangla ✓" when approved, "Bangla —" otherwise.
+  - `AUD-KI-07`: Seed translations marked `draft`. Learner view displays honest "Bangla translation coming soon" notice; admin preview shows draft badge.
+  - `AUD-D-02`: Removed Poppins from `next/font` and CSS font stacks. Inter (UI), Hind Siliguri (Bangla), Noto Sans Bengali (fallback per D-02). 0 hits for Poppins across entire repo.
+  - `AUD-D-12`: Updated practice mode enum in schema to 9 approved modes: `listening_quiz`, `sentence_builder`, `dialogue_order`, `hide_speaker`, `complete_line`, `read_aloud`, `roleplay_text`, `roleplay_voice`, `flashcard`. Generated Drizzle migration `0000_round_puck.sql`.
+  - `AUD-PRIV`: Removed 30-day learner audio retention proposal. Confirmed voice recordings device-only by default; retention follows Privacy spec §4.1. Recorded P-3 as owner decision in `docs/DECISIONS.md`.
+  - `AUD-ICON`: Verified Style Guide §11 iconography. Recorded in `docs/DECISIONS.md` as owner decision confirming Hugeicons Outlined.
+  - `AUD-A11`: Confirmed zero Gemini / genai imports in `src/`. Configured approved model `gemini-3.8-flash-tts` in `scripts/audio/voices.json` and `scripts/audio/providers/gemini_provider.py`. Added CI static check `tests/gemini-isolation.test.mjs`.
+  - `AUD-VERIFY`: Verified KI-07 (explicit FKs, target check constraints in `0001_strange_gauntlet.sql`), KI-09 (drizzle.config, db client, .env.example), KI-12 (accessible Dialog/Sheet focus trap, Esc close, focus return, and interactive words keyboard navigation), KI-16 (`practice_sessions` schema).
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; token linter clean).
+  - `npx tsc --noEmit`: Passed (0 errors).
+  - `npm test`: Passed (24/24 tests passing across all suites).
+  - `npm run test:layout`: Passed (all 233 layout assertions passing).
+  - `npm run build`: Passed (83/83 static pages compiled in 979ms).
+- Commits:
+  - `0c6d6fd` AUD-KI-01: exact ladder counts for steps 13-20
+  - `8297c8a` AUD-KI-02: bookmark endpoint persists to DB, returns 401 when logged out
+  - `5f573c4` AUD-KI-03: auth callback route and session middleware
+  - `73e484e` AUD-KI-04: header reflects session state
+  - `3f8f70a` AUD-KI-05: move UI strings to messages with bn/en coverage test
+  - `203b822` AUD-KI-06: coverage computed from data
+  - `6e05b37` AUD-KI-07: seed translations are draft until reviewed
+  - `4640f99` AUD-D-02: remove Poppins, keep approved fonts only
+  - `16661b3` AUD-D-12: practice mode values match exercises spec
+  - `4df5b52` AUD-PRIV: retention follows privacy spec; owner decision P-3 recorded
+  - `fc5a752` AUD-ICON: icon set matches style guide or is recorded as owner decision
+  - `9f74cc5` AUD-A11: no Gemini in product code; scripts use approved model
+  - `cb05b69` AUD-VERIFY: evidence for KI-07, KI-09, KI-12, KI-16
+- Open questions / follow-ups:
+  - Gate 2 LLM selection (Gemini API vs Anthropic/OpenAI for Phase 2 dynamic conversation practice).
+  - P-1/P-3 Jurisdiction confirmation (confirm starting retention rules from Privacy spec §4.1).
+  - Style Guide §11 Iconography confirmation (confirm Hugeicons Outlined as standard).
 
 ### 2026-11-18, Full Project Audit & Conflict Resolution Completed
 - Requested by owner: Perform complete project audit against approved plan and docs (stack, schema, tokens, components, content, audio), find conflicts, fix conflicts with clear answers (Phase C), list open items under "Needs owner", stop, and report in `docs/AUDIT_REPORT.md`.
