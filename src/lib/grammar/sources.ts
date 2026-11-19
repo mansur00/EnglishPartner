@@ -1,6 +1,7 @@
 import type { GrammarSourceDefinition, GrammarSourceSentence } from "./types";
 import { SEED_DIALOGUES } from "@/content/seed/dialogues";
 import { SEED_VOCABULARY } from "@/content/seed/vocabulary";
+import { SEED_EXERCISES_MAP } from "@/content/seed/exercises";
 
 class GrammarSourcesRegistry {
   private sources: Map<string, GrammarSourceDefinition> = new Map();
@@ -65,7 +66,30 @@ class GrammarSourcesRegistry {
       id: "practice",
       title: "Practice Prompts",
       listSentences: (): GrammarSourceSentence[] => {
-        return [];
+        const sentences: GrammarSourceSentence[] = [];
+        for (const [stepKey, exerciseSet] of Object.entries(SEED_EXERCISES_MAP)) {
+          if (exerciseSet.completeLines) {
+            for (const cl of exerciseSet.completeLines) {
+              sentences.push({
+                id: `practice/${stepKey}/${cl.id}`,
+                text: cl.fullSentence,
+                lang: "en",
+              });
+            }
+          }
+          if (exerciseSet.listeningQuizzes) {
+            for (const lq of exerciseSet.listeningQuizzes) {
+              if (lq.audioPrompt) {
+                sentences.push({
+                  id: `practice/${stepKey}/${lq.id}`,
+                  text: lq.audioPrompt,
+                  lang: "en",
+                });
+              }
+            }
+          }
+        }
+        return sentences;
       },
     });
   }

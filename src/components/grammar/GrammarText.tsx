@@ -57,6 +57,8 @@ export function GrammarText({
               data-gram-time={isGrammarActive ? token.tenseTime || undefined : undefined}
               data-gram-aspect={isGrammarActive ? token.tenseAspect || undefined : undefined}
               data-gram-edge={isGrammarActive ? token.edge || undefined : undefined}
+              data-gram-phrase={isGrammarActive ? token.phraseEdge || undefined : undefined}
+              data-gram-clause={isGrammarActive ? token.clauseEdge || undefined : undefined}
               data-gram-pattern={isGrammarActive ? token.patternFamily || undefined : undefined}
               data-gram-focused={
                 isGrammarActive && token.isFocused ? "true" : undefined

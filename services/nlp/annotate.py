@@ -22,8 +22,9 @@ except Exception:
 TAXONOMY_VERSION = 1
 TAGGER_VERSION = "spacy-en_core_web_sm+rules-1.0"
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 LISTS_DIR = os.path.join(BASE_DIR, "data", "grammar", "lists")
+OVERRIDES_DIR = os.path.join(BASE_DIR, "data", "grammar", "overrides")
 
 def load_json_list(filename: str) -> list:
     path = os.path.join(LISTS_DIR, filename)
@@ -414,3 +415,31 @@ def annotate_source(source_id: str, lines: List[Dict[str, Any]]) -> Dict[str, An
         "sourceId": source_id,
         "lines": annotated_lines
     }
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="EnglishPartner Grammar Annotator CLI")
+    parser.add_argument("--text", type=str, help="Single sentence to analyze")
+    parser.add_argument("--json", action="store_true", help="Output formatted JSON")
+    parser.add_argument("--file", type=str, help="Input JSON file with lines to annotate")
+    parser.add_argument("--out", type=str, help="Output JSON file path")
+    args = parser.parse_args()
+
+    if args.text:
+        res = analyze_sentence(args.text)
+        print(json.dumps(res, indent=2))
+    elif args.file:
+        with open(args.file, "r", encoding="utf-8") as f:
+            in_data = json.load(f)
+        src_id = in_data.get("sourceId", "unknown")
+        lines = in_data.get("lines", [])
+        out_data = annotate_source(src_id, lines)
+        if args.out:
+            with open(args.out, "w", encoding="utf-8") as f:
+                json.dump(out_data, f, indent=2)
+            print(f"Annotated {len(lines)} lines -> {args.out}")
+        else:
+            print(json.dumps(out_data, indent=2))
+    else:
+        print("EnglishPartner Grammar Annotator CLI: provide --text or --file")
+

@@ -89,6 +89,8 @@ export interface RenderToken extends GrammarToken {
   tenseAspect?: "simple" | "continuous" | "perfect" | "perfect-continuous" | null;
   patternFamily?: string | null;
   patternKey?: string | null;
+  phraseEdge?: "start" | "end" | "both";
+  clauseEdge?: "start" | "end" | "both";
   rubyLabel?: string | null;
   isFocused?: boolean;
 }

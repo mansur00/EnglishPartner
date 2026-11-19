@@ -184,8 +184,8 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 14. **[DONE] (commits 28794fd..9e2d018) Audit Report Correction Round (10 Items):** Gated Gemini offline provider on unsigned A-11 scope in `_pending_a11`, recorded AUD-ICON as owner decision in `docs/DECISIONS.md`, saved layout test evidence (233 assertions), marked KI-09 blocked pending clean test DB, audited hardcoded strings and added 30 keys to messages (98/98 keys, 100% parity), added integration test for KI-02 bookmark spoofing protection, restored historical docs mentions of Poppins with dated non-current note (AUD-D-02), recorded database migration apply status (AUD-MIGRATE), authored headless browser E2E test and marked KI-12 blocked pending Playwright runner, and reconciled AUDIT_REPORT summary, tables, and git log (AUD-RECONCILE).
 15. **[DONE] (commits 1759d60..27cfabd) Audit Round 3 Remediation:** Single master findings table in `docs/AUDIT_REPORT.md` (25 rows: 6 PASS, 12 Fixed, 1 Blocked, 4 Not built yet, 2 Needs owner = 25 total); KI-12 verified locally (PASS) with CI gate tracked separately (KI-12-CI: Not built yet); KI-09 generate check verified (PASS) with live run blocked pending owner throwaway DB URL; KI-02 bookmark persistence verified with before/after row counts (0 -> 1 -> 1 -> 1 -> 2); KI-05 hardcoded strings audited (103 -> 30 moved to messages, 98/98 keys, 73 justified); layout invariants suite exit code 0 recorded (233 assertions); all commit hashes verified in git log.
 16. **[DONE] (commit e56927d) Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` (.rainbow-border when ON, 44px target) next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`, RuleCardDialog, enhanced WordDetailPopover breakdown, 0.0000px layout shift verified, toggle response 44ms (turn) and 5ms (global), 16 screenshots saved.
-17. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 3 (Complete System):** Remaining layers (Phrases & Clauses, full Patterns), lists integration, `grammar:check` build gate, admin editor integration, vocabulary & practice integration, `docs/grammar-system.md`.
-18. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+17. **[DONE] Phase 2 Checkpoint 3 (Complete System):** Remaining layers (Phrases & Clauses brackets/outlines, full Patterns overlines/chips), author lists in `data/grammar/lists/` and overrides in `data/grammar/overrides/`, `grammar:check` build gate wired into `prebuild`, `grammar:report` (`npm run grammar:report`) reporting unreviewed entries and confidence, admin editor status banner in `ConversationEditorClient.tsx`, vocabulary page integration in `src/app/(app)/vocabulary/page.tsx`, practice prompts in `src/lib/grammar/sources.ts`, 100% taxonomy coverage, Section 11 tests (gold benchmark 100%, 17 tenses unit tests, 5 token mutation tests, 4 future-content fixture tests; 52 total unit tests pass), generated `docs/grammar-system.md`.
+18. **[PENDING - Awaiting Owner Approval] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -214,6 +214,38 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-20, Phase 2 Checkpoint 3 (Complete System) Completed & Verified
+- Requested by owner: Execute Phase 2 Checkpoint 3 (Complete System) per EnglishPartner_Grammar_ColorCoding_Spec.md §12.
+- Changed:
+  - `src/styles/grammar.css`: Added pattern overline styling (`reported`, `question`, `comparison`, `existential`, `verb`, `article`, `agreement`, `lexical`) and phrase/clause bracket rules (`data-gram-phrase`, `data-gram-clause`).
+  - `src/lib/grammar/`: `types.ts` (`phraseEdge`, `clauseEdge`), `resolve.ts` (phrase/clause groups mapping when layer active), `sources.ts` (registered practice exercises sentences).
+  - `src/components/grammar/GrammarText.tsx`: rendered `data-gram-phrase` and `data-gram-clause` attributes.
+  - `src/components/admin/ConversationEditorClient.tsx`: integrated Grammar Status Banner with pre-annotated pipeline confirmation and build-gate badges.
+  - `src/app/(app)/vocabulary/page.tsx`: wrapped in `GrammarProvider` with per-word example sentence `GrammarToggleButton` (.rainbow-border when ON, 44px target) and interactive `GrammarText` breakdown.
+  - `services/nlp/annotate.py`: fixed `BASE_DIR` path resolution for `data/grammar/lists/` and added CLI runner `--text` / `--file`.
+  - `scripts/grammar-check.mjs`: authored authoritative build gate script verifying 130 categories, 18 rules, 339 tokens, and 55 groups.
+  - `scripts/grammar-report.mjs`: authored reporting script displaying dataset confidence breakdown, gold benchmark results, and queue of 94 unreviewed Bangla labels for owner review.
+  - `package.json`: wired `grammar:check` into `prebuild` (blocking builds on missing/invalid annotations) and `grammar:report`.
+  - `tests/grammar-tenses.test.mjs`: authored unit tests for all 12 tenses, passive voice, inversion, negative forms, and internal adverbs (17/17 pass).
+  - `tests/grammar-token-mutation.test.mjs`: authored token mutation reactivity test for POS, roles, tenses, and pattern families without literal color fallbacks (5/5 pass).
+  - `tests/grammar-future-content.test.mjs`: authored future-content fixture test validating zero code changes required for new content and build-gate rejection of invalid categories (4/4 pass).
+  - `docs/grammar-system.md`: authored complete reference manual covering architecture, taxonomy addition, rule card authoring, idiom/phrasal-verb registration, sources registry, and overrides.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; token linter clean).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (52/52 tests passing across all 16 test suites).
+  - `python3 services/nlp/tests/gold_test_set.py`: Passed (100% POS, 100% 12 Tenses, 100% Voice, 100% Patterns, 95% Roles).
+  - `npm run grammar:check`: Passed (all 130 categories, 18 rules, 339 tokens, 55 groups verified).
+  - `npm run grammar:report`: Passed (exit code 0; report generated).
+  - `npm run test:layout`: Passed (all 233 layout invariants passing with exit code 0).
+  - `npm run build`: Passed (prebuild grammar:check succeeded; 83/83 static pages compiled).
+- Commit: pending
+- Open questions / follow-ups:
+  - Queue of 94 draft Bangla category labels in `src/content/grammar/labels.bn.json` prepared for owner review.
+  - Checkpoint 3 Complete; awaiting owner review and approval before starting No Hard-Code Stage 2.
 
 ### 2026-11-20, Phase 2 Checkpoint 2 (UI MVP) Completed & Verified
 - Requested by owner: Execute Phase 2 Checkpoint 2 (UI MVP) per EnglishPartner_Grammar_ColorCoding_Spec.md §12.

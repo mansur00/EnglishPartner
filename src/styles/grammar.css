@@ -142,6 +142,53 @@
   border-top: var(--gram-underline-thickness) solid var(--gram-pattern-discourse-line);
   background-color: var(--gram-pattern-discourse-bg);
 }
+[data-gram-pattern="reported"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-reported-line);
+  background-color: var(--gram-pattern-reported-bg);
+}
+[data-gram-pattern="question"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-question-line);
+  background-color: var(--gram-pattern-question-bg);
+}
+[data-gram-pattern="comparison"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-comparison-line);
+  background-color: var(--gram-pattern-comparison-bg);
+}
+[data-gram-pattern="existential"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-existential-line);
+  background-color: var(--gram-pattern-existential-bg);
+}
+[data-gram-pattern="verb"],
+[data-gram-pattern="verbs"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-verb-line);
+  background-color: var(--gram-pattern-verb-bg);
+}
+[data-gram-pattern="article"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-article-line);
+  background-color: var(--gram-pattern-article-bg);
+}
+[data-gram-pattern="agreement"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-agreement-line);
+  background-color: var(--gram-pattern-agreement-bg);
+}
+[data-gram-pattern="lexical"] {
+  border-top: var(--gram-underline-thickness) solid var(--gram-pattern-lexical-line);
+  background-color: var(--gram-pattern-lexical-bg);
+}
+
+/* 6. Phrases & Clauses (Brackets and Outlines) */
+[data-gram-phrase="start"] {
+  border-left: 2px solid var(--gram-phrase-line);
+}
+[data-gram-phrase="end"] {
+  border-right: 2px solid var(--gram-phrase-line);
+}
+[data-gram-clause="start"] {
+  border-left: 2px solid var(--gram-clause-line);
+}
+[data-gram-clause="end"] {
+  border-right: 2px solid var(--gram-clause-line);
+}
 
 /* 6. Focus Mode Dimming */
 .gram-container[data-gram-focus-active="true"] .gram-token:not([data-gram-focused="true"]) {

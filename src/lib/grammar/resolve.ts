@@ -33,6 +33,29 @@ export function resolveRenderTokens(
   const isRoleActive = layerSet.has("role");
   const isTenseActive = layerSet.has("tense");
   const isPatternActive = layerSet.has("pattern");
+  const isPhraseActive = layerSet.has("phrase");
+
+  // Map token index -> phrase / clause edges
+  const phraseEdgeMap = new Map<number, "start" | "end" | "both">();
+  const clauseEdgeMap = new Map<number, "start" | "end" | "both">();
+
+  if (isPhraseActive && annotation.groups) {
+    for (const group of annotation.groups) {
+      if ((group.type === "phrase" || group.type === "clause") && group.tokens.length > 0) {
+        const sorted = [...group.tokens].sort((a, b) => a - b);
+        const first = sorted[0];
+        const last = sorted[sorted.length - 1];
+        const targetMap = group.type === "phrase" ? phraseEdgeMap : clauseEdgeMap;
+
+        if (first === last) {
+          targetMap.set(first, "both");
+        } else {
+          targetMap.set(first, "start");
+          targetMap.set(last, "end");
+        }
+      }
+    }
+  }
 
   // Map token index -> verb group (if any)
   const verbGroupMap = new Map<
@@ -151,6 +174,9 @@ export function resolveRenderTokens(
       }
     }
 
+    const phraseEdge = isPhraseActive ? phraseEdgeMap.get(token.i) : undefined;
+    const clauseEdge = isPhraseActive ? clauseEdgeMap.get(token.i) : undefined;
+
     return {
       ...token,
       pos,
@@ -161,6 +187,8 @@ export function resolveRenderTokens(
       tenseAspect,
       patternFamily,
       patternKey,
+      phraseEdge,
+      clauseEdge,
       rubyLabel,
       isFocused,
     };

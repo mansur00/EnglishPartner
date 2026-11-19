@@ -74,7 +74,7 @@
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 201,
+      "line": 214,
       "detail": "Tailwind raw palette color: text-white",
       "code": "? \"bg-brand-800 text-white shadow-xs dark:bg-brand-700\""
     },
@@ -122,43 +122,43 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 28,
+      "line": 27,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<div className=\"w-10 h-10 rounded-[12px] bg-brand-800 text-white flex items-center justify-center font-semibold text-lg shadow-xs group-hover:scale-95 transition-transform\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 96,
+      "line": 95,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<section className=\"bg-gradient-to-b from-brand-800 to-brand-900 text-white rounded-b-[24px] pt-12 pb-18 md:pt-16 md:pb-22 px-4 sm:px-6 md:px-8\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 99,
+      "line": 98,
       "detail": "Tailwind raw palette color: bg-white/10, border-white/20, text-white",
       "code": "<div className=\"inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 border border-white/20 text-white shadow-2xs backdrop-blur-xs\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 105,
+      "line": 104,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<h1 className=\"text-4xl font-semibold font-heading tracking-tight text-white max-w-3xl mx-auto leading-tight\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 110,
+      "line": 109,
       "detail": "Tailwind raw palette color: text-white/85",
       "code": "<p className=\"text-base sm:text-lg text-white/85 font-bangla font-medium max-w-2xl mx-auto leading-relaxed\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 131,
+      "line": 130,
       "detail": "Tailwind raw palette color: bg-white/10, bg-white/20, text-white, border-white/20",
       "code": "className=\"w-full sm:w-auto text-base rounded-[12px] bg-white/10 hover:bg-white/20 text-white border-white/20 gap-2 font-bangla\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 140,
+      "line": 139,
       "detail": "Tailwind raw palette color: text-white/70",
       "code": "<div className=\"pt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/70\">"
     },
@@ -272,151 +272,151 @@
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 258,
+      "line": 261,
       "detail": "Tailwind raw palette color: text-emerald-700, bg-emerald-50, border-emerald-200",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 301,
+      "line": 304,
       "detail": "Tailwind raw palette color: bg-white",
       "code": "<Card className=\"p-6 bg-white border-ecp-border space-y-4\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 312,
+      "line": 315,
       "detail": "Tailwind raw palette color: text-emerald-700",
       "code": "<div className=\"text-emerald-700 font-semibold flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 323,
+      "line": 326,
       "detail": "Tailwind raw palette color: text-emerald-700",
       "code": "<div className=\"text-emerald-700 font-semibold flex items-center gap-1.5 font-bangla\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 346,
+      "line": 349,
       "detail": "Tailwind raw palette color: bg-white",
       "code": "<Card className=\"p-6 bg-white border-ecp-border space-y-3\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 353,
+      "line": 356,
       "detail": "Tailwind raw palette color: text-emerald-600",
       "code": "<span className=\"text-emerald-600 font-semibold\">VERIFIED</span>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 357,
+      "line": 360,
       "detail": "Tailwind raw palette color: text-emerald-600",
       "code": "<span className=\"text-emerald-600 font-semibold\">PASSED</span>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 361,
+      "line": 364,
       "detail": "Tailwind raw palette color: text-emerald-600",
       "code": "<span className=\"text-emerald-600 font-semibold\">PUBLISHED</span>"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 52,
+      "line": 53,
       "detail": "Arbitrary var() color utility: border-[var(--ecp-error)]",
       "code": "<Card className=\"max-w-md w-full text-center space-y-4 p-8 border-[var(--ecp-error)]/30\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 53,
+      "line": 54,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-error-surface)], text-[var(--ecp-error)]",
       "code": "<div className=\"w-12 h-12 rounded-full bg-[var(--ecp-error-surface)] text-[var(--ecp-error)] flex items-center justify-center mx-auto\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 57,
+      "line": 58,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-primary)]",
       "code": "<h1 className=\"text-xl font-semibold text-[var(--ecp-text-primary)]\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 61,
+      "line": 62,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-secondary)]",
       "code": "<p className=\"text-sm text-[var(--ecp-text-secondary)] leading-relaxed font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 163,
+      "line": 164,
       "detail": "Tailwind raw palette color: bg-white",
       "code": "<div className=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-white border border-ecp-border rounded-2xl shadow-2xs\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 211,
+      "line": 212,
       "detail": "Tailwind raw palette color: bg-emerald-50, border-emerald-200, text-emerald-800",
       "code": "<div className=\"p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800 font-bangla animate-in fade-in flex items-center gap-2\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 212,
+      "line": 213,
       "detail": "Tailwind raw palette color: text-emerald-600",
       "code": "<HugeiconsIcon icon={CheckmarkCircle01Icon} size={16} className=\"text-emerald-600\" />"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 221,
+      "line": 222,
       "detail": "Tailwind raw palette color: bg-emerald-50/40, border-emerald-200",
       "code": "? \"bg-emerald-50/40 border-emerald-200\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 222,
+      "line": 223,
       "detail": "Tailwind raw palette color: bg-rose-50/40, border-rose-200",
       "code": ": \"bg-rose-50/40 border-rose-200\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 230,
+      "line": 231,
       "detail": "Tailwind raw palette color: text-emerald-600, text-rose-600",
       "code": "className={validation.isValid ? \"text-emerald-600\" : \"text-rose-600\"}"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 242,
+      "line": 243,
       "detail": "Tailwind raw palette color: text-rose-700",
       "code": "<div className=\"space-y-1 text-xs text-rose-700 font-medium\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 253,
+      "line": 254,
       "detail": "Tailwind raw palette color: text-amber-700, border-amber-200/40",
       "code": "<div className=\"space-y-1 text-xs text-amber-700 pt-1 border-t border-amber-200/40\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 285,
+      "line": 316,
       "detail": "Tailwind raw palette color: bg-white",
       "code": "className=\"p-5 bg-white border-ecp-border space-y-4 hover:border-ecp-violet/40 transition-all shadow-2xs\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 334,
+      "line": 365,
       "detail": "Tailwind raw palette color: text-rose-600, bg-rose-50",
       "code": "className=\"p-1.5 rounded-lg text-ecp-text-muted hover:text-rose-600 hover:bg-rose-50 transition-colors ml-1 cursor-pointer\""
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 58,
+      "line": 59,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<h1 className=\"text-page-title text-white\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 61,
+      "line": 62,
       "detail": "Tailwind raw palette color: text-white/80",
       "code": "<p className=\"text-meta text-white/80 mt-1.5 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 137,
+      "line": 138,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<span className=\"size-marker rounded-pill bg-brand-800 text-white flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs\">"
     },
@@ -434,223 +434,187 @@
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 24,
+      "line": 29,
       "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, border-emerald-500/30, bg-emerald-400/15, text-emerald-300",
       "code": "A1: \"bg-emerald-500/10 text-emerald-800 border-emerald-500/30 dark:bg-emerald-400/15 dark:text-emerald-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 25,
+      "line": 30,
       "detail": "Tailwind raw palette color: bg-sky-500/10, text-sky-800, border-sky-500/30, bg-sky-400/15, text-sky-300",
       "code": "A2: \"bg-sky-500/10 text-sky-800 border-sky-500/30 dark:bg-sky-400/15 dark:text-sky-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 26,
+      "line": 31,
       "detail": "Tailwind raw palette color: bg-amber-500/10, text-amber-800, border-amber-500/30, bg-amber-400/15, text-amber-300",
       "code": "B1: \"bg-amber-500/10 text-amber-800 border-amber-500/30 dark:bg-amber-400/15 dark:text-amber-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 27,
+      "line": 32,
       "detail": "Tailwind raw palette color: bg-orange-500/10, text-orange-800, border-orange-500/30, bg-orange-400/15, text-orange-300",
       "code": "B2: \"bg-orange-500/10 text-orange-800 border-orange-500/30 dark:bg-orange-400/15 dark:text-orange-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 28,
+      "line": 33,
       "detail": "Tailwind raw palette color: bg-purple-500/10, text-purple-800, border-purple-500/30, bg-purple-400/15, text-purple-300",
       "code": "C1: \"bg-purple-500/10 text-purple-800 border-purple-500/30 dark:bg-purple-400/15 dark:text-purple-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 48,
+      "line": 53,
       "detail": "Arbitrary var() color utility: text-[var(--topic-ink)]",
       "code": "<span className=\"text-sm font-semibold text-[var(--topic-ink)]\">"
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 116,
+      "line": 117,
       "detail": "Arbitrary var() color utility: ring-[var(--ecp-brand-800)]",
       "code": "\"inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] focus:ring-offset-1 select-none\","
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 118,
+      "line": 119,
       "detail": "Tailwind raw palette color: text-white",
-      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-xs\""
-    },
-    {
-      "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 118,
-      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
       "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-xs\""
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
       "line": 119,
+      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
+      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-xs\""
+    },
+    {
+      "file": "src/components/learning/AudioPlayButton.tsx",
+      "line": 120,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-surface-muted)], text-[var(--ecp-brand-800)], bg-[var(--ecp-brand-100)], border-[var(--ecp-border)]",
       "code": ": \"bg-[var(--ecp-surface-muted)] text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-brand-100)] border border-[var(--ecp-border)]\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 121,
+      "line": 122,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-surface)], border-[var(--ecp-border)]",
       "code": "<div className=\"sticky bottom-4 z-20 mx-auto max-w-3xl w-full bg-[var(--ecp-surface)]/95 backdrop-blur-md border border-[var(--ecp-border)] rounded-2xl p-4 shadow-xl space-y-3\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 123,
+      "line": 124,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-surface-muted)]",
       "code": "<div className=\"w-full bg-[var(--ecp-surface-muted)] h-1.5 rounded-full overflow-hidden\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 125,
+      "line": 126,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
       "code": "className=\"bg-[var(--ecp-brand-800)] h-full transition-all duration-300 rounded-full\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 148,
+      "line": 149,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-secondary)]",
       "code": "className=\"rounded-full text-[var(--ecp-text-secondary)]\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 155,
+      "line": 156,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-secondary)]",
       "code": "<div className=\"text-xs font-semibold text-[var(--ecp-text-secondary)]\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 157,
+      "line": 158,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-brand-800)]",
       "code": "<span className=\"flex items-center gap-1.5 text-[var(--ecp-brand-800)] font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 158,
+      "line": 159,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
       "code": "<span className=\"w-2 h-2 rounded-full bg-[var(--ecp-brand-800)] animate-pulse\" />"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 172,
+      "line": 173,
       "detail": "Arbitrary var() color utility: bg-[var(--ecp-surface-muted)], border-[var(--ecp-border)], text-[var(--ecp-text-primary)], border-[var(--ecp-brand-800)]",
       "code": "className=\"px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 179,
+      "line": 180,
       "detail": "Arbitrary var() color utility: border-[var(--ecp-border)], bg-[var(--ecp-surface-muted)]",
       "code": "<div className=\"inline-flex rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface-muted)] p-0.5 text-xs font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 185,
+      "line": 186,
       "detail": "Tailwind raw palette color: text-white",
-      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-2xs\""
-    },
-    {
-      "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 185,
-      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
       "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-2xs\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
       "line": 186,
+      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
+      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-2xs\""
+    },
+    {
+      "file": "src/components/learning/AudioPlayer.tsx",
+      "line": 187,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-muted)], text-[var(--ecp-text-primary)]",
       "code": ": \"text-[var(--ecp-text-muted)] hover:text-[var(--ecp-text-primary)]\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 196,
+      "line": 197,
       "detail": "Tailwind raw palette color: text-white",
-      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-2xs\""
-    },
-    {
-      "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 196,
-      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
       "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-2xs\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
       "line": 197,
+      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
+      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-2xs\""
+    },
+    {
+      "file": "src/components/learning/AudioPlayer.tsx",
+      "line": 198,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-muted)], text-[var(--ecp-text-primary)]",
       "code": ": \"text-[var(--ecp-text-muted)] hover:text-[var(--ecp-text-primary)]\""
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 102,
+      "line": 154,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-muted)]",
       "code": "<div className=\"p-8 text-center text-sm text-[var(--ecp-text-muted)]\">"
     },
     {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 233,
-      "detail": "Arbitrary var() color utility: bg-[var(--ecp-surface)], border-[var(--ecp-border)]",
-      "code": "<div className=\"flex flex-wrap items-center justify-between gap-3 p-4 bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl shadow-2xs\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 249,
-      "detail": "Arbitrary var() color utility: text-[var(--ecp-text-muted)]",
-      "code": "<span className=\"text-xs font-semibold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 253,
-      "detail": "Arbitrary var() color utility: bg-[var(--ecp-surface-muted)], border-[var(--ecp-border)]",
-      "code": "<div className=\"flex items-center gap-1.5 bg-[var(--ecp-surface-muted)] p-1 rounded-xl border border-[var(--ecp-border)]\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 264,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-xs\""
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 264,
-      "detail": "Arbitrary var() color utility: bg-[var(--ecp-brand-800)]",
-      "code": "? \"bg-[var(--ecp-brand-800)] text-white shadow-xs\""
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 265,
-      "detail": "Arbitrary var() color utility: text-[var(--ecp-text-secondary)], text-[var(--ecp-text-primary)]",
-      "code": ": \"text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]\""
-    },
-    {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 97,
-      "detail": "Arbitrary var() color utility: text-[var(--ecp-text-secondary)], text-[var(--ecp-brand-800)], bg-[var(--ecp-surface-muted)]",
-      "code": "className=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-surface-muted)] transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 108,
+      "line": 133,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-primary)]",
-      "code": "<p className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
+      "code": "<div className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 136,
+      "line": 191,
       "detail": "Arbitrary var() color utility: border-[var(--ecp-border)]",
       "code": "<div className=\"pt-2 border-t border-[var(--ecp-border)]/60 animate-in fade-in duration-200\">"
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 137,
+      "line": 198,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-text-secondary)]",
-      "code": "<p className=\"text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla leading-[1.75]\">"
+      "code": ": \"text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla\""
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 145,
+      "line": 204,
+      "detail": "Tailwind raw palette color: text-amber-800, bg-amber-500/10",
+      "code": "<span className=\"inline-block mt-1 text-chip font-medium text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded border border-border\">"
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 214,
       "detail": "Arbitrary var() color utility: text-[var(--ecp-brand-800)], bg-[var(--ecp-brand-50)], border-[var(--ecp-brand-100)]",
       "code": "<div className=\"flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-[12px] border border-[var(--ecp-brand-100)]\">"
     },
@@ -764,7 +728,7 @@
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 194,
+      "line": 273,
       "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
       "code": "<HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className=\"text-emerald-600 dark:text-emerald-400\" />"
     },
@@ -986,43 +950,43 @@
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 28,
+      "line": 29,
       "detail": "Tailwind raw palette color: text-white",
       "code": "\"w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-white shadow-xs space-y-3.5 min-w-0 sm:min-w-[360px]\","
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 38,
+      "line": 39,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<span className=\"text-stat text-white\">{streak}</span>"
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 39,
+      "line": 40,
       "detail": "Tailwind raw palette color: text-white/90",
-      "code": "<span className=\"text-meta text-white/90\">day streak</span>"
+      "code": "<span className=\"text-meta text-white/90\">{t(\"dashboard.dayStreak\")}</span>"
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 58,
+      "line": 59,
       "detail": "Tailwind raw palette color: bg-white/20, text-white/80",
       "code": "!isDone && isPast && \"bg-white/20 text-white/80\","
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 59,
+      "line": 60,
       "detail": "Tailwind raw palette color: border-white/30, text-white/50",
       "code": "isFuture && \"border border-dashed border-white/30 text-white/50\""
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 72,
+      "line": 73,
       "detail": "Tailwind raw palette color: text-white",
       "code": "<span className=\"text-body font-semibold text-white\">"
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 75,
+      "line": 76,
       "detail": "Tailwind raw palette color: text-white/80",
       "code": "<span className=\"text-meta text-white/80\">"
     },
@@ -1252,49 +1216,49 @@
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 95,
+      "line": 96,
       "detail": "Arbitrary typography class: tracking-[-0.01em]",
       "code": "<h1 className=\"text-3xl font-semibold font-heading text-foreground tracking-[-0.01em]\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 95,
+      "line": 96,
       "detail": "Direct scale text utility in feature code: text-3xl",
       "code": "<h1 className=\"text-3xl font-semibold font-heading text-foreground tracking-[-0.01em]\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 95,
+      "line": 96,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h1 className=\"text-3xl font-semibold font-heading text-foreground tracking-[-0.01em]\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 98,
+      "line": 99,
       "detail": "Direct scale text utility in feature code: text-sm, text-base",
       "code": "<p className=\"text-sm md:text-base text-muted-foreground mt-1.5 font-bangla\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 123,
+      "line": 124,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "className=\"w-full h-12 pl-12 pr-12 border-0 shadow-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus-visible:ring-0\""
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 158,
+      "line": 159,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm font-semibold text-muted-foreground\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 158,
+      "line": 159,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-sm font-semibold text-muted-foreground\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 159,
+      "line": 160,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "Showing <span className=\"text-primary font-semibold\">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? \"s\" : \"\"}"
     },
@@ -1372,103 +1336,127 @@
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 128,
+      "line": 141,
       "detail": "Direct scale text utility in feature code: text-xl, text-2xl",
       "code": "<h1 className=\"text-xl sm:text-2xl font-semibold text-foreground font-bangla\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 128,
+      "line": 141,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h1 className=\"text-xl sm:text-2xl font-semibold text-foreground font-bangla\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 131,
+      "line": 144,
       "detail": "Direct scale text utility in feature code: text-xs, text-sm",
       "code": "<p className=\"text-xs sm:text-sm text-muted-foreground mt-0.5\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 142,
+      "line": 155,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"text-xs gap-2 font-bangla rounded-[12px]\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 150,
+      "line": 163,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"flex items-center justify-between gap-3 p-4 rounded-[12px] bg-brand-50/60 dark:bg-brand-950/40 border border-brand-200/50 dark:border-brand-800/40 text-xs text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 160,
+      "line": 173,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"font-semibold text-brand-800 dark:text-brand-300 hover:underline shrink-0 cursor-pointer\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 178,
+      "line": 191,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"w-full h-12 pl-10 pr-4 rounded-[12px] border border-border bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-brand-600 focus:ring-1 focus:ring-brand-600 transition-all\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 199,
+      "line": 212,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className={`h-10 px-4 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 199,
+      "line": 212,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className={`h-10 px-4 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 224,
+      "line": 237,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<h3 className=\"text-xl font-semibold text-foreground font-sans\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 224,
+      "line": 237,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-xl font-semibold text-foreground font-sans\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 231,
+      "line": 244,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-mono text-muted-foreground mt-1 block\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 260,
+      "line": 273,
       "detail": "Direct scale text utility in feature code: text-xs, text-sm",
       "code": "<div className=\"text-xs sm:text-sm font-bangla text-foreground font-medium leading-relaxed\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 260,
+      "line": 273,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"text-xs sm:text-sm font-bangla text-foreground font-medium leading-relaxed\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 264,
+      "line": 277,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"text-xs font-bangla text-muted-foreground\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 271,
+      "line": 286,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<p className=\"text-xs text-muted-foreground italic pt-1 border-t border-border/60\">"
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider font-bangla\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 280,
+      "line": 286,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider font-bangla\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 295,
+      "detail": "Direct scale text utility in feature code: text-xs, text-sm",
+      "code": "<div className=\"text-xs sm:text-sm font-medium py-1\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 295,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<div className=\"text-xs sm:text-sm font-medium py-1\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 301,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<p className=\"text-xs text-muted-foreground italic\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 312,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"pt-2 text-xs text-muted-foreground flex flex-wrap gap-2\">"
     },
@@ -1660,271 +1648,271 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 28,
+      "line": 27,
       "detail": "Direct scale text utility in feature code: text-lg",
       "code": "<div className=\"w-10 h-10 rounded-[12px] bg-brand-800 text-white flex items-center justify-center font-semibold text-lg shadow-xs group-hover:scale-95 transition-transform\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 28,
+      "line": 27,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"w-10 h-10 rounded-[12px] bg-brand-800 text-white flex items-center justify-center font-semibold text-lg shadow-xs group-hover:scale-95 transition-transform\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 32,
+      "line": 31,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "<span className=\"font-semibold text-base font-heading text-foreground tracking-tight leading-none block\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 32,
+      "line": 31,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"font-semibold text-base font-heading text-foreground tracking-tight leading-none block\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 35,
+      "line": 34,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs text-muted-foreground font-bangla leading-none block mt-0.5\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 45,
+      "line": 44,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"text-sm font-medium text-muted-foreground hover:text-foreground transition-colors\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 45,
+      "line": 44,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "className=\"text-sm font-medium text-muted-foreground hover:text-foreground transition-colors\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 55,
+      "line": 54,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"text-sm font-medium text-muted-foreground/50 cursor-not-allowed flex items-center gap-1.5\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 55,
+      "line": 54,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "className=\"text-sm font-medium text-muted-foreground/50 cursor-not-allowed flex items-center gap-1.5\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 67,
+      "line": 66,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"text-sm font-medium text-muted-foreground/50 cursor-not-allowed flex items-center gap-1.5\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 67,
+      "line": 66,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "className=\"text-sm font-medium text-muted-foreground/50 cursor-not-allowed flex items-center gap-1.5\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 77,
+      "line": 76,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"text-sm font-medium text-muted-foreground hover:text-foreground transition-colors\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 77,
+      "line": 76,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "className=\"text-sm font-medium text-muted-foreground hover:text-foreground transition-colors\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 99,
+      "line": 98,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 border border-white/20 text-white shadow-2xs backdrop-blur-xs\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 99,
+      "line": 98,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 border border-white/20 text-white shadow-2xs backdrop-blur-xs\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 105,
+      "line": 104,
       "detail": "Direct scale text utility in feature code: text-4xl",
       "code": "<h1 className=\"text-4xl font-semibold font-heading tracking-tight text-white max-w-3xl mx-auto leading-tight\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 105,
+      "line": 104,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h1 className=\"text-4xl font-semibold font-heading tracking-tight text-white max-w-3xl mx-auto leading-tight\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 110,
+      "line": 109,
       "detail": "Direct scale text utility in feature code: text-base, text-lg",
       "code": "<p className=\"text-base sm:text-lg text-white/85 font-bangla font-medium max-w-2xl mx-auto leading-relaxed\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 110,
+      "line": 109,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-base sm:text-lg text-white/85 font-bangla font-medium max-w-2xl mx-auto leading-relaxed\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 120,
+      "line": 119,
       "detail": "Direct scale text utility in feature code: text-base, text-lg",
       "code": "className=\"w-full sm:w-auto text-base sm:text-lg rounded-[12px] shadow-sm gap-2.5 font-semibold px-8\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 120,
+      "line": 119,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"w-full sm:w-auto text-base sm:text-lg rounded-[12px] shadow-sm gap-2.5 font-semibold px-8\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 131,
+      "line": 130,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "className=\"w-full sm:w-auto text-base rounded-[12px] bg-white/10 hover:bg-white/20 text-white border-white/20 gap-2 font-bangla\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 140,
+      "line": 139,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"pt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/70\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 166,
+      "line": 165,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 169,
+      "line": 168,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<h2 className=\"text-xl font-semibold font-heading text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 169,
+      "line": 168,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-xl font-semibold font-heading text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 172,
+      "line": 171,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 172,
+      "line": 171,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 176,
+      "line": 175,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-medium\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 176,
+      "line": 175,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-medium\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 190,
+      "line": 189,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 193,
+      "line": 192,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<h2 className=\"text-xl font-semibold font-heading text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 193,
+      "line": 192,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-xl font-semibold font-heading text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 196,
+      "line": 195,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 196,
+      "line": 195,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 200,
+      "line": 199,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-medium\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 200,
+      "line": 199,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-medium\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 214,
+      "line": 213,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 217,
+      "line": 216,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<h2 className=\"text-xl font-semibold font-heading text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 217,
+      "line": 216,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-xl font-semibold font-heading text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 220,
+      "line": 219,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 220,
+      "line": 219,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 224,
+      "line": 223,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-medium\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 224,
+      "line": 223,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"pt-4 mt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground font-medium\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 236,
+      "line": 235,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"max-w-5xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground\">"
     },
@@ -2194,385 +2182,403 @@
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 226,
+      "line": 229,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-semibold text-ecp-text-primary font-sans\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 229,
+      "line": 232,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"text-xs text-ecp-text-secondary font-bangla\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 232,
+      "line": 235,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-mono text-ecp-text-muted\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 251,
+      "line": 254,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"block text-xs text-ecp-text-muted mt-0.5 capitalize\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 258,
+      "line": 261,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 258,
+      "line": 261,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 262,
+      "line": 265,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-ecp-violet font-medium bg-ecp-violet-surface px-2 py-0.5 rounded-md border border-ecp-violet/20\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 262,
+      "line": 265,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-ecp-violet font-medium bg-ecp-violet-surface px-2 py-0.5 rounded-md border border-ecp-violet/20\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 267,
+      "line": 270,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs text-ecp-text-muted block mt-1\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 280,
+      "line": 283,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<Button variant=\"outline\" size=\"sm\" className=\"text-xs gap-1\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 287,
+      "line": 290,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<Button variant=\"ghost\" size=\"sm\" className=\"text-xs\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 304,
+      "line": 307,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "<h3 className=\"text-base font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 304,
+      "line": 307,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-base font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 309,
+      "line": 312,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"grid grid-cols-1 md:grid-cols-3 gap-4 text-xs\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 311,
+      "line": 314,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-semibold text-ecp-text-primary\">English Source Texts</div>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 312,
+      "line": 315,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-emerald-700 font-semibold flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 322,
+      "line": 325,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-semibold text-ecp-text-primary font-bangla\">বাংলা অনুবাদ (Bengali Glosses)</div>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 323,
+      "line": 326,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-emerald-700 font-semibold flex items-center gap-1.5 font-bangla\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 333,
+      "line": 336,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-semibold text-ecp-text-primary\">Accents & Audio Assets</div>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 334,
+      "line": 337,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-ecp-violet font-semibold flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 347,
+      "line": 350,
       "detail": "Direct scale text utility in feature code: text-sm",
-      "code": "<h3 className=\"text-sm font-semibold text-ecp-text-primary font-bangla\">"
-    },
-    {
-      "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 347,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-sm font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
       "line": 350,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-sm font-semibold text-ecp-text-primary font-bangla\">"
+    },
+    {
+      "file": "src/components/admin/AdminDashboardClient.tsx",
+      "line": 353,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"space-y-2 text-xs font-mono text-ecp-text-secondary\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 353,
+      "line": 356,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-emerald-600 font-semibold\">VERIFIED</span>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 357,
+      "line": 360,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-emerald-600 font-semibold\">PASSED</span>"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 361,
+      "line": 364,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-emerald-600 font-semibold\">PUBLISHED</span>"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 53,
+      "line": 54,
       "detail": "Arbitrary typography class: text-[var(--ecp-error)]",
       "code": "<div className=\"w-12 h-12 rounded-full bg-[var(--ecp-error-surface)] text-[var(--ecp-error)] flex items-center justify-center mx-auto\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 57,
+      "line": 58,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-primary)]",
       "code": "<h1 className=\"text-xl font-semibold text-[var(--ecp-text-primary)]\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 57,
+      "line": 58,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<h1 className=\"text-xl font-semibold text-[var(--ecp-text-primary)]\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 57,
+      "line": 58,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h1 className=\"text-xl font-semibold text-[var(--ecp-text-primary)]\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 61,
+      "line": 62,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)]",
       "code": "<p className=\"text-sm text-[var(--ecp-text-secondary)] leading-relaxed font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 61,
+      "line": 62,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm text-[var(--ecp-text-secondary)] leading-relaxed font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 67,
+      "line": 68,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<Button className=\"w-full text-xs font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 166,
+      "line": 167,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<Button variant=\"ghost\" size=\"sm\" className=\"gap-1.5 text-xs -ml-2\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 173,
+      "line": 174,
       "detail": "Direct scale text utility in feature code: text-lg, text-xl",
       "code": "<h1 className=\"text-lg sm:text-xl font-semibold text-ecp-text-primary font-sans\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 173,
+      "line": 174,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h1 className=\"text-lg sm:text-xl font-semibold text-ecp-text-primary font-sans\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 180,
+      "line": 181,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<p className=\"text-xs text-ecp-text-secondary font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 192,
+      "line": 193,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"text-xs font-bangla\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 201,
+      "line": 202,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"text-xs font-bangla gap-1.5\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 211,
+      "line": 212,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800 font-bangla animate-in fade-in flex items-center gap-2\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 211,
+      "line": 212,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800 font-bangla animate-in fade-in flex items-center gap-2\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 232,
+      "line": 233,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<h3 className=\"text-sm font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 232,
+      "line": 233,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-sm font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 242,
+      "line": 243,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"space-y-1 text-xs text-rose-700 font-medium\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 242,
+      "line": 243,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"space-y-1 text-xs text-rose-700 font-medium\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 253,
+      "line": 254,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"space-y-1 text-xs text-amber-700 pt-1 border-t border-amber-200/40\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 267,
+      "line": 273,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<h3 className=\"text-sm font-semibold text-foreground font-sans\">"
+    },
+    {
+      "file": "src/components/admin/ConversationEditorClient.tsx",
+      "line": 273,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-sm font-semibold text-foreground font-sans\">"
+    },
+    {
+      "file": "src/components/admin/ConversationEditorClient.tsx",
+      "line": 280,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<p className=\"text-xs text-muted-foreground font-bangla mt-0.5\">"
+    },
+    {
+      "file": "src/components/admin/ConversationEditorClient.tsx",
+      "line": 298,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "<h2 className=\"text-base font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 267,
+      "line": 298,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-base font-semibold text-ecp-text-primary font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 274,
+      "line": 305,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"text-xs gap-1.5 font-bangla\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 290,
+      "line": 321,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"w-7 h-7 rounded-lg bg-ecp-violet-surface text-ecp-violet font-semibold text-xs flex items-center justify-center font-mono\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 290,
+      "line": 321,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"w-7 h-7 rounded-lg bg-ecp-violet-surface text-ecp-violet font-semibold text-xs flex items-center justify-center font-mono\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 298,
+      "line": 329,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-ecp-border bg-ecp-bg-canvas text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet cursor-pointer\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 298,
+      "line": 329,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-ecp-border bg-ecp-bg-canvas text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet cursor-pointer\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 346,
+      "line": 377,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<label className=\"text-xs font-semibold text-ecp-text-primary block\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 346,
+      "line": 377,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-xs font-semibold text-ecp-text-primary block\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 354,
+      "line": 385,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"w-full p-2.5 rounded-xl border border-ecp-border text-sm font-sans text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet focus:ring-1 focus:ring-ecp-violet\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 360,
+      "line": 391,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<label className=\"text-xs font-semibold text-ecp-text-primary block font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 360,
+      "line": 391,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-xs font-semibold text-ecp-text-primary block font-bangla\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 368,
+      "line": 399,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"w-full p-2.5 rounded-xl border border-ecp-border text-sm font-bangla text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet focus:ring-1 focus:ring-ecp-violet\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 374,
+      "line": 405,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 text-xs text-ecp-text-secondary\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 381,
+      "line": 412,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"w-full px-3 py-1.5 rounded-lg border border-ecp-border text-xs bg-ecp-bg-canvas text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 386,
+      "line": 417,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-ecp-violet font-semibold bg-ecp-violet-surface px-2 py-1 rounded-md\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 386,
+      "line": 417,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-ecp-violet font-semibold bg-ecp-violet-surface px-2 py-1 rounded-md\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 402,
+      "line": 433,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"gap-2 font-bangla px-6 text-xs\""
     },
@@ -2650,73 +2656,73 @@
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 61,
+      "line": 62,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-meta text-white/80 mt-1.5 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 97,
+      "line": 98,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-lead text-muted-foreground font-bangla text-bangla mt-1 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 107,
+      "line": 108,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"flex items-center gap-1.5 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 110,
+      "line": 111,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"flex items-center gap-1.5 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 127,
+      "line": 128,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center justify-between text-meta font-semibold text-topic-ink uppercase tracking-wider pb-2 border-b border-border\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 132,
+      "line": 133,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-meta font-semibold\">2 turns</span>"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 141,
+      "line": 142,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-semibold text-brand-950 dark:text-brand-100\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 144,
+      "line": 145,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-meta text-muted-foreground font-bangla text-bangla mt-1 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 153,
+      "line": 154,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-semibold text-topic-ink\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 156,
+      "line": 157,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-meta text-topic-ink/80 font-bangla text-bangla mt-1 font-medium\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 190,
+      "line": 191,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center justify-between text-meta font-semibold text-topic-ink mb-1.5\">"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 229,
+      "line": 230,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center justify-between text-meta font-semibold text-topic-ink mb-1.5\">"
     },
@@ -2752,409 +2758,841 @@
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 37,
+      "line": 38,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<div className=\"flex items-center gap-2 text-muted-foreground font-semibold uppercase tracking-wider text-sm mr-1\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 37,
+      "line": 38,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-muted-foreground font-semibold uppercase tracking-wider text-sm mr-1\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 47,
+      "line": 48,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<SelectTrigger className=\"w-[160px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 64,
+      "line": 65,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<SelectTrigger className=\"w-[160px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 79,
+      "line": 80,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<SelectTrigger className=\"w-[170px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 96,
+      "line": 97,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "className=\"btn-press h-11 text-sm gap-1.5 ml-auto px-4\""
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 41,
+      "line": 46,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl shrink-0 shadow-2xs\""
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 48,
+      "line": 53,
       "detail": "Arbitrary typography class: text-[var(--topic-ink)]",
       "code": "<span className=\"text-sm font-semibold text-[var(--topic-ink)]\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 48,
+      "line": 53,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<span className=\"text-sm font-semibold text-[var(--topic-ink)]\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 48,
+      "line": 53,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-sm font-semibold text-[var(--topic-ink)]\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 52,
+      "line": 57,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 52,
+      "line": 57,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cefrStyles[scenario.level] || cefrStyles.A2}`}>"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 55,
+      "line": 60,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<span className=\"text-xs font-semibold uppercase tracking-wider bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border\">"
+      "code": "<span className=\"text-xs font-medium bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 55,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-xs font-semibold uppercase tracking-wider bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border\">"
+      "line": 60,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"text-xs font-medium bg-muted text-muted-foreground px-2 py-0.5 rounded-full border border-border\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 72,
+      "line": 77,
       "detail": "Direct scale text utility in feature code: text-xl",
       "code": "<h3 className=\"text-xl font-semibold font-heading text-foreground group-hover:text-primary transition-colors line-clamp-1\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 72,
+      "line": 77,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-xl font-semibold font-heading text-foreground group-hover:text-primary transition-colors line-clamp-1\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 75,
+      "line": 80,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla mt-1 line-clamp-1\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 75,
+      "line": 80,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-sm font-medium text-muted-foreground font-bangla mt-1 line-clamp-1\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 81,
+      "line": 86,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm text-muted-foreground leading-relaxed line-clamp-2\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 88,
+      "line": 93,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<div className=\"flex items-center gap-4 text-sm text-muted-foreground\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 89,
+      "line": 94,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"flex items-center gap-1.5 font-medium\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 93,
+      "line": 98,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"flex items-center gap-1.5 font-medium\">"
     },
     {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 28,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<div className=\"p-3 rounded-panel bg-muted/40 border border-border flex items-center justify-between text-xs\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 30,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-muted-foreground block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 33,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"font-medium text-foreground capitalize\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 38,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<Badge variant=\"outline\" size=\"sm\" className=\"capitalize text-xs\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 47,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<table className=\"w-full text-left text-xs border border-border rounded-panel\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 48,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<thead className=\"bg-muted/60 text-muted-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 65,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<td className=\"p-2 font-medium text-foreground\">{tok.text}</td>"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 91,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 91,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 107,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"p-2.5 rounded-control border border-border bg-card flex items-center justify-between text-xs\""
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 110,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-foreground font-bangla block\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 121,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"px-2 py-1 text-xs font-semibold text-primary hover:underline cursor-pointer font-bangla\""
+    },
+    {
+      "file": "src/components/grammar/GrammarBreakdown.tsx",
+      "line": 121,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"px-2 py-1 text-xs font-semibold text-primary hover:underline cursor-pointer font-bangla\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 92,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"hidden sm:inline text-xs font-semibold font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 92,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"hidden sm:inline text-xs font-semibold font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 103,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<PopoverTitle className=\"text-sm font-semibold font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 103,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<PopoverTitle className=\"text-sm font-semibold font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 111,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"text-xs h-7 px-2 text-primary gap-1\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 121,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 121,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 133,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold font-bangla text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 133,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold font-bangla text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 136,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs text-muted-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 154,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 154,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 166,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "\"py-1.5 px-2 text-xs font-semibold rounded-xs transition-colors cursor-pointer capitalize font-bangla\","
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 166,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"py-1.5 px-2 text-xs font-semibold rounded-xs transition-colors cursor-pointer capitalize font-bangla\","
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 190,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"text-xs font-semibold font-bangla text-foreground cursor-pointer\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 190,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"text-xs font-semibold font-bangla text-foreground cursor-pointer\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 194,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs text-muted-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 61,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<div className=\"flex items-center gap-1.5 text-xs font-semibold font-bangla text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 61,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-1.5 text-xs font-semibold font-bangla text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 65,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-normal\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 65,
+      "detail": "Direct font-weight utility in feature code: font-normal",
+      "code": "<span className=\"text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-normal\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 76,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground cursor-pointer\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 86,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"text-xs font-medium text-primary hover:underline cursor-pointer font-bangla\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 86,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "className=\"text-xs font-medium text-primary hover:underline cursor-pointer font-bangla\""
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 111,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "\"inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-xs font-semibold transition-all duration-150 cursor-pointer border\","
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 111,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-xs font-semibold transition-all duration-150 cursor-pointer border\","
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 145,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"font-bangla text-xs font-medium\">{label.name}</span>"
+    },
+    {
+      "file": "src/components/grammar/GrammarLegend.tsx",
+      "line": 145,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"font-bangla text-xs font-medium\">{label.name}</span>"
+    },
+    {
+      "file": "src/components/grammar/GrammarModeSwitch.tsx",
+      "line": 40,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"text-xs font-semibold font-bangla text-foreground cursor-pointer\""
+    },
+    {
+      "file": "src/components/grammar/GrammarModeSwitch.tsx",
+      "line": 40,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"text-xs font-semibold font-bangla text-foreground cursor-pointer\""
+    },
+    {
+      "file": "src/components/grammar/GrammarSummaryRow.tsx",
+      "line": 117,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground inline-flex items-center gap-1 mr-1\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarSummaryRow.tsx",
+      "line": 117,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground inline-flex items-center gap-1 mr-1\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarSummaryRow.tsx",
+      "line": 132,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "\"inline-flex items-center gap-1 px-2.5 py-1 rounded-pill text-xs font-semibold transition-all duration-150 cursor-pointer border\","
+    },
+    {
+      "file": "src/components/grammar/GrammarSummaryRow.tsx",
+      "line": 132,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"inline-flex items-center gap-1 px-2.5 py-1 rounded-pill text-xs font-semibold transition-all duration-150 cursor-pointer border\","
+    },
+    {
+      "file": "src/components/grammar/GrammarSummaryRow.tsx",
+      "line": 146,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs opacity-70 ml-0.5 font-normal\">ℹ</span>"
+    },
+    {
+      "file": "src/components/grammar/GrammarSummaryRow.tsx",
+      "line": 146,
+      "detail": "Direct font-weight utility in feature code: font-normal",
+      "code": "<span className=\"text-xs opacity-70 ml-0.5 font-normal\">ℹ</span>"
+    },
+    {
+      "file": "src/components/grammar/GrammarToggleButton.tsx",
+      "line": 32,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "\"relative inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 rounded-control text-xs font-semibold cursor-pointer transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-primary\","
+    },
+    {
+      "file": "src/components/grammar/GrammarToggleButton.tsx",
+      "line": 32,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"relative inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 rounded-control text-xs font-semibold cursor-pointer transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-primary\","
+    },
+    {
+      "file": "src/components/grammar/GrammarToggleButton.tsx",
+      "line": 34,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "? \"rainbow-border bg-card text-foreground shadow-xs font-semibold\""
+    },
+    {
+      "file": "src/components/grammar/GrammarToggleButton.tsx",
+      "line": 47,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"hidden sm:inline font-bangla font-semibold text-xs\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarToggleButton.tsx",
+      "line": 47,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"hidden sm:inline font-bangla font-semibold text-xs\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 46,
+      "detail": "Direct scale text utility in feature code: text-xl",
+      "code": "<DialogTitle className=\"text-xl font-semibold text-foreground tracking-tight font-sans\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 46,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<DialogTitle className=\"text-xl font-semibold text-foreground tracking-tight font-sans\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 49,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<p className=\"text-xs text-muted-foreground font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 59,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-primary uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 59,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-primary uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 62,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<p className=\"text-sm font-mono font-medium text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 62,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<p className=\"text-sm font-mono font-medium text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 70,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 70,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 73,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<p className=\"text-sm text-foreground leading-relaxed font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 81,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 81,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 84,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<ul className=\"space-y-1 text-sm text-foreground font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 98,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 98,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 107,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<p className=\"text-sm font-medium text-foreground italic\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 107,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<p className=\"text-sm font-medium text-foreground italic\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 111,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<p className=\"text-xs text-muted-foreground font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 124,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-destructive uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 124,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-destructive uppercase tracking-wider block font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 127,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<ul className=\"space-y-1 text-xs text-foreground font-bangla\">"
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 138,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<Button variant=\"ghost\" size=\"sm\" onClick={onClose} className=\"text-xs font-bangla\">"
+    },
+    {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 101,
+      "line": 102,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold text-muted-foreground bg-muted cursor-not-allowed select-none\""
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 101,
+      "line": 102,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold text-muted-foreground bg-muted cursor-not-allowed select-none\""
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 116,
+      "line": 117,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "\"inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] focus:ring-offset-1 select-none\","
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 116,
+      "line": 117,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "\"inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] focus:ring-offset-1 select-none\","
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 119,
+      "line": 120,
       "detail": "Arbitrary typography class: text-[var(--ecp-brand-800)]",
       "code": ": \"bg-[var(--ecp-surface-muted)] text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-brand-100)] border border-[var(--ecp-border)]\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 148,
+      "line": 149,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)]",
       "code": "className=\"rounded-full text-[var(--ecp-text-secondary)]\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 155,
+      "line": 156,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)]",
       "code": "<div className=\"text-xs font-semibold text-[var(--ecp-text-secondary)]\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 155,
+      "line": 156,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"text-xs font-semibold text-[var(--ecp-text-secondary)]\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 155,
+      "line": 156,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-xs font-semibold text-[var(--ecp-text-secondary)]\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 157,
+      "line": 158,
       "detail": "Arbitrary typography class: text-[var(--ecp-brand-800)]",
       "code": "<span className=\"flex items-center gap-1.5 text-[var(--ecp-brand-800)] font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 157,
+      "line": 158,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"flex items-center gap-1.5 text-[var(--ecp-brand-800)] font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 172,
+      "line": 173,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-primary)]",
       "code": "className=\"px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 172,
+      "line": 173,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 172,
+      "line": 173,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 179,
+      "line": 180,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"inline-flex rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface-muted)] p-0.5 text-xs font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 179,
+      "line": 180,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"inline-flex rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface-muted)] p-0.5 text-xs font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 186,
+      "line": 187,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-muted)], text-[var(--ecp-text-primary)]",
       "code": ": \"text-[var(--ecp-text-muted)] hover:text-[var(--ecp-text-primary)]\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 197,
+      "line": 198,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-muted)], text-[var(--ecp-text-primary)]",
       "code": ": \"text-[var(--ecp-text-muted)] hover:text-[var(--ecp-text-primary)]\""
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 102,
+      "line": 154,
       "detail": "Arbitrary typography class: text-[var(--ecp-text-muted)]",
       "code": "<div className=\"p-8 text-center text-sm text-[var(--ecp-text-muted)]\">"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 102,
+      "line": 154,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<div className=\"p-8 text-center text-sm text-[var(--ecp-text-muted)]\">"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 237,
+      "line": 292,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<span className=\"inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-semibold text-xs font-mono border border-ecp-violet/20\">"
+      "code": "<div className=\"flex items-center gap-2 overflow-x-auto pb-1 text-xs\">"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 237,
+      "line": 293,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-semibold text-xs font-mono border border-ecp-violet/20\">"
+      "code": "<span className=\"font-semibold text-muted-foreground whitespace-nowrap flex items-center gap-1 font-bangla\">"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 242,
+      "line": 306,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<span className=\"text-xs text-ecp-text-secondary bg-ecp-bg-canvas px-3 py-1.5 rounded-xl border border-ecp-border hidden md:inline\">"
+      "code": "className={`px-3 py-1 rounded-control text-xs font-semibold transition-all cursor-pointer ${"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 249,
-      "detail": "Arbitrary typography class: text-[var(--ecp-text-muted)]",
-      "code": "<span className=\"text-xs font-semibold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 249,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<span className=\"text-xs font-semibold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 249,
+      "line": 306,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-xs font-semibold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5\">"
+      "code": "className={`px-3 py-1 rounded-control text-xs font-semibold transition-all cursor-pointer ${"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 262,
+      "line": 331,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${"
+      "code": "<Button variant=\"outline\" size=\"sm\" className=\"min-h-[44px] text-xs font-bangla gap-1\">"
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 262,
+      "line": 340,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<Button size=\"sm\" className=\"min-h-[44px] text-xs font-bangla gap-1\">"
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 351,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"min-h-[44px] text-xs gap-1.5 font-bangla\""
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 365,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"min-h-[44px] text-xs gap-1.5 font-bangla\""
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 110,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer\""
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 110,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 265,
-      "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)], text-[var(--ecp-text-primary)]",
-      "code": ": \"text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]\""
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 279,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<Button variant=\"outline\" size=\"sm\" className=\"text-xs font-bangla gap-1\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 288,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<Button size=\"sm\" className=\"text-xs font-bangla gap-1\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 299,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className=\"text-xs gap-1.5\""
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 313,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className=\"text-xs gap-1.5 font-bangla\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 85,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className=\"inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 85,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "className=\"inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 97,
-      "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)], text-[var(--ecp-brand-800)]",
-      "code": "className=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-surface-muted)] transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 97,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-surface-muted)] transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 97,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "className=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-surface-muted)] transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 108,
-      "detail": "Arbitrary typography class: text-[var(--ecp-text-primary)], leading-[1.7]",
-      "code": "<p className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 108,
-      "detail": "Direct scale text utility in feature code: text-lg, text-xl",
-      "code": "<p className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 108,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
+      "code": "className=\"inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer\""
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
       "line": 122,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "? \"font-semibold text-ecp-violet underline decoration-ecp-warm decoration-2 underline-offset-4 hover:bg-ecp-violet-surface/70\""
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border\""
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 137,
-      "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)], leading-[1.75]",
-      "code": "<p className=\"text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla leading-[1.75]\">"
+      "line": 122,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "className=\"inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border\""
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 137,
+      "line": 133,
+      "detail": "Arbitrary typography class: text-[var(--ecp-text-primary)], leading-[1.7]",
+      "code": "<div className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 133,
+      "detail": "Direct scale text utility in feature code: text-lg, text-xl",
+      "code": "<div className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 133,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<div className=\"text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight\">"
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 195,
+      "detail": "Arbitrary typography class: leading-[1.75]",
+      "code": "\"leading-[1.75]\","
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 197,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "? \"text-sm text-muted-foreground italic font-sans\""
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 198,
+      "detail": "Arbitrary typography class: text-[var(--ecp-text-secondary)]",
+      "code": ": \"text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla\""
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 198,
       "detail": "Direct scale text utility in feature code: text-sm, text-base",
-      "code": "<p className=\"text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla leading-[1.75]\">"
+      "code": ": \"text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla\""
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 145,
+      "line": 204,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"inline-block mt-1 text-chip font-medium text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded border border-border\">"
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 214,
       "detail": "Arbitrary typography class: text-[var(--ecp-brand-800)]",
       "code": "<div className=\"flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-[12px] border border-[var(--ecp-brand-100)]\">"
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 145,
+      "line": 214,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-[12px] border border-[var(--ecp-brand-100)]\">"
     },
@@ -3754,183 +4192,207 @@
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 76,
+      "line": 96,
       "detail": "Direct scale text utility in feature code: text-2xl",
       "code": "<DialogTitle className=\"text-2xl font-semibold text-foreground tracking-tight font-sans\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 76,
+      "line": 96,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<DialogTitle className=\"text-2xl font-semibold text-foreground tracking-tight font-sans\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 79,
+      "line": 99,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<Badge variant={posBadgeVariant(entry.partOfSpeech)} size=\"sm\" className=\"uppercase text-xs\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 83,
+      "line": 103,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<Badge variant=\"accent\" size=\"sm\" className=\"font-semibold text-xs\">"
+      "code": "<Badge variant=\"accent\" size=\"sm\" className=\"font-semibold text-xs font-bangla\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 83,
+      "line": 103,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<Badge variant=\"accent\" size=\"sm\" className=\"font-semibold text-xs\">"
+      "code": "<Badge variant=\"accent\" size=\"sm\" className=\"font-semibold text-xs font-bangla\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 92,
+      "line": 112,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-mono text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-md border border-border\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 100,
+      "line": 120,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className=\"btn-press text-xs gap-1.5 h-8\""
+      "code": "className=\"btn-press text-xs gap-1.5 h-8 font-bangla\""
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 110,
-      "detail": "Arbitrary typography class: font-[var(--ecp-font-bangla)]",
-      "code": "<div className=\"text-xs font-semibold text-primary font-[var(--ecp-font-bangla)] mb-1 flex items-center gap-1.5\">"
-    },
-    {
-      "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 110,
+      "line": 130,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<div className=\"text-xs font-semibold text-primary font-[var(--ecp-font-bangla)] mb-1 flex items-center gap-1.5\">"
+      "code": "<div className=\"text-xs font-semibold text-primary font-bangla flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 110,
+      "line": 130,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"text-xs font-semibold text-primary font-[var(--ecp-font-bangla)] mb-1 flex items-center gap-1.5\">"
+      "code": "<div className=\"text-xs font-semibold text-primary font-bangla flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 114,
-      "detail": "Arbitrary typography class: font-[var(--ecp-font-bangla)]",
-      "code": "<p className=\"text-sm font-[var(--ecp-font-bangla)] text-foreground leading-relaxed font-medium\">"
+      "line": 134,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<div className=\"grid grid-cols-2 gap-2 text-xs\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 114,
-      "detail": "Direct scale text utility in feature code: text-sm",
-      "code": "<p className=\"text-sm font-[var(--ecp-font-bangla)] text-foreground leading-relaxed font-medium\">"
+      "line": 138,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-foreground font-bangla\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 114,
+      "line": 146,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-foreground font-bangla\">{roleLabel.name}</span>"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 152,
       "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-sm font-[var(--ecp-font-bangla)] text-foreground leading-relaxed font-medium\">"
+      "code": "<span className=\"font-mono font-medium text-foreground\">{tokenData.lemma}</span>"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 120,
-      "detail": "Arbitrary typography class: font-[var(--ecp-font-bangla)]",
-      "code": "<span className=\"text-xs font-semibold text-muted-foreground font-[var(--ecp-font-bangla)] uppercase tracking-wider block mb-1\">"
-    },
-    {
-      "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 120,
-      "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "<span className=\"text-xs font-semibold text-muted-foreground font-[var(--ecp-font-bangla)] uppercase tracking-wider block mb-1\">"
-    },
-    {
-      "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 120,
+      "line": 158,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-xs font-semibold text-muted-foreground font-[var(--ecp-font-bangla)] uppercase tracking-wider block mb-1\">"
+      "code": "<span className=\"font-semibold text-foreground font-bangla\">{tenseLabel.name}</span>"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 123,
-      "detail": "Arbitrary typography class: font-[var(--ecp-font-bangla)]",
-      "code": "<p className=\"text-sm font-[var(--ecp-font-bangla)] text-muted-foreground\">"
+      "line": 165,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<div className=\"pt-1.5 border-t border-border/60 flex items-center justify-between text-xs\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 123,
+      "line": 176,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "className=\"text-xs font-semibold text-primary hover:underline cursor-pointer font-bangla\""
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 176,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"text-xs font-semibold text-primary hover:underline cursor-pointer font-bangla\""
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 189,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<div className=\"text-xs font-semibold text-primary font-bangla mb-1 flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 189,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"text-xs font-semibold text-primary font-bangla mb-1 flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 193,
       "detail": "Direct scale text utility in feature code: text-sm",
-      "code": "<p className=\"text-sm font-[var(--ecp-font-bangla)] text-muted-foreground\">"
+      "code": "<p className=\"text-sm font-bangla text-foreground leading-relaxed font-medium\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 130,
+      "line": 193,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<p className=\"text-sm font-bangla text-foreground leading-relaxed font-medium\">"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 199,
+      "detail": "Direct scale text utility in feature code: text-xs",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground font-bangla uppercase tracking-wider block mb-1\">"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 199,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-xs font-semibold text-muted-foreground font-bangla uppercase tracking-wider block mb-1\">"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 202,
+      "detail": "Direct scale text utility in feature code: text-sm",
+      "code": "<p className=\"text-sm font-bangla text-muted-foreground\">"
+    },
+    {
+      "file": "src/components/learning/WordDetailPopover.tsx",
+      "line": 209,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 130,
+      "line": 209,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 133,
+      "line": 212,
       "detail": "Direct scale text utility in feature code: text-sm",
       "code": "<p className=\"text-sm text-foreground italic font-sans leading-relaxed\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 141,
+      "line": 220,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 141,
+      "line": 220,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 144,
+      "line": 223,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<div className=\"flex flex-wrap gap-2 text-xs\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 167,
+      "line": 246,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 167,
+      "line": 246,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 174,
+      "line": 253,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "className=\"text-xs px-2.5 py-0.5 rounded-full bg-muted/60 border border-border text-muted-foreground\""
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 190,
-      "detail": "Arbitrary typography class: font-[var(--ecp-font-bangla)]",
-      "code": "className=\"btn-press gap-2 font-[var(--ecp-font-bangla)]\""
-    },
-    {
-      "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 209,
-      "detail": "Arbitrary typography class: font-[var(--ecp-font-bangla)]",
-      "code": "className=\"btn-press text-xs text-muted-foreground font-[var(--ecp-font-bangla)]\""
-    },
-    {
-      "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 209,
+      "line": 288,
       "detail": "Direct scale text utility in feature code: text-xs",
-      "code": "className=\"btn-press text-xs text-muted-foreground font-[var(--ecp-font-bangla)]\""
+      "code": "className=\"btn-press text-xs text-muted-foreground font-bangla\""
     },
     {
       "file": "src/components/navigation/AppShell.tsx",
@@ -3940,121 +4402,139 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 55,
+      "line": 94,
       "detail": "Direct scale text utility in feature code: text-lg",
       "code": "<div className=\"flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 55,
+      "line": 94,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 59,
+      "line": 98,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "<div className=\"font-semibold font-heading text-base leading-tight text-foreground\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 59,
+      "line": 98,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-semibold font-heading text-base leading-tight text-foreground\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 78,
+      "line": 117,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "\"flex items-center gap-3 px-4 py-3 rounded-control text-label font-semibold transition-colors\","
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 95,
+      "line": 134,
       "detail": "Direct scale text utility in feature code: text-lg",
       "code": "<div className=\"flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity shrink-0\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 95,
+      "line": 134,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity shrink-0\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 99,
+      "line": 138,
       "detail": "Direct scale text utility in feature code: text-base",
       "code": "<span className=\"font-semibold font-heading text-base leading-tight text-foreground\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 99,
+      "line": 138,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"font-semibold font-heading text-base leading-tight text-foreground\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 102,
+      "line": 141,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip text-muted-foreground font-medium\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 117,
+      "line": 156,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3.5 rounded-pill border border-border bg-card text-label font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer\""
     },
     {
+      "file": "src/components/navigation/Header.tsx",
+      "line": 173,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex h-6 w-6 items-center justify-center rounded-pill bg-primary text-primary-foreground font-semibold text-chip\">"
+    },
+    {
+      "file": "src/components/navigation/Header.tsx",
+      "line": 176,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"hidden md:inline-block max-w-[100px] truncate text-label font-medium text-foreground\">"
+    },
+    {
+      "file": "src/components/navigation/Header.tsx",
+      "line": 199,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"h-control-sm px-3 rounded-control text-label font-semibold text-foreground border-border hover:bg-muted\""
+    },
+    {
       "file": "src/components/navigation/MobileBottomNav.tsx",
-      "line": 54,
+      "line": 55,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "? \"text-primary font-semibold\""
     },
     {
       "file": "src/components/navigation/MobileBottomNav.tsx",
-      "line": 59,
+      "line": 60,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<span className=\"text-xs font-semibold leading-none\">{item.name}</span>"
     },
     {
       "file": "src/components/navigation/MobileBottomNav.tsx",
-      "line": 59,
+      "line": 60,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-xs font-semibold leading-none\">{item.name}</span>"
     },
     {
       "file": "src/components/navigation/Sidebar.tsx",
-      "line": 88,
+      "line": 89,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"px-3 text-chip font-semibold uppercase tracking-wider text-muted-foreground\">"
     },
     {
       "file": "src/components/navigation/Sidebar.tsx",
-      "line": 99,
+      "line": 100,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "className=\"flex items-center justify-between h-control-md px-3 text-label font-medium rounded-control text-muted-foreground/60 cursor-not-allowed select-none transition-colors\""
     },
     {
       "file": "src/components/navigation/Sidebar.tsx",
-      "line": 105,
+      "line": 106,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold bg-muted text-muted-foreground px-2 py-0.5 rounded-pill border border-border\">"
     },
     {
       "file": "src/components/navigation/Sidebar.tsx",
-      "line": 117,
+      "line": 118,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "\"flex items-center gap-3 h-control-md px-3 text-label font-semibold rounded-control transition-all duration-fast btn-press\","
     },
     {
       "file": "src/components/navigation/Sidebar.tsx",
-      "line": 119,
+      "line": 120,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "? \"bg-primary/10 text-primary font-semibold dark:bg-primary/20\""
     },
     {
       "file": "src/components/navigation/Sidebar.tsx",
-      "line": 137,
+      "line": 138,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-meta font-semibold font-heading text-foreground\">"
     },
@@ -4516,7 +4996,7 @@
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 72,
+      "line": 73,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-body font-semibold text-white\">"
     }
@@ -4524,139 +5004,139 @@
   "c_radius": [
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 104,
+      "line": 105,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[14px]",
       "code": "<div className={cn(\"rounded-[14px] transition-all duration-200\", isSearchFocused && \"rainbow-border\")}>"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 105,
+      "line": 106,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[14px]",
       "code": "<div className=\"relative bg-card rounded-[14px] border border-border shadow-xs\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 130,
+      "line": 131,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "className=\"absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer\""
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 167,
+      "line": 168,
       "detail": "Raw scale rounded utility in feature code: rounded-2xl",
       "code": "<div key={i} className=\"p-7 rounded-2xl bg-card border border-border space-y-4\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 169,
+      "line": 170,
       "detail": "Raw scale rounded utility in feature code: rounded-2xl",
       "code": "<Skeleton className=\"w-12 h-12 rounded-2xl\" />"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 122,
+      "line": 135,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[16px]",
       "code": "<div className=\"flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 md:p-6 rounded-[16px] bg-card border border-border shadow-2xs\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 124,
+      "line": 137,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"w-12 h-12 rounded-[12px] bg-brand-50 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300 flex items-center justify-center shrink-0\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 142,
+      "line": 155,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "className=\"text-xs gap-2 font-bangla rounded-[12px]\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 150,
+      "line": 163,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"flex items-center justify-between gap-3 p-4 rounded-[12px] bg-brand-50/60 dark:bg-brand-950/40 border border-brand-200/50 dark:border-brand-800/40 text-xs text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 178,
+      "line": 191,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "className=\"w-full h-12 pl-10 pr-4 rounded-[12px] border border-border bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-brand-600 focus:ring-1 focus:ring-brand-600 transition-all\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 217,
+      "line": 230,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[16px]",
       "code": "className=\"p-5 rounded-[16px] bg-card border border-border shadow-2xs hover:shadow-xs hover:border-brand-500/40 transition-all flex flex-col justify-between\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 241,
+      "line": 254,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[10px]",
       "code": "className=\"w-11 h-11 rounded-[10px] text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 dark:hover:bg-brand-900 transition-colors cursor-pointer flex items-center justify-center\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 250,
+      "line": 263,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[10px]",
       "code": "className=\"w-11 h-11 rounded-[10px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 28,
+      "line": 27,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"w-10 h-10 rounded-[12px] bg-brand-800 text-white flex items-center justify-center font-semibold text-lg shadow-xs group-hover:scale-95 transition-transform\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 87,
+      "line": 86,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<Button size=\"sm\" className=\"hidden sm:inline-flex rounded-[12px] font-bangla\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 120,
+      "line": 119,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "className=\"w-full sm:w-auto text-base sm:text-lg rounded-[12px] shadow-sm gap-2.5 font-semibold px-8\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 131,
+      "line": 130,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "className=\"w-full sm:w-auto text-base rounded-[12px] bg-white/10 hover:bg-white/20 text-white border-white/20 gap-2 font-bangla\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 163,
+      "line": 162,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[16px]",
       "code": "className=\"p-5 md:p-6 rounded-[16px] border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 166,
+      "line": 165,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 187,
+      "line": 186,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[16px]",
       "code": "className=\"p-5 md:p-6 rounded-[16px] border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 190,
+      "line": 189,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 211,
+      "line": 210,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[16px]",
       "code": "className=\"p-5 md:p-6 rounded-[16px] border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 214,
+      "line": 213,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
@@ -4698,115 +5178,115 @@
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 258,
+      "line": 261,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 262,
+      "line": 265,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-ecp-violet font-medium bg-ecp-violet-surface px-2 py-0.5 rounded-md border border-ecp-violet/20\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 310,
+      "line": 313,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "<div className=\"p-4 rounded-xl bg-ecp-bg-canvas border border-ecp-border space-y-2\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 321,
+      "line": 324,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "<div className=\"p-4 rounded-xl bg-ecp-bg-canvas border border-ecp-border space-y-2\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 332,
+      "line": 335,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "<div className=\"p-4 rounded-xl bg-ecp-bg-canvas border border-ecp-border space-y-2\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 351,
+      "line": 354,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "<div className=\"p-2.5 rounded-lg bg-ecp-bg-canvas border border-ecp-border flex items-center justify-between\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 355,
+      "line": 358,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "<div className=\"p-2.5 rounded-lg bg-ecp-bg-canvas border border-ecp-border flex items-center justify-between\">"
     },
     {
       "file": "src/components/admin/AdminDashboardClient.tsx",
-      "line": 359,
+      "line": 362,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "<div className=\"p-2.5 rounded-lg bg-ecp-bg-canvas border border-ecp-border flex items-center justify-between\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 163,
+      "line": 164,
       "detail": "Raw scale rounded utility in feature code: rounded-2xl",
       "code": "<div className=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-white border border-ecp-border rounded-2xl shadow-2xs\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 211,
+      "line": 212,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "<div className=\"p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800 font-bangla animate-in fade-in flex items-center gap-2\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 290,
+      "line": 321,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "<span className=\"w-7 h-7 rounded-lg bg-ecp-violet-surface text-ecp-violet font-semibold text-xs flex items-center justify-center font-mono\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 298,
+      "line": 329,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "className=\"text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-ecp-border bg-ecp-bg-canvas text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet cursor-pointer\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 315,
+      "line": 346,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "className=\"p-1.5 rounded-lg text-ecp-text-muted hover:text-ecp-text-primary disabled:opacity-30 cursor-pointer\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 325,
+      "line": 356,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "className=\"p-1.5 rounded-lg text-ecp-text-muted hover:text-ecp-text-primary disabled:opacity-30 cursor-pointer\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 334,
+      "line": 365,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "className=\"p-1.5 rounded-lg text-ecp-text-muted hover:text-rose-600 hover:bg-rose-50 transition-colors ml-1 cursor-pointer\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 354,
+      "line": 385,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "className=\"w-full p-2.5 rounded-xl border border-ecp-border text-sm font-sans text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet focus:ring-1 focus:ring-ecp-violet\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 368,
+      "line": 399,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "className=\"w-full p-2.5 rounded-xl border border-ecp-border text-sm font-bangla text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet focus:ring-1 focus:ring-ecp-violet\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 381,
+      "line": 412,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "className=\"w-full px-3 py-1.5 rounded-lg border border-ecp-border text-xs bg-ecp-bg-canvas text-ecp-text-primary focus:outline-hidden focus:border-ecp-violet\""
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 386,
+      "line": 417,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"inline-flex items-center gap-1 text-xs text-ecp-violet font-semibold bg-ecp-violet-surface px-2 py-1 rounded-md\">"
     },
@@ -4824,103 +5304,61 @@
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 36,
+      "line": 37,
       "detail": "Raw scale rounded utility in feature code: rounded-2xl",
       "code": "<div className=\"sticky top-16 z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-card/95 backdrop-blur border border-border shadow-2xs\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 41,
+      "line": 46,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl shrink-0 shadow-2xs\""
     },
     {
       "file": "src/components/learning/AudioPlayButton.tsx",
-      "line": 116,
+      "line": 117,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "\"inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] focus:ring-offset-1 select-none\","
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 121,
+      "line": 122,
       "detail": "Raw scale rounded utility in feature code: rounded-2xl",
       "code": "<div className=\"sticky bottom-4 z-20 mx-auto max-w-3xl w-full bg-[var(--ecp-surface)]/95 backdrop-blur-md border border-[var(--ecp-border)] rounded-2xl p-4 shadow-xl space-y-3\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 172,
+      "line": 173,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "className=\"px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors\""
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 179,
+      "line": 180,
       "detail": "Raw scale rounded utility in feature code: rounded-lg",
       "code": "<div className=\"inline-flex rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface-muted)] p-0.5 text-xs font-semibold\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 183,
+      "line": 184,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "className={`px-2 py-0.5 rounded-md transition-all ${"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 194,
+      "line": 195,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "className={`px-2 py-0.5 rounded-md transition-all ${"
     },
     {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 233,
-      "detail": "Raw scale rounded utility in feature code: rounded-2xl",
-      "code": "<div className=\"flex flex-wrap items-center justify-between gap-3 p-4 bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl shadow-2xs\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 237,
-      "detail": "Raw scale rounded utility in feature code: rounded-xl",
-      "code": "<span className=\"inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-semibold text-xs font-mono border border-ecp-violet/20\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 242,
-      "detail": "Raw scale rounded utility in feature code: rounded-xl",
-      "code": "<span className=\"text-xs text-ecp-text-secondary bg-ecp-bg-canvas px-3 py-1.5 rounded-xl border border-ecp-border hidden md:inline\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 253,
-      "detail": "Raw scale rounded utility in feature code: rounded-xl",
-      "code": "<div className=\"flex items-center gap-1.5 bg-[var(--ecp-surface-muted)] p-1 rounded-xl border border-[var(--ecp-border)]\">"
-    },
-    {
-      "file": "src/components/learning/ConversationReader.tsx",
-      "line": 262,
-      "detail": "Raw scale rounded utility in feature code: rounded-lg",
-      "code": "className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${"
-    },
-    {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 53,
+      "line": 72,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[16px]",
       "code": "\"rounded-[16px] p-5 md:p-6 transition-all duration-200 border space-y-3.5\","
     },
     {
       "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 85,
-      "detail": "Raw scale rounded utility in feature code: rounded-md",
-      "code": "className=\"inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 97,
-      "detail": "Raw scale rounded utility in feature code: rounded-md",
-      "code": "className=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-surface-muted)] transition-colors cursor-pointer\""
-    },
-    {
-      "file": "src/components/learning/ConversationTurn.tsx",
-      "line": 145,
+      "line": 214,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[12px]",
       "code": "<div className=\"flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-[12px] border border-[var(--ecp-brand-100)]\">"
     },
@@ -5046,37 +5484,37 @@
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 92,
+      "line": 112,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"text-xs font-mono text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-md border border-border\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 109,
+      "line": 188,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "<div className=\"bg-primary/5 dark:bg-primary/10 p-3.5 rounded-xl border border-primary/15\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 129,
+      "line": 208,
       "detail": "Raw scale rounded utility in feature code: rounded-xl",
       "code": "<div className=\"bg-muted/40 p-3 rounded-xl border border-border\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 146,
+      "line": 225,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 151,
+      "line": 230,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 156,
+      "line": 235,
       "detail": "Raw scale rounded utility in feature code: rounded-md",
       "code": "<span className=\"px-2.5 py-1 bg-muted/60 border border-border rounded-md text-muted-foreground\">"
     },
@@ -5268,7 +5706,7 @@
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 91,
+      "line": 92,
       "detail": "Arbitrary rounded-[..] in feature code: rounded-[2px]",
       "code": "\"h-segment flex-1 rounded-[2px] transition-colors\","
     }
@@ -5294,25 +5732,25 @@
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 92,
+      "line": 93,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl",
       "code": "<div className=\"space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16\">"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 123,
+      "line": 124,
       "detail": "Hardcoded layout constant / magic number: h-12",
       "code": "className=\"w-full h-12 pl-12 pr-12 border-0 shadow-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus-visible:ring-0\""
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 169,
+      "line": 170,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "<Skeleton className=\"w-12 h-12 rounded-2xl\" />"
     },
     {
       "file": "src/app/(app)/explore/page.tsx",
-      "line": 176,
+      "line": 177,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "<Skeleton className=\"h-11 w-full rounded-full\" />"
     },
@@ -5330,37 +5768,37 @@
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 120,
+      "line": 133,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl",
       "code": "<div className=\"space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 124,
+      "line": 137,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "<div className=\"w-12 h-12 rounded-[12px] bg-brand-50 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300 flex items-center justify-center shrink-0\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 178,
+      "line": 191,
       "detail": "Hardcoded layout constant / magic number: h-12",
       "code": "className=\"w-full h-12 pl-10 pr-4 rounded-[12px] border border-border bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-brand-600 focus:ring-1 focus:ring-brand-600 transition-all\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 199,
+      "line": 212,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "className={`h-10 px-4 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 241,
+      "line": 254,
       "detail": "Hardcoded layout constant / magic number: w-11, h-11",
       "code": "className=\"w-11 h-11 rounded-[10px] text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 dark:hover:bg-brand-900 transition-colors cursor-pointer flex items-center justify-center\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 250,
+      "line": 263,
       "detail": "Hardcoded layout constant / magic number: w-11, h-11",
       "code": "className=\"w-11 h-11 rounded-[10px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center\""
     },
@@ -5378,67 +5816,67 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 24,
+      "line": 23,
       "detail": "Hardcoded layout constant / magic number: z-40",
       "code": "<header className=\"sticky top-0 z-40 w-full border-b border-border bg-card/90 backdrop-blur\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 25,
+      "line": 24,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl, h-16",
       "code": "<div className=\"max-w-5xl mx-auto px-4 sm:px-6 md:px-8 h-16 flex items-center justify-between\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 28,
+      "line": 27,
       "detail": "Hardcoded layout constant / magic number: w-10, h-10",
       "code": "<div className=\"w-10 h-10 rounded-[12px] bg-brand-800 text-white flex items-center justify-center font-semibold text-lg shadow-xs group-hover:scale-95 transition-transform\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 97,
+      "line": 96,
       "detail": "Hardcoded layout constant / magic number: max-w-4xl",
       "code": "<div className=\"max-w-4xl mx-auto text-center space-y-6\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 105,
+      "line": 104,
       "detail": "Hardcoded layout constant / magic number: max-w-3xl",
       "code": "<h1 className=\"text-4xl font-semibold font-heading tracking-tight text-white max-w-3xl mx-auto leading-tight\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 110,
+      "line": 109,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-base sm:text-lg text-white/85 font-bangla font-medium max-w-2xl mx-auto leading-relaxed\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 158,
+      "line": 157,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl",
       "code": "<main className=\"flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 md:px-8 -mt-10 relative z-10 pb-16 space-y-12\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 166,
+      "line": 165,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 190,
+      "line": 189,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 214,
+      "line": 213,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "<div className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 236,
+      "line": 235,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl",
       "code": "<div className=\"max-w-5xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground\">"
     },
@@ -5456,19 +5894,25 @@
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 51,
+      "line": 52,
       "detail": "Arbitrary layout [Npx] utility: min-h-[60vh]",
       "code": "<div className=\"flex items-center justify-center p-4 min-h-[60vh]\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 53,
+      "line": 54,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "<div className=\"w-12 h-12 rounded-full bg-[var(--ecp-error-surface)] text-[var(--ecp-error)] flex items-center justify-center mx-auto\">"
     },
     {
       "file": "src/components/admin/ConversationEditorClient.tsx",
-      "line": 290,
+      "line": 268,
+      "detail": "Hardcoded layout constant / magic number: w-10, h-10",
+      "code": "<div className=\"w-10 h-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0\">"
+    },
+    {
+      "file": "src/components/admin/ConversationEditorClient.tsx",
+      "line": 321,
       "detail": "Hardcoded layout constant / magic number: w-7, h-7",
       "code": "<span className=\"w-7 h-7 rounded-lg bg-ecp-violet-surface text-ecp-violet font-semibold text-xs flex items-center justify-center font-mono\">"
     },
@@ -5480,13 +5924,13 @@
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 195,
+      "line": 196,
       "detail": "Arbitrary layout [Npx] utility: w-[40%]",
       "code": "<div className=\"h-full bg-topic-accent rounded-pill w-[40%]\" />"
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 234,
+      "line": 235,
       "detail": "Arbitrary layout [Npx] utility: w-[15%]",
       "code": "<div className=\"h-full bg-topic-accent rounded-pill w-[15%]\" />"
     },
@@ -5498,69 +5942,135 @@
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 36,
+      "line": 37,
       "detail": "Hardcoded layout constant / magic number: top-16",
       "code": "<div className=\"sticky top-16 z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-card/95 backdrop-blur border border-border shadow-2xs\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 47,
+      "line": 48,
       "detail": "Arbitrary layout [Npx] utility: w-[160px]",
       "code": "<SelectTrigger className=\"w-[160px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 47,
+      "line": 48,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "<SelectTrigger className=\"w-[160px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 64,
+      "line": 65,
       "detail": "Arbitrary layout [Npx] utility: w-[160px]",
       "code": "<SelectTrigger className=\"w-[160px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 64,
+      "line": 65,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "<SelectTrigger className=\"w-[160px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 79,
+      "line": 80,
       "detail": "Arbitrary layout [Npx] utility: w-[170px]",
       "code": "<SelectTrigger className=\"w-[170px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 79,
+      "line": 80,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "<SelectTrigger className=\"w-[170px] h-11 text-sm bg-card border-border\">"
     },
     {
       "file": "src/components/discovery/FilterBar.tsx",
-      "line": 96,
+      "line": 97,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"btn-press h-11 text-sm gap-1.5 ml-auto px-4\""
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 41,
+      "line": 46,
       "detail": "Hardcoded layout constant / magic number: w-12, h-12",
       "code": "className=\"w-12 h-12 rounded-[12px] emoji-tile flex items-center justify-center text-xl shrink-0 shadow-2xs\""
     },
     {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 86,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px], min-w-[44px]",
+      "code": "\"inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-2.5 py-1.5 rounded-control border border-border bg-card/60 hover:bg-card text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary\","
+    },
+    {
+      "file": "src/components/grammar/GrammarLayerPicker.tsx",
+      "line": 111,
+      "detail": "Hardcoded layout constant / magic number: h-7",
+      "code": "className=\"text-xs h-7 px-2 text-primary gap-1\""
+    },
+    {
+      "file": "src/components/grammar/GrammarModeSwitch.tsx",
+      "line": 26,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "\"inline-flex items-center gap-2 px-3 py-1.5 rounded-control border border-border bg-card/60 backdrop-blur-xs select-none min-h-[44px]\","
+    },
+    {
+      "file": "src/components/grammar/GrammarToggleButton.tsx",
+      "line": 32,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px], min-w-[44px]",
+      "code": "\"relative inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 rounded-control text-xs font-semibold cursor-pointer transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-primary\","
+    },
+    {
+      "file": "src/components/grammar/RuleCard.tsx",
+      "line": 39,
+      "detail": "Arbitrary layout [Npx] utility: h-[90vh]",
+      "code": "<DialogContent className=\"w-full sm:max-w-lg bg-card border-border p-5 sm:p-6 text-left max-h-[90vh] overflow-y-auto\">"
+    },
+    {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 121,
+      "line": 122,
       "detail": "Hardcoded layout constant / magic number: max-w-3xl",
       "code": "<div className=\"sticky bottom-4 z-20 mx-auto max-w-3xl w-full bg-[var(--ecp-surface)]/95 backdrop-blur-md border border-[var(--ecp-border)] rounded-2xl p-4 shadow-xl space-y-3\">"
     },
     {
       "file": "src/components/learning/AudioPlayer.tsx",
-      "line": 137,
+      "line": 138,
       "detail": "Arbitrary layout [Npx] utility: min-w-[100px]",
       "code": "className=\"rounded-full shadow-sm gap-1.5 min-w-[100px]\""
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 331,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "<Button variant=\"outline\" size=\"sm\" className=\"min-h-[44px] text-xs font-bangla gap-1\">"
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 340,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "<Button size=\"sm\" className=\"min-h-[44px] text-xs font-bangla gap-1\">"
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 351,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "className=\"min-h-[44px] text-xs gap-1.5 font-bangla\""
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 365,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "className=\"min-h-[44px] text-xs gap-1.5 font-bangla\""
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 110,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "className=\"inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer\""
+    },
+    {
+      "file": "src/components/learning/ConversationTurn.tsx",
+      "line": 122,
+      "detail": "Arbitrary layout [Npx] utility: min-h-[44px]",
+      "code": "className=\"inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border\""
     },
     {
       "file": "src/components/learning/GrammarPanel.tsx",
@@ -5606,31 +6116,37 @@
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 72,
+      "line": 92,
       "detail": "Arbitrary layout [Npx] utility: h-[90vh]",
       "code": "<DialogContent className=\"w-full sm:max-w-lg bg-card border-border p-5 sm:p-6 text-left max-h-[90vh] overflow-y-auto\">"
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 100,
+      "line": 120,
       "detail": "Hardcoded layout constant / magic number: h-8",
-      "code": "className=\"btn-press text-xs gap-1.5 h-8\""
+      "code": "className=\"btn-press text-xs gap-1.5 h-8 font-bangla\""
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 55,
+      "line": 94,
       "detail": "Hardcoded layout constant / magic number: h-10, w-10",
       "code": "<div className=\"flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs\">"
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 95,
+      "line": 134,
       "detail": "Hardcoded layout constant / magic number: h-10, w-10",
       "code": "<div className=\"flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity shrink-0\">"
     },
     {
+      "file": "src/components/navigation/Header.tsx",
+      "line": 176,
+      "detail": "Arbitrary layout [Npx] utility: max-w-[100px]",
+      "code": "<span className=\"hidden md:inline-block max-w-[100px] truncate text-label font-medium text-foreground\">"
+    },
+    {
       "file": "src/components/navigation/MobileBottomNav.tsx",
-      "line": 45,
+      "line": 46,
       "detail": "Hardcoded layout constant / magic number: h-14",
       "code": "<nav className=\"md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-14 w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs\">"
     },
@@ -5666,7 +6182,7 @@
     },
     {
       "file": "src/components/shared/TodayPanel.tsx",
-      "line": 28,
+      "line": 29,
       "detail": "Arbitrary layout [Npx] utility: min-w-[360px]",
       "code": "\"w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-white shadow-xs space-y-3.5 min-w-0 sm:min-w-[360px]\","
     }
@@ -5758,6 +6274,15 @@
       ]
     },
     {
+      "detail": "ClassName repeated 6 times",
+      "className": "text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla",
+      "files": [
+        "src/components/grammar/GrammarBreakdown.tsx",
+        "src/components/grammar/GrammarLayerPicker.tsx",
+        "src/components/grammar/RuleCard.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 3 times",
       "className": "text-sm font-semibold text-foreground font-[var(--ecp-font-bangla)]",
       "files": [
@@ -5776,6 +6301,20 @@
       "className": "font-semibold text-primary min-w-28 shrink-0",
       "files": [
         "src/components/learning/GrammarPanel.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "p-2 rounded-control bg-card border border-border",
+      "files": [
+        "src/components/learning/WordDetailPopover.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "font-semibold text-foreground font-bangla",
+      "files": [
+        "src/components/learning/WordDetailPopover.tsx"
       ]
     },
     {
@@ -5832,73 +6371,73 @@
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 124,
+      "line": 137,
       "detail": "Raw color with dark: prefix: dark:bg-brand-950/60, dark:text-brand-300",
       "code": "<div className=\"w-12 h-12 rounded-[12px] bg-brand-50 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300 flex items-center justify-center shrink-0\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 144,
+      "line": 157,
       "detail": "Raw color with dark: prefix: dark:text-brand-300",
       "code": "<HugeiconsIcon icon={Login01Icon} size={16} className=\"text-brand-800 dark:text-brand-300\" />"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 150,
+      "line": 163,
       "detail": "Raw color with dark: prefix: dark:bg-brand-950/40, dark:border-brand-800/40",
       "code": "<div className=\"flex items-center justify-between gap-3 p-4 rounded-[12px] bg-brand-50/60 dark:bg-brand-950/40 border border-brand-200/50 dark:border-brand-800/40 text-xs text-muted-foreground font-bangla\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 160,
+      "line": 173,
       "detail": "Raw color with dark: prefix: dark:text-brand-300",
       "code": "className=\"font-semibold text-brand-800 dark:text-brand-300 hover:underline shrink-0 cursor-pointer\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 201,
+      "line": 214,
       "detail": "Raw color with dark: prefix: dark:bg-brand-700",
       "code": "? \"bg-brand-800 text-white shadow-xs dark:bg-brand-700\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 241,
+      "line": 254,
       "detail": "Raw color with dark: prefix: dark:text-brand-300, dark:bg-brand-950/60",
       "code": "className=\"w-11 h-11 rounded-[10px] text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 dark:hover:bg-brand-900 transition-colors cursor-pointer flex items-center justify-center\""
     },
     {
       "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 141,
+      "line": 142,
       "detail": "Raw color with dark: prefix: dark:text-brand-100",
       "code": "<p className=\"font-semibold text-brand-950 dark:text-brand-100\">"
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 24,
+      "line": 29,
       "detail": "Raw color with dark: prefix: dark:bg-emerald-400/15, dark:text-emerald-300",
       "code": "A1: \"bg-emerald-500/10 text-emerald-800 border-emerald-500/30 dark:bg-emerald-400/15 dark:text-emerald-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 25,
+      "line": 30,
       "detail": "Raw color with dark: prefix: dark:bg-sky-400/15, dark:text-sky-300",
       "code": "A2: \"bg-sky-500/10 text-sky-800 border-sky-500/30 dark:bg-sky-400/15 dark:text-sky-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 26,
+      "line": 31,
       "detail": "Raw color with dark: prefix: dark:bg-amber-400/15, dark:text-amber-300",
       "code": "B1: \"bg-amber-500/10 text-amber-800 border-amber-500/30 dark:bg-amber-400/15 dark:text-amber-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 27,
+      "line": 32,
       "detail": "Raw color with dark: prefix: dark:bg-orange-400/15, dark:text-orange-300",
       "code": "B2: \"bg-orange-500/10 text-orange-800 border-orange-500/30 dark:bg-orange-400/15 dark:text-orange-300\","
     },
     {
       "file": "src/components/discovery/ScenarioCard.tsx",
-      "line": 28,
+      "line": 33,
       "detail": "Raw color with dark: prefix: dark:bg-purple-400/15, dark:text-purple-300",
       "code": "C1: \"bg-purple-500/10 text-purple-800 border-purple-500/30 dark:bg-purple-400/15 dark:text-purple-300\","
     },
@@ -5928,7 +6467,7 @@
     },
     {
       "file": "src/components/learning/WordDetailPopover.tsx",
-      "line": 194,
+      "line": 273,
       "detail": "Raw color with dark: prefix: dark:text-emerald-400",
       "code": "<HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className=\"text-emerald-600 dark:text-emerald-400\" />"
     },

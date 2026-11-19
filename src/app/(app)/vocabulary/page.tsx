@@ -20,8 +20,21 @@ import {
   SEED_VOCABULARY,
   VocabularyEntry,
 } from "@/content/seed/vocabulary";
+import { GrammarProvider, useGrammar } from "@/lib/grammar/context";
+import { GrammarText } from "@/components/grammar/GrammarText";
+import { GrammarToggleButton } from "@/components/grammar/GrammarToggleButton";
+import { createFallbackAnnotation } from "@/lib/grammar/fallback";
 
 export default function VocabularyPage() {
+  return (
+    <GrammarProvider>
+      <VocabularyContent />
+    </GrammarProvider>
+  );
+}
+
+function VocabularyContent() {
+  const { isLineActive, toggleLine } = useGrammar();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPos, setSelectedPos] = useState<string>("all");
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
@@ -266,11 +279,30 @@ export default function VocabularyPage() {
                     </div>
                   )}
 
-                  {/* Example Sentence */}
+                  {/* Example Sentence with Grammar Support */}
                   {item.exampleSentence && (
-                    <p className="text-xs text-muted-foreground italic pt-1 border-t border-border/60">
-                      &ldquo;{item.exampleSentence}&rdquo;
-                    </p>
+                    <div className="pt-2.5 border-t border-border/60 space-y-1.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider font-bangla">
+                          উদাহরণ বাক্য
+                        </span>
+                        <GrammarToggleButton
+                          isActive={isLineActive(`vocab-${item.lemma}`)}
+                          onToggle={() => toggleLine(`vocab-${item.lemma}`)}
+                        />
+                      </div>
+                      {isLineActive(`vocab-${item.lemma}`) ? (
+                        <div className="text-xs sm:text-sm font-medium py-1">
+                          <GrammarText
+                            annotation={createFallbackAnnotation(`vocab-${item.lemma}`, item.exampleSentence)}
+                          />
+                        </div>
+                      ) : (
+                        <p className="text-xs text-muted-foreground italic">
+                          &ldquo;{item.exampleSentence}&rdquo;
+                        </p>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
