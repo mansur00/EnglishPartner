@@ -8,6 +8,7 @@ import {
   ArrowRight01Icon,
   Book01Icon,
 } from "@hugeicons/core-free-icons";
+import { PageContainer } from "@/components/shared";
 import { LadderStepItem } from "@/content/seed/niche_shopping_money";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -62,9 +63,9 @@ export function NicheLadderRoadmap({
   ];
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto pb-16">
+    <PageContainer className="space-y-8 pb-16">
       {/* Niche Hero Header */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-ecp-border shadow-xs space-y-4">
+      <div className="p-6 sm:p-8 rounded-card bg-card border border-border shadow-xs space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="brand" size="sm">
             Niche 01 • Pilot Track
@@ -72,37 +73,37 @@ export function NicheLadderRoadmap({
           <Badge variant="accent" size="sm">
             20-Step Progressive Ladder
           </Badge>
-          <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+          <span className="text-chip text-success bg-success-bg px-2.5 py-0.5 rounded-pill border border-border">
             A1 to C1 Complete
           </span>
         </div>
 
         <div>
-          <h1 className="text-3xl font-semibold text-ecp-text-primary tracking-[-0.01em] font-sans">
+          <h1 className="text-page-title text-foreground">
             {nicheTitle}
           </h1>
-          <p className="text-base sm:text-lg font-bangla text-ecp-text-secondary mt-1 font-medium">
+          <p className="text-lead text-muted-foreground text-bangla mt-1">
             {nicheTitleBn}
           </p>
         </div>
 
         <div className="space-y-1">
-          <p className="text-xs sm:text-sm text-ecp-text-secondary max-w-2xl leading-relaxed">
+          <p className="text-meta text-muted-foreground max-w-reading leading-relaxed">
             {description}
           </p>
-          <p className="text-xs sm:text-sm text-ecp-text-muted max-w-2xl leading-relaxed font-bangla">
+          <p className="text-meta text-muted-foreground max-w-reading leading-relaxed text-bangla">
             {descriptionBn}
           </p>
         </div>
 
         <div className="pt-2 flex flex-wrap items-center gap-3">
           <Link href={`/conversations/${steps[0]?.stepSlug}`}>
-            <Button className="gap-2 font-bangla text-xs sm:text-sm">
+            <Button className="gap-2 text-label rounded-control">
               <HugeiconsIcon icon={PlayCircle02Icon} size={16} />
               <span>ধাপ ০১ থেকে শুরু করুন (Start Step 01)</span>
             </Button>
           </Link>
-          <span className="text-xs text-ecp-text-muted font-bangla">
+          <span className="text-chip text-muted-foreground text-bangla">
             প্রতিটি ধাপ শেষ হলে &ldquo;পরবর্তী ধাপ&rdquo; বাটনে স্বয়ংক্রিয়ভাবে পরের কথোপকথনে যাওয়া যাবে
           </span>
         </div>
@@ -121,7 +122,7 @@ export function NicheLadderRoadmap({
                 <Badge variant={tier.badgeVariant} size="sm">
                   {tier.group}
                 </Badge>
-                <h3 className="text-sm font-semibold text-ecp-text-primary font-bangla">
+                <h3 className="text-card-title text-foreground text-bangla">
                   {tier.titleBn}
                 </h3>
               </div>
@@ -132,31 +133,31 @@ export function NicheLadderRoadmap({
                   return (
                     <div
                       key={step.stepSlug}
-                      className="p-5 rounded-2xl bg-white border border-ecp-border hover:border-ecp-violet hover:shadow-xs transition-all flex flex-col justify-between group"
+                      className="p-5 rounded-card bg-card border border-border hover:border-primary hover:shadow-xs transition-all flex flex-col justify-between group"
                     >
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-lg">
+                          <span className="inline-flex items-center gap-1.5 font-mono text-chip text-primary bg-primary/10 px-2.5 py-1 rounded-control">
                             <HugeiconsIcon icon={Book01Icon} size={13} />
                             Step {step.stepNumber.toString().padStart(2, "0")}
                           </span>
-                          <span className="text-xs font-semibold text-ecp-text-muted">
+                          <span className="text-chip text-muted-foreground">
                             {step.linesCount} lines · {step.level}
                           </span>
                         </div>
 
                         <div>
-                          <h4 className="text-base font-semibold text-ecp-text-primary group-hover:text-ecp-violet transition-colors font-sans">
+                          <h4 className="text-card-title text-foreground group-hover:text-primary transition-colors">
                             {step.title}
                           </h4>
-                          <p className="text-xs font-bangla text-ecp-text-secondary mt-0.5 line-clamp-1">
+                          <p className="text-meta text-muted-foreground text-bangla mt-0.5 line-clamp-1">
                             {step.titleBn}
                           </p>
                         </div>
 
                         {/* Grammar Focus Pill */}
-                        <div className="bg-ecp-bg-canvas p-2.5 rounded-xl border border-ecp-border text-xs text-ecp-text-secondary">
-                          <span className="font-semibold text-ecp-text-primary block mb-0.5">
+                        <div className="bg-muted/50 p-2.5 rounded-panel border border-border text-chip text-muted-foreground">
+                          <span className="text-foreground block mb-0.5">
                             Grammar Focus:
                           </span>
                           <span className="italic leading-snug block line-clamp-2">
@@ -166,8 +167,8 @@ export function NicheLadderRoadmap({
                       </div>
 
                       {/* Speakers & Action */}
-                      <div className="pt-3.5 mt-3 border-t border-ecp-border flex items-center justify-between gap-2">
-                        <div className="text-xs text-ecp-text-muted truncate">
+                      <div className="pt-3.5 mt-3 border-t border-border flex items-center justify-between gap-2">
+                        <div className="text-chip text-muted-foreground truncate">
                           বক্তা: {step.speakers.map((s) => s.name).join(", ")}
                         </div>
 
@@ -175,7 +176,7 @@ export function NicheLadderRoadmap({
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="text-xs gap-1 text-ecp-violet group-hover:bg-ecp-violet-surface font-bangla -mr-2 cursor-pointer"
+                            className="text-label gap-1 text-primary group-hover:bg-primary/10 rounded-control font-bangla -mr-2 cursor-pointer"
                           >
                             <span>অনুশীলন করুন</span>
                             <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
@@ -190,6 +191,6 @@ export function NicheLadderRoadmap({
           );
         })}
       </div>
-    </div>
+    </PageContainer>
   );
 }

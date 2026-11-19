@@ -69,7 +69,7 @@ export function ConversationTurn({
   return (
     <div
       className={cn(
-        "rounded-[16px] p-5 md:p-6 transition-all duration-200 border space-y-3.5",
+        "rounded-card p-5 md:p-6 transition-all duration-200 border space-y-3.5",
         isCurrentlyPlaying
           ? "bg-primary/10 border-primary shadow-xs ring-1 ring-primary/30"
           : speaker.colorScheme === "accent"
@@ -107,7 +107,7 @@ export function ConversationTurn({
             <button
               type="button"
               onClick={() => onGrammarClick?.(line.id)}
-              className="inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 min-h-tap px-2.5 py-1 rounded-control text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
               title="বাক্যের ব্যাকরণ ও গঠন বিশ্লেষণ দেখুন"
             >
               <HugeiconsIcon icon={BookOpen01Icon} size={14} />
@@ -119,7 +119,7 @@ export function ConversationTurn({
           <button
             type="button"
             onClick={() => setLocalTranslationVisible(!isTranslationShown)}
-            className="inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border"
+            className="inline-flex items-center gap-1 min-h-tap px-2.5 py-1 rounded-control text-chip text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border"
             title={isTranslationShown ? "Hide Bangla translation" : "Show Bangla translation"}
           >
             <HugeiconsIcon icon={isTranslationShown ? ViewOffIcon : ViewIcon} size={14} />
@@ -130,7 +130,7 @@ export function ConversationTurn({
 
       {/* English Dialogue Line */}
       <div className="pt-1">
-        <div className="text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight">
+        <div className="text-lead text-foreground tracking-tight">
           {isGrammarActive ? (
             <GrammarText
               annotation={resolvedAnnotation}
@@ -188,20 +188,19 @@ export function ConversationTurn({
 
       {/* Contextual Bangla Translation (Multi-Language §6.2) */}
       {isTranslationShown && (
-        <div className="pt-2 border-t border-[var(--ecp-border)]/60 animate-in fade-in duration-200">
+        <div className="pt-2 border-t border-border/60 animate-in fade-in duration-200">
           <div>
             <p
               className={cn(
-                "leading-[1.75]",
                 translationDisplay.isComingSoon
-                  ? "text-sm text-muted-foreground italic font-sans"
-                  : "text-sm md:text-base text-[var(--ecp-text-secondary)] font-bangla"
+                  ? "text-meta text-muted-foreground italic font-sans"
+                  : "text-meta text-muted-foreground text-bangla"
               )}
             >
               {translationDisplay.displayText}
             </p>
             {translationDisplay.isDraftPreview && (
-              <span className="inline-block mt-1 text-chip font-medium text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded border border-border">
+              <span className="inline-block mt-1 text-chip text-warning bg-warning-bg px-2 py-0.5 rounded-pill border border-border">
                 Draft Preview (Unreviewed)
               </span>
             )}
@@ -211,7 +210,7 @@ export function ConversationTurn({
 
       {/* Optional Learning Note */}
       {line.learningNote && (
-        <div className="flex items-start gap-2 pt-1 text-xs text-[var(--ecp-brand-800)] bg-[var(--ecp-brand-50)]/80 p-2.5 rounded-[12px] border border-[var(--ecp-brand-100)]">
+        <div className="flex items-start gap-2 pt-1 text-chip text-primary bg-primary/10 p-2.5 rounded-panel border border-primary/20">
           <HugeiconsIcon icon={InformationCircleIcon} size={15} className="shrink-0 mt-0.5" />
           <span className="leading-snug">{line.learningNote}</span>
         </div>

@@ -151,7 +151,7 @@ function ConversationReaderInner({
 
   if (!currentVersion) {
     return (
-      <div className="p-8 text-center text-sm text-[var(--ecp-text-muted)]">
+      <div className="p-8 text-center text-meta text-muted-foreground">
         Dialogue content is being prepared.
       </div>
     );
@@ -289,8 +289,8 @@ function ConversationReaderInner({
       <div className="flex flex-col gap-3 p-3 sm:p-4 bg-card/60 backdrop-blur-xs rounded-panel border border-border">
         {/* Dialogue Version Selector (if multiple versions exist) */}
         {versions.length > 1 && (
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-            <span className="font-semibold text-muted-foreground whitespace-nowrap flex items-center gap-1 font-bangla">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 text-chip">
+            <span className="text-muted-foreground whitespace-nowrap flex items-center gap-1 text-bangla">
               <HugeiconsIcon icon={Layers01Icon} size={14} />
               <span>সংস্করণ:</span>
             </span>
@@ -303,7 +303,7 @@ function ConversationReaderInner({
                     setSelectedVersionId(ver.versionId);
                     setActiveLineIndex(null);
                   }}
-                  className={`px-3 py-1 rounded-control text-xs font-semibold transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded-control text-chip transition-all cursor-pointer ${
                     selectedVersionId === ver.versionId
                       ? "bg-primary text-primary-foreground shadow-xs"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
@@ -328,7 +328,7 @@ function ConversationReaderInner({
           <div className="flex flex-wrap items-center gap-2">
             {prevStepSlug && (
               <Link href={`/conversations/${prevStepSlug}`}>
-                <Button variant="outline" size="sm" className="min-h-[44px] text-xs font-bangla gap-1">
+                <Button variant="outline" size="sm" className="min-h-tap text-label rounded-control font-bangla gap-1">
                   <HugeiconsIcon icon={ArrowLeft01Icon} size={13} />
                   <span>আগের ধাপ</span>
                 </Button>
@@ -337,7 +337,7 @@ function ConversationReaderInner({
 
             {nextStepSlug && (
               <Link href={`/conversations/${nextStepSlug}`}>
-                <Button size="sm" className="min-h-[44px] text-xs font-bangla gap-1">
+                <Button size="sm" className="min-h-tap text-label rounded-control font-bangla gap-1">
                   <span>পরের ধাপ</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
                 </Button>
@@ -348,7 +348,7 @@ function ConversationReaderInner({
               variant="outline"
               size="sm"
               onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
-              className="min-h-[44px] text-xs gap-1.5 font-bangla"
+              className="min-h-tap text-label rounded-control gap-1.5 font-bangla"
             >
               <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
               <span>
@@ -362,7 +362,7 @@ function ConversationReaderInner({
               variant={isCompleted ? "secondary" : "outline"}
               size="sm"
               onClick={() => setIsCompleted(!isCompleted)}
-              className="min-h-[44px] text-xs gap-1.5 font-bangla"
+              className="min-h-tap text-label rounded-control gap-1.5 font-bangla"
             >
               <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
               <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত"}</span>

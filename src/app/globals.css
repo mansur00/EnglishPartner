@@ -311,6 +311,19 @@ body {
   width: var(--tile-size);
   height: var(--tile-size);
 }
+@utility size-control {
+  width: var(--control-h-md);
+  height: var(--control-h-md);
+}
+@utility max-w-reading {
+  max-width: 48rem;
+}
+@utility max-w-dialog {
+  max-width: 32rem;
+}
+@utility max-h-dialog {
+  max-height: 90vh;
+}
 @utility h-segment {
   height: var(--segment-h);
 }

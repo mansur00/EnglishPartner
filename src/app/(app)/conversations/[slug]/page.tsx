@@ -10,6 +10,7 @@ import {
   CheckmarkCircle02Icon,
   Book01Icon,
 } from "@hugeicons/core-free-icons";
+import { PageContainer } from "@/components/shared";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES, ConversationVersionData } from "@/content/seed/dialogues";
 import {
@@ -66,24 +67,24 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
     };
 
     return (
-      <div className="space-y-6 max-w-4xl mx-auto pb-12">
+      <PageContainer className="space-y-6 pb-12">
         {/* Top Breadcrumb & Action */}
         <div className="flex items-center justify-between">
           <Link href="/explore/category/shopping-and-money">
-            <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-xs">
+            <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
               <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
               Shopping Ladder (সব ধাপ)
             </Button>
           </Link>
 
-          <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+          <Button variant="outline" size="sm" className="gap-1.5 text-label rounded-control">
             <HugeiconsIcon icon={Bookmark02Icon} size={14} />
             Bookmark
           </Button>
         </div>
 
         {/* Step Header Card */}
-        <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs">
+        <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs rounded-card">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="brand" size="sm">
               Niche 01: Shopping & Money
@@ -94,22 +95,22 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
             <Badge variant="accent" size="sm">
               {ladderStep.level} • CEFR
             </Badge>
-            <span className="text-xs text-muted-foreground font-medium ml-1">
+            <span className="text-chip text-muted-foreground ml-1">
               {ladderStep.linesCount} Turns
             </span>
           </div>
 
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
+            <h1 className="text-page-title text-foreground">
               {ladderStep.title}
             </h1>
-            <p className="text-sm md:text-base text-muted-foreground font-[var(--ecp-font-bangla)] mt-1 font-medium">
+            <p className="text-meta text-muted-foreground text-bangla mt-1">
               {ladderStep.titleBn}
             </p>
           </div>
 
           {/* Grammar Focus Callout */}
-          <div className="flex items-start gap-2 pt-2 text-xs text-muted-foreground border-t border-border">
+          <div className="flex items-start gap-2 pt-2 text-chip text-muted-foreground border-t border-border">
             <HugeiconsIcon
               icon={Book01Icon}
               size={16}
@@ -127,7 +128,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           step={ladderStep}
           ladderVersion={ladderVersion}
         />
-      </div>
+      </PageContainer>
     );
   }
 
@@ -185,24 +186,24 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
   ];
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto pb-12">
+    <PageContainer className="space-y-6 pb-12">
       {/* Top Breadcrumb & Action */}
       <div className="flex items-center justify-between">
         <Link href="/explore">
-          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-xs">
+          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to Explore
           </Button>
         </Link>
 
-        <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+        <Button variant="outline" size="sm" className="gap-1.5 text-label rounded-control">
           <HugeiconsIcon icon={Bookmark02Icon} size={14} />
           Bookmark
         </Button>
       </div>
 
       {/* Scenario Header Card */}
-      <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs">
+      <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs rounded-card">
         <div className="flex flex-wrap items-center gap-2">
           {scenario.categories.map((cat) => (
             <Badge key={cat.id} variant="neutral" size="sm">
@@ -218,20 +219,20 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
+          <h1 className="text-page-title text-foreground">
             {scenario.title}
           </h1>
-          <p className="text-sm md:text-base text-muted-foreground font-[var(--ecp-font-bangla)] mt-1">
+          <p className="text-meta text-muted-foreground text-bangla mt-1">
             {scenario.titleBn}
           </p>
         </div>
 
         {/* Learning Objective Callout */}
-        <div className="flex items-start gap-2 pt-2 text-xs text-muted-foreground border-t border-border">
+        <div className="flex items-start gap-2 pt-2 text-chip text-muted-foreground border-t border-border">
           <HugeiconsIcon
             icon={CheckmarkCircle02Icon}
             size={16}
-            className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5"
+            className="text-success shrink-0 mt-0.5"
           />
           <span>
             <strong className="text-foreground">Goal: </strong>
@@ -243,10 +244,10 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
       {/* Interactive Conversation Reader */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold text-[var(--ecp-brand-950)]">
+          <h2 className="text-card-title text-foreground">
             Dialogue Turns & Listening Practice
           </h2>
-          <span className="text-xs text-[var(--ecp-text-muted)] font-medium">
+          <span className="text-chip text-muted-foreground">
             Tap words to explore meaning
           </span>
         </div>
@@ -258,6 +259,6 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           scenarioSlug={slug}
         />
       </div>
-    </div>
+    </PageContainer>
   );
 }

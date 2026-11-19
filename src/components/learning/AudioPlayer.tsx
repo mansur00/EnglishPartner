@@ -119,11 +119,11 @@ export function AudioPlayer({
   }, []);
 
   return (
-    <div className="sticky bottom-4 z-20 mx-auto max-w-3xl w-full bg-[var(--ecp-surface)]/95 backdrop-blur-md border border-[var(--ecp-border)] rounded-2xl p-4 shadow-xl space-y-3">
+    <div className="sticky bottom-4 z-20 mx-auto max-w-reading w-full bg-card/95 backdrop-blur-md border border-border rounded-card p-4 shadow-xl space-y-3">
       {/* Progress Bar */}
-      <div className="w-full bg-[var(--ecp-surface-muted)] h-1.5 rounded-full overflow-hidden">
+      <div className="w-full bg-muted h-1.5 rounded-pill overflow-hidden">
         <div
-          className="bg-[var(--ecp-brand-800)] h-full transition-all duration-300 rounded-full"
+          className="bg-primary h-full transition-all duration-300 rounded-pill"
           style={{ width: `${progressPercent}%` }}
         />
       </div>
@@ -132,10 +132,10 @@ export function AudioPlayer({
         {/* Left: Play / Pause & Replay */}
         <div className="flex items-center gap-2">
           <Button
-            variant="primary"
+            variant="default"
             size="md"
             onClick={handleTogglePlay}
-            className="rounded-full shadow-sm gap-1.5 min-w-[100px]"
+            className="rounded-pill shadow-xs gap-1.5 min-w-24"
           >
             <HugeiconsIcon icon={isPlaying ? PauseIcon : PlayIcon} size={18} />
             <span>{isPlaying ? "Pause" : "Play Full"}</span>
@@ -146,17 +146,17 @@ export function AudioPlayer({
             size="icon"
             onClick={handleReplay}
             title={t("audio.replay")}
-            className="rounded-full text-[var(--ecp-text-secondary)]"
+            className="rounded-pill text-muted-foreground"
           >
             <HugeiconsIcon icon={ReloadIcon} size={16} />
           </Button>
         </div>
 
         {/* Center: Current Line Position Indicator */}
-        <div className="text-xs font-semibold text-[var(--ecp-text-secondary)]">
+        <div className="text-chip text-muted-foreground">
           {isPlaying && activeLineIndex !== null ? (
-            <span className="flex items-center gap-1.5 text-[var(--ecp-brand-800)] font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[var(--ecp-brand-800)] animate-pulse" />
+            <span className="flex items-center gap-1.5 text-primary">
+              <span className="w-2 h-2 rounded-pill bg-primary animate-pulse" />
               Playing Line {activeLineIndex + 1} of {lines.length}
             </span>
           ) : (
@@ -170,21 +170,21 @@ export function AudioPlayer({
           <button
             type="button"
             onClick={handleSpeedToggle}
-            className="px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--ecp-surface-muted)] border border-[var(--ecp-border)] text-[var(--ecp-text-primary)] hover:border-[var(--ecp-brand-800)]/40 transition-colors"
+            className="px-2.5 py-1 rounded-control text-chip bg-muted border border-border text-foreground hover:border-primary/40 transition-colors cursor-pointer"
             title={t("audio.cycleSpeed")}
           >
             {playbackSpeed}x
           </button>
 
           {/* Accent Switcher (en-US / en-GB) */}
-          <div className="inline-flex rounded-lg border border-[var(--ecp-border)] bg-[var(--ecp-surface-muted)] p-0.5 text-xs font-semibold">
+          <div className="inline-flex rounded-control border border-border bg-muted p-0.5 text-chip">
             <button
               type="button"
               onClick={() => onAccentChange("en-US")}
-              className={`px-2 py-0.5 rounded-md transition-all ${
+              className={`px-2 py-0.5 rounded-control transition-all cursor-pointer ${
                 accent === "en-US"
-                  ? "bg-[var(--ecp-brand-800)] text-white shadow-2xs"
-                  : "text-[var(--ecp-text-muted)] hover:text-[var(--ecp-text-primary)]"
+                  ? "bg-primary text-primary-foreground shadow-2xs"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               US
@@ -192,10 +192,10 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={() => onAccentChange("en-GB")}
-              className={`px-2 py-0.5 rounded-md transition-all ${
+              className={`px-2 py-0.5 rounded-control transition-all cursor-pointer ${
                 accent === "en-GB"
-                  ? "bg-[var(--ecp-brand-800)] text-white shadow-2xs"
-                  : "text-[var(--ecp-text-muted)] hover:text-[var(--ecp-text-primary)]"
+                  ? "bg-primary text-primary-foreground shadow-2xs"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               UK
