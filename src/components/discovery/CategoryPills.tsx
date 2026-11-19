@@ -22,16 +22,16 @@ export function CategoryPills({
           <div
             key={cat.id}
             data-topic={theme.topic}
-            className={cn("rounded-full shrink-0", isSelected && "rainbow-border")}
+            className={cn("rounded-pill shrink-0", isSelected && "rainbow-border")}
           >
             <button
               type="button"
               onClick={() => onSelectCategory(cat.slug)}
               className={cn(
-                "btn-press h-10 px-4 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer border flex items-center gap-1.5",
+                "btn-press h-control-sm px-4 rounded-pill text-label whitespace-nowrap transition-all duration-150 cursor-pointer border flex items-center gap-1.5",
                 isSelected
-                  ? "bg-[var(--topic-tile)] text-[var(--topic-ink)] border-transparent shadow-xs font-semibold"
-                  : "bg-[var(--topic-surface)] text-[var(--topic-ink)] border-[var(--topic-border)] hover:bg-[var(--topic-tile)]"
+                  ? "bg-topic-tile text-topic-ink border-transparent shadow-xs"
+                  : "bg-topic-surface text-topic-ink border-topic-border hover:bg-topic-tile"
               )}
             >
               <span>{cat.name}</span>

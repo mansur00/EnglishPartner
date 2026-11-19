@@ -17,6 +17,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { cn } from "@/lib/utils";
+import { PageContainer } from "@/components/shared";
 
 export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -90,20 +91,20 @@ export default function ExplorePage() {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16">
+    <PageContainer className="space-y-6 pb-16">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-semibold font-heading text-foreground tracking-[-0.01em]">
+        <h1 className="text-page-title text-foreground">
           Explore Conversations
         </h1>
-        <p className="text-sm md:text-base text-muted-foreground mt-1.5 font-bangla">
+        <p className="text-meta text-muted-foreground mt-1.5 text-bangla">
           বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন (EN + BN)
         </p>
       </div>
 
       {/* Search Input with Rainbow Border on Focus & Clear Button */}
-      <div className={cn("rounded-[14px] transition-all duration-200", isSearchFocused && "rainbow-border")}>
-        <div className="relative bg-card rounded-[14px] border border-border shadow-xs">
+      <div className={cn("rounded-control transition-all duration-200", isSearchFocused && "rainbow-border")}>
+        <div className="relative bg-card rounded-control border border-border shadow-xs">
           <HugeiconsIcon
             icon={Search01Icon}
             size={20}
@@ -121,14 +122,14 @@ export default function ExplorePage() {
               });
             }}
             placeholder={t("discovery.searchPlaceholder")}
-            className="w-full h-12 pl-12 pr-12 border-0 shadow-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
+            className="w-full h-control-lg pl-12 pr-12 border-0 shadow-none bg-transparent text-body text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
               aria-label="Clear search"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
               <HugeiconsIcon icon={Cancel01Icon} size={18} />
             </button>
@@ -156,8 +157,8 @@ export default function ExplorePage() {
 
       {/* Results Count Summary */}
       <div className="flex items-center justify-between pt-1">
-        <p className="text-sm font-semibold text-muted-foreground">
-          Showing <span className="text-primary font-semibold">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
+        <p className="text-meta text-muted-foreground">
+          Showing <span className="text-primary">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
         </p>
       </div>
 
@@ -165,16 +166,16 @@ export default function ExplorePage() {
       {isPending ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="p-7 rounded-2xl bg-card border border-border space-y-4">
+            <div key={i} className="p-7 rounded-card bg-card border border-border space-y-4">
               <div className="flex items-center gap-3">
-                <Skeleton className="w-12 h-12 rounded-2xl" />
+                <Skeleton className="size-tile rounded-control" />
                 <div className="space-y-2 flex-1">
                   <Skeleton className="h-5 w-1/3" />
                   <Skeleton className="h-4 w-1/4" />
                 </div>
               </div>
               <Skeleton className="h-6 w-3/4" />
-              <Skeleton className="h-11 w-full rounded-full" />
+              <Skeleton className="h-control-md w-full rounded-pill" />
             </div>
           ))}
         </div>
@@ -190,12 +191,12 @@ export default function ExplorePage() {
           description={`We couldn't find any situation matching "${searchQuery}". Try different keywords in English or বাংলা.`}
           icon={<HugeiconsIcon icon={SearchXIcon} size={28} />}
           action={
-            <Button variant="outline" size="md" onClick={handleResetFilters} className="btn-press">
+            <Button variant="outline" size="md" onClick={handleResetFilters} className="btn-press rounded-control">
               Reset All Filters
             </Button>
           }
         />
       )}
-    </div>
+    </PageContainer>
   );
 }

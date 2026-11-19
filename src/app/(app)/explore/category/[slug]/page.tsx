@@ -5,6 +5,7 @@ import { NicheLadderRoadmap } from "@/components/learning/NicheLadderRoadmap";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
+import { PageContainer } from "@/components/shared";
 import { SEED_SCENARIOS, CATEGORIES_LIST } from "@/content/seed/scenarios";
 import {
   NICHE_01_SHOPPING_MONEY,
@@ -37,10 +38,10 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
   const isShoppingCategory = slug === "shopping-and-money" || slug === "shopping-money";
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-16">
+    <PageContainer className="space-y-6 pb-16">
       <div className="space-y-3">
         <Link href="/explore">
-          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-xs">
+          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to All Topics
           </Button>
@@ -60,8 +61,8 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
 
           {/* Additional standalone scenarios in this category */}
           {categoryScenarios.length > 0 && (
-            <div className="space-y-4 pt-4 border-t border-ecp-border">
-              <h3 className="text-base font-semibold text-ecp-text-primary font-bangla">
+            <div className="space-y-4 pt-4 border-t border-border">
+              <h3 className="text-card-title text-foreground text-bangla">
                 অন্যান্য প্রাসঙ্গিক দৃশ্যপট (Additional Practice Scenarios)
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -75,15 +76,15 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
       ) : (
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[var(--ecp-brand-950)]">
+            <h1 className="text-page-title text-foreground">
               {category?.name || "Category"}
             </h1>
-            <p className="text-sm text-[var(--ecp-text-secondary)] font-[var(--ecp-font-bangla)] mt-1">
+            <p className="text-meta text-muted-foreground text-bangla mt-1">
               {category?.nameBn} — বাস্তব কথোপকথন চর্চা করুন
             </p>
           </div>
 
-          <div className="flex items-center justify-between text-xs font-semibold text-[var(--ecp-text-muted)] border-b border-[var(--ecp-border)] pb-3">
+          <div className="flex items-center justify-between text-chip text-muted-foreground border-b border-border pb-3">
             <span>{categoryScenarios.length} Scenarios Available</span>
           </div>
 
@@ -94,6 +95,6 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
           </div>
         </div>
       )}
-    </div>
+    </PageContainer>
   );
 }

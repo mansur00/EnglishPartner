@@ -34,8 +34,8 @@ export function FilterBar({
   isFiltered,
 }: FilterBarProps) {
   return (
-    <div className="sticky top-16 z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-card/95 backdrop-blur border border-border shadow-2xs">
-      <div className="flex items-center gap-2 text-muted-foreground font-semibold uppercase tracking-wider text-sm mr-1">
+    <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-card bg-card/95 backdrop-blur border border-border shadow-2xs">
+      <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-label mr-1">
         <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
         <span>{t("discovery.filters")}</span>
       </div>
@@ -45,7 +45,7 @@ export function FilterBar({
         value={level}
         onValueChange={(val) => setLevel((val as string) || "all")}
       >
-        <SelectTrigger className="w-[160px] h-11 text-sm bg-card border-border">
+        <SelectTrigger className="w-40 h-control-md text-label bg-card border-border">
           <SelectValue placeholder={t("discovery.allLevels")} />
         </SelectTrigger>
         <SelectContent>
@@ -62,7 +62,7 @@ export function FilterBar({
         value={lengthType}
         onValueChange={(val) => setLengthType((val as string) || "all")}
       >
-        <SelectTrigger className="w-[160px] h-11 text-sm bg-card border-border">
+        <SelectTrigger className="w-40 h-control-md text-label bg-card border-border">
           <SelectValue placeholder={t("discovery.anyLength")} />
         </SelectTrigger>
         <SelectContent>
@@ -77,7 +77,7 @@ export function FilterBar({
         value={style}
         onValueChange={(val) => setStyle((val as string) || "all")}
       >
-        <SelectTrigger className="w-[170px] h-11 text-sm bg-card border-border">
+        <SelectTrigger className="w-44 h-control-md text-label bg-card border-border">
           <SelectValue placeholder={t("discovery.anyStyle")} />
         </SelectTrigger>
         <SelectContent>
@@ -94,7 +94,7 @@ export function FilterBar({
           variant="destructive"
           size="sm"
           onClick={onReset}
-          className="btn-press h-11 text-sm gap-1.5 ml-auto px-4"
+          className="btn-press h-control-md text-label gap-1.5 ml-auto px-4 rounded-control"
         >
           <HugeiconsIcon icon={Cancel01Icon} size={16} />
           <span>{t("discovery.resetFilters")}</span>
