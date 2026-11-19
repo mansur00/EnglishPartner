@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { ConversationTurn } from "./ConversationTurn";
 import { AudioPlayer } from "./AudioPlayer";
@@ -9,6 +9,13 @@ import { GrammarPanel } from "./GrammarPanel";
 import { ReviewSummary } from "./ReviewSummary";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import { Button } from "@/components/ui/button";
+import { GrammarProvider } from "@/lib/grammar/context";
+import { GrammarModeSwitch } from "@/components/grammar/GrammarModeSwitch";
+import { GrammarLayerPicker } from "@/components/grammar/GrammarLayerPicker";
+import { GrammarLegend } from "@/components/grammar/GrammarLegend";
+import { RuleCardDialog } from "@/components/grammar/RuleCard";
+import { loadConversationAnnotation } from "@/lib/grammar/loader";
+import type { ConversationAnnotation, RenderToken } from "@/lib/grammar/types";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ViewIcon,
@@ -25,7 +32,6 @@ import {
   VocabularyEntry,
   SentenceGrammarEntry,
 } from "@/content/seed/vocabulary";
-import { formatLanguageCoverageLine } from "@/lib/content/language-coverage";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
@@ -40,14 +46,19 @@ interface ConversationReaderProps {
   nextStepTitle?: string;
 }
 
-export function ConversationReader({
+export function ConversationReader(props: ConversationReaderProps) {
+  return (
+    <GrammarProvider>
+      <ConversationReaderInner {...props} />
+    </GrammarProvider>
+  );
+}
+
+function ConversationReaderInner({
   versions,
   scenarioTitleEn = "English Conversation Practice",
   scenarioTitleBn = "ইংরেজি কথোপকথন অনুশীলন",
   scenarioSlug,
-  stepNumber,
-  totalSteps = 20,
-  stepFocus,
   prevStepSlug,
   nextStepSlug,
   nextStepTitle,
@@ -61,10 +72,16 @@ export function ConversationReader({
 
   // Active Word Popover, Grammar Panel, Auth Prompt Modal
   const [selectedWordEntry, setSelectedWordEntry] = useState<VocabularyEntry | null>(null);
+  const [selectedTokenData, setSelectedTokenData] = useState<RenderToken | null>(null);
   const [isWordPopoverOpen, setIsWordPopoverOpen] = useState(false);
 
   const [selectedGrammarEntry, setSelectedGrammarEntry] = useState<SentenceGrammarEntry | null>(null);
   const [isGrammarPanelOpen, setIsGrammarPanelOpen] = useState(false);
+
+  // Grammar System State
+  const [annotation, setAnnotation] = useState<ConversationAnnotation | null>(null);
+  const [selectedRuleKey, setSelectedRuleKey] = useState<string | null>(null);
+  const [isRuleCardOpen, setIsRuleCardOpen] = useState(false);
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalPurpose, setAuthModalPurpose] = useState<string>("");
@@ -72,6 +89,17 @@ export function ConversationReader({
   const [savedWords, setSavedWords] = useState<Set<string>>(new Set());
   const [isScenarioBookmarked, setIsScenarioBookmarked] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+
+  // Load static grammar annotations lazily
+  useEffect(() => {
+    if (scenarioSlug) {
+      loadConversationAnnotation(scenarioSlug).then((data) => {
+        if (data) {
+          setAnnotation(data);
+        }
+      });
+    }
+  }, [scenarioSlug]);
 
   // Initialize saved words from localStorage if available
   useEffect(() => {
@@ -98,6 +126,29 @@ export function ConversationReader({
   const currentVersion =
     versions.find((v) => v.versionId === selectedVersionId) || versions[0];
 
+  const presentCategories = useMemo(() => {
+    const set = new Set<string>();
+    if (annotation) {
+      for (const line of annotation.lines) {
+        for (const tok of line.tokens) {
+          if (tok.pos && tok.pos !== "punctuation") set.add(tok.pos);
+          if (tok.role) set.add(tok.role);
+        }
+        if (line.groups) {
+          for (const grp of line.groups) {
+            if (grp.time && grp.aspect) set.add(`${grp.time}-${grp.aspect}`);
+            if (grp.key) set.add(grp.key);
+          }
+        }
+      }
+    } else {
+      ["noun", "verb", "adjective", "pronoun", "determiner", "preposition"].forEach((k) =>
+        set.add(k)
+      );
+    }
+    return Array.from(set);
+  }, [annotation]);
+
   if (!currentVersion) {
     return (
       <div className="p-8 text-center text-sm text-[var(--ecp-text-muted)]">
@@ -109,8 +160,10 @@ export function ConversationReader({
   const speakerMap = new Map(currentVersion.speakers.map((s) => [s.id, s]));
 
   // Word Lookup Function
-  const handleWordClick = (word: string) => {
+  const handleWordClick = (word: string, tokenData?: RenderToken) => {
     const clean = word.toLowerCase().trim();
+    setSelectedTokenData(tokenData || null);
+
     // 1. Direct match in dictionary
     let foundEntry: VocabularyEntry | undefined = SEED_VOCABULARY[clean];
 
@@ -126,11 +179,12 @@ export function ConversationReader({
 
     // 3. Fallback entry if not in static seed
     if (!foundEntry) {
+      const pos = tokenData && tokenData.pos !== "unannotated" ? (tokenData.pos as VocabularyEntry["partOfSpeech"]) : "noun";
       foundEntry = {
         word: word.charAt(0).toUpperCase() + word.slice(1),
         lemma: clean,
         ipa: `/${clean}/`,
-        partOfSpeech: "noun",
+        partOfSpeech: pos,
         contextualMeaningBn: `"${word}" শব্দটির অর্থ ও ব্যাকরণগত প্রয়োগ`,
         generalMeaningBn: `প্রসঙ্গ অনুযায়ী এর প্রয়োগ লক্ষ্য করুন।`,
         exampleSentence: `Practice using "${word}" in your daily conversations.`,
@@ -190,7 +244,6 @@ export function ConversationReader({
     if (entry) {
       setSelectedGrammarEntry(entry);
     } else {
-      // Find line text for dynamic fallback grammar breakdown
       const targetLine = currentVersion.lines.find((l) => l.id === lineId);
       setSelectedGrammarEntry({
         lineId,
@@ -212,49 +265,36 @@ export function ConversationReader({
     setIsGrammarPanelOpen(true);
   };
 
+  const handleRuleClick = (ruleKey: string) => {
+    setSelectedRuleKey(ruleKey);
+    setIsRuleCardOpen(true);
+  };
+
   // Gather vocabulary items used in this conversation
   const scenarioVocabList: VocabularyEntry[] = [];
   currentVersion.lines.forEach((line) => {
     if (line.wordHighlights) {
       line.wordHighlights.forEach((w) => {
         const key = w.toLowerCase();
-        const found =
-          SEED_VOCABULARY[key] ||
-          Object.values(SEED_VOCABULARY).find((v) => v.lemma.toLowerCase() === key);
-        if (found && !scenarioVocabList.some((item) => item.lemma === found.lemma)) {
-          scenarioVocabList.push(found);
+        if (SEED_VOCABULARY[key]) {
+          scenarioVocabList.push(SEED_VOCABULARY[key]);
         }
       });
     }
   });
 
   return (
-    <div className="space-y-6 relative pb-16">
-      {/* Control Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-[var(--ecp-surface)] border border-[var(--ecp-border)] rounded-2xl shadow-2xs">
-        {/* Step-by-Step Badge (when on ladder track) or Version Switcher (fallback) */}
-        {stepNumber ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ecp-violet-surface text-ecp-violet font-semibold text-xs font-mono border border-ecp-violet/20">
+    <div className="space-y-6">
+      {/* Top Controls Bar: Versions, Global Grammar Switches, Translation Toggle & Step Navigation */}
+      <div className="flex flex-col gap-3 p-3 sm:p-4 bg-card/60 backdrop-blur-xs rounded-panel border border-border">
+        {/* Dialogue Version Selector (if multiple versions exist) */}
+        {versions.length > 1 && (
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+            <span className="font-semibold text-muted-foreground whitespace-nowrap flex items-center gap-1 font-bangla">
               <HugeiconsIcon icon={Layers01Icon} size={14} />
-              ধাপ {stepNumber.toString().padStart(2, "0")} / {totalSteps}
+              <span>সংস্করণ:</span>
             </span>
-            {stepFocus && (
-              <span className="text-xs text-ecp-text-secondary bg-ecp-bg-canvas px-3 py-1.5 rounded-xl border border-ecp-border hidden md:inline">
-                <strong className="text-ecp-text-primary">Focus:</strong> {stepFocus}
-              </span>
-            )}
-            <span className="text-xs font-medium text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-full border border-border">
-              {formatLanguageCoverageLine(["en", "bn"], currentVersion.lines)}
-            </span>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-[var(--ecp-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
-              <HugeiconsIcon icon={Layers01Icon} size={14} />
-              সংস্করণ (Version):
-            </span>
-            <div className="flex items-center gap-1.5 bg-[var(--ecp-surface-muted)] p-1 rounded-xl border border-[var(--ecp-border)]">
+            <div className="flex items-center gap-1.5">
               {versions.map((ver) => (
                 <button
                   key={ver.versionId}
@@ -263,10 +303,10 @@ export function ConversationReader({
                     setSelectedVersionId(ver.versionId);
                     setActiveLineIndex(null);
                   }}
-                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded-control text-xs font-semibold transition-all cursor-pointer ${
                     selectedVersionId === ver.versionId
-                      ? "bg-[var(--ecp-brand-800)] text-white shadow-xs"
-                      : "text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-text-primary)]"
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                   }`}
                 >
                   {ver.versionName} ({ver.lines.length} turns)
@@ -276,50 +316,62 @@ export function ConversationReader({
           </div>
         )}
 
-        {/* Global Translation Toggle & Step Navigation */}
-        <div className="flex flex-wrap items-center gap-2">
-          {prevStepSlug && (
-            <Link href={`/conversations/${prevStepSlug}`}>
-              <Button variant="outline" size="sm" className="text-xs font-bangla gap-1">
-                <HugeiconsIcon icon={ArrowLeft01Icon} size={13} />
-                <span>আগের ধাপ</span>
-              </Button>
-            </Link>
-          )}
+        {/* Global Action Toolbar */}
+        <div className="flex flex-wrap items-center justify-between gap-2.5">
+          {/* Left: Grammar Controls (Global Switch + Layer Picker) */}
+          <div className="flex flex-wrap items-center gap-2">
+            <GrammarModeSwitch />
+            <GrammarLayerPicker />
+          </div>
 
-          {nextStepSlug && (
-            <Link href={`/conversations/${nextStepSlug}`}>
-              <Button size="sm" className="text-xs font-bangla gap-1">
-                <span>পরের ধাপ</span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
-              </Button>
-            </Link>
-          )}
+          {/* Right: Navigation, Translation Toggle & Complete */}
+          <div className="flex flex-wrap items-center gap-2">
+            {prevStepSlug && (
+              <Link href={`/conversations/${prevStepSlug}`}>
+                <Button variant="outline" size="sm" className="min-h-[44px] text-xs font-bangla gap-1">
+                  <HugeiconsIcon icon={ArrowLeft01Icon} size={13} />
+                  <span>আগের ধাপ</span>
+                </Button>
+              </Link>
+            )}
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
-            className="text-xs gap-1.5"
-          >
-            <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
-            <span>
-              {isGlobalTranslationVisible
-                ? "অনুবাদ লুকান"
-                : "সব অনুবাদ"}
-            </span>
-          </Button>
+            {nextStepSlug && (
+              <Link href={`/conversations/${nextStepSlug}`}>
+                <Button size="sm" className="min-h-[44px] text-xs font-bangla gap-1">
+                  <span>পরের ধাপ</span>
+                  <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
+                </Button>
+              </Link>
+            )}
 
-          <Button
-            variant={isCompleted ? "secondary" : "outline"}
-            size="sm"
-            onClick={() => setIsCompleted(!isCompleted)}
-            className="text-xs gap-1.5 font-bangla"
-          >
-            <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
-            <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত"}</span>
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
+              className="min-h-[44px] text-xs gap-1.5 font-bangla"
+            >
+              <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
+              <span>
+                {isGlobalTranslationVisible
+                  ? "অনুবাদ লুকান"
+                  : "সব অনুবাদ"}
+              </span>
+            </Button>
+
+            <Button
+              variant={isCompleted ? "secondary" : "outline"}
+              size="sm"
+              onClick={() => setIsCompleted(!isCompleted)}
+              className="min-h-[44px] text-xs gap-1.5 font-bangla"
+            >
+              <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
+              <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত"}</span>
+            </Button>
+          </div>
         </div>
+
+        {/* Contextual Grammar Legend */}
+        <GrammarLegend presentCategories={presentCategories} />
       </div>
 
       {/* Ordered Dialogue Turns */}
@@ -337,6 +389,11 @@ export function ConversationReader({
 
           const hasGrammar = Boolean(SEED_GRAMMAR_EXPLANATIONS[line.id]);
 
+          // Match static line annotation if loaded
+          const lineAnnotation = annotation?.lines.find(
+            (l) => l.lineId === line.id || l.text.trim() === line.englishText.trim()
+          );
+
           return (
             <ConversationTurn
               key={line.id}
@@ -349,7 +406,9 @@ export function ConversationReader({
               onLinePlayEnd={() => setActiveLineIndex(null)}
               onWordClick={handleWordClick}
               onGrammarClick={handleGrammarClick}
+              onRuleClick={handleRuleClick}
               hasGrammarExplanation={hasGrammar}
+              annotation={lineAnnotation}
             />
           );
         })}
@@ -372,13 +431,18 @@ export function ConversationReader({
         nextScenarioTitle={nextStepTitle}
       />
 
-      {/* Word Detail Popover */}
+      {/* Word Detail Popover (with enhanced Grammar Breakdown) */}
       <WordDetailPopover
         entry={selectedWordEntry}
         isOpen={isWordPopoverOpen}
-        onClose={() => setIsWordPopoverOpen(false)}
+        onClose={() => {
+          setIsWordPopoverOpen(false);
+          setSelectedTokenData(null);
+        }}
         onSaveToggle={handleSaveWordToggle}
         isSaved={selectedWordEntry ? savedWords.has(selectedWordEntry.lemma) : false}
+        tokenData={selectedTokenData}
+        onRuleClick={handleRuleClick}
       />
 
       {/* Sentence Grammar Panel */}
@@ -386,6 +450,16 @@ export function ConversationReader({
         entry={selectedGrammarEntry}
         isOpen={isGrammarPanelOpen}
         onClose={() => setIsGrammarPanelOpen(false)}
+      />
+
+      {/* Rule Card Dialog */}
+      <RuleCardDialog
+        ruleKey={selectedRuleKey}
+        isOpen={isRuleCardOpen}
+        onClose={() => {
+          setIsRuleCardOpen(false);
+          setSelectedRuleKey(null);
+        }}
       />
 
       {/* Non-Blocking Auth Prompt Modal (A-01) */}

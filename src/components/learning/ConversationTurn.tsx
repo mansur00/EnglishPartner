@@ -5,6 +5,12 @@ import { cn } from "@/lib/utils";
 import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { SpeakerLabel } from "./SpeakerLabel";
 import { AudioPlayButton } from "./AudioPlayButton";
+import { GrammarToggleButton } from "@/components/grammar/GrammarToggleButton";
+import { GrammarText } from "@/components/grammar/GrammarText";
+import { GrammarSummaryRow } from "@/components/grammar/GrammarSummaryRow";
+import { useGrammar } from "@/lib/grammar/context";
+import { createFallbackAnnotation } from "@/lib/grammar/fallback";
+import type { LineAnnotation, RenderToken } from "@/lib/grammar/types";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ViewIcon,
@@ -22,10 +28,12 @@ interface ConversationTurnProps {
   isCurrentlyPlaying?: boolean;
   onLinePlayStart?: () => void;
   onLinePlayEnd?: () => void;
-  onWordClick?: (word: string) => void;
+  onWordClick?: (word: string, tokenData?: RenderToken) => void;
   onGrammarClick?: (lineId: string) => void;
+  onRuleClick?: (ruleKey: string) => void;
   hasGrammarExplanation?: boolean;
   isAdminPreview?: boolean;
+  annotation?: LineAnnotation;
 }
 
 export function ConversationTurn({
@@ -38,19 +46,25 @@ export function ConversationTurn({
   onLinePlayEnd,
   onWordClick,
   onGrammarClick,
+  onRuleClick,
   hasGrammarExplanation = false,
   isAdminPreview = false,
+  annotation,
 }: ConversationTurnProps) {
   const [localTranslationVisible, setLocalTranslationVisible] = useState<boolean | null>(null);
+
+  const { isLineActive, toggleLine } = useGrammar();
+  const isGrammarActive = isLineActive(line.id);
+
+  // Resolved annotation (from props or runtime fallback)
+  const resolvedAnnotation =
+    annotation || createFallbackAnnotation(line.id, line.englishText);
 
   const translationDisplay = getLineTranslationDisplay(line, isAdminPreview);
 
   // If local toggle hasn't been clicked, follow global; otherwise follow local override
   const isTranslationShown =
     localTranslationVisible !== null ? localTranslationVisible : isGlobalTranslationVisible;
-
-  // Split english sentence to highlight key words
-  const words = line.englishText.split(" ");
 
   return (
     <div
@@ -64,7 +78,7 @@ export function ConversationTurn({
       )}
     >
       {/* Top Bar: Speaker & Controls */}
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
         <SpeakerLabel speaker={speaker} />
 
         <div className="flex items-center gap-1.5 sm:gap-2">
@@ -82,16 +96,22 @@ export function ConversationTurn({
             ariaLabel={`Play line ${line.sequenceNumber} by ${speaker.name}`}
           />
 
-          {/* Grammar Explanation Button */}
+          {/* Grammar Color-Coding Toggle (per turn) */}
+          <GrammarToggleButton
+            isActive={isGrammarActive}
+            onToggle={() => toggleLine(line.id)}
+          />
+
+          {/* Detailed Grammar Explanation Modal Button (if static explanation exists) */}
           {hasGrammarExplanation && (
             <button
               type="button"
               onClick={() => onGrammarClick?.(line.id)}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
               title="বাক্যের ব্যাকরণ ও গঠন বিশ্লেষণ দেখুন"
             >
               <HugeiconsIcon icon={BookOpen01Icon} size={14} />
-              <span className="hidden sm:inline font-bangla">ব্যাকরণ</span>
+              <span className="hidden sm:inline font-bangla">বিশ্লেষণ</span>
             </button>
           )}
 
@@ -99,49 +119,71 @@ export function ConversationTurn({
           <button
             type="button"
             onClick={() => setLocalTranslationVisible(!isTranslationShown)}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-[var(--ecp-text-secondary)] hover:text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-surface-muted)] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 min-h-[44px] px-2.5 py-1 rounded-control text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border"
             title={isTranslationShown ? "Hide Bangla translation" : "Show Bangla translation"}
           >
             <HugeiconsIcon icon={isTranslationShown ? ViewOffIcon : ViewIcon} size={14} />
-            <span className="hidden sm:inline">{isTranslationShown ? "Hide" : "বাংলা"}</span>
+            <span className="hidden sm:inline font-bangla">{isTranslationShown ? "লুকান" : "বাংলা"}</span>
           </button>
         </div>
       </div>
 
-      {/* English Dialogue Line with Interactive Words */}
+      {/* English Dialogue Line */}
       <div className="pt-1">
-        <p className="text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight">
-          {words.map((word, idx) => {
-            const cleanWord = word.replace(/[^a-zA-Z]/g, "").toLowerCase();
-            const isHighlighted = line.wordHighlights?.some(
-              (h) => h.toLowerCase() === cleanWord
-            );
+        <div className="text-lg md:text-xl font-medium text-[var(--ecp-text-primary)] leading-[1.7] tracking-tight">
+          {isGrammarActive ? (
+            <GrammarText
+              annotation={resolvedAnnotation}
+              onTokenClick={(token) => {
+                const cleanWord = token.lemma || token.text.replace(/[^a-zA-Z]/g, "").toLowerCase();
+                if (cleanWord) {
+                  onWordClick?.(cleanWord, token);
+                }
+              }}
+            />
+          ) : (
+            resolvedAnnotation.tokens.map((token, index) => {
+              const cleanWord = token.lemma || token.text.replace(/[^a-zA-Z]/g, "").toLowerCase();
+              const isPunctuation = token.pos === "punctuation";
+              const isClickable = !isPunctuation;
 
-            return (
-              <span
-                key={idx}
-                role={cleanWord ? "button" : undefined}
-                tabIndex={cleanWord ? 0 : undefined}
-                onClick={() => cleanWord && onWordClick?.(cleanWord)}
-                onKeyDown={(e) => {
-                  if (cleanWord && (e.key === "Enter" || e.key === " ")) {
-                    e.preventDefault();
-                    onWordClick?.(cleanWord);
-                  }
-                }}
-                className={cn(
-                  "inline-block mr-1.5 transition-colors rounded px-0.5 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                  isHighlighted
-                    ? "font-semibold text-ecp-violet underline decoration-ecp-warm decoration-2 underline-offset-4 hover:bg-ecp-violet-surface/70"
-                    : "hover:bg-ecp-bg-canvas hover:text-ecp-violet"
-                )}
-                title={isHighlighted ? `Click to see meaning & grammar for '${word}'` : `Click to see meaning for '${word}'`}
-              >
-                {word}
-              </span>
-            );
-          })}
-        </p>
+              return (
+                <span key={`${token.i}-${index}`}>
+                  <span
+                    role={cleanWord ? "button" : undefined}
+                    tabIndex={cleanWord ? 0 : undefined}
+                    onClick={() => cleanWord && onWordClick?.(cleanWord)}
+                    onKeyDown={(e) => {
+                      if (cleanWord && (e.key === "Enter" || e.key === " ")) {
+                        e.preventDefault();
+                        onWordClick?.(cleanWord);
+                      }
+                    }}
+                    className={cn(
+                      "gram-token",
+                      isClickable &&
+                        "cursor-pointer hover:bg-muted/40 transition-colors duration-150 outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+                    )}
+                    title={cleanWord ? `Click to see meaning for '${token.text}'` : undefined}
+                  >
+                    {token.text}
+                  </span>
+                  {index < resolvedAnnotation.tokens.length - 1 &&
+                    resolvedAnnotation.tokens[index + 1].pos !== "punctuation" &&
+                    " "}
+                </span>
+              );
+            })
+          )}
+        </div>
+
+        {/* Grammar Summary Row (Chips for Tenses & Patterns when active) */}
+        {isGrammarActive && (
+          <GrammarSummaryRow
+            annotation={resolvedAnnotation}
+            onRuleClick={onRuleClick}
+          />
+        )}
       </div>
 
       {/* Contextual Bangla Translation (Multi-Language §6.2) */}
