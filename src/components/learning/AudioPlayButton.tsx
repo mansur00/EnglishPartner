@@ -99,7 +99,7 @@ export function AudioPlayButton({
   if (!isAvailable) {
     return (
       <span
-        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold text-muted-foreground bg-muted cursor-not-allowed select-none"
+        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-pill text-chip text-muted-foreground bg-muted cursor-not-allowed select-none"
         title={t("audio.generating")}
       >
         <HugeiconsIcon icon={VolumeMute01Icon} size={13} />
@@ -114,10 +114,10 @@ export function AudioPlayButton({
       onClick={handleTogglePlay}
       aria-label={ariaLabel}
       className={cn(
-        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--ecp-brand-800)] focus:ring-offset-1 select-none",
+        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-control text-chip transition-all duration-150 cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-1 select-none",
         isPlaying
-          ? "bg-[var(--ecp-brand-800)] text-white shadow-xs"
-          : "bg-[var(--ecp-surface-muted)] text-[var(--ecp-brand-800)] hover:bg-[var(--ecp-brand-100)] border border-[var(--ecp-border)]"
+          ? "bg-primary text-primary-foreground shadow-xs"
+          : "bg-muted text-primary hover:bg-primary/10 border border-border"
       )}
     >
       <HugeiconsIcon icon={isPlaying ? PauseIcon : PlayIcon} size={14} />

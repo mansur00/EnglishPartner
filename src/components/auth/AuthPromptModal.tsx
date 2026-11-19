@@ -34,26 +34,26 @@ export function AuthPromptModal({
 }: AuthPromptModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md bg-card border-border p-6 sm:p-7">
+      <DialogContent className="sm:max-w-md bg-card border-border p-6 sm:p-7 rounded-card">
         <DialogHeader className="text-left space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-1">
+          <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center mb-1">
             <HugeiconsIcon icon={Bookmark01Icon} size={22} />
           </div>
-          <DialogTitle className="text-lg sm:text-xl font-semibold text-foreground font-[var(--ecp-font-bangla)]">
+          <DialogTitle className="text-card-title text-foreground text-bangla">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground leading-relaxed font-[var(--ecp-font-bangla)]">
+          <DialogDescription className="text-meta text-muted-foreground leading-relaxed text-bangla">
             {description}
           </DialogDescription>
         </DialogHeader>
 
         {/* Feature Benefits */}
-        <div className="bg-muted/50 rounded-xl p-3.5 my-3 space-y-2 border border-border">
-          <div className="flex items-center gap-2.5 text-xs sm:text-sm text-foreground font-[var(--ecp-font-bangla)]">
+        <div className="bg-muted/50 rounded-panel p-3.5 my-3 space-y-2 border border-border">
+          <div className="flex items-center gap-2.5 text-meta text-foreground text-bangla">
             <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary shrink-0" />
             <span>যেকোনো সময় সেভ করা শব্দের তালিকা রিভিশন দিন</span>
           </div>
-          <div className="flex items-center gap-2.5 text-xs sm:text-sm text-foreground font-[var(--ecp-font-bangla)]">
+          <div className="flex items-center gap-2.5 text-meta text-foreground text-bangla">
             <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary shrink-0" />
             <span>মোবাইল ও কম্পিউটার সব ডিভাইসে সিংক্রোনাইজড থাকবে</span>
           </div>
@@ -62,7 +62,7 @@ export function AuthPromptModal({
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
           <Link href="/auth/login?reason=save" className="w-full">
-            <Button className="btn-press w-full justify-center gap-2 font-[var(--ecp-font-bangla)]">
+            <Button className="btn-press w-full justify-center gap-2 text-bangla text-label rounded-control">
               <HugeiconsIcon icon={Login01Icon} size={16} />
               <span>লগইন / সাইন-আপ করুন</span>
             </Button>
@@ -70,13 +70,13 @@ export function AuthPromptModal({
           <Button
             variant="outline"
             onClick={onClose}
-            className="btn-press w-full justify-center font-[var(--ecp-font-bangla)] text-muted-foreground"
+            className="btn-press w-full justify-center text-bangla text-label text-muted-foreground rounded-control"
           >
             পরে করব (Continue)
           </Button>
         </div>
 
-        <p className="text-center text-xs text-muted-foreground mt-2">
+        <p className="text-center text-chip text-muted-foreground mt-2">
           {actionText} • শেখার স্থান কখনো হারাবে না
         </p>
       </DialogContent>
