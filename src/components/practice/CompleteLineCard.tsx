@@ -57,22 +57,22 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
 
   if (isFinished) {
     return (
-      <div className="p-6 sm:p-8 rounded-2xl bg-white border border-ecp-border text-center space-y-4 shadow-2xs">
-        <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
+      <div className="p-6 sm:p-8 rounded-card bg-card border border-border text-center space-y-4 shadow-2xs">
+        <div className="size-control rounded-control bg-success-bg text-success flex items-center justify-center mx-auto">
           <HugeiconsIcon icon={SparklesIcon} size={28} />
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-ecp-text-primary font-bangla">
+          <h3 className="text-card-title text-foreground text-bangla">
             শব্দ বসানোর অনুশীলন সম্পন্ন হয়েছে!
           </h3>
-          <p className="text-xs sm:text-sm text-ecp-text-secondary mt-1 font-bangla">
+          <p className="text-meta text-muted-foreground mt-1 text-bangla">
             আপনি সফলভাবে বাক্যের শূন্যস্থানের সঠিক শব্দগুলো শনাক্ত করেছেন।
           </p>
         </div>
 
         <div className="pt-2">
-          <Button onClick={handleRestart} variant="outline" className="font-bangla text-xs">
+          <Button onClick={handleRestart} variant="outline" className="text-bangla text-label rounded-control">
             পুনরায় অনুশীলন করুন
           </Button>
         </div>
@@ -83,33 +83,33 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
   const isCorrect = selectedWord === blank.correctAnswer;
 
   return (
-    <div className="p-6 rounded-2xl bg-white border border-ecp-border space-y-5 shadow-2xs">
+    <div className="p-6 rounded-card bg-card border border-border space-y-5 shadow-2xs">
       {/* Header Counter */}
-      <div className="flex items-center justify-between pb-3 border-b border-ecp-border text-xs">
-        <span className="font-mono font-semibold text-ecp-violet bg-ecp-violet-surface px-2.5 py-1 rounded-md">
+      <div className="flex items-center justify-between pb-3 border-b border-border text-chip">
+        <span className="font-mono text-primary bg-primary/10 px-2.5 py-1 rounded-control border border-primary/20">
           বাক্য {currentIndex + 1} / {exercises.length}
         </span>
-        <span className="text-ecp-text-muted font-bangla">
+        <span className="text-muted-foreground text-bangla">
           সঠিক শব্দটি নির্বাচন করে শূন্যস্থান পূরণ করুন
         </span>
       </div>
 
       {/* Masked Sentence Display */}
-      <div className="p-5 rounded-2xl bg-ecp-bg-canvas border border-ecp-border space-y-2 text-center">
-        <p className="text-lg sm:text-xl font-semibold text-ecp-text-primary font-sans leading-relaxed">
+      <div className="p-5 rounded-panel bg-muted/40 border border-border space-y-2 text-center">
+        <p className="text-card-title text-foreground font-sans leading-relaxed">
           {currentItem.maskedSentence.split("___").map((part, idx, arr) => (
             <React.Fragment key={idx}>
               {part}
               {idx < arr.length - 1 && (
                 <span
-                  className={`inline-block min-w-16 px-2.5 py-0.5 mx-1 rounded-lg border font-mono text-base font-semibold transition-all ${
+                  className={`inline-block min-w-16 px-2.5 py-0.5 mx-1 rounded-control border font-mono text-label transition-all ${
                     selectedWord
                       ? hasChecked
                         ? isCorrect
-                          ? "bg-emerald-100 text-emerald-800 border-emerald-400"
-                          : "bg-rose-100 text-rose-800 border-rose-400"
-                        : "bg-ecp-violet-surface text-ecp-violet border-ecp-violet"
-                      : "bg-white border-dashed border-ecp-text-muted text-transparent"
+                          ? "bg-success-bg text-success border-success/40"
+                          : "bg-destructive/10 text-destructive border-destructive/40"
+                        : "bg-primary/10 text-primary border-primary/30"
+                      : "bg-card border-dashed border-border text-transparent"
                   }`}
                 >
                   {selectedWord || "___"}
@@ -119,29 +119,29 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
           ))}
         </p>
 
-        <p className="text-xs sm:text-sm font-bangla text-ecp-text-secondary pt-1">
+        <p className="text-meta text-bangla text-muted-foreground pt-1">
           {currentItem.translationBn}
         </p>
       </div>
 
       {/* Word Options Chips */}
       <div className="space-y-2">
-        <span className="text-xs font-semibold text-ecp-text-muted uppercase tracking-wider block">
+        <span className="text-chip text-muted-foreground uppercase tracking-wider block">
           শব্দ বেছে নিন:
         </span>
         <div className="flex flex-wrap gap-2.5">
           {blank.options.map((word) => {
             const isSelected = selectedWord === word;
             let chipStyle =
-              "bg-white border-ecp-border text-ecp-text-primary hover:border-ecp-violet hover:bg-ecp-violet-surface/20";
+              "bg-card border-border text-foreground hover:border-primary/40 hover:bg-primary/5";
 
             if (isSelected) {
               if (hasChecked) {
                 chipStyle = isCorrect
-                  ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
-                  : "bg-rose-600 text-white border-rose-600 shadow-xs";
+                  ? "bg-success-bg text-success border-success shadow-xs"
+                  : "bg-destructive/10 text-destructive border-destructive shadow-xs";
               } else {
-                chipStyle = "bg-ecp-violet text-white border-ecp-violet shadow-xs";
+                chipStyle = "bg-primary text-primary-foreground border-primary shadow-xs";
               }
             }
 
@@ -151,7 +151,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
                 type="button"
                 disabled={hasChecked}
                 onClick={() => handleSelectWord(word)}
-                className={`px-4 py-2 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${chipStyle}`}
+                className={`px-4 py-2 rounded-control border text-label transition-all cursor-pointer ${chipStyle}`}
               >
                 {word}
               </button>
@@ -163,17 +163,17 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
       {/* Explanation Banner */}
       {hasChecked && (
         <div
-          className={`p-4 rounded-xl text-xs sm:text-sm font-bangla leading-relaxed border animate-in fade-in ${
+          className={`p-4 rounded-panel text-meta text-bangla leading-relaxed border animate-in fade-in ${
             isCorrect
-              ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-              : "bg-amber-50 border-amber-200 text-amber-900"
+              ? "bg-success-bg border-success/30 text-foreground"
+              : "bg-warning-bg border-warning/30 text-foreground"
           }`}
         >
-          <div className="font-semibold mb-1 flex items-center gap-1.5">
+          <div className="text-label mb-1 flex items-center gap-1.5">
             <HugeiconsIcon
               icon={isCorrect ? CheckmarkCircle01Icon : Cancel01Icon}
               size={16}
-              className={isCorrect ? "text-emerald-600" : "text-amber-600"}
+              className={isCorrect ? "text-success" : "text-warning"}
             />
             <span>{isCorrect ? "চমৎকার! সঠিক হয়েছে।" : "সঠিক উত্তর নয়"}</span>
           </div>
@@ -187,12 +187,12 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
           <Button
             onClick={handleCheck}
             disabled={!selectedWord}
-            className="font-bangla text-xs"
+            className="text-bangla text-label rounded-control"
           >
             উত্তর যাচাই করুন
           </Button>
         ) : (
-          <Button onClick={handleNext} className="gap-1.5 font-bangla text-xs">
+          <Button onClick={handleNext} className="gap-1.5 text-bangla text-label rounded-control">
             <span>{currentIndex < exercises.length - 1 ? "পরবর্তী বাক্য" : "সমাপ্ত করুন"}</span>
             <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
           </Button>

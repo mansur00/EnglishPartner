@@ -67,22 +67,22 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
 
   if (isFinished) {
     return (
-      <div className="p-6 sm:p-8 rounded-2xl bg-white border border-ecp-border text-center space-y-4 shadow-2xs">
-        <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
+      <div className="p-6 sm:p-8 rounded-card bg-card border border-border text-center space-y-4 shadow-2xs">
+        <div className="size-control rounded-control bg-success-bg text-success flex items-center justify-center mx-auto">
           <HugeiconsIcon icon={SparklesIcon} size={28} />
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-ecp-text-primary font-bangla">
+          <h3 className="text-card-title text-foreground text-bangla">
             রোলপ্লে অনুশীলন সম্পন্ন হয়েছে!
           </h3>
-          <p className="text-xs sm:text-sm text-ecp-text-secondary mt-1 font-bangla">
+          <p className="text-meta text-muted-foreground mt-1 text-bangla">
             আপনি সফলভাবে পুরো কথোপকথনের নিজের সংলাপগুলো অনুশীলন করেছেন।
           </p>
         </div>
 
         <div className="pt-2 flex justify-center gap-2.5">
-          <Button onClick={handleRestart} variant="outline" className="font-bangla text-xs gap-1.5">
+          <Button onClick={handleRestart} variant="outline" className="text-bangla text-label rounded-control gap-1.5">
             <HugeiconsIcon icon={RefreshIcon} size={14} />
             <span>পুনরায় অনুশীলন করুন</span>
           </Button>
@@ -92,17 +92,17 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
   }
 
   return (
-    <div className="p-6 rounded-2xl bg-white border border-ecp-border space-y-5 shadow-2xs">
+    <div className="p-6 rounded-card bg-card border border-border space-y-5 shadow-2xs">
       {/* Role Selector Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-ecp-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-border">
         <div className="flex items-center gap-2">
-          <HugeiconsIcon icon={UserGroupIcon} size={16} className="text-ecp-violet" />
-          <span className="text-xs font-semibold text-ecp-text-primary font-bangla">
+          <HugeiconsIcon icon={UserGroupIcon} size={16} className="text-primary" />
+          <span className="text-label text-foreground text-bangla">
             আপনার চরিত্র বেছে নিন:
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-ecp-bg-canvas p-1 rounded-xl border border-ecp-border">
+        <div className="flex items-center gap-1.5 bg-muted/40 p-1 rounded-control border border-border">
           {speakers.map((spk) => (
             <button
               key={spk.id}
@@ -113,10 +113,10 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
                 setIsRevealed(false);
                 setIsFinished(false);
               }}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-3 py-1 rounded-control text-chip transition-all cursor-pointer ${
                 learnerSpeakerId === spk.id
-                  ? "bg-ecp-violet text-white shadow-xs"
-                  : "text-ecp-text-secondary hover:text-ecp-text-primary"
+                  ? "bg-primary text-primary-foreground shadow-xs"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {spk.name} ({spk.nameBn})
@@ -126,8 +126,8 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
       </div>
 
       {/* Turn Progress */}
-      <div className="flex items-center justify-between text-xs text-ecp-text-muted">
-        <span className="font-mono font-semibold text-ecp-violet">
+      <div className="flex items-center justify-between text-chip text-muted-foreground">
+        <span className="font-mono text-primary">
           বাক্য {currentLineIndex + 1} / {lines.length}
         </span>
         <Badge variant={isLearnerTurn ? "accent" : "neutral"} size="sm">
@@ -138,13 +138,13 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
       {/* Turn Content Box */}
       {isLearnerTurn ? (
         /* Learner Turn: Hidden until revealed */
-        <div className="p-6 rounded-2xl bg-ecp-warm-surface/40 border border-ecp-warm/30 text-center space-y-4">
+        <div className="p-6 rounded-panel bg-warning-bg border border-warning/30 text-center space-y-4">
           <div className="space-y-1">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-200">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip bg-warning-bg text-warning border border-warning/40">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>আপনার বলার পালা! Speak your line in English</span>
             </span>
-            <p className="text-sm font-bangla text-ecp-text-primary pt-2 font-medium">
+            <p className="text-meta text-bangla text-foreground pt-2">
               বাংলা ভাবার্থ: &ldquo;{currentLine.translationBn}&rdquo;
             </p>
           </div>
@@ -159,7 +159,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
                   setIsRevealed(true);
                   playLineAudio(currentLine.englishText);
                 }}
-                className="font-bangla text-xs gap-1.5"
+                className="text-bangla text-label rounded-control gap-1.5"
               >
                 <HugeiconsIcon icon={PlayCircle02Icon} size={15} />
                 <span>ইংরেজি উত্তর দেখুন ও শুনুন (Reveal & Listen)</span>
@@ -168,8 +168,8 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
           ) : (
             /* Revealed Answer & Audio */
             <div className="space-y-3 pt-2 animate-in fade-in">
-              <div className="p-3.5 rounded-xl bg-white border border-ecp-border shadow-2xs">
-                <p className="text-lg font-semibold text-ecp-text-primary font-sans italic">
+              <div className="p-3.5 rounded-control bg-card border border-border shadow-2xs">
+                <p className="text-card-title text-foreground font-sans italic">
                   &ldquo;{currentLine.englishText}&rdquo;
                 </p>
               </div>
@@ -177,36 +177,36 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
               <button
                 type="button"
                 onClick={() => playLineAudio(currentLine.englishText)}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold text-ecp-violet bg-ecp-violet-surface hover:bg-ecp-violet-surface/80 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-control text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
               >
                 <HugeiconsIcon icon={VolumeHighIcon} size={14} />
-                <span>উচ্চারণ আবার শুনুন</span>
+                <span className="text-bangla">উচ্চারণ আবার শুনুন</span>
               </button>
             </div>
           )}
         </div>
       ) : (
         /* Partner Turn: Visible with Audio */
-        <div className="p-6 rounded-2xl bg-ecp-bg-canvas border border-ecp-border space-y-3">
+        <div className="p-6 rounded-panel bg-muted/40 border border-border space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-ecp-text-primary">
+            <span className="text-label text-foreground">
               {currentLine.speakerName} ({currentLine.speakerRole}):
             </span>
             <button
               type="button"
               onClick={() => playLineAudio(currentLine.englishText)}
-              className="p-1.5 rounded-lg text-ecp-violet hover:bg-white transition-colors cursor-pointer"
+              className="p-1.5 rounded-control text-primary hover:bg-card transition-colors cursor-pointer"
               title="শুনুন"
             >
               <HugeiconsIcon icon={VolumeHighIcon} size={16} />
             </button>
           </div>
 
-          <p className="text-base sm:text-lg font-medium text-ecp-text-primary font-sans leading-relaxed">
+          <p className="text-lead text-foreground font-sans leading-relaxed">
             &ldquo;{currentLine.englishText}&rdquo;
           </p>
 
-          <p className="text-xs sm:text-sm font-bangla text-ecp-text-secondary pt-2 border-t border-ecp-border/60">
+          <p className="text-meta text-bangla text-muted-foreground pt-2 border-t border-border/60">
             {currentLine.translationBn}
           </p>
         </div>
@@ -214,7 +214,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
 
       {/* Next Turn Button */}
       <div className="pt-2 flex justify-end">
-        <Button onClick={handleNextTurn} className="gap-1.5 font-bangla text-xs">
+        <Button onClick={handleNextTurn} className="gap-1.5 text-bangla text-label rounded-control">
           <span>{currentLineIndex < lines.length - 1 ? "পরবর্তী সংলাপ (Next)" : "অনুশীলন সমাপ্ত"}</span>
           <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
         </Button>

@@ -84,44 +84,44 @@ export function PracticeWorkspace({
   return (
     <div className="space-y-6">
       {/* Mode Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-white border border-ecp-border rounded-2xl shadow-2xs">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card border border-border rounded-panel shadow-2xs">
         <button
           type="button"
           onClick={() => setActiveTab("quiz")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
             activeTab === "quiz"
-              ? "bg-ecp-violet text-white shadow-xs"
-              : "text-ecp-text-secondary hover:text-ecp-text-primary hover:bg-ecp-bg-canvas"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
           }`}
         >
           <HugeiconsIcon icon={VolumeHighIcon} size={16} />
-          <span className="font-bangla">লিসেনিং কুইজ (Quiz)</span>
+          <span className="text-bangla">লিসেনিং কুইজ (Quiz)</span>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab("roleplay")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
             activeTab === "roleplay"
-              ? "bg-ecp-violet text-white shadow-xs"
-              : "text-ecp-text-secondary hover:text-ecp-text-primary hover:bg-ecp-bg-canvas"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
           }`}
         >
           <HugeiconsIcon icon={UserGroupIcon} size={16} />
-          <span className="font-bangla">রোলপ্লে: নিজের ডায়লগ বলুন (Roleplay)</span>
+          <span className="text-bangla">রোলপ্লে: নিজের ডায়লগ বলুন (Roleplay)</span>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab("blanks")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
             activeTab === "blanks"
-              ? "bg-ecp-violet text-white shadow-xs"
-              : "text-ecp-text-secondary hover:text-ecp-text-primary hover:bg-ecp-bg-canvas"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
           }`}
         >
           <HugeiconsIcon icon={PlayCircle02Icon} size={16} />
-          <span className="font-bangla">শূন্যস্থান পূরণ (Fill Blanks)</span>
+          <span className="text-bangla">শূন্যস্থান পূরণ (Fill Blanks)</span>
         </button>
       </div>
 
@@ -140,23 +140,23 @@ export function PracticeWorkspace({
 
       {/* Advance to Next Step Banner */}
       {nextStepSlug && (
-        <div className="p-5 rounded-2xl bg-white border border-ecp-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+        <div className="p-5 rounded-card bg-card border border-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+            <div className="size-control rounded-control bg-success-bg text-success flex items-center justify-center shrink-0">
               <HugeiconsIcon icon={SparklesIcon} size={20} />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-ecp-text-primary font-bangla">
+              <h4 className="text-label text-foreground text-bangla">
                 ধাপ {stepNumber.toString().padStart(2, "0")} অনুশীলন শেষ?
               </h4>
-              <p className="text-xs text-ecp-text-muted">
+              <p className="text-chip text-muted-foreground">
                 পরবর্তী কথোপকথনে নতুন ব্যাকরণ ও আরও বাক্য শিখতে এগিয়ে যান
               </p>
             </div>
           </div>
 
           <Link href={`/conversations/${nextStepSlug}`}>
-            <Button className="w-full sm:w-auto gap-2 font-bangla text-xs">
+            <Button className="w-full sm:w-auto gap-2 text-bangla text-label rounded-control">
               <span>পরবর্তী ধাপে যান ({nextStepTitle || "Next Step"})</span>
               <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
             </Button>
