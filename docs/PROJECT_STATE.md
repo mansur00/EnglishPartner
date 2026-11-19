@@ -160,6 +160,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `7c165eb` | AUD-R3-LAYOUT: exit code and assertion count recorded |
 | `986c89e` | AUD-R3-TABLE: single findings table, counts computed from rows |
 | `27cfabd` | AUD-R3-RECONCILE: one commit per finding, all hashes verified |
+| `e56927d` | Phase 2 Checkpoint 2 (UI MVP): Sources registry, loader, fallback, useGrammar, GrammarText, GrammarToggleButton (.rainbow-border when ON), GrammarModeSwitch, GrammarLayerPicker, GrammarLegend, GrammarSummaryRow, RuleCardDialog, WordDetailPopover breakdown, 0.0000px layout shift, 16 screenshots |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -182,8 +183,9 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 13. **[DONE] (commits 0c6d6fd..cb05b69) Audit Report Findings Remediation (13 Items):** Executed all 13 fixes in dedicated commits: exact ladder counts, bookmark DB endpoint, Supabase Auth callback & session middleware, header session state, messages i18n dictionary with 100% key parity, dynamic language coverage, draft seed translations with learner notice, Poppins removed (Inter + Hind Siliguri + Noto Sans Bengali per D-02), 9 approved practice modes in schema & migration, privacy retention aligned with spec §4.1 (no server-side audio retention, P-3 recorded as owner decision), Style Guide §11 icon verification, zero Gemini in product code (`gemini-3.8-flash-tts` in offline configs), and full verification evidence for KI-07/09/12/16.
 14. **[DONE] (commits 28794fd..9e2d018) Audit Report Correction Round (10 Items):** Gated Gemini offline provider on unsigned A-11 scope in `_pending_a11`, recorded AUD-ICON as owner decision in `docs/DECISIONS.md`, saved layout test evidence (233 assertions), marked KI-09 blocked pending clean test DB, audited hardcoded strings and added 30 keys to messages (98/98 keys, 100% parity), added integration test for KI-02 bookmark spoofing protection, restored historical docs mentions of Poppins with dated non-current note (AUD-D-02), recorded database migration apply status (AUD-MIGRATE), authored headless browser E2E test and marked KI-12 blocked pending Playwright runner, and reconciled AUDIT_REPORT summary, tables, and git log (AUD-RECONCILE).
 15. **[DONE] (commits 1759d60..27cfabd) Audit Round 3 Remediation:** Single master findings table in `docs/AUDIT_REPORT.md` (25 rows: 6 PASS, 12 Fixed, 1 Blocked, 4 Not built yet, 2 Needs owner = 25 total); KI-12 verified locally (PASS) with CI gate tracked separately (KI-12-CI: Not built yet); KI-09 generate check verified (PASS) with live run blocked pending owner throwaway DB URL; KI-02 bookmark persistence verified with before/after row counts (0 -> 1 -> 1 -> 1 -> 2); KI-05 hardcoded strings audited (103 -> 30 moved to messages, 98/98 keys, 73 justified); layout invariants suite exit code 0 recorded (233 assertions); all commit hashes verified in git log.
-16. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`.
-17. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+16. **[DONE] (commit e56927d) Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` (.rainbow-border when ON, 44px target) next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`, RuleCardDialog, enhanced WordDetailPopover breakdown, 0.0000px layout shift verified, toggle response 44ms (turn) and 5ms (global), 16 screenshots saved.
+17. **[PENDING - Awaiting Owner Approval] Phase 2 Checkpoint 3 (Complete System):** Remaining layers (Phrases & Clauses, full Patterns), lists integration, `grammar:check` build gate, admin editor integration, vocabulary & practice integration, `docs/grammar-system.md`.
+18. **[PENDING] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
 
 ---
 
@@ -212,6 +214,31 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-20, Phase 2 Checkpoint 2 (UI MVP) Completed & Verified
+- Requested by owner: Execute Phase 2 Checkpoint 2 (UI MVP) per EnglishPartner_Grammar_ColorCoding_Spec.md §12.
+- Changed:
+  - `src/lib/grammar/`: `types.ts`, `taxonomy.ts`, `sources.ts`, `loader.ts`, `fallback.ts`, `resolve.ts`, `context.tsx`.
+  - `src/hooks/useGrammar.ts`: re-exported hook and provider.
+  - `src/components/grammar/`: `GrammarToggleButton.tsx` (44px target, .rainbow-border when active), `GrammarText.tsx` (flat token rendering with data-gram-* attributes), `GrammarModeSwitch.tsx` (global switch, hydration-safe), `GrammarLayerPicker.tsx` (popover for 5 layers, basic/advanced, ruby labels), `GrammarLegend.tsx` (contextual categories with interactive focus mode), `GrammarSummaryRow.tsx` (chips for tenses, voice, patterns), `GrammarBreakdown.tsx`, `RuleCard.tsx`.
+  - `src/components/learning/ConversationTurn.tsx`: integrated GrammarToggleButton next to AudioPlayButton, GrammarText with 0.0000px horizontal shift, GrammarSummaryRow.
+  - `src/components/learning/ConversationReader.tsx`: wrapped with GrammarProvider, loaded static annotations lazily, added GrammarModeSwitch, GrammarLayerPicker, GrammarLegend, RuleCardDialog.
+  - `src/components/learning/WordDetailPopover.tsx`: added enhanced grammar breakdown section with POS, role, lemma, and tense formula.
+  - `scripts/verify-grammar-ui.mjs`: performance, layout shift, and multi-state screenshot suite.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (26/26 unit tests).
+  - `npm run test:layout`: Passed (all 233 layout invariants passing with exit code 0).
+  - `npm run build`: Passed (83/83 static pages compiled).
+  - Layout Shift: 0.0000 px shift across all tokens between OFF and ON.
+  - Toggle Performance: 44 ms single-turn toggle, 5 ms global toggle (both well under 100 ms target).
+  - 16 high-fidelity screenshots captured across 1280px & 360px, light & dark themes.
+- Commit: e56927d
+- Open questions / follow-ups:
+  - Awaiting owner review and approval of Checkpoint 2 UI MVP before proceeding to Checkpoint 3.
 
 ### 2026-11-19, Audit Round 3 Verified Findings & Reconciliation Completed
 - Requested by owner: Make audit report accurate and verifiable. Build single master findings table with one row per finding and exact counts computed from rows. Separate KI-12 test result (PASS) from CI gate (Not built yet). Check `drizzle-kit generate` (PASS) and mark KI-09 live run blocked pending owner throwaway DB URL. Record bookmark row count before/after evidence (0 -> 1 -> 1 -> 1 -> 2). Record hardcoded string scanner counts (103 -> 30 moved to messages, 98/98 keys, 73 justified). Execute layout invariants test against production build, record exit code 0 and last lines. Ensure one commit per finding with verified git log hashes. Run final verification suite.
