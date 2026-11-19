@@ -11,28 +11,28 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-[var(--ecp-canvas)] p-4 sm:p-8 flex justify-center">
-      <div className="max-w-3xl w-full space-y-6">
+    <div className="min-h-screen bg-background p-4 sm:p-8 flex justify-center">
+      <div className="max-w-reading w-full space-y-6">
         <Link href="/">
-          <Button variant="ghost" size="sm" className="gap-1.5 text-xs -ml-2 mb-2">
+          <Button variant="ghost" size="sm" className="gap-1.5 text-label rounded-control -ml-2 mb-2">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to Home
           </Button>
         </Link>
 
-        <Card className="p-6 sm:p-8 bg-white border-ecp-border space-y-6 shadow-xs">
+        <Card className="p-6 sm:p-8 bg-card border-border space-y-6 shadow-xs rounded-card">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-ecp-text-primary font-sans">
+            <h1 className="text-page-title text-foreground font-sans">
               Terms of Service (ব্যবহারের শর্তাবলী)
             </h1>
-            <p className="text-xs sm:text-sm text-ecp-text-muted mt-1">
+            <p className="text-meta text-muted-foreground mt-1">
               Last Updated: November 2026 • English Conversation Partner (ECP)
             </p>
           </div>
 
-          <div className="space-y-4 text-sm text-ecp-text-secondary leading-relaxed">
+          <div className="space-y-4 text-body text-muted-foreground leading-relaxed">
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ১. শিক্ষামূলক উদ্দেশ্যে ব্যবহারের অধিকার (Educational Purpose)
               </h2>
               <p>
@@ -41,7 +41,7 @@ export default function TermsPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ২. বুদ্ধিবৃত্তিক সম্পত্তি ও অডিও লাইসেন্সিং (Licenses)
               </h2>
               <p>
@@ -50,7 +50,7 @@ export default function TermsPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ৩. ব্যবহারকারীর আচরণ ও অপব্যবহার রোধ
               </h2>
               <p>
@@ -59,12 +59,12 @@ export default function TermsPage() {
             </section>
           </div>
 
-          <div className="pt-4 border-t border-ecp-border flex items-center justify-between text-xs text-ecp-text-muted">
-            <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
+          <div className="pt-4 border-t border-border flex items-center justify-between text-chip text-muted-foreground">
+            <span className="flex items-center gap-1.5 text-success">
               <HugeiconsIcon icon={CheckmarkCircle01Icon} size={15} />
               Open Learning Integrity
             </span>
-            <Link href="/privacy" className="text-ecp-violet hover:underline">
+            <Link href="/privacy" className="text-primary hover:underline">
               Privacy Policy
             </Link>
           </div>

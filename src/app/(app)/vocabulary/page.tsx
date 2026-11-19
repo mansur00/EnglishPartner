@@ -15,6 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
+import { PageContainer } from "@/components/shared/PageContainer";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import {
   SEED_VOCABULARY,
@@ -130,18 +131,18 @@ function VocabularyContent() {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto p-4 md:p-8 pb-16">
+    <PageContainer className="space-y-6 pb-16">
       {/* Top Banner / Heading */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 md:p-6 rounded-[16px] bg-card border border-border shadow-2xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 md:p-6 rounded-card bg-card border border-border shadow-2xs">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-[12px] bg-brand-50 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300 flex items-center justify-center shrink-0">
+          <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
             <HugeiconsIcon icon={Book01Icon} size={24} />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-semibold text-foreground font-bangla">
+            <h1 className="text-page-title text-foreground text-bangla">
               আমার শব্দভান্ডার (My Vocabulary Notebook)
             </h1>
-            <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+            <p className="text-meta text-muted-foreground mt-0.5">
               কথোপকথন থেকে সংরক্ষিত শব্দ এবং ব্যাকরণগত অর্থ
             </p>
           </div>
@@ -152,15 +153,15 @@ function VocabularyContent() {
           variant="outline"
           size="sm"
           onClick={() => setIsAuthModalOpen(true)}
-          className="text-xs gap-2 font-bangla rounded-[12px]"
+          className="text-label gap-2 text-bangla rounded-control"
         >
-          <HugeiconsIcon icon={Login01Icon} size={16} className="text-brand-800 dark:text-brand-300" />
+          <HugeiconsIcon icon={Login01Icon} size={16} className="text-primary" />
           <span>ক্লাউডে সিঙ্ক করুন</span>
         </Button>
       </div>
 
       {/* Guest Mode Notice */}
-      <div className="flex items-center justify-between gap-3 p-4 rounded-[12px] bg-brand-50/60 dark:bg-brand-950/40 border border-brand-200/50 dark:border-brand-800/40 text-xs text-muted-foreground font-bangla">
+      <div className="flex items-center justify-between gap-3 p-4 rounded-panel bg-primary/5 border border-primary/20 text-chip text-muted-foreground text-bangla">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={SparklesIcon} size={16} className="text-sun-500 shrink-0" />
           <span>
@@ -170,7 +171,7 @@ function VocabularyContent() {
         <button
           type="button"
           onClick={() => setIsAuthModalOpen(true)}
-          className="font-semibold text-brand-800 dark:text-brand-300 hover:underline shrink-0 cursor-pointer"
+          className="text-primary hover:underline shrink-0 cursor-pointer text-label"
         >
           লগইন করে সুরক্ষিত রাখুন
         </button>
@@ -188,7 +189,7 @@ function VocabularyContent() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="শব্দ বা অর্থ দিয়ে খুঁজুন (Search English or Bangla)..."
-            className="w-full h-12 pl-10 pr-4 rounded-[12px] border border-border bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-brand-600 focus:ring-1 focus:ring-brand-600 transition-all"
+            className="w-full h-control-md pl-10 pr-4 rounded-control border border-border bg-card text-body text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary transition-all"
           />
         </div>
 
@@ -209,9 +210,9 @@ function VocabularyContent() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedPos(cat.id)}
-              className={`h-10 px-4 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              className={`min-h-tap px-4 rounded-pill text-chip whitespace-nowrap transition-all cursor-pointer ${
                 selectedPos === cat.id
-                  ? "bg-brand-800 text-white shadow-xs dark:bg-brand-700"
+                  ? "bg-primary text-primary-foreground shadow-xs"
                   : "bg-card border border-border text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -227,21 +228,21 @@ function VocabularyContent() {
           {filteredEntries.map((item) => (
             <div
               key={item.lemma}
-              className="p-5 rounded-[16px] bg-card border border-border shadow-2xs hover:shadow-xs hover:border-brand-500/40 transition-all flex flex-col justify-between"
+              className="p-5 rounded-card bg-card border border-border shadow-2xs hover:shadow-xs hover:border-primary/40 transition-all flex flex-col justify-between"
             >
               <div>
                 {/* Word & Audio */}
                 <div className="flex items-start justify-between gap-3 pb-3 border-b border-border">
                   <div>
                     <div className="flex items-center gap-2.5 flex-wrap">
-                      <h3 className="text-xl font-semibold text-foreground font-sans">
+                      <h3 className="text-card-title text-foreground font-sans">
                         {item.word}
                       </h3>
-                      <Badge variant={posBadgeVariant(item.partOfSpeech)} size="sm">
+                      <Badge variant={posBadgeVariant(item.partOfSpeech)} size="sm" className="text-chip">
                         {item.partOfSpeech}
                       </Badge>
                     </div>
-                    <span className="text-xs font-mono text-muted-foreground mt-1 block">
+                    <span className="text-chip font-mono text-muted-foreground mt-1 block">
                       {item.ipa}
                     </span>
                   </div>
@@ -251,7 +252,7 @@ function VocabularyContent() {
                       type="button"
                       onClick={() => playWord(item.word)}
                       aria-label={`উচ্চারণ শুনুন: ${item.word}`}
-                      className="w-11 h-11 rounded-[10px] text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 dark:hover:bg-brand-900 transition-colors cursor-pointer flex items-center justify-center"
+                      className="size-control rounded-control text-primary bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer flex items-center justify-center"
                       title="উচ্চারণ শুনুন"
                     >
                       <HugeiconsIcon icon={VolumeHighIcon} size={18} />
@@ -260,7 +261,7 @@ function VocabularyContent() {
                       type="button"
                       onClick={() => handleRemoveWord(item.lemma)}
                       aria-label={`তালিকা থেকে মুছুন: ${item.word}`}
-                      className="w-11 h-11 rounded-[10px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center"
+                      className="size-control rounded-control text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center"
                       title="তালিকা থেকে বাদ দিন"
                     >
                       <HugeiconsIcon icon={BookmarkRemove01Icon} size={18} />
@@ -270,11 +271,11 @@ function VocabularyContent() {
 
                 {/* Meanings */}
                 <div className="py-3 space-y-2">
-                  <div className="text-xs sm:text-sm font-bangla text-foreground font-medium leading-relaxed">
+                  <div className="text-body text-bangla text-foreground leading-relaxed">
                     {item.contextualMeaningBn}
                   </div>
                   {item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn && (
-                    <div className="text-xs font-bangla text-muted-foreground">
+                    <div className="text-meta text-bangla text-muted-foreground">
                       সাধারণ অর্থ: {item.generalMeaningBn}
                     </div>
                   )}
@@ -283,7 +284,7 @@ function VocabularyContent() {
                   {item.exampleSentence && (
                     <div className="pt-2.5 border-t border-border/60 space-y-1.5">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider font-bangla">
+                        <span className="text-chip text-muted-foreground uppercase tracking-wider text-bangla">
                           উদাহরণ বাক্য
                         </span>
                         <GrammarToggleButton
@@ -292,13 +293,13 @@ function VocabularyContent() {
                         />
                       </div>
                       {isLineActive(`vocab-${item.lemma}`) ? (
-                        <div className="text-xs sm:text-sm font-medium py-1">
+                        <div className="text-body py-1">
                           <GrammarText
                             annotation={createFallbackAnnotation(`vocab-${item.lemma}`, item.exampleSentence)}
                           />
                         </div>
                       ) : (
-                        <p className="text-xs text-muted-foreground italic">
+                        <p className="text-meta text-muted-foreground italic">
                           &ldquo;{item.exampleSentence}&rdquo;
                         </p>
                       )}
@@ -309,7 +310,7 @@ function VocabularyContent() {
 
               {/* Word Forms / Synonyms footer */}
               {item.wordForms && (
-                <div className="pt-2 text-xs text-muted-foreground flex flex-wrap gap-2">
+                <div className="pt-2 text-chip text-muted-foreground flex flex-wrap gap-2">
                   {item.wordForms.past && <span>Past: {item.wordForms.past}</span>}
                   {item.wordForms.plural && <span>Plural: {item.wordForms.plural}</span>}
                 </div>
@@ -342,6 +343,6 @@ function VocabularyContent() {
         title="শব্দভান্ডার ক্লাউডে সিঙ্ক করুন (Sync to Cloud)"
         description="লগইন করলে আপনার সব ডিভাইসে সংরক্ষিত শব্দভান্ডার পাওয়া যাবে এবং কখনো মুছে যাবে না।"
       />
-    </div>
+    </PageContainer>
   );
 }

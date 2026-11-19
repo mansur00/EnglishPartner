@@ -11,32 +11,32 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-[var(--ecp-canvas)] p-4 sm:p-8 flex justify-center">
-      <div className="max-w-3xl w-full space-y-6">
+    <div className="min-h-screen bg-background p-4 sm:p-8 flex justify-center">
+      <div className="max-w-reading w-full space-y-6">
         <Link href="/">
-          <Button variant="ghost" size="sm" className="gap-1.5 text-xs -ml-2 mb-2">
+          <Button variant="ghost" size="sm" className="gap-1.5 text-label rounded-control -ml-2 mb-2">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to Home
           </Button>
         </Link>
 
-        <Card className="p-6 sm:p-8 bg-white border-ecp-border space-y-6 shadow-xs">
+        <Card className="p-6 sm:p-8 bg-card border-border space-y-6 shadow-xs rounded-card">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip bg-success-bg text-success border border-success/30 mb-2">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>Learner-First Privacy</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-ecp-text-primary font-sans">
+            <h1 className="text-page-title text-foreground font-sans">
               Privacy Policy (গোপনীয়তা নীতি)
             </h1>
-            <p className="text-xs sm:text-sm text-ecp-text-muted mt-1">
+            <p className="text-meta text-muted-foreground mt-1">
               Last Updated: November 2026 • Effective Date: Gate 1 Launch
             </p>
           </div>
 
-          <div className="space-y-4 text-sm text-ecp-text-secondary leading-relaxed">
+          <div className="space-y-4 text-body text-muted-foreground leading-relaxed">
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ১. উন্মুক্ত শিক্ষা ও কোনো লুকানো ট্র্যাকিং নেই (Free & Open Learning)
               </h2>
               <p>
@@ -45,16 +45,16 @@ export default function PrivacyPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ২. গেস্ট ডেটা সংরক্ষণ (Guest Storage)
               </h2>
               <p>
-                আপনি যদি সাইন-ইন ছাড়া শব্দ সেভ করেন বা বুকমার্ক করেন, তবে সেই তথ্য সম্পূর্ণ আপনার ডিভাইসের ব্রাউজারে (<code className="text-xs bg-ecp-bg-canvas px-1.5 py-0.5 rounded font-mono">localStorage</code>) সংরক্ষিত থাকে। এই তথ্য আমাদের সার্ভারে পাঠানো হয় না।
+                আপনি যদি সাইন-ইন ছাড়া শব্দ সেভ করেন বা বুকমার্ক করেন, তবে সেই তথ্য সম্পূর্ণ আপনার ডিভাইসের ব্রাউজারে (<code className="text-chip bg-muted px-1.5 py-0.5 rounded-control font-mono text-foreground">localStorage</code>) সংরক্ষিত থাকে। এই তথ্য আমাদের সার্ভারে পাঠানো হয় না।
               </p>
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ৩. নিবন্ধিত অ্যাকাউন্ট ও ক্লাউড সিঙ্ক (Registered Users)
               </h2>
               <p>
@@ -63,7 +63,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-base font-semibold text-ecp-text-primary font-bangla">
+              <h2 className="text-card-title text-foreground text-bangla">
                 ৪. অডিও ও মাইক্রোফোন অনুমতি
               </h2>
               <p>
@@ -72,12 +72,12 @@ export default function PrivacyPage() {
             </section>
           </div>
 
-          <div className="pt-4 border-t border-ecp-border flex items-center justify-between text-xs text-ecp-text-muted">
-            <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
+          <div className="pt-4 border-t border-border flex items-center justify-between text-chip text-muted-foreground">
+            <span className="flex items-center gap-1.5 text-success">
               <HugeiconsIcon icon={CheckmarkCircle01Icon} size={15} />
               GDPR & Privacy Compliant
             </span>
-            <Link href="/terms" className="text-ecp-violet hover:underline">
+            <Link href="/terms" className="text-primary hover:underline">
               Terms of Service
             </Link>
           </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PageContainer } from "@/components/shared/PageContainer";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -33,34 +34,34 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
   );
 
   return (
-    <div className="space-y-6 max-w-5xl">
+    <PageContainer className="space-y-6">
       <div className="space-y-3">
         <Link href="/explore">
-          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-xs">
+          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to Explore
           </Button>
         </Link>
 
         {/* Hero Path Banner */}
-        <Card variant="warm" className="p-6 space-y-3 border-[var(--ecp-accent-400)]/40">
+        <Card variant="warm" className="p-6 space-y-3 border-border rounded-card">
           <div className="flex items-center gap-2">
-            <Badge variant="brand" className="gap-1">
+            <Badge variant="brand" size="sm" className="gap-1 text-chip">
               <HugeiconsIcon icon={Briefcase01Icon} size={12} />
               Professional Career Track
             </Badge>
-            <Badge variant="accent">5 Dialogue Modules</Badge>
+            <Badge variant="accent" size="sm" className="text-chip">5 Dialogue Modules</Badge>
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-semibold text-[var(--ecp-brand-950)]">
+          <h1 className="text-page-title text-foreground">
             UI/UX Designer Professional Track
           </h1>
 
-          <p className="text-sm text-[var(--ecp-text-secondary)] max-w-2xl leading-relaxed">
+          <p className="text-body text-muted-foreground max-w-reading leading-relaxed">
             Master international client communication: kickoff discovery meetings, wireframe presentations, design critique defenses, scope changes, and frontend developer handoff terminology.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-2 text-xs text-[var(--ecp-brand-800)] font-medium">
+          <div className="flex flex-wrap gap-4 pt-2 text-chip text-primary">
             <span className="flex items-center gap-1.5">
               <HugeiconsIcon icon={CheckmarkCircle02Icon} size={15} /> Client Kickoffs
             </span>
@@ -77,7 +78,7 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
         </Card>
       </div>
 
-      <div className="flex items-center justify-between text-xs font-semibold text-[var(--ecp-text-muted)] border-b border-[var(--ecp-border)] pb-3">
+      <div className="flex items-center justify-between text-chip text-muted-foreground border-b border-border pb-3">
         <span>Step-by-Step Learning Sequence</span>
       </div>
 
@@ -86,6 +87,6 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
           <ScenarioCard key={scenario.id} scenario={scenario} />
         ))}
       </div>
-    </div>
+    </PageContainer>
   );
 }
