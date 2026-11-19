@@ -67,8 +67,8 @@ export default async function ConversationEditorPage({
   };
 
   return (
-    <div className="min-h-screen bg-[var(--ecp-canvas)] p-4 sm:p-8">
-      <Suspense fallback={<div className="p-8 text-center text-sm text-ecp-text-muted">Loading editor...</div>}>
+    <div className="min-h-screen bg-background p-4 sm:p-8">
+      <Suspense fallback={<div className="p-8 text-center text-meta text-muted-foreground">Loading editor...</div>}>
         <ConversationEditorClient
           scenario={scenario}
           initialVersion={initialVersion}
