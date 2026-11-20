@@ -8,65 +8,8 @@
   {
     "token": "--radius-card",
     "override": "0px",
-    "failedRoutesCount": 2,
-    "routes": [
-      {
-        "route": "Reader",
-        "path": "/conversations/asking-price-product-details",
-        "count": 4,
-        "sample": [
-          {
-            "element": "div.rounded-[16px].p-5.md:p-6",
-            "property": "borderRadius",
-            "expected": "0px",
-            "actual": "16px",
-            "hint": "Card radius hard-coded via rounded-[16px] rather than rounded-card token"
-          },
-          {
-            "element": "div.rounded-[16px].p-5.md:p-6",
-            "property": "borderRadius",
-            "expected": "0px",
-            "actual": "16px",
-            "hint": "Card radius hard-coded via rounded-[16px] rather than rounded-card token"
-          },
-          {
-            "element": "div.rounded-[16px].p-5.md:p-6",
-            "property": "borderRadius",
-            "expected": "0px",
-            "actual": "16px",
-            "hint": "Card radius hard-coded via rounded-[16px] rather than rounded-card token"
-          }
-        ]
-      },
-      {
-        "route": "Vocabulary",
-        "path": "/vocabulary",
-        "count": 8,
-        "sample": [
-          {
-            "element": "div.flex.flex-col.sm:flex-row",
-            "property": "borderRadius",
-            "expected": "0px",
-            "actual": "16px",
-            "hint": "Card radius hard-coded via rounded-[16px] rather than rounded-card token"
-          },
-          {
-            "element": "div.p-5.rounded-[16px].bg-card",
-            "property": "borderRadius",
-            "expected": "0px",
-            "actual": "16px",
-            "hint": "Card radius hard-coded via rounded-[16px] rather than rounded-card token"
-          },
-          {
-            "element": "div.p-5.rounded-[16px].bg-card",
-            "property": "borderRadius",
-            "expected": "0px",
-            "actual": "16px",
-            "hint": "Card radius hard-coded via rounded-[16px] rather than rounded-card token"
-          }
-        ]
-      }
-    ]
+    "failedRoutesCount": 0,
+    "routes": []
   },
   {
     "token": "--radius-control",
@@ -83,93 +26,8 @@
   {
     "token": "--text-page-title",
     "override": "60px",
-    "failedRoutesCount": 6,
-    "routes": [
-      {
-        "route": "Landing",
-        "path": "/",
-        "count": 1,
-        "sample": [
-          {
-            "element": "h1: \"Master Real-Life English \"",
-            "property": "fontSize",
-            "expected": "60px",
-            "actual": "40px",
-            "hint": "Page title size hard-coded via text-3xl / clamp rather than text-page-title utility"
-          }
-        ]
-      },
-      {
-        "route": "Explore",
-        "path": "/explore",
-        "count": 1,
-        "sample": [
-          {
-            "element": "h1: \"Explore Conversations\"",
-            "property": "fontSize",
-            "expected": "60px",
-            "actual": "33.6px",
-            "hint": "Page title size hard-coded via text-3xl / clamp rather than text-page-title utility"
-          }
-        ]
-      },
-      {
-        "route": "Category",
-        "path": "/explore/category/shopping-and-money",
-        "count": 1,
-        "sample": [
-          {
-            "element": "h1: \"Shopping & Money\"",
-            "property": "fontSize",
-            "expected": "60px",
-            "actual": "33.6px",
-            "hint": "Page title size hard-coded via text-3xl / clamp rather than text-page-title utility"
-          }
-        ]
-      },
-      {
-        "route": "Reader",
-        "path": "/conversations/asking-price-product-details",
-        "count": 1,
-        "sample": [
-          {
-            "element": "h1: \"Asking for a Price & Prod\"",
-            "property": "fontSize",
-            "expected": "60px",
-            "actual": "33.6px",
-            "hint": "Page title size hard-coded via text-3xl / clamp rather than text-page-title utility"
-          }
-        ]
-      },
-      {
-        "route": "Vocabulary",
-        "path": "/vocabulary",
-        "count": 1,
-        "sample": [
-          {
-            "element": "h1: \"আমার শব্দভান্ডার (My Voca\"",
-            "property": "fontSize",
-            "expected": "60px",
-            "actual": "29.44px",
-            "hint": "Page title size hard-coded via text-3xl / clamp rather than text-page-title utility"
-          }
-        ]
-      },
-      {
-        "route": "Admin",
-        "path": "/admin",
-        "count": 1,
-        "sample": [
-          {
-            "element": "h1: \"কন্টেন্ট ম্যানেজমেন্ট ও অ\"",
-            "property": "fontSize",
-            "expected": "60px",
-            "actual": "29.44px",
-            "hint": "Page title size hard-coded via text-3xl / clamp rather than text-page-title utility"
-          }
-        ]
-      }
-    ]
+    "failedRoutesCount": 0,
+    "routes": []
   },
   {
     "token": "--header-h",
@@ -180,58 +38,14 @@
   {
     "token": "--container-max",
     "override": "800px",
-    "failedRoutesCount": 2,
-    "routes": [
-      {
-        "route": "Landing",
-        "path": "/",
-        "count": 1,
-        "sample": [
-          {
-            "element": "div.max-w-4xl.mx-auto",
-            "property": "maxWidth",
-            "expected": "800px",
-            "actual": "896px",
-            "hint": "Container max-width hard-coded via max-w-5xl rather than container-app token"
-          }
-        ]
-      },
-      {
-        "route": "Reader",
-        "path": "/conversations/asking-price-product-details",
-        "count": 1,
-        "sample": [
-          {
-            "element": "div.space-y-6.max-w-4xl",
-            "property": "maxWidth",
-            "expected": "800px",
-            "actual": "896px",
-            "hint": "Container max-width hard-coded via max-w-5xl rather than container-app token"
-          }
-        ]
-      }
-    ]
+    "failedRoutesCount": 0,
+    "routes": []
   },
   {
     "token": "--topic-tile",
     "override": "lime",
-    "failedRoutesCount": 1,
-    "routes": [
-      {
-        "route": "Dashboard",
-        "path": "/dashboard",
-        "count": 1,
-        "sample": [
-          {
-            "element": "div.size-tile rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
-            "property": "backgroundColor",
-            "expected": "lime / rgb(0, 255, 0)",
-            "actual": "oklab(0.342246 0.0786027 -0.108869 / 0.1)",
-            "hint": "Tile background not connected to dynamic token"
-          }
-        ]
-      }
-    ]
+    "failedRoutesCount": 0,
+    "routes": []
   },
   {
     "token": "--sun-500",

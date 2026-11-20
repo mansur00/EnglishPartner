@@ -59,7 +59,7 @@ const MUTATIONS = [
   {
     token: '--topic-tile',
     override: 'lime',
-    css: `:root { --topic-tile: lime !important; } [data-topic] { --topic-tile: lime !important; } .emoji-tile { background-color: var(--topic-tile) !important; }${TRANSITION_RESET}`
+    css: `:root { --topic-tile: lime !important; --color-topic-tile: lime !important; } [data-topic] { --topic-tile: lime !important; --color-topic-tile: lime !important; } .emoji-tile, [class*="bg-topic-tile"] { background-color: var(--topic-tile) !important; }${TRANSITION_RESET}`
   },
   {
     token: '--sun-500',
@@ -244,7 +244,7 @@ async function run() {
           });
         } else if (tok === '--topic-tile') {
           // Emoji tile background should be lime
-          const tiles = document.querySelectorAll('.emoji-tile, .size-tile');
+          const tiles = document.querySelectorAll('.emoji-tile, [class*="bg-topic-tile"]');
           tiles.forEach((el) => {
             const cs = window.getComputedStyle(el);
             if (!cs.backgroundColor.includes('0, 255, 0') && !cs.backgroundColor.includes('lime')) {

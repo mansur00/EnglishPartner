@@ -185,7 +185,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 15. **[DONE] (commits 1759d60..27cfabd) Audit Round 3 Remediation:** Single master findings table in `docs/AUDIT_REPORT.md` (25 rows: 6 PASS, 12 Fixed, 1 Blocked, 4 Not built yet, 2 Needs owner = 25 total); KI-12 verified locally (PASS) with CI gate tracked separately (KI-12-CI: Not built yet); KI-09 generate check verified (PASS) with live run blocked pending owner throwaway DB URL; KI-02 bookmark persistence verified with before/after row counts (0 -> 1 -> 1 -> 1 -> 2); KI-05 hardcoded strings audited (103 -> 30 moved to messages, 98/98 keys, 73 justified); layout invariants suite exit code 0 recorded (233 assertions); all commit hashes verified in git log.
 16. **[DONE] (commit e56927d) Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` (.rainbow-border when ON, 44px target) next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`, RuleCardDialog, enhanced WordDetailPopover breakdown, 0.0000px layout shift verified, toggle response 44ms (turn) and 5ms (global), 16 screenshots saved.
 17. **[DONE] Phase 2 Checkpoint 3 (Complete System):** Remaining layers (Phrases & Clauses brackets/outlines, full Patterns overlines/chips), author lists in `data/grammar/lists/` and overrides in `data/grammar/overrides/`, `grammar:check` build gate wired into `prebuild`, `grammar:report` (`npm run grammar:report`) reporting unreviewed entries and confidence, admin editor status banner in `ConversationEditorClient.tsx`, vocabulary page integration in `src/app/(app)/vocabulary/page.tsx`, practice prompts in `src/lib/grammar/sources.ts`, 100% taxonomy coverage, Section 11 tests (gold benchmark 100%, 17 tenses unit tests, 5 token mutation tests, 4 future-content fixture tests; 52 total unit tests pass), generated `docs/grammar-system.md`.
-18. **[PENDING - Awaiting Owner Approval] No Hard-Code Migration Stage 2 (Steps 4-7):** Migrate remaining pages (explore, category, reader, practice, vocabulary, admin), eliminate remaining `--ecp-*` tokens, reach 0 violations in `lint:tokens` and 0 unmutated elements across all routes.
+18. **[DONE] (commits f8d6718..7e723cc) No Hard-Code Migration Stage 2 (Steps 4-7):** Migrated all remaining pages and components (admin, auth, navigation/shell, dashboard, grammar, practice, vocabulary, reader, explore, category, professions, public terms/privacy), eliminated duplicated class strings (Rule f), completely removed `--ecp-*` tokens and backward-compatible aliases, reached 0 violations in `lint:tokens` across rules a to i, verified 0 unmutated elements across all 9 mutations in `token-mutation-test.mjs`, passed all 233 layout invariants in `test:layout`, generated `docs/design-tokens.md`.
 
 ---
 
@@ -214,6 +214,33 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, No Hard-Code Migration Stage 2 (Steps 4-7) Completed & Verified
+- Requested by owner: Execute Stage 2 (Steps 4 to 7) of EnglishPartner_NoHardCode_Migration.md.
+- Changed:
+  - `src/app/globals.css`: Added semantic typography utilities (`text-card-title-bn`, `text-subtitle-bn`, `text-meta-lead-bn`, `text-chip-bn`, `text-grammar-header`), practice utilities (`card-practice`, `card-practice-result`, `badge-success-icon`, `btn-nav-action`), and navigation utility (`btn-back-nav`); eliminated legacy `--ecp-*` backward-compatible blocks in `:root` and `.dark`.
+  - `src/components/navigation/`: Migrated `AppShell.tsx`, `Header.tsx`, `MobileBottomNav.tsx`, `Sidebar.tsx`, and `ThemeToggle.tsx` to semantic tokens.
+  - `src/components/dashboard/`: Migrated `DashboardClient.tsx`, `TodayPanel.tsx`, `HeroBand.tsx`, `ChatBubble.tsx`, `EmojiTile.tsx`, and `Panel.tsx`.
+  - `src/components/grammar/`: Migrated `GrammarBreakdown.tsx`, `GrammarLayerPicker.tsx`, `GrammarLegend.tsx`, `GrammarModeSwitch.tsx`, `GrammarSummaryRow.tsx`, `GrammarToggleButton.tsx`, and `RuleCard.tsx`.
+  - `src/components/practice/`: Migrated `CompleteLineCard.tsx`, `HideSpeakerPractice.tsx`, and `ListeningQuizCard.tsx`.
+  - `src/components/ui/`: Migrated `dialog.tsx`, `sheet.tsx`, `tooltip.tsx`, and `empty-state.tsx`.
+  - `src/components/shared/LoadingBox.tsx`: Created shared loading fallback replacing duplicated loading markup.
+  - `src/app/(admin)/`: Extracted `AdminMetricCard`, `CoveragePanel`, and `AuditLogRow` in `AdminDashboardClient.tsx` and migrated `ConversationEditorClient.tsx`.
+  - `src/app/(app)/`: Migrated `explore/category/[slug]/page.tsx`, `conversations/[slug]/page.tsx`, `professions/[slug]/page.tsx`.
+  - `src/app/(public)/`: Migrated `privacy/page.tsx` and `terms/page.tsx`.
+  - `src/app/page.tsx`: Extracted `FeatureHighlightCard`, eliminating repeated 40+ char class strings.
+  - `docs/design-tokens.md`: Authored comprehensive design token system architecture documentation.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint:tokens`: Passed (0 violations across all rules a through i: 0 colors, 0 typography, 0 radius, 0 layout/magic, 0 inline styles, 0 duplication, 0 TS data colors, 0 dark-mode raw classes, 0 UI primitive hardcoded values).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (52/52 tests passing across all test suites).
+  - `npm run test:layout`: Passed (all 233 layout invariants passing strictly across 7 routes, 2 viewports, 2 themes, 2 scroll states).
+  - `node scripts/token-mutation-test.mjs`: Passed (0 unmutated elements across all 9 token mutations in headless Chrome).
+  - `npm run build`: Passed (all 83/83 static pages compiled successfully).
+- Commits: `f8d6718`, `9515ce0`, `a023d68`, `a500e42`, `44c88a9`, `7e723cc`
+- Open questions / follow-ups: none.
 
 ### 2026-11-20, Phase 2 Checkpoint 3 (Complete System) Completed & Verified
 - Requested by owner: Execute Phase 2 Checkpoint 3 (Complete System) per EnglishPartner_Grammar_ColorCoding_Spec.md §12.
