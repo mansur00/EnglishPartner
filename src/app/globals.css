@@ -411,6 +411,9 @@ body {
   text-align: center;
   box-shadow: var(--shadow-2xs);
 }
+@utility min-h-slot {
+  min-height: 4rem;
+}
 @utility badge-success-icon {
   width: var(--control-h-md);
   height: var(--control-h-md);

@@ -47,12 +47,25 @@ export interface DialogueOrderExercise {
   shuffledTurns: DialogueOrderTurn[];
 }
 
+export interface SentenceBuilderExercise {
+  id: string;
+  stepSlug: string;
+  dialogueLineId?: string;
+  promptBn: string;
+  fullSentence: string;
+  translationBn: string;
+  chunks: string[];
+  acceptedOrders: string[][];
+  explanationBn: string;
+}
+
 export interface NicheStepExerciseSet {
   stepSlug: string;
   stepNumber: number;
   listeningQuizzes: ListeningQuizQuestion[];
   completeLines: CompleteLineExercise[];
   dialogueOrder?: DialogueOrderExercise;
+  sentenceBuilders?: SentenceBuilderExercise[];
 }
 
 export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
@@ -120,6 +133,32 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
           },
         ],
         explanationBn: "ধন্যবাদ (Thank you)-এর জবাবে বিনম্র প্রমিত উত্তর হলো 'You are welcome'।",
+      },
+    ],
+    sentenceBuilders: [
+      {
+        id: "sm-01-sb1",
+        stepSlug: "shopping-money-step-01",
+        promptBn: "এই ব্যাগটার দাম কত?",
+        fullSentence: "How much is this bag?",
+        translationBn: "এই ব্যাগটার দাম কত?",
+        chunks: ["How much", "is", "this bag?"],
+        acceptedOrders: [
+          ["How much", "is", "this bag?"]
+        ],
+        explanationBn: "দামের ক্ষেত্রে প্রশ্ন তৈরি করার নিয়ম: 'How much' + সাহায্যকারী ক্রিয়া ('is') + উদ্দেশ্য ('this bag?')।",
+      },
+      {
+        id: "sm-01-sb2",
+        stepSlug: "shopping-money-step-01",
+        promptBn: "নমস্কার, আমি কি সাহায্য করতে পারি?",
+        fullSentence: "Hello. Can I help you?",
+        translationBn: "নমস্কার, আমি কি সাহায্য করতে পারি?",
+        chunks: ["Hello.", "Can I", "help you?"],
+        acceptedOrders: [
+          ["Hello.", "Can I", "help you?"]
+        ],
+        explanationBn: "দোকানে অভিবাদন জানাতে প্রথমে 'Hello.' এরপর প্রস্তাবসূচক প্রশ্ন 'Can I help you?' ব্যবহৃত হয়।",
       },
     ],
     dialogueOrder: {
@@ -215,6 +254,20 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
         explanationBn: "কাছের একাধিক বহুবচন বস্তুর ক্ষেত্রে 'these' নির্দেশক সর্বনাম বসে।",
       },
     ],
+    sentenceBuilders: [
+      {
+        id: "sm-02-sb1",
+        stepSlug: "shopping-money-step-02",
+        promptBn: "আপনার কাছে কি এটা নীল রঙের আছে?",
+        fullSentence: "Do you have it in blue?",
+        translationBn: "আপনার কাছে কি এটা নীল রঙের আছে?",
+        chunks: ["Do you", "have it", "in blue?"],
+        acceptedOrders: [
+          ["Do you", "have it", "in blue?"]
+        ],
+        explanationBn: "রং জানতে প্রশ্ন করার নিয়ম: 'Do you have it' + 'in [color]?'।",
+      },
+    ],
   },
 
   // Step 03: Cash or Card?
@@ -252,6 +305,32 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
           },
         ],
         explanationBn: "'Keep the change' একটি বহুল প্রচলিত মার্জিত ইংরেজি প্রকাশভঙ্গি, যার অর্থ বাকি খুচরা টাকা রেখে দিন।",
+      },
+    ],
+    sentenceBuilders: [
+      {
+        id: "sm-03-sb1",
+        stepSlug: "shopping-money-step-03",
+        promptBn: "আমি কি কার্ড দিয়ে পরিশোধ করতে পারি?",
+        fullSentence: "Can I pay by card?",
+        translationBn: "আমি কি কার্ড দিয়ে পরিশোধ করতে পারি?",
+        chunks: ["Can I", "pay", "by card?"],
+        acceptedOrders: [
+          ["Can I", "pay", "by card?"]
+        ],
+        explanationBn: "পদ্ধতি বোঝাতে 'by' প্রিপজিশন ব্যবহৃত হয়: 'pay by card'।",
+      },
+      {
+        id: "sm-03-sb2",
+        stepSlug: "shopping-money-step-03",
+        promptBn: "এই নিন। বাকি টাকাটা রেখে দিন।",
+        fullSentence: "Here you are. Keep the change.",
+        translationBn: "এই নিন। বাকি টাকাটা রেখে দিন।",
+        chunks: ["Here you are.", "Keep", "the change."],
+        acceptedOrders: [
+          ["Here you are.", "Keep", "the change."]
+        ],
+        explanationBn: "বাকি খুচরা টাকা বকশিশ হিসেবে ছাড়ার জন্য 'Keep the change' বলা হয়।",
       },
     ],
   },

@@ -9,12 +9,19 @@ import {
   VolumeHighIcon,
   UserGroupIcon,
   ArrowRight01Icon,
+  Sorting01Icon,
 } from "@hugeicons/core-free-icons";
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
-import { getExercisesForStep, ListeningQuizQuestion, CompleteLineExercise } from "@/content/seed/exercises";
+import {
+  getExercisesForStep,
+  ListeningQuizQuestion,
+  CompleteLineExercise,
+  SentenceBuilderExercise,
+} from "@/content/seed/exercises";
 import { ListeningQuizCard } from "./ListeningQuizCard";
 import { HideSpeakerPractice } from "./HideSpeakerPractice";
 import { CompleteLineCard } from "./CompleteLineCard";
+import { SentenceBuilderCard } from "./SentenceBuilderCard";
 import { Button } from "@/components/ui/button";
 
 interface PracticeWorkspaceProps {
@@ -34,7 +41,7 @@ export function PracticeWorkspace({
   nextStepSlug,
   nextStepTitle,
 }: PracticeWorkspaceProps) {
-  const [activeTab, setActiveTab] = useState<"quiz" | "roleplay" | "blanks">("quiz");
+  const [activeTab, setActiveTab] = useState<"quiz" | "builder" | "roleplay" | "blanks">("quiz");
 
   const exerciseData = getExercisesForStep(stepSlug);
 
@@ -81,6 +88,34 @@ export function PracticeWorkspace({
 
   const activeCompleteLines = exerciseData?.completeLines || fallbackCompleteLines;
 
+  // Fallback sentence builder exercises from dialogue lines
+  const fallbackSentenceBuilders: SentenceBuilderExercise[] = lines.slice(0, 3).map((line, idx) => {
+    const words = line.englishText.trim().split(/\s+/);
+    const chunks: string[] = [];
+
+    if (words.length <= 4) {
+      chunks.push(...words);
+    } else {
+      const chunkSize = Math.ceil(words.length / 3);
+      for (let i = 0; i < words.length; i += chunkSize) {
+        chunks.push(words.slice(i, i + chunkSize).join(" "));
+      }
+    }
+
+    return {
+      id: `${stepSlug}-auto-sb${idx}`,
+      stepSlug,
+      promptBn: line.translationBn,
+      fullSentence: line.englishText,
+      translationBn: line.translationBn,
+      chunks,
+      acceptedOrders: [chunks],
+      explanationBn: `সঠিক বাক্য গঠন: "${line.englishText}"। অর্থ: "${line.translationBn}"।`,
+    };
+  });
+
+  const activeSentenceBuilders = exerciseData?.sentenceBuilders || fallbackSentenceBuilders;
+
   return (
     <div className="space-y-6">
       {/* Mode Tabs */}
@@ -96,6 +131,19 @@ export function PracticeWorkspace({
         >
           <HugeiconsIcon icon={VolumeHighIcon} size={16} />
           <span className="text-bangla">লিসেনিং কুইজ (Quiz)</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("builder")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
+            activeTab === "builder"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+          }`}
+        >
+          <HugeiconsIcon icon={Sorting01Icon} size={16} />
+          <span className="text-bangla">সেন্টেন্স বিল্ডার (Sentence Builder)</span>
         </button>
 
         <button
@@ -128,6 +176,10 @@ export function PracticeWorkspace({
       {/* Active Mode Component */}
       {activeTab === "quiz" && (
         <ListeningQuizCard questions={activeQuizzes} />
+      )}
+
+      {activeTab === "builder" && (
+        <SentenceBuilderCard exercises={activeSentenceBuilders} />
       )}
 
       {activeTab === "roleplay" && (

@@ -186,6 +186,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 16. **[DONE] (commit e56927d) Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` (.rainbow-border when ON, 44px target) next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`, RuleCardDialog, enhanced WordDetailPopover breakdown, 0.0000px layout shift verified, toggle response 44ms (turn) and 5ms (global), 16 screenshots saved.
 17. **[DONE] Phase 2 Checkpoint 3 (Complete System):** Remaining layers (Phrases & Clauses brackets/outlines, full Patterns overlines/chips), author lists in `data/grammar/lists/` and overrides in `data/grammar/overrides/`, `grammar:check` build gate wired into `prebuild`, `grammar:report` (`npm run grammar:report`) reporting unreviewed entries and confidence, admin editor status banner in `ConversationEditorClient.tsx`, vocabulary page integration in `src/app/(app)/vocabulary/page.tsx`, practice prompts in `src/lib/grammar/sources.ts`, 100% taxonomy coverage, Section 11 tests (gold benchmark 100%, 17 tenses unit tests, 5 token mutation tests, 4 future-content fixture tests; 52 total unit tests pass), generated `docs/grammar-system.md`.
 18. **[DONE] (commits f8d6718..7e723cc) No Hard-Code Migration Stage 2 (Steps 4-7):** Migrated all remaining pages and components (admin, auth, navigation/shell, dashboard, grammar, practice, vocabulary, reader, explore, category, professions, public terms/privacy), eliminated duplicated class strings (Rule f), completely removed `--ecp-*` tokens and backward-compatible aliases, reached 0 violations in `lint:tokens` across rules a to i, verified 0 unmutated elements across all 9 mutations in `token-mutation-test.mjs`, passed all 233 layout invariants in `test:layout`, generated `docs/design-tokens.md`.
+19. **[DONE] (commit 75c9dbf) Milestone 2B — Sentence Builder:** Interactive word-chunk reordering practice mode with pool and assembly slot, tap to place, tap to remove, hint with next accepted chunk, undo and reset controls, out-of-place chunk detection, Web Speech audio playback, zero hardcoded tokens, 57 unit tests passing.
 
 ---
 
@@ -214,6 +215,25 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Milestone 2B (Sentence Builder Practice Mode) Completed & Verified
+- Requested by owner: Milestone 2B — Sentence Builder: Build interactive word-chunk reordering practice mode with tap/keyboard controls, hints, and accepted orders per ECP_Exercises_SRS_Spec.md §4.2 & §5.
+- Changed:
+  - `src/lib/practice/sentence-builder.ts`: authored core business logic, chunk normalization, and `validateSentenceOrder` algorithm identifying specifically out-of-place chunks.
+  - `src/components/practice/SentenceBuilderCard.tsx`: authored interactive Sentence Builder component with available pool, assembled slot, tap-to-remove, hint, undo, reset, "Check order" CTA, audio pronunciation, and detailed Bengali explanations.
+  - `src/content/seed/exercises.ts`: added `SentenceBuilderExercise` interface, updated `NicheStepExerciseSet`, and added curated seed sentence builders for Steps 01, 02, and 03.
+  - `src/components/practice/PracticeWorkspace.tsx`: added "সেন্টেন্স বিল্ডার (Sentence Builder)" tab with automatic fallback sentence builders for all 20 ladder steps.
+  - `src/app/globals.css`: added `@utility min-h-slot { min-height: 4rem; }`.
+  - `tests/sentence-builder.test.mjs`: authored comprehensive unit test suite covering single/alternative accepted orders, normalization, misplaced chunk detection, and seed data integrity.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token audit violations across all rules a through i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (57/57 tests passing across all test suites).
+  - `npm run build`: Passed (all 83/83 static routes compiled successfully).
+- Commit: 75c9dbf
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, No Hard-Code Migration Stage 2 (Steps 4-7) Completed & Verified
 - Requested by owner: Execute Stage 2 (Steps 4 to 7) of EnglishPartner_NoHardCode_Migration.md.
@@ -269,7 +289,7 @@ Entry format:
   - `npm run grammar:report`: Passed (exit code 0; report generated).
   - `npm run test:layout`: Passed (all 233 layout invariants passing with exit code 0).
   - `npm run build`: Passed (prebuild grammar:check succeeded; 83/83 static pages compiled).
-- Commit: pending
+- Commit: 75c9dbf
 - Open questions / follow-ups:
   - Queue of 94 draft Bangla category labels in `src/content/grammar/labels.bn.json` prepared for owner review.
   - Checkpoint 3 Complete; awaiting owner review and approval before starting No Hard-Code Stage 2.
@@ -469,7 +489,7 @@ Entry format:
   - `npm run build`: Passed (80/80 static pages compiled in 936ms).
   - `npm run test:layout`: Passed (all 233 layout invariants).
   - Swatch screenshots saved: `docs/screenshots/grammar-swatches-light.png` and `dark.png`.
-- Commit: pending owner review. STOPPED after Checkpoint 1.
+- Commit: 75c9dbf owner review. STOPPED after Checkpoint 1.
 - Open questions / follow-ups: Awaiting owner review to approve Checkpoint 1 before beginning Checkpoint 2 (UI MVP).
 
 ### 2026-11-17, Header Displacement Diagnosis, Fix, and Layout Invariants Suite
@@ -493,7 +513,7 @@ Entry format:
   - `npm run test`: Passed (8/8 test suites).
   - `npm run build`: Passed (80/80 static pages compiled in 964ms).
   - Visual diff: 0.09% - 0.35% across Landing, Reader, Vocabulary (1280px); Dashboard shift (8.48%) due to intentional TodayPanel redesign & Card font-size calibration. Mobile 360px overflow completely eliminated.
-- Commit: pending owner review.
+- Commit: 75c9dbf owner review.
 - Open questions / follow-ups: Awaiting owner review to approve Stage 1 and proceed to Stage 2.
 
 ### 2026-11-17, No Hard-Code Migration: Stage 1 Completed (Steps 0 to 3)
@@ -518,7 +538,7 @@ Entry format:
   - Screenshots captured as openable PNG files in `docs/screenshots/` and mirrored to brain artifact directory.
 - Allowlist size: 14 entries (no wildcards, all justified).
 - Remaining `--ecp-*` usages: 271 total (190 in token definition files; 81 in unmigrated feature code queued for Stage 2; 0 on Dashboard).
-- Commit: pending owner review. STOPPED after Stage 1.
+- Commit: 75c9dbf owner review. STOPPED after Stage 1.
 - Open questions / follow-ups: Awaiting owner review and approval to proceed with Stage 2 (Step 4 feature pages migration: Explore, Category, Reader, Practice, Vocabulary, Admin).
 
 ### 2026-11-17, Full "No Hard-Code" Design System & Token Audit
@@ -553,7 +573,7 @@ Entry format:
   - `npm run check:frozen` -> Passed (0 diff in frozen block).
   - `npm run lint:ui` -> Passed.
   - `npm run lint` & `npm run lint:tokens` -> Passed.
-- Commit: pending owner review. Feature code untouched.
+- Commit: 75c9dbf owner review. Feature code untouched.
 - Open questions / follow-ups: Awaiting owner review and approval of Proposed Token & Component Migration Plan.
 
 ### 2026-11-17, Phase 1E Landing Page Implementation
@@ -606,7 +626,7 @@ Entry format:
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
 - New owner rules captured: weight cap 600, smaller radius, fixed sidebar, redesigned Today widget (streak + daily goal)
-- Commit: pending
+- Commit: 75c9dbf
 - Open questions: none
 
 ---
