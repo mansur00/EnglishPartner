@@ -35,7 +35,7 @@ export function ThemeToggle() {
       className="btn-press size-11 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
     >
       {isDark ? (
-        <HugeiconsIcon icon={Sun01Icon} size={20} className="text-amber-400" />
+        <HugeiconsIcon icon={Sun01Icon} size={20} className="text-sun-500" />
       ) : (
         <HugeiconsIcon icon={Moon02Icon} size={20} className="text-foreground" />
       )}

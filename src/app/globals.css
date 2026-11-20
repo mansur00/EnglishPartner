@@ -324,6 +324,9 @@ body {
 @utility max-h-dialog {
   max-height: 90vh;
 }
+@utility h-bottom-nav {
+  height: 3.5rem;
+}
 @utility h-segment {
   height: var(--segment-h);
 }

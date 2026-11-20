@@ -86,7 +86,7 @@ export function Sidebar() {
   return (
     <aside className="hidden md:flex w-sidebar flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 sticky top-header h-below-header overflow-y-auto z-sidebar">
       <div className="space-y-1.5">
-        <span className="px-3 text-chip font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="px-3 text-chip uppercase tracking-wider text-muted-foreground">
           {t("nav.menu")}
         </span>
         <nav className="space-y-1 pt-1.5" aria-label={t("nav.mainNav")}>
@@ -97,13 +97,13 @@ export function Sidebar() {
                   key={item.name}
                   aria-disabled="true"
                   title={`${item.name} (Coming soon in future release)`}
-                  className="flex items-center justify-between h-control-md px-3 text-label font-medium rounded-control text-muted-foreground/60 cursor-not-allowed select-none transition-colors"
+                  className="flex items-center justify-between h-control-md px-3 text-label rounded-control text-muted-foreground/60 cursor-not-allowed select-none transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <HugeiconsIcon icon={item.icon} size={20} />
                     <span>{item.name}</span>
                   </div>
-                  <span className="text-chip font-semibold bg-muted text-muted-foreground px-2 py-0.5 rounded-pill border border-border">
+                  <span className="text-chip bg-muted text-muted-foreground px-2 py-0.5 rounded-pill border border-border">
                     {t("landing.soon")}
                   </span>
                 </div>
@@ -115,9 +115,9 @@ export function Sidebar() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 h-control-md px-3 text-label font-semibold rounded-control transition-all duration-fast btn-press",
+                  "flex items-center gap-3 h-control-md px-3 text-label rounded-control transition-all duration-fast btn-press",
                   item.active
-                    ? "bg-primary/10 text-primary font-semibold dark:bg-primary/20"
+                    ? "bg-primary/10 text-primary dark:bg-primary/20"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
@@ -135,7 +135,7 @@ export function Sidebar() {
 
       <div className="pt-4 border-t border-border mt-auto">
         <div className="p-4 bg-muted/50 rounded-panel border border-border space-y-1">
-          <p className="text-meta font-semibold font-heading text-foreground">
+          <p className="text-meta font-heading text-foreground">
             Active Learning Path
           </p>
           <p className="text-chip text-muted-foreground leading-relaxed">

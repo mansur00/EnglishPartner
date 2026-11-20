@@ -91,11 +91,11 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
           <SheetContent side="left" className="w-72 bg-card border-r border-border p-6">
             <SheetHeader className="pb-4 border-b border-border text-left">
               <SheetTitle className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs">
+                <div className="flex size-control items-center justify-center rounded-control bg-primary text-primary-foreground font-heading text-card-title shadow-xs">
                   E
                 </div>
                 <div>
-                  <div className="font-semibold font-heading text-base leading-tight text-foreground">
+                  <div className="font-heading text-card-title leading-tight text-foreground">
                     English Partner
                   </div>
                   <div className="text-chip text-muted-foreground">
@@ -114,7 +114,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-control text-label font-semibold transition-colors",
+                      "flex items-center gap-3 px-4 py-3 rounded-control text-label transition-colors",
                       isActive
                         ? "bg-primary/10 text-primary dark:bg-primary/20"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -131,14 +131,14 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
 
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-control bg-primary text-primary-foreground font-semibold font-heading text-lg shadow-xs group-hover:opacity-90 transition-opacity shrink-0">
+          <div className="flex size-control items-center justify-center rounded-control bg-primary text-primary-foreground font-heading text-card-title shadow-xs group-hover:opacity-90 transition-opacity shrink-0">
             E
           </div>
           <div className="hidden sm:flex flex-col">
-            <span className="font-semibold font-heading text-base leading-tight text-foreground">
+            <span className="font-heading text-card-title leading-tight text-foreground">
               English Partner
             </span>
-            <span className="text-chip text-muted-foreground font-medium">
+            <span className="text-chip text-muted-foreground">
               Conversation Practice
             </span>
           </div>
@@ -153,7 +153,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
           aria-haspopup="true"
           aria-expanded="false"
           title={t("header.bilingualMode")}
-          className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3.5 rounded-pill border border-border bg-card text-label font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
+          className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3.5 rounded-pill border border-border bg-card text-label text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
         >
           <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary shrink-0" />
           <span>বাংলা</span>
@@ -170,10 +170,10 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
               aria-label={account.profileLabel}
               className="flex items-center gap-2 h-control-sm px-2 sm:px-3 rounded-pill bg-muted/60 hover:bg-muted text-foreground transition-colors"
             >
-              <div className="flex h-6 w-6 items-center justify-center rounded-pill bg-primary text-primary-foreground font-semibold text-chip">
+              <div className="flex size-6 items-center justify-center rounded-pill bg-primary text-primary-foreground text-chip">
                 {account.initial}
               </div>
-              <span className="hidden md:inline-block max-w-[100px] truncate text-label font-medium text-foreground">
+              <span className="hidden md:inline-block max-w-24 truncate text-label text-foreground">
                 {account.displayName}
               </span>
             </Link>
@@ -196,7 +196,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
             <Button
               variant="outline"
               size="sm"
-              className="h-control-sm px-3 rounded-control text-label font-semibold text-foreground border-border hover:bg-muted"
+              className="h-control-sm px-3 rounded-control text-label text-foreground border-border hover:bg-muted"
             >
               <HugeiconsIcon icon={Login01Icon} size={16} className="mr-1.5" />
               <span>{account.loginLabel}</span>

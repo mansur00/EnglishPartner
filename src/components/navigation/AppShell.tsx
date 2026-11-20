@@ -12,7 +12,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user?:
           <Sidebar />
         </Suspense>
         <main className="flex-1 pb-20 md:pb-8 w-full min-w-0">
-          <Suspense fallback={<div className="p-8 text-center text-sm text-muted-foreground">Loading...</div>}>
+          <Suspense fallback={<div className="p-8 text-center text-meta text-muted-foreground">Loading...</div>}>
             {children}
           </Suspense>
         </main>

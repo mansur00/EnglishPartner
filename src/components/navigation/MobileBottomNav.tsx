@@ -43,7 +43,7 @@ export function MobileBottomNav() {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-14 w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-bottom-nav w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs">
       {navItems.map((item) => {
         return (
           <Link
@@ -52,12 +52,12 @@ export function MobileBottomNav() {
             className={cn(
               "flex flex-col items-center justify-center gap-1 w-16 py-1 transition-all btn-press",
               item.active
-                ? "text-primary font-semibold"
+                ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
             <HugeiconsIcon icon={item.icon} size={22} />
-            <span className="text-xs font-semibold leading-none">{item.name}</span>
+            <span className="text-chip leading-none">{item.name}</span>
           </Link>
         );
       })}
