@@ -360,6 +360,81 @@ body {
 @utility w-progress-40 {
   width: 40%;
 }
+@utility text-card-title-bn {
+  font-family: var(--font-heading), var(--font-bangla);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+}
+@utility text-subtitle-bn {
+  font-family: var(--font-bangla);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--muted-foreground);
+  margin-top: 0.25rem;
+}
+@utility text-meta-lead-bn {
+  font-family: var(--font-bangla);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--muted-foreground);
+}
+@utility text-chip-bn {
+  font-family: var(--font-bangla);
+  font-size: 0.75rem;
+  line-height: 1.75;
+  color: var(--muted-foreground);
+}
+@utility text-grammar-header {
+  font-family: var(--font-bangla);
+  line-height: 1.75;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+@utility card-practice {
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-2xs);
+}
+@utility card-practice-result {
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  text-align: center;
+  box-shadow: var(--shadow-2xs);
+}
+@utility badge-success-icon {
+  width: var(--control-h-md);
+  height: var(--control-h-md);
+  border-radius: var(--radius-control);
+  background-color: var(--success-bg);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+@utility btn-nav-action {
+  gap: 0.375rem;
+  font-family: var(--font-bangla);
+  line-height: 1.75;
+  font-size: 0.875rem;
+  border-radius: var(--radius-control);
+}
+@utility btn-back-nav {
+  gap: 0.375rem;
+  margin-left: -0.5rem;
+  border-radius: var(--radius-control);
+}
 
 @utility duration-fast {
   transition-duration: var(--dur-fast);
@@ -458,35 +533,7 @@ body {
   --sidebar-border: #E6DDF0;
   --sidebar-ring: #8E5BC0;
 
-  /* Backward-compatible ECP brand tokens mapping */
-  --ecp-canvas: var(--background);
-  --ecp-surface: var(--card);
-  --ecp-surface-muted: var(--muted);
-  --ecp-surface-warm: #FFFDF9;
-  --ecp-border: var(--border);
-  --ecp-border-strong: var(--input);
-  --ecp-text-primary: var(--foreground);
-  --ecp-text-secondary: var(--muted-foreground);
-  --ecp-text-muted: #8E8B99;
-  --ecp-brand-950: var(--brand-950);
-  --ecp-brand-900: var(--brand-900);
-  --ecp-brand-800: var(--brand-800);
-  --ecp-brand-700: var(--brand-700);
-  --ecp-brand-100: var(--brand-100);
-  --ecp-brand-50:  var(--brand-50);
-  --ecp-accent-500: var(--sun-500);
-  --ecp-accent-400: var(--sun-400);
-  --ecp-accent-100: var(--sun-100);
-  --ecp-peach-400: #F3A58F;
-  --ecp-peach-100: #FCE9E2;
-  --ecp-success: var(--success);
-  --ecp-success-surface: #EAF6EF;
-  --ecp-warning: var(--warning);
-  --ecp-warning-surface: #FFF5DF;
-  --ecp-error: var(--destructive);
-  --ecp-error-surface: #FDEEEE;
-  --ecp-font-sans: var(--font-sans);
-  --ecp-font-bangla: var(--font-bangla);
+
 
   /* Topic-Based Soft Color Themes (Section 3.2 - Light) */
   --topic-surface: #F3EAFE;
@@ -634,33 +681,7 @@ body {
   --sidebar-border: #33224A;
   --sidebar-ring: #A97BD8;
 
-  /* Backward-compatible ECP brand tokens mapping in dark mode */
-  --ecp-canvas: var(--background);
-  --ecp-surface: var(--card);
-  --ecp-surface-muted: var(--muted);
-  --ecp-surface-warm: #26163B;
-  --ecp-border: var(--border);
-  --ecp-border-strong: var(--input);
-  --ecp-text-primary: var(--foreground);
-  --ecp-text-secondary: var(--muted-foreground);
-  --ecp-text-muted: #9A8EA8;
-  --ecp-brand-950: #F4EEFB;
-  --ecp-brand-900: #E0DAF5;
-  --ecp-brand-800: #A97BD8;
-  --ecp-brand-700: #C9A6EC;
-  --ecp-brand-100: #2A1A3D;
-  --ecp-brand-50:  #211432;
-  --ecp-accent-500: var(--sun-500);
-  --ecp-accent-400: #FFE066;
-  --ecp-accent-100: #352500;
-  --ecp-peach-400: #F2A64B;
-  --ecp-peach-100: #3D2E1C;
-  --ecp-success: var(--success);
-  --ecp-success-surface: #142B20;
-  --ecp-warning: var(--warning);
-  --ecp-warning-surface: #302412;
-  --ecp-error: var(--destructive);
-  --ecp-error-surface: #381818;
+
 
   /* Topic-Based Soft Color Themes (Section 3.3 - Dark) */
   --topic-surface: #2A2040;

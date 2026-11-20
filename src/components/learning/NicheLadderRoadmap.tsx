@@ -103,7 +103,7 @@ export function NicheLadderRoadmap({
               <span>ধাপ ০১ থেকে শুরু করুন (Start Step 01)</span>
             </Button>
           </Link>
-          <span className="text-chip text-muted-foreground text-bangla">
+          <span className="text-chip-bn">
             প্রতিটি ধাপ শেষ হলে &ldquo;পরবর্তী ধাপ&rdquo; বাটনে স্বয়ংক্রিয়ভাবে পরের কথোপকথনে যাওয়া যাবে
           </span>
         </div>
@@ -122,7 +122,7 @@ export function NicheLadderRoadmap({
                 <Badge variant={tier.badgeVariant} size="sm">
                   {tier.group}
                 </Badge>
-                <h3 className="text-card-title text-foreground text-bangla">
+                <h3 className="text-card-title-bn">
                   {tier.titleBn}
                 </h3>
               </div>

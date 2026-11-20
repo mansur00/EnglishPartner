@@ -88,7 +88,7 @@ export function GrammarBreakdown({
       {/* 3. Detected Groups & Rules */}
       {annotation.groups && annotation.groups.length > 0 && (
         <div className="space-y-2">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
+          <span className="text-grammar-header">
             {isBn ? "চিহ্নিত ব্যাকরণিক নিয়ম ও কাল:" : "Rules & Tenses:"}
           </span>
           <div className="space-y-1.5">

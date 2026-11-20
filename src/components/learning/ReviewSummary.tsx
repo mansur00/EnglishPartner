@@ -61,7 +61,7 @@ export function ReviewSummary({
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-pill text-chip text-success bg-success-bg border border-border mb-1">
               <span>অভিনন্দন! (Well Done)</span>
             </div>
-            <h3 className="text-card-title text-foreground text-bangla">
+            <h3 className="text-card-title-bn">
               আপনি {scenarioTitleBn} কথোপকথনটি সম্পন্ন করেছেন
             </h3>
             <p className="text-meta text-muted-foreground font-sans">

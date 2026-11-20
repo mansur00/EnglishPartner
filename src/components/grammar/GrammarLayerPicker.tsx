@@ -118,7 +118,7 @@ export function GrammarLayerPicker({
 
         {/* 1. Layers Checklist */}
         <div className="space-y-2">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
+          <span className="text-grammar-header">
             {isBn ? "সক্রিয় লেয়ারসমূহ" : "Active Layers"}
           </span>
           <div className="space-y-1.5">
@@ -151,7 +151,7 @@ export function GrammarLayerPicker({
 
         {/* 2. Detail Level (Basic vs Advanced) */}
         <div className="space-y-2 pt-2 border-t border-border">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
+          <span className="text-grammar-header">
             {isBn ? "বিশ্লেষণের গভীরতা" : "Detail Level"}
           </span>
           <div className="grid grid-cols-2 gap-1.5 p-1 bg-muted/60 rounded-control">

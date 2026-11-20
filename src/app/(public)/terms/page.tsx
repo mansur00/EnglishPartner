@@ -32,7 +32,7 @@ export default function TermsPage() {
 
           <div className="space-y-4 text-body text-muted-foreground leading-relaxed">
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ১. শিক্ষামূলক উদ্দেশ্যে ব্যবহারের অধিকার (Educational Purpose)
               </h2>
               <p>
@@ -41,7 +41,7 @@ export default function TermsPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ২. বুদ্ধিবৃত্তিক সম্পত্তি ও অডিও লাইসেন্সিং (Licenses)
               </h2>
               <p>
@@ -50,7 +50,7 @@ export default function TermsPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ৩. ব্যবহারকারীর আচরণ ও অপব্যবহার রোধ
               </h2>
               <p>

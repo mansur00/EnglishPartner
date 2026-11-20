@@ -16,6 +16,47 @@ import {
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
 
+interface FeatureHighlightProps {
+  topic: string;
+  icon: typeof ShoppingBag01Icon;
+  title: string;
+  bnDescription: string;
+  badgeText: string;
+}
+
+function FeatureHighlightCard({
+  topic,
+  icon: IconComponent,
+  title,
+  bnDescription,
+  badgeText,
+}: FeatureHighlightProps) {
+  return (
+    <Card
+      data-topic={topic}
+      className="p-5 md:p-6 rounded-card border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between"
+    >
+      <div className="space-y-3">
+        <div className="size-tile rounded-control emoji-tile flex items-center justify-center">
+          <HugeiconsIcon icon={IconComponent} size={24} />
+        </div>
+        <h2 className="text-card-title font-heading text-foreground">
+          {title}
+        </h2>
+        <p className="text-meta text-muted-foreground text-bangla">
+          {bnDescription}
+        </p>
+      </div>
+      <div className="pt-4 mt-4 border-t border-border flex items-center justify-between text-chip text-muted-foreground">
+        <span>{badgeText}</span>
+        <span className="text-foreground flex items-center gap-1">
+          Explore <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+        </span>
+      </div>
+    </Card>
+  );
+}
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
@@ -156,77 +197,27 @@ export default function LandingPage() {
       {/* 3. Highlight Feature Cards (Overlapping) */}
       <main className="flex-1 container-app overlap-band relative z-base pb-16 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Feature 1: Shopping & Everyday */}
-          <Card
-            data-topic="shopping"
-            className="p-5 md:p-6 rounded-card border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between"
-          >
-            <div className="space-y-3">
-              <div className="size-tile rounded-control emoji-tile flex items-center justify-center">
-                <HugeiconsIcon icon={ShoppingBag01Icon} size={24} />
-              </div>
-              <h2 className="text-card-title font-heading text-foreground">
-                Everyday & Shopping
-              </h2>
-              <p className="text-meta text-muted-foreground text-bangla">
-                দোকানে দাম জানতে চাওয়া, ছাড়ের কথা বলা এবং বিল পরিশোধ করার বাস্তব কথোপকথন।
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-border flex items-center justify-between text-chip text-muted-foreground">
-              <span>20 Step Ladder</span>
-              <span className="text-foreground flex items-center gap-1">
-                Explore <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-              </span>
-            </div>
-          </Card>
-
-          {/* Feature 2: Travel & Commute */}
-          <Card
-            data-topic="travel"
-            className="p-5 md:p-6 rounded-card border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between"
-          >
-            <div className="space-y-3">
-              <div className="size-tile rounded-control emoji-tile flex items-center justify-center">
-                <HugeiconsIcon icon={Airplane01Icon} size={24} />
-              </div>
-              <h2 className="text-card-title font-heading text-foreground">
-                Travel & Commute
-              </h2>
-              <p className="text-meta text-muted-foreground text-bangla">
-                বিমানবন্দর, হোটেল বুকিং ও দিকনির্দেশনা চাওয়ার সময় সাবলীলভাবে কথা বলার দক্ষতা।
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-border flex items-center justify-between text-chip text-muted-foreground">
-              <span>15 Scenarios</span>
-              <span className="text-foreground flex items-center gap-1">
-                Explore <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-              </span>
-            </div>
-          </Card>
-
-          {/* Feature 3: Workplace & Business */}
-          <Card
-            data-topic="workplace"
-            className="p-5 md:p-6 rounded-card border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between"
-          >
-            <div className="space-y-3">
-              <div className="size-tile rounded-control emoji-tile flex items-center justify-center">
-                <HugeiconsIcon icon={Briefcase01Icon} size={24} />
-              </div>
-              <h2 className="text-card-title font-heading text-foreground">
-                Office & Workplace
-              </h2>
-              <p className="text-meta text-muted-foreground text-bangla">
-                মিটিং পরিচালনা, ক্লায়েন্ট কমিউনিকেশন ও পেশাদার প্রেজেন্টেশনের জন্য উপযুক্ত ভাষা।
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-border flex items-center justify-between text-chip text-muted-foreground">
-              <span>12 Scenarios</span>
-              <span className="text-foreground flex items-center gap-1">
-                Explore <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-              </span>
-            </div>
-          </Card>
+          <FeatureHighlightCard
+            topic="shopping"
+            icon={ShoppingBag01Icon}
+            title="Everyday & Shopping"
+            bnDescription="দোকানে দাম জানতে চাওয়া, ছাড়ের কথা বলা এবং বিল পরিশোধ করার বাস্তব কথোপকথন।"
+            badgeText="20 Step Ladder"
+          />
+          <FeatureHighlightCard
+            topic="travel"
+            icon={Airplane01Icon}
+            title="Travel & Commute"
+            bnDescription="বিমানবন্দর, হোটেল বুকিং ও দিকনির্দেশনা চাওয়ার সময় সাবলীলভাবে কথা বলার দক্ষতা।"
+            badgeText="15 Scenarios"
+          />
+          <FeatureHighlightCard
+            topic="workplace"
+            icon={Briefcase01Icon}
+            title="Office & Workplace"
+            bnDescription="মিটিং পরিচালনা, ক্লায়েন্ট কমিউনিকেশন ও পেশাদার প্রেজেন্টেশনের জন্য উপযুক্ত ভাষা।"
+            badgeText="12 Scenarios"
+          />
         </div>
       </main>
 

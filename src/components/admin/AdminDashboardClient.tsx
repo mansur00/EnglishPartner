@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,72 @@ import {
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES } from "@/content/seed/dialogues";
 import { UserRole, canViewAdminPanel } from "@/lib/auth/roles";
+
+interface AdminMetricCardProps {
+  title: string;
+  value: React.ReactNode;
+  subtitle: string;
+  valueClass?: string;
+  subtitleClass?: string;
+}
+
+function AdminMetricCard({
+  title,
+  value,
+  subtitle,
+  valueClass,
+  subtitleClass = "text-muted-foreground",
+}: AdminMetricCardProps) {
+  return (
+    <Card className="p-5 bg-card border-border rounded-card space-y-1">
+      <span className="text-chip text-muted-foreground uppercase tracking-wider block">
+        {title}
+      </span>
+      <div className={cn("text-stat text-foreground", valueClass)}>{value}</div>
+      <span className={cn("text-chip", subtitleClass)}>{subtitle}</span>
+    </Card>
+  );
+}
+
+interface CoveragePanelProps {
+  title: string;
+  status: string;
+  statusIcon: typeof CheckmarkCircle01Icon;
+  statusClass?: string;
+  description: string;
+  isBangla?: boolean;
+}
+
+function CoveragePanel({
+  title,
+  status,
+  statusIcon: StatusIcon,
+  statusClass = "text-success",
+  description,
+  isBangla,
+}: CoveragePanelProps) {
+  return (
+    <div className="p-4 rounded-panel bg-muted/40 border border-border space-y-2">
+      <div className={cn("text-label text-foreground", isBangla && "text-bangla")}>{title}</div>
+      <div className={cn("flex items-center gap-1.5", statusClass, isBangla && "text-bangla")}>
+        <HugeiconsIcon icon={StatusIcon} size={15} />
+        {status}
+      </div>
+      <p className={cn("text-muted-foreground leading-relaxed", isBangla && "text-bangla")}>
+        {description}
+      </p>
+    </div>
+  );
+}
+
+function AuditLogRow({ message, status }: { message: string; status: string }) {
+  return (
+    <div className="p-2.5 rounded-control bg-muted/40 border border-border flex items-center justify-between">
+      <span>{message}</span>
+      <span className="text-success">{status}</span>
+    </div>
+  );
+}
 
 export function AdminDashboardClient() {
   const searchParams = useSearchParams();
@@ -42,7 +109,7 @@ export function AdminDashboardClient() {
             403 — অননুমোদিত অ্যাক্সেস (Unauthorized)
           </h1>
 
-          <p className="text-meta text-muted-foreground leading-relaxed text-bangla">
+          <p className="text-meta-lead-bn">
             কন্টেন্ট অ্যাডমিনিস্ট্রেশন প্যানেল শুধুমাত্র অনুমোদিত এডিটর এবং পর্যালোচকদের জন্য সংরক্ষিত। বর্তমান ভূমিকা: <strong className="text-destructive font-mono">{currentRole}</strong>।
           </p>
 
@@ -126,45 +193,30 @@ export function AdminDashboardClient() {
 
       {/* Metrics Banner */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-5 bg-card border-border rounded-card space-y-1">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block">
-            Total Scenarios
-          </span>
-          <div className="text-stat text-foreground">
-            {totalScenarios}
-          </div>
-          <span className="text-chip text-success">100% Active in Library</span>
-        </Card>
-
-        <Card className="p-5 bg-card border-border rounded-card space-y-1">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block">
-            Dialogue Turns
-          </span>
-          <div className="text-stat text-foreground">
-            {totalDialogueLines}+
-          </div>
-          <span className="text-chip text-muted-foreground">Short & Medium Versions</span>
-        </Card>
-
-        <Card className="p-5 bg-card border-border rounded-card space-y-1">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block">
-            Bangla Translations
-          </span>
-          <div className="text-stat text-success">
-            100%
-          </div>
-          <span className="text-chip text-success">All lines fully glossed</span>
-        </Card>
-
-        <Card className="p-5 bg-card border-border rounded-card space-y-1">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block">
-            Audio Asset Pipeline
-          </span>
-          <div className="text-stat text-primary">
-            Piper TTS
-          </div>
-          <span className="text-chip text-muted-foreground">en-US + en-GB offline audio</span>
-        </Card>
+        <AdminMetricCard
+          title="Total Scenarios"
+          value={totalScenarios}
+          subtitle="100% Active in Library"
+          subtitleClass="text-success"
+        />
+        <AdminMetricCard
+          title="Dialogue Turns"
+          value={`${totalDialogueLines}+`}
+          subtitle="Short & Medium Versions"
+        />
+        <AdminMetricCard
+          title="Bangla Translations"
+          value="100%"
+          valueClass="text-success"
+          subtitle="All lines fully glossed"
+          subtitleClass="text-success"
+        />
+        <AdminMetricCard
+          title="Audio Asset Pipeline"
+          value="Piper TTS"
+          valueClass="text-primary"
+          subtitle="en-US + en-GB offline audio"
+        />
       </div>
 
       {/* Content Library Table with Filter Tabs */}
@@ -172,7 +224,7 @@ export function AdminDashboardClient() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
-            <h2 className="text-card-title text-foreground text-bangla">
+            <h2 className="text-card-title-bn">
               দৃশ্যপট তালিকা ও প্রকাশনা স্থিতি (Scenarios)
             </h2>
           </div>
@@ -229,7 +281,7 @@ export function AdminDashboardClient() {
                       <div className="text-label text-foreground font-sans">
                         {scenario.title}
                       </div>
-                      <div className="text-chip text-muted-foreground text-bangla">
+                      <div className="text-chip-bn">
                         {scenario.titleBn}
                       </div>
                       <span className="text-chip font-mono text-muted-foreground">
@@ -304,65 +356,53 @@ export function AdminDashboardClient() {
       <Card className="p-6 bg-card border-border rounded-card space-y-4">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={SparklesIcon} size={18} className="text-primary" />
-          <h3 className="text-card-title text-foreground text-bangla">
+          <h3 className="text-card-title-bn">
             ভাষা ও কভারেজ ম্যাট্রিক্স (Language Coverage Report)
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-chip">
-          <div className="p-4 rounded-panel bg-muted/40 border border-border space-y-2">
-            <div className="text-label text-foreground">English Source Texts</div>
-            <div className="text-success flex items-center gap-1.5">
-              <HugeiconsIcon icon={CheckmarkCircle01Icon} size={15} />
-              17 of 17 Scenarios Certified
-            </div>
-            <p className="text-muted-foreground leading-relaxed">
-              Reviewed for CEFR progression (A1 to B2) and natural conversational authenticity.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-panel bg-muted/40 border border-border space-y-2">
-            <div className="text-label text-foreground text-bangla">বাংলা অনুবাদ (Bengali Glosses)</div>
-            <div className="text-success flex items-center gap-1.5 text-bangla">
-              <HugeiconsIcon icon={CheckmarkCircle01Icon} size={15} />
-              ১৭টি দৃশ্যপটের সব বাক্য অনুবাদকৃত
-            </div>
-            <p className="text-muted-foreground leading-relaxed text-bangla">
-              আক্ষরিক অনুবাদের পরিবর্তে প্রাসঙ্গিক ও সাবলীল প্রমিত বাংলা অর্থ নিশ্চিত করা হয়েছে।
-            </p>
-          </div>
-
-          <div className="p-4 rounded-panel bg-muted/40 border border-border space-y-2">
-            <div className="text-label text-foreground">Accents & Audio Assets</div>
-            <div className="text-primary flex items-center gap-1.5">
-              <HugeiconsIcon icon={VolumeHighIcon} size={15} />
-              en-US & en-GB Accents Ready
-            </div>
-            <p className="text-muted-foreground leading-relaxed">
-              Synthesized with 600ms conversational turn spacing and zero autoplay compliance.
-            </p>
-          </div>
+          <CoveragePanel
+            title="English Source Texts"
+            status="17 of 17 Scenarios Certified"
+            statusIcon={CheckmarkCircle01Icon}
+            description="Reviewed for CEFR progression (A1 to B2) and natural conversational authenticity."
+          />
+          <CoveragePanel
+            title="বাংলা অনুবাদ (Bengali Glosses)"
+            status="১৭টি দৃশ্যপটের সব বাক্য অনুবাদকৃত"
+            statusIcon={CheckmarkCircle01Icon}
+            description="আক্ষরিক অনুবাদের পরিবর্তে প্রাসঙ্গিক ও সাবলীল প্রমিত বাংলা অর্থ নিশ্চিত করা হয়েছে।"
+            isBangla
+          />
+          <CoveragePanel
+            title="Accents & Audio Assets"
+            status="en-US & en-GB Accents Ready"
+            statusIcon={VolumeHighIcon}
+            statusClass="text-primary"
+            description="Synthesized with 600ms conversational turn spacing and zero autoplay compliance."
+          />
         </div>
       </Card>
 
       {/* Audit Log */}
       <Card className="p-6 bg-card border-border rounded-card space-y-3">
-        <h3 className="text-card-title text-foreground text-bangla">
+        <h3 className="text-card-title-bn">
           সাম্প্রতিক অডিট লগ (Audit Log)
         </h3>
         <div className="space-y-2 text-chip font-mono text-muted-foreground">
-          <div className="p-2.5 rounded-control bg-muted/40 border border-border flex items-center justify-between">
-            <span>[2026-11-16 23:45] Phase 1 Milestone 1D Learning Tools verified by Admin</span>
-            <span className="text-success">VERIFIED</span>
-          </div>
-          <div className="p-2.5 rounded-control bg-muted/40 border border-border flex items-center justify-between">
-            <span>[2026-11-16 22:30] Audio timing manifest and pause spacing synchronized</span>
-            <span className="text-success">PASSED</span>
-          </div>
-          <div className="p-2.5 rounded-control bg-muted/40 border border-border flex items-center justify-between">
-            <span>[2026-11-16 17:15] 17 Bilingual seed scenarios pre-rendered into static pages</span>
-            <span className="text-success">PUBLISHED</span>
-          </div>
+          <AuditLogRow
+            message="[2026-11-16 23:45] Phase 1 Milestone 1D Learning Tools verified by Admin"
+            status="VERIFIED"
+          />
+          <AuditLogRow
+            message="[2026-11-16 22:30] Audio timing manifest and pause spacing synchronized"
+            status="PASSED"
+          />
+          <AuditLogRow
+            message="[2026-11-16 17:15] 17 Bilingual seed scenarios pre-rendered into static pages"
+            status="PUBLISHED"
+          />
         </div>
       </Card>
     </div>

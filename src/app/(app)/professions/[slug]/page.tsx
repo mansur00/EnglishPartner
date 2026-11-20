@@ -37,7 +37,7 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
     <PageContainer className="space-y-6">
       <div className="space-y-3">
         <Link href="/explore">
-          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
+          <Button variant="ghost" size="sm" className="btn-back-nav text-label">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to Explore
           </Button>

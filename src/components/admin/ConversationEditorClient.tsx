@@ -59,7 +59,7 @@ export function ConversationEditorClient({
             403 — Edit Access Restricted
           </h1>
 
-          <p className="text-meta text-muted-foreground leading-relaxed text-bangla">
+          <p className="text-meta-lead-bn">
             কন্টেন্ট এডিট করার জন্য &ldquo;editor&rdquo; বা তার ঊর্ধ্বতন অনুমতি প্রয়োজন। বর্তমান ভূমিকা: {userRole}।
           </p>
 
@@ -178,7 +178,7 @@ export function ConversationEditorClient({
                 {version.versionName} Version
               </Badge>
             </div>
-            <p className="text-chip text-muted-foreground text-bangla">
+            <p className="text-chip-bn">
               {scenario.titleBn} • {version.lines.length}টি বাক্য
             </p>
           </div>
@@ -295,7 +295,7 @@ export function ConversationEditorClient({
       {/* Dialogue Lines List */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-card-title text-foreground text-bangla">
+          <h2 className="text-card-title-bn">
             কথোপকথনের বাক্যসমূহ (Turns)
           </h2>
           <Button

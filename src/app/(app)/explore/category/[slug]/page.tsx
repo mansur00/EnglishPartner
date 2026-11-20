@@ -41,7 +41,7 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
     <PageContainer className="space-y-6 pb-16">
       <div className="space-y-3">
         <Link href="/explore">
-          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
+          <Button variant="ghost" size="sm" className="btn-back-nav text-label">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to All Topics
           </Button>
@@ -62,7 +62,7 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
           {/* Additional standalone scenarios in this category */}
           {categoryScenarios.length > 0 && (
             <div className="space-y-4 pt-4 border-t border-border">
-              <h3 className="text-card-title text-foreground text-bangla">
+              <h3 className="text-card-title-bn">
                 অন্যান্য প্রাসঙ্গিক দৃশ্যপট (Additional Practice Scenarios)
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -79,7 +79,7 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
             <h1 className="text-page-title text-foreground">
               {category?.name || "Category"}
             </h1>
-            <p className="text-meta text-muted-foreground text-bangla mt-1">
+            <p className="text-subtitle-bn">
               {category?.nameBn} — বাস্তব কথোপকথন চর্চা করুন
             </p>
           </div>

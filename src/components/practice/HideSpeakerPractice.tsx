@@ -67,13 +67,13 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
 
   if (isFinished) {
     return (
-      <div className="p-6 sm:p-8 rounded-card bg-card border border-border text-center space-y-4 shadow-2xs">
-        <div className="size-control rounded-control bg-success-bg text-success flex items-center justify-center mx-auto">
+      <div className="card-practice-result space-y-4">
+        <div className="badge-success-icon">
           <HugeiconsIcon icon={SparklesIcon} size={28} />
         </div>
 
         <div>
-          <h3 className="text-card-title text-foreground text-bangla">
+          <h3 className="text-card-title-bn">
             রোলপ্লে অনুশীলন সম্পন্ন হয়েছে!
           </h3>
           <p className="text-meta text-muted-foreground mt-1 text-bangla">
@@ -92,7 +92,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
   }
 
   return (
-    <div className="p-6 rounded-card bg-card border border-border space-y-5 shadow-2xs">
+    <div className="card-practice space-y-5">
       {/* Role Selector Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-border">
         <div className="flex items-center gap-2">
@@ -214,7 +214,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
 
       {/* Next Turn Button */}
       <div className="pt-2 flex justify-end">
-        <Button onClick={handleNextTurn} className="gap-1.5 text-bangla text-label rounded-control">
+        <Button onClick={handleNextTurn} className="btn-nav-action">
           <span>{currentLineIndex < lines.length - 1 ? "পরবর্তী সংলাপ (Next)" : "অনুশীলন সমাপ্ত"}</span>
           <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
         </Button>

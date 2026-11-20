@@ -71,7 +71,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         {/* Top Breadcrumb & Action */}
         <div className="flex items-center justify-between">
           <Link href="/explore/category/shopping-and-money">
-            <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
+            <Button variant="ghost" size="sm" className="btn-back-nav text-label">
               <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
               Shopping Ladder (সব ধাপ)
             </Button>
@@ -104,7 +104,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
             <h1 className="text-page-title text-foreground">
               {ladderStep.title}
             </h1>
-            <p className="text-meta text-muted-foreground text-bangla mt-1">
+            <p className="text-subtitle-bn">
               {ladderStep.titleBn}
             </p>
           </div>
@@ -190,7 +190,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
       {/* Top Breadcrumb & Action */}
       <div className="flex items-center justify-between">
         <Link href="/explore">
-          <Button variant="ghost" size="sm" className="gap-1.5 -ml-2 text-label rounded-control">
+          <Button variant="ghost" size="sm" className="btn-back-nav text-label">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
             Back to Explore
           </Button>
@@ -222,7 +222,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           <h1 className="text-page-title text-foreground">
             {scenario.title}
           </h1>
-          <p className="text-meta text-muted-foreground text-bangla mt-1">
+          <p className="text-subtitle-bn">
             {scenario.titleBn}
           </p>
         </div>

@@ -39,10 +39,10 @@ export function AuthPromptModal({
           <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center mb-1">
             <HugeiconsIcon icon={Bookmark01Icon} size={22} />
           </div>
-          <DialogTitle className="text-card-title text-foreground text-bangla">
+          <DialogTitle className="text-card-title-bn">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-meta text-muted-foreground leading-relaxed text-bangla">
+          <DialogDescription className="text-meta-lead-bn">
             {description}
           </DialogDescription>
         </DialogHeader>

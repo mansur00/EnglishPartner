@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES } from "@/content/seed/dialogues";
 import { ConversationEditorClient } from "@/components/admin/ConversationEditorClient";
+import { LoadingBox } from "@/components/shared/LoadingBox";
 
 interface ConversationEditorPageProps {
   params: Promise<{ slug: string }>;
@@ -68,7 +69,7 @@ export default async function ConversationEditorPage({
 
   return (
     <div className="min-h-screen bg-background p-4 sm:p-8">
-      <Suspense fallback={<div className="p-8 text-center text-meta text-muted-foreground">Loading editor...</div>}>
+      <Suspense fallback={<LoadingBox message="Loading editor..." />}>
         <ConversationEditorClient
           scenario={scenario}
           initialVersion={initialVersion}

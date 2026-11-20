@@ -36,7 +36,7 @@ export default function PrivacyPage() {
 
           <div className="space-y-4 text-body text-muted-foreground leading-relaxed">
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ১. উন্মুক্ত শিক্ষা ও কোনো লুকানো ট্র্যাকিং নেই (Free & Open Learning)
               </h2>
               <p>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ২. গেস্ট ডেটা সংরক্ষণ (Guest Storage)
               </h2>
               <p>
@@ -54,7 +54,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ৩. নিবন্ধিত অ্যাকাউন্ট ও ক্লাউড সিঙ্ক (Registered Users)
               </h2>
               <p>
@@ -63,7 +63,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-card-title text-foreground text-bangla">
+              <h2 className="text-card-title-bn">
                 ৪. অডিও ও মাইক্রোফোন অনুমতি
               </h2>
               <p>

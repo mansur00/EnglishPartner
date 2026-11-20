@@ -8,6 +8,7 @@ import { WordDetailPopover } from "./WordDetailPopover";
 import { GrammarPanel } from "./GrammarPanel";
 import { ReviewSummary } from "./ReviewSummary";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
+import { LoadingBox } from "@/components/shared/LoadingBox";
 import { Button } from "@/components/ui/button";
 import { GrammarProvider } from "@/lib/grammar/context";
 import { GrammarModeSwitch } from "@/components/grammar/GrammarModeSwitch";
@@ -150,11 +151,7 @@ function ConversationReaderInner({
   }, [annotation]);
 
   if (!currentVersion) {
-    return (
-      <div className="p-8 text-center text-meta text-muted-foreground">
-        Dialogue content is being prepared.
-      </div>
-    );
+    return <LoadingBox message="Dialogue content is being prepared." />;
   }
 
   const speakerMap = new Map(currentVersion.speakers.map((s) => [s.id, s]));

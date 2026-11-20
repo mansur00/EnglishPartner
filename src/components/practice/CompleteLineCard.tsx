@@ -57,13 +57,13 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
 
   if (isFinished) {
     return (
-      <div className="p-6 sm:p-8 rounded-card bg-card border border-border text-center space-y-4 shadow-2xs">
-        <div className="size-control rounded-control bg-success-bg text-success flex items-center justify-center mx-auto">
+      <div className="card-practice-result space-y-4">
+        <div className="badge-success-icon">
           <HugeiconsIcon icon={SparklesIcon} size={28} />
         </div>
 
         <div>
-          <h3 className="text-card-title text-foreground text-bangla">
+          <h3 className="text-card-title-bn">
             শব্দ বসানোর অনুশীলন সম্পন্ন হয়েছে!
           </h3>
           <p className="text-meta text-muted-foreground mt-1 text-bangla">
@@ -83,7 +83,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
   const isCorrect = selectedWord === blank.correctAnswer;
 
   return (
-    <div className="p-6 rounded-card bg-card border border-border space-y-5 shadow-2xs">
+    <div className="card-practice space-y-5">
       {/* Header Counter */}
       <div className="flex items-center justify-between pb-3 border-b border-border text-chip">
         <span className="font-mono text-primary bg-primary/10 px-2.5 py-1 rounded-control border border-primary/20">
@@ -192,7 +192,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
             উত্তর যাচাই করুন
           </Button>
         ) : (
-          <Button onClick={handleNext} className="gap-1.5 text-bangla text-label rounded-control">
+          <Button onClick={handleNext} className="btn-nav-action">
             <span>{currentIndex < exercises.length - 1 ? "পরবর্তী বাক্য" : "সমাপ্ত করুন"}</span>
             <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
           </Button>

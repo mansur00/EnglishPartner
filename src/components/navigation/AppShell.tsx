@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Header, type HeaderUser } from "./Header";
 import { Sidebar } from "./Sidebar";
 import { MobileBottomNav } from "./MobileBottomNav";
+import { LoadingBox } from "@/components/shared/LoadingBox";
 
 export function AppShell({ children, user }: { children: React.ReactNode; user?: HeaderUser | null }) {
   return (
@@ -12,7 +13,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user?:
           <Sidebar />
         </Suspense>
         <main className="flex-1 pb-20 md:pb-8 w-full min-w-0">
-          <Suspense fallback={<div className="p-8 text-center text-meta text-muted-foreground">Loading...</div>}>
+          <Suspense fallback={<LoadingBox />}>
             {children}
           </Suspense>
         </main>

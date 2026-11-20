@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { cn } from "@/lib/utils";
 import { t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -31,6 +32,33 @@ interface WordDetailPopoverProps {
   grammarRole?: string;
   tokenData?: RenderToken | null;
   onRuleClick?: (ruleKey: string) => void;
+}
+
+function GrammarItemCard({
+  title,
+  value,
+  isMonospace,
+}: {
+  title: string;
+  value: React.ReactNode;
+  isMonospace?: boolean;
+}) {
+  return (
+    <div className="p-2 rounded-control bg-card border border-border">
+      <span className="text-muted-foreground block text-bangla">{title}</span>
+      <span className={cn("text-foreground", isMonospace ? "font-mono" : "text-bangla")}>
+        {value}
+      </span>
+    </div>
+  );
+}
+
+function WordFormBadge({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-control text-muted-foreground">
+      <strong className="text-foreground">{label}:</strong> {value}
+    </span>
+  );
 }
 
 export function WordDetailPopover({
@@ -133,30 +161,19 @@ export function WordDetailPopover({
             </div>
             <div className="grid grid-cols-2 gap-2 text-chip">
               {posLabel && (
-                <div className="p-2 rounded-control bg-card border border-border">
-                  <span className="text-muted-foreground block text-bangla">পদ (POS):</span>
-                  <span className="text-foreground text-bangla">
-                    {posLabel.name} {subLabel ? `(${subLabel.name})` : ""}
-                  </span>
-                </div>
+                <GrammarItemCard
+                  title="পদ (POS):"
+                  value={`${posLabel.name} ${subLabel ? `(${subLabel.name})` : ""}`}
+                />
               )}
               {roleLabel && (
-                <div className="p-2 rounded-control bg-card border border-border">
-                  <span className="text-muted-foreground block text-bangla">বাক্যের ভূমিকা (Role):</span>
-                  <span className="text-foreground text-bangla">{roleLabel.name}</span>
-                </div>
+                <GrammarItemCard title="বাক্যের ভূমিকা (Role):" value={roleLabel.name} />
               )}
               {tokenData.lemma && (
-                <div className="p-2 rounded-control bg-card border border-border">
-                  <span className="text-muted-foreground block text-bangla">মূল শব্দ (Lemma):</span>
-                  <span className="font-mono text-foreground">{tokenData.lemma}</span>
-                </div>
+                <GrammarItemCard title="মূল শব্দ (Lemma):" value={tokenData.lemma} isMonospace />
               )}
               {tenseLabel && (
-                <div className="p-2 rounded-control bg-card border border-border">
-                  <span className="text-muted-foreground block text-bangla">কাল (Tense):</span>
-                  <span className="text-foreground text-bangla">{tenseLabel.name}</span>
-                </div>
+                <GrammarItemCard title="কাল (Tense):" value={tenseLabel.name} />
               )}
             </div>
 
@@ -222,19 +239,16 @@ export function WordDetailPopover({
               </span>
               <div className="flex flex-wrap gap-2 text-chip">
                 {entry.wordForms.past && (
-                  <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-control text-muted-foreground">
-                    <strong className="text-foreground">{t("learning.past")}:</strong> {entry.wordForms.past}
-                  </span>
+                  <WordFormBadge label={t("learning.past")} value={entry.wordForms.past} />
                 )}
                 {entry.wordForms.pastParticiple && (
-                  <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-control text-muted-foreground">
-                    <strong className="text-foreground">{t("learning.pastParticiple")}:</strong> {entry.wordForms.pastParticiple}
-                  </span>
+                  <WordFormBadge
+                    label={t("learning.pastParticiple")}
+                    value={entry.wordForms.pastParticiple}
+                  />
                 )}
                 {entry.wordForms.plural && (
-                  <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-control text-muted-foreground">
-                    <strong className="text-foreground">{t("learning.plural")}:</strong> {entry.wordForms.plural}
-                  </span>
+                  <WordFormBadge label={t("learning.plural")} value={entry.wordForms.plural} />
                 )}
               </div>
             </div>

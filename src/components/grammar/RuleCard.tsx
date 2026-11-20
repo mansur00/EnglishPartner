@@ -56,7 +56,7 @@ export function RuleCardDialog({
         {/* Formula Box */}
         {rule.formula && (
           <div className="p-3.5 rounded-control bg-primary/5 border border-primary/20 space-y-1">
-            <span className="text-chip text-primary uppercase tracking-wider block font-bangla text-bangla">
+            <span className="text-grammar-header text-primary">
               {isBn ? "গঠন প্রণালী (Formula):" : "Formula:"}
             </span>
             <p className="text-meta font-mono text-foreground">
@@ -67,7 +67,7 @@ export function RuleCardDialog({
 
         {/* Explanation */}
         <div className="space-y-1">
-          <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
+          <span className="text-grammar-header">
             {isBn ? "ব্যাখ্যা ও প্রয়োগ (Explanation):" : "Explanation:"}
           </span>
           <p className="text-body text-foreground leading-relaxed font-bangla text-bangla">
@@ -78,7 +78,7 @@ export function RuleCardDialog({
         {/* Usage points */}
         {rule.usage && rule.usage.length > 0 && (
           <div className="space-y-1.5">
-            <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
+            <span className="text-grammar-header">
               {isBn ? "কখন ব্যবহার করবেন:" : "When to use:"}
             </span>
             <ul className="space-y-1 text-body text-foreground font-bangla text-bangla">
@@ -95,7 +95,7 @@ export function RuleCardDialog({
         {/* Examples */}
         {rule.examples && rule.examples.length > 0 && (
           <div className="space-y-2">
-            <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
+            <span className="text-grammar-header">
               {isBn ? "উদাহরণসমূহ (Examples):" : "Examples:"}
             </span>
             <div className="space-y-1.5">
@@ -121,7 +121,7 @@ export function RuleCardDialog({
         {/* Common Mistakes */}
         {rule.commonMistakes && rule.commonMistakes.length > 0 && (
           <div className="p-3 rounded-control bg-destructive/5 border border-destructive/20 space-y-1">
-            <span className="text-chip text-destructive uppercase tracking-wider block font-bangla text-bangla">
+            <span className="text-grammar-header text-destructive">
               {isBn ? "সাধারণ ভুল যা এড়িয়ে চলবেন:" : "Common Mistakes:"}
             </span>
             <ul className="space-y-1 text-chip text-foreground font-bangla text-bangla">

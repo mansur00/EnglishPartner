@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   SparklesIcon,
@@ -23,6 +24,23 @@ interface GrammarPanelProps {
   entry: SentenceGrammarEntry | null;
   isOpen: boolean;
   onClose: () => void;
+}
+
+interface StructureRowProps {
+  label: string;
+  value: string;
+  isMonospace?: boolean;
+}
+
+function StructureRow({ label, value, isMonospace = true }: StructureRowProps) {
+  return (
+    <div className="p-3 text-meta flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4">
+      <span className="text-label text-primary min-w-28 shrink-0">{label}</span>
+      <span className={cn("text-muted-foreground text-chip", isMonospace && "font-mono")}>
+        {value}
+      </span>
+    </div>
+  );
 }
 
 export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
@@ -73,30 +91,9 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
             </div>
 
             <div className="bg-card rounded-panel border border-border divide-y divide-border shadow-2xs">
-              <div className="p-3 text-meta flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4">
-                <span className="text-label text-primary min-w-28 shrink-0">
-                  Subject (কর্তা):
-                </span>
-                <span className="text-muted-foreground font-mono text-chip">
-                  {entry.structure.subject}
-                </span>
-              </div>
-              <div className="p-3 text-meta flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4">
-                <span className="text-label text-primary min-w-28 shrink-0">
-                  Verb (ক্রিয়া):
-                </span>
-                <span className="text-muted-foreground font-mono text-chip">
-                  {entry.structure.verb}
-                </span>
-              </div>
-              <div className="p-3 text-meta flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4">
-                <span className="text-label text-primary min-w-28 shrink-0">
-                  Object / Complement:
-                </span>
-                <span className="text-muted-foreground font-mono text-chip">
-                  {entry.structure.objectOrComplement}
-                </span>
-              </div>
+              <StructureRow label="Subject (কর্তা):" value={entry.structure.subject} />
+              <StructureRow label="Verb (ক্রিয়া):" value={entry.structure.verb} />
+              <StructureRow label="Object / Complement:" value={entry.structure.objectOrComplement} />
               <div className="p-3 text-meta flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 bg-primary/5 dark:bg-primary/10">
                 <span className="text-label text-primary min-w-28 shrink-0">
                   Tense Pattern:
