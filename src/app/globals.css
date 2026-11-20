@@ -137,7 +137,12 @@ body {
   --color-band-panel: var(--band-panel-bg);
   --color-band-panel-border: var(--band-panel-border);
   --color-band-panel-ink: var(--band-panel-ink);
+  --color-band-panel-past: var(--band-panel-past-bg);
+  --color-band-panel-marker-border: var(--band-panel-marker-border);
   --color-band-segment-empty: var(--band-segment-empty);
+  --color-bubble-primary: var(--bubble-primary-bg);
+  --color-bubble-primary-ink: var(--bubble-primary-ink);
+  --color-panel-brand: var(--panel-brand-bg);
 
   /* Status Colors Inline Mapping */
   --color-status-success-bg: var(--success-bg);
@@ -332,6 +337,24 @@ body {
 }
 @utility h-below-header {
   height: calc(100dvh - var(--header-h));
+}
+@utility min-w-panel {
+  min-width: 22.5rem;
+}
+@utility rounded-segment {
+  border-radius: 2px;
+}
+@utility gap-segment {
+  gap: 3px;
+}
+@utility max-w-bubble {
+  max-width: 88%;
+}
+@utility w-progress-15 {
+  width: 15%;
+}
+@utility w-progress-40 {
+  width: 40%;
 }
 
 @utility duration-fast {
@@ -548,7 +571,12 @@ body {
   --band-panel-bg: rgba(255, 255, 255, 0.1);
   --band-panel-border: rgba(255, 255, 255, 0.15);
   --band-panel-ink: #FFFFFF;
+  --band-panel-past-bg: rgba(255, 255, 255, 0.2);
+  --band-panel-marker-border: rgba(255, 255, 255, 0.3);
   --band-segment-empty: rgba(255, 255, 255, 0.2);
+  --bubble-primary-bg: #F4E8FC;
+  --bubble-primary-ink: #2A0F44;
+  --panel-brand-bg: #F4E8FC;
 }
 
 @media (min-width: 640px) {
@@ -670,7 +698,12 @@ body {
   --band-panel-bg: rgba(255, 255, 255, 0.08);
   --band-panel-border: rgba(255, 255, 255, 0.12);
   --band-panel-ink: #FFFFFF;
+  --band-panel-past-bg: rgba(255, 255, 255, 0.15);
+  --band-panel-marker-border: rgba(255, 255, 255, 0.25);
   --band-segment-empty: rgba(255, 255, 255, 0.15);
+  --bubble-primary-bg: rgba(42, 15, 68, 0.4);
+  --bubble-primary-ink: #F4E8FC;
+  --panel-brand-bg: rgba(42, 15, 68, 0.4);
 }
 
 /* Topic-Based Scopes (Section 3.2 - Light) */

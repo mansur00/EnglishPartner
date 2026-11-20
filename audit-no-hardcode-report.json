@@ -1,145 +1,6 @@
 {
-  "a_colors": [
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 59,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "<h1 className=\"text-page-title text-white\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 62,
-      "detail": "Tailwind raw palette color: text-white/80",
-      "code": "<p className=\"text-meta text-white/80 mt-1.5 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 138,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "<span className=\"size-marker rounded-pill bg-brand-800 text-white flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs\">"
-    },
-    {
-      "file": "src/components/shared/HeroBand.tsx",
-      "line": 10,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "\"w-full bg-gradient-to-b from-brand-800 to-brand-900 dark:from-brand-900 dark:to-brand-950 text-white rounded-band pt-8 pb-12 md:pt-10 md:pb-14 shadow-xs\","
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 29,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "\"w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-white shadow-xs space-y-3.5 min-w-0 sm:min-w-[360px]\","
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 39,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "<span className=\"text-stat text-white\">{streak}</span>"
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 40,
-      "detail": "Tailwind raw palette color: text-white/90",
-      "code": "<span className=\"text-meta text-white/90\">{t(\"dashboard.dayStreak\")}</span>"
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 59,
-      "detail": "Tailwind raw palette color: bg-white/20, text-white/80",
-      "code": "!isDone && isPast && \"bg-white/20 text-white/80\","
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 60,
-      "detail": "Tailwind raw palette color: border-white/30, text-white/50",
-      "code": "isFuture && \"border border-dashed border-white/30 text-white/50\""
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 73,
-      "detail": "Tailwind raw palette color: text-white",
-      "code": "<span className=\"text-body font-semibold text-white\">"
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 76,
-      "detail": "Tailwind raw palette color: text-white/80",
-      "code": "<span className=\"text-meta text-white/80\">"
-    }
-  ],
+  "a_colors": [],
   "b_typography": [
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 62,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-meta text-white/80 mt-1.5 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 98,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-lead text-muted-foreground font-bangla text-bangla mt-1 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 108,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<span className=\"flex items-center gap-1.5 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 111,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<span className=\"flex items-center gap-1.5 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 128,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center justify-between text-meta font-semibold text-topic-ink uppercase tracking-wider pb-2 border-b border-border\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 133,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-meta font-semibold\">2 turns</span>"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 142,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"font-semibold text-brand-950 dark:text-brand-100\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 145,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-meta text-muted-foreground font-bangla text-bangla mt-1 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 154,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"font-semibold text-topic-ink\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 157,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-meta text-topic-ink/80 font-bangla text-bangla mt-1 font-medium\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 191,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center justify-between text-meta font-semibold text-topic-ink mb-1.5\">"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 230,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center justify-between text-meta font-semibold text-topic-ink mb-1.5\">"
-    },
     {
       "file": "src/components/grammar/GrammarBreakdown.tsx",
       "line": 28,
@@ -595,47 +456,10 @@
       "line": 138,
       "detail": "Direct scale text utility in feature code: text-xs",
       "code": "<Button variant=\"ghost\" size=\"sm\" onClick={onClose} className=\"text-xs font-bangla\">"
-    },
-    {
-      "file": "src/components/shared/EmojiTile.tsx",
-      "line": 12,
-      "detail": "Direct scale text utility in feature code: text-2xl",
-      "code": "\"size-tile rounded-control bg-topic-tile text-topic-ink flex items-center justify-center text-2xl font-semibold shadow-2xs select-none shrink-0\","
-    },
-    {
-      "file": "src/components/shared/EmojiTile.tsx",
-      "line": 12,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "\"size-tile rounded-control bg-topic-tile text-topic-ink flex items-center justify-center text-2xl font-semibold shadow-2xs select-none shrink-0\","
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 73,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-body font-semibold text-white\">"
     }
   ],
-  "c_radius": [
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 92,
-      "detail": "Arbitrary rounded-[..] in feature code: rounded-[2px]",
-      "code": "\"h-segment flex-1 rounded-[2px] transition-colors\","
-    }
-  ],
+  "c_radius": [],
   "d_layout_magic": [
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 196,
-      "detail": "Arbitrary layout [Npx] utility: w-[40%]",
-      "code": "<div className=\"h-full bg-topic-accent rounded-pill w-[40%]\" />"
-    },
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 235,
-      "detail": "Arbitrary layout [Npx] utility: w-[15%]",
-      "code": "<div className=\"h-full bg-topic-accent rounded-pill w-[15%]\" />"
-    },
     {
       "file": "src/components/grammar/GrammarLayerPicker.tsx",
       "line": 86,
@@ -665,18 +489,6 @@
       "line": 39,
       "detail": "Arbitrary layout [Npx] utility: h-[90vh]",
       "code": "<DialogContent className=\"w-full sm:max-w-lg bg-card border-border p-5 sm:p-6 text-left max-h-[90vh] overflow-y-auto\">"
-    },
-    {
-      "file": "src/components/shared/ChatBubble.tsx",
-      "line": 12,
-      "detail": "Arbitrary layout [Npx] utility: max-w-[88%]",
-      "code": "\"rounded-bubble p-3.5 shadow-2xs text-body border border-border max-w-[88%]\","
-    },
-    {
-      "file": "src/components/shared/TodayPanel.tsx",
-      "line": 29,
-      "detail": "Arbitrary layout [Npx] utility: min-w-[360px]",
-      "code": "\"w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-white shadow-xs space-y-3.5 min-w-0 sm:min-w-[360px]\","
     }
   ],
   "e_inline_styles": [],
@@ -890,26 +702,7 @@
     }
   ],
   "g_ts_data_colors": [],
-  "h_dark_mode": [
-    {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 142,
-      "detail": "Raw color with dark: prefix: dark:text-brand-100",
-      "code": "<p className=\"font-semibold text-brand-950 dark:text-brand-100\">"
-    },
-    {
-      "file": "src/components/shared/ChatBubble.tsx",
-      "line": 14,
-      "detail": "Raw color with dark: prefix: dark:bg-brand-950/40, dark:text-brand-100",
-      "code": "? \"rounded-bubble-tail-tl bg-brand-100 dark:bg-brand-950/40 text-brand-950 dark:text-brand-100\""
-    },
-    {
-      "file": "src/components/shared/Panel.tsx",
-      "line": 15,
-      "detail": "Raw color with dark: prefix: dark:bg-brand-950/40",
-      "code": "variant === \"brand\" && \"bg-brand-100 dark:bg-brand-950/40 text-foreground\","
-    }
-  ],
+  "h_dark_mode": [],
   "i_ui_primitives": [
     {
       "file": "src/components/ui/dialog.tsx",

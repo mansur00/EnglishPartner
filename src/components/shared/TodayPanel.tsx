@@ -26,7 +26,7 @@ export function TodayPanel({
   return (
     <div
       className={cn(
-        "w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-white shadow-xs space-y-3.5 min-w-0 sm:min-w-[360px]",
+        "w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-band-panel-ink shadow-xs space-y-3.5 min-w-0 sm:min-w-panel",
         className
       )}
       {...props}
@@ -36,8 +36,8 @@ export function TodayPanel({
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={FireIcon} size={20} className="text-sun-500 shrink-0" />
           <div className="flex items-baseline gap-1.5">
-            <span className="text-stat text-white">{streak}</span>
-            <span className="text-meta text-white/90">{t("dashboard.dayStreak")}</span>
+            <span className="text-stat text-band-panel-ink">{streak}</span>
+            <span className="text-meta text-band-panel-ink/90">{t("dashboard.dayStreak")}</span>
           </div>
         </div>
 
@@ -56,8 +56,8 @@ export function TodayPanel({
                 className={cn(
                   "inline-flex items-center justify-center size-marker rounded-pill text-chip select-none",
                   isDone && "bg-sun-500 text-brand-950 shadow-xs",
-                  !isDone && isPast && "bg-white/20 text-white/80",
-                  isFuture && "border border-dashed border-white/30 text-white/50"
+                  !isDone && isPast && "bg-band-panel-past text-band-panel-ink/80",
+                  isFuture && "border border-dashed border-band-panel-marker-border text-band-panel-ink/50"
                 )}
               >
                 {day}
@@ -70,16 +70,16 @@ export function TodayPanel({
       {/* Row 2: Daily Goal with 10-Segment Minute Bar */}
       <div className="space-y-1.5 pt-1 border-t border-band-panel-border">
         <div className="flex items-center justify-between">
-          <span className="text-body font-semibold text-white">
+          <span className="text-card-title text-band-panel-ink">
             {minutesCompleted} / {minutesGoal} min
           </span>
-          <span className="text-meta text-white/80">
+          <span className="text-meta text-band-panel-ink/80">
             {remainingMinutes === 0 ? t("dashboard.goalReached") : `${remainingMinutes} ${t("dashboard.minutesToGo")}`}
           </span>
         </div>
         {/* 10-Segment Minute Bar */}
         <div
-          className="flex items-center gap-[3px] w-full"
+          className="flex items-center gap-segment w-full"
           role="progressbar"
           aria-valuenow={minutesCompleted}
           aria-valuemin={0}
@@ -89,7 +89,7 @@ export function TodayPanel({
             <div
               key={idx}
               className={cn(
-                "h-segment flex-1 rounded-[2px] transition-colors",
+                "h-segment flex-1 rounded-segment transition-colors",
                 idx < minutesCompleted ? "bg-sun-500" : "bg-band-segment-empty"
               )}
             />

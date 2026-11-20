@@ -9,7 +9,7 @@ export function EmojiTile({ emoji, className, children, ...props }: EmojiTilePro
   return (
     <div
       className={cn(
-        "size-tile rounded-control bg-topic-tile text-topic-ink flex items-center justify-center text-2xl font-semibold shadow-2xs select-none shrink-0",
+        "size-tile rounded-control bg-topic-tile text-topic-ink flex items-center justify-center text-stat shadow-2xs select-none shrink-0",
         className
       )}
       {...props}

@@ -12,7 +12,7 @@ export function Panel({ variant = "default", className, children, ...props }: Pa
         "rounded-panel p-4 border border-border",
         variant === "default" && "bg-card text-card-foreground",
         variant === "topic" && "bg-topic-surface text-foreground",
-        variant === "brand" && "bg-brand-100 dark:bg-brand-950/40 text-foreground",
+        variant === "brand" && "bg-panel-brand text-foreground",
         className
       )}
       {...props}

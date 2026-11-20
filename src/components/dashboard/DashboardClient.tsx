@@ -56,10 +56,10 @@ export function DashboardClient() {
         <PageContainer>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-page-title text-white">
+              <h1 className="text-page-title text-band-panel-ink">
                 Good day, Learner! 👋
               </h1>
-              <p className="text-meta text-white/80 mt-1.5 font-medium">
+              <p className="text-meta text-band-panel-ink/80 mt-1.5">
                 Ready to practice real-life English conversation today?
               </p>
             </div>
@@ -95,7 +95,7 @@ export function DashboardClient() {
                   <h2 className="text-hero-title text-foreground">
                     Asking for a Price & Product Details
                   </h2>
-                  <p className="text-lead text-muted-foreground font-bangla text-bangla mt-1 font-medium">
+                  <p className="text-lead text-muted-foreground font-bangla text-bangla mt-1">
                     দোকানে কোনো পণ্যের দাম ও বিবরণ জানতে চাওয়া
                   </p>
                 </div>
@@ -105,10 +105,10 @@ export function DashboardClient() {
                 </p>
 
                 <div className="flex items-center gap-5 text-meta text-muted-foreground pt-1">
-                  <span className="flex items-center gap-1.5 font-medium">
+                  <span className="flex items-center gap-1.5">
                     <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" /> 5-8 minutes
                   </span>
-                  <span className="flex items-center gap-1.5 font-medium">
+                  <span className="flex items-center gap-1.5">
                     <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" /> 8 dialogue turns
                   </span>
                 </div>
@@ -125,24 +125,24 @@ export function DashboardClient() {
 
               {/* Right Column: Mini Interactive Dialogue Preview */}
               <Panel variant="topic" className="lg:col-span-5 p-5 space-y-3">
-                <div className="flex items-center justify-between text-meta font-semibold text-topic-ink uppercase tracking-wider pb-2 border-b border-border">
+                <div className="flex items-center justify-between text-meta text-topic-ink uppercase tracking-wider pb-2 border-b border-border">
                   <span className="flex items-center gap-1.5">
                     <HugeiconsIcon icon={Message01Icon} size={16} />
                     Dialogue Preview
                   </span>
-                  <span className="text-meta font-semibold">2 turns</span>
+                  <span className="text-meta">2 turns</span>
                 </div>
 
                 {/* Bubble 1: Customer (Speaker 1) */}
                 <div className="flex items-start gap-2.5 text-left">
-                  <span className="size-marker rounded-pill bg-brand-800 text-white flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs">
+                  <span className="size-marker rounded-pill bg-brand-800 text-band-panel-ink flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs">
                     C
                   </span>
                   <ChatBubble speaker="1">
-                    <p className="font-semibold text-brand-950 dark:text-brand-100">
+                    <p className="text-card-title text-bubble-primary-ink">
                       &ldquo;Excuse me, could you tell me how much this costs?&rdquo;
                     </p>
-                    <p className="text-meta text-muted-foreground font-bangla text-bangla mt-1 font-medium">
+                    <p className="text-meta text-muted-foreground font-bangla text-bangla mt-1">
                       মাফ করবেন, এটার দাম কত বলতে পারেন?
                     </p>
                   </ChatBubble>
@@ -151,10 +151,10 @@ export function DashboardClient() {
                 {/* Bubble 2: Shop Assistant (Speaker 2) */}
                 <div className="flex items-start gap-2.5 justify-end text-right">
                   <ChatBubble speaker="2">
-                    <p className="font-semibold text-topic-ink">
+                    <p className="text-card-title text-topic-ink">
                       &ldquo;Certainly! It is forty-five dollars with a 10% discount.&rdquo;
                     </p>
-                    <p className="text-meta text-topic-ink/80 font-bangla text-bangla mt-1 font-medium">
+                    <p className="text-meta text-topic-ink/80 font-bangla text-bangla mt-1">
                       অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।
                     </p>
                   </ChatBubble>
@@ -188,12 +188,12 @@ export function DashboardClient() {
 
               {/* Progress bar motif */}
               <div className="mt-4 pt-3 border-t border-border">
-                <div className="flex items-center justify-between text-meta font-semibold text-topic-ink mb-1.5">
+                <div className="flex items-center justify-between text-meta text-topic-ink mb-1.5">
                   <span>Active Track Progress</span>
                   <span>40% complete</span>
                 </div>
                 <div className="h-segment w-full bg-topic-tile rounded-pill overflow-hidden">
-                  <div className="h-full bg-topic-accent rounded-pill w-[40%]" />
+                  <div className="h-full bg-topic-accent rounded-pill w-progress-40" />
                 </div>
               </div>
             </div>
@@ -227,12 +227,12 @@ export function DashboardClient() {
 
               {/* Progress bar motif */}
               <div className="mt-4 pt-3 border-t border-border">
-                <div className="flex items-center justify-between text-meta font-semibold text-topic-ink mb-1.5">
+                <div className="flex items-center justify-between text-meta text-topic-ink mb-1.5">
                   <span>Professional Track</span>
                   <span>15% complete</span>
                 </div>
                 <div className="h-segment w-full bg-topic-tile rounded-pill overflow-hidden">
-                  <div className="h-full bg-topic-accent rounded-pill w-[15%]" />
+                  <div className="h-full bg-topic-accent rounded-pill w-progress-15" />
                 </div>
               </div>
             </div>
