@@ -114,9 +114,9 @@ export function GrammarSummaryRow({
 
   return (
     <div className={cn("pt-2 flex flex-wrap items-center gap-1.5", className)}>
-      <span className="text-xs font-semibold text-muted-foreground inline-flex items-center gap-1 mr-1">
+      <span className="text-chip text-muted-foreground inline-flex items-center gap-1 mr-1">
         <HugeiconsIcon icon={SparklesIcon} size={12} className="text-primary" />
-        <span className="font-bangla">গঠন:</span>
+        <span className="font-bangla text-bangla">গঠন:</span>
       </span>
 
       {summaryItems.map((item) => {
@@ -129,7 +129,7 @@ export function GrammarSummaryRow({
             type="button"
             onClick={() => handleChipClick(item.key)}
             className={cn(
-              "inline-flex items-center gap-1 px-2.5 py-1 rounded-pill text-xs font-semibold transition-all duration-150 cursor-pointer border",
+              "inline-flex items-center gap-1 px-2.5 py-1 rounded-pill text-chip transition-all duration-150 cursor-pointer border",
               isFocused
                 ? "bg-primary text-primary-foreground border-primary shadow-xs ring-2 ring-primary/30"
                 : "bg-muted/70 hover:bg-muted text-foreground border-border",
@@ -141,9 +141,9 @@ export function GrammarSummaryRow({
                 : `ফোকাস করতে ক্লিক করুন: ${item.labelBn}`
             }
           >
-            <span className="font-bangla">{item.labelBn}</span>
+            <span className="font-bangla text-bangla">{item.labelBn}</span>
             {hasRule && (
-              <span className="text-xs opacity-70 ml-0.5 font-normal">ℹ</span>
+              <span className="text-chip opacity-70 ml-0.5">ℹ</span>
             )}
           </button>
         );

@@ -83,13 +83,13 @@ export function GrammarLayerPicker({
     <Popover>
       <PopoverTrigger
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-2.5 py-1.5 rounded-control border border-border bg-card/60 hover:bg-card text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "inline-flex items-center justify-center gap-1.5 min-h-tap min-w-tap px-2.5 py-1.5 rounded-control border border-border bg-card/60 hover:bg-card text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
           className
         )}
         aria-label={isBn ? "ব্যাকরণ লেয়ার ও সেটিংস" : "Grammar Layers & Settings"}
       >
         <HugeiconsIcon icon={SlidersHorizontalIcon} size={16} />
-        <span className="hidden sm:inline text-xs font-semibold font-bangla">
+        <span className="hidden sm:inline text-chip font-bangla text-bangla">
           {isBn ? "লেয়ার সেটিংস" : "Layers"}
         </span>
       </PopoverTrigger>
@@ -100,7 +100,7 @@ export function GrammarLayerPicker({
         className="w-80 p-4 space-y-4 bg-popover text-popover-foreground rounded-panel border border-border shadow-md"
       >
         <PopoverHeader className="pb-2 border-b border-border flex items-center justify-between">
-          <PopoverTitle className="text-sm font-semibold font-bangla">
+          <PopoverTitle className="text-card-title font-bangla text-bangla">
             {isBn ? "ব্যাকরণ লেয়ার নির্বাচন" : "Grammar Layers"}
           </PopoverTitle>
           {focusedKey && (
@@ -108,7 +108,7 @@ export function GrammarLayerPicker({
               variant="ghost"
               size="sm"
               onClick={clearFocus}
-              className="text-xs h-7 px-2 text-primary gap-1"
+              className="text-chip h-control-xs px-2 text-primary gap-1"
             >
               <HugeiconsIcon icon={Cancel01Icon} size={12} />
               <span>{isBn ? "ফোকাস মুছুন" : "Clear Focus"}</span>
@@ -118,7 +118,7 @@ export function GrammarLayerPicker({
 
         {/* 1. Layers Checklist */}
         <div className="space-y-2">
-          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla">
+          <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
             {isBn ? "সক্রিয় লেয়ারসমূহ" : "Active Layers"}
           </span>
           <div className="space-y-1.5">
@@ -130,10 +130,10 @@ export function GrammarLayerPicker({
                   className="flex items-center justify-between p-2 rounded-control bg-muted/40 hover:bg-muted/70 transition-colors cursor-pointer select-none"
                 >
                   <div className="flex flex-col">
-                    <span className="text-xs font-semibold font-bangla text-foreground">
+                    <span className="text-label font-bangla text-bangla text-foreground">
                       {isBn ? layer.labelBn : layer.labelEn}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-chip text-muted-foreground">
                       {isBn ? layer.channelBn : layer.channelEn}
                     </span>
                   </div>
@@ -151,7 +151,7 @@ export function GrammarLayerPicker({
 
         {/* 2. Detail Level (Basic vs Advanced) */}
         <div className="space-y-2 pt-2 border-t border-border">
-          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block font-bangla">
+          <span className="text-chip text-muted-foreground uppercase tracking-wider block font-bangla text-bangla">
             {isBn ? "বিশ্লেষণের গভীরতা" : "Detail Level"}
           </span>
           <div className="grid grid-cols-2 gap-1.5 p-1 bg-muted/60 rounded-control">
@@ -163,7 +163,7 @@ export function GrammarLayerPicker({
                   type="button"
                   onClick={() => setDetailLevel(level)}
                   className={cn(
-                    "py-1.5 px-2 text-xs font-semibold rounded-xs transition-colors cursor-pointer capitalize font-bangla",
+                    "py-1.5 px-2 text-label rounded-xs transition-colors cursor-pointer capitalize font-bangla text-bangla",
                     isSelected
                       ? "bg-card text-foreground shadow-xs"
                       : "text-muted-foreground hover:text-foreground"
@@ -187,11 +187,11 @@ export function GrammarLayerPicker({
           <div className="flex flex-col">
             <label
               htmlFor="grammar-show-labels"
-              className="text-xs font-semibold font-bangla text-foreground cursor-pointer"
+              className="text-label font-bangla text-bangla text-foreground cursor-pointer"
             >
               {isBn ? "শব্দের উপরে লেবেল দেখান" : "Show text labels (Ruby)"}
             </label>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-chip text-muted-foreground">
               {isBn ? "রঙ ছাড়াও সহজে চেনার সুবিধার্থে" : "Non-color accessibility cue"}
             </span>
           </div>

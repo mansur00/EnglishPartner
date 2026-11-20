@@ -143,6 +143,7 @@ body {
   --color-bubble-primary: var(--bubble-primary-bg);
   --color-bubble-primary-ink: var(--bubble-primary-ink);
   --color-panel-brand: var(--panel-brand-bg);
+  --color-overlay: var(--overlay-bg);
 
   /* Status Colors Inline Mapping */
   --color-status-success-bg: var(--success-bg);
@@ -337,6 +338,9 @@ body {
 }
 @utility h-below-header {
   height: calc(100dvh - var(--header-h));
+}
+@utility h-control-xs {
+  height: 1.75rem;
 }
 @utility min-w-panel {
   min-width: 22.5rem;
@@ -577,6 +581,7 @@ body {
   --bubble-primary-bg: #F4E8FC;
   --bubble-primary-ink: #2A0F44;
   --panel-brand-bg: #F4E8FC;
+  --overlay-bg: rgba(0, 0, 0, 0.1);
 }
 
 @media (min-width: 640px) {
@@ -704,6 +709,7 @@ body {
   --bubble-primary-bg: rgba(42, 15, 68, 0.4);
   --bubble-primary-ink: #F4E8FC;
   --panel-brand-bg: rgba(42, 15, 68, 0.4);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
 }
 
 /* Topic-Based Scopes (Section 3.2 - Light) */

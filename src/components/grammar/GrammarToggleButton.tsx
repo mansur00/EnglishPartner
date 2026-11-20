@@ -29,9 +29,9 @@ export function GrammarToggleButton({
       aria-label={`${label}: ${isActive ? "Active" : "Inactive"}`}
       title={isActive ? "Hide grammar color-coding" : "Show grammar color-coding"}
       className={cn(
-        "relative inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 rounded-control text-xs font-semibold cursor-pointer transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-primary",
+        "relative inline-flex items-center justify-center gap-1.5 min-h-tap min-w-tap px-3 py-2 rounded-control text-label cursor-pointer transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-primary",
         isActive
-          ? "rainbow-border bg-card text-foreground shadow-xs font-semibold"
+          ? "rainbow-border bg-card text-foreground shadow-xs"
           : "bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground border border-border",
         className
       )}
@@ -44,7 +44,7 @@ export function GrammarToggleButton({
           isActive ? "text-primary" : "text-muted-foreground"
         )}
       />
-      <span className="hidden sm:inline font-bangla font-semibold text-xs">
+      <span className="hidden sm:inline font-bangla text-bangla text-label">
         {label}
       </span>
     </button>

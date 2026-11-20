@@ -23,7 +23,7 @@ export function GrammarModeSwitch({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 px-3 py-1.5 rounded-control border border-border bg-card/60 backdrop-blur-xs select-none min-h-[44px]",
+        "inline-flex items-center gap-2 px-3 py-1.5 rounded-control border border-border bg-card/60 backdrop-blur-xs select-none min-h-tap",
         className
       )}
     >
@@ -37,7 +37,7 @@ export function GrammarModeSwitch({
       />
       <label
         htmlFor="grammar-global-switch"
-        className="text-xs font-semibold font-bangla text-foreground cursor-pointer"
+        className="text-label font-bangla text-bangla text-foreground cursor-pointer"
       >
         {label}
       </label>
