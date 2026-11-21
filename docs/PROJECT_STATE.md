@@ -239,7 +239,7 @@ Entry format:
   - `npx tsc --noEmit`: Passed (0 TypeScript errors).
   - `npm test`: Passed (126/126 unit tests passing across all 18 test suites).
   - Root directory verified clean (only `docs/`, `Conversation/`, `english-partner/`, `AGENTS.md`, and assets remain).
-- Commit: pending
+- Commit: be2a521
 - Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 1D (Faceted Pagination & Admin Unauthorized Access Guards / KI-10) Completed & Verified
