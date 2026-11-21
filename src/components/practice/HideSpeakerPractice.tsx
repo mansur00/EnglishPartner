@@ -4,15 +4,19 @@ import React, { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
-  PlayCircle02Icon,
   SparklesIcon,
   UserGroupIcon,
   ArrowRight01Icon,
   RefreshIcon,
+  ViewIcon,
 } from "@hugeicons/core-free-icons";
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Tag } from "@/components/ui/tag";
+import { Pill } from "@/components/ui/pill";
+import { ChatBubble } from "@/components/shared/ChatBubble";
+import { EmojiTile } from "@/components/shared/EmojiTile";
+import { resolveSpeakerPerspective, isLearnerLine } from "@/lib/practice/hide-speaker";
 
 interface HideSpeakerPracticeProps {
   lines: LadderDialogueLine[];
@@ -20,7 +24,7 @@ interface HideSpeakerPracticeProps {
 }
 
 export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProps) {
-  // Default to second speaker (usually customer/learner)
+  // Default to second speaker (typically the customer/learner)
   const [learnerSpeakerId, setLearnerSpeakerId] = useState<string>(
     speakers[1]?.id || speakers[0]?.id || ""
   );
@@ -28,8 +32,9 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
   const [isRevealed, setIsRevealed] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
+  const { learnerSpeaker, partnerSpeaker } = resolveSpeakerPerspective(speakers, learnerSpeakerId);
   const currentLine = lines[currentLineIndex];
-  const isLearnerTurn = currentLine?.speakerId === learnerSpeakerId;
+  const isLearnerTurn = currentLine ? isLearnerLine(currentLine, learnerSpeakerId) : false;
 
   const playLineAudio = (text: string) => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -82,7 +87,11 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
         </div>
 
         <div className="pt-2 flex justify-center gap-2.5">
-          <Button onClick={handleRestart} variant="outline" className="text-bangla text-label rounded-control gap-1.5">
+          <Button
+            onClick={handleRestart}
+            variant="outline"
+            className="btn-restart-action"
+          >
             <HugeiconsIcon icon={RefreshIcon} size={14} />
             <span>পুনরায় অনুশীলন করুন</span>
           </Button>
@@ -92,130 +101,171 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
   }
 
   return (
-    <div className="card-practice space-y-5">
-      {/* Role Selector Header */}
+    <div className="card-practice space-y-6">
+      {/* Role Selection Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-border">
         <div className="flex items-center gap-2">
-          <HugeiconsIcon icon={UserGroupIcon} size={16} className="text-primary" />
+          <HugeiconsIcon icon={UserGroupIcon} size={18} className="text-primary" />
           <span className="text-label text-foreground text-bangla">
-            আপনার চরিত্র বেছে নিন:
+            আপনার চরিত্র বেছে নিন (Choose Your Role):
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-muted/40 p-1 rounded-control border border-border">
-          {speakers.map((spk) => (
-            <button
-              key={spk.id}
-              type="button"
-              onClick={() => {
-                setLearnerSpeakerId(spk.id);
-                setCurrentLineIndex(0);
-                setIsRevealed(false);
-                setIsFinished(false);
-              }}
-              className={`px-3 py-1 rounded-control text-chip transition-all cursor-pointer ${
-                learnerSpeakerId === spk.id
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {spk.name} ({spk.nameBn})
-            </button>
-          ))}
+        <div className="flex items-center gap-2 flex-wrap">
+          {speakers.map((spk) => {
+            const isSelected = learnerSpeakerId === spk.id;
+            return (
+              <Tag
+                key={spk.id}
+                selected={isSelected}
+                variant={isSelected ? "brand" : "outline"}
+                size="default"
+                onClick={() => {
+                  setLearnerSpeakerId(spk.id);
+                  setCurrentLineIndex(0);
+                  setIsRevealed(false);
+                  setIsFinished(false);
+                }}
+                className="cursor-pointer text-chip"
+              >
+                {spk.name} ({spk.nameBn})
+              </Tag>
+            );
+          })}
         </div>
       </div>
 
-      {/* Turn Progress */}
+      {/* Progress & Turn Indicator */}
       <div className="flex items-center justify-between text-chip text-muted-foreground">
-        <span className="font-mono text-primary">
-          বাক্য {currentLineIndex + 1} / {lines.length}
-        </span>
-        <Badge variant={isLearnerTurn ? "accent" : "neutral"} size="sm">
-          {isLearnerTurn ? "আপনার পালা (Your Turn)" : "পার্টনারের পালা (Partner Speaking)"}
-        </Badge>
+        <Pill variant="default" size="sm" className="font-mono">
+          সংলাপ {currentLineIndex + 1} / {lines.length}
+        </Pill>
+        <Pill variant={isLearnerTurn ? "warning" : "neutral"} size="sm" dot>
+          {isLearnerTurn
+            ? `আপনার পালা (${learnerSpeaker.name})`
+            : `${partnerSpeaker.name} (${partnerSpeaker.role})`}
+        </Pill>
       </div>
 
-      {/* Turn Content Box */}
-      {isLearnerTurn ? (
-        /* Learner Turn: Hidden until revealed */
-        <div className="p-6 rounded-panel bg-warning-bg border border-warning/30 text-center space-y-4">
-          <div className="space-y-1">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip bg-warning-bg text-warning border border-warning/40">
-              <HugeiconsIcon icon={SparklesIcon} size={14} />
-              <span>আপনার বলার পালা! Speak your line in English</span>
-            </span>
-            <p className="text-meta text-bangla text-foreground pt-2">
-              বাংলা ভাবার্থ: &ldquo;{currentLine.translationBn}&rdquo;
-            </p>
-          </div>
-
-          {/* Reveal Button */}
-          {!isRevealed ? (
-            <div className="pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  setIsRevealed(true);
-                  playLineAudio(currentLine.englishText);
-                }}
-                className="text-bangla text-label rounded-control gap-1.5"
-              >
-                <HugeiconsIcon icon={PlayCircle02Icon} size={15} />
-                <span>ইংরেজি উত্তর দেখুন ও শুনুন (Reveal & Listen)</span>
-              </Button>
-            </div>
-          ) : (
-            /* Revealed Answer & Audio */
-            <div className="space-y-3 pt-2 animate-in fade-in">
-              <div className="p-3.5 rounded-control bg-card border border-border shadow-2xs">
-                <p className="text-card-title text-foreground font-sans italic">
-                  &ldquo;{currentLine.englishText}&rdquo;
-                </p>
+      {/* Conversational Stream using ChatBubble & EmojiTile */}
+      <div className="space-y-4 py-2">
+        {!isLearnerTurn ? (
+          /* Partner's Turn: Left-aligned Bubble */
+          <div className="flex items-start gap-3 max-w-reading">
+            <EmojiTile emoji={partnerSpeaker.avatarChar || "👤"} className="size-control" />
+            <div className="space-y-1.5 flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-label text-foreground">
+                  {currentLine.speakerName}
+                </span>
+                <span className="text-chip text-muted-foreground">
+                  ({currentLine.speakerRole})
+                </span>
               </div>
 
-              <button
-                type="button"
-                onClick={() => playLineAudio(currentLine.englishText)}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-control text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
-              >
-                <HugeiconsIcon icon={VolumeHighIcon} size={14} />
-                <span className="text-bangla">উচ্চারণ আবার শুনুন</span>
-              </button>
+              <ChatBubble speaker="1" className="space-y-2">
+                <p className="text-lead text-foreground font-sans leading-relaxed">
+                  &ldquo;{currentLine.englishText}&rdquo;
+                </p>
+                <p className="text-meta text-bangla text-muted-foreground border-t border-border/60 pt-1.5">
+                  {currentLine.translationBn}
+                </p>
+              </ChatBubble>
+
+              <div className="pt-0.5">
+                <button
+                  type="button"
+                  onClick={() => playLineAudio(currentLine.englishText)}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
+                >
+                  <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+                  <span className="text-bangla">অডিও শুনুন</span>
+                </button>
+              </div>
             </div>
-          )}
-        </div>
-      ) : (
-        /* Partner Turn: Visible with Audio */
-        <div className="p-6 rounded-panel bg-muted/40 border border-border space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-label text-foreground">
-              {currentLine.speakerName} ({currentLine.speakerRole}):
-            </span>
-            <button
-              type="button"
-              onClick={() => playLineAudio(currentLine.englishText)}
-              className="p-1.5 rounded-control text-primary hover:bg-card transition-colors cursor-pointer"
-              title="শুনুন"
-            >
-              <HugeiconsIcon icon={VolumeHighIcon} size={16} />
-            </button>
           </div>
+        ) : (
+          /* Learner's Turn: Right-aligned Bubble with Reveal/Playback */
+          <div className="flex items-start justify-end gap-3 max-w-reading ml-auto">
+            <div className="space-y-2 flex-1 min-w-0 text-right">
+              <div className="flex items-center justify-end gap-2">
+                <span className="text-chip text-muted-foreground">
+                  ({learnerSpeaker.role})
+                </span>
+                <span className="text-label text-foreground">
+                  {learnerSpeaker.name} (আপনি)
+                </span>
+              </div>
 
-          <p className="text-lead text-foreground font-sans leading-relaxed">
-            &ldquo;{currentLine.englishText}&rdquo;
-          </p>
+              <ChatBubble speaker="2" className="text-left space-y-3">
+                <div className="flex items-center justify-between gap-2 border-b border-border/50 pb-1.5">
+                  <span className="text-chip text-primary text-bangla flex items-center gap-1">
+                    <HugeiconsIcon icon={SparklesIcon} size={14} />
+                    <span>আপনার বলার পালা!</span>
+                  </span>
+                  <span className="text-chip text-muted-foreground">
+                    Speak your line in English
+                  </span>
+                </div>
 
-          <p className="text-meta text-bangla text-muted-foreground pt-2 border-t border-border/60">
-            {currentLine.translationBn}
-          </p>
-        </div>
-      )}
+                <div className="space-y-1">
+                  <span className="text-chip text-muted-foreground block">
+                    বাংলা ভাবার্থ:
+                  </span>
+                  <p className="text-meta text-bangla text-foreground">
+                    &ldquo;{currentLine.translationBn}&rdquo;
+                  </p>
+                </div>
 
-      {/* Next Turn Button */}
+                {/* Target English Text (Hidden or Revealed) */}
+                {!isRevealed ? (
+                  <div className="pt-2 flex justify-center">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setIsRevealed(true);
+                        playLineAudio(currentLine.englishText);
+                      }}
+                      className="text-bangla text-label rounded-control gap-1.5"
+                    >
+                      <HugeiconsIcon icon={ViewIcon} size={15} />
+                      <span>ইংরেজি উত্তর দেখুন ও শুনুন (Reveal & Listen)</span>
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-2 pt-2 border-t border-border/60 animate-in fade-in">
+                    <div className="p-3 rounded-control bg-card border border-border shadow-2xs">
+                      <p className="text-card-title text-foreground font-sans italic">
+                        &ldquo;{currentLine.englishText}&rdquo;
+                      </p>
+                    </div>
+
+                    <div className="flex justify-end pt-1">
+                      <button
+                        type="button"
+                        onClick={() => playLineAudio(currentLine.englishText)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
+                      >
+                        <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+                        <span className="text-bangla">উচ্চারণ শুনুন</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </ChatBubble>
+            </div>
+            <EmojiTile emoji={learnerSpeaker.avatarChar || "🎯"} className="size-control" />
+          </div>
+        )}
+      </div>
+
+      {/* Next Turn Navigation Button */}
       <div className="pt-2 flex justify-end">
         <Button onClick={handleNextTurn} className="btn-nav-action">
-          <span>{currentLineIndex < lines.length - 1 ? "পরবর্তী সংলাপ (Next)" : "অনুশীলন সমাপ্ত"}</span>
+          <span>
+            {currentLineIndex < lines.length - 1 ? "পরবর্তী সংলাপ (Next)" : "অনুশীলন সমাপ্ত"}
+          </span>
           <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
         </Button>
       </div>

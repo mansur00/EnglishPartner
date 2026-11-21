@@ -7,9 +7,14 @@ import {
   Cancel01Icon,
   SparklesIcon,
   ArrowRight01Icon,
+  VolumeHighIcon,
+  RefreshIcon,
 } from "@hugeicons/core-free-icons";
 import { CompleteLineExercise } from "@/content/seed/exercises";
 import { Button } from "@/components/ui/button";
+import { Tag } from "@/components/ui/tag";
+import { Pill } from "@/components/ui/pill";
+import { validateBlankAnswer } from "@/lib/practice/complete-line";
 
 interface CompleteLineCardProps {
   exercises: CompleteLineExercise[];
@@ -25,14 +30,28 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
   const currentItem = exercises[currentIndex];
   const blank = currentItem?.blanks[0];
 
+  const playSentenceAudio = (text: string) => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      utterance.rate = 0.85;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   const handleSelectWord = (word: string) => {
     if (hasChecked) return;
     setSelectedWord(word);
   };
 
   const handleCheck = () => {
-    if (!selectedWord) return;
+    if (!selectedWord || !blank) return;
     setHasChecked(true);
+    const { isCorrect } = validateBlankAnswer(selectedWord, [blank.correctAnswer]);
+    if (isCorrect) {
+      playSentenceAudio(currentItem.fullSentence);
+    }
   };
 
   const handleNext = () => {
@@ -72,37 +91,42 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
         </div>
 
         <div className="pt-2">
-          <Button onClick={handleRestart} variant="outline" className="text-bangla text-label rounded-control">
-            পুনরায় অনুশীলন করুন
+          <Button
+            onClick={handleRestart}
+            variant="outline"
+            className="btn-restart-action"
+          >
+            <HugeiconsIcon icon={RefreshIcon} size={14} />
+            <span>পুনরায় অনুশীলন করুন</span>
           </Button>
         </div>
       </div>
     );
   }
 
-  const isCorrect = selectedWord === blank.correctAnswer;
+  const { isCorrect } = validateBlankAnswer(selectedWord || "", [blank.correctAnswer]);
 
   return (
     <div className="card-practice space-y-5">
       {/* Header Counter */}
       <div className="flex items-center justify-between pb-3 border-b border-border text-chip">
-        <span className="font-mono text-primary bg-primary/10 px-2.5 py-1 rounded-control border border-primary/20">
+        <Pill variant="default" size="sm" className="font-mono">
           বাক্য {currentIndex + 1} / {exercises.length}
-        </span>
+        </Pill>
         <span className="text-muted-foreground text-bangla">
           সঠিক শব্দটি নির্বাচন করে শূন্যস্থান পূরণ করুন
         </span>
       </div>
 
       {/* Masked Sentence Display */}
-      <div className="p-5 rounded-panel bg-muted/40 border border-border space-y-2 text-center">
+      <div className="p-5 rounded-panel bg-muted/40 border border-border space-y-3 text-center">
         <p className="text-card-title text-foreground font-sans leading-relaxed">
           {currentItem.maskedSentence.split("___").map((part, idx, arr) => (
             <React.Fragment key={idx}>
               {part}
               {idx < arr.length - 1 && (
                 <span
-                  className={`inline-block min-w-16 px-2.5 py-0.5 mx-1 rounded-control border font-mono text-label transition-all ${
+                  className={`inline-block min-w-16 px-3 py-1 mx-1 rounded-control border font-mono text-label transition-all ${
                     selectedWord
                       ? hasChecked
                         ? isCorrect
@@ -119,42 +143,53 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
           ))}
         </p>
 
-        <p className="text-meta text-bangla text-muted-foreground pt-1">
+        <p className="text-meta-bn">
           {currentItem.translationBn}
         </p>
+
+        {hasChecked && (
+          <div className="pt-1 flex justify-center">
+            <button
+              type="button"
+              onClick={() => playSentenceAudio(currentItem.fullSentence)}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
+            >
+              <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+              <span className="text-bangla">সম্পূর্ণ বাক্যটি শুনুন (Listen)</span>
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Word Options Chips */}
-      <div className="space-y-2">
+      {/* Word Options Chips via Design System Tag */}
+      <div className="space-y-2.5">
         <span className="text-chip text-muted-foreground uppercase tracking-wider block">
-          শব্দ বেছে নিন:
+          শব্দ বেছে নিন (Choose Word):
         </span>
         <div className="flex flex-wrap gap-2.5">
           {blank.options.map((word) => {
             const isSelected = selectedWord === word;
-            let chipStyle =
-              "bg-card border-border text-foreground hover:border-primary/40 hover:bg-primary/5";
+            let tagVariant: "brand" | "outline" | "success" | "destructive" = "outline";
 
             if (isSelected) {
               if (hasChecked) {
-                chipStyle = isCorrect
-                  ? "bg-success-bg text-success border-success shadow-xs"
-                  : "bg-destructive/10 text-destructive border-destructive shadow-xs";
+                tagVariant = isCorrect ? "success" : "destructive";
               } else {
-                chipStyle = "bg-primary text-primary-foreground border-primary shadow-xs";
+                tagVariant = "brand";
               }
             }
 
             return (
-              <button
+              <Tag
                 key={word}
-                type="button"
-                disabled={hasChecked}
+                selected={isSelected}
+                variant={tagVariant}
+                size="default"
                 onClick={() => handleSelectWord(word)}
-                className={`px-4 py-2 rounded-control border text-label transition-all cursor-pointer ${chipStyle}`}
+                className="cursor-pointer text-label px-4 py-2 transition-all"
               >
                 {word}
-              </button>
+              </Tag>
             );
           })}
         </div>

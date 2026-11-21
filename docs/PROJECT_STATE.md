@@ -192,6 +192,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 22. **[DONE] (commit be2df9b) Milestone 2C — Read Aloud Practice Mode:** Read Aloud and pronunciation practice per Spec §4.6 and Audio Voice Guide §9-10 in src/lib/practice/read-aloud.ts, interactive ReadAloudCard with MediaRecorder recording, side-by-side playback, optional speech recognition transcript matching, self-check rating buttons, and Bengali guidance in src/components/practice/ReadAloudCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 80 unit tests passing.
 23. **[DONE] (commit 6db085d) Expandable Design System Foundation:** Code-first shadcn/ui expandable system for Button, Input, Field, InputGroup, Badge, Pill, and Tag per user specification. Supports all variants (default, secondary, outline, ghost, destructive, link, cta, success, warning), all sizes (xs, sm, default/md, lg, icon, icon-xs, icon-sm, icon-lg), states (loading with spinner, pill, error), and composition patterns. 84 unit tests passing.
 24. **[DONE] (commit bd51c31) Milestone 2E Backend & UI Component Integration (KI-08):** Added `review_events`, `daily_challenges`, and `content_audit_logs` tables with migration `0002_elite_wrecker.sql`. Implemented SRS review event logging (`recordReviewEvent`, `/api/v1/srs/review-events`, `logReviewEventClient`), Daily Challenge selection per Spec §7 (`getOrCreateDailyChallenge`, `/api/v1/challenges/daily`), and migrated Vocabulary and Explore search & filters to Expandable Design System `InputGroup`, `Tag`, and `Pill`. 98 unit tests passing.
+25. **[DONE] Milestone 2C — Roleplay (Hide Speaker) & Complete Line Practice Modes:** Authored `src/lib/practice/complete-line.ts` and `src/lib/practice/hide-speaker.ts`, upgraded `HideSpeakerPractice.tsx` to conversational roleplay stream using `ChatBubble` (speaker="1" for partner, speaker="2" for learner), `EmojiTile`, `Tag`, role selection, and audio reveal per Spec §4.4, upgraded `CompleteLineCard.tsx` with `Tag` word chips, audio pronunciation, and `btn-restart-action` per Spec §4.5. 111 unit tests passing.
 
 ---
 
@@ -220,6 +221,26 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Milestone 2C (Roleplay / Hide Speaker & Complete Line Modes) Completed & Verified
+- Requested by owner: "next" -> execute Milestone 2C: upgrade HideSpeakerPractice to real conversational roleplay using ChatBubble and EmojiTile per Spec §4.4, upgrade CompleteLineCard with Expandable Design System per Spec §4.5, and author full unit test suites.
+- Changed:
+  - `src/lib/practice/complete-line.ts`: authored answer normalization, blank answer validation, and masked sentence generator.
+  - `src/lib/practice/hide-speaker.ts`: authored speaker perspective resolution (`learnerSpeaker`, `partnerSpeaker`), line ownership validator (`isLearnerLine`), and learner turn evaluation.
+  - `src/components/practice/HideSpeakerPractice.tsx`: redesigned into interactive conversational stream using `ChatBubble` (speaker="1" for partner, speaker="2" for learner), `EmojiTile` avatars, `Tag` role selectors, turn progress pill, Web Speech pronunciation, and reveal controls per Spec §4.4.
+  - `src/components/practice/CompleteLineCard.tsx`: upgraded with `Tag` word selection chips, full sentence Web Speech pronunciation, masked slot rendering, and pedagogical Bengali explanations per Spec §4.5.
+  - `src/app/globals.css`: added `@utility btn-restart-action` (frozen `.rainbow-border` preserved with zero byte diff).
+  - `tests/complete-line.test.mjs`: authored comprehensive unit test suite covering normalization, blank validation, masked text, and seed data integrity (7/7 pass).
+  - `tests/hide-speaker.test.mjs`: authored comprehensive unit test suite covering perspective resolution, turn assignment, and turn evaluation (6/6 pass).
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a through i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (111/111 tests passing across all 14 test suites).
+  - `npm run build`: Passed (all 85/85 static and dynamic routes compiled successfully).
+- Commit: pending
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 2E Backend & Design System Integration (KI-08) Completed & Verified
 - Requested by owner: "next" -> execute Milestone 2E Backend (Review Events & Daily Challenge Database Logging, resolving KI-08) and integrate Expandable Design System components (InputGroup, Tag, Pill) into existing pages.

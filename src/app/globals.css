@@ -425,6 +425,12 @@ body {
   line-height: 1.75;
   color: var(--muted-foreground);
 }
+@utility btn-restart-action {
+  font-family: var(--font-bangla);
+  font-size: var(--text-label);
+  border-radius: var(--radius-control);
+  gap: 0.375rem;
+}
 @utility practice-header-row {
   display: flex;
   align-items: center;
