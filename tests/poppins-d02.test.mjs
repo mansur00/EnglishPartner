@@ -48,8 +48,13 @@ test('D-02: historical documents containing Poppins have dated non-current note'
     }
   }
 
-  const designDoc = path.resolve('../EnglishPartner_Design_System_v2.md');
-  if (fs.existsSync(designDoc)) {
+  const candidatePaths = [
+    path.resolve('../docs/EnglishPartner_Design_System_v2.md'),
+    path.resolve('docs/specs/EnglishPartner_Design_System_v2.md'),
+    path.resolve('../EnglishPartner_Design_System_v2.md'),
+  ];
+  const designDoc = candidatePaths.find((p) => fs.existsSync(p));
+  if (designDoc) {
     const content = fs.readFileSync(designDoc, 'utf8');
     if (/poppins/i.test(content)) {
       assert.match(

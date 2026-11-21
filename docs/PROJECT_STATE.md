@@ -224,6 +224,24 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-22, Workspace Markdown Files Reorganization
+- Requested by owner: "file gulo akhon age guciye neo md file gulo doc folder a jniye asho aivabe filte gucao age" -> clean up workspace root by moving all loose specification markdown files into `docs/` and synchronizing with `english-partner/docs/specs/`.
+- Changed:
+  - Moved 22 specification markdown files (`ECP_*.md`, `English*.md`, `MOTION.md`) from workspace root into `docs/`.
+  - Copied `AGENTS.md` to `docs/AGENTS.md` (retaining root `AGENTS.md` for agent instructions and user rule continuity).
+  - Kept authoritative `PROJECT_STATE.md` at `docs/PROJECT_STATE.md` and synced with `english-partner/docs/PROJECT_STATE.md`.
+  - Synchronized `docs/specs/` inside `english-partner` with all specification documents (`ECP_Gemini_TTS_Implementation.md`, `EnglishPartner_Agent_Spec.md`, `EnglishPartner_Design_System_v2.md`).
+  - `tests/poppins-d02.test.mjs`: updated path resolution candidate list to check `../docs/` and `docs/specs/`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (126/126 unit tests passing across all 18 test suites).
+  - Root directory verified clean (only `docs/`, `Conversation/`, `english-partner/`, `AGENTS.md`, and assets remain).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-21, Milestone 1D (Faceted Pagination & Admin Unauthorized Access Guards / KI-10) Completed & Verified
 - Requested by owner: "next" -> execute Milestone 1D (KI-10): faceted pagination engine and UI component, admin unauthorized access guards & redirect warnings, integrate into Explore and Admin consoles, author unit tests, and update AUDIT_REPORT.md.
 - Changed:
