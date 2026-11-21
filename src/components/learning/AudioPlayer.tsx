@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { t } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
+import { Pill } from "@/components/ui/pill";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, PauseIcon, ReloadIcon } from "@hugeicons/core-free-icons";
 import type { DialogueLineItem } from "@/content/seed/dialogues";
+import {
+  buildAudioTimingManifest,
+  findLineIndexAtTimestamp,
+} from "@/lib/audio/timing-manifest";
 
 interface AudioPlayerProps {
   lines: DialogueLineItem[];
@@ -24,27 +29,49 @@ export function AudioPlayer({
 }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
-  const [currentLineIdx, setCurrentLineIdx] = useState<number>(0);
-  const [progressPercent, setProgressPercent] = useState<number>(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [lastSelectedIdx, setLastSelectedIdx] = useState<number>(0);
 
   const isPlayingRef = useRef(false);
   const playLineRef = useRef<(index: number) => void>(() => {});
+  const progressBarRef = useRef<HTMLDivElement>(null);
+
+  // Compute timing manifest per Audio Guide §5.2
+  const manifest = useMemo(
+    () =>
+      buildAudioTimingManifest(
+        lines.map((l) => ({ id: l.id, speakerName: l.speakerId, englishText: l.englishText })),
+        { accent, playbackRate: playbackSpeed }
+      ),
+    [lines, accent, playbackSpeed]
+  );
+
+  const currentLineIdx = activeLineIndex ?? lastSelectedIdx;
+
+  const progressPercent = useMemo(() => {
+    if (isCompleted) return 100;
+    if (activeLineIndex === null) return 0;
+    const lineTiming = manifest.lines[activeLineIndex];
+    if (lineTiming && manifest.durationMs > 0) {
+      return Math.min(100, Math.max(0, Math.round((lineTiming.startMs / manifest.durationMs) * 100)));
+    }
+    return Math.min(100, Math.max(0, Math.round(((activeLineIndex + 1) / lines.length) * 100)));
+  }, [isCompleted, activeLineIndex, manifest, lines.length]);
 
   const playLine = useCallback(
     (index: number) => {
       if (index >= lines.length) {
         setIsPlaying(false);
         isPlayingRef.current = false;
-        setCurrentLineIdx(0);
+        setIsCompleted(true);
+        setLastSelectedIdx(0);
         onActiveLineChange(null);
-        setProgressPercent(100);
         return;
       }
 
-      setCurrentLineIdx(index);
+      setIsCompleted(false);
+      setLastSelectedIdx(index);
       onActiveLineChange(index);
-      const progress = ((index + 1) / lines.length) * 100;
-      setProgressPercent(progress);
 
       const targetLine = lines[index];
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -78,6 +105,54 @@ export function AudioPlayer({
     playLineRef.current = playLine;
   }, [playLine]);
 
+  const seekToLine = (index: number) => {
+    if (index < 0 || index >= lines.length) return;
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsCompleted(false);
+    setLastSelectedIdx(index);
+    onActiveLineChange(index);
+    if (isPlaying) {
+      playLine(index);
+    }
+  };
+
+  const handleSeekFromEvent = (clientX: number) => {
+    if (!progressBarRef.current || manifest.durationMs <= 0) return;
+    const rect = progressBarRef.current.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    const targetMs = ratio * manifest.durationMs;
+    const targetLineIdx = findLineIndexAtTimestamp(manifest, targetMs);
+
+    if (targetLineIdx !== null) {
+      seekToLine(targetLineIdx);
+    }
+  };
+
+  const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    handleSeekFromEvent(e.clientX);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIdx = Math.min(lines.length - 1, currentLineIdx + 1);
+      seekToLine(nextIdx);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIdx = Math.max(0, currentLineIdx - 1);
+      seekToLine(prevIdx);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      seekToLine(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      seekToLine(lines.length - 1);
+    }
+  };
+
   const handleTogglePlay = () => {
     if (isPlaying) {
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -99,7 +174,8 @@ export function AudioPlayer({
     }
     setIsPlaying(true);
     isPlayingRef.current = true;
-    setProgressPercent(0);
+    setIsCompleted(false);
+    setLastSelectedIdx(0);
     playLine(0);
   };
 
@@ -120,10 +196,21 @@ export function AudioPlayer({
 
   return (
     <div className="sticky bottom-4 z-20 mx-auto max-w-reading w-full bg-card/95 backdrop-blur-md border border-border rounded-card p-4 shadow-xl space-y-3">
-      {/* Progress Bar */}
-      <div className="w-full bg-muted h-1.5 rounded-pill overflow-hidden">
+      {/* Interactive Seek Bar (KI-13) */}
+      <div
+        ref={progressBarRef}
+        role="slider"
+        tabIndex={0}
+        aria-label="Audio playback scrub bar"
+        aria-valuenow={Math.round(progressPercent)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        onClick={handleProgressBarClick}
+        onKeyDown={handleKeyDown}
+        className="relative w-full bg-muted h-2 rounded-pill overflow-hidden cursor-pointer group hover:h-2.5 transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+      >
         <div
-          className="bg-primary h-full transition-all duration-300 rounded-pill"
+          className="bg-primary h-full transition-all duration-150 rounded-pill"
           style={{ width: `${progressPercent}%` }}
         />
       </div>
@@ -156,11 +243,16 @@ export function AudioPlayer({
         <div className="text-chip text-muted-foreground">
           {isPlaying && activeLineIndex !== null ? (
             <span className="flex items-center gap-1.5 text-primary">
-              <span className="w-2 h-2 rounded-pill bg-primary animate-pulse" />
+              <span className="size-2 rounded-pill bg-primary animate-pulse" />
               Playing Line {activeLineIndex + 1} of {lines.length}
             </span>
           ) : (
-            <span>{t("audio.fullConversation")}</span>
+            <div className="flex items-center gap-1.5">
+              <span>{t("audio.fullConversation")}</span>
+              <Pill variant="neutral" size="sm" className="font-mono">
+                {lines.length} lines
+              </Pill>
+            </div>
           )}
         </div>
 

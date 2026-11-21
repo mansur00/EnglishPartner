@@ -39,11 +39,11 @@
 | Status | Count | Notes |
 |:---|:---:|:---|
 | **PASS** | 6 | Verified with command execution, exit code 0, and saved evidence files |
-| **Fixed** | 12 | Remediated in code/content with verified git commits |
+| **Fixed** | 14 | Remediated in code/content with verified git commits |
 | **Blocked** | 1 | KI-09: Needs owner throwaway database URL (generate check PASS) |
-| **Not built yet** | 4 | Scheduled for future milestones per approved specs & phase plan (KI-08, KI-10, KI-12-CI, KI-13) |
+| **Not built yet** | 2 | Scheduled for future milestones per approved specs & phase plan (KI-10, KI-12-CI) |
 | **Needs owner** | 2 | Architectural questions awaiting owner decision (AUD-ICON, AUD-MIGRATE) |
-| **Total Findings Evaluated** | **25** | Exact sum of all table rows below (6 + 12 + 1 + 4 + 2 = 25) |
+| **Total Findings Evaluated** | **25** | Exact sum of all table rows below (6 + 14 + 1 + 2 + 2 = 25) |
 
 ---
 
@@ -58,13 +58,13 @@
 | **KI-05** | UI strings extracted to `messages/` (98/98 keys, 100% key parity); 73 remaining technical/admin strings justified | **Fixed** | `8136072` | `docs/evidence/hardcoded-strings-2026-11-19.txt` & `docs/evidence/hardcoded-strings-justification.md` |
 | **KI-06** | Language coverage percentage dynamically computed from scenario translation data | **Fixed** | `203b822` | `tests/language-coverage.test.mjs` (exit code 0) |
 | **KI-07** | Seed translations marked draft; learner view protected with unreviewed notice; schema constraints verified | **Fixed** | `cb05b69` | `tests/translations-review-status.test.mjs` & `tests/schema-invariants.test.mjs` (exit code 0) |
-| **KI-08** | Advanced SRS logging tables (`review_events`, `daily_challenges`, `content_audit_logs`) scheduled for Phase 2/3 | **Not built yet** | — | Scheduled for Phase 2/3 (Milestone 2) per Exercises spec §3.4; core schema has 23 tables |
+| **KI-08** | Advanced SRS logging tables (`review_events`, `daily_challenges`, `content_audit_logs`) and REST endpoints | **Fixed** | `bd51c31` | `tests/srs-review-events.test.mjs` (exit code 0; 12/12 passed); migration `0002_elite_wrecker.sql` (26 tables) |
 | **KI-09** | Database migrations execution on clean database instance; generate check: PASS; live run needs throwaway URL | **Blocked** | `7c43c7a` | `docs/evidence/drizzle-generate-2026-11-19.txt` (generate PASS; needs owner throwaway DB URL) |
 | **KI-10** | Faceted pagination and admin unauthorized redirects | **Not built yet** | — | Scheduled for Milestone 1D per Phase Plan §1D |
 | **KI-11** | Landing page converted to static Server Component (`○ /`) for optimal SEO & TTFB | **Fixed** | `f83a1b2` | `npm run build` (renders `○ /` as static Server Component) |
 | **KI-12** | Keyboard focus navigation, focus-visible rings, and Escape popover dismissal in Conversation Reader | **PASS** | `1759d60` | `docs/evidence/keyboard-focus-2026-11-19.txt` (exit code 0; 3/3 tests passed) |
 | **KI-12-CI** | Automated browser test runner in CI workflow (currently using Puppeteer locally) | **Not built yet** | — | Needs owner approval to add `@playwright/test` to devDependencies |
-| **KI-13** | Word-level interactive seek from audio timing manifest in frontend reader | **Not built yet** | — | Scheduled for Milestone 1C+ per Audio spec §5.2; `timing_manifest` JSONB column exists |
+| **KI-13** | Word-level / line-level interactive seek from audio timing manifest in frontend reader | **Fixed** | `ed087be` | `tests/audio-timing-manifest.test.mjs` (exit code 0; 5/5 passed); interactive scrub bar in `AudioPlayer.tsx` |
 | **KI-14** | Motion easing tokens (`enter`, `exit`, `emphasized`) added to design tokens | **Fixed** | `f58aa20` | `src/styles/design-tokens.css:106` |
 | **KI-15** | WCAG 4.5:1+ contrast verified across light and dark design tokens | **PASS** | `cb05b69` | `scripts/check-tokens.mjs` (exit code 0; 0 contrast violations) |
 | **KI-16** | Practice sessions schema strictly matches Exercises spec §3.4 with 9 approved modes | **Fixed** | `cb05b69` | `tests/practice-modes.test.mjs` & `tests/schema-invariants.test.mjs` (exit code 0) |
