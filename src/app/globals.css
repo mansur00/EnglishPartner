@@ -419,6 +419,12 @@ body {
   font-size: 0.75rem;
   color: var(--muted-foreground);
 }
+@utility text-meta-bn {
+  font-family: var(--font-bangla);
+  font-size: var(--text-meta);
+  line-height: 1.75;
+  color: var(--muted-foreground);
+}
 @utility practice-header-row {
   display: flex;
   align-items: center;

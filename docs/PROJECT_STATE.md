@@ -189,6 +189,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 19. **[DONE] (commit ba66aa3) Milestone 2B — Sentence Builder:** Interactive word-chunk reordering practice mode with pool and assembly slot, tap to place, tap to remove, hint with next accepted chunk, undo and reset controls, out-of-place chunk detection, Web Speech audio playback, zero hardcoded tokens, 57 unit tests passing.
 20. **[DONE] (commit b461a0d) Milestone 2E — Spaced Repetition (SRS) Review System:** Pure SM-2 algorithm in src/lib/srs/sm2.ts and src/lib/srs/types.ts, interactive flashcard queue with audio pronunciation, 4 rating buttons (again, hard, good, easy), interval previews, flip card animation, empty state, and vocabulary page integration with due badge & view switcher, 66 unit tests passing.
 21. **[DONE] (commit 795e77c) Milestone 2C — Dialogue Ordering Practice Mode:** Dialogue turn sequencing and matching per Spec §4.3 in src/lib/practice/dialogue-order.ts, interactive DialogueOrderCard with swap/up/down controls, audio, hint, reset, undo, and feedback banners in src/components/practice/DialogueOrderCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 74 unit tests passing.
+22. **[DONE] (commit 3aa9b6b) Milestone 2C — Read Aloud Practice Mode:** Read Aloud and pronunciation practice per Spec §4.6 and Audio Voice Guide §9-10 in src/lib/practice/read-aloud.ts, interactive ReadAloudCard with MediaRecorder recording, side-by-side playback, optional speech recognition transcript matching, self-check rating buttons, and Bengali guidance in src/components/practice/ReadAloudCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 80 unit tests passing.
 
 ---
 
@@ -217,6 +218,25 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Milestone 2C (Read Aloud Pronunciation Practice Mode) Completed & Verified
+- Requested by owner: Milestone 2C: Read Aloud Mode — interactive pronunciation practice with model audio and self-check / microphone playback per Spec §4.6.
+- Changed:
+  - `src/lib/practice/read-aloud.ts`: authored spoken text normalization, contraction expansion (`i'm` -> `i am`, `it's` -> `it is`, `can't` -> `cannot`), constructive word comparison, and self-check rating metadata conforming to `ECP_Exercises_SRS_Spec.md` §4.6 and `ECP_Audio_Voice_Guide.md` §10.2.
+  - `src/components/practice/ReadAloudCard.tsx`: built full-featured interactive Read Aloud component with target sentence display, speaker chips, phonetic hints, Bengali translation, Web Speech model audio playback, in-memory `MediaRecorder` voice recording, live pulsing recording timer, side-by-side learner vs model audio playback, optional browser speech recognition transcript matching, 3-level self-check ratings, and delete recording privacy control.
+  - `src/components/practice/PracticeWorkspace.tsx`: added "উচ্চারণ (Read Aloud)" tab with automatic fallback generator covering all 20 conversation ladder steps.
+  - `src/content/seed/exercises.ts`: defined `ReadAloudExercise` interface and added curated exercises for Step 01, Step 02, and Step 03.
+  - `src/app/globals.css`: added `@utility text-meta-bn` (frozen `.rainbow-border` preserved with zero byte diff).
+  - `tests/read-aloud.test.mjs`: authored comprehensive unit test suite covering contraction normalization, 100% spoken match, contraction in spoken speech, constructive missing word flagging, empty input handling, and self-check rating metadata integrity.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token audit violations across all rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (80/80 tests passing across all test suites).
+  - `npm run build`: Passed (all 83/83 static routes compiled successfully).
+- Commit: 3aa9b6b
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 2C (Dialogue Ordering Practice Mode) Completed & Verified
 - Requested by owner: Milestone 2C: Dialogue Ordering Practice Mode — interactive dialogue turn sequencing and matching per Spec §4.3.

@@ -59,6 +59,18 @@ export interface SentenceBuilderExercise {
   explanationBn: string;
 }
 
+export interface ReadAloudExercise {
+  id: string;
+  stepSlug: string;
+  dialogueLineId?: string;
+  speakerName: string;
+  speakerRole: string;
+  targetSentence: string;
+  translationBn: string;
+  phoneticHint?: string;
+  explanationBn: string;
+}
+
 export interface NicheStepExerciseSet {
   stepSlug: string;
   stepNumber: number;
@@ -66,6 +78,7 @@ export interface NicheStepExerciseSet {
   completeLines: CompleteLineExercise[];
   dialogueOrder?: DialogueOrderExercise;
   sentenceBuilders?: SentenceBuilderExercise[];
+  readAloudExercises?: ReadAloudExercise[];
 }
 
 export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
@@ -201,6 +214,28 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
         },
       ],
     },
+    readAloudExercises: [
+      {
+        id: "sm-01-ra1",
+        stepSlug: "shopping-money-step-01",
+        speakerName: "Rafi",
+        speakerRole: "Shop Assistant",
+        targetSentence: "Hello. Can I help you?",
+        translationBn: "নমস্কার, আমি কি সাহায্য করতে পারি?",
+        phoneticHint: "he-LOH, kan eye HELP yoo?",
+        explanationBn: "'Can I help you?' বাক্যে 'help'-এর ওপর সামান্য জোর দিয়ে বিনম্র সুরে বলা হয়।",
+      },
+      {
+        id: "sm-01-ra2",
+        stepSlug: "shopping-money-step-01",
+        speakerName: "Nadia",
+        speakerRole: "Customer",
+        targetSentence: "How much is this bag?",
+        translationBn: "এই ব্যাগটার দাম কত?",
+        phoneticHint: "how MUCH iz this BAG?",
+        explanationBn: "প্রশ্নবোধক বাক্যে 'much' এবং 'bag' শব্দ দুটি স্পষ্টভাবে উচ্চারিত হয়।",
+      },
+    ],
   },
 
   // Step 02: This One or That One?
@@ -316,6 +351,28 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
         },
       ],
     },
+    readAloudExercises: [
+      {
+        id: "sm-02-ra1",
+        stepSlug: "shopping-money-step-02",
+        speakerName: "Nadia",
+        speakerRole: "Customer",
+        targetSentence: "Do you have it in blue?",
+        translationBn: "এটা কি নীল রঙে আছে?",
+        phoneticHint: "doo yoo HAV it in BLOO?",
+        explanationBn: "রং জিজ্ঞেস করার সময় শেষের 'blue' শব্দটি ওপরের দিকে টোন নিয়ে বলতে হয়।",
+      },
+      {
+        id: "sm-02-ra2",
+        stepSlug: "shopping-money-step-02",
+        speakerName: "Nadia",
+        speakerRole: "Customer",
+        targetSentence: "Perfect. I'll take that one.",
+        translationBn: "চমৎকার। আমি ওটাই নেব।",
+        phoneticHint: "PUR-fekt. eye-ul TAYK that wun.",
+        explanationBn: "'Perfect' শব্দে প্রথম সিলেবলে জোর দিন: PUR-fekt।",
+      },
+    ],
   },
 
   // Step 03: Cash or Card?
@@ -421,6 +478,28 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
         },
       ],
     },
+    readAloudExercises: [
+      {
+        id: "sm-03-ra1",
+        stepSlug: "shopping-money-step-03",
+        speakerName: "Nadia",
+        speakerRole: "Customer",
+        targetSentence: "Can I pay by card?",
+        translationBn: "আমি কি কার্ডে পেমেন্ট করতে পারি?",
+        phoneticHint: "kan eye PAY by KARD?",
+        explanationBn: "'pay by card' একটি স্বাভাবিক গতিতে যুক্তভাবে উচ্চারিত হয়।",
+      },
+      {
+        id: "sm-03-ra2",
+        stepSlug: "shopping-money-step-03",
+        speakerName: "Nadia",
+        speakerRole: "Customer",
+        targetSentence: "Here you are. Keep the change.",
+        translationBn: "এই নিন। বাকি টাকা রাখুন।",
+        phoneticHint: "heer yoo AR. keep the CHAYNJ.",
+        explanationBn: "'Keep the change' দৈনন্দিন বিনম্র ইংরেজি শিষ্টাচারের অন্যতম অংশ।",
+      },
+    ],
   },
 };
 

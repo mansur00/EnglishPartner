@@ -11,6 +11,7 @@ import {
   ArrowRight01Icon,
   Sorting01Icon,
   SortByDown02Icon,
+  Mic01Icon,
 } from "@hugeicons/core-free-icons";
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
 import {
@@ -20,12 +21,14 @@ import {
   SentenceBuilderExercise,
   DialogueOrderExercise,
   DialogueOrderTurn,
+  ReadAloudExercise,
 } from "@/content/seed/exercises";
 import { ListeningQuizCard } from "./ListeningQuizCard";
 import { HideSpeakerPractice } from "./HideSpeakerPractice";
 import { CompleteLineCard } from "./CompleteLineCard";
 import { SentenceBuilderCard } from "./SentenceBuilderCard";
 import { DialogueOrderCard } from "./DialogueOrderCard";
+import { ReadAloudCard } from "./ReadAloudCard";
 import { shuffleDialogueTurns } from "@/lib/practice/dialogue-order";
 import { Button } from "@/components/ui/button";
 
@@ -46,7 +49,7 @@ export function PracticeWorkspace({
   nextStepSlug,
   nextStepTitle,
 }: PracticeWorkspaceProps) {
-  const [activeTab, setActiveTab] = useState<"quiz" | "builder" | "order" | "roleplay" | "blanks">("quiz");
+  const [activeTab, setActiveTab] = useState<"quiz" | "builder" | "order" | "aloud" | "roleplay" | "blanks">("quiz");
 
   const exerciseData = getExercisesForStep(stepSlug);
 
@@ -143,6 +146,19 @@ export function PracticeWorkspace({
 
   const activeDialogueOrder = exerciseData?.dialogueOrder || fallbackDialogueOrder;
 
+  // Fallback read aloud exercises from dialogue lines
+  const fallbackReadAlouds: ReadAloudExercise[] = lines.slice(0, 3).map((line, idx) => ({
+    id: `${stepSlug}-auto-ra${idx}`,
+    stepSlug,
+    speakerName: line.speakerName,
+    speakerRole: line.speakerRole,
+    targetSentence: line.englishText,
+    translationBn: line.translationBn,
+    explanationBn: `মডেল অডিও শুনে স্বাভাবিক গতিতে বাক্যটি উচ্চারণ করুন।`,
+  }));
+
+  const activeReadAlouds = exerciseData?.readAloudExercises || fallbackReadAlouds;
+
   return (
     <div className="space-y-6">
       {/* Mode Tabs */}
@@ -188,6 +204,19 @@ export function PracticeWorkspace({
 
         <button
           type="button"
+          onClick={() => setActiveTab("aloud")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
+            activeTab === "aloud"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+          }`}
+        >
+          <HugeiconsIcon icon={Mic01Icon} size={16} />
+          <span className="text-bangla">উচ্চারণ (Read Aloud)</span>
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveTab("roleplay")}
           className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
             activeTab === "roleplay"
@@ -224,6 +253,10 @@ export function PracticeWorkspace({
 
       {activeTab === "order" && (
         <DialogueOrderCard exercise={activeDialogueOrder} />
+      )}
+
+      {activeTab === "aloud" && (
+        <ReadAloudCard exercises={activeReadAlouds} />
       )}
 
       {activeTab === "roleplay" && (
