@@ -70,6 +70,26 @@
       "file": "src/components/ui/skeleton.tsx",
       "rule": "primitives",
       "reason": "Primitive skeleton component mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/field.tsx",
+      "rule": "primitives",
+      "reason": "Primitive form field composition wrapper mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/input-group.tsx",
+      "rule": "primitives",
+      "reason": "Primitive input group prefix/suffix wrapper mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/tag.tsx",
+      "rule": "primitives",
+      "reason": "Primitive interactive tag/chip component mapping to design system tokens."
+    },
+    {
+      "file": "src/components/ui/pill.tsx",
+      "rule": "primitives",
+      "reason": "Primitive pill badge component mapping to design system tokens."
     }
   ]
 }

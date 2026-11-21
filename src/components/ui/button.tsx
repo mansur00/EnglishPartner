@@ -1,57 +1,58 @@
+import * as React from "react"
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
-import { cva, type VariantProps } from "class-variance-authority"
+import { buttonVariants, type ButtonVariantProps } from "./button-variants"
 import { cn } from "@/lib/utils"
 
-const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-control border border-transparent bg-clip-padding text-label font-semibold whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-  {
-    variants: {
-      variant: {
-        cta: "bg-cta bg-cta-hover active:bg-sun-600 shadow-sm font-semibold",
-        default: "bg-primary text-primary-foreground hover:bg-brand-900 active:bg-brand-950 shadow-xs font-semibold",
-        primary: "bg-primary text-primary-foreground hover:bg-brand-900 active:bg-brand-950 shadow-xs font-semibold",
-        accent:
-          "bg-cta hover:bg-sun-400 shadow-xs font-semibold",
-        outline:
-          "border border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
-        secondary:
-          "bg-brand-100 text-brand-800 hover:bg-brand-200 active:bg-brand-300 dark:bg-accent dark:text-accent-foreground font-semibold",
-        ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-xs",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-control-md gap-2 px-5 text-label rounded-control",
-        md: "h-control-md gap-2 px-5 text-label rounded-control",
-        sm: "h-control-sm gap-1.5 px-3.5 text-meta rounded-control",
-        xs: "h-7 gap-1 px-2.5 text-chip rounded-panel",
-        lg: "h-control-lg gap-2.5 px-7 text-lead rounded-control",
-        icon: "size-tap rounded-control",
-        "icon-sm": "h-control-sm w-control-sm rounded-control",
-        "icon-lg": "h-control-lg w-control-lg rounded-control",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
+export interface ButtonProps
+  extends ButtonPrimitive.Props,
+    ButtonVariantProps {
+  loading?: boolean;
+  pill?: boolean;
+}
 
 function Button({
   className,
   variant = "default",
   size = "default",
+  pill = false,
+  loading = false,
+  disabled,
+  children,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonProps) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled || loading}
+      aria-busy={loading ? "true" : undefined}
+      className={cn(buttonVariants({ variant, size, pill, className }))}
       {...props}
-    />
+    >
+      {loading && (
+        <svg
+          className="size-4 animate-spin shrink-0"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          />
+        </svg>
+      )}
+      {children}
+    </ButtonPrimitive>
   )
 }
 

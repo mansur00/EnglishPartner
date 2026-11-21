@@ -189,7 +189,8 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 19. **[DONE] (commit ba66aa3) Milestone 2B — Sentence Builder:** Interactive word-chunk reordering practice mode with pool and assembly slot, tap to place, tap to remove, hint with next accepted chunk, undo and reset controls, out-of-place chunk detection, Web Speech audio playback, zero hardcoded tokens, 57 unit tests passing.
 20. **[DONE] (commit b461a0d) Milestone 2E — Spaced Repetition (SRS) Review System:** Pure SM-2 algorithm in src/lib/srs/sm2.ts and src/lib/srs/types.ts, interactive flashcard queue with audio pronunciation, 4 rating buttons (again, hard, good, easy), interval previews, flip card animation, empty state, and vocabulary page integration with due badge & view switcher, 66 unit tests passing.
 21. **[DONE] (commit 795e77c) Milestone 2C — Dialogue Ordering Practice Mode:** Dialogue turn sequencing and matching per Spec §4.3 in src/lib/practice/dialogue-order.ts, interactive DialogueOrderCard with swap/up/down controls, audio, hint, reset, undo, and feedback banners in src/components/practice/DialogueOrderCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 74 unit tests passing.
-22. **[DONE] (commit 3aa9b6b) Milestone 2C — Read Aloud Practice Mode:** Read Aloud and pronunciation practice per Spec §4.6 and Audio Voice Guide §9-10 in src/lib/practice/read-aloud.ts, interactive ReadAloudCard with MediaRecorder recording, side-by-side playback, optional speech recognition transcript matching, self-check rating buttons, and Bengali guidance in src/components/practice/ReadAloudCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 80 unit tests passing.
+22. **[DONE] (commit be2df9b) Milestone 2C — Read Aloud Practice Mode:** Read Aloud and pronunciation practice per Spec §4.6 and Audio Voice Guide §9-10 in src/lib/practice/read-aloud.ts, interactive ReadAloudCard with MediaRecorder recording, side-by-side playback, optional speech recognition transcript matching, self-check rating buttons, and Bengali guidance in src/components/practice/ReadAloudCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 80 unit tests passing.
+23. **[DONE] (commit 6db085d) Expandable Design System Foundation:** Code-first shadcn/ui expandable system for Button, Input, Field, InputGroup, Badge, Pill, and Tag per user specification. Supports all variants (default, secondary, outline, ghost, destructive, link, cta, success, warning), all sizes (xs, sm, default/md, lg, icon, icon-xs, icon-sm, icon-lg), states (loading with spinner, pill, error), and composition patterns. 84 unit tests passing.
 
 ---
 
@@ -218,6 +219,32 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Expandable Design System Foundation Completed & Verified
+- Requested by owner: Build expandable design system based on shadcn/ui patterns for Button, Input, Field, InputGroup, Badge, Pill, Tag.
+- Changed:
+  - `src/components/ui/button-variants.ts`: authored CVA definitions for all variants (`default`, `secondary`, `outline`, `ghost`, `destructive`, `link`, `cta`, `primary`, `accent`), all sizes (`xs`, `sm`, `default`/`md`, `lg`, `icon`, `icon-xs`, `icon-sm`, `icon-lg`), and `pill: true`.
+  - `src/components/ui/button.tsx`: updated `Button` supporting `loading` (animated spinner + aria-busy + disabled) and `pill`.
+  - `src/components/ui/input-variants.ts`: authored CVA definitions for input variants (`outline`, `filled`, `ghost`), sizes (`sm`, `default`, `lg`), and `pill: true`.
+  - `src/components/ui/input.tsx`: updated `Input` supporting `variant`, `inputSize`, and `pill`.
+  - `src/components/ui/field.tsx`: created `Field`, `FieldLabel`, `FieldDescription`, and `FieldError` with accessible context and error alerts.
+  - `src/components/ui/input-group.tsx`: created `InputGroup`, `InputGroupPrefix`, and `InputGroupSuffix` for prefix/suffix icons and buttons.
+  - `src/components/ui/badge-variants.ts`: authored CVA definitions for badge variants (`default`, `secondary`, `destructive`, `outline`, `ghost`, `success`, `warning`, `brand`, `accent`, `peach`, `neutral`, `error`), sizes (`sm`, `default`, `md`, `lg`), and shapes (`pill`, `rounded`).
+  - `src/components/ui/badge.tsx`: updated `Badge` supporting `variant`, `size`, `shape`, and `pill`.
+  - `src/components/ui/pill.tsx`: created dedicated `Pill` component with optional status `dot`.
+  - `src/components/ui/tag.tsx`: created dedicated `Tag` component with selectable filter state (`selected`) and removable action button (`onRemove` with `Cancel01Icon`).
+  - `scripts/token-allowlist.json`: added primitive UI entries for new components.
+  - `docs/expandable-design-system.md`: authored complete reference manual and usage documentation.
+  - `tests/design-system-components.test.mjs`: authored unit test suite verifying all variants, sizes, and shapes across Button, Input, and Badge.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token audit violations across all rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (84/84 tests passing across all test suites).
+  - `npm run build`: Passed (all 83/83 static routes compiled successfully).
+- Commit: 6db085d
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 2C (Read Aloud Pronunciation Practice Mode) Completed & Verified
 - Requested by owner: Milestone 2C: Read Aloud Mode — interactive pronunciation practice with model audio and self-check / microphone playback per Spec §4.6.
