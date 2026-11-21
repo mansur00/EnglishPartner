@@ -8,6 +8,7 @@ import { FilterBar } from "@/components/discovery/FilterBar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupPrefix, InputGroupSuffix } from "@/components/ui/input-group";
 import { Skeleton } from "@/components/ui/skeleton";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -104,12 +105,14 @@ export default function ExplorePage() {
 
       {/* Search Input with Rainbow Border on Focus & Clear Button */}
       <div className={cn("rounded-control transition-all duration-200", isSearchFocused && "rainbow-border")}>
-        <div className="relative bg-card rounded-control border border-border shadow-xs">
-          <HugeiconsIcon
-            icon={Search01Icon}
-            size={20}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
-          />
+        <InputGroup className="bg-card rounded-control border border-border shadow-xs">
+          <InputGroupPrefix>
+            <HugeiconsIcon
+              icon={Search01Icon}
+              size={20}
+              className="text-muted-foreground"
+            />
+          </InputGroupPrefix>
           <Input
             type="text"
             value={searchQuery}
@@ -122,19 +125,23 @@ export default function ExplorePage() {
               });
             }}
             placeholder={t("discovery.searchPlaceholder")}
-            className="w-full h-control-lg pl-12 pr-12 border-0 shadow-none bg-transparent text-body text-foreground placeholder:text-muted-foreground focus-visible:ring-0"
+            variant="ghost"
+            inputSize="lg"
+            className="w-full pl-12 pr-12 text-body"
           />
           {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery("")}
-              aria-label="Clear search"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-            >
-              <HugeiconsIcon icon={Cancel01Icon} size={18} />
-            </button>
+            <InputGroupSuffix>
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                aria-label="Clear search"
+                className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+              >
+                <HugeiconsIcon icon={Cancel01Icon} size={18} />
+              </button>
+            </InputGroupSuffix>
           )}
-        </div>
+        </InputGroup>
       </div>
 
       {/* Category Horizontal Pills */}

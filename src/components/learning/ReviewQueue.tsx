@@ -20,6 +20,7 @@ import {
   createDefaultSRSState,
   getDueReviewItems,
 } from "@/lib/srs/sm2";
+import { logReviewEventClient } from "@/lib/srs/review-client";
 import {
   SEED_VOCABULARY,
 } from "@/content/seed/vocabulary";
@@ -153,6 +154,17 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
       } catch {
         // ignore
       }
+
+      // Asynchronously log review event per Spec §6.4 & KI-08
+      logReviewEventClient({
+        lemma: currentSRSItem.lemma,
+        rating,
+        reviewStage: calcResult.reviewStage,
+        intervalDays: calcResult.intervalDays,
+        easeFactor: calcResult.easeFactor,
+      }).catch(() => {
+        // ignore background logging failure
+      });
 
       setReviewedSessionCount((prev) => prev + 1);
       setIsFlipped(false);

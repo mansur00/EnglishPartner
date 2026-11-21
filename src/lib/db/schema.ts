@@ -8,6 +8,7 @@ import {
   jsonb,
   pgEnum,
   check,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
@@ -308,3 +309,48 @@ export const practiceSessions = pgTable("practice_sessions", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+// --- 13. REVIEW EVENTS & DAILY CHALLENGES (Phase 2/3, ECP_Exercises_SRS_Spec.md §6.4 & §7, KI-08) ---
+export const srsRatingEnum = pgEnum("srs_rating", ["again", "hard", "good", "easy"]);
+export const challengeStatusEnum = pgEnum("challenge_status", ["assigned", "in_progress", "completed", "expired"]);
+
+export const reviewEvents = pgTable("review_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+  userVocabularyId: uuid("user_vocabulary_id").references(() => userVocabulary.id, { onDelete: "cascade" }),
+  lemma: text("lemma"),
+  rating: srsRatingEnum("rating").notNull(),
+  reviewStage: integer("review_stage"),
+  intervalDays: integer("interval_days"),
+  easeFactor: text("ease_factor"),
+  reviewedAt: timestamp("reviewed_at").defaultNow().notNull(),
+});
+
+export const dailyChallenges = pgTable(
+  "daily_challenges",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
+    challengeDate: text("challenge_date").notNull(), // ISO YYYY-MM-DD
+    conversationVersionId: uuid("conversation_version_id").references(() => conversationVersions.id, { onDelete: "cascade" }),
+    scenarioSlug: text("scenario_slug").notNull(),
+    status: challengeStatusEnum("status").notNull().default("assigned"),
+    completedAt: timestamp("completed_at"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("daily_challenges_user_date_idx").on(table.userId, table.challengeDate),
+  ]
+);
+
+export const contentAuditLogs = pgTable("content_audit_logs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  actorUserId: uuid("actor_user_id").references(() => users.id, { onDelete: "set null" }),
+  entityType: text("entity_type").notNull(),
+  entityId: text("entity_id").notNull(),
+  action: text("action").notNull(),
+  changeSummary: text("change_summary"),
+  metadata: jsonb("metadata"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+

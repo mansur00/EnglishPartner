@@ -14,6 +14,10 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupPrefix } from "@/components/ui/input-group";
+import { Tag } from "@/components/ui/tag";
+import { Pill } from "@/components/ui/pill";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageContainer } from "@/components/shared/PageContainer";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
@@ -226,9 +230,9 @@ function VocabularyContent() {
           <HugeiconsIcon icon={SparklesIcon} size={16} />
           <span className="text-bangla">দৈনিক ফ্ল্যাশকার্ড রিভিউ</span>
           {dueCount > 0 && (
-            <span className="px-2 py-0.5 rounded-pill bg-sun-500 text-brand-950 text-chip font-mono">
+            <Pill variant="warning" size="sm" className="font-mono">
               {dueCount} due
-            </span>
+            </Pill>
           )}
         </button>
       </div>
@@ -239,21 +243,25 @@ function VocabularyContent() {
         <>
           {/* Search & Filter Bar */}
           <div className="flex flex-col sm:flex-row gap-3">
-        {/* Search Input */}
-        <div className="relative flex-1">
-          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground">
-            <HugeiconsIcon icon={Search01Icon} size={18} />
-          </div>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="শব্দ বা অর্থ দিয়ে খুঁজুন (Search English or Bangla)..."
-            className="w-full h-control-md pl-10 pr-4 rounded-control border border-border bg-card text-body text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-          />
+        {/* Search Input using Design System InputGroup */}
+        <div className="flex-1">
+          <InputGroup>
+            <InputGroupPrefix>
+              <HugeiconsIcon icon={Search01Icon} size={18} />
+            </InputGroupPrefix>
+            <Input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="শব্দ বা অর্থ দিয়ে খুঁজুন (Search English or Bangla)..."
+              variant="outline"
+              inputSize="default"
+              className="pl-10 text-body"
+            />
+          </InputGroup>
         </div>
 
-        {/* Part of Speech Filter */}
+        {/* Part of Speech Filter using Design System Tag */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
           <div className="text-muted-foreground shrink-0 hidden sm:block ml-2">
             <HugeiconsIcon icon={FilterIcon} size={16} />
@@ -266,18 +274,16 @@ function VocabularyContent() {
             { id: "adverb", label: "Adverbs" },
             { id: "phrase", label: "Phrases" },
           ].map((cat) => (
-            <button
+            <Tag
               key={cat.id}
-              type="button"
+              selected={selectedPos === cat.id}
               onClick={() => setSelectedPos(cat.id)}
-              className={`min-h-tap px-4 rounded-pill text-chip whitespace-nowrap transition-all cursor-pointer ${
-                selectedPos === cat.id
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "bg-card border border-border text-muted-foreground hover:text-foreground"
-              }`}
+              variant={selectedPos === cat.id ? "brand" : "outline"}
+              size="default"
+              className="whitespace-nowrap cursor-pointer text-chip"
             >
               {cat.label}
-            </button>
+            </Tag>
           ))}
         </div>
       </div>
