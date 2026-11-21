@@ -19,6 +19,8 @@ import {
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { cn } from "@/lib/utils";
 import { PageContainer } from "@/components/shared";
+import { paginateItems } from "@/lib/pagination/faceted-pagination";
+import { FacetedPagination } from "@/components/discovery/FacetedPagination";
 
 export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,6 +28,8 @@ export default function ExplorePage() {
   const [level, setLevel] = useState("all");
   const [lengthType, setLengthType] = useState("all");
   const [style, setStyle] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 6;
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -75,6 +79,10 @@ export default function ExplorePage() {
     searchQuery || selectedCategory !== "all" || level !== "all" || lengthType !== "all" || style !== "all"
   );
 
+  const paginatedScenarios = useMemo(() => {
+    return paginateItems(filteredScenarios, { page: currentPage, pageSize });
+  }, [filteredScenarios, currentPage, pageSize]);
+
   const handleResetFilters = () => {
     startTransition(() => {
       setSearchQuery("");
@@ -82,12 +90,14 @@ export default function ExplorePage() {
       setLevel("all");
       setLengthType("all");
       setStyle("all");
+      setCurrentPage(1);
     });
   };
 
   const handleCategorySelect = (slug: string) => {
     startTransition(() => {
       setSelectedCategory(slug);
+      setCurrentPage(1);
     });
   };
 
@@ -122,6 +132,7 @@ export default function ExplorePage() {
               const val = e.target.value;
               startTransition(() => {
                 setSearchQuery(val);
+                setCurrentPage(1);
               });
             }}
             placeholder={t("discovery.searchPlaceholder")}
@@ -133,7 +144,10 @@ export default function ExplorePage() {
             <InputGroupSuffix>
               <button
                 type="button"
-                onClick={() => setSearchQuery("")}
+                onClick={() => {
+                  setSearchQuery("");
+                  setCurrentPage(1);
+                }}
                 aria-label="Clear search"
                 className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
               >
@@ -153,11 +167,11 @@ export default function ExplorePage() {
       {/* Sticky Advanced Filter Bar */}
       <FilterBar
         level={level}
-        setLevel={(l) => startTransition(() => setLevel(l))}
+        setLevel={(l) => startTransition(() => { setLevel(l); setCurrentPage(1); })}
         lengthType={lengthType}
-        setLengthType={(len) => startTransition(() => setLengthType(len))}
+        setLengthType={(len) => startTransition(() => { setLengthType(len); setCurrentPage(1); })}
         style={style}
-        setStyle={(st) => startTransition(() => setStyle(st))}
+        setStyle={(st) => startTransition(() => { setStyle(st); setCurrentPage(1); })}
         onReset={handleResetFilters}
         isFiltered={isFiltered}
       />
@@ -166,6 +180,11 @@ export default function ExplorePage() {
       <div className="flex items-center justify-between pt-1">
         <p className="text-meta text-muted-foreground">
           Showing <span className="text-primary">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
+          {filteredScenarios.length > pageSize && (
+            <span className="ml-1 text-chip text-muted-foreground">
+              (Page {paginatedScenarios.currentPage} of {paginatedScenarios.totalPages})
+            </span>
+          )}
         </p>
       </div>
 
@@ -187,10 +206,27 @@ export default function ExplorePage() {
           ))}
         </div>
       ) : filteredScenarios.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {filteredScenarios.map((scenario) => (
-            <ScenarioCard key={scenario.id} scenario={scenario} />
-          ))}
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {paginatedScenarios.items.map((scenario) => (
+              <ScenarioCard key={scenario.id} scenario={scenario} />
+            ))}
+          </div>
+
+          {/* Faceted Pagination Controls (Milestone 1D / KI-10) */}
+          <FacetedPagination
+            currentPage={paginatedScenarios.currentPage}
+            totalPages={paginatedScenarios.totalPages}
+            totalItems={paginatedScenarios.totalItems}
+            startIndex={paginatedScenarios.startIndex}
+            endIndex={paginatedScenarios.endIndex}
+            onPageChange={(p) => {
+              setCurrentPage(p);
+              if (typeof window !== "undefined") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          />
         </div>
       ) : (
         <EmptyState

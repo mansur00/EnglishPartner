@@ -194,6 +194,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 24. **[DONE] (commit bd51c31) Milestone 2E Backend & UI Component Integration (KI-08):** Added `review_events`, `daily_challenges`, and `content_audit_logs` tables with migration `0002_elite_wrecker.sql`. Implemented SRS review event logging (`recordReviewEvent`, `/api/v1/srs/review-events`, `logReviewEventClient`), Daily Challenge selection per Spec §7 (`getOrCreateDailyChallenge`, `/api/v1/challenges/daily`), and migrated Vocabulary and Explore search & filters to Expandable Design System `InputGroup`, `Tag`, and `Pill`. 98 unit tests passing.
 25. **[DONE] (commit ed087be) Milestone 2C — Roleplay (Hide Speaker) & Complete Line Practice Modes:** Authored `src/lib/practice/complete-line.ts` and `src/lib/practice/hide-speaker.ts`, upgraded `HideSpeakerPractice.tsx` to conversational roleplay stream using `ChatBubble` (speaker="1" for partner, speaker="2" for learner), `EmojiTile`, `Tag`, role selection, and audio reveal per Spec §4.4, upgraded `CompleteLineCard.tsx` with `Tag` word chips, audio pronunciation, and `btn-restart-action` per Spec §4.5. 111 unit tests passing.
 26. **[DONE] (commit 8f66338) Milestone 1C+ — Audio Timing Manifest & Interactive Seek Bar (KI-13):** Authored `src/lib/audio/timing-manifest.ts` with duration estimation, sequential timestamp generation, and bidirectional percentage/time mapping per Audio Guide §5.2. Upgraded `src/components/learning/AudioPlayer.tsx` with interactive scrub bar (`role="slider"`, `aria-valuenow`, keyboard navigation, hover zoom), timing manifest synchronization, Pill badge line count, and eliminated cascading renders via render-time derived progress calculation. Reconciled `docs/AUDIT_REPORT.md` (KI-13 marked Fixed). 116 unit tests passing.
+27. **[DONE] Milestone 1D — Faceted Pagination & Admin Unauthorized Access Guards (KI-10):** Authored `src/lib/pagination/faceted-pagination.ts` (safe boundary clamping, windowed page numbers with ellipsis), `src/components/discovery/FacetedPagination.tsx` (ARIA navigation, page controls, range indicator), and `src/lib/auth/admin-guard.ts` (role guards, unauthorized redirect URLs). Integrated faceted pagination into `ExplorePage` (page size 6) and `AdminDashboardClient` (page size 5), and added unauthorized access alert banners and editor return navigation. Reconciled `docs/AUDIT_REPORT.md` (KI-10 marked Fixed; Fixed=15, Not built yet=1, Total=25). 126 unit tests passing.
 
 ---
 
@@ -222,6 +223,28 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Milestone 1D (Faceted Pagination & Admin Unauthorized Access Guards / KI-10) Completed & Verified
+- Requested by owner: "next" -> execute Milestone 1D (KI-10): faceted pagination engine and UI component, admin unauthorized access guards & redirect warnings, integrate into Explore and Admin consoles, author unit tests, and update AUDIT_REPORT.md.
+- Changed:
+  - `src/lib/pagination/faceted-pagination.ts`: authored pure pagination engine (`paginateItems`) with safe boundary clamping, start/end index calculation, and windowed page numbers generator (`getPageNumbers`) with ellipses.
+  - `src/components/discovery/FacetedPagination.tsx`: accessible pagination controls using Expandable Design System `Button` (`variant="outline"`, `variant="ghost"`, `variant="default"`, `size="sm"`, `size="icon-sm"`), zero magic numbers, range display, and keyboard navigation.
+  - `src/lib/auth/admin-guard.ts`: role authorization and redirect helper (`checkAdminAccess`, `checkEditorAccess`, `checkReviewerAccess`) returning redirect URLs and HTTP status codes (401/403).
+  - `src/app/(app)/explore/page.tsx`: integrated `paginateItems` and `FacetedPagination` (page size 6), resetting to page 1 on search or filter changes, with smooth top scroll.
+  - `src/components/admin/AdminDashboardClient.tsx`: integrated table pagination (page size 5) with `FacetedPagination`, and added unauthorized access warning alert banner when redirected.
+  - `src/components/admin/ConversationEditorClient.tsx`: added return to admin link with role and requirement parameters when edit access is restricted.
+  - `tests/faceted-pagination.test.mjs`: authored comprehensive unit test suite covering page slicing, boundary clamping, empty lists, and ellipses generation (5/5 pass).
+  - `tests/admin-auth-guard.test.mjs`: authored comprehensive unit test suite covering role access levels, status codes, and redirect URLs (3/3 pass).
+  - `docs/AUDIT_REPORT.md`: reconciled master table (KI-10 marked Fixed; Fixed=15, Not built yet=1, Total=25).
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a through i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (126/126 tests passing across all 18 test suites).
+  - `npm run build`: Passed (all 85/85 static and dynamic routes compiled successfully).
+- Commit: pending
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 1C+ (Audio Timing Manifest & Interactive Seek Bar / KI-13) Completed & Verified
 - Requested by owner: "next" -> execute Milestone 1C+ (KI-13): audio timing manifest generator, sentence duration estimation, interactive seek/scrub bar in AudioPlayer with full slider accessibility (role="slider", keyboard Arrow/Home/End seek), and update AUDIT_REPORT.md.

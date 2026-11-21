@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -22,6 +22,8 @@ import {
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES } from "@/content/seed/dialogues";
 import { UserRole, canViewAdminPanel } from "@/lib/auth/roles";
+import { paginateItems } from "@/lib/pagination/faceted-pagination";
+import { FacetedPagination } from "@/components/discovery/FacetedPagination";
 
 interface AdminMetricCardProps {
   title: string;
@@ -93,9 +95,27 @@ export function AdminDashboardClient() {
   const searchParams = useSearchParams();
   const currentRole: UserRole = (searchParams.get("role") as UserRole) || "admin";
   const filterStatus = searchParams.get("status") || "all";
+  const isRedirectedFromUnauthorized = searchParams.get("unauthorized") === "true";
+  const requiredRole = searchParams.get("required") || "editor";
+
+  const [tablePage, setTablePage] = useState(1);
+  const pageSize = 5;
 
   // Server/Client Role Guard
   const isAuthorized = canViewAdminPanel(currentRole);
+
+  // Status Filter & Pagination (Milestone 1D / KI-10)
+  const filteredScenarios = useMemo(() => {
+    return SEED_SCENARIOS.filter(() => {
+      if (filterStatus === "all") return true;
+      if (filterStatus === "published") return true;
+      return false;
+    });
+  }, [filterStatus]);
+
+  const paginatedScenarios = useMemo(() => {
+    return paginateItems(filteredScenarios, { page: tablePage, pageSize });
+  }, [filteredScenarios, tablePage, pageSize]);
 
   if (!isAuthorized) {
     return (
@@ -138,15 +158,18 @@ export function AdminDashboardClient() {
     return acc + (versions[0]?.lines.length || 0);
   }, 0);
 
-  // Status Filter
-  const filteredScenarios = SEED_SCENARIOS.filter(() => {
-    if (filterStatus === "all") return true;
-    if (filterStatus === "published") return true;
-    return false;
-  });
-
   return (
     <div className="min-h-screen bg-background p-4 sm:p-8 space-y-8 container-app w-full min-w-0 overflow-x-hidden">
+      {/* Unauthorized Redirect Alert (Milestone 1D / KI-10) */}
+      {isRedirectedFromUnauthorized && (
+        <div className="p-4 rounded-panel bg-destructive/10 border border-destructive/30 flex items-center gap-3 text-destructive">
+          <HugeiconsIcon icon={Alert02Icon} size={20} className="shrink-0" />
+          <div className="text-chip">
+            <strong>অননুমোদিত অ্যাক্সেস (Access Restricted):</strong> দৃশ্যপট সম্পাদনা করতে ‘{requiredRole}’ বা উচ্চতর ভূমিকা প্রয়োজন। আপনার বর্তমান ভূমিকা: ‘{currentRole}’।
+          </div>
+        </div>
+      )}
+
       {/* Top Header & Role Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-border">
         <div className="flex items-center gap-3.5">
@@ -268,7 +291,7 @@ export function AdminDashboardClient() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {filteredScenarios.map((scenario) => {
+              {paginatedScenarios.items.map((scenario) => {
                 const dialogue = SEED_DIALOGUES[scenario.slug];
                 const lines = dialogue?.[0]?.lines || [];
                 const turnsCount = lines.length;
@@ -350,6 +373,16 @@ export function AdminDashboardClient() {
             </tbody>
           </table>
         </div>
+
+        {/* Faceted Pagination Controls (Milestone 1D / KI-10) */}
+        <FacetedPagination
+          currentPage={paginatedScenarios.currentPage}
+          totalPages={paginatedScenarios.totalPages}
+          totalItems={paginatedScenarios.totalItems}
+          startIndex={paginatedScenarios.startIndex}
+          endIndex={paginatedScenarios.endIndex}
+          onPageChange={setTablePage}
+        />
       </Card>
 
       {/* Language Coverage Matrix */}

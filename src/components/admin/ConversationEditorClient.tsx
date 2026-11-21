@@ -63,7 +63,12 @@ export function ConversationEditorClient({
             কন্টেন্ট এডিট করার জন্য &ldquo;editor&rdquo; বা তার ঊর্ধ্বতন অনুমতি প্রয়োজন। বর্তমান ভূমিকা: {userRole}।
           </p>
 
-          <div className="pt-2">
+          <div className="pt-2 flex flex-col gap-2">
+            <Link href={`/admin?unauthorized=true&role=${userRole}&required=editor`}>
+              <Button variant="outline" className="w-full text-label text-bangla rounded-control">
+                অ্যাডমিন কনসোলে ফিরে যান (Return to Admin)
+              </Button>
+            </Link>
             <Link href={`/admin/conversations/${scenario.slug}/edit?role=admin`}>
               <Button className="w-full text-label text-bangla rounded-control">
                 অ্যাডমিন হিসেবে অ্যাক্সেস করুন
