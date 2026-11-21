@@ -414,6 +414,18 @@ body {
 @utility min-h-slot {
   min-height: 4rem;
 }
+@utility text-chip-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+@utility practice-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
 @utility badge-success-icon {
   width: var(--control-h-md);
   height: var(--control-h-md);

@@ -17,6 +17,8 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageContainer } from "@/components/shared/PageContainer";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
+import { ReviewQueue } from "@/components/learning/ReviewQueue";
+import { getDueReviewItems } from "@/lib/srs/sm2";
 import {
   SEED_VOCABULARY,
   VocabularyEntry,
@@ -25,6 +27,7 @@ import { GrammarProvider, useGrammar } from "@/lib/grammar/context";
 import { GrammarText } from "@/components/grammar/GrammarText";
 import { GrammarToggleButton } from "@/components/grammar/GrammarToggleButton";
 import { createFallbackAnnotation } from "@/lib/grammar/fallback";
+import { cn } from "@/lib/utils";
 
 export default function VocabularyPage() {
   return (
@@ -36,6 +39,7 @@ export default function VocabularyPage() {
 
 function VocabularyContent() {
   const { isLineActive, toggleLine } = useGrammar();
+  const [activeView, setActiveView] = useState<"words" | "srs">("words");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPos, setSelectedPos] = useState<string>("all");
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
@@ -115,6 +119,22 @@ function VocabularyContent() {
     });
   }, [allEntries, searchQuery, selectedPos]);
 
+  const dueCount = useMemo(() => {
+    try {
+      const raw =
+        typeof window !== "undefined"
+          ? localStorage.getItem("ecp_vocabulary_srs")
+          : null;
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return getDueReviewItems(Object.values(parsed), new Date()).length;
+      }
+    } catch {
+      // ignore
+    }
+    return savedLemmas.length;
+  }, [savedLemmas]);
+
   const posBadgeVariant = (pos: VocabularyEntry["partOfSpeech"]): "brand" | "neutral" | "accent" | "peach" => {
     switch (pos) {
       case "verb":
@@ -177,8 +197,48 @@ function VocabularyContent() {
         </button>
       </div>
 
-      {/* Search & Filter Bar */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      {/* Mode View Tabs */}
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card border border-border rounded-panel shadow-2xs">
+        <button
+          type="button"
+          onClick={() => setActiveView("words")}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer",
+            activeView === "words"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+          )}
+        >
+          <HugeiconsIcon icon={Book01Icon} size={16} />
+          <span className="text-bangla">সংরক্ষিত শব্দাবলী ({allEntries.length})</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveView("srs")}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer",
+            activeView === "srs"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+          )}
+        >
+          <HugeiconsIcon icon={SparklesIcon} size={16} />
+          <span className="text-bangla">দৈনিক ফ্ল্যাশকার্ড রিভিউ</span>
+          {dueCount > 0 && (
+            <span className="px-2 py-0.5 rounded-pill bg-sun-500 text-brand-950 text-chip font-mono">
+              {dueCount} due
+            </span>
+          )}
+        </button>
+      </div>
+
+      {activeView === "srs" ? (
+        <ReviewQueue savedLemmas={savedLemmas} />
+      ) : (
+        <>
+          {/* Search & Filter Bar */}
+          <div className="flex flex-col sm:flex-row gap-3">
         {/* Search Input */}
         <div className="relative flex-1">
           <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground">
@@ -334,6 +394,8 @@ function VocabularyContent() {
             </Link>
           }
         />
+      )}
+        </>
       )}
 
       {/* Auth Prompt Modal */}

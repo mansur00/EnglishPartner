@@ -186,7 +186,8 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 16. **[DONE] (commit e56927d) Phase 2 Checkpoint 2 (UI MVP):** Sources registry, loader, resolve, fallback, `useGrammar`, `GrammarText`, `GrammarToggleButton` (.rainbow-border when ON, 44px target) next to Listen in `ConversationTurn`, `GrammarModeSwitch`, `GrammarLayerPicker`, `GrammarLegend`, `GrammarSummaryRow`, RuleCardDialog, enhanced WordDetailPopover breakdown, 0.0000px layout shift verified, toggle response 44ms (turn) and 5ms (global), 16 screenshots saved.
 17. **[DONE] Phase 2 Checkpoint 3 (Complete System):** Remaining layers (Phrases & Clauses brackets/outlines, full Patterns overlines/chips), author lists in `data/grammar/lists/` and overrides in `data/grammar/overrides/`, `grammar:check` build gate wired into `prebuild`, `grammar:report` (`npm run grammar:report`) reporting unreviewed entries and confidence, admin editor status banner in `ConversationEditorClient.tsx`, vocabulary page integration in `src/app/(app)/vocabulary/page.tsx`, practice prompts in `src/lib/grammar/sources.ts`, 100% taxonomy coverage, Section 11 tests (gold benchmark 100%, 17 tenses unit tests, 5 token mutation tests, 4 future-content fixture tests; 52 total unit tests pass), generated `docs/grammar-system.md`.
 18. **[DONE] (commits f8d6718..7e723cc) No Hard-Code Migration Stage 2 (Steps 4-7):** Migrated all remaining pages and components (admin, auth, navigation/shell, dashboard, grammar, practice, vocabulary, reader, explore, category, professions, public terms/privacy), eliminated duplicated class strings (Rule f), completely removed `--ecp-*` tokens and backward-compatible aliases, reached 0 violations in `lint:tokens` across rules a to i, verified 0 unmutated elements across all 9 mutations in `token-mutation-test.mjs`, passed all 233 layout invariants in `test:layout`, generated `docs/design-tokens.md`.
-19. **[DONE] (commit 75c9dbf) Milestone 2B — Sentence Builder:** Interactive word-chunk reordering practice mode with pool and assembly slot, tap to place, tap to remove, hint with next accepted chunk, undo and reset controls, out-of-place chunk detection, Web Speech audio playback, zero hardcoded tokens, 57 unit tests passing.
+19. **[DONE] (commit ba66aa3) Milestone 2B — Sentence Builder:** Interactive word-chunk reordering practice mode with pool and assembly slot, tap to place, tap to remove, hint with next accepted chunk, undo and reset controls, out-of-place chunk detection, Web Speech audio playback, zero hardcoded tokens, 57 unit tests passing.
+20. **[DONE] (commit b461a0d) Milestone 2E — Spaced Repetition (SRS) Review System:** Pure SM-2 algorithm in src/lib/srs/sm2.ts and src/lib/srs/types.ts, interactive flashcard queue with audio pronunciation, 4 rating buttons (again, hard, good, easy), interval previews, flip card animation, empty state, and vocabulary page integration with due badge & view switcher, 66 unit tests passing.
 
 ---
 
@@ -215,6 +216,25 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Milestone 2E (Spaced Repetition SRS Review System & Flashcards) Completed & Verified
+- Requested by owner: Milestone 2E — Spaced Repetition (SRS) Review System: Implement SM-2 algorithm (src/lib/srs/sm2.ts) and Flashcard Review Queue on /vocabulary per Spec §6.
+- Changed:
+  - `src/lib/srs/types.ts`: defined `SRSRating`, `SRSState`, `UserVocabularySRSItem`, `SM2CalculationInput`, and `SM2CalculationResult`.
+  - `src/lib/srs/sm2.ts`: implemented pure SM-2 algorithm (`ratingToQuality`, `calculateSM2`, `createDefaultSRSState`, `getDueReviewItems`) adhering to `ECP_Exercises_SRS_Spec.md` §6.2.
+  - `src/components/learning/ReviewQueue.tsx`: created full-featured interactive SRS review flashcard component with front/back flip, Web Speech audio pronunciation, 4 rating buttons (`again`, `hard`, `good`, `easy`) showing scheduled interval previews, progress tracking, and celebratory "Nothing due today" empty state.
+  - `src/app/globals.css`: added `@utility text-chip-mono` and `@utility practice-header-row` (frozen `.rainbow-border` preserved with zero byte diff).
+  - `src/app/(app)/vocabulary/page.tsx`: added view switcher tabs between "সংরক্ষিত শব্দাবলী" (Saved Words) and "দৈনিক ফ্ল্যাশকার্ড রিভিউ" (SRS Flashcards) with real-time due counter badge.
+  - `tests/srs-sm2.test.mjs`: authored comprehensive unit test suite covering rating quality mapping, first success (1 day), second success (6 days), subsequent intervals ($I \times EF$), stage cap at 8, failure reset (again -> stage 0, lapseCount+1), ease floor at 1.30, due queue filtering/ordering, and empty queue handling.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token audit violations across all rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (66/66 tests passing across all test suites).
+  - `npm run build`: Passed (all 83/83 static routes compiled successfully).
+- Commit: b461a0d
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 2B (Sentence Builder Practice Mode) Completed & Verified
 - Requested by owner: Milestone 2B — Sentence Builder: Build interactive word-chunk reordering practice mode with tap/keyboard controls, hints, and accepted orders per ECP_Exercises_SRS_Spec.md §4.2 & §5.
