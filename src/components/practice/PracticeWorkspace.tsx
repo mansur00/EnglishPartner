@@ -10,6 +10,7 @@ import {
   UserGroupIcon,
   ArrowRight01Icon,
   Sorting01Icon,
+  SortByDown02Icon,
 } from "@hugeicons/core-free-icons";
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
 import {
@@ -17,11 +18,15 @@ import {
   ListeningQuizQuestion,
   CompleteLineExercise,
   SentenceBuilderExercise,
+  DialogueOrderExercise,
+  DialogueOrderTurn,
 } from "@/content/seed/exercises";
 import { ListeningQuizCard } from "./ListeningQuizCard";
 import { HideSpeakerPractice } from "./HideSpeakerPractice";
 import { CompleteLineCard } from "./CompleteLineCard";
 import { SentenceBuilderCard } from "./SentenceBuilderCard";
+import { DialogueOrderCard } from "./DialogueOrderCard";
+import { shuffleDialogueTurns } from "@/lib/practice/dialogue-order";
 import { Button } from "@/components/ui/button";
 
 interface PracticeWorkspaceProps {
@@ -41,7 +46,7 @@ export function PracticeWorkspace({
   nextStepSlug,
   nextStepTitle,
 }: PracticeWorkspaceProps) {
-  const [activeTab, setActiveTab] = useState<"quiz" | "builder" | "roleplay" | "blanks">("quiz");
+  const [activeTab, setActiveTab] = useState<"quiz" | "builder" | "order" | "roleplay" | "blanks">("quiz");
 
   const exerciseData = getExercisesForStep(stepSlug);
 
@@ -116,6 +121,28 @@ export function PracticeWorkspace({
 
   const activeSentenceBuilders = exerciseData?.sentenceBuilders || fallbackSentenceBuilders;
 
+  // Fallback dialogue order exercise from dialogue lines
+  const fallbackDialogueOrder: DialogueOrderExercise = (() => {
+    const turns: DialogueOrderTurn[] = lines.slice(0, 4).map((line, idx) => ({
+      id: `${stepSlug}-turn-${idx + 1}`,
+      correctSequence: idx + 1,
+      speakerName: line.speakerName,
+      speakerRole: line.speakerRole,
+      englishText: line.englishText,
+      translationBn: line.translationBn,
+    }));
+
+    return {
+      id: `${stepSlug}-auto-order`,
+      stepSlug,
+      title: "Arrange Conversation Turns",
+      titleBn: "সংলাপটি সঠিক ক্রমানুসারে সাজান",
+      shuffledTurns: shuffleDialogueTurns(turns),
+    };
+  })();
+
+  const activeDialogueOrder = exerciseData?.dialogueOrder || fallbackDialogueOrder;
+
   return (
     <div className="space-y-6">
       {/* Mode Tabs */}
@@ -144,6 +171,19 @@ export function PracticeWorkspace({
         >
           <HugeiconsIcon icon={Sorting01Icon} size={16} />
           <span className="text-bangla">সেন্টেন্স বিল্ডার (Sentence Builder)</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("order")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
+            activeTab === "order"
+              ? "bg-primary text-primary-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+          }`}
+        >
+          <HugeiconsIcon icon={SortByDown02Icon} size={16} />
+          <span className="text-bangla">ডায়লগ ক্রমানুসার (Dialogue Order)</span>
         </button>
 
         <button
@@ -180,6 +220,10 @@ export function PracticeWorkspace({
 
       {activeTab === "builder" && (
         <SentenceBuilderCard exercises={activeSentenceBuilders} />
+      )}
+
+      {activeTab === "order" && (
+        <DialogueOrderCard exercise={activeDialogueOrder} />
       )}
 
       {activeTab === "roleplay" && (

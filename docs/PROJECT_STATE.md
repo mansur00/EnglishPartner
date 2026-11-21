@@ -188,6 +188,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 18. **[DONE] (commits f8d6718..7e723cc) No Hard-Code Migration Stage 2 (Steps 4-7):** Migrated all remaining pages and components (admin, auth, navigation/shell, dashboard, grammar, practice, vocabulary, reader, explore, category, professions, public terms/privacy), eliminated duplicated class strings (Rule f), completely removed `--ecp-*` tokens and backward-compatible aliases, reached 0 violations in `lint:tokens` across rules a to i, verified 0 unmutated elements across all 9 mutations in `token-mutation-test.mjs`, passed all 233 layout invariants in `test:layout`, generated `docs/design-tokens.md`.
 19. **[DONE] (commit ba66aa3) Milestone 2B — Sentence Builder:** Interactive word-chunk reordering practice mode with pool and assembly slot, tap to place, tap to remove, hint with next accepted chunk, undo and reset controls, out-of-place chunk detection, Web Speech audio playback, zero hardcoded tokens, 57 unit tests passing.
 20. **[DONE] (commit b461a0d) Milestone 2E — Spaced Repetition (SRS) Review System:** Pure SM-2 algorithm in src/lib/srs/sm2.ts and src/lib/srs/types.ts, interactive flashcard queue with audio pronunciation, 4 rating buttons (again, hard, good, easy), interval previews, flip card animation, empty state, and vocabulary page integration with due badge & view switcher, 66 unit tests passing.
+21. **[DONE] (commit 795e77c) Milestone 2C — Dialogue Ordering Practice Mode:** Dialogue turn sequencing and matching per Spec §4.3 in src/lib/practice/dialogue-order.ts, interactive DialogueOrderCard with swap/up/down controls, audio, hint, reset, undo, and feedback banners in src/components/practice/DialogueOrderCard.tsx, integrated into PracticeWorkspace with automatic fallback generator, seed data for shopping-money steps 01-03, 74 unit tests passing.
 
 ---
 
@@ -216,6 +217,24 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-21, Milestone 2C (Dialogue Ordering Practice Mode) Completed & Verified
+- Requested by owner: Milestone 2C: Dialogue Ordering Practice Mode — interactive dialogue turn sequencing and matching per Spec §4.3.
+- Changed:
+  - `src/lib/practice/dialogue-order.ts`: authored core dialogue ordering business logic (`validateDialogueOrder`, `moveDialogueTurn`, `shuffleDialogueTurns`, and `getDialogueOrderHint`) conforming to `ECP_Exercises_SRS_Spec.md` §4.3.
+  - `src/components/practice/DialogueOrderCard.tsx`: built full-featured interactive Dialogue Ordering component with position numbering, speaker chips, English/Bangla text, Web Speech audio pronunciation, accessible Up/Down controls, tap-to-swap selection, pedagogical hint alert, reset, undo, and comprehensive success/error feedback banners.
+  - `src/components/practice/PracticeWorkspace.tsx`: added "ডায়লগ ক্রমানুসার (Dialogue Order)" tab with automatic fallback generator covering all 20 conversation ladder steps.
+  - `src/content/seed/exercises.ts`: added curated dialogue ordering exercises for Step 02 ("Arrange the Size & Color Inquiry") and Step 03 ("Arrange Payment & Change Conversation") alongside existing Step 01.
+  - `tests/dialogue-order.test.mjs`: authored comprehensive unit test suite covering validation, misplaced index detection, up/down reordering, shuffling guarantee, hint calculation, and seed data integrity.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen .rainbow-border block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token audit violations across all rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (74/74 tests passing across all test suites).
+  - `npm run build`: Passed (all 83/83 static routes compiled successfully).
+- Commit: 795e77c
+- Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 2E (Spaced Repetition SRS Review System & Flashcards) Completed & Verified
 - Requested by owner: Milestone 2E — Spaced Repetition (SRS) Review System: Implement SM-2 algorithm (src/lib/srs/sm2.ts) and Flashcard Review Queue on /vocabulary per Spec §6.
