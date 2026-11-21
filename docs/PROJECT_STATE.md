@@ -161,6 +161,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `986c89e` | AUD-R3-TABLE: single findings table, counts computed from rows |
 | `27cfabd` | AUD-R3-RECONCILE: one commit per finding, all hashes verified |
 | `e56927d` | Phase 2 Checkpoint 2 (UI MVP): Sources registry, loader, fallback, useGrammar, GrammarText, GrammarToggleButton (.rainbow-border when ON), GrammarModeSwitch, GrammarLayerPicker, GrammarLegend, GrammarSummaryRow, RuleCardDialog, WordDetailPopover breakdown, 0.0000px layout shift, 16 screenshots |
+| `34726f2` | Milestone 2C — "What Should I Say?" (AI Intent & Expression Assistant): Schema S1 contract, deterministic intent engine (zero Gemini in product code per AUD-A11), POST /api/v1/ai/say-it, interactive WhatShouldISay UI with Expandable Design System, Web Speech audio, and unit tests |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -195,6 +196,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 25. **[DONE] (commit ed087be) Milestone 2C — Roleplay (Hide Speaker) & Complete Line Practice Modes:** Authored `src/lib/practice/complete-line.ts` and `src/lib/practice/hide-speaker.ts`, upgraded `HideSpeakerPractice.tsx` to conversational roleplay stream using `ChatBubble` (speaker="1" for partner, speaker="2" for learner), `EmojiTile`, `Tag`, role selection, and audio reveal per Spec §4.4, upgraded `CompleteLineCard.tsx` with `Tag` word chips, audio pronunciation, and `btn-restart-action` per Spec §4.5. 111 unit tests passing.
 26. **[DONE] (commit 8f66338) Milestone 1C+ — Audio Timing Manifest & Interactive Seek Bar (KI-13):** Authored `src/lib/audio/timing-manifest.ts` with duration estimation, sequential timestamp generation, and bidirectional percentage/time mapping per Audio Guide §5.2. Upgraded `src/components/learning/AudioPlayer.tsx` with interactive scrub bar (`role="slider"`, `aria-valuenow`, keyboard navigation, hover zoom), timing manifest synchronization, Pill badge line count, and eliminated cascading renders via render-time derived progress calculation. Reconciled `docs/AUDIT_REPORT.md` (KI-13 marked Fixed). 116 unit tests passing.
 27. **[DONE] (commit cfd5bdf) Milestone 1D — Faceted Pagination & Admin Unauthorized Access Guards (KI-10):** Authored `src/lib/pagination/faceted-pagination.ts` (safe boundary clamping, windowed page numbers with ellipsis), `src/components/discovery/FacetedPagination.tsx` (ARIA navigation, page controls, range indicator), and `src/lib/auth/admin-guard.ts` (role guards, unauthorized redirect URLs). Integrated faceted pagination into `ExplorePage` (page size 6) and `AdminDashboardClient` (page size 5), and added unauthorized access alert banners and editor return navigation. Reconciled `docs/AUDIT_REPORT.md` (KI-10 marked Fixed; Fixed=15, Not built yet=1, Total=25). 126 unit tests passing.
+28. **[DONE] (commit 34726f2) Milestone 2C — "What Should I Say?" (AI Intent & Expression Assistant):** Authored Schema S1 contract (`src/lib/ai/say-it-schema.ts`), deterministic intent resolution engine with Bangla/English support and placeholder injection (`src/lib/ai/say-it.ts`), `POST /api/v1/ai/say-it` API endpoint (`src/app/api/v1/ai/say-it/route.ts`), interactive UI (`src/components/tools/WhatShouldISay.tsx`) with Expandable Design System `InputGroup`, `Pill`, `Tag`, and `Button`, route `/what-should-i-say`, and sidebar navigation. 132 unit tests passing.
 
 ---
 
@@ -223,6 +225,26 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 2C — "What Should I Say?" Intent Assistant
+- Requested by owner: "now tmi jekhane shes korcila oikhan theke shuru koro, next step a jai amra" -> complete Milestone 2C ("What Should I Say?" / AI Expression Recommender) per ECP_Phase_Plan §5.1, ECP_AI_Prompt_Spec §3.4, and ECP_API_Contract §4.7.
+- Changed:
+  - `src/lib/ai/say-it-schema.ts`: Authored Schema S1 zod schemas and TypeScript types (`ToneEnum`, `SayItOptionSchema`, `SayItResponseSchema`, `SayItRequestSchema`).
+  - `src/lib/ai/say-it.ts`: Implemented deterministic intent resolution engine for Bangla and English inputs with placeholders (`[date]`, `[number of days]`, `[amount]`) adhering to AUD-A11 (zero Gemini imports in `src/`).
+  - `src/app/api/v1/ai/say-it/route.ts`: Built `POST /api/v1/ai/say-it` endpoint conforming to API contract.
+  - `src/components/tools/WhatShouldISay.tsx`: Built interactive UI component using Expandable Design System (`InputGroup`, `Pill`, `Tag`, `Button`), Web Speech API, copy-to-clipboard, and quick sample intent pills.
+  - `src/app/(app)/what-should-i-say/page.tsx`: Created page route with metadata.
+  - `src/components/navigation/Sidebar.tsx`: Added "What Should I Say?" sidebar link with `SparklesIcon`.
+  - `tests/what-should-i-say.test.mjs`: Added comprehensive unit test suite covering Schema S1 conformance, placeholders, Bangla parsing, clarifying questions, and fallbacks.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (132/132 unit tests passing across 18 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 87/87 static pages generated, including `/what-should-i-say` and `/api/v1/ai/say-it`).
+- Commit: 34726f2
+- Open questions / follow-ups: none.
 
 ### 2026-11-22, Cleanup of Obsolete and Unnecessary Files
 - Requested by owner: "je file gulo dorkar nei shegulo delete kore deo" -> delete all redundant, obsolete, and temporary files from root and repository.
