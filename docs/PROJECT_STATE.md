@@ -193,7 +193,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 23. **[DONE] (commit 6db085d) Expandable Design System Foundation:** Code-first shadcn/ui expandable system for Button, Input, Field, InputGroup, Badge, Pill, and Tag per user specification. Supports all variants (default, secondary, outline, ghost, destructive, link, cta, success, warning), all sizes (xs, sm, default/md, lg, icon, icon-xs, icon-sm, icon-lg), states (loading with spinner, pill, error), and composition patterns. 84 unit tests passing.
 24. **[DONE] (commit bd51c31) Milestone 2E Backend & UI Component Integration (KI-08):** Added `review_events`, `daily_challenges`, and `content_audit_logs` tables with migration `0002_elite_wrecker.sql`. Implemented SRS review event logging (`recordReviewEvent`, `/api/v1/srs/review-events`, `logReviewEventClient`), Daily Challenge selection per Spec §7 (`getOrCreateDailyChallenge`, `/api/v1/challenges/daily`), and migrated Vocabulary and Explore search & filters to Expandable Design System `InputGroup`, `Tag`, and `Pill`. 98 unit tests passing.
 25. **[DONE] (commit ed087be) Milestone 2C — Roleplay (Hide Speaker) & Complete Line Practice Modes:** Authored `src/lib/practice/complete-line.ts` and `src/lib/practice/hide-speaker.ts`, upgraded `HideSpeakerPractice.tsx` to conversational roleplay stream using `ChatBubble` (speaker="1" for partner, speaker="2" for learner), `EmojiTile`, `Tag`, role selection, and audio reveal per Spec §4.4, upgraded `CompleteLineCard.tsx` with `Tag` word chips, audio pronunciation, and `btn-restart-action` per Spec §4.5. 111 unit tests passing.
-26. **[DONE] Milestone 1C+ — Audio Timing Manifest & Interactive Seek Bar (KI-13):** Authored `src/lib/audio/timing-manifest.ts` with duration estimation, sequential timestamp generation, and bidirectional percentage/time mapping per Audio Guide §5.2. Upgraded `src/components/learning/AudioPlayer.tsx` with interactive scrub bar (`role="slider"`, `aria-valuenow`, keyboard navigation, hover zoom), timing manifest synchronization, Pill badge line count, and eliminated cascading renders via render-time derived progress calculation. Reconciled `docs/AUDIT_REPORT.md` (KI-13 marked Fixed). 116 unit tests passing.
+26. **[DONE] (commit 8f66338) Milestone 1C+ — Audio Timing Manifest & Interactive Seek Bar (KI-13):** Authored `src/lib/audio/timing-manifest.ts` with duration estimation, sequential timestamp generation, and bidirectional percentage/time mapping per Audio Guide §5.2. Upgraded `src/components/learning/AudioPlayer.tsx` with interactive scrub bar (`role="slider"`, `aria-valuenow`, keyboard navigation, hover zoom), timing manifest synchronization, Pill badge line count, and eliminated cascading renders via render-time derived progress calculation. Reconciled `docs/AUDIT_REPORT.md` (KI-13 marked Fixed). 116 unit tests passing.
 
 ---
 
@@ -237,7 +237,7 @@ Entry format:
   - `npx tsc --noEmit`: Passed (0 TypeScript errors).
   - `npm test`: Passed (116/116 tests passing across all 18 test suites).
   - `npm run build`: Passed (all 85/85 static and dynamic routes compiled successfully).
-- Commit: pending
+- Commit: 8f66338
 - Open questions / follow-ups: none.
 
 ### 2026-11-21, Milestone 2C (Roleplay / Hide Speaker & Complete Line Modes) Completed & Verified
