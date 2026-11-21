@@ -15,6 +15,7 @@ import {
   Bookmark02Icon,
   Analytics01Icon,
   Settings01Icon,
+  SparklesIcon,
 } from "@hugeicons/core-free-icons";
 
 interface NavItem {
@@ -53,6 +54,12 @@ export function Sidebar() {
       href: "/explore?category=workplace-business",
       icon: Briefcase01Icon,
       active: false,
+    },
+    {
+      name: "What Should I Say?",
+      href: "/what-should-i-say",
+      icon: SparklesIcon,
+      active: pathname === "/what-should-i-say",
     },
     {
       name: "AI Partner",
