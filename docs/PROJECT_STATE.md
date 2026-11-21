@@ -224,6 +224,24 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-22, Cleanup of Obsolete and Unnecessary Files
+- Requested by owner: "je file gulo dorkar nei shegulo delete kore deo" -> delete all redundant, obsolete, and temporary files from root and repository.
+- Changed:
+  - Deleted stale root copies of `design-tokens.css` and `tailwind-theme-v4.css` (canonical files live in `english-partner/src/styles/`).
+  - Deleted legacy `tailwind-theme-v3.example.cjs` (Tailwind v3 retired per D-04; project uses Tailwind v4).
+  - Deleted unreferenced browser downloads (`download.png`, `download (1).png`, `download (2).png`) and `.DS_Store`.
+  - Deleted build/test artifacts `english-partner/audit-no-hardcode-report.json`, `english-partner/mutation-test-report.json`, `english-partner/logs/server.log`.
+  - Added `audit-no-hardcode-report.json` and `mutation-test-report.json` to `.gitignore`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (126/126 unit tests passing across all 18 test suites).
+  - Clean root directory verified (only `AGENTS.md`, `Conversation/`, `docs/`, and `english-partner/` remain).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-22, Workspace Markdown Files Reorganization
 - Requested by owner: "file gulo akhon age guciye neo md file gulo doc folder a jniye asho aivabe filte gucao age" -> clean up workspace root by moving all loose specification markdown files into `docs/` and synchronizing with `english-partner/docs/specs/`.
 - Changed:

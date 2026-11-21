@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+audit-no-hardcode-report.json
+mutation-test-report.json
 
 # next.js
 /.next/
