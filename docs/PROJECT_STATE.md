@@ -1145,6 +1145,23 @@ Entry format:
 - Commit: `98485fe`
 - Open questions / follow-ups: Stopped after item 8 per owner instruction. Awaiting approval to proceed to Phase 1E (landing page) or Phase 2 (grammar color-coding).
 
+### 2026-11-22, Comprehensive Button, Pill & Badge WCAG AA/AAA Contrast Alignment
+- Requested by owner: Set button colors, font and icon colors, check and fix contrast across buttons, labels, pills, and badges in both Light mode and Dark mode.
+- Changed:
+  - `src/app/globals.css`: Added `--destructive-foreground: #FFFFFF;` (Light) and `--destructive-foreground: #2A0F44;` (Dark) with mapped `--color-destructive-foreground` token.
+  - `src/components/ui/button-variants.ts`: Replaced hardcoded dark purple hover in `default` variant with `hover:bg-primary/90 active:bg-primary/80` ensuring dark-mode hover preserves >6.8:1 legibility; updated `secondary` variant to `dark:bg-muted dark:text-foreground` (14.06:1 contrast in dark mode).
+  - `src/components/ui/badge-variants.ts`: Fixed `brand` badge dark mode text from low-contrast `dark:text-primary-foreground` to high-contrast `dark:text-primary` (6.5:1 contrast); fixed `destructive` badge to `dark:bg-destructive/25 dark:text-destructive` (5.8:1 contrast).
+  - Verified SVG icons in all variants inherit `currentColor` so icons strictly match text contrast.
+- Verified with:
+  - Full WCAG 2.1 relative luminance script: 100% of button, badge, and pill variants pass WCAG AA (>= 4.5:1) and AAA (>= 7:1) in both Light mode and Dark mode.
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (203/203 unit tests passing across 41 suites).
+- Commit: `916f2f5`
+- Open questions / follow-ups: None.
+
 ### 2026-11-22, Screenshot UI Review & Shadcn Harmonization Overhaul
 - Requested by owner: Review 5 live screenshots showing broken button consistency, poor contrast, irregular spacing, and chaotic turn toolbar actions. Fix based strictly on shadcn design system and background XOR stroke rule.
 - Changed:
