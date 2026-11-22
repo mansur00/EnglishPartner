@@ -10,12 +10,12 @@ export const buttonVariants = cva(
         secondary:
           "bg-brand-100 text-brand-800 hover:bg-brand-200 active:bg-brand-300 dark:bg-accent dark:text-accent-foreground font-semibold",
         outline:
-          "border border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border border-border bg-transparent hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border dark:bg-transparent dark:hover:bg-muted/50",
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "bg-transparent hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-xs",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "bg-transparent text-primary underline-offset-4 hover:underline",
         // Extended & brand-specific variants
         cta: "bg-cta bg-cta-hover active:bg-sun-600 shadow-sm font-semibold",
         primary:

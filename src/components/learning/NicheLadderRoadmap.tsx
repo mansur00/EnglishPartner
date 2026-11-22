@@ -65,7 +65,7 @@ export function NicheLadderRoadmap({
   return (
     <PageContainer className="space-y-8 pb-16">
       {/* Niche Hero Header */}
-      <div className="p-6 sm:p-8 rounded-card bg-card border border-border shadow-xs space-y-4">
+      <div className="p-6 sm:p-8 rounded-card bg-card shadow-xs space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="brand" size="sm">
             Niche 01 • Pilot Track
@@ -133,7 +133,7 @@ export function NicheLadderRoadmap({
                   return (
                     <div
                       key={step.stepSlug}
-                      className="p-5 rounded-card bg-card border border-border hover:border-primary hover:shadow-xs transition-all flex flex-col justify-between group"
+                      className="p-5 rounded-card bg-card hover:shadow-xs transition-all flex flex-col justify-between group"
                     >
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">

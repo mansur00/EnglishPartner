@@ -428,7 +428,7 @@ export function RoleplayPartner() {
       </div>
 
       {/* Voice Mode & Speed Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-panel bg-muted/40 border border-border">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-panel bg-muted/40">
         {/* Voice Mode Toggle */}
         <div className="flex items-center gap-2">
           <Button
@@ -480,7 +480,7 @@ export function RoleplayPartner() {
       </div>
 
       {/* Roleplay Context Card */}
-      <Card className="p-4 bg-muted/30 border border-border rounded-panel flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <Card className="p-4 bg-muted/40 rounded-panel flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-pill bg-primary/10 text-primary">
             <HugeiconsIcon icon={BotIcon} size={20} />
@@ -515,7 +515,7 @@ export function RoleplayPartner() {
       </Card>
 
       {/* Main Conversation Stream */}
-      <Card className="p-4 sm:p-6 bg-card border border-border rounded-card space-y-4 min-h-96 flex flex-col justify-between shadow-xs">
+      <Card className="p-4 sm:p-6 bg-card rounded-card space-y-4 min-h-96 flex flex-col justify-between shadow-xs">
         <div className="space-y-4 overflow-y-auto max-h-96 pr-1">
           {messages.map((msg, idx) => {
             const isAi = msg.speaker === "ai";
@@ -564,7 +564,7 @@ export function RoleplayPartner() {
 
                 {/* Inline Gentle Correction (Brief §9.2) */}
                 {msg.correction && (
-                  <div className="mt-1 p-2.5 rounded-panel bg-warning-bg border border-warning/30 text-meta text-bangla max-w-sm space-y-1 animate-in fade-in">
+                  <div className="mt-1 p-2.5 rounded-panel bg-warning-bg text-meta text-bangla max-w-sm space-y-1 animate-in fade-in">
                     <div className="flex items-center gap-1.5 text-label text-foreground">
                       <HugeiconsIcon icon={SparklesIcon} size={14} className="text-warning shrink-0" />
                       <span>জেন্টল কারেকশন (Friendly Tip):</span>
@@ -584,7 +584,7 @@ export function RoleplayPartner() {
 
         {/* Live Audio & Speaking Status Indicator */}
         {isAiSpeaking && (
-          <div className="flex items-center justify-between p-2.5 rounded-panel bg-primary/10 border border-primary/20 text-primary text-chip animate-in fade-in">
+          <div className="flex items-center justify-between p-2.5 rounded-panel bg-primary/10 text-primary text-chip animate-in fade-in">
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-pill bg-primary animate-ping" />
               <span className="text-bangla">{voiceCue.labelBn}</span>
@@ -603,7 +603,7 @@ export function RoleplayPartner() {
 
         {/* Inline Mic Access Error Banner */}
         {micError && (
-          <div className="flex items-center justify-between p-3 rounded-panel bg-destructive/10 border border-destructive/20 text-destructive text-chip animate-in fade-in">
+          <div className="flex items-center justify-between p-3 rounded-panel bg-destructive/10 text-destructive text-chip animate-in fade-in">
             <p className="text-bangla">{micError}</p>
             <button
               type="button"
@@ -617,7 +617,7 @@ export function RoleplayPartner() {
 
         {/* Inline Hint Banner */}
         {activeHint && !feedback && (
-          <div className="p-3 rounded-panel bg-primary/5 border border-primary/20 flex items-center justify-between gap-2 text-chip text-bangla animate-in fade-in">
+          <div className="p-3 rounded-panel bg-primary/10 flex items-center justify-between gap-2 text-chip text-bangla animate-in fade-in">
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={HelpCircleIcon} size={15} className="text-primary shrink-0" />
               <span className="text-foreground">{activeHint}</span>
@@ -653,7 +653,7 @@ export function RoleplayPartner() {
 
             {/* Session Turn Limit Notice per ECP_API_Contract §4.7 */}
             {messages.filter((m) => m.speaker === "learner").length >= 20 && (
-              <div className="p-2.5 rounded-control bg-primary/10 border border-primary/20 text-chip text-primary flex items-center justify-between gap-2">
+              <div className="p-2.5 rounded-control bg-primary/10 text-chip text-primary flex items-center justify-between gap-2">
                 <span>সেশনের ২০টি কথোপকথন পূর্ণ হয়েছে। অগ্রগতি দেখতে সেশন সমাপ্ত করুন।</span>
                 <Button
                   variant="default"
@@ -727,7 +727,7 @@ export function RoleplayPartner() {
 
       {/* Session Feedback Summary Modal/Card (Schema F1) */}
       {feedback && (
-        <Card className="p-6 bg-card border border-border rounded-card space-y-5 shadow-sm animate-in fade-in">
+        <Card className="p-6 bg-card rounded-card space-y-5 shadow-sm animate-in fade-in">
           <div className="flex items-center justify-between pb-3 border-b border-border flex-wrap gap-2">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-pill bg-success-bg text-success">
@@ -755,12 +755,12 @@ export function RoleplayPartner() {
           </div>
 
           {/* Bengali Summary */}
-          <div className="p-4 rounded-panel bg-muted/40 border border-border text-meta text-bangla leading-relaxed text-foreground">
+          <div className="p-4 rounded-panel bg-muted/40 text-meta text-bangla leading-relaxed text-foreground">
             {feedback.summary}
           </div>
 
           {/* Session Dialogue Audio Replay (Milestone 3B) */}
-          <div className="space-y-2 p-3.5 rounded-panel bg-muted/20 border border-border">
+          <div className="space-y-2 p-3.5 rounded-panel bg-muted/20">
             <FeedbackSectionHeader>
               Dialogue Replay (কথোপকথন অডিও রিভিশন)
             </FeedbackSectionHeader>
@@ -768,7 +768,7 @@ export function RoleplayPartner() {
               {messages.map((turn, tIdx) => (
                 <div
                   key={tIdx}
-                  className="flex items-center justify-between p-2 rounded-control bg-card border border-border text-chip"
+                  className="flex items-center justify-between p-2 rounded-control bg-card text-chip"
                 >
                   <span className="text-foreground">
                     <strong className="text-primary font-mono mr-1">
@@ -814,7 +814,7 @@ export function RoleplayPartner() {
                 {feedback.focus_areas.map((fa, fIdx) => (
                   <div
                     key={fIdx}
-                    className="p-3.5 rounded-panel border border-border bg-card space-y-1.5"
+                    className="p-3.5 rounded-panel bg-card space-y-1.5 shadow-2xs"
                   >
                     <div className="flex items-center justify-between">
                       <Tag variant="secondary" size="sm">
@@ -837,7 +837,7 @@ export function RoleplayPartner() {
           )}
 
           {/* Next Step */}
-          <div className="p-3.5 rounded-panel bg-primary/5 border border-primary/20 space-y-1 text-meta text-bangla">
+          <div className="p-3.5 rounded-panel bg-primary/10 space-y-1 text-meta text-bangla">
             <div className="flex items-center gap-1.5 text-label text-foreground">
               <HugeiconsIcon icon={Target01Icon} size={16} />
               <span>পরবর্তী পদক্ষেপ (Next Step):</span>

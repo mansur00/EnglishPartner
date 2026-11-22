@@ -26,7 +26,7 @@ export function TodayPanel({
   return (
     <div
       className={cn(
-        "w-full md:w-auto bg-band-panel border border-band-panel-border rounded-panel p-4 text-band-panel-ink shadow-xs space-y-3.5 min-w-0 sm:min-w-panel",
+        "w-full md:w-auto bg-band-panel rounded-panel p-4 text-band-panel-ink shadow-xs space-y-3.5 min-w-0 sm:min-w-panel",
         className
       )}
       {...props}

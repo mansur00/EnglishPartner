@@ -48,7 +48,7 @@ export default function ProfessionsIndexPage() {
         {ALL_PROFESSIONS.map((profession) => (
           <Card
             key={profession.slug}
-            className="p-5 md:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-2xs hover:border-primary/40 transition-colors"
+            className="p-5 md:p-6 bg-card rounded-card flex flex-col justify-between space-y-4 shadow-2xs hover:shadow-xs transition-all"
           >
             <div className="space-y-3">
               {/* Top Meta Row */}

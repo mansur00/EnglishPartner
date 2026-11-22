@@ -108,7 +108,7 @@ export function Sidebar() {
                     <HugeiconsIcon icon={item.icon} size={20} />
                     <span>{item.name}</span>
                   </div>
-                  <span className="text-chip bg-muted text-muted-foreground px-2 py-0.5 rounded-pill border border-border">
+                  <span className="text-chip bg-muted text-muted-foreground px-2 py-0.5 rounded-pill">
                     {t("landing.soon")}
                   </span>
                 </div>
@@ -139,7 +139,7 @@ export function Sidebar() {
       </div>
 
       <div className="pt-4 border-t border-border mt-auto">
-        <div className="p-4 bg-muted/50 rounded-panel border border-border space-y-1">
+        <div className="p-4 bg-muted/50 rounded-panel space-y-1">
           <p className="text-meta font-heading text-foreground">
             Active Learning Path
           </p>

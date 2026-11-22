@@ -148,7 +148,7 @@ export function PracticeWorkspace({
   return (
     <div className="space-y-6">
       {/* Mode Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card border border-border rounded-panel shadow-2xs">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card rounded-panel shadow-2xs">
         <button
           type="button"
           onClick={() => setActiveTab("quiz")}
@@ -255,7 +255,7 @@ export function PracticeWorkspace({
 
       {/* Advance to Next Step Banner */}
       {nextStepSlug && (
-        <div className="p-5 rounded-card bg-card border border-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+        <div className="p-5 rounded-card bg-card flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
           <div className="flex items-center gap-3">
             <div className="size-control rounded-control bg-success-bg text-success flex items-center justify-center shrink-0">
               <HugeiconsIcon icon={SparklesIcon} size={20} />

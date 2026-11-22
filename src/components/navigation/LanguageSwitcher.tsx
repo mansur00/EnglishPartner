@@ -153,7 +153,7 @@ export function LanguageSwitcher() {
         aria-expanded={isOpen}
         aria-label="Select translation & interface language"
         onClick={() => setIsOpen(!isOpen)}
-        className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3 rounded-pill border border-border bg-card text-label text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
+        className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3 rounded-pill border border-border bg-transparent text-label text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
       >
         <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary shrink-0" />
         <span className="font-heading text-card-title">{currentMeta.nativeName}</span>
@@ -168,7 +168,7 @@ export function LanguageSwitcher() {
         <div
           role="menu"
           aria-orientation="vertical"
-          className="absolute right-0 mt-1.5 w-sidebar rounded-card border border-border bg-card p-2 shadow-card z-modal animate-in fade-in zoom-in-95 duration-fast"
+          className="absolute right-0 mt-1.5 w-sidebar rounded-card bg-card p-2 shadow-card z-modal animate-in fade-in zoom-in-95 duration-fast"
         >
           <div className="px-3 py-1.5 mb-1 border-b border-border">
             <p className="text-chip text-muted-foreground uppercase tracking-wide">

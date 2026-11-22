@@ -157,7 +157,7 @@ function VocabularyContent() {
   return (
     <PageContainer className="space-y-6 pb-16">
       {/* Top Banner / Heading */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 md:p-6 rounded-card bg-card border border-border shadow-2xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 md:p-6 rounded-card bg-card shadow-2xs">
         <div className="flex items-center gap-3.5">
           <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
             <HugeiconsIcon icon={Book01Icon} size={24} />
@@ -185,7 +185,7 @@ function VocabularyContent() {
       </div>
 
       {/* Guest Mode Notice */}
-      <div className="flex items-center justify-between gap-3 p-4 rounded-panel bg-primary/5 border border-primary/20 text-chip text-muted-foreground text-bangla">
+      <div className="flex items-center justify-between gap-3 p-4 rounded-panel bg-primary/10 text-chip text-muted-foreground text-bangla">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={SparklesIcon} size={16} className="text-sun-500 shrink-0" />
           <span>
@@ -202,7 +202,7 @@ function VocabularyContent() {
       </div>
 
       {/* Mode View Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card border border-border rounded-panel shadow-2xs">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card rounded-panel shadow-2xs">
         <button
           type="button"
           onClick={() => setActiveView("words")}
@@ -294,7 +294,7 @@ function VocabularyContent() {
           {filteredEntries.map((item) => (
             <div
               key={item.lemma}
-              className="p-5 rounded-card bg-card border border-border shadow-2xs hover:shadow-xs hover:border-primary/40 transition-all flex flex-col justify-between"
+              className="p-5 rounded-card bg-card shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between"
             >
               <div>
                 {/* Word & Audio */}

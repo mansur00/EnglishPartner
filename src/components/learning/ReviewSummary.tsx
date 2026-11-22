@@ -50,7 +50,7 @@ export function ReviewSummary({
   };
 
   return (
-    <div className="mt-8 rounded-card bg-card border border-border p-6 sm:p-8 shadow-xs">
+    <div className="mt-8 rounded-card bg-card p-6 sm:p-8 shadow-xs">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-border">
         <div className="flex items-center gap-3.5">

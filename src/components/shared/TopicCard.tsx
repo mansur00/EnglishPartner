@@ -11,8 +11,7 @@ export function TopicCard({ topic, className, children, ...props }: TopicCardPro
     <Card
       data-topic={topic}
       className={cn(
-        "rounded-card border border-border bg-card shadow-card transition-all",
-        topic && "hover:border-topic-border",
+        "rounded-card bg-card shadow-card transition-all",
         className
       )}
       {...props}

@@ -83,7 +83,7 @@ export function GrammarLayerPicker({
     <Popover>
       <PopoverTrigger
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 min-h-tap min-w-tap px-2.5 py-1.5 rounded-control border border-border bg-card/60 hover:bg-card text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "inline-flex items-center justify-center gap-1.5 min-h-tap min-w-tap px-2.5 py-1.5 rounded-control bg-card hover:bg-muted text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-2xs",
           className
         )}
         aria-label={isBn ? "ব্যাকরণ লেয়ার ও সেটিংস" : "Grammar Layers & Settings"}
@@ -97,7 +97,7 @@ export function GrammarLayerPicker({
       <PopoverContent
         align="end"
         side="bottom"
-        className="w-80 p-4 space-y-4 bg-popover text-popover-foreground rounded-panel border border-border shadow-md"
+        className="w-80 p-4 space-y-4 bg-popover text-popover-foreground rounded-panel shadow-md"
       >
         <PopoverHeader className="pb-2 border-b border-border flex items-center justify-between">
           <PopoverTitle className="text-card-title font-bangla text-bangla">

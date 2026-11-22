@@ -53,7 +53,7 @@ export function GrammarLegend({
   return (
     <div
       className={cn(
-        "p-3 rounded-panel border border-border bg-card/60 space-y-2.5",
+        "p-3 rounded-panel bg-card space-y-2.5 shadow-2xs",
         className
       )}
     >

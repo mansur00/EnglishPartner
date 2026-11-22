@@ -275,10 +275,10 @@ function SentenceBuilderQuestionView({
                   className={cn(
                     "px-3.5 py-2 rounded-control text-label transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs",
                     isChunkCorrect
-                      ? "bg-success-bg text-success border border-success/40"
+                      ? "bg-success-bg text-success"
                       : isMisplaced
-                      ? "bg-destructive/10 text-destructive border border-destructive/50 ring-1 ring-destructive/30"
-                      : "bg-card border border-border text-foreground hover:border-primary/50 hover:bg-muted/50"
+                      ? "bg-destructive/10 text-destructive"
+                      : "bg-card text-foreground hover:bg-muted/50"
                   )}
                   title={isCorrect ? undefined : "ফেরত পাঠাতে ট্যাপ করুন"}
                 >
@@ -298,7 +298,7 @@ function SentenceBuilderQuestionView({
         <span className="text-chip text-muted-foreground text-bangla">
           ব্যবহারযোগ্য শব্দাংশ (Word Pool):
         </span>
-        <div className="flex flex-wrap items-center gap-2.5 p-3 rounded-panel bg-muted/20 border border-border min-h-slot">
+        <div className="flex flex-wrap items-center gap-2.5 p-3 rounded-panel bg-muted/20 min-h-slot">
           {availableChunks.map((chunk) => (
             <button
               key={chunk.id}
@@ -309,7 +309,7 @@ function SentenceBuilderQuestionView({
                 "px-4 py-2 rounded-control text-label transition-all cursor-pointer shadow-2xs select-none",
                 chunk.isPlaced
                   ? "opacity-25 border border-dashed border-border bg-transparent pointer-events-none"
-                  : "bg-card border border-border text-foreground hover:border-primary hover:bg-muted/60 active:scale-95"
+                  : "bg-card text-foreground hover:bg-muted/60 active:scale-95"
               )}
             >
               {chunk.text}
@@ -345,7 +345,7 @@ function SentenceBuilderQuestionView({
             <button
               type="button"
               onClick={() => handleSpeak(currentItem.fullSentence)}
-              className="px-2.5 py-1 rounded-control bg-card border border-border text-foreground hover:bg-muted/60 text-chip flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+              className="px-2.5 py-1 rounded-control bg-card text-foreground hover:bg-muted/60 text-chip flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
               title="সম্পূর্ণ বাক্যটির অডিও শুনুন"
             >
               <HugeiconsIcon icon={VolumeHighIcon} size={14} className="text-primary" />

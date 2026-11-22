@@ -166,7 +166,7 @@ export function ConversationEditorClient({
   return (
     <div className="space-y-6 container-app pb-16">
       {/* Top Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-card border border-border rounded-panel shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-card rounded-panel shadow-2xs">
         <div className="flex items-center gap-3">
           <Link href={`/admin?role=${userRole}`}>
             <Button variant="ghost" size="sm" className="gap-1.5 text-label rounded-control -ml-2">
@@ -268,7 +268,7 @@ export function ConversationEditorClient({
       </Card>
 
       {/* Grammar Annotation & Pipeline Status */}
-      <Card className="p-4 bg-card border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-panel shadow-2xs">
+      <Card className="p-4 bg-card flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-panel shadow-2xs">
         <div className="flex items-center gap-3">
           <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
             <HugeiconsIcon icon={SparklesIcon} size={20} />

@@ -9,7 +9,7 @@ export function Panel({ variant = "default", className, children, ...props }: Pa
   return (
     <div
       className={cn(
-        "rounded-panel p-4 border border-border",
+        "rounded-panel p-4",
         variant === "default" && "bg-card text-card-foreground",
         variant === "topic" && "bg-topic-surface text-foreground",
         variant === "brand" && "bg-panel-brand text-foreground",

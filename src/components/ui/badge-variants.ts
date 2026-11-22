@@ -11,25 +11,25 @@ export const badgeVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
         outline:
-          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+          "border border-border bg-transparent text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
         ghost:
-          "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
+          "bg-transparent hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
         success:
-          "bg-status-success-bg text-status-success-ink border border-status-success-ink/20",
+          "bg-status-success-bg text-status-success-ink",
         warning:
-          "bg-status-warning-bg text-status-warning-ink border border-status-warning-ink/20",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-status-warning-bg text-status-warning-ink",
+        link: "bg-transparent text-primary underline-offset-4 hover:underline",
         // Additional brand & legacy variants
         brand:
-          "bg-primary/10 text-primary border border-primary/20 dark:bg-primary/20 dark:text-primary-foreground",
+          "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground",
         accent:
-          "bg-sun-100 text-brand-950 border border-sun-300 dark:bg-status-warning-bg dark:text-sun-300 dark:border-sun-700",
+          "bg-sun-100 text-brand-950 dark:bg-status-warning-bg dark:text-sun-300",
         peach:
-          "bg-topic-tile text-topic-ink border border-topic-border",
+          "bg-topic-tile text-topic-ink",
         neutral:
-          "bg-muted text-muted-foreground border border-border",
+          "bg-muted text-muted-foreground",
         error:
-          "bg-status-danger-bg text-status-danger-ink border border-status-danger-ink/20",
+          "bg-status-danger-bg text-status-danger-ink",
       },
       size: {
         sm: "h-5 px-2 text-chip",

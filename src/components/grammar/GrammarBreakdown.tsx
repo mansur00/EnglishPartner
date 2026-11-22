@@ -25,7 +25,7 @@ export function GrammarBreakdown({
     <div className={cn("space-y-4", className)}>
       {/* 1. Sentence Structure Summary */}
       {annotation.sentence && (
-        <div className="p-3 rounded-panel bg-muted/40 border border-border flex items-center justify-between text-chip">
+        <div className="p-3 rounded-panel bg-muted/40 flex items-center justify-between text-chip">
           <div>
             <span className="text-label text-muted-foreground block font-bangla text-bangla">
               {isBn ? "বাক্যের ধরন (Sentence Structure):" : "Sentence Structure:"}
@@ -104,7 +104,7 @@ export function GrammarBreakdown({
               return (
                 <div
                   key={group.id}
-                  className="p-2.5 rounded-control border border-border bg-card flex items-center justify-between text-chip"
+                  className="p-2.5 rounded-control bg-card flex items-center justify-between text-chip shadow-2xs"
                 >
                   <div>
                     <span className="text-label text-foreground font-bangla text-bangla block">

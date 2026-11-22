@@ -11,10 +11,10 @@ function Card({
   variant?: "default" | "warm" | "muted" | "bordered";
 }) {
   const variantStyles = {
-    default: "bg-card border border-border text-card-foreground shadow-card",
-    warm: "bg-card border border-sun-400/40 text-card-foreground shadow-card dark:border-sun-400/30",
-    muted: "bg-muted/50 border border-border text-card-foreground",
-    bordered: "bg-transparent border border-border text-card-foreground",
+    default: "bg-card text-card-foreground shadow-card",
+    warm: "bg-card text-card-foreground shadow-card",
+    muted: "bg-muted/70 text-card-foreground",
+    bordered: "bg-transparent border border-border text-card-foreground shadow-none",
   };
 
   return (

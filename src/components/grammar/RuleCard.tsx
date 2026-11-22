@@ -55,7 +55,7 @@ export function RuleCardDialog({
 
         {/* Formula Box */}
         {rule.formula && (
-          <div className="p-3.5 rounded-control bg-primary/5 border border-primary/20 space-y-1">
+          <div className="p-3.5 rounded-control bg-primary/10 space-y-1">
             <span className="text-grammar-header text-primary">
               {isBn ? "গঠন প্রণালী (Formula):" : "Formula:"}
             </span>
@@ -102,7 +102,7 @@ export function RuleCardDialog({
               {rule.examples.map((ex, idx) => (
                 <div
                   key={idx}
-                  className="p-2.5 rounded-control bg-muted/40 border border-border space-y-0.5"
+                  className="p-2.5 rounded-control bg-muted/40 space-y-0.5"
                 >
                   <p className="text-body text-foreground italic">
                     &ldquo;{ex.text}&rdquo;
@@ -120,7 +120,7 @@ export function RuleCardDialog({
 
         {/* Common Mistakes */}
         {rule.commonMistakes && rule.commonMistakes.length > 0 && (
-          <div className="p-3 rounded-control bg-destructive/5 border border-destructive/20 space-y-1">
+          <div className="p-3 rounded-control bg-destructive/10 space-y-1">
             <span className="text-grammar-header text-destructive">
               {isBn ? "সাধারণ ভুল যা এড়িয়ে চলবেন:" : "Common Mistakes:"}
             </span>

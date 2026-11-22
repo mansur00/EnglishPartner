@@ -86,7 +86,7 @@ export function DashboardClient() {
                     ✨ Daily Recommendation
                   </Badge>
                   <CefrChip level="A2" label="A2 • Elementary" />
-                  <span className="inline-flex items-center px-3 py-1 rounded-pill text-chip border border-topic-border bg-topic-tile text-topic-ink shadow-2xs">
+                  <span className="inline-flex items-center px-3 py-1 rounded-pill text-chip bg-topic-tile text-topic-ink shadow-2xs">
                     Shopping & Money
                   </span>
                 </div>
@@ -280,7 +280,7 @@ export function DashboardClient() {
             </div>
           </TopicCard>
         ) : (
-          <Card className="border border-dashed border-border bg-card p-6 md:p-8 rounded-card">
+          <Card className="bg-card p-6 md:p-8 rounded-card">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <div className="size-tile rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">

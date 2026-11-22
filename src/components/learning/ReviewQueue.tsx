@@ -272,7 +272,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
             <button
               type="button"
               onClick={() => handleSpeak(currentVocabEntry.word)}
-              className="p-2.5 rounded-control bg-card border border-border text-foreground hover:bg-muted/60 transition-all cursor-pointer shadow-2xs"
+              className="p-2.5 rounded-control bg-card text-foreground hover:bg-muted/60 transition-all cursor-pointer shadow-2xs"
               title="উচ্চারণ শুনুন"
               aria-label={`Listen to ${currentVocabEntry.word}`}
             >

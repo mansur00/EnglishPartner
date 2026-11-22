@@ -115,7 +115,7 @@ export default function ExplorePage() {
 
       {/* Search Input with Rainbow Border on Focus & Clear Button */}
       <div className={cn("rounded-control transition-all duration-200", isSearchFocused && "rainbow-border")}>
-        <InputGroup className="bg-card rounded-control border border-border shadow-xs">
+        <InputGroup className="bg-card rounded-control shadow-xs">
           <InputGroupPrefix>
             <HugeiconsIcon
               icon={Search01Icon}
@@ -192,7 +192,7 @@ export default function ExplorePage() {
       {isPending ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="p-7 rounded-card bg-card border border-border space-y-4">
+            <div key={i} className="p-7 rounded-card bg-card space-y-4 shadow-xs">
               <div className="flex items-center gap-3">
                 <Skeleton className="size-tile rounded-control" />
                 <div className="space-y-2 flex-1">

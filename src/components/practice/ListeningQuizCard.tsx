@@ -152,7 +152,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
     const summary = calculateQuizScore(questions.length, correctCount, skippedCount);
 
     return (
-      <Card className="p-6 sm:p-8 bg-card border border-border rounded-card text-center space-y-5 shadow-xs animate-in fade-in">
+      <Card className="p-6 sm:p-8 bg-card rounded-card text-center space-y-5 shadow-xs animate-in fade-in">
         <div className="p-3 mx-auto rounded-pill bg-primary/10 text-primary inline-flex items-center justify-center">
           <HugeiconsIcon icon={SparklesIcon} size={28} />
         </div>
@@ -221,7 +221,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
   const hasAnswered = !!evaluation;
 
   return (
-    <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs">
+    <Card className="p-5 sm:p-6 bg-card rounded-card space-y-5 shadow-xs">
       {/* Top Bar: Progress, Slow Audio Switch, and Audio Trigger */}
       <div className="flex items-center justify-between gap-3 pb-3 border-b border-border flex-wrap">
         <div className="flex items-center gap-2">

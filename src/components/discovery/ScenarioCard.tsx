@@ -43,7 +43,7 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
               </span>
               <div className="flex items-center gap-2 mt-1">
                 <CefrChip level={(scenario.level as CefrLevel) || "A2"} />
-                <span className="text-chip bg-muted text-muted-foreground px-2 py-0.5 rounded-pill border border-border">
+                <span className="text-chip bg-muted text-muted-foreground px-2 py-0.5 rounded-pill">
                   {coverageLine}
                 </span>
               </div>

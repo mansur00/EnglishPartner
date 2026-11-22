@@ -105,7 +105,7 @@ export function WhatShouldISay() {
       {/* Input Group with Rainbow Border on Focus */}
       <div className="space-y-3">
         <div className={cn("rounded-control transition-all duration-200", isFocused && "rainbow-border")}>
-          <InputGroup className="bg-card rounded-control border border-border shadow-xs">
+          <InputGroup className="bg-card rounded-control shadow-xs">
             <InputGroupPrefix>
               <HugeiconsIcon icon={SparklesIcon} size={18} className="text-muted-foreground" />
             </InputGroupPrefix>
@@ -177,7 +177,7 @@ export function WhatShouldISay() {
       {response && (
         <div className="space-y-4 pt-2">
           {/* Understood Intent Banner */}
-          <div className="p-3.5 rounded-panel bg-card border border-border flex items-start gap-2.5">
+          <div className="p-3.5 rounded-panel bg-card flex items-start gap-2.5 shadow-2xs">
             <HugeiconsIcon icon={HelpCircleIcon} size={18} className="text-primary shrink-0 mt-0.5" />
             <div className="text-chip text-foreground leading-relaxed">
               <span className="text-muted-foreground block text-chip uppercase tracking-wider mb-0.5">
@@ -196,7 +196,7 @@ export function WhatShouldISay() {
               return (
                 <Card
                   key={idx}
-                  className="p-4 sm:p-5 bg-card border border-border rounded-card space-y-3 shadow-xs hover:border-primary/40 transition-colors"
+                  className="p-4 sm:p-5 bg-card rounded-card space-y-3 shadow-xs transition-colors"
                 >
                   {/* Top Bar: Tone Tag and Actions */}
                   <div className="flex items-center justify-between gap-2">
@@ -261,7 +261,7 @@ export function WhatShouldISay() {
 
           {/* Useful Expressions Chips */}
           {response.useful_phrases && response.useful_phrases.length > 0 && (
-            <Card className="p-4 bg-muted/30 border border-border rounded-panel space-y-2.5">
+            <Card className="p-4 bg-muted/40 rounded-panel space-y-2.5">
               <span className="text-meta text-muted-foreground uppercase tracking-wider block">
                 Useful Expressions (কাজের কিছু শব্দগুচ্ছ)
               </span>
@@ -269,7 +269,7 @@ export function WhatShouldISay() {
                 {response.useful_phrases.map((phrase, pIdx) => (
                   <div
                     key={pIdx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-card border border-border text-chip shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-card text-chip shadow-2xs"
                   >
                     <span className="text-label text-foreground">{phrase.phrase}</span>
                     <span className="text-muted-foreground text-bangla">— {phrase.meaning}</span>

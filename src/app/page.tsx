@@ -34,7 +34,7 @@ function FeatureHighlightCard({
   return (
     <Card
       data-topic={topic}
-      className="p-5 md:p-6 rounded-card border border-border bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between"
+      className="p-5 md:p-6 rounded-card bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between"
     >
       <div className="space-y-3">
         <div className="size-tile rounded-control emoji-tile flex items-center justify-center">
@@ -136,7 +136,7 @@ export default function LandingPage() {
       <section className="bg-gradient-to-b from-brand-800 to-brand-900 text-band-panel-ink rounded-band pt-12 pb-18 md:pt-16 md:pb-22 px-4 sm:px-6 md:px-8">
         <div className="max-w-reading mx-auto text-center space-y-6">
           {/* Top Pill Chip */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill text-chip bg-band-panel border border-band-panel-border text-band-panel-ink shadow-2xs backdrop-blur-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill text-chip bg-band-panel text-band-panel-ink shadow-2xs backdrop-blur-xs">
             <HugeiconsIcon icon={SparklesIcon} size={16} className="text-sun-500" />
             <span>Spoken English for Native Bangla Speakers</span>
           </div>

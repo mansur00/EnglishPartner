@@ -235,7 +235,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
                   </div>
                 ) : (
                   <div className="space-y-2 pt-2 border-t border-border/60 animate-in fade-in">
-                    <div className="p-3 rounded-control bg-card border border-border shadow-2xs">
+                    <div className="p-3 rounded-control bg-card shadow-2xs">
                       <p className="text-card-title text-foreground font-sans italic">
                         &ldquo;{currentLine.englishText}&rdquo;
                       </p>

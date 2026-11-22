@@ -34,7 +34,7 @@ export function FilterBar({
   isFiltered,
 }: FilterBarProps) {
   return (
-    <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-card bg-card/95 backdrop-blur border border-border shadow-2xs">
+    <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-card bg-card/95 backdrop-blur shadow-2xs">
       <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-label mr-1">
         <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
         <span>{t("discovery.filters")}</span>

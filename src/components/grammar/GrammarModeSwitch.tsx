@@ -23,7 +23,7 @@ export function GrammarModeSwitch({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 px-3 py-1.5 rounded-control border border-border bg-card/60 backdrop-blur-xs select-none min-h-tap",
+        "inline-flex items-center gap-2 px-3 py-1.5 rounded-control bg-card shadow-2xs select-none min-h-tap",
         className
       )}
     >

@@ -20,9 +20,9 @@ export default function PrivacyPage() {
           </Button>
         </Link>
 
-        <Card className="p-6 sm:p-8 bg-card border-border space-y-6 shadow-xs rounded-card">
+        <Card className="p-6 sm:p-8 bg-card space-y-6 shadow-xs rounded-card">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip bg-success-bg text-success border border-success/30 mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip bg-success-bg text-success mb-2">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>Learner-First Privacy</span>
             </div>

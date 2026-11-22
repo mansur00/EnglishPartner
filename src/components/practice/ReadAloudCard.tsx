@@ -332,7 +332,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
       </div>
 
       {/* Target Sentence Display Box */}
-      <div className="p-6 rounded-card bg-card border border-border shadow-2xs space-y-3">
+      <div className="p-6 rounded-card bg-card shadow-2xs space-y-3">
         <div className="flex items-center gap-2">
           <span className="text-chip px-2.5 py-0.5 rounded-pill bg-primary/10 text-primary font-mono">
             {currentItem.speakerName} ({currentItem.speakerRole})
@@ -433,7 +433,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
 
         {/* Recorded Audio Playback & Pronunciation Assessment View */}
         {recordedAudioUrl && !isRecording && (
-          <div className="p-4 rounded-panel bg-card border border-border space-y-4">
+          <div className="p-4 rounded-panel bg-card shadow-2xs space-y-4">
             <div className="flex items-center justify-between gap-3 pb-3 border-b border-border/60">
               <div className="flex items-center gap-2">
                 <Button
@@ -575,7 +575,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
 
                 {/* Actionable Feedback Tips Banner */}
                 {pronunciationAssessment.actionableTipsBn.length > 0 && (
-                  <div className="space-y-1.5 p-3 rounded-panel bg-card border border-border/80">
+                  <div className="space-y-1.5 p-3 rounded-panel bg-card shadow-2xs">
                     <span className="text-chip font-mono text-muted-foreground uppercase">
                       Practice Tips • উন্নতির টিপস:
                     </span>

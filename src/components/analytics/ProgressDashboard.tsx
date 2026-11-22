@@ -132,7 +132,7 @@ export function ProgressDashboard() {
       {/* Top 4 KPI Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, idx) => (
-          <Card key={idx} className="p-4 sm:p-5 bg-card border border-border rounded-card space-y-3 shadow-xs">
+          <Card key={idx} className="p-4 sm:p-5 bg-card rounded-card space-y-3 shadow-xs">
             <div className="flex items-center justify-between">
               <span className="text-meta uppercase font-sans text-muted-foreground">
                 {kpi.label}
@@ -161,7 +161,7 @@ export function ProgressDashboard() {
       {/* Vocabulary Retention & Weekly Activity Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Vocabulary Retention Stages (SM-2 Breakdown) */}
-        <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs">
+        <Card className="p-5 sm:p-6 bg-card rounded-card space-y-4 shadow-xs">
           <div className="flex justify-between items-center pb-3 border-b border-border">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-pill bg-primary/10 text-primary">
@@ -223,7 +223,7 @@ export function ProgressDashboard() {
         </Card>
 
         {/* Weekly Practice Activity */}
-        <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs">
+        <Card className="p-5 sm:p-6 bg-card rounded-card space-y-4 shadow-xs">
           <div className="flex justify-between items-center pb-3 border-b border-border">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-pill bg-warning-bg text-warning">
@@ -303,7 +303,7 @@ export function ProgressDashboard() {
           {recommendations.map((rec) => (
             <Card
               key={rec.id}
-              className="p-5 bg-card border border-border rounded-card space-y-3 shadow-xs hover:border-primary/40 transition-colors flex flex-col justify-between"
+              className="p-5 bg-card rounded-card space-y-3 shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">

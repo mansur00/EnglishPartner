@@ -44,7 +44,7 @@ function GrammarItemCard({
   isMonospace?: boolean;
 }) {
   return (
-    <div className="p-2 rounded-control bg-card border border-border">
+    <div className="p-2 rounded-control bg-card shadow-2xs">
       <span className="text-muted-foreground block text-bangla">{title}</span>
       <span className={cn("text-foreground", isMonospace ? "font-mono" : "text-bangla")}>
         {value}
