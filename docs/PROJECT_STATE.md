@@ -257,6 +257,27 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-23, UI Contrast, Pill Standard & Background XOR Stroke Enforcement
+- Requested by owner: Review live screenshots, check button text contrast (light/dark mode), fix button consistency, standardize label/pill heights, and enforce authoritative "Background XOR Stroke" rule across reader, dashboard, explore, and popovers.
+- Changed:
+  - `src/lib/utils.ts`: Configured `extendTailwindMerge` to recognize custom semantic typography utilities (`text-page-title`, `text-hero-title`, `text-card-title`, `text-lead`, `text-body`, `text-meta`, `text-label`, `text-chip`, `text-stat`) under `classGroups["font-size"]`, preventing `cn()` from stripping `text-primary-foreground` and resolving the dark-on-dark text bug.
+  - `src/components/ui/button-variants.ts`: Enforced strict Background XOR Stroke rule (solid variants `default`, `cta`, `secondary`, `destructive`, `primary`, `accent` explicitly set `border-0`; stroked variants `outline` set `border border-border bg-transparent`; `ghost`/`link` set `border-0 bg-transparent`).
+  - `src/components/ui/badge-variants.ts`: Enforced `border-0` across all solid badge variants (`default`, `secondary`, `destructive`, `success`, `warning`, `brand`, `accent`, `peach`, `neutral`, `error`).
+  - `src/components/shared/CefrChip.tsx` & `src/components/discovery/ScenarioCard.tsx`: Standardized all pills to uniform 24px (`h-6 px-2.5 rounded-pill text-chip select-none shrink-0`).
+  - `src/app/(app)/conversations/[slug]/page.tsx`: Standardized scenario header badges to `size="default"` (24px pill), removed redundant `border-border` from card headers (`border-0 shadow-card`).
+  - `src/components/learning/ConversationReader.tsx`: Standardized top controls bar to `bg-card rounded-panel border-0 shadow-xs`.
+  - `src/components/learning/WordDetailPopover.tsx`: Word modal dialog converted to `bg-card border-0 shadow-lg`; word badges to `border-0 bg-muted/60`; "Save Word" button text verified white on `#4A1D6E` (12.41:1 contrast).
+  - `src/components/learning/AudioPlayer.tsx`: Removed border strokes from solid `bg-muted` speed and accent controls.
+- Verified with:
+  - Puppeteer live computed styles: Primary button text `#FFFFFF` on `#4A1D6E` = 12.41:1 (AAA Pass); CTA button text `#2A0F44` on `#FFD93D` = 12.19:1 (AAA Pass); Pill heights strictly 24px (`h-6`).
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 errors).
+  - `npm test`: Passed (203/203 unit tests passing across 41 suites).
+- Commit: `1af215f`
+- Open questions / follow-ups: none.
+
 ### 2026-11-22, Migration Journal Verification Suite & AUD-MIGRATE Audit Sync
 - Requested by owner: "next" -> verify database migration journal and synchronize migration tracking.
 - Changed:
