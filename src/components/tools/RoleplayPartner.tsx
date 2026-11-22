@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useTransition, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   BotIcon,
@@ -16,6 +16,7 @@ import {
   Award01Icon,
   Target01Icon,
   Mic01Icon,
+  CpuIcon,
 } from "@hugeicons/core-free-icons";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -161,8 +162,20 @@ export function RoleplayPartner() {
   const [micError, setMicError] = useState<string | null>(null);
   const [activeHint, setActiveHint] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<RoleplayFeedbackResponse | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
+  const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch("/api/v1/ai/status")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          setProviderInfo({ isLive: data.isLive, statusText: data.statusText });
+        }
+      })
+      .catch(() => {});
+  }, []);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
 
@@ -253,9 +266,9 @@ export function RoleplayPartner() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = (textToSend?: string) => {
+  const handleSendMessage = async (textToSend?: string) => {
     const text = (textToSend ?? inputMessage).trim();
-    if (!text || isPending || feedback) return;
+    if (!text || isLoading || feedback) return;
 
     setInputMessage("");
 
@@ -265,17 +278,42 @@ export function RoleplayPartner() {
       text: m.text,
     }));
 
-    startTransition(() => {
-      const response: RoleplayTurnResponse = generateRoleplayTurn({
-        scenario_id: selectedScenario.id,
-        scenario_title: selectedScenario.title,
-        scenario_context: selectedScenario.context,
-        ai_role: selectedScenario.aiRole,
-        learner_role: selectedScenario.learnerRole,
-        level: selectedScenario.level,
-        transcript,
-        learner_message: text,
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/v1/ai/roleplay/turn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          scenario_id: selectedScenario.id,
+          scenario_title: selectedScenario.title,
+          scenario_context: selectedScenario.context,
+          learning_objective: "Natural conversational dialogue practice",
+          ai_role: selectedScenario.aiRole,
+          learner_role: selectedScenario.learnerRole,
+          level: selectedScenario.level,
+          style: "casual",
+          transcript,
+          learner_message: text,
+          explanation_language: "bn",
+        }),
       });
+
+      let response: RoleplayTurnResponse;
+      if (res.ok) {
+        response = await res.json();
+      } else {
+        response = generateRoleplayTurn({
+          scenario_id: selectedScenario.id,
+          scenario_title: selectedScenario.title,
+          scenario_context: selectedScenario.context,
+          ai_role: selectedScenario.aiRole,
+          learner_role: selectedScenario.learnerRole,
+          level: selectedScenario.level,
+          transcript,
+          learner_message: text,
+        });
+      }
 
       const nextAiIndex = messages.length + 1;
 
@@ -304,10 +342,30 @@ export function RoleplayPartner() {
       if (response.turn_status === "learner_finished") {
         handleEndSession();
       }
-    });
+    } catch {
+      // Local fallback
+      const fallback = generateRoleplayTurn({
+        scenario_id: selectedScenario.id,
+        scenario_title: selectedScenario.title,
+        scenario_context: selectedScenario.context,
+        ai_role: selectedScenario.aiRole,
+        learner_role: selectedScenario.learnerRole,
+        level: selectedScenario.level,
+        transcript,
+        learner_message: text,
+      });
+
+      setMessages((prev) => [
+        ...prev,
+        { speaker: "learner", text, correction: fallback.correction },
+        { speaker: "ai", text: fallback.ai_reply, hint: fallback.hint },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleEndSession = () => {
+  const handleEndSession = async () => {
     stopAudio();
     if (messages.length === 0) return;
 
@@ -316,15 +374,43 @@ export function RoleplayPartner() {
       text: m.text,
     }));
 
-    startTransition(() => {
-      const fb = generateRoleplayFeedback({
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/v1/ai/roleplay/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          scenario_title: selectedScenario.title,
+          level: selectedScenario.level,
+          transcript,
+          learner_language: "bn",
+        }),
+      });
+
+      if (res.ok) {
+        const fb: RoleplayFeedbackResponse = await res.json();
+        setFeedback(fb);
+      } else {
+        const fallbackFb = generateRoleplayFeedback({
+          scenario_title: selectedScenario.title,
+          level: selectedScenario.level,
+          learner_language: "bn",
+          transcript,
+        });
+        setFeedback(fallbackFb);
+      }
+    } catch {
+      const fallbackFb = generateRoleplayFeedback({
         scenario_title: selectedScenario.title,
         level: selectedScenario.level,
         learner_language: "bn",
         transcript,
       });
-      setFeedback(fb);
-    });
+      setFeedback(fallbackFb);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const toggleSpeechRecognition = () => {
@@ -392,13 +478,24 @@ export function RoleplayPartner() {
       {/* Header & Scenario Selection */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-border">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <Tag variant="brand" size="sm">
               Milestones 2D &amp; 3B
             </Tag>
             <Pill variant="neutral" size="sm">
               AI Partner (Voice &amp; Text Roleplay)
             </Pill>
+            {providerInfo && (
+              <Pill
+                variant={providerInfo.isLive ? "brand" : "neutral"}
+                size="sm"
+                className="gap-1 font-mono text-chip"
+                title={providerInfo.statusText}
+              >
+                <HugeiconsIcon icon={CpuIcon} size={12} />
+                <span>{providerInfo.statusText}</span>
+              </Pill>
+            )}
           </div>
           <h1 className="text-page-title text-foreground">
             AI Voice &amp; Text Conversation Partner
@@ -506,7 +603,7 @@ export function RoleplayPartner() {
             variant="outline"
             size="sm"
             onClick={handleEndSession}
-            disabled={isPending}
+            disabled={isLoading}
             className="rounded-control text-chip text-destructive hover:bg-destructive/10 border-destructive/30"
           >
             <span>সেশন শেষ করুন (Get Feedback)</span>
@@ -643,7 +740,7 @@ export function RoleplayPartner() {
                   key={pIdx}
                   type="button"
                   onClick={() => handleSendMessage(prompt)}
-                  disabled={isPending}
+                  disabled={isLoading}
                   className="px-2.5 py-1 rounded-pill bg-muted/60 hover:bg-muted text-chip text-muted-foreground hover:text-foreground transition-colors cursor-pointer select-none"
                 >
                   {prompt}
@@ -659,6 +756,8 @@ export function RoleplayPartner() {
                   variant="default"
                   size="sm"
                   onClick={handleEndSession}
+                  disabled={isLoading}
+                  loading={isLoading}
                   className="rounded-control text-chip shrink-0"
                 >
                   Feedback
@@ -683,9 +782,11 @@ export function RoleplayPartner() {
                       ? "সেশনের সীমা পূর্ণ হয়েছে..."
                       : isListening
                       ? "Listening... Speak in English..."
+                      : isLoading
+                      ? "AI is thinking..."
                       : "Type your response or tap mic to speak..."
                   }
-                  disabled={isPending || messages.filter((m) => m.speaker === "learner").length >= 20}
+                  disabled={isLoading || messages.filter((m) => m.speaker === "learner").length >= 20}
                   className="rounded-control text-label"
                 />
                 <InputGroupSuffix>
@@ -694,7 +795,7 @@ export function RoleplayPartner() {
                     variant={isListening ? "destructive" : "ghost"}
                     size="sm"
                     onClick={toggleSpeechRecognition}
-                    disabled={isPending || messages.filter((m) => m.speaker === "learner").length >= 20}
+                    disabled={isLoading || messages.filter((m) => m.speaker === "learner").length >= 20}
                     title={isListening ? "Stop listening" : "Speak your message"}
                     className={cn(
                       "rounded-control text-chip px-2",
@@ -710,9 +811,10 @@ export function RoleplayPartner() {
                     size="sm"
                     disabled={
                       !inputMessage.trim() ||
-                      isPending ||
+                      isLoading ||
                       messages.filter((m) => m.speaker === "learner").length >= 20
                     }
+                    loading={isLoading}
                     className="rounded-control text-chip gap-1"
                   >
                     <HugeiconsIcon icon={SentIcon} size={14} />

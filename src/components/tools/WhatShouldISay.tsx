@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,7 @@ import {
   SentIcon,
   HelpCircleIcon,
   Cancel01Icon,
+  CpuIcon,
 } from "@hugeicons/core-free-icons";
 import { resolveSayItIntent } from "@/lib/ai/say-it";
 import type { SayItResponse, ToneType } from "@/lib/ai/say-it-schema";
@@ -32,21 +33,51 @@ const SAMPLE_INTENTS = [
 export function WhatShouldISay() {
   const [intentInput, setIntentInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
   const [response, setResponse] = useState<SayItResponse | null>(() =>
     resolveSayItIntent({ intent: "I want to tell my manager that I need two more days to finish the task." })
   );
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
-  const [isPending, startTransition] = useTransition();
 
-  const handleSearch = (textToResolve?: string) => {
+  useEffect(() => {
+    fetch("/api/v1/ai/status")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          setProviderInfo({ isLive: data.isLive, statusText: data.statusText });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSearch = async (textToResolve?: string) => {
     const query = (textToResolve ?? intentInput).trim();
-    if (!query) return;
+    if (!query || isLoading) return;
 
-    startTransition(() => {
-      const result = resolveSayItIntent({ intent: query });
-      setResponse(result);
-    });
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/v1/ai/say-it", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ intent: query }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`API error: ${res.status}`);
+      }
+
+      const data: SayItResponse = await res.json();
+      setResponse(data);
+    } catch {
+      // Seamless local fallback
+      const fallbackResult = resolveSayItIntent({ intent: query });
+      setResponse(fallbackResult);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCopy = (text: string, index: number) => {
@@ -89,13 +120,27 @@ export function WhatShouldISay() {
     <div className="space-y-6 w-full max-w-reading mx-auto">
       {/* Header Banner */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center">
-            <HugeiconsIcon icon={SparklesIcon} size={20} />
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center">
+              <HugeiconsIcon icon={SparklesIcon} size={20} />
+            </div>
+            <h1 className="text-page-title text-foreground">
+              What Should I Say?
+            </h1>
           </div>
-          <h1 className="text-page-title text-foreground">
-            What Should I Say?
-          </h1>
+
+          {providerInfo && (
+            <Pill
+              variant={providerInfo.isLive ? "brand" : "neutral"}
+              size="sm"
+              className="gap-1 font-mono text-chip"
+              title={providerInfo.statusText}
+            >
+              <HugeiconsIcon icon={CpuIcon} size={12} />
+              <span>{providerInfo.statusText}</span>
+            </Pill>
+          )}
         </div>
         <p className="text-meta-lead-bn">
           আপনি কী বলতে চান তা নিজের ভাষায় (ইংরেজি, বাংলা বা বাংলিশ) লিখুন; মুহূর্তেই পেয়ে যান মার্জিত ও স্বাভাবিক ইংরেজি বিকল্প।
@@ -164,7 +209,8 @@ export function WhatShouldISay() {
             variant="default"
             size="sm"
             onClick={() => handleSearch()}
-            disabled={!intentInput.trim() || isPending}
+            disabled={!intentInput.trim() || isLoading}
+            loading={isLoading}
             className="rounded-control gap-1.5 text-label btn-press"
           >
             <HugeiconsIcon icon={SentIcon} size={14} />
