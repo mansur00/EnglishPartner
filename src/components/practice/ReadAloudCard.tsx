@@ -11,6 +11,7 @@ import {
   RotateLeft01Icon,
   CheckmarkCircle01Icon,
   ArrowRight01Icon,
+  InformationCircleIcon,
 } from "@hugeicons/core-free-icons";
 import type { ReadAloudExercise } from "@/content/seed/exercises";
 import {
@@ -19,7 +20,14 @@ import {
   SELF_CHECK_RATINGS,
   SelfCheckRating,
 } from "@/lib/practice/read-aloud";
+import {
+  evaluatePronunciationQuality,
+  PronunciationAssessment,
+  PronunciationWordToken,
+} from "@/lib/practice/pronunciation";
 import { Button } from "@/components/ui/button";
+import { Pill } from "@/components/ui/pill";
+import { Tag } from "@/components/ui/tag";
 import { cn } from "@/lib/utils";
 
 interface ReadAloudCardProps {
@@ -59,8 +67,13 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
   const [recordedAudioUrl, setRecordedAudioUrl] = useState<string | null>(null);
   const [isPlayingRecorded, setIsPlayingRecorded] = useState(false);
   const [isPlayingModel, setIsPlayingModel] = useState(false);
+  const [isPlayingSlowModel, setIsPlayingSlowModel] = useState(false);
+  const [playingWord, setPlayingWord] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<string>("");
-  const [comparisonResult, setComparisonResult] = useState<SpokenComparisonResult | null>(null);
+  const [, setComparisonResult] = useState<SpokenComparisonResult | null>(null);
+  const [pronunciationAssessment, setPronunciationAssessment] =
+    useState<PronunciationAssessment | null>(null);
+  const [activeWordToken, setActiveWordToken] = useState<PronunciationWordToken | null>(null);
   const [selectedRating, setSelectedRating] = useState<SelfCheckRating | null>(null);
   const [micError, setMicError] = useState<string | null>(null);
 
@@ -87,27 +100,54 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
     };
   }, [recordedAudioUrl]);
 
-  // Model audio playback via Web Speech API
-  const handlePlayModel = useCallback(() => {
+  // Model audio playback via Web Speech API with configurable rate
+  const handlePlayModel = useCallback(
+    (rate = 0.85) => {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(currentItem.targetSentence);
+      utterance.lang = "en-US";
+      utterance.rate = rate;
+
+      if (rate < 0.8) {
+        utterance.onstart = () => setIsPlayingSlowModel(true);
+        utterance.onend = () => setIsPlayingSlowModel(false);
+        utterance.onerror = () => setIsPlayingSlowModel(false);
+      } else {
+        utterance.onstart = () => setIsPlayingModel(true);
+        utterance.onend = () => setIsPlayingModel(false);
+        utterance.onerror = () => setIsPlayingModel(false);
+      }
+
+      window.speechSynthesis.speak(utterance);
+    },
+    [currentItem.targetSentence]
+  );
+
+  // Isolated slow word playback
+  const handlePlayWord = useCallback((word: string) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
 
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(currentItem.targetSentence);
+    const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = "en-US";
-    utterance.rate = 0.85;
+    utterance.rate = 0.7;
 
-    utterance.onstart = () => setIsPlayingModel(true);
-    utterance.onend = () => setIsPlayingModel(false);
-    utterance.onerror = () => setIsPlayingModel(false);
+    setPlayingWord(word);
+    utterance.onend = () => setPlayingWord(null);
+    utterance.onerror = () => setPlayingWord(null);
 
     window.speechSynthesis.speak(utterance);
-  }, [currentItem.targetSentence]);
+  }, []);
 
   // Start recording
   const handleStartRecording = useCallback(async () => {
     setMicError(null);
     setTranscript("");
     setComparisonResult(null);
+    setPronunciationAssessment(null);
+    setActiveWordToken(null);
     setSelectedRating(null);
 
     if (recordedAudioUrl) {
@@ -137,7 +177,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
         stream.getTracks().forEach((track) => track.stop());
       };
 
-      // Optional browser speech recognition for transcript
+      // Optional browser speech recognition for transcript and word alignment
       if (typeof window !== "undefined") {
         const speechWindow = window as unknown as WindowWithSpeech;
         const SpeechRecognitionClass =
@@ -155,6 +195,18 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
               setTranscript(text);
               const comparison = compareSpokenSentence(text, currentItem.targetSentence);
               setComparisonResult(comparison);
+
+              const assessed = evaluatePronunciationQuality(
+                currentItem.targetSentence,
+                text
+              );
+              setPronunciationAssessment(assessed);
+
+              // Auto-select first tricky token if present
+              const firstTricky = assessed.tokens.find((t) => t.status !== "clear");
+              if (firstTricky) {
+                setActiveWordToken(firstTricky);
+              }
             };
 
             recognition.onerror = () => {
@@ -234,6 +286,8 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
     }
     setTranscript("");
     setComparisonResult(null);
+    setPronunciationAssessment(null);
+    setActiveWordToken(null);
     setSelectedRating(null);
     setIsPlayingRecorded(false);
     setRecordingDuration(0);
@@ -315,21 +369,37 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
       {/* Audio Interaction Area */}
       <div className="p-5 rounded-panel bg-muted/40 border border-border space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          {/* Model Audio Playback Button */}
-          <Button
-            variant="outline"
-            onClick={handlePlayModel}
-            disabled={isRecording}
-            className={cn(
-              "gap-2 rounded-control cursor-pointer",
-              isPlayingModel && "border-primary text-primary"
-            )}
-          >
-            <HugeiconsIcon icon={VolumeHighIcon} size={18} />
-            <span className="text-bangla">
-              {isPlayingModel ? "মডেল অডিও বাজছে..." : "মডেল অডিও শুনুন"}
-            </span>
-          </Button>
+          {/* Model Audio Playback Options */}
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              onClick={() => handlePlayModel(0.85)}
+              disabled={isRecording}
+              className={cn(
+                "gap-2 rounded-control cursor-pointer",
+                isPlayingModel && "border-primary text-primary"
+              )}
+            >
+              <HugeiconsIcon icon={VolumeHighIcon} size={18} />
+              <span className="text-bangla">
+                {isPlayingModel ? "মডেল অডিও বাজছে..." : "মডেল অডিও শুনুন"}
+              </span>
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => handlePlayModel(0.7)}
+              disabled={isRecording}
+              className={cn(
+                "gap-1.5 rounded-control cursor-pointer text-muted-foreground",
+                isPlayingSlowModel && "border-primary text-primary"
+              )}
+              title="ধীর গতিতে শুনুন (0.7x)"
+            >
+              <span className="text-bangla">ধীরে (0.7x)</span>
+            </Button>
+          </div>
 
           {/* Record / Stop Button */}
           {!isRecording ? (
@@ -361,7 +431,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
           </div>
         )}
 
-        {/* Recorded Audio Playback & Comparison View */}
+        {/* Recorded Audio Playback & Pronunciation Assessment View */}
         {recordedAudioUrl && !isRecording && (
           <div className="p-4 rounded-panel bg-card border border-border space-y-4">
             <div className="flex items-center justify-between gap-3 pb-3 border-b border-border/60">
@@ -395,34 +465,145 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
               </span>
             </div>
 
-            {/* Speech Recognition Comparison (when available) */}
-            {transcript && comparisonResult && (
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-chip text-muted-foreground">
-                    শনাক্ত হওয়া শব্দসমূহ:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {comparisonResult.tokens.map((tok, idx) => (
-                      <span
-                        key={idx}
-                        className={cn(
-                          "px-2 py-0.5 rounded-pill text-chip font-mono",
-                          tok.isMatched
-                            ? "bg-success-bg text-success border border-success/40"
-                            : "bg-muted text-muted-foreground border border-border"
-                        )}
-                      >
-                        {tok.word}
-                      </span>
-                    ))}
+            {/* Qualitative Pronunciation Analysis (Milestone 3C) */}
+            {pronunciationAssessment && (
+              <div className="space-y-4 pt-1">
+                {/* Status Bar: Qualitative Tier (No fake percentage) */}
+                <div className="flex flex-wrap items-center justify-between gap-2 p-3 rounded-panel bg-muted/50 border border-border">
+                  <div className="flex items-center gap-2">
+                    <Pill
+                      dot
+                      variant={
+                        pronunciationAssessment.tier === "clear"
+                          ? "success"
+                          : pronunciationAssessment.tier === "getting_there"
+                          ? "warning"
+                          : "secondary"
+                      }
+                    >
+                      {pronunciationAssessment.tierLabelBn} ({pronunciationAssessment.tierLabelEn})
+                    </Pill>
+                    <span className="text-chip text-muted-foreground">
+                      {pronunciationAssessment.clearWordsCount} / {pronunciationAssessment.totalWords} শব্দ স্পষ্ট
+                    </span>
+                  </div>
+
+                  <p className="text-chip-bn text-muted-foreground">
+                    {pronunciationAssessment.feedbackBn}
+                  </p>
+                </div>
+
+                {/* Word-Level Pronunciation Chips */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-label text-foreground text-bangla">
+                      শব্দভিত্তিক উচ্চারণ বিশ্লেষণ:
+                    </h4>
+                    <span className="text-chip-bn text-muted-foreground">
+                      শব্দে ক্লিক করে টিপস ও ধীর অডিও শুনুন
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {pronunciationAssessment.tokens.map((token, idx) => {
+                      const isSelected = activeWordToken?.clean === token.clean;
+                      return (
+                        <Tag
+                          key={`${token.clean}-${idx}`}
+                          selected={isSelected}
+                          variant={
+                            token.status === "clear"
+                              ? "outline"
+                              : token.status === "unclear"
+                              ? "warning"
+                              : "secondary"
+                          }
+                          onClick={() => setActiveWordToken(token)}
+                          className={cn(
+                            "cursor-pointer font-mono text-chip",
+                            token.status === "clear" &&
+                              "border-success/40 text-status-success-ink bg-status-success-bg/60",
+                            token.status === "missed" && "border-dashed"
+                          )}
+                        >
+                          {token.original}
+                        </Tag>
+                      );
+                    })}
                   </div>
                 </div>
 
-                <p className="text-meta-bn">
-                  💬 {comparisonResult.feedbackBn}
-                </p>
+                {/* Selected Word Detail & Bengali Phonetic Guide Card */}
+                {activeWordToken && (
+                  <div className="p-3.5 rounded-panel bg-muted/30 border border-border space-y-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-label text-foreground">
+                          &ldquo;{activeWordToken.clean}&rdquo;
+                        </span>
+                        {activeWordToken.phoneticGuide?.phoneticHint && (
+                          <span className="text-chip-mono">
+                            /{activeWordToken.phoneticGuide.phoneticHint}/
+                          </span>
+                        )}
+                        {activeWordToken.phoneticGuide?.ipa && (
+                          <span className="text-chip-mono text-muted-foreground">
+                            {activeWordToken.phoneticGuide.ipa}
+                          </span>
+                        )}
+                      </div>
+
+                      <Button
+                        size="xs"
+                        variant="outline"
+                        onClick={() => handlePlayWord(activeWordToken.clean)}
+                        className="gap-1.5 rounded-control cursor-pointer text-chip"
+                      >
+                        <HugeiconsIcon icon={VolumeHighIcon} size={12} />
+                        <span className="text-bangla">
+                          {playingWord === activeWordToken.clean ? "বাজছে..." : "আস্তে শুনুন (0.7x)"}
+                        </span>
+                      </Button>
+                    </div>
+
+                    <p className="text-chip-bn text-foreground">
+                      💡 {activeWordToken.phoneticGuide?.bengaliTip ||
+                        "শব্দটি মডেল অডিওর সাথে মিলিয়ে আরেকবার স্পষ্ট করে বলুন।"}
+                    </p>
+                  </div>
+                )}
+
+                {/* Actionable Feedback Tips Banner */}
+                {pronunciationAssessment.actionableTipsBn.length > 0 && (
+                  <div className="space-y-1.5 p-3 rounded-panel bg-card border border-border/80">
+                    <span className="text-chip font-mono text-muted-foreground uppercase">
+                      Practice Tips • উন্নতির টিপস:
+                    </span>
+                    <ul className="space-y-1">
+                      {pronunciationAssessment.actionableTipsBn.map((tip, idx) => (
+                        <li key={idx} className="text-chip-bn text-muted-foreground">
+                          • {tip}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Automated Audio Analysis Disclaimer (Brief §9.3 & §20) */}
+                <div className="flex items-start gap-2 p-2.5 rounded-panel bg-muted/20 border border-border/50 text-muted-foreground">
+                  <HugeiconsIcon icon={InformationCircleIcon} size={15} className="shrink-0 mt-0.5" />
+                  <p className="text-chip-bn">
+                    {pronunciationAssessment.disclaimerBn}
+                  </p>
+                </div>
               </div>
+            )}
+
+            {/* Fallback speech transcript if assessment not ready */}
+            {transcript && !pronunciationAssessment && (
+              <p className="text-meta text-muted-foreground">
+                শনাক্ত হওয়া পাঠ্য: &ldquo;{transcript}&rdquo;
+              </p>
             )}
 
             {/* Honest Self-Check Rating Buttons */}
