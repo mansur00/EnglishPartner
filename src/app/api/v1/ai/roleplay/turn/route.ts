@@ -1,4 +1,4 @@
-import { generateRoleplayTurn } from "../../../../../../lib/ai/roleplay.ts";
+import { generateRoleplayTurnAsync } from "../../../../../../lib/ai/roleplay.ts";
 import { RoleplayTurnRequestSchema } from "../../../../../../lib/ai/roleplay-schema.ts";
 import {
   globalQuotaStore,
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const response = generateRoleplayTurn(parsed.data);
+    const response = await generateRoleplayTurnAsync(parsed.data);
     return Response.json(response, { status: 200, headers: rateHeaders });
   } catch (error) {
     return Response.json(

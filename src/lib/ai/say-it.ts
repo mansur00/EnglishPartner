@@ -13,6 +13,7 @@ import {
   SayItRequestSchema,
   SayItResponseSchema,
 } from "./say-it-schema.ts";
+import { callStructuredLlm } from "./llm-client.ts";
 
 interface IntentRule {
   id: string;
@@ -287,4 +288,62 @@ export function resolveSayItIntent(rawRequest: SayItRequest): SayItResponse {
     ],
     clarifying_question: null,
   });
+}
+
+/**
+ * Async LLM-backed intent resolution with seamless deterministic fallback
+ * Conforms to ECP_AI_Prompt_Spec.md §3.4 (Task M7, Schema S1)
+ */
+export async function resolveSayItIntentAsync(
+  request: SayItRequest
+): Promise<SayItResponse> {
+  const trimmed = request.intent?.trim() || "";
+  if (!trimmed || trimmed.length < 3) {
+    return resolveSayItIntent(request);
+  }
+
+  const systemPrompt = `
+Task M7 — "What Should I Say?" Assistant
+The learner describes what they want to say. Provide natural, idiomatic English options.
+Rules:
+1. Preserve the learner's intended meaning strictly.
+2. Do NOT add commitments, dates, specific amounts, or facts the learner did not state.
+3. If the intent involves a commitment you cannot know (for example, a specific deadline or price), leave a placeholder like [date] or [amount].
+4. Return 2 to 3 natural options: at least one polite_professional and one casual, unless the situation is formal by nature.
+5. Max 5 useful_phrases with Bangla meanings.
+6. Target explanation language: Bengali (Bangla).
+7. Output JSON strictly matching Schema S1:
+{
+  "understood_intent": "string in Bangla explaining what was understood, 1 sentence",
+  "options": [
+    {
+      "tone": "polite_professional" | "neutral" | "casual",
+      "english": "string",
+      "translation": "string in Bangla",
+      "placeholders": ["date", "amount"] or []
+    }
+  ],
+  "useful_phrases": [
+    { "phrase": "string", "meaning": "string in Bangla" }
+  ],
+  "clarifying_question": "string or null, only if intent is too ambiguous"
+}
+`.trim();
+
+  const userPrompt = `Learner Intent: "${trimmed}"`;
+
+  const llmResult = await callStructuredLlm({
+    taskName: "sayIt",
+    systemPrompt,
+    userPrompt,
+    schema: SayItResponseSchema,
+    temperature: 0.3,
+  });
+
+  if (llmResult.success && llmResult.data) {
+    return llmResult.data;
+  }
+
+  // Graceful fallback to deterministic engine
+  return resolveSayItIntent(request);
 }

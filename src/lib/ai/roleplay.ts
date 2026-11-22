@@ -18,6 +18,7 @@ import {
   RoleplayFeedbackRequestSchema,
   RoleplayFeedbackResponseSchema,
 } from "./roleplay-schema.ts";
+import { callStructuredLlm, type LlmMessage } from "./llm-client.ts";
 
 // Common ESL / Bengali-English mistakes for targeted single-correction rule
 interface CorrectionRule {
@@ -317,4 +318,139 @@ export function generateRoleplayFeedback(
     next_step: "একই দৃশ্যপটে অন্য চরিত্রে অভিনয় করে অথবা একটু ভিন্ন পরিস্থিতিতে কথা বলার নতুন বাক্য প্রয়োগ করে পুনরাবৃত্তি করুন।",
     limitations: "এটি একটি স্বয়ংক্রিয় শিক্ষামূলক মূল্যায়ন; মানুষের বাস্তব প্রতিক্রিয়ার সাথে সামান্য পার্থক্য থাকতে পারে।",
   });
+}
+
+/**
+ * Async LLM-backed in-character roleplay turn with seamless deterministic fallback
+ * Conforms to ECP_AI_Prompt_Spec.md §3.5 (Task M8, Schema R1)
+ */
+export async function generateRoleplayTurnAsync(
+  rawRequest: RoleplayTurnRequestInput
+): Promise<RoleplayTurnResponse> {
+  const request = RoleplayTurnRequestSchema.parse(rawRequest);
+  const learnerMessage = request.learner_message.trim();
+
+  // Safety / injection check (framework §4.4)
+  if (isPromptInjection(learnerMessage)) {
+    return RoleplayTurnResponseSchema.parse({
+      ai_reply: "I am your conversation partner for this scenario. Let's stay focused on our practice topic!",
+      hint: "সিনারিও অনুযায়ী স্বাভাবিক ইংরেজি কথোপকথনে মনোযোগ দিন।",
+      correction: null,
+      turn_status: "off_scenario",
+    });
+  }
+
+  const systemPrompt = `
+Task M8 — In-Character Roleplay Turn
+You are playing the role of ${request.ai_role} in a short English practice conversation.
+The learner plays ${request.learner_role}.
+Scenario: "${request.scenario_title}".
+Situation: ${request.scenario_context}.
+Objective: ${request.learning_objective}.
+Learner CEFR Level: ${request.level}. Style: ${request.style}.
+
+Rules:
+1. Stay in character and strictly in scenario. If the learner goes off-topic, gently bring them back in character.
+2. Speak in short, conversational turns: 1 to 2 sentences at the learner's level (${request.level}).
+3. Ask natural follow-up questions to keep the dialogue active.
+4. If the learner says "I don't know", "help", or seems stuck, provide a short pedagogical hint in Bangla (max 20 words).
+5. At most ONE gentle correction per turn, only if there is a clear ESL error. Corrections are separate from your in-role reply. If no correction is needed, set "correction" to null.
+6. The correction "original" field MUST be an exact quote/substring from the learner's latest message.
+7. Output JSON strictly matching Schema R1:
+{
+  "ai_reply": "string in English, 1 to 2 natural sentences in character",
+  "hint": "string or null in Bangla, max 20 words",
+  "correction": {
+    "original": "exact substring from learner message",
+    "improved": "natural corrected phrase",
+    "reason": "short explanation in Bangla, max 25 words"
+  } or null,
+  "turn_status": "continue" | "learner_finished" | "off_scenario" | "unsafe"
+}
+`.trim();
+
+  // Map transcript history to chat messages
+  const historyMessages: LlmMessage[] = request.transcript.map((t) => ({
+    role: t.speaker === "ai" ? "assistant" : "user",
+    content: t.text,
+  }));
+
+  const llmResult = await callStructuredLlm({
+    taskName: "roleplayTurn",
+    systemPrompt,
+    userPrompt: learnerMessage,
+    messages: historyMessages,
+    schema: RoleplayTurnResponseSchema,
+    temperature: 0.4,
+  });
+
+  if (llmResult.success && llmResult.data) {
+    return llmResult.data;
+  }
+
+  // Graceful fallback to deterministic engine
+  return generateRoleplayTurn(request);
+}
+
+/**
+ * Async LLM-backed session feedback rubric with seamless deterministic fallback
+ * Conforms to ECP_AI_Prompt_Spec.md §3.6 (Task M9, Schema F1)
+ */
+export async function generateRoleplayFeedbackAsync(
+  request: RoleplayFeedbackRequestInput
+): Promise<RoleplayFeedbackResponse> {
+  const learnerTurns = request.transcript.filter((t) => t.speaker === "learner");
+  if (learnerTurns.length === 0) {
+    return generateRoleplayFeedback(request);
+  }
+
+  const systemPrompt = `
+Task M9 — Roleplay Session Feedback & Pedagogical Rubric
+Evaluate the LEARNER's English from the transcript.
+Scenario: "${request.scenario_title}". Level: ${request.level}.
+
+Rules:
+1. Give supportive, constructive, and specific feedback on the LEARNER's English only.
+2. Quote short phrases from the learner's actual messages (max 10 words each).
+3. Do NOT give a numeric or pronunciation score (no audio analysed here).
+4. Focus areas must be categorized under: "grammar" | "vocabulary" | "sentence_formation" | "naturalness" | "relevance".
+5. Max 3 focus_areas.
+6. Write summary and next_step in Bengali (Bangla).
+7. Output JSON strictly matching Schema F1:
+{
+  "summary": "string in Bangla, 2 to 3 supportive sentences summarizing progress",
+  "strengths": ["string, 1 sentence each, max 3 strengths"],
+  "focus_areas": [
+    {
+      "area": "grammar" | "vocabulary" | "sentence_formation" | "naturalness" | "relevance",
+      "example_from_learner": "quote from learner, max 10 words",
+      "suggestion": "constructive advice in Bangla, max 25 words",
+      "natural_alternative": "better English expression"
+    }
+  ],
+  "next_step": "concrete next practice suggestion in Bangla",
+  "limitations": "এটি একটি স্বয়ংক্রিয় শিক্ষামূলক মূল্যায়ন; মানুষের বাস্তব প্রতিক্রিয়ার সাথে সামান্য পার্থক্য থাকতে পারে।"
+}
+`.trim();
+
+  const formattedTranscript = request.transcript
+    .map((t) => `${t.speaker.toUpperCase()}: ${t.text}`)
+    .join("\n");
+
+  const userPrompt = `Roleplay Transcript for evaluation:\n${formattedTranscript}`;
+
+  const llmResult = await callStructuredLlm({
+    taskName: "roleplayFeedback",
+    systemPrompt,
+    userPrompt,
+    schema: RoleplayFeedbackResponseSchema,
+    temperature: 0.2,
+  });
+
+  if (llmResult.success && llmResult.data) {
+    return llmResult.data;
+  }
+
+  // Graceful fallback to deterministic engine
+  return generateRoleplayFeedback(request);
 }

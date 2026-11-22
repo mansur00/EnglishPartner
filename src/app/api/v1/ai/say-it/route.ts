@@ -1,4 +1,4 @@
-import { resolveSayItIntent } from "../../../../../lib/ai/say-it.ts";
+import { resolveSayItIntentAsync } from "../../../../../lib/ai/say-it.ts";
 import { SayItRequestSchema } from "../../../../../lib/ai/say-it-schema.ts";
 import {
   globalQuotaStore,
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const response = resolveSayItIntent(parsed.data);
+    const response = await resolveSayItIntentAsync(parsed.data);
     return Response.json(response, { status: 200, headers: rateHeaders });
   } catch (error) {
     return Response.json(

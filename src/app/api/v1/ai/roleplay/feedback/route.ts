@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generateRoleplayFeedback } from "@/lib/ai/roleplay";
+import { generateRoleplayFeedbackAsync } from "@/lib/ai/roleplay";
 import { RoleplayFeedbackRequestSchema } from "@/lib/ai/roleplay-schema";
 
 /**
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const response = generateRoleplayFeedback(parsed.data);
+    const response = await generateRoleplayFeedbackAsync(parsed.data);
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     return NextResponse.json(
