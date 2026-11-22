@@ -75,10 +75,9 @@ export function Sidebar() {
     },
     {
       name: "My Progress",
-      href: "#",
+      href: "/progress",
       icon: Analytics01Icon,
-      active: false,
-      comingSoon: true,
+      active: pathname === "/progress",
     },
     {
       name: t("nav.settings"),

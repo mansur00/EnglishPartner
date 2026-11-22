@@ -14,6 +14,7 @@ import {
   StopIcon,
   Award01Icon,
   Target01Icon,
+  Mic01Icon,
 } from "@hugeicons/core-free-icons";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -138,10 +139,13 @@ export function RoleplayPartner() {
   });
   const [inputMessage, setInputMessage] = useState("");
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const [isListening, setIsListening] = useState(false);
   const [activeHint, setActiveHint] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<RoleplayFeedbackResponse | null>(null);
   const [isPending, startTransition] = useTransition();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null);
 
   // Initialize greeting turn on scenario change
   const startSession = useCallback((scenario: RoleplayScenario) => {
@@ -259,6 +263,55 @@ export function RoleplayPartner() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       setPlayingIndex(null);
+    }
+  };
+
+  const toggleSpeechRecognition = () => {
+    if (isListening) {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      setIsListening(false);
+      return;
+    }
+
+    if (typeof window === "undefined") return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.continuous = false;
+      recognition.interimResults = true;
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognition.onresult = (event: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const transcript = Array.from(event.results).map((r: any) => r[0].transcript).join("");
+        setInputMessage(transcript);
+      };
+
+      recognition.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch {
+      setIsListening(false);
     }
   };
 
@@ -460,6 +513,18 @@ export function RoleplayPartner() {
                   className="rounded-control text-label"
                 />
                 <InputGroupSuffix>
+                  <Button
+                    type="button"
+                    variant={isListening ? "destructive" : "ghost"}
+                    size="sm"
+                    onClick={toggleSpeechRecognition}
+                    disabled={isPending}
+                    title={isListening ? "Stop listening" : "Speak your message"}
+                    className="rounded-control text-chip px-2"
+                  >
+                    <HugeiconsIcon icon={isListening ? StopIcon : Mic01Icon} size={15} />
+                  </Button>
+
                   <Button
                     type="submit"
                     variant="default"
