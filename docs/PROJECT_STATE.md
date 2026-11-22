@@ -167,6 +167,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `9fab261` | Milestones 3A & 3D & 3E: Speech Recognition input in RoleplayPartner, Personalised Analytics & Recommendations Engine (progress-metrics.ts), ProgressDashboard UI, /progress route, and sidebar navigation |
 | `839f4cb` | Milestone 3C: Pronunciation Hints & Acoustic Word-Level Feedback Engine (ECP_Phase_Plan §6.1, ECP_Audio_Voice_Guide §10.2, Brief §9.3 & §20). Pure alignment engine in pronunciation.ts, Bengali acoustic tips dictionary, qualitative relative tiers (no fake decimal/percentage scores), transparent browser limitations disclaimer, slow audio controls (0.7x/0.75x), and upgraded ReadAloudCard |
 | `67d6d7d` | Milestone 3B: Voice Roleplay Loop (ECP_Phase_Plan §6.1 & §6.4). Auto-speak AI replies with Web Speech API, speed controller (0.75x/0.88x/1.0x), speech input with transcript cleanup, live status cues, and dialogue replay in RoleplayPartner.tsx |
+| `1bd9fbb` | Milestones 4A & 4C: Professional English Career Paths & PWA Foundation (ECP_Phase_Plan §7.1). 5 career tracks in registry.ts, /professions index page, upgraded /professions/[slug], PWA web manifest, service worker shell caching, and sidebar navigation |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -207,6 +208,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 31. **[DONE] (commit 9fab261) Milestones 3A & 3D & 3E — Speech Input, Personalisation & Progress Analytics:** Authored `src/lib/analytics/progress-metrics.ts` (retention tiers, SM-2 stage distribution, accuracy, and personalized next steps), built interactive `ProgressDashboard.tsx` with KPI metrics, SM-2 vocabulary retention progress, and weekly activity columns, created route `/progress`, wired "My Progress" in `Sidebar.tsx`, and added Web Speech recognition input to `RoleplayPartner.tsx`. 158 unit tests passing.
 32. **[DONE] (commit 839f4cb) Milestone 3C — Pronunciation Hints & Acoustic Word-Level Feedback Engine:** Authored `src/lib/practice/pronunciation.ts` with word-level phonetic alignment, Bengali acoustic hints dictionary, qualitative tiers ('clear', 'getting_there', 'needs_practice'), zero fake precision scores, automated audio disclaimer, and upgraded `ReadAloudCard` with interactive word chips and slow audio playback. 166 unit tests passing.
 33. **[DONE] (commit 67d6d7d) Milestone 3B — Voice Roleplay Loop:** Implemented auto-speak AI replies with Web Speech API, speed controller (0.75x/0.88x/1.0x), speech input with transcript cleanup in src/lib/ai/roleplay-voice.ts, live status cues, and dialogue replay in RoleplayPartner.tsx. 171 unit tests passing.
+34. **[DONE] (commit 1bd9fbb) Milestones 4A & 4C — Professional English Career Paths & PWA Foundation:** Authored src/lib/professions/registry.ts (UI/UX, Software Engineer, Remote Freelancer, Healthcare, Teacher), created /professions page, upgraded /professions/[slug] static params and UI, created PWA web manifest and offline service worker (/sw.js), wired sidebar, 177 unit tests passing, 109 static routes.
 
 ---
 
@@ -235,6 +237,26 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestones 4A & 4C — Professional English Career Paths & PWA Foundation
+- Requested by owner: "next" -> implement Milestone 4A (More professions & Profession Index) and Milestone 4C (PWA Installability) per ECP_Phase_Plan §7.1.
+- Changed:
+  - `src/lib/professions/registry.ts`: Authored registry for 5 professional tracks (UI/UX Designer, Software Engineer, Remote Freelancer, Healthcare Assistant, Teacher/Educator) with competencies, CEFR targets, hours, and scenario mapping.
+  - `src/app/(app)/professions/page.tsx`: Built career paths index page with competencies checklist, scenario counts, and direct action CTAs using Expandable Design System.
+  - `src/app/(app)/professions/[slug]/page.tsx`: Upgraded dynamic profession detail page with static params for all registered tracks, rich competency chips, and sequence cards.
+  - `src/content/seed/scenarios.ts`: Added 6 realistic professional scenarios spanning agile standups, PR reviews, client kickoffs, deadline extensions, patient triage, and parent conferences.
+  - `src/app/manifest.ts` & `public/sw.js`: Authored W3C PWA web app manifest and offline caching service worker for core shell routes.
+  - `src/app/layout.tsx` & `src/components/navigation/Sidebar.tsx`: Added PWA metadata, registered service worker, and wired "Professional English" directly to `/professions`.
+  - `tests/professions.test.mjs` & `tests/pwa-manifest.test.mjs`: Authored 6 unit tests verifying career registry, scenario coverage, PWA manifest structure, and service worker presence.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (177/177 unit tests passing across 33 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 109/109 static pages generated, including `/professions` and `/manifest.webmanifest`).
+- Commit: `1bd9fbb`
+- Open questions / follow-ups: none
 
 ### 2026-11-22, Milestone 3B — Voice Roleplay Loop
 - Requested by owner: "next" -> implement Milestone 3B: Voice Roleplay Loop per ECP_Phase_Plan §6.1 & §6.4.
