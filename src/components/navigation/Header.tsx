@@ -13,9 +13,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Globe02Icon,
   Menu01Icon,
   DashboardSquare01Icon,
   CompassIcon,
@@ -147,17 +147,8 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
 
       {/* Right Controls: Grammar Toggle Slot, Language, Theme, User Profile */}
       <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-        {/* Language Badge */}
-        <button
-          type="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-          title={t("header.bilingualMode")}
-          className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3.5 rounded-pill border border-border bg-card text-label text-muted-foreground hover:text-foreground hover:border-border transition-colors cursor-pointer"
-        >
-          <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary shrink-0" />
-          <span>বাংলা</span>
-        </button>
+        {/* Language Switcher */}
+        <LanguageSwitcher />
 
         {/* Theme Toggle (Dark / Light) */}
         <ThemeToggle />

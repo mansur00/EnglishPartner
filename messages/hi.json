@@ -1,0 +1,124 @@
+{
+  "auth": {
+    "login": "लॉग इन करें",
+    "logout": "लॉग आउट",
+    "profile": "शिक्षार्थी प्रोफ़ाइल",
+    "account": "खाता",
+    "guest": "अतिथि शिक्षार्थी",
+    "welcome": "वापसी पर स्वागत है"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "explore": "खोजें",
+    "shoppingLadder": "शॉपिंग लैडर (20 चरण)",
+    "professionalEnglish": "पेशेवर अंग्रेज़ी",
+    "vocabulary": "मेरी शब्दावली",
+    "menu": "मेनू और शिक्षण पथ",
+    "admin": "एडमिन स्टूडियो",
+    "settings": "सेटिंग्स",
+    "openMenu": "नेविगेशन मेनू खोलें",
+    "mainNav": "मुख्य नेविगेशन"
+  },
+  "header": {
+    "title": "English Partner",
+    "subtitle": "बातचीत अभ्यास",
+    "bilingualMode": "द्विभाषी मोड: अंग्रेज़ी और हिन्दी",
+    "themeToggle": "थीम बदलें"
+  },
+  "landing": {
+    "heroTitle": "आत्मविश्वास के साथ रोज़मर्रा की अंग्रेज़ी सीखें",
+    "heroSubtitle": "वास्तविक बातचीत, इंटरएक्टिव ऑडियो संवाद, और दक्षिण एशियाई शिक्षार्थियों के लिए तैयार किए गए चरण।",
+    "startLearning": "सीखना शुरू करें",
+    "browseTopics": "विषय देखें",
+    "soon": "शीघ्र",
+    "categoriesTitle": "वास्तविक बोलने के परिदृश्यों के लिए डिज़ाइन किया गया",
+    "categoriesSubtitle": "बाज़ार की खरीदारी से लेकर कार्यस्थल की बातचीत तक, जानें कि मूल वक्ता वास्तव में कैसे बात करते हैं।"
+  },
+  "dashboard": {
+    "greeting": "नमस्ते, शिक्षार्थी!",
+    "dayStreak": "दिनों की लड़ी",
+    "minutesToGo": "मिनट बाकी",
+    "goalReached": "आज का लक्ष्य पूरा हुआ!",
+    "continuePractice": "अभ्यास जारी रखें",
+    "activeConversation": "सक्रिय बातचीत",
+    "dialoguePreview": "संवाद पूर्वावलोकन",
+    "exploreTopics": "सभी परिदृश्य देखें",
+    "viewVocabulary": "सहेजे गए शब्द देखें",
+    "completedSteps": "पूर्ण किए गए चरण",
+    "dailyGoal": "दैनिक लक्ष्य",
+    "startConversation": "बातचीत शुरू करें",
+    "browseEveryday": "दैनिक पुस्तकालय देखें",
+    "exploreProfessional": "पेशेवर पथ देखें",
+    "startFirstConversation": "पहली बातचीत शुरू करें"
+  },
+  "discovery": {
+    "filters": "फ़िल्टर:",
+    "allLevels": "सभी स्तर (CEFR)",
+    "anyLength": "कोई भी लंबाई",
+    "shortLength": "छोटा (4-6 मोड़)",
+    "mediumLength": "मध्यम (7-10 मोड़)",
+    "anyStyle": "कोई भी शैली",
+    "resetFilters": "फ़िल्टर रीसेट करें",
+    "searchPlaceholder": "विषय, कीवर्ड या भूमिका द्वारा खोजें...",
+    "noConversationsFound": "कोई बातचीत नहीं मिली"
+  },
+  "audio": {
+    "generating": "ऑडियो तैयार किया जा रहा है",
+    "unavailable": "ऑडियो अनुपलब्ध है",
+    "replay": "शुरुआत से दोबारा सुनें",
+    "fullConversation": "पूरी बातचीत का ऑडियो",
+    "cycleSpeed": "प्लेबैक गति बदलें (0.75x, 1x, 1.25x, 1.5x)"
+  },
+  "learning": {
+    "practice": "अभ्यास",
+    "contextualMeaning": "प्रासंगिक अर्थ",
+    "past": "भूतकाल",
+    "pastParticiple": "पूर्ण भूतकाल",
+    "plural": "बहुवचन",
+    "saved": "सहेजा गया",
+    "saveWord": "शब्द सहेजें"
+  },
+  "reader": {
+    "listen": "सुनें",
+    "speed": "गति",
+    "saveWord": "शब्द सहेजें",
+    "translationComingSoon": "अनुवाद जल्द आ रहा है",
+    "approvedTranslation": "सत्यापित अनुवाद",
+    "grammarColors": "व्याकरण रंग",
+    "stepProgress": "चरण",
+    "previousStep": "पिछला चरण",
+    "nextStep": "अगला चरण",
+    "practiceScenario": "इस परिदृश्य का अभ्यास करें"
+  },
+  "vocabulary": {
+    "title": "मेरी शब्दावली नोटबुक",
+    "subtitle": "बातचीत अभ्यास के दौरान सहेजे गए शब्दावली शब्दों का व्यक्तिगत संग्रह।",
+    "searchPlaceholder": "सहेजे गए शब्द या परिभाषाएँ खोजें...",
+    "filterAll": "सभी शब्द",
+    "filterLearning": "सीख रहे हैं",
+    "filterMastered": "निपुण",
+    "emptyTitle": "अभी तक कोई शब्द सहेजा नहीं गया है",
+    "emptyDescription": "अपनी नोटबुक में जोड़ने के लिए बातचीत में किसी भी हाइलाइट किए गए शब्द पर टैप करें।"
+  },
+  "admin": {
+    "title": "सामग्री प्रबंधन और परिदृश्य स्टूडियो",
+    "subtitle": "परिदृश्यों की समीक्षा करें, अनुवाद संपादित करें और ऑडियो संपत्तियों का प्रबंधन करें।",
+    "tableTitle": "परिदृश्य शीर्षक",
+    "tableNiche": "श्रेणी",
+    "tableLevel": "स्तर",
+    "tableLines": "पंक्तियाँ",
+    "tableCoverage": "अनुवाद कवरेज",
+    "tableStatus": "स्थिति"
+  },
+  "common": {
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "back": "वापस",
+    "next": "अगला",
+    "loading": "लोड हो रहा है...",
+    "error": "एक त्रुटि हुई",
+    "englishApproved": "English ✓",
+    "banglaApproved": "বাংলা ✓",
+    "banglaDraft": "Draft —"
+  }
+}

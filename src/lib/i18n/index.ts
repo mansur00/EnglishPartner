@@ -1,7 +1,13 @@
 import enMessages from "../../../messages/en.json" with { type: "json" };
 import bnMessages from "../../../messages/bn.json" with { type: "json" };
+import hiMessages from "../../../messages/hi.json" with { type: "json" };
+import {
+  isRtlLanguage,
+  SUPPORTED_LOCALES,
+  type SupportedLocale,
+} from "./languages.ts";
 
-export type Locale = "en" | "bn";
+export type Locale = SupportedLocale;
 
 type MessageTree = {
   [key: string]: string | MessageTree;
@@ -10,6 +16,7 @@ type MessageTree = {
 const dictionaries: Record<Locale, MessageTree> = {
   en: enMessages as MessageTree,
   bn: bnMessages as MessageTree,
+  hi: hiMessages as MessageTree,
 };
 
 function resolvePath(obj: MessageTree, path: string): string | undefined {
@@ -45,3 +52,9 @@ export function t(key: string, locale: Locale = "en"): string {
 export function getDictionary(locale: Locale = "en") {
   return dictionaries[locale] || dictionaries.en;
 }
+
+export function isRtlLocale(locale: string): boolean {
+  return isRtlLanguage(locale);
+}
+
+export { SUPPORTED_LOCALES };
