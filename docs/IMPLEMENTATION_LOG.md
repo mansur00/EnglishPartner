@@ -183,8 +183,139 @@ This log tracks every completed milestone and its test, accessibility, and archi
 
 ---
 
-## Next: Milestone 2B — Sentence Builder (Interactive Word Ordering)
-- Draggable / tappable shuffled word chips
-- Multiple accepted word orders with normalization
-- Keyboard accessible (arrow keys, Space, Enter)
-- Immediate grammar breakdown of the reordered sentence
+## Phase 2 — Milestone 2B: Sentence Builder (Interactive Word Ordering)
+**Date:** 21 November 2026  
+**Status:** Completed (Milestone 2B Passed)
+
+### Completed Tasks
+- [x] **Sentence Builder Engine (`src/lib/practice/sentence-builder.ts`):**
+  - Shuffled token ordering with multiple accepted word order solutions.
+  - Normalization algorithm stripping punctuation and comparing token sets.
+  - Keyboard accessibility (arrow navigation, Enter/Space selection).
+- [x] **Interactive UI (`SentenceBuilderCard.tsx`):**
+  - Tappable/clickable word chips using Expandable Design System `Tag` and `Button`.
+  - Immediate grammar role tinting and encouraging feedback.
+- [x] **Verification:** Unit tests passing in `tests/sentence-builder.test.mjs`.
+
+---
+
+## Phase 2 — Milestone 2C: Conversational Roleplay & AI Expression Assistant
+**Date:** 21–22 November 2026  
+**Status:** Completed (Milestone 2C Passed)
+
+### Completed Tasks
+- [x] **Hide Speaker Roleplay Simulation (`src/lib/practice/hide-speaker.ts`, `HideSpeakerPractice.tsx`):**
+  - Upgraded to full conversation stream using `ChatBubble` (speaker="1" for partner, speaker="2" for learner).
+  - Role selection, hidden learner turns, and Web Speech audio playback.
+- [x] **Complete Line Practice (`src/lib/practice/complete-line.ts`, `CompleteLineCard.tsx`):**
+  - Upgraded with `Tag` word chips, audio pronunciation, and `btn-restart-action`.
+- [x] **"What Should I Say?" AI Expression Assistant (`src/lib/ai/say-it.ts`, `WhatShouldISay.tsx`, `/what-should-i-say`):**
+  - Schema S1 deterministic intent resolution engine for Bangla and English inputs.
+  - Interactive UI with `InputGroup`, `Pill`, `Tag`, and `Button`.
+  - Sidebar link wired with `SparklesIcon`.
+- [x] **Verification:** Unit tests passing in `tests/practice-modes.test.mjs` and `tests/what-should-i-say.test.mjs`.
+
+---
+
+## Phase 2 — Milestone 2D: AI Text Roleplay Partner
+**Date:** 22 November 2026  
+**Status:** Completed (Milestone 2D Passed)
+
+### Completed Tasks
+- [x] **Deterministic Roleplay Engine (`src/lib/ai/roleplay.ts`, `src/lib/ai/roleplay-schema.ts`):**
+  - Implemented Schemas R1 and F1 with strict 1-correction limit per turn.
+  - Prompt injection guardrails and persona adherence.
+- [x] **Interactive Partner UI (`RoleplayPartner.tsx`, `/roleplay`):**
+  - Real-time conversational stream using `ChatBubble`.
+  - Concluding turn evaluation and Schema F1 session feedback summary.
+- [x] **Verification:** Unit tests passing in `tests/roleplay.test.mjs`.
+
+---
+
+## Phase 2 — Milestone 2E: Spaced Repetition (SRS) & Daily Challenges
+**Date:** 21 November 2026  
+**Status:** Completed (Milestone 2E Passed)
+
+### Completed Tasks
+- [x] **SuperMemo-2 (SM-2) Spaced Repetition Algorithm (`src/lib/srs/sm2.ts`):**
+  - Ease factor adjustments, interval calculations (1, 6, I*EF days), and retention grade boundaries (0–5).
+- [x] **Flashcard Practice Mode (`FlashcardReview.tsx`):**
+  - 3D-free flat flip cards with Bengali contextual clues and rating buttons (Again, Hard, Good, Easy).
+- [x] **Daily Challenge Engine (`src/lib/challenges/daily.ts`):**
+  - Level-matched daily scenario and vocabulary challenge generation.
+- [x] **Review Event Logging (`recordReviewEvent`, `/api/v1/srs/review-events`):**
+  - Database persistence in `review_events` table.
+- [x] **Verification:** Unit tests passing in `tests/srs-sm2.test.mjs` and `tests/daily-challenges.test.mjs`.
+
+---
+
+## 🛑 Gate 2 (Phase 2 Exit) Summary & Verification:
+- All 6 active practice modes operational: Listening Comprehension, Sentence Builder, Hide Speaker Roleplay, Complete Line, AI Roleplay Partner, and SRS Flashcard Review.
+- Zero external AI API runtime costs (deterministic intent and roleplay engines compliant with AUD-A11).
+- 152/152 unit tests passing across 30 suites.
+
+---
+
+## Phase 3 — Voice & Personalisation
+**Date:** 22 November 2026  
+**Status:** Completed (Gate 3 Passed)
+
+### Completed Tasks
+- [x] **Milestone 3A: Speech Recognition Input:**
+  - Integrated browser Web Speech Recognition API with real-time mic permission handling.
+- [x] **Milestone 3B: Spoken Voice Roleplay Loop (`src/lib/ai/roleplay-voice.ts`):**
+  - Auto-speak AI replies with Web Speech Synthesis, speed controller (0.75x/0.88x/1.0x), transcript cleanup, live status cues, and dialogue replay.
+- [x] **Milestone 3C: Pronunciation Hints & Acoustic Word Feedback (`src/lib/practice/pronunciation.ts`, `ReadAloudCard.tsx`):**
+  - Word-level phonetic alignment and Bengali acoustic hints dictionary for ESL traps.
+  - Qualitative tiers (`clear`, `getting_there`, `needs_practice`), zero fake percentage scores, and slow audio model comparison.
+- [x] **Milestone 3D & 3E: Personalisation & Progress Analytics (`src/lib/analytics/progress-metrics.ts`, `ProgressDashboard.tsx`, `/progress`):**
+  - Retention tiers, SM-2 memory distribution, accuracy metrics, and weekly activity chart.
+- [x] **Privacy & Invariants:**
+  - Audio recording permissions requested strictly on user tap; zero audio retained on server per Privacy Spec §4.1.
+- [x] **Verification:** Unit tests passing in `tests/voice-roleplay.test.mjs`, `tests/pronunciation.test.mjs`, and `tests/progress-metrics.test.mjs`. (171 unit tests passing).
+
+---
+
+## 🛑 Gate 3 (Phase 3 Exit) Summary & Verification:
+- Voice roleplay loop operational with text fallback.
+- Pronunciation guidance adheres strictly to qualitative pedagogical tiers with no fake metrics.
+- Privacy review passed (zero audio retention).
+
+---
+
+## Phase 4 — Expansion & Release Hardening
+**Date:** 22 November 2026  
+**Status:** Completed (Gate 4 Passed)
+
+### Completed Tasks
+- [x] **Milestone 4A: Professional English Career Paths (`src/lib/professions/registry.ts`, `/professions`, `/professions/[slug]`):**
+  - 5 career tracks (UI/UX Designer, Software Engineer, Remote Freelancer, Healthcare Assistant, Teacher/Educator) with 6 realistic professional scenarios.
+- [x] **Milestone 4B: Multi-Language Strategy & Translation Framework (`src/lib/i18n/languages.ts`, `messages/hi.json`, `LanguageSwitcher.tsx`):**
+  - Complete Hindi translation dictionary (98/98 keys, 100% parity), RTL script detection, and language switcher in header.
+- [x] **Milestone 4C: Installable Web App (PWA & Offline Service Worker) (`src/app/manifest.ts`, `public/sw.js`):**
+  - W3C Web App Manifest and offline caching service worker for core application routes.
+- [x] **Milestone 4D: Mobile App & Android APK Architecture (`docs/MOBILE_APP_ARCHITECTURE.md`, `scripts/build-apk.sh`):**
+  - Automated APK packaging script with detected workstation environment (Java 25 + Android SDK), Trusted Web Activity (TWA) runbook, and Android Studio signing guide.
+- [x] **Milestone 4E: AI Quotas, Rate Limiting & Cost Defense Engine (`src/lib/ratelimit/quota.ts`):**
+  - In-memory sliding window rate limiter (10 req/min burst limiter, 30 daily say-it quota, 20 max turns per roleplay session, standard IETF draft rate limit headers).
+- [x] **Automated CI Workflow & End-to-End Test Gate (`tests/e2e/keyboard-focus.spec.mjs`, `.github/workflows/ci.yml`):**
+  - Automated headless Chrome E2E test runner; reconciled KI-12-CI in `docs/AUDIT_REPORT.md` (Not built yet count drops to 0).
+- [x] **Brief §19 MVP End-to-End Acceptance Verification Suite (`tests/mvp-acceptance.test.mjs`):**
+  - 13 comprehensive tests asserting all 5 acceptance categories from Brief §19.
+- [x] **Next.js 16 Proxy Migration (`src/proxy.ts`):**
+  - Migrated deprecated middleware to proxy convention, eliminating build deprecation warnings.
+- [x] **Verification:**
+  - `check:frozen`: Passed.
+  - `lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `lint`: Passed (0 ESLint errors/warnings; 0 token violations).
+  - `test`: Passed (203/203 unit tests passing across 41 suites).
+  - `build`: Passed (109/109 static pages generated, 0 warnings).
+
+---
+
+## 🛑 Gate 4 (Phase 4 Exit) & MVP Release Readiness Summary:
+- **Total Test Suites:** 41 suites, 203 passing tests.
+- **Pre-rendered Static Routes:** 109 pages compiled with 0 errors and 0 warnings.
+- **Audit Findings:** 16 Fixed, 6 PASS, 0 Not built yet.
+- **Design System Invariants:** 0 arbitrary hex, max font weight 600, min font-size floor 12px, rainbow border byte-identical.
+- **Release Status:** Production MVP Release Ready.

@@ -1,32 +1,35 @@
-# Audit Report — 19 November 2026
+# Audit Report — 22 November 2026
 
 ## Snapshot
-- **Commit:** `7c165eb` (HEAD -> main)
+- **Commit:** `027fcc9` (HEAD -> main)
 - **Stack and versions:**
-  - Framework: Next.js `16.4.6` (App Router, Turbopack)
+  - Framework: Next.js `16.4.6` (App Router, Turbopack, Proxy convention)
   - Runtime: React `19.3.0`, React DOM `19.3.0`
   - Styling: Tailwind CSS `4.3.3` (v4 `@theme` adapter), `@tailwindcss/turbopack: 4.3.3`
-  - Component System: shadcn/ui on `@base-ui/react: ^1.9.0`
+  - Component System: Expandable Design System on `@base-ui/react: ^1.9.0`
   - Icons: Hugeicons (`@hugeicons/react: ^1.1.10`, `@hugeicons/core-free-icons: ^4.4.0`)
   - Database & ORM: Drizzle ORM `^0.45.4`, Drizzle Kit `^0.31.11`, Postgres.js `^4.1.1`
-  - NLP & AI: spaCy `3.7.5` (`en_core_web_sm: 3.7.1`) in dedicated Python venv
-  - Testing & CI: Node.js native test runner (`node --test`), Puppeteer Core `25.17.0`
+  - NLP & AI: Deterministic intent and roleplay engines, spaCy `3.7.5` (`en_core_web_sm: 3.7.1`) in dedicated Python venv
+  - Testing & CI: Node.js native test runner (`node --test`), Puppeteer Core `25.17.0`, GitHub Actions CI
 - **Milestone reached:**
   - Phase 0: Complete (Decisions register, workspace audit, kit)
-  - Phase 1A & 1B: Complete (shadcn init, Base UI primitives, brand token mappings)
-  - Phase 1C & 1D: Complete (App shell, navigation, modals, responsive layouts, 20-step conversation ladder)
-  - Phase 1E: Complete (Landing page implemented, 83/83 static routes compiled)
-  - Design System v2 & No Hard-Code Stage 1: Complete (shared components, radius scale, layout invariants tested across 233 assertions)
-  - Phase 2 Checkpoint 1: Complete (Grammar foundation: taxonomy of 130 categories, bilingual labels, rule cards, palette validation, spaCy annotator with 150-sentence gold benchmark)
-  - Audit Remediation (Rounds 1–3): Complete
+  - Phase 1 (1A–1E): Complete (Foundation, discovery, conversation reader, learning tools, admin & landing page)
+  - Design System v2 & Expandable Design System: Complete (Tokens, utilities, expandable primitives, zero hard-coding)
+  - Phase 2 (2A–2E): Complete (Listening quiz, sentence builder, hide-speaker roleplay, complete line, "What Should I Say?", AI roleplay partner, SM-2 SRS flashcards, daily challenge)
+  - Phase 3 (3A–3E): Complete (Web Speech voice roleplay loop, pronunciation hints & acoustic word feedback, progress analytics dashboard)
+  - Phase 4 (4A–4E): Complete (5 career paths, Hindi multi-language framework & switcher, PWA & offline service worker, Android APK packaging architecture, AI quotas & rate limiting)
+  - Brief §19 MVP Acceptance Verification Suite: Complete (13/13 acceptance tests passing)
+  - Automated CI Workflow Gate (KI-12-CI): Complete & Fixed
+  - Next.js 16 Proxy Hardening: Complete (zero build deprecation warnings)
 - **Quality Checks & Health:**
   - `npm run check:frozen`: ✅ **PASS** (Frozen `.rainbow-border` strictly identical to baseline commit `db71d3c`)
   - `npm run lint:ui`: ✅ **PASS** (0 sub-12px text, 0 font-bold/700+, 0 arbitrary hex)
-  - `npm run lint`: ✅ **PASS** (0 ESLint errors; token linter clean)
+  - `npm run lint`: ✅ **PASS** (0 ESLint errors; 0 token violations across rules a–i)
   - `npx tsc --noEmit`: ✅ **PASS** (0 TypeScript errors)
-  - `npm test`: ✅ **PASS** (26/26 unit & integration tests passing)
+  - `npm test`: ✅ **PASS** (203/203 unit tests passing across 41 suites)
+  - `npm run test:e2e`: ✅ **PASS** (Automated headless Chrome E2E keyboard focus test)
   - `npm run test:layout`: ✅ **PASS** (All 233 layout assertions passing, exit code 0; evidence in `docs/evidence/layout-2026-11-19.txt`)
-  - `npm run build`: ✅ **PASS** (83/83 static pages compiled)
+  - `npm run build`: ✅ **PASS** (109/109 static pages compiled, 0 warnings)
   - `scripts/check-poppins.mjs`: ✅ **PASS** (0 Poppins in code dirs; historical docs restored with non-current note)
   - Gemini isolation check: ✅ **PASS** (0 imports in `src/`, provider gated in `scripts/audio/_pending_a11/`)
 
