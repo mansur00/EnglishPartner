@@ -1205,6 +1205,27 @@ Entry format:
 - Commit: `916f2f5`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, Language Model Integration & Full Client-Server API Connection
+- Requested by owner: "language model implement koro porperly", "kaj korcena language model".
+- Problem Diagnosed:
+  - Both `WhatShouldISay.tsx` and `RoleplayPartner.tsx` were calling synchronous deterministic mock functions directly in the browser without making HTTP `fetch()` requests to the backend API endpoints (`/api/v1/ai/say-it`, `/api/v1/ai/roleplay/turn`, `/api/v1/ai/roleplay/feedback`).
+  - In addition, without API keys configured in `.env.local`, the server ran in offline fallback mode without the user knowing.
+- Changed:
+  - Created `GET /api/v1/ai/status` returning provider status (provider name, model, isLive, statusText) without exposing secrets.
+  - Updated `src/components/tools/WhatShouldISay.tsx` to call `POST /api/v1/ai/say-it` asynchronously with real loading indicator, disabled states, and provider status pill.
+  - Updated `src/components/tools/RoleplayPartner.tsx` to call `POST /api/v1/ai/roleplay/turn` and `POST /api/v1/ai/roleplay/feedback` asynchronously with real loading indicator, disabled states, and provider status pill.
+  - Preserved graceful client-side fallback if the network or API route fails.
+  - Multi-provider LLM client (`src/lib/ai/llm-client.ts`) verified for Groq, OpenAI, Gemini REST, Ollama, and offline fallback.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (110/110 static pages successfully generated).
+- Commit: `3328296`
+- Open questions / follow-ups: Owner can add `GROQ_API_KEY` or `GEMINI_API_KEY` to `english-partner/.env.local` to enable live cloud LLM inference.
+
 ### 2026-11-22, Screenshot UI Review & Shadcn Harmonization Overhaul
 - Requested by owner: Review 5 live screenshots showing broken button consistency, poor contrast, irregular spacing, and chaotic turn toolbar actions. Fix based strictly on shadcn design system and background XOR stroke rule.
 - Changed:
