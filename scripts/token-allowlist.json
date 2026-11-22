@@ -90,6 +90,11 @@
       "file": "src/components/ui/pill.tsx",
       "rule": "primitives",
       "reason": "Primitive pill badge component mapping to design system tokens."
+    },
+    {
+      "file": "src/app/manifest.ts",
+      "rule": "a_colors",
+      "reason": "PWA Web App Manifest requires literal hex color codes for OS browser theme_color and background_color per W3C specification."
     }
   ]
 }

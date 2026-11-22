@@ -3,6 +3,7 @@ import { Inter, Hind_Siliguri, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { PwaRegister } from "@/components/pwa/PwaRegister";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,12 @@ const notoSansBengali = Noto_Sans_Bengali({
 export const metadata: Metadata = {
   title: "English Conversation Partner",
   description: "Learn English through realistic, context-driven conversations.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "EnglishPartner",
+  },
 };
 
 export default function RootLayout({
@@ -43,6 +50,7 @@ export default function RootLayout({
     >
       <body className="antialiased min-h-screen font-sans bg-background text-foreground transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <PwaRegister />
           {children}
         </ThemeProvider>
       </body>

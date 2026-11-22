@@ -51,9 +51,9 @@ export function Sidebar() {
     },
     {
       name: t("nav.professionalEnglish"),
-      href: "/explore?category=workplace-business",
+      href: "/professions",
       icon: Briefcase01Icon,
-      active: false,
+      active: pathname.startsWith("/professions"),
     },
     {
       name: "What Should I Say?",
