@@ -651,6 +651,21 @@ export function RoleplayPartner() {
               ))}
             </div>
 
+            {/* Session Turn Limit Notice per ECP_API_Contract §4.7 */}
+            {messages.filter((m) => m.speaker === "learner").length >= 20 && (
+              <div className="p-2.5 rounded-control bg-primary/10 border border-primary/20 text-chip text-primary flex items-center justify-between gap-2">
+                <span>সেশনের ২০টি কথোপকথন পূর্ণ হয়েছে। অগ্রগতি দেখতে সেশন সমাপ্ত করুন।</span>
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={handleEndSession}
+                  className="rounded-control text-chip shrink-0"
+                >
+                  Feedback
+                </Button>
+              </div>
+            )}
+
             {/* Input Form with Voice Speech Integration */}
             <form
               onSubmit={(e) => {
@@ -664,11 +679,13 @@ export function RoleplayPartner() {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   placeholder={
-                    isListening
+                    messages.filter((m) => m.speaker === "learner").length >= 20
+                      ? "সেশনের সীমা পূর্ণ হয়েছে..."
+                      : isListening
                       ? "Listening... Speak in English..."
                       : "Type your response or tap mic to speak..."
                   }
-                  disabled={isPending}
+                  disabled={isPending || messages.filter((m) => m.speaker === "learner").length >= 20}
                   className="rounded-control text-label"
                 />
                 <InputGroupSuffix>
@@ -677,7 +694,7 @@ export function RoleplayPartner() {
                     variant={isListening ? "destructive" : "ghost"}
                     size="sm"
                     onClick={toggleSpeechRecognition}
-                    disabled={isPending}
+                    disabled={isPending || messages.filter((m) => m.speaker === "learner").length >= 20}
                     title={isListening ? "Stop listening" : "Speak your message"}
                     className={cn(
                       "rounded-control text-chip px-2",
@@ -691,7 +708,11 @@ export function RoleplayPartner() {
                     type="submit"
                     variant="default"
                     size="sm"
-                    disabled={!inputMessage.trim() || isPending}
+                    disabled={
+                      !inputMessage.trim() ||
+                      isPending ||
+                      messages.filter((m) => m.speaker === "learner").length >= 20
+                    }
                     className="rounded-control text-chip gap-1"
                   >
                     <HugeiconsIcon icon={SentIcon} size={14} />
