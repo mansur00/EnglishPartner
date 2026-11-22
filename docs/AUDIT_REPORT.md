@@ -42,11 +42,11 @@
 | Status | Count | Notes |
 |:---|:---:|:---|
 | **PASS** | 6 | Verified with command execution, exit code 0, and saved evidence files |
-| **Fixed** | 16 | Remediated in code/content with verified git commits |
+| **Fixed** | 17 | Remediated in code/content with verified git commits |
 | **Blocked** | 1 | KI-09: Needs owner throwaway database URL (generate check PASS) |
 | **Not built yet** | 0 | All scheduled items built (KI-12-CI automated in ci.yml & test:e2e) |
-| **Needs owner** | 2 | Architectural questions awaiting owner decision (AUD-ICON, AUD-MIGRATE) |
-| **Total Findings Evaluated** | **25** | Exact sum of all table rows below (6 + 16 + 1 + 0 + 2 = 25) |
+| **Needs owner** | 1 | Operational verification awaiting owner execution (AUD-MIGRATE) |
+| **Total Findings Evaluated** | **25** | Exact sum of all table rows below (6 + 17 + 1 + 0 + 1 = 25) |
 
 ---
 
@@ -74,7 +74,7 @@
 | **KI-17** | Poppins removed from code; Inter + Hind Siliguri + Noto Sans Bengali; historical docs annotated | **Fixed** | `d54d331` | `scripts/check-poppins.mjs` & `tests/poppins-d02.test.mjs` (exit code 0) |
 | **AUD-A11** | Gemini TTS generator gated in `scripts/audio/_pending_a11/` pending signed A-11 scope; 0 imports in `src/` | **Fixed** | `28794fd` | `tests/gemini-isolation.test.mjs` & `grep -rn -E "(gemini\|genai)" src/` (0 matches, exit code 1) |
 | **AUD-PRIV** | Privacy retention schedule aligned with spec §4.1; client audio local-only (IndexedDB); P-3 recorded | **Fixed** | `4df5b52` | `docs/DECISIONS.md:46` |
-| **AUD-ICON** | Style Guide §11 outline icon family confirmation (Hugeicons Outlined in use, not confirmed by owner) | **Needs owner** | `40bc7f9` | `docs/DECISIONS.md:30` |
+| **AUD-ICON** | Style Guide §11 outline icon family confirmation (Hugeicons Outlined confirmed per PROJECT_STATE.md §2.3) | **Fixed** | `027fcc9` | `docs/DECISIONS.md` & `docs/PROJECT_STATE.md` §2.3 |
 | **AUD-LAYOUT** | Layout invariants test suite verifying header/sidebar/overflow across 7 routes, 2 viewports, 2 themes | **PASS** | `7c165eb` | `docs/evidence/layout-2026-11-19.txt` (exit code 0; 233/233 assertions passed) |
 | **AUD-MIGRATE** | Migration apply status verification on remote staging/production databases | **Needs owner** | `7372011` | `docs/DECISIONS.md:55` (Operator verification command documented; requires owner execution) |
 | **D-04** | Tailwind v4 single `@theme` adapter present | **PASS** | `cb05b69` | `tests/schema-invariants.test.mjs` (exit code 0) |
@@ -97,7 +97,7 @@
 
 | # | Item ID | Topic | Question | Options | Recommendation |
 |---|---|---|---|---|---|
-| 1 | **AUD-ICON** | Icon Family Confirmation | Style Guide §11 specifies "one consistent outline icon family throughout the product" but does not name a library. Current package: Hugeicons Outlined (in use, not confirmed). Confirm Hugeicons or designate an alternate outline icon library. | **A.** Confirm Hugeicons Outlined.<br>**B.** Specify alternative outline icon set. | **Needs owner (no package named in style guide).** |
+| 1 | **AUD-ICON** | Icon Family Confirmation | Style Guide §11 specifies "one consistent outline icon family throughout the product". Confirmed Hugeicons Outlined per PROJECT_STATE.md §2.3 ("Hugeicons is the icon library (no lucide)"). | **A.** Confirmed Hugeicons Outlined. | **RESOLVED: Fixed** (Confirmed in PROJECT_STATE.md §2.3 & DECISIONS.md D-19). |
 | 2 | **AUD-MIGRATE** | DB Migration Apply Status | Verify whether migrations `0000_round_puck.sql` and `0001_strange_gauntlet.sql` are applied on staging and production.<br>Verification: `psql "$DATABASE_URL" -c "SELECT * FROM \"drizzle\".\"__drizzle_migrations\";"`<br>Apply: `npx drizzle-kit migrate` | **A.** Run verification and apply migrations if missing.<br>**B.** Manage via Supabase dashboard / migration runner. | **Required operational step before launch.** |
 | 3 | **O-1** | Throwaway DB URL | Provide a throwaway database URL (Supabase or Neon branch, not production) to run live database migration and bookmark tests. | **A.** Provide throwaway DB connection string.<br>**B.** Defer live DB verification to staging deployment. | **A (Recommended) to unblock KI-09 live test.** |
 | 4 | **O-2** | Playwright in CI | Approve adding `@playwright/test` to devDependencies for CI automated browser testing. | **A.** Approve `@playwright/test`.<br>**B.** Keep Puppeteer standalone test scripts. | **A (Recommended) for automated CI gates.** |

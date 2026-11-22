@@ -27,7 +27,7 @@
 | **D-16** | Search Scope | Phase 1B uses Postgres full-text (`english` config + Bangla translation titles). Trigram & embeddings deferred to Phase 2+. | Approved | 2026-11-16 |
 | **D-17** | Motion Libraries | No Rive in MVP (free-only rule). Native CSS + Motion for React. GSAP only with licence check. | Approved | 2026-11-16 |
 | **D-18** | Platform Stack | Next.js 16 + TypeScript + Tailwind v4 + Supabase Postgres + Supabase Auth + Vercel. | Confirmed via Audit | 2026-11-16 |
-| **D-19** | Icon Library | Needs owner: Style Guide §11 requires one outline icon family but does not name one. Current package: Hugeicons Outlined (in use, not confirmed). | Needs owner | 2026-11-18 |
+| **D-19** | Icon Library | Confirmed Hugeicons Outlined per PROJECT_STATE.md §2.3 ("Hugeicons is the icon library (no lucide)"). | Approved | 2026-11-22 |
 
 ---
 
