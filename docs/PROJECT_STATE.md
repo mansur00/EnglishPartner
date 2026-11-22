@@ -165,6 +165,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `72de12a` | Milestone 2A: Listening Comprehension Quiz engine (ECP_Exercises_SRS_Spec §4.1, Brief §10.4), Expandable Design System UI (Card, Button, Pill, Tag), slow audio (0.75x) toggle, score calculator, fallback generator, and test suite |
 | `f34740d` | Milestone 2D: AI Text Roleplay Partner (Schema R1 in-role turns, Schema F1 feedback summary, max 1 correction per turn, prompt injection guardrail, POST /api/v1/ai/roleplay/turn & feedback, RoleplayPartner UI with ChatBubble and audio, /roleplay route) |
 | `9fab261` | Milestones 3A & 3D & 3E: Speech Recognition input in RoleplayPartner, Personalised Analytics & Recommendations Engine (progress-metrics.ts), ProgressDashboard UI, /progress route, and sidebar navigation |
+| `839f4cb` | Milestone 3C: Pronunciation Hints & Acoustic Word-Level Feedback Engine (ECP_Phase_Plan §6.1, ECP_Audio_Voice_Guide §10.2, Brief §9.3 & §20). Pure alignment engine in pronunciation.ts, Bengali acoustic tips dictionary, qualitative relative tiers (no fake decimal/percentage scores), transparent browser limitations disclaimer, slow audio controls (0.7x/0.75x), and upgraded ReadAloudCard |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -203,6 +204,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 29. **[DONE] (commit 72de12a) Milestone 2A — Listening Comprehension Quiz:** Authored `src/lib/practice/listening-quiz.ts` (Zod schema §4.1, evaluation, score calculation with pedagogical tiers, and fallback generator), upgraded `ListeningQuizCard.tsx` with Expandable Design System, slow audio toggle, option badges, skip action, and keyboard shortcuts, and added unit tests in `tests/listening-quiz.test.mjs`. 145 unit tests passing.
 30. **[DONE] (commit f34740d) Milestone 2D — AI Text Roleplay Partner:** Authored `src/lib/ai/roleplay-schema.ts` (Schemas R1 & F1), deterministic in-character roleplay engine with 1-correction limit and prompt injection guardrails (`src/lib/ai/roleplay.ts`), API routes `/api/v1/ai/roleplay/turn` and `/api/v1/ai/roleplay/feedback`, interactive UI (`RoleplayPartner.tsx`) with `ChatBubble` (speaker="1" for partner, "2" for learner) and Web Speech audio, route `/roleplay`, and sidebar navigation. 152 unit tests passing.
 31. **[DONE] (commit 9fab261) Milestones 3A & 3D & 3E — Speech Input, Personalisation & Progress Analytics:** Authored `src/lib/analytics/progress-metrics.ts` (retention tiers, SM-2 stage distribution, accuracy, and personalized next steps), built interactive `ProgressDashboard.tsx` with KPI metrics, SM-2 vocabulary retention progress, and weekly activity columns, created route `/progress`, wired "My Progress" in `Sidebar.tsx`, and added Web Speech recognition input to `RoleplayPartner.tsx`. 158 unit tests passing.
+32. **[DONE] (commit 839f4cb) Milestone 3C — Pronunciation Hints & Acoustic Word-Level Feedback Engine:** Authored `src/lib/practice/pronunciation.ts` with word-level phonetic alignment, Bengali acoustic hints dictionary, qualitative tiers ('clear', 'getting_there', 'needs_practice'), zero fake precision scores, automated audio disclaimer, and upgraded `ReadAloudCard` with interactive word chips and slow audio playback. 166 unit tests passing.
 
 ---
 
@@ -231,6 +233,22 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 3C — Pronunciation Hints & Acoustic Word-Level Feedback Engine
+- Requested by owner: "next" -> implement Milestone 3C: Pronunciation hints & acoustic word-level feedback engine per ECP_Phase_Plan §6.1, ECP_Audio_Voice_Guide §10.2, and Brief §9.3 & §20.
+- Changed:
+  - `src/lib/practice/pronunciation.ts`: Built word-level phonetic matching, token alignment, curated Bengali pronunciation dictionary for tricky ESL sounds (silent letters, vowel reduction, epenthesis cluster traps, 'th' fricatives, 'v' vs 'w'), qualitative tiers (`clear`, `getting_there`, `needs_practice`), actionable tips generator, and transparent disclaimer. Statically enforced zero fake percentage or decimal scores.
+  - `src/components/practice/ReadAloudCard.tsx`: Upgraded with interactive word-level pronunciation chips, slow (0.75x) model audio playback, isolated slow (0.7x) word pronunciation, Bengali phonetic guidance card, and disclaimer notice.
+  - `tests/pronunciation-hints.test.mjs`: Authored unit test suite (8 tests) verifying word alignment, dictionary phonetic tips, tiering logic, absence of fake scores, and disclaimer text.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (166/166 unit tests passing across 33 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 91/91 static pages generated).
+- Commit: `839f4cb`
+- Open questions / follow-ups: none
 
 ### 2026-11-22, Milestones 3A, 3D & 3E — Speech Input, Personalisation & Progress Analytics
 - Requested by owner: "next" -> implement speech input (3A), personalized recommendations engine (3D), and learner progress analytics dashboard (3E) per ECP_Phase_Plan §6.1, Brief §10.3, and Brief §19.
