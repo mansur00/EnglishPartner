@@ -63,10 +63,9 @@ export function Sidebar() {
     },
     {
       name: "AI Partner",
-      href: "#",
+      href: "/roleplay",
       icon: BotIcon,
-      active: false,
-      comingSoon: true,
+      active: pathname === "/roleplay",
     },
     {
       name: t("nav.vocabulary"),
