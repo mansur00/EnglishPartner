@@ -1145,6 +1145,36 @@ Entry format:
 - Commit: `98485fe`
 - Open questions / follow-ups: Stopped after item 8 per owner instruction. Awaiting approval to proceed to Phase 1E (landing page) or Phase 2 (grammar color-coding).
 
+### 2026-11-22, Screenshot UI Review & Shadcn Harmonization Overhaul
+- Requested by owner: Review 5 live screenshots showing broken button consistency, poor contrast, irregular spacing, and chaotic turn toolbar actions. Fix based strictly on shadcn design system and background XOR stroke rule.
+- Changed:
+  - `src/components/learning/ConversationTurn.tsx` & `AudioPlayButton.tsx`: Harmonized all 4 action buttons in turn headers (`Listen`, `Grammar`, `Analysis`, `Hide translation`) to identical shadcn `size="sm"` (`h-control-sm`), `rounded-control` (12px), `text-chip` (12px font), unified outline variant (`border border-border bg-transparent`) when idle, active states elevated or `.rainbow-border`. Turn card container converted to clean elevated solid white `bg-card shadow-sm border-0` with hover elevation.
+  - `src/components/learning/ConversationReader.tsx`: Standardized top toolbar buttons to uniform `h-9` (`size="sm"`), eliminating mismatched heights.
+  - `src/components/dashboard/DashboardClient.tsx`: Fixed sibling track cards (Everyday vs Professional) to use identical `variant="default"` primary buttons and matching `Badge` variants, eliminating one-white-one-purple discrepancy.
+  - `src/components/discovery/ScenarioCard.tsx`: Converted "Practice" CTA to high-contrast `variant="default" size="sm"` button.
+  - `src/components/discovery/FilterBar.tsx`: Fixed Select dropdowns to render full translated labels ("All Levels (CEFR)", "Any Length", "Any Style") instead of raw lowercase `"all"`; converted triggers to `border border-input bg-transparent`.
+  - `src/components/discovery/CategoryPills.tsx`: Converted unselected pills to clean outline `border border-border bg-transparent` and selected pill to `.rainbow-border bg-card`.
+  - `src/components/learning/WordDetailPopover.tsx`: Eliminated nested box borders in Grammar Breakdown, Contextual Meaning, and Example Sentence (`border-0` with solid muted/panel fills); unified footer actions to standard shadcn Cancel (`variant="outline"`) and Confirm (`variant="default"`).
+  - `src/app/globals.css`: Removed forced `background-color: var(--topic-surface)` on all cards so cards remain crisp white `bg-card shadow-card` surfaces; removed stroke from `.emoji-tile`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (203/203 unit tests passing across 41 suites).
+- Commit: `8555e2a`
+- Open questions / follow-ups: None.
+
+### 2026-11-22, Localhost Dev Server Launch
+- Requested by owner: "run local host".
+- Changed:
+  - Launched Next.js development server (`next dev` with Turbopack) on port 3000 as background daemon process.
+  - Server successfully initialized and actively listening at `http://localhost:3000` (network `http://192.168.0.102:3000`).
+- Verified with:
+  - Background task status: `RUNNING` with `✓ Ready in 254ms`.
+- Commit: Working tree clean.
+- Open questions / follow-ups: None.
+
 ### 2026-11-22, Shadcn UI Harmonization & Surface Contrast Rule
 - Requested by owner: Harmonize UI with shadcn design system (button sizes, pill sizes, label sizes, card sizes, spacing, padding, margin, 4px grid rhythm). Define and enforce minimum (12px) and maximum (40px) font sizes, font weight max 600. Enforce "Background XOR Stroke": solid background has no stroke, stroke has no background fill; sole exception is active gradient `.rainbow-border`.
 - Changed:
