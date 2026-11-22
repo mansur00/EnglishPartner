@@ -6,21 +6,21 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 shadow-xs font-semibold",
+          "bg-primary text-primary-foreground border-0 hover:bg-primary/90 active:bg-primary/80 shadow-xs font-semibold",
         secondary:
-          "bg-brand-100 text-brand-800 hover:bg-brand-200 active:bg-brand-300 dark:bg-muted dark:text-foreground dark:hover:bg-muted/80 font-semibold",
+          "bg-brand-100 text-brand-800 border-0 hover:bg-brand-200 active:bg-brand-300 dark:bg-muted dark:text-foreground dark:hover:bg-muted/80 font-semibold",
         outline:
-          "border border-border bg-transparent hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border dark:bg-transparent dark:hover:bg-muted/50",
+          "border border-border bg-transparent text-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-border dark:bg-transparent dark:hover:bg-muted/50",
         ghost:
-          "bg-transparent hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "border-0 bg-transparent hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-xs",
-        link: "bg-transparent text-primary underline-offset-4 hover:underline",
+          "bg-destructive text-destructive-foreground border-0 hover:bg-destructive/90 shadow-xs",
+        link: "border-0 bg-transparent text-primary underline-offset-4 hover:underline",
         // Extended & brand-specific variants
-        cta: "bg-cta bg-cta-hover active:bg-sun-600 shadow-sm font-semibold",
+        cta: "bg-cta text-brand-950 border-0 hover:bg-sun-400 active:bg-sun-600 shadow-sm font-semibold",
         primary:
-          "bg-primary text-primary-foreground hover:bg-brand-900 active:bg-brand-950 shadow-xs font-semibold",
-        accent: "bg-cta hover:bg-sun-400 shadow-xs font-semibold",
+          "bg-primary text-primary-foreground border-0 hover:bg-brand-900 active:bg-brand-950 shadow-xs font-semibold",
+        accent: "bg-cta text-brand-950 border-0 hover:bg-sun-400 shadow-xs font-semibold",
       },
       size: {
         default: "h-control-md gap-2 px-5 text-label rounded-control",

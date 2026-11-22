@@ -283,7 +283,7 @@ function ConversationReaderInner({
   return (
     <div className="space-y-6">
       {/* Top Controls Bar: Versions, Global Grammar Switches, Translation Toggle & Step Navigation */}
-      <div className="flex flex-col gap-3 p-3 sm:p-4 bg-card/60 backdrop-blur-xs rounded-panel border border-border">
+      <div className="flex flex-col gap-3 p-3 sm:p-4 bg-card rounded-panel border-0 shadow-xs">
         {/* Dialogue Version Selector (if multiple versions exist) */}
         {versions.length > 1 && (
           <div className="flex items-center gap-2 overflow-x-auto pb-1 text-chip">

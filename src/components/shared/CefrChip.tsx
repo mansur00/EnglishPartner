@@ -21,7 +21,7 @@ export function CefrChip({ level, label, className, ...props }: CefrChipProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-pill text-chip select-none",
+        "inline-flex items-center justify-center h-6 px-2.5 rounded-pill text-chip select-none shrink-0",
         levelStyles[level],
         className
       )}

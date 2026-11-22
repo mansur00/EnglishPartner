@@ -84,15 +84,15 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
 
         {/* Step Header Card */}
-        <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs rounded-card">
+        <Card className="space-y-3.5 p-6 md:p-7 bg-card border-0 shadow-card rounded-card">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="brand" size="sm">
+            <Badge variant="brand" size="default">
               Niche 01: Shopping & Money
             </Badge>
-            <Badge variant="neutral" size="sm" className="font-mono">
+            <Badge variant="neutral" size="default" className="font-mono">
               ধাপ {ladderStep.stepNumber.toString().padStart(2, "0")} / 20
             </Badge>
-            <Badge variant="accent" size="sm">
+            <Badge variant="accent" size="default">
               {ladderStep.level} • CEFR
             </Badge>
             <span className="text-chip text-muted-foreground ml-1">
@@ -203,17 +203,17 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
       </div>
 
       {/* Scenario Header Card */}
-      <Card className="space-y-3.5 p-6 md:p-7 bg-card border-border shadow-xs rounded-card">
+      <Card className="space-y-3.5 p-6 md:p-7 bg-card border-0 shadow-card rounded-card">
         <div className="flex flex-wrap items-center gap-2">
           {scenario.categories.map((cat) => (
-            <Badge key={cat.id} variant="neutral" size="sm">
+            <Badge key={cat.id} variant="neutral" size="default">
               {cat.name}
             </Badge>
           ))}
-          <Badge variant="brand" size="sm">
+          <Badge variant="brand" size="default">
             {scenario.level} • CEFR
           </Badge>
-          <Badge variant="accent" size="sm" className="capitalize">
+          <Badge variant="accent" size="default" className="capitalize">
             {scenario.communicationStyle} Register
           </Badge>
         </div>

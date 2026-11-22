@@ -262,14 +262,14 @@ export function AudioPlayer({
           <button
             type="button"
             onClick={handleSpeedToggle}
-            className="px-2.5 py-1 rounded-control text-chip bg-muted border border-border text-foreground hover:border-primary/40 transition-colors cursor-pointer"
+            className="px-2.5 py-1 rounded-control text-chip bg-muted border-0 text-foreground hover:bg-muted/80 transition-colors cursor-pointer"
             title={t("audio.cycleSpeed")}
           >
             {playbackSpeed}x
           </button>
 
           {/* Accent Switcher (en-US / en-GB) */}
-          <div className="inline-flex rounded-control border border-border bg-muted p-0.5 text-chip">
+          <div className="inline-flex rounded-control border-0 bg-muted p-0.5 text-chip">
             <button
               type="button"
               onClick={() => onAccentChange("en-US")}

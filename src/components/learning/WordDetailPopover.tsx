@@ -55,7 +55,7 @@ function GrammarItemCard({
 
 function WordFormBadge({ label, value }: { label: string; value: string }) {
   return (
-    <span className="px-2.5 py-1 bg-muted/60 border border-border rounded-control text-muted-foreground">
+    <span className="px-2.5 py-1 bg-muted/60 border-0 rounded-control text-muted-foreground">
       <strong className="text-foreground">{label}:</strong> {value}
     </span>
   );
@@ -117,7 +117,7 @@ export function WordDetailPopover({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="w-full sm:max-w-lg bg-card border-border p-5 sm:p-6 text-left max-h-dialog overflow-y-auto">
+      <DialogContent className="w-full sm:max-w-lg bg-card border-0 shadow-lg p-5 sm:p-6 text-left max-h-dialog overflow-y-auto">
         {/* Header with Title, POS and Grammar Role */}
         <DialogHeader className="pb-3 border-b border-border text-left">
           <div className="flex items-center gap-2.5 flex-wrap">
