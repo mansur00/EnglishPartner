@@ -7,7 +7,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * Complies with Decision A-01, Register D-07, and Brief §14.
  * Never exposes service role keys or handles raw user passwords.
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   });
