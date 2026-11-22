@@ -89,6 +89,7 @@ body {
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -532,6 +533,7 @@ body {
   --success: #1F9D6B;
   --warning: #D98E04;
   --destructive: #D8344F;
+  --destructive-foreground: #FFFFFF;
 
   /* Shadcn Mapping (Section 1.4) */
   --primary: var(--brand-800);
@@ -681,6 +683,7 @@ body {
   --success: #4ADE9A;
   --warning: #FBBF24;
   --destructive: #F87189;
+  --destructive-foreground: #2A0F44;
 
   /* Shadcn Mapping (Dark) */
   --primary: var(--brand-400);

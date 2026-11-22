@@ -9,7 +9,7 @@ export const badgeVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
         destructive:
-          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/25 dark:text-destructive [a]:hover:bg-destructive/20",
         outline:
           "border border-border bg-transparent text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
         ghost:
@@ -21,7 +21,7 @@ export const badgeVariants = cva(
         link: "bg-transparent text-primary underline-offset-4 hover:underline",
         // Additional brand & legacy variants
         brand:
-          "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground",
+          "bg-primary/10 text-primary dark:bg-primary/25 dark:text-primary",
         accent:
           "bg-sun-100 text-brand-950 dark:bg-status-warning-bg dark:text-sun-300",
         peach:
