@@ -244,6 +244,21 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-22, Migration Journal Verification Suite & AUD-MIGRATE Audit Sync
+- Requested by owner: "next" -> verify database migration journal and synchronize migration tracking.
+- Changed:
+  - `tests/schema-invariants.test.mjs`: Upgraded test suite to verify presence and integrity of all 3 Drizzle migrations (`0000_round_puck.sql`, `0001_strange_gauntlet.sql`, and `0002_elite_wrecker.sql`), validating consistency with `_journal.json` across 26 tables.
+  - `docs/AUDIT_REPORT.md` & `docs/DECISIONS.md`: Synchronized `AUD-MIGRATE` and `M-01` to track all 3 migrations.
+- Verified with:
+  - `npx drizzle-kit generate`: Passed (26 tables, 0 diff).
+  - `npm test`: Passed (203/203 unit tests passing across 41 suites).
+  - `npm run check:frozen`: Passed.
+  - `npm run lint:ui`: Passed.
+  - `npm run lint`: Passed.
+  - `npx tsc --noEmit`: Passed.
+- Commit: `6184a75`
+- Open questions / follow-ups: none.
+
 ### 2026-11-22, AUD-ICON Resolution & D-19 Confirmation in Audit Report
 - Requested by owner: "next" -> reconcile AUD-ICON and D-19 against PROJECT_STATE.md §2.3.
 - Changed:
