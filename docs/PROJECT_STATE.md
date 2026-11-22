@@ -209,6 +209,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 32. **[DONE] (commit 839f4cb) Milestone 3C — Pronunciation Hints & Acoustic Word-Level Feedback Engine:** Authored `src/lib/practice/pronunciation.ts` with word-level phonetic alignment, Bengali acoustic hints dictionary, qualitative tiers ('clear', 'getting_there', 'needs_practice'), zero fake precision scores, automated audio disclaimer, and upgraded `ReadAloudCard` with interactive word chips and slow audio playback. 166 unit tests passing.
 33. **[DONE] (commit 67d6d7d) Milestone 3B — Voice Roleplay Loop:** Implemented auto-speak AI replies with Web Speech API, speed controller (0.75x/0.88x/1.0x), speech input with transcript cleanup in src/lib/ai/roleplay-voice.ts, live status cues, and dialogue replay in RoleplayPartner.tsx. 171 unit tests passing.
 34. **[DONE] (commit 1bd9fbb) Milestones 4A & 4C — Professional English Career Paths & PWA Foundation:** Authored src/lib/professions/registry.ts (UI/UX, Software Engineer, Remote Freelancer, Healthcare, Teacher), created /professions page, upgraded /professions/[slug] static params and UI, created PWA web manifest and offline service worker (/sw.js), wired sidebar, 177 unit tests passing, 109 static routes.
+35. **[DONE] (commit 8f51de4) Milestone 4B — Multi-Language Strategy & Translation Framework:** Authored `src/lib/i18n/languages.ts` (registry for BN, EN, HI, UR, AR; RTL detection; script metadata), added complete `messages/hi.json` with 100% key parity (98/98 keys), updated `src/lib/i18n/index.ts` with Hindi dictionary and fallback, authored `LanguageSwitcher.tsx` with Expandable Design System, integrated in `Header.tsx`, 183 unit tests passing, 109 static routes.
 
 ---
 
@@ -237,6 +238,25 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 4B — Multi-Language Strategy & Translation Framework
+- Requested by owner: "next" -> implement Milestone 4B: Multi-Language Strategy & Translation Framework (Hindi expansion, RTL detection, language switcher) per ECP_Phase_Plan §7.1, ECP_Multi_Language_Strategy §13.3, and Brief §3.2 & §18.
+- Changed:
+  - `src/lib/i18n/languages.ts`: Multi-language registry defining Bengali, English, Hindi, Urdu, and Arabic with script classification, text direction (LTR vs RTL), status (available, beta, planned), and helper functions `isRtlLanguage`, `getLanguageMeta`, `getAllLanguages`, `getAvailableLanguages`.
+  - `messages/hi.json`: Complete Hindi translation dictionary achieving 100% key parity (98/98 keys) with natural, idiomatic Hindi for ESL learners.
+  - `src/lib/i18n/index.ts`: Integrated Hindi dictionary with English fallback, exported `Locale = "en" | "bn" | "hi"` and `isRtlLocale`.
+  - `src/components/navigation/LanguageSwitcher.tsx`: Interactive language switcher with active language state, native script display, beta tags, upcoming roadmap list (Urdu & Arabic with RTL badges), and click-outside/escape-key accessibility.
+  - `src/components/navigation/Header.tsx`: Integrated `LanguageSwitcher` in header control slot replacing static placeholder.
+  - `tests/multi-language-coverage.test.mjs`: Authored unit test suite (6 tests) verifying 100% key parity across EN, BN, and HI, non-empty values, RTL/LTR script detection, and dictionary resolution.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (183/183 unit tests passing across 34 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 109/109 static pages generated).
+- Commit: `8f51de4`
+- Open questions / follow-ups: none
 
 ### 2026-11-22, Milestones 4A & 4C — Professional English Career Paths & PWA Foundation
 - Requested by owner: "next" -> implement Milestone 4A (More professions & Profession Index) and Milestone 4C (PWA Installability) per ECP_Phase_Plan §7.1.
