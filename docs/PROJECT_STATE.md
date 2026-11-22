@@ -210,6 +210,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 33. **[DONE] (commit 67d6d7d) Milestone 3B — Voice Roleplay Loop:** Implemented auto-speak AI replies with Web Speech API, speed controller (0.75x/0.88x/1.0x), speech input with transcript cleanup in src/lib/ai/roleplay-voice.ts, live status cues, and dialogue replay in RoleplayPartner.tsx. 171 unit tests passing.
 34. **[DONE] (commit 1bd9fbb) Milestones 4A & 4C — Professional English Career Paths & PWA Foundation:** Authored src/lib/professions/registry.ts (UI/UX, Software Engineer, Remote Freelancer, Healthcare, Teacher), created /professions page, upgraded /professions/[slug] static params and UI, created PWA web manifest and offline service worker (/sw.js), wired sidebar, 177 unit tests passing, 109 static routes.
 35. **[DONE] (commit 8f51de4) Milestone 4B — Multi-Language Strategy & Translation Framework:** Authored `src/lib/i18n/languages.ts` (registry for BN, EN, HI, UR, AR; RTL detection; script metadata), added complete `messages/hi.json` with 100% key parity (98/98 keys), updated `src/lib/i18n/index.ts` with Hindi dictionary and fallback, authored `LanguageSwitcher.tsx` with Expandable Design System, integrated in `Header.tsx`, 183 unit tests passing, 109 static routes.
+36. **[DONE] (commit 2cc43b4) Milestone 4E — AI Quotas, Rate Limiting & Cost Defense Engine:** Authored `src/lib/ratelimit/quota.ts` (10 req/min burst limiter, 30 daily say-it requests, 20 max turns per roleplay session, IETF draft headers `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`, `Retry-After`), integrated in `POST /api/v1/ai/say-it` and `POST /api/v1/ai/roleplay/turn`, added turn limit notice and input guard in `RoleplayPartner.tsx`, 190 unit tests passing, 109 static routes.
 
 ---
 
@@ -238,6 +239,24 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 4E — AI Quotas, Rate Limiting & Cost Defense Engine
+- Requested by owner: "next" -> implement Milestone 4E: AI Quotas, Rate Limiting & Cost Defense Engine per ECP_API_Contract §4.7 & §7, ECP_System_Framework §13, and ECP_Phase_Plan §7.1 Track 4E.
+- Changed:
+  - `src/lib/ratelimit/quota.ts`: In-memory sliding window rate limiter and daily quota engine supporting customizable clocks for deterministic testing. Enforces: 10 req/min for AI endpoints, 30 daily "What Should I Say?" requests, max 20 turns per roleplay session, and standard IETF draft rate limit headers (`RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`, `Retry-After`).
+  - `src/app/api/v1/ai/say-it/route.ts`: Integrated client IP extraction, quota checking, and 429 response formatting with remaining retry time.
+  - `src/app/api/v1/ai/roleplay/turn/route.ts`: Integrated client IP extraction, 10 req/min burst limiter, and 20-turn session cap returning 400 `SESSION_TURN_LIMIT_EXCEEDED` if exceeded.
+  - `src/components/tools/RoleplayPartner.tsx`: Added session turn limit detection (`learnerTurnCount >= 20`), friendly Bengali completion banner ("সেশনের ২০টি কথোপকথন পূর্ণ হয়েছে। অগ্রগতি দেখতে সেশন সমাপ্ত করুন।"), and disabled input controls when session limit is reached.
+  - `tests/ai-quota-ratelimit.test.mjs`: Authored comprehensive test suite (7 tests) verifying 1-minute burst limit, 60s sliding window expiration, daily quota enforcement, IETF rate limit headers, IP extraction, 20-turn session cap, and endpoint integration.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (190/190 unit tests passing across 35 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 109/109 static pages generated).
+- Commit: `2cc43b4`
+- Open questions / follow-ups: none
 
 ### 2026-11-22, Milestone 4B — Multi-Language Strategy & Translation Framework
 - Requested by owner: "next" -> implement Milestone 4B: Multi-Language Strategy & Translation Framework (Hindi expansion, RTL detection, language switcher) per ECP_Phase_Plan §7.1, ECP_Multi_Language_Strategy §13.3, and Brief §3.2 & §18.
