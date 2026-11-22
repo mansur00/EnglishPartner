@@ -163,6 +163,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `e56927d` | Phase 2 Checkpoint 2 (UI MVP): Sources registry, loader, fallback, useGrammar, GrammarText, GrammarToggleButton (.rainbow-border when ON), GrammarModeSwitch, GrammarLayerPicker, GrammarLegend, GrammarSummaryRow, RuleCardDialog, WordDetailPopover breakdown, 0.0000px layout shift, 16 screenshots |
 | `34726f2` | Milestone 2C — "What Should I Say?" (AI Intent & Expression Assistant): Schema S1 contract, deterministic intent engine (zero Gemini in product code per AUD-A11), POST /api/v1/ai/say-it, interactive WhatShouldISay UI with Expandable Design System, Web Speech audio, and unit tests |
 | `72de12a` | Milestone 2A: Listening Comprehension Quiz engine (ECP_Exercises_SRS_Spec §4.1, Brief §10.4), Expandable Design System UI (Card, Button, Pill, Tag), slow audio (0.75x) toggle, score calculator, fallback generator, and test suite |
+| `f34740d` | Milestone 2D: AI Text Roleplay Partner (Schema R1 in-role turns, Schema F1 feedback summary, max 1 correction per turn, prompt injection guardrail, POST /api/v1/ai/roleplay/turn & feedback, RoleplayPartner UI with ChatBubble and audio, /roleplay route) |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -199,6 +200,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 27. **[DONE] (commit cfd5bdf) Milestone 1D — Faceted Pagination & Admin Unauthorized Access Guards (KI-10):** Authored `src/lib/pagination/faceted-pagination.ts` (safe boundary clamping, windowed page numbers with ellipsis), `src/components/discovery/FacetedPagination.tsx` (ARIA navigation, page controls, range indicator), and `src/lib/auth/admin-guard.ts` (role guards, unauthorized redirect URLs). Integrated faceted pagination into `ExplorePage` (page size 6) and `AdminDashboardClient` (page size 5), and added unauthorized access alert banners and editor return navigation. Reconciled `docs/AUDIT_REPORT.md` (KI-10 marked Fixed; Fixed=15, Not built yet=1, Total=25). 126 unit tests passing.
 28. **[DONE] (commit 34726f2) Milestone 2C — "What Should I Say?" (AI Intent & Expression Assistant):** Authored Schema S1 contract (`src/lib/ai/say-it-schema.ts`), deterministic intent resolution engine with Bangla/English support and placeholder injection (`src/lib/ai/say-it.ts`), `POST /api/v1/ai/say-it` API endpoint (`src/app/api/v1/ai/say-it/route.ts`), interactive UI (`src/components/tools/WhatShouldISay.tsx`) with Expandable Design System `InputGroup`, `Pill`, `Tag`, and `Button`, route `/what-should-i-say`, and sidebar navigation. 132 unit tests passing.
 29. **[DONE] (commit 72de12a) Milestone 2A — Listening Comprehension Quiz:** Authored `src/lib/practice/listening-quiz.ts` (Zod schema §4.1, evaluation, score calculation with pedagogical tiers, and fallback generator), upgraded `ListeningQuizCard.tsx` with Expandable Design System, slow audio toggle, option badges, skip action, and keyboard shortcuts, and added unit tests in `tests/listening-quiz.test.mjs`. 145 unit tests passing.
+30. **[DONE] (commit f34740d) Milestone 2D — AI Text Roleplay Partner:** Authored `src/lib/ai/roleplay-schema.ts` (Schemas R1 & F1), deterministic in-character roleplay engine with 1-correction limit and prompt injection guardrails (`src/lib/ai/roleplay.ts`), API routes `/api/v1/ai/roleplay/turn` and `/api/v1/ai/roleplay/feedback`, interactive UI (`RoleplayPartner.tsx`) with `ChatBubble` (speaker="1" for partner, "2" for learner) and Web Speech audio, route `/roleplay`, and sidebar navigation. 152 unit tests passing.
 
 ---
 
@@ -227,6 +229,27 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 2D — AI Text Roleplay Partner
+- Requested by owner: "next" -> implement Milestone 2D (AI Text Roleplay Partner) per ECP_Phase_Plan §5.1, ECP_AI_Prompt_Spec §3.5 (Schema R1) & §3.6 (Schema F1), and Brief §9.
+- Changed:
+  - `src/lib/ai/roleplay-schema.ts`: Authored Zod schemas and TypeScript types for Schema R1 (`RoleplayTurnResponseSchema`), Schema F1 (`RoleplayFeedbackResponseSchema`), and requests.
+  - `src/lib/ai/roleplay.ts`: Implemented deterministic in-character roleplay turn engine, single-correction rule (max 1 per turn, `correction.original` strictly verified as substring of learner message), prompt injection neutralization, and rubric-based session feedback generator.
+  - `src/app/api/v1/ai/roleplay/turn/route.ts`: Built `POST /api/v1/ai/roleplay/turn` endpoint.
+  - `src/app/api/v1/ai/roleplay/feedback/route.ts`: Built `POST /api/v1/ai/roleplay/feedback` endpoint.
+  - `src/components/tools/RoleplayPartner.tsx`: Built interactive UI using Expandable Design System, `ChatBubble` (speaker="1" partner, "2" learner), Web Speech API audio, gentle inline correction cards, situational hint banner, quick prompts, and Schema F1 session feedback summary card.
+  - `src/app/(app)/roleplay/page.tsx`: Created page route with metadata.
+  - `src/components/navigation/Sidebar.tsx`: Activated "AI Partner" link pointing to `/roleplay`.
+  - `tests/roleplay.test.mjs`: Authored unit test suite verifying Schema R1 conformance, single-correction rule invariant, prompt injection guardrails, conversation conclusion detection, and Schema F1 feedback summary conformance.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (152/152 unit tests passing across 30 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 90/90 static pages generated, including `/roleplay` and new API endpoints).
+- Commit: f34740d
+- Open questions / follow-ups: none.
 
 ### 2026-11-22, Milestone 2A — Listening Comprehension Quiz
 - Requested by owner: "option a" -> implement Milestone 2A (Listening Comprehension Quiz) per ECP_Phase_Plan §5.1, ECP_Exercises_SRS_Spec §4.1, and Brief §10.4.
