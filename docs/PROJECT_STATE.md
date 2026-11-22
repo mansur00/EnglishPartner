@@ -47,6 +47,19 @@ Optional: add a short root `AGENTS.md` saying "Read docs/PROJECT_STATE.md first 
    - **Dark mode:** No `dark:` + raw color classes. All tokens define light and dark values in token definitions.
    - **Primitives (`src/components/ui`):** May use scale utilities, but must resolve to design tokens via `@theme`.
 
+7. **AUTHORITATIVE SURFACE CONTRAST & STROKE RULE (Owner Rule, 2026-11-22):**
+   - **Background XOR Stroke:**
+     - If an element has a solid background color (`bg-*`), it MUST NOT have a stroke or border (`border-0` or omit stroke).
+     - If an element has a stroke/border (`border border-*`), it MUST NOT have a solid background color (use `bg-transparent`).
+     - **Sole Explicit Exception:** The active animated gradient rainbow border (`.rainbow-border`), which retains both background and border.
+   - **Strict Shadcn Harmony & Typography Scale:**
+     - Strict font size scale: floor `12px` (`text-chip`, `text-meta`), `14px` (`text-label`), `16px` (`text-body`), `18px` (`text-lead`), `20px` (`text-card-title`), `26-34px` (`text-page-title`), max `40px` (`text-display`).
+     - Max font weight: strictly 600 (`font-semibold`).
+     - Button heights: `xs` (28px / h-7), `sm` (36px / h-9), `md`/default (40px / h-10), `lg` (44px / h-11), `cta` (52px / h-13). Radius: 12px (`rounded-control`).
+     - Pill / Badge heights: `sm` (20px), `md` (24px), `lg` (28px). Radius: `rounded-pill`.
+     - Card sizes & padding: Standard `p-5 md:p-6 rounded-card` (16px), compact `p-4 rounded-card`.
+     - Spacing rhythm: 4px base (`gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px, container `max-w-5xl mx-auto px-4 sm:px-6 md:px-8`).
+
 ---
 
 ## 3. CURRENT DESIGN RULES (authoritative)
@@ -1131,6 +1144,24 @@ Entry format:
     - Global font audit: Min font size `12px` (0 nodes below 12px), Max font weight `600` (0 nodes above 600).
 - Commit: `98485fe`
 - Open questions / follow-ups: Stopped after item 8 per owner instruction. Awaiting approval to proceed to Phase 1E (landing page) or Phase 2 (grammar color-coding).
+
+### 2026-11-22, Shadcn UI Harmonization & Surface Contrast Rule
+- Requested by owner: Harmonize UI with shadcn design system (button sizes, pill sizes, label sizes, card sizes, spacing, padding, margin, 4px grid rhythm). Define and enforce minimum (12px) and maximum (40px) font sizes, font weight max 600. Enforce "Background XOR Stroke": solid background has no stroke, stroke has no background fill; sole exception is active gradient `.rainbow-border`.
+- Changed:
+  - `src/components/ui/card.tsx`: default/warm/muted cards solid with `border-0`; bordered card uses `border border-border bg-transparent`.
+  - `src/components/ui/badge-variants.ts`: all solid badge variants borderless; outline badge uses `border border-border bg-transparent`.
+  - `src/components/ui/button-variants.ts`: outline button `border border-border bg-transparent`; solid buttons borderless.
+  - `src/components/ui/input-variants.ts` & `src/components/ui/select.tsx`: outline inputs use transparent bg.
+  - Cleared redundant borders from solid containers across 34 feature components and pages (`Panel`, `TopicCard`, `ChatBubble`, `CefrChip`, `TodayPanel`, `DashboardClient`, `WhatShouldISay`, `RoleplayPartner`, `NicheLadderRoadmap`, `ReviewQueue`, `PracticeWorkspace`, `ProgressDashboard`, `Grammar*`, `Sidebar`, `explore`, `vocabulary`, `professions`, `privacy`, landing).
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (203/203 unit tests passing across 41 suites).
+  - `npm run build`: Passed (109/109 static pages successfully generated in 3.1s).
+- Commit: `d51ab66`
+- Open questions / follow-ups: None.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
