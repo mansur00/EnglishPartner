@@ -166,6 +166,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `f34740d` | Milestone 2D: AI Text Roleplay Partner (Schema R1 in-role turns, Schema F1 feedback summary, max 1 correction per turn, prompt injection guardrail, POST /api/v1/ai/roleplay/turn & feedback, RoleplayPartner UI with ChatBubble and audio, /roleplay route) |
 | `9fab261` | Milestones 3A & 3D & 3E: Speech Recognition input in RoleplayPartner, Personalised Analytics & Recommendations Engine (progress-metrics.ts), ProgressDashboard UI, /progress route, and sidebar navigation |
 | `839f4cb` | Milestone 3C: Pronunciation Hints & Acoustic Word-Level Feedback Engine (ECP_Phase_Plan §6.1, ECP_Audio_Voice_Guide §10.2, Brief §9.3 & §20). Pure alignment engine in pronunciation.ts, Bengali acoustic tips dictionary, qualitative relative tiers (no fake decimal/percentage scores), transparent browser limitations disclaimer, slow audio controls (0.7x/0.75x), and upgraded ReadAloudCard |
+| `67d6d7d` | Milestone 3B: Voice Roleplay Loop (ECP_Phase_Plan §6.1 & §6.4). Auto-speak AI replies with Web Speech API, speed controller (0.75x/0.88x/1.0x), speech input with transcript cleanup, live status cues, and dialogue replay in RoleplayPartner.tsx |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -205,6 +206,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 30. **[DONE] (commit f34740d) Milestone 2D — AI Text Roleplay Partner:** Authored `src/lib/ai/roleplay-schema.ts` (Schemas R1 & F1), deterministic in-character roleplay engine with 1-correction limit and prompt injection guardrails (`src/lib/ai/roleplay.ts`), API routes `/api/v1/ai/roleplay/turn` and `/api/v1/ai/roleplay/feedback`, interactive UI (`RoleplayPartner.tsx`) with `ChatBubble` (speaker="1" for partner, "2" for learner) and Web Speech audio, route `/roleplay`, and sidebar navigation. 152 unit tests passing.
 31. **[DONE] (commit 9fab261) Milestones 3A & 3D & 3E — Speech Input, Personalisation & Progress Analytics:** Authored `src/lib/analytics/progress-metrics.ts` (retention tiers, SM-2 stage distribution, accuracy, and personalized next steps), built interactive `ProgressDashboard.tsx` with KPI metrics, SM-2 vocabulary retention progress, and weekly activity columns, created route `/progress`, wired "My Progress" in `Sidebar.tsx`, and added Web Speech recognition input to `RoleplayPartner.tsx`. 158 unit tests passing.
 32. **[DONE] (commit 839f4cb) Milestone 3C — Pronunciation Hints & Acoustic Word-Level Feedback Engine:** Authored `src/lib/practice/pronunciation.ts` with word-level phonetic alignment, Bengali acoustic hints dictionary, qualitative tiers ('clear', 'getting_there', 'needs_practice'), zero fake precision scores, automated audio disclaimer, and upgraded `ReadAloudCard` with interactive word chips and slow audio playback. 166 unit tests passing.
+33. **[DONE] (commit 67d6d7d) Milestone 3B — Voice Roleplay Loop:** Implemented auto-speak AI replies with Web Speech API, speed controller (0.75x/0.88x/1.0x), speech input with transcript cleanup in src/lib/ai/roleplay-voice.ts, live status cues, and dialogue replay in RoleplayPartner.tsx. 171 unit tests passing.
 
 ---
 
@@ -233,6 +235,22 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 3B — Voice Roleplay Loop
+- Requested by owner: "next" -> implement Milestone 3B: Voice Roleplay Loop per ECP_Phase_Plan §6.1 & §6.4.
+- Changed:
+  - `src/lib/ai/roleplay-voice.ts`: Built speech rate mapping (slow 0.75x, clear 0.88x, normal 1.0x), transcript cleanup (strips filler stutters like um/uh, capitalizes, adds punctuation), and contextual Bengali status cues.
+  - `src/components/tools/RoleplayPartner.tsx`: Upgraded with Voice Mode toggle (ON by default), auto-speak AI replies, speech speed selector, live speech recognition with editable transcript, mic error fallback, and session dialogue audio replay in Feedback Summary. Eliminated duplication rule f violation with `FeedbackSectionHeader`.
+  - `tests/voice-roleplay.test.mjs`: Authored unit test suite (5 tests) verifying speech rates, transcript cleaning, status cues, config schema, and privacy invariants.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (171/171 unit tests passing across 33 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 91/91 static pages generated).
+- Commit: `67d6d7d`
+- Open questions / follow-ups: none
 
 ### 2026-11-22, Milestone 3C — Pronunciation Hints & Acoustic Word-Level Feedback Engine
 - Requested by owner: "next" -> implement Milestone 3C: Pronunciation hints & acoustic word-level feedback engine per ECP_Phase_Plan §6.1, ECP_Audio_Voice_Guide §10.2, and Brief §9.3 & §20.
