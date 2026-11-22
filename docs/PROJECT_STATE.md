@@ -162,6 +162,7 @@ Buttons 36/44/52 (md default 44), inputs 48, selects 44, chips 40, badges 24, na
 | `27cfabd` | AUD-R3-RECONCILE: one commit per finding, all hashes verified |
 | `e56927d` | Phase 2 Checkpoint 2 (UI MVP): Sources registry, loader, fallback, useGrammar, GrammarText, GrammarToggleButton (.rainbow-border when ON), GrammarModeSwitch, GrammarLayerPicker, GrammarLegend, GrammarSummaryRow, RuleCardDialog, WordDetailPopover breakdown, 0.0000px layout shift, 16 screenshots |
 | `34726f2` | Milestone 2C — "What Should I Say?" (AI Intent & Expression Assistant): Schema S1 contract, deterministic intent engine (zero Gemini in product code per AUD-A11), POST /api/v1/ai/say-it, interactive WhatShouldISay UI with Expandable Design System, Web Speech audio, and unit tests |
+| `72de12a` | Milestone 2A: Listening Comprehension Quiz engine (ECP_Exercises_SRS_Spec §4.1, Brief §10.4), Expandable Design System UI (Card, Button, Pill, Tag), slow audio (0.75x) toggle, score calculator, fallback generator, and test suite |
 
 Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes below), hero card edges aligned to container padding.
 
@@ -197,6 +198,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 26. **[DONE] (commit 8f66338) Milestone 1C+ — Audio Timing Manifest & Interactive Seek Bar (KI-13):** Authored `src/lib/audio/timing-manifest.ts` with duration estimation, sequential timestamp generation, and bidirectional percentage/time mapping per Audio Guide §5.2. Upgraded `src/components/learning/AudioPlayer.tsx` with interactive scrub bar (`role="slider"`, `aria-valuenow`, keyboard navigation, hover zoom), timing manifest synchronization, Pill badge line count, and eliminated cascading renders via render-time derived progress calculation. Reconciled `docs/AUDIT_REPORT.md` (KI-13 marked Fixed). 116 unit tests passing.
 27. **[DONE] (commit cfd5bdf) Milestone 1D — Faceted Pagination & Admin Unauthorized Access Guards (KI-10):** Authored `src/lib/pagination/faceted-pagination.ts` (safe boundary clamping, windowed page numbers with ellipsis), `src/components/discovery/FacetedPagination.tsx` (ARIA navigation, page controls, range indicator), and `src/lib/auth/admin-guard.ts` (role guards, unauthorized redirect URLs). Integrated faceted pagination into `ExplorePage` (page size 6) and `AdminDashboardClient` (page size 5), and added unauthorized access alert banners and editor return navigation. Reconciled `docs/AUDIT_REPORT.md` (KI-10 marked Fixed; Fixed=15, Not built yet=1, Total=25). 126 unit tests passing.
 28. **[DONE] (commit 34726f2) Milestone 2C — "What Should I Say?" (AI Intent & Expression Assistant):** Authored Schema S1 contract (`src/lib/ai/say-it-schema.ts`), deterministic intent resolution engine with Bangla/English support and placeholder injection (`src/lib/ai/say-it.ts`), `POST /api/v1/ai/say-it` API endpoint (`src/app/api/v1/ai/say-it/route.ts`), interactive UI (`src/components/tools/WhatShouldISay.tsx`) with Expandable Design System `InputGroup`, `Pill`, `Tag`, and `Button`, route `/what-should-i-say`, and sidebar navigation. 132 unit tests passing.
+29. **[DONE] (commit 72de12a) Milestone 2A — Listening Comprehension Quiz:** Authored `src/lib/practice/listening-quiz.ts` (Zod schema §4.1, evaluation, score calculation with pedagogical tiers, and fallback generator), upgraded `ListeningQuizCard.tsx` with Expandable Design System, slow audio toggle, option badges, skip action, and keyboard shortcuts, and added unit tests in `tests/listening-quiz.test.mjs`. 145 unit tests passing.
 
 ---
 
@@ -225,6 +227,24 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 2A — Listening Comprehension Quiz
+- Requested by owner: "option a" -> implement Milestone 2A (Listening Comprehension Quiz) per ECP_Phase_Plan §5.1, ECP_Exercises_SRS_Spec §4.1, and Brief §10.4.
+- Changed:
+  - `src/lib/practice/listening-quiz.ts`: Authored Zod schema `ListeningQuizItemDataSchema`, `evaluateQuizAnswer` (Brief §20 Rule 5 non-judgmental feedback), `calculateQuizScore` (pedagogical tiers: perfect, proficient, developing, needs_review), and `generateFallbackQuizzes`.
+  - `src/components/practice/ListeningQuizCard.tsx`: Upgraded with Expandable Design System (`Card`, `Button`, `Tag`, `Pill`), slow audio speed switch (`0.75x` vs `1.0x`), question skip action, option badges (A, B, C, D), keyboard shortcuts (1-4, Space, Enter), and completion breakdown screen.
+  - `src/components/practice/PracticeWorkspace.tsx`: Integrated `generateFallbackQuizzes` for modular fallback quiz generation.
+  - `src/content/seed/exercises.ts`: Curated `sm-03-q2` for Step 03 ensuring full seed data integrity across all steps.
+  - `tests/listening-quiz.test.mjs`: Authored comprehensive unit test suite covering evaluation, score tiers, schema conformance, fallback generation, and seed data integrity.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border` block).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings; 0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (145/145 unit tests passing across 24 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 87/87 static pages generated).
+- Commit: 72de12a
+- Open questions / follow-ups: none.
 
 ### 2026-11-22, Milestone 2C — "What Should I Say?" Intent Assistant
 - Requested by owner: "now tmi jekhane shes korcila oikhan theke shuru koro, next step a jai amra" -> complete Milestone 2C ("What Should I Say?" / AI Expression Recommender) per ECP_Phase_Plan §5.1, ECP_AI_Prompt_Spec §3.4, and ECP_API_Contract §4.7.
