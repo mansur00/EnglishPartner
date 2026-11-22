@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { SpeakerLabel } from "./SpeakerLabel";
 import { AudioPlayButton } from "./AudioPlayButton";
@@ -69,12 +70,10 @@ export function ConversationTurn({
   return (
     <div
       className={cn(
-        "rounded-card p-5 md:p-6 transition-all duration-200 border space-y-3.5",
+        "rounded-card p-5 md:p-6 transition-all duration-200 space-y-3.5",
         isCurrentlyPlaying
-          ? "bg-primary/10 border-primary shadow-xs ring-1 ring-primary/30"
-          : speaker.colorScheme === "accent"
-            ? "bg-card border-border"
-            : "bg-card border-border"
+          ? "bg-primary/10 shadow-xs ring-2 ring-primary/40 border-0"
+          : "bg-card shadow-sm border-0 hover:shadow-md"
       )}
     >
       {/* Top Bar: Speaker & Controls */}
@@ -94,37 +93,43 @@ export function ConversationTurn({
               else onLinePlayEnd?.();
             }}
             ariaLabel={`Play line ${line.sequenceNumber} by ${speaker.name}`}
+            className="h-control-sm px-2.5 text-chip"
           />
 
           {/* Grammar Color-Coding Toggle (per turn) */}
           <GrammarToggleButton
             isActive={isGrammarActive}
             onToggle={() => toggleLine(line.id)}
+            size="sm"
           />
 
           {/* Detailed Grammar Explanation Modal Button (if static explanation exists) */}
           {hasGrammarExplanation && (
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="sm"
               onClick={() => onGrammarClick?.(line.id)}
-              className="inline-flex items-center gap-1 min-h-tap px-2.5 py-1 rounded-control text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
+              className="h-control-sm px-2.5 text-chip gap-1 text-primary hover:text-primary rounded-control"
               title="বাক্যের ব্যাকরণ ও গঠন বিশ্লেষণ দেখুন"
             >
               <HugeiconsIcon icon={BookOpen01Icon} size={14} />
               <span className="hidden sm:inline font-bangla">বিশ্লেষণ</span>
-            </button>
+            </Button>
           )}
 
           {/* Translation Toggle per Line */}
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="sm"
             onClick={() => setLocalTranslationVisible(!isTranslationShown)}
-            className="inline-flex items-center gap-1 min-h-tap px-2.5 py-1 rounded-control text-chip text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors cursor-pointer border border-border"
+            className="h-control-sm px-2.5 text-chip gap-1 text-muted-foreground hover:text-foreground rounded-control"
             title={isTranslationShown ? "Hide Bangla translation" : "Show Bangla translation"}
           >
             <HugeiconsIcon icon={isTranslationShown ? ViewOffIcon : ViewIcon} size={14} />
             <span className="hidden sm:inline font-bangla">{isTranslationShown ? "লুকান" : "বাংলা"}</span>
-          </button>
+          </Button>
         </div>
       </div>
 

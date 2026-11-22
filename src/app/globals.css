@@ -849,15 +849,12 @@ body {
 }
 
 /* Topic Card & Tile Global Application */
-[data-slot="card"][data-topic],
-.topic-card[data-topic] {
+.topic-card-tinted[data-topic] {
   background-color: var(--topic-surface);
-  border-color: var(--topic-border);
 }
 
 .emoji-tile {
   background-color: var(--topic-tile);
-  border: 1px solid var(--topic-border);
   color: var(--topic-ink);
 }
 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { BookOpen01Icon } from "@hugeicons/core-free-icons";
 
@@ -10,6 +11,7 @@ interface GrammarToggleButtonProps {
   onToggle: () => void;
   className?: string;
   lang?: "en" | "bn";
+  size?: "sm" | "default";
 }
 
 export function GrammarToggleButton({
@@ -17,36 +19,39 @@ export function GrammarToggleButton({
   onToggle,
   className,
   lang = "bn",
+  size = "default",
 }: GrammarToggleButtonProps) {
   const label = lang === "bn" ? "ব্যাকরণ" : "Grammar";
 
   return (
-    <button
+    <Button
       type="button"
+      variant={isActive ? "default" : "outline"}
+      size={size === "sm" ? "sm" : "default"}
       data-grammar-toggle="true"
       onClick={onToggle}
       aria-pressed={isActive}
       aria-label={`${label}: ${isActive ? "Active" : "Inactive"}`}
       title={isActive ? "Hide grammar color-coding" : "Show grammar color-coding"}
       className={cn(
-        "relative inline-flex items-center justify-center gap-1.5 min-h-tap min-w-tap px-3 py-2 rounded-control text-label cursor-pointer transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-primary",
-        isActive
-          ? "rainbow-border bg-card text-foreground shadow-xs"
-          : "bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground",
+        size === "sm"
+          ? "h-control-sm px-2.5 text-chip gap-1.5 rounded-control transition-all"
+          : "h-control-md px-3 text-label gap-1.5 rounded-control transition-all",
+        isActive ? "rainbow-border bg-card text-foreground shadow-xs border-0" : "",
         className
       )}
     >
       <HugeiconsIcon
         icon={BookOpen01Icon}
-        size={16}
+        size={size === "sm" ? 14 : 16}
         className={cn(
           "transition-colors",
           isActive ? "text-primary" : "text-muted-foreground"
         )}
       />
-      <span className="hidden sm:inline font-bangla text-bangla text-label">
+      <span className="hidden sm:inline font-bangla text-bangla">
         {label}
       </span>
-    </button>
+    </Button>
   );
 }

@@ -88,8 +88,8 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
         </div>
 
         <Link href={`/conversations/${scenario.slug}`}>
-          <Button variant="secondary" size="md" className="btn-press gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-all rounded-control">
-            <HugeiconsIcon icon={PlayCircleIcon} size={18} />
+          <Button variant="default" size="sm" className="btn-press gap-2 rounded-control">
+            <HugeiconsIcon icon={PlayCircleIcon} size={16} />
             <span>{t("learning.practice")}</span>
           </Button>
         </Link>

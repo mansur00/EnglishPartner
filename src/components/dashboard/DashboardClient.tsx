@@ -216,7 +216,7 @@ export function DashboardClient() {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <EmojiTile emoji="💼" />
-                <Badge variant="accent" size="md">30+ Job Roles</Badge>
+                <Badge variant="brand" size="md">30+ Job Roles</Badge>
               </div>
               <h3 className="text-card-title text-foreground">
                 Professional Conversations
@@ -239,7 +239,7 @@ export function DashboardClient() {
 
             <div className="pt-5 mt-5 border-t border-border">
               <Link href="/explore?category=workplace-business">
-                <Button variant="outline" size="md" className="btn-press w-full justify-between">
+                <Button variant="default" size="md" className="btn-press w-full justify-between">
                   <span>{t("dashboard.exploreProfessional")}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
                 </Button>

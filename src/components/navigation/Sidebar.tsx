@@ -138,8 +138,8 @@ export function Sidebar() {
         </nav>
       </div>
 
-      <div className="pt-4 border-t border-border mt-auto">
-        <div className="p-4 bg-muted/50 rounded-panel space-y-1">
+      <div className="pt-4 border-t border-border mt-auto mb-6">
+        <div className="p-4 bg-muted/60 rounded-panel space-y-1">
           <p className="text-meta font-heading text-foreground">
             Active Learning Path
           </p>

@@ -34,7 +34,7 @@ export function FilterBar({
   isFiltered,
 }: FilterBarProps) {
   return (
-    <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-3.5 rounded-card bg-card/95 backdrop-blur shadow-2xs">
+    <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-4 rounded-card bg-card/95 backdrop-blur shadow-xs border-0">
       <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-label mr-1">
         <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
         <span>{t("discovery.filters")}</span>
@@ -45,8 +45,19 @@ export function FilterBar({
         value={level}
         onValueChange={(val) => setLevel((val as string) || "all")}
       >
-        <SelectTrigger className="w-40 h-control-md text-label bg-card border-border">
-          <SelectValue placeholder={t("discovery.allLevels")} />
+        <SelectTrigger className="w-48 h-control-md text-label border border-input bg-transparent">
+          <SelectValue>
+            {(val) => {
+              if (!val || val === "all") return t("discovery.allLevels");
+              const map: Record<string, string> = {
+                A1: "A1 • Beginner",
+                A2: "A2 • Elementary",
+                B1: "B1 • Intermediate",
+                B2: "B2 • Upper Intermediate",
+              };
+              return map[val as string] || val;
+            }}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">{t("discovery.allLevels")}</SelectItem>
@@ -62,8 +73,17 @@ export function FilterBar({
         value={lengthType}
         onValueChange={(val) => setLengthType((val as string) || "all")}
       >
-        <SelectTrigger className="w-40 h-control-md text-label bg-card border-border">
-          <SelectValue placeholder={t("discovery.anyLength")} />
+        <SelectTrigger className="w-44 h-control-md text-label border border-input bg-transparent">
+          <SelectValue>
+            {(val) => {
+              if (!val || val === "all") return t("discovery.anyLength");
+              const map: Record<string, string> = {
+                short: t("discovery.shortLength"),
+                medium: t("discovery.mediumLength"),
+              };
+              return map[val as string] || val;
+            }}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">{t("discovery.anyLength")}</SelectItem>
@@ -77,8 +97,18 @@ export function FilterBar({
         value={style}
         onValueChange={(val) => setStyle((val as string) || "all")}
       >
-        <SelectTrigger className="w-44 h-control-md text-label bg-card border-border">
-          <SelectValue placeholder={t("discovery.anyStyle")} />
+        <SelectTrigger className="w-48 h-control-md text-label border border-input bg-transparent">
+          <SelectValue>
+            {(val) => {
+              if (!val || val === "all") return t("discovery.anyStyle");
+              const map: Record<string, string> = {
+                casual: "Casual / Friendly",
+                neutral: "Neutral Everyday",
+                formal: "Formal / Professional",
+              };
+              return map[val as string] || val;
+            }}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">{t("discovery.anyStyle")}</SelectItem>

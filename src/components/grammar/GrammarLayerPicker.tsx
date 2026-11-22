@@ -83,13 +83,13 @@ export function GrammarLayerPicker({
     <Popover>
       <PopoverTrigger
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 min-h-tap min-w-tap px-2.5 py-1.5 rounded-control bg-card hover:bg-muted text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-2xs",
+          "inline-flex items-center justify-center gap-1.5 h-9 px-3 rounded-control border border-border bg-transparent hover:bg-muted text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
           className
         )}
         aria-label={isBn ? "ব্যাকরণ লেয়ার ও সেটিংস" : "Grammar Layers & Settings"}
       >
-        <HugeiconsIcon icon={SlidersHorizontalIcon} size={16} />
-        <span className="hidden sm:inline text-chip font-bangla text-bangla">
+        <HugeiconsIcon icon={SlidersHorizontalIcon} size={15} />
+        <span className="hidden sm:inline text-label font-bangla text-bangla">
           {isBn ? "লেয়ার সেটিংস" : "Layers"}
         </span>
       </PopoverTrigger>

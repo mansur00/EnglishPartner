@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PlayIcon,
@@ -18,6 +19,7 @@ export interface AudioPlayButtonProps {
   isPlaying?: boolean;
   onPlayStateChange?: (playing: boolean) => void;
   ariaLabel?: string;
+  className?: string;
 }
 
 export function AudioPlayButton({
@@ -28,6 +30,7 @@ export function AudioPlayButton({
   isPlaying: externalIsPlaying,
   onPlayStateChange,
   ariaLabel = "Play sentence audio",
+  className,
 }: AudioPlayButtonProps) {
   const [internalIsPlaying, setInternalIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -109,19 +112,19 @@ export function AudioPlayButton({
   }
 
   return (
-    <button
+    <Button
       type="button"
+      variant={isPlaying ? "default" : "outline"}
+      size="sm"
       onClick={handleTogglePlay}
       aria-label={ariaLabel}
       className={cn(
-        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-control text-chip transition-all duration-150 cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-1 select-none",
-        isPlaying
-          ? "bg-primary text-primary-foreground shadow-xs"
-          : "bg-muted text-primary hover:bg-primary/10 border border-border"
+        "h-control-sm px-2.5 text-chip gap-1.5 rounded-control transition-all",
+        className
       )}
     >
       <HugeiconsIcon icon={isPlaying ? PauseIcon : PlayIcon} size={14} />
       <span>{isPlaying ? "Pause" : "Listen"}</span>
-    </button>
+    </Button>
   );
 }

@@ -325,8 +325,8 @@ function ConversationReaderInner({
           <div className="flex flex-wrap items-center gap-2">
             {prevStepSlug && (
               <Link href={`/conversations/${prevStepSlug}`}>
-                <Button variant="outline" size="sm" className="min-h-tap text-label rounded-control font-bangla gap-1">
-                  <HugeiconsIcon icon={ArrowLeft01Icon} size={13} />
+                <Button variant="outline" size="sm" className="h-9 text-label rounded-control font-bangla gap-1">
+                  <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
                   <span>আগের ধাপ</span>
                 </Button>
               </Link>
@@ -334,9 +334,9 @@ function ConversationReaderInner({
 
             {nextStepSlug && (
               <Link href={`/conversations/${nextStepSlug}`}>
-                <Button size="sm" className="min-h-tap text-label rounded-control font-bangla gap-1">
+                <Button variant="default" size="sm" className="h-9 text-label rounded-control font-bangla gap-1">
                   <span>পরের ধাপ</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
+                  <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
                 </Button>
               </Link>
             )}
@@ -345,7 +345,7 @@ function ConversationReaderInner({
               variant="outline"
               size="sm"
               onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
-              className="min-h-tap text-label rounded-control gap-1.5 font-bangla"
+              className="h-9 text-label rounded-control gap-1.5 font-bangla"
             >
               <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
               <span>
@@ -359,7 +359,7 @@ function ConversationReaderInner({
               variant={isCompleted ? "secondary" : "outline"}
               size="sm"
               onClick={() => setIsCompleted(!isCompleted)}
-              className="min-h-tap text-label rounded-control gap-1.5 font-bangla"
+              className="h-9 text-label rounded-control gap-1.5 font-bangla"
             >
               <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
               <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত"}</span>

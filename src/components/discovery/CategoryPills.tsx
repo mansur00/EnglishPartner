@@ -28,10 +28,10 @@ export function CategoryPills({
               type="button"
               onClick={() => onSelectCategory(cat.slug)}
               className={cn(
-                "btn-press h-control-sm px-4 rounded-pill text-label whitespace-nowrap transition-all duration-150 cursor-pointer border flex items-center gap-1.5",
+                "btn-press h-control-sm px-4 rounded-pill text-label whitespace-nowrap transition-all duration-150 cursor-pointer flex items-center gap-1.5",
                 isSelected
-                  ? "bg-topic-tile text-topic-ink border-transparent shadow-xs"
-                  : "bg-topic-surface text-topic-ink border-topic-border hover:bg-topic-tile"
+                  ? "bg-card text-foreground shadow-xs"
+                  : "border border-border bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
               <span>{cat.name}</span>

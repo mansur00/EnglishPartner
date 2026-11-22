@@ -137,15 +137,15 @@ export function WordDetailPopover({
 
         {/* Pronunciation & Audio */}
         <div className="flex items-center gap-3 py-2">
-          <span className="text-chip font-mono text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-control border border-border">
+          <span className="text-chip font-mono text-muted-foreground bg-muted px-2.5 py-1 rounded-control border-0">
             {entry.ipa}
           </span>
           <Button
-            variant={isPlayingAudio ? "default" : "secondary"}
+            variant={isPlayingAudio ? "default" : "outline"}
             size="sm"
             onClick={playPronunciation}
             aria-label={`উচ্চারণ শুনুন: ${entry.word}`}
-            className="btn-press text-label gap-1.5 h-control-sm text-bangla rounded-control"
+            className="btn-press text-label gap-1.5 h-9 text-bangla rounded-control"
           >
             <HugeiconsIcon icon={VolumeHighIcon} size={15} />
             <span>উচ্চারণ শুনুন</span>
@@ -154,7 +154,7 @@ export function WordDetailPopover({
 
         {/* Enhanced Grammar Breakdown (when token data is available) */}
         {tokenData && (
-          <div className="my-2 p-3.5 rounded-panel bg-primary/5 border border-primary/20 space-y-2">
+          <div className="my-2 p-3.5 rounded-panel bg-muted/50 space-y-2.5 border-0">
             <div className="text-chip text-primary text-bangla flex items-center gap-1.5">
               <HugeiconsIcon icon={BookOpen01Icon} size={14} />
               <span>ব্যাকরণগত বিশ্লেষণ (Grammar Breakdown):</span>
@@ -202,7 +202,7 @@ export function WordDetailPopover({
 
         {/* Contextual Meaning */}
         <div className="space-y-3 my-2">
-          <div className="bg-primary/5 dark:bg-primary/10 p-3.5 rounded-panel border border-primary/15">
+          <div className="bg-primary/5 dark:bg-primary/10 p-3.5 rounded-panel border-0">
             <div className="text-chip text-primary text-bangla mb-1 flex items-center gap-1.5">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>এই প্রসঙ্গের অর্থ (Contextual Meaning):</span>
@@ -222,7 +222,7 @@ export function WordDetailPopover({
           </div>
 
           {/* Example Sentence */}
-          <div className="bg-muted/40 p-3 rounded-panel border border-border">
+          <div className="bg-muted/40 p-3.5 rounded-panel border-0">
             <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1">
               Example Sentence:
             </span>
@@ -264,7 +264,7 @@ export function WordDetailPopover({
                 {entry.synonyms.map((syn, idx) => (
                   <span
                     key={idx}
-                    className="text-chip px-2.5 py-0.5 rounded-pill bg-muted/60 border border-border text-muted-foreground"
+                    className="text-chip px-2.5 py-1 rounded-pill bg-muted text-muted-foreground border-0"
                   >
                     {syn}
                   </span>
@@ -280,7 +280,7 @@ export function WordDetailPopover({
             variant={isSaved ? "secondary" : "default"}
             size="sm"
             onClick={() => onSaveToggle(entry.lemma)}
-            className="btn-press gap-2 font-bangla text-label rounded-control"
+            className="btn-press gap-2 font-bangla text-label rounded-control h-9"
           >
             {isSaved ? (
               <>
@@ -296,10 +296,10 @@ export function WordDetailPopover({
           </Button>
 
           <Button
-            variant="ghost"
+            variant="outline"
             size="sm"
             onClick={onClose}
-            className="btn-press text-label text-muted-foreground font-bangla rounded-control"
+            className="btn-press text-label font-bangla rounded-control h-9"
           >
             বন্ধ করুন
           </Button>
