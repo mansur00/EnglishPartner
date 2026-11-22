@@ -23,8 +23,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run lint
+      - name: Check frozen CSS block
+        run: npm run check:frozen
+
+      - name: Check UI design rules
+        run: npm run lint:ui
+
+      - name: Run lint and token audit
         run: npm run lint
+
+      - name: Run unit and integration tests
+        run: npm test
 
       - name: Build Next.js
         run: npm run build
@@ -32,3 +41,11 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: "https://ijlrseclqymuzdcrruoz.supabase.co"
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "sb_publishable_7wtqx3FnO8osRGGHR7BiWA_R-pfsErM"
 
+      - name: Run E2E browser tests
+        run: |
+          npm start &
+          sleep 4
+          npm run test:e2e
+        env:
+          APP_URL: "http://localhost:3000"
+          CHROME_PATH: "/usr/bin/google-chrome"

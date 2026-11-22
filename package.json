@@ -13,6 +13,7 @@
     "check:frozen": "bash scripts/check-frozen.sh",
     "check:ladder": "node scripts/check-ladder-counts.mjs",
     "test": "node --experimental-strip-types --test 'tests/**/*.test.mjs'",
+    "test:e2e": "node tests/e2e/keyboard-focus.spec.mjs",
     "test:layout": "node scripts/layout-invariants.mjs",
     "grammar:palette": "node scripts/grammar-palette.mjs",
     "grammar:check": "node scripts/grammar-check.mjs",
