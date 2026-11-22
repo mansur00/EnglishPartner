@@ -257,6 +257,28 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-23, Provider-Agnostic Language Model (LLM) Integration & Production Pipeline
+- Requested by owner: "language model implement koro porperly" -> implement production-ready LLM integration layer with multi-provider support, structured JSON outputs, prompt injection defenses, and seamless fallback.
+- Changed:
+  - `src/lib/ai/llm-client.ts`: Authored provider-agnostic LLM client utilizing native `fetch` with zero proprietary SDK dependencies (AUD-A11 compliant). Supports Groq (`GROQ_API_KEY` with Llama 3.3/3.1), OpenAI/compatible endpoints (`OPENAI_API_KEY` / `OPENAI_BASE_URL`), Google AI Studio REST (`GEMINI_API_KEY`), and local Ollama (`OLLAMA_BASE_URL`), with auto-detection, markdown fence stripping, and Zod schema validation.
+  - `src/lib/ai/say-it.ts`: Added `resolveSayItIntentAsync` implementing Task M7 prompt per ECP_AI_Prompt_Spec.md §3.4 with structured Schema S1 JSON generation and graceful deterministic fallback.
+  - `src/lib/ai/roleplay.ts`: Added `generateRoleplayTurnAsync` (Task M8, Schema R1 in-character conversational turns, max 1 correction per turn) and `generateRoleplayFeedbackAsync` (Task M9, Schema F1 pedagogical rubric feedback).
+  - `src/lib/ai/roleplay-schema.ts`: Added `learning_objective` and `style` fields to `RoleplayTurnRequestSchema` matching Spec §3.5.
+  - `src/app/api/v1/ai/say-it/route.ts`: Switched to async LLM-backed intent resolution.
+  - `src/app/api/v1/ai/roleplay/turn/route.ts` & `src/app/api/v1/ai/roleplay/feedback/route.ts`: Switched to async LLM-backed roleplay turns and rubric feedback.
+  - `.env.example`: Added detailed LLM configuration section for Groq, OpenAI, Google AI Studio, and Ollama.
+  - `tests/llm-client.test.mjs`: Added 6 unit tests verifying provider resolution, markdown cleanup, offline mock fallback, Say-It async resolution, injection defense, and roleplay feedback.
+- Verified with:
+  - `tests/gemini-isolation.test.mjs`: Passed (0 forbidden imports in `src/`, AUD-A11 strictly maintained).
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 token violations across rules a-i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 42 suites).
+  - `npm run build`: Passed (109/109 static pages generated, 0 warnings).
+- Commit: `ffe9611`
+- Open questions / follow-ups: none.
+
 ### 2026-11-23, UI Contrast, Pill Standard & Background XOR Stroke Enforcement
 - Requested by owner: Review live screenshots, check button text contrast (light/dark mode), fix button consistency, standardize label/pill heights, and enforce authoritative "Background XOR Stroke" rule across reader, dashboard, explore, and popovers.
 - Changed:
