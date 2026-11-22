@@ -53,7 +53,7 @@
   - Technical / server logs: Retained 30 days.
 
 ### M-01 — Database Migrations Apply Status
-- **Migrations:** `0000_round_puck.sql` (initial schema) and `0001_strange_gauntlet.sql` (practice mode enum update).
+- **Migrations:** `0000_round_puck.sql` (initial schema), `0001_strange_gauntlet.sql` (practice mode enum update), and `0002_elite_wrecker.sql` (SRS review events, daily challenges, and content audit logs).
 - **Local environment:** Not applied to local database (no local database present).
 - **Staging / Production environments:** Unknown: cannot access remote environments from this sandbox.
 - **Operator verification command:**

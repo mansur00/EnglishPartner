@@ -55,6 +55,25 @@ test("AUD-VERIFY KI-09: drizzle config, db client, and .env.example exist and ar
   const dbClient = fs.readFileSync("src/lib/db/index.ts", "utf-8");
   assert.ok(dbClient.includes("drizzle-orm/postgres-js"), "db client must use postgres-js");
   assert.ok(dbClient.includes("export const db"), "db client must export db instance");
+
+  // Verify migration journal and SQL files
+  const journalPath = "src/lib/db/migrations/meta/_journal.json";
+  assert.ok(fs.existsSync(journalPath), "Migration journal must exist");
+  const journal = JSON.parse(fs.readFileSync(journalPath, "utf-8"));
+  assert.equal(journal.entries.length, 3, "Expected 3 migration entries");
+
+  const expectedMigrations = [
+    "0000_round_puck",
+    "0001_strange_gauntlet",
+    "0002_elite_wrecker",
+  ];
+  journal.entries.forEach((entry, idx) => {
+    assert.equal(entry.tag, expectedMigrations[idx], `Migration entry ${idx} must be ${expectedMigrations[idx]}`);
+    const sqlPath = `src/lib/db/migrations/${entry.tag}.sql`;
+    assert.ok(fs.existsSync(sqlPath), `Migration file ${sqlPath} must exist`);
+    const sqlContent = fs.readFileSync(sqlPath, "utf-8");
+    assert.ok(sqlContent.length > 50, `Migration file ${sqlPath} must be non-empty`);
+  });
 });
 
 test("AUD-VERIFY KI-16: practice_sessions matches Exercises spec §3.4", () => {
