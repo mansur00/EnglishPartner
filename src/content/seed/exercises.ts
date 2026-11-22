@@ -394,6 +394,20 @@ export const SEED_EXERCISES_MAP: Record<string, NicheStepExerciseSet> = {
         correctOptionId: "b",
         explanationBn: "নাদিয়া বলেছিল: 'Can I pay by card?' এবং রফি কার্ড ট্যাপ করতে বলেছিল।",
       },
+      {
+        id: "sm-03-q2",
+        stepSlug: "shopping-money-step-03",
+        question: "What did Nadia tell the assistant regarding the change?",
+        questionBn: "খুচরা টাকার ব্যাপারে নাদিয়া সহকারীকে কী বলেছিল?",
+        audioPrompt: "Here you are. Keep the change.",
+        options: [
+          { id: "a", text: "Give me the exact change", textBn: "আমাকে ঠিকঠাক খুচরা টাকা দিন" },
+          { id: "b", text: "Keep the change", textBn: "বাকি খুচরা টাকা রেখে দিন" },
+          { id: "c", text: "The bill is too high", textBn: "বিল অনেক বেশি হয়েছে" },
+        ],
+        correctOptionId: "b",
+        explanationBn: "নাদিয়া ভদ্রভাবে বলেছিল: 'Keep the change' অর্থাৎ বাকি খুচরা টাকা রেখে দেওয়ার জন্য বলেছিল।",
+      },
     ],
     completeLines: [
       {

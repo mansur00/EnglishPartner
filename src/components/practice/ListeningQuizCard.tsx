@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -8,124 +8,282 @@ import {
   Cancel01Icon,
   SparklesIcon,
   ArrowRight01Icon,
+  ArrowReloadHorizontalIcon,
+  HelpCircleIcon,
+  StopIcon,
 } from "@hugeicons/core-free-icons";
-import { ListeningQuizQuestion } from "@/content/seed/exercises";
+import type { ListeningQuizQuestion } from "@/content/seed/exercises";
+import {
+  evaluateQuizAnswer,
+  calculateQuizScore,
+  type QuizAnswerEvaluation,
+} from "@/lib/practice/listening-quiz";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Tag } from "@/components/ui/tag";
+import { Pill } from "@/components/ui/pill";
+import { cn } from "@/lib/utils";
 
 interface ListeningQuizCardProps {
   questions: ListeningQuizQuestion[];
   onComplete?: (score: number, total: number) => void;
 }
 
+const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
+
 export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
-  const [hasAnswered, setHasAnswered] = useState(false);
-  const [score, setScore] = useState(0);
+  const [evaluation, setEvaluation] = useState<QuizAnswerEvaluation | null>(null);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [skippedCount, setSkippedCount] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [isSlowAudio, setIsSlowAudio] = useState(false);
 
   const currentQ = questions[currentIndex];
 
-  const playPromptAudio = (text?: string) => {
-    if (!text) return;
+  const playPromptAudio = useCallback(
+    (text?: string, slowOverride?: boolean) => {
+      if (!text) return;
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        const useSlow = slowOverride !== undefined ? slowOverride : isSlowAudio;
+        utterance.rate = useSlow ? 0.75 : 0.95;
+
+        setIsPlayingAudio(true);
+        utterance.onend = () => setIsPlayingAudio(false);
+        utterance.onerror = () => setIsPlayingAudio(false);
+
+        window.speechSynthesis.speak(utterance);
+      }
+    },
+    [isSlowAudio]
+  );
+
+  const stopAudio = useCallback(() => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
+      setIsPlayingAudio(false);
     }
-  };
+  }, []);
 
-  const handleSelectOption = (optionId: string) => {
-    if (hasAnswered) return;
-    setSelectedOptionId(optionId);
-    setHasAnswered(true);
+  const handleSelectOption = useCallback(
+    (optionId: string) => {
+      if (evaluation || !currentQ) return; // Already answered
+      setSelectedOptionId(optionId);
+      const result = evaluateQuizAnswer(currentQ, optionId);
+      setEvaluation(result);
 
-    if (optionId === currentQ.correctOptionId) {
-      setScore((prev) => prev + 1);
-    }
-  };
+      if (result.isCorrect) {
+        setCorrectCount((prev) => prev + 1);
+      }
+    },
+    [evaluation, currentQ]
+  );
 
-  const handleNext = () => {
+  const handleSkip = useCallback(() => {
+    if (evaluation || !currentQ) return;
+    const result = evaluateQuizAnswer(currentQ, null);
+    setEvaluation(result);
+    setSkippedCount((prev) => prev + 1);
+  }, [evaluation, currentQ]);
+
+  const handleNext = useCallback(() => {
+    stopAudio();
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
       setSelectedOptionId(null);
-      setHasAnswered(false);
+      setEvaluation(null);
     } else {
       setIsFinished(true);
-      onComplete?.(score + (selectedOptionId === currentQ.correctOptionId ? 1 : 0), questions.length);
+      const finalCorrect = correctCount + (evaluation?.isCorrect ? 1 : 0);
+      onComplete?.(finalCorrect, questions.length);
     }
-  };
+  }, [stopAudio, currentIndex, questions.length, correctCount, evaluation, onComplete]);
 
   const handleRestart = () => {
+    stopAudio();
     setCurrentIndex(0);
     setSelectedOptionId(null);
-    setHasAnswered(false);
-    setScore(0);
+    setEvaluation(null);
+    setCorrectCount(0);
+    setSkippedCount(0);
     setIsFinished(false);
   };
 
+  // Keyboard shortcut navigation (1-4 / A-D, Space to play, Enter for next)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isFinished || !currentQ) return;
+
+      if (!evaluation) {
+        // Option selection
+        const key = e.key.toLowerCase();
+        if (["1", "a"].includes(key) && currentQ.options[0]) {
+          handleSelectOption(currentQ.options[0].id);
+        } else if (["2", "b"].includes(key) && currentQ.options[1]) {
+          handleSelectOption(currentQ.options[1].id);
+        } else if (["3", "c"].includes(key) && currentQ.options[2]) {
+          handleSelectOption(currentQ.options[2].id);
+        } else if (["4", "d"].includes(key) && currentQ.options[3]) {
+          handleSelectOption(currentQ.options[3].id);
+        } else if (key === "s") {
+          handleSkip();
+        }
+      } else {
+        // Next on Enter
+        if (e.key === "Enter") {
+          handleNext();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [evaluation, isFinished, currentQ, handleSelectOption, handleSkip, handleNext]);
+
   if (!currentQ) return null;
 
+  // Completion View
   if (isFinished) {
-    const finalScore = score;
-    const isPerfect = finalScore === questions.length;
+    const summary = calculateQuizScore(questions.length, correctCount, skippedCount);
 
     return (
-      <div className="card-practice-result space-y-4">
-        <div className="badge-success-icon">
+      <Card className="p-6 sm:p-8 bg-card border border-border rounded-card text-center space-y-5 shadow-xs animate-in fade-in">
+        <div className="p-3 mx-auto rounded-pill bg-primary/10 text-primary inline-flex items-center justify-center">
           <HugeiconsIcon icon={SparklesIcon} size={28} />
         </div>
 
-        <div>
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-center gap-2">
+            <Pill
+              variant={summary.rating === "perfect" ? "accent" : summary.rating === "proficient" ? "success" : "neutral"}
+              size="sm"
+            >
+              {summary.ratingLabelEn}
+            </Pill>
+          </div>
           <h3 className="text-card-title-bn">
-            কুইজ সম্পন্ন হয়েছে! (Quiz Completed)
+            কুইজ সম্পন্ন হয়েছে! ({summary.ratingLabelBn})
           </h3>
           <p className="text-meta text-muted-foreground mt-1">
-            আপনার স্কোর: <strong className="text-primary font-mono">{finalScore} / {questions.length}</strong>
+            আপনার স্কোর:{" "}
+            <span className="text-primary font-mono text-lead">
+              {summary.correctCount} / {summary.totalQuestions}
+            </span>{" "}
+            ({summary.percentage}%)
           </p>
         </div>
 
-        <p className="text-meta text-muted-foreground text-bangla max-w-sm mx-auto">
-          {isPerfect
-            ? "অসাধারণ! আপনি প্রতিটি প্রশ্নের সঠিক উত্তর দিয়েছেন।"
-            : "ভালো চেষ্টা! পুনরায় অনুশীলন করে পূর্ণাঙ্গ স্কোর অর্জন করতে পারেন।"}
+        {/* Breakdown Tags */}
+        <div className="flex items-center justify-center gap-2 flex-wrap pt-1">
+          <Tag variant="success" size="sm">
+            সঠিক: {summary.correctCount}
+          </Tag>
+          {summary.incorrectCount > 0 && (
+            <Tag variant="destructive" size="sm">
+              ভুল: {summary.incorrectCount}
+            </Tag>
+          )}
+          {summary.skippedCount > 0 && (
+            <Tag variant="outline" size="sm">
+              বাদ দেওয়া: {summary.skippedCount}
+            </Tag>
+          )}
+        </div>
+
+        <p className="text-meta text-muted-foreground text-bangla max-w-sm mx-auto leading-relaxed">
+          {summary.rating === "perfect"
+            ? "অসাধারণ! আপনি প্রতিটি ডায়লগের অর্থ নিখুঁতভাবে অনুধাবন করেছেন।"
+            : summary.rating === "proficient"
+            ? "চমৎকার অগ্রগতি! সামান্য কিছু জায়গা আরেকবার শুনলে পুরো আয়ত্তে চলে আসবে।"
+            : "ভালো চেষ্টা! অডিও ডায়লগগুলো মনোযোগ দিয়ে কয়েকবার শুনে আবার অনুশীলন করুন।"}
         </p>
 
-        <div className="pt-2">
-          <Button onClick={handleRestart} variant="outline" className="text-bangla text-label rounded-control">
-            পুনরায় কুইজ দিন (Try Again)
+        <div className="pt-3 flex items-center justify-center gap-3">
+          <Button
+            onClick={handleRestart}
+            variant="outline"
+            size="default"
+            className="rounded-control text-bangla gap-1.5"
+          >
+            <HugeiconsIcon icon={ArrowReloadHorizontalIcon} size={15} />
+            <span>পুনরায় কুইজ দিন (Try Again)</span>
           </Button>
         </div>
-      </div>
+      </Card>
     );
   }
 
-  const isCorrect = selectedOptionId === currentQ.correctOptionId;
+  const hasAnswered = !!evaluation;
 
   return (
-    <div className="card-practice space-y-5">
-      {/* Progress & Audio Cue */}
-      <div className="flex items-center justify-between pb-3 border-b border-border">
-        <span className="text-chip font-mono text-primary bg-primary/10 px-2.5 py-1 rounded-control border border-primary/20">
-          প্রশ্ন {currentIndex + 1} / {questions.length}
-        </span>
+    <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs">
+      {/* Top Bar: Progress, Slow Audio Switch, and Audio Trigger */}
+      <div className="flex items-center justify-between gap-3 pb-3 border-b border-border flex-wrap">
+        <div className="flex items-center gap-2">
+          <Pill variant="neutral" size="sm" className="font-mono">
+            প্রশ্ন {currentIndex + 1} / {questions.length}
+          </Pill>
 
-        {currentQ.audioPrompt && (
+          {!hasAnswered && (
+            <Button
+              variant="ghost"
+              size="xs"
+              onClick={handleSkip}
+              className="text-muted-foreground hover:text-foreground text-chip rounded-control px-2"
+              title="প্রশ্নটি বাদ দিতে ক্লিক করুন"
+            >
+              বাদ দিন (Skip)
+            </Button>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2">
+          {/* Slow Audio Toggle */}
           <button
             type="button"
-            onClick={() => playPromptAudio(currentQ.audioPrompt)}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-control text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
-            title="প্রশ্নের ডায়লগ শুনুন"
+            onClick={() => setIsSlowAudio((prev) => !prev)}
+            className={cn(
+              "text-chip px-2.5 py-1 rounded-control border transition-colors cursor-pointer",
+              isSlowAudio
+                ? "bg-primary/10 border-primary/30 text-primary"
+                : "border-border text-muted-foreground hover:text-foreground"
+            )}
+            title="ধীরগতির অডিও গতি পরিবর্তন করুন"
           >
-            <HugeiconsIcon icon={VolumeHighIcon} size={15} />
-            <span>শুনুন (Listen)</span>
+            {isSlowAudio ? "0.75x ধীর" : "1.0x স্বাভাবিক"}
           </button>
-        )}
+
+          {/* Audio Listen Button */}
+          {currentQ.audioPrompt && (
+            <Button
+              variant={isPlayingAudio ? "default" : "secondary"}
+              size="sm"
+              onClick={() => {
+                if (isPlayingAudio) {
+                  stopAudio();
+                } else {
+                  playPromptAudio(currentQ.audioPrompt);
+                }
+              }}
+              className="rounded-control gap-1.5 text-chip"
+              title="প্রশ্নের ডায়লগ শুনুন"
+            >
+              <HugeiconsIcon
+                icon={isPlayingAudio ? StopIcon : VolumeHighIcon}
+                size={14}
+              />
+              <span>{isPlayingAudio ? "থামান" : "শুনুন (Listen)"}</span>
+            </Button>
+          )}
+        </div>
       </div>
 
-      {/* Question Text */}
+      {/* Question Header */}
       <div className="space-y-1">
         <h4 className="text-lead text-foreground font-sans leading-snug">
           {currentQ.question}
@@ -136,18 +294,27 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
       </div>
 
       {/* Options List */}
-      <div className="space-y-2.5">
-        {currentQ.options.map((opt) => {
-          let btnStyle = "border-border bg-card text-foreground hover:border-primary/40";
+      <div className="space-y-2.5" role="radiogroup" aria-label="কুইজের সম্ভাব্য উত্তর">
+        {currentQ.options.map((opt, optIdx) => {
+          const isSelected = selectedOptionId === opt.id;
+          const isKeyOption = opt.id === currentQ.correctOptionId;
+
+          let optionStyle = "border-border bg-card text-foreground hover:border-primary/40";
+          let tagVariant: "outline" | "success" | "destructive" | "secondary" = "outline";
 
           if (hasAnswered) {
-            if (opt.id === currentQ.correctOptionId) {
-              btnStyle = "border-success bg-success-bg text-foreground";
-            } else if (opt.id === selectedOptionId) {
-              btnStyle = "border-destructive bg-destructive/10 text-destructive";
+            if (isKeyOption) {
+              optionStyle = "border-success bg-success-bg text-foreground";
+              tagVariant = "success";
+            } else if (isSelected) {
+              optionStyle = "border-destructive bg-destructive/10 text-destructive";
+              tagVariant = "destructive";
             } else {
-              btnStyle = "border-border bg-muted/40 text-muted-foreground opacity-60";
+              optionStyle = "border-border bg-muted/40 text-muted-foreground opacity-60";
+              tagVariant = "secondary";
             }
+          } else if (isSelected) {
+            optionStyle = "border-primary bg-primary/5 text-primary";
           }
 
           return (
@@ -156,21 +323,33 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
               type="button"
               disabled={hasAnswered}
               onClick={() => handleSelectOption(opt.id)}
-              className={`w-full p-3.5 rounded-control border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${btnStyle}`}
+              role="radio"
+              aria-checked={isSelected}
+              className={cn(
+                "w-full p-3.5 rounded-control border text-left flex items-center justify-between gap-3 transition-all cursor-pointer select-none",
+                optionStyle
+              )}
             >
-              <div>
-                <span className="text-label font-sans block">
-                  {opt.text}
-                </span>
-                <span className="text-chip text-bangla text-muted-foreground">
-                  {opt.textBn}
-                </span>
+              <div className="flex items-center gap-3">
+                <Tag variant={tagVariant} size="sm" className="font-mono">
+                  {OPTION_LETTERS[optIdx] || opt.id.toUpperCase()}
+                </Tag>
+                <div>
+                  <span className="text-label font-sans block">
+                    {opt.text}
+                  </span>
+                  {opt.textBn && (
+                    <span className="text-chip text-bangla text-muted-foreground">
+                      {opt.textBn}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              {hasAnswered && opt.id === currentQ.correctOptionId && (
+              {hasAnswered && isKeyOption && (
                 <HugeiconsIcon icon={CheckmarkCircle01Icon} size={18} className="text-success shrink-0" />
               )}
-              {hasAnswered && opt.id === selectedOptionId && opt.id !== currentQ.correctOptionId && (
+              {hasAnswered && isSelected && !isKeyOption && (
                 <HugeiconsIcon icon={Cancel01Icon} size={18} className="text-destructive shrink-0" />
               )}
             </button>
@@ -178,36 +357,56 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
         })}
       </div>
 
-      {/* Explanation & Feedback */}
-      {hasAnswered && (
+      {/* Feedback & Explanation Banner */}
+      {hasAnswered && evaluation && (
         <div
-          className={`p-4 rounded-panel text-meta text-bangla leading-relaxed animate-in fade-in border ${
-            isCorrect
+          className={cn(
+            "p-4 rounded-panel text-meta text-bangla leading-relaxed border space-y-1.5 animate-in fade-in",
+            evaluation.isCorrect
               ? "bg-success-bg border-success/30 text-foreground"
+              : evaluation.isSkipped
+              ? "bg-muted/40 border-border text-muted-foreground"
               : "bg-warning-bg border-warning/30 text-foreground"
-          }`}
+          )}
         >
-          <div className="text-label mb-1 flex items-center gap-1.5">
+          <div className="text-label flex items-center gap-1.5">
             <HugeiconsIcon
-              icon={isCorrect ? CheckmarkCircle01Icon : SparklesIcon}
+              icon={
+                evaluation.isCorrect
+                  ? CheckmarkCircle01Icon
+                  : evaluation.isSkipped
+                  ? HelpCircleIcon
+                  : SparklesIcon
+              }
               size={16}
-              className={isCorrect ? "text-success" : "text-warning"}
+              className={
+                evaluation.isCorrect
+                  ? "text-success"
+                  : evaluation.isSkipped
+                  ? "text-muted-foreground"
+                  : "text-warning"
+              }
             />
-            <span>{isCorrect ? "সঠিক উত্তর!" : "ব্যাখ্যা লক্ষ্য করুন:"}</span>
+            <span>{evaluation.feedbackBn}</span>
           </div>
-          <p>{currentQ.explanationBn}</p>
+          <p className="text-meta text-foreground">{evaluation.explanationBn}</p>
         </div>
       )}
 
-      {/* Next Question Action */}
+      {/* Next Question / Finish Action */}
       {hasAnswered && (
         <div className="pt-2 flex justify-end">
-          <Button onClick={handleNext} className="btn-nav-action">
+          <Button
+            onClick={handleNext}
+            variant="default"
+            size="default"
+            className="rounded-control text-bangla gap-1.5"
+          >
             <span>{currentIndex < questions.length - 1 ? "পরবর্তী প্রশ্ন" : "ফলাফল দেখুন"}</span>
             <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
           </Button>
         </div>
       )}
-    </div>
+    </Card>
   );
 }

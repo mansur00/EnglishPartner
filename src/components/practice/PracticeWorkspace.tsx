@@ -16,7 +16,6 @@ import {
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
 import {
   getExercisesForStep,
-  ListeningQuizQuestion,
   CompleteLineExercise,
   SentenceBuilderExercise,
   DialogueOrderExercise,
@@ -30,6 +29,7 @@ import { SentenceBuilderCard } from "./SentenceBuilderCard";
 import { DialogueOrderCard } from "./DialogueOrderCard";
 import { ReadAloudCard } from "./ReadAloudCard";
 import { shuffleDialogueTurns } from "@/lib/practice/dialogue-order";
+import { generateFallbackQuizzes } from "@/lib/practice/listening-quiz";
 import { Button } from "@/components/ui/button";
 
 interface PracticeWorkspaceProps {
@@ -54,21 +54,7 @@ export function PracticeWorkspace({
   const exerciseData = getExercisesForStep(stepSlug);
 
   // Fallback listening quiz if not explicitly curated
-  const fallbackQuizzes: ListeningQuizQuestion[] = lines.slice(0, 3).map((line, idx) => ({
-    id: `${stepSlug}-auto-q${idx}`,
-    stepSlug,
-    question: `What did ${line.speakerName} say?`,
-    questionBn: `${line.speakerName} কী বলেছিলেন?`,
-    audioPrompt: line.englishText,
-    options: [
-      { id: "a", text: line.englishText, textBn: line.translationBn },
-      { id: "b", text: `I do not need this right now.`, textBn: "আমার এখনই এটা দরকার নেই।" },
-      { id: "c", text: `Can you show me another item?`, textBn: "আমাকে অন্য একটি জিনিস দেখাতে পারেন?" },
-    ],
-    correctOptionId: "a",
-    explanationBn: `সঠিক উত্তর! ${line.speakerName} বলেছিলেন: "${line.englishText}"।`,
-  }));
-
+  const fallbackQuizzes = generateFallbackQuizzes(stepSlug, lines, 3);
   const activeQuizzes = exerciseData?.listeningQuizzes || fallbackQuizzes;
 
   // Fallback complete line exercises
