@@ -214,6 +214,7 @@ Measured and accepted: H1, hero title sizes, 24px overlap, 12px floor (0 nodes b
 37. **[DONE] (commit 8addb7c / c326c38) Automated CI Workflow & End-to-End Test Gate (KI-12-CI):** Automated multi-platform headless Chrome runner in `tests/e2e/keyboard-focus.spec.mjs`, added `"test:e2e"` script in `package.json`, upgraded `.github/workflows/ci.yml` with comprehensive gate checks (`check:frozen`, `lint:ui`, `lint`, `test`, `build`, and live E2E runner), and reconciled `docs/AUDIT_REPORT.md` (KI-12-CI marked Fixed; Not built yet count reduced to 0).
 38. **[DONE] (commit e495833) Brief §19 MVP End-to-End Acceptance Verification Suite:** Authored `tests/mvp-acceptance.test.mjs` verifying all 5 core acceptance criteria categories from Brief §19 (Discovery, Conversation Learning, Vocabulary & Grammar, Personal Learning & Practice & AI, Multi-Language & Quality) across 13 comprehensive tests. 203 unit tests passing, 109 static routes.
 39. **[DONE] (commit 45f8460) Next.js 16 Proxy Migration:** Migrated deprecated `src/middleware.ts` to `src/proxy.ts` exporting `proxy`, eliminating the Next.js 16 build deprecation warning while preserving Supabase session token refresh and security cookie handling. Build 100% warning-free, 203 unit tests passing.
+40. **[DONE] (commit b4e99d4) Milestone 4D — Mobile App & Android APK Architecture:** Authored `docs/MOBILE_APP_ARCHITECTURE.md` detailing Trusted Web Activity (TWA via Bubblewrap) and Capacitor Android packaging, configured detected Mac ARM environment (`JAVA_HOME` pointing to embedded OpenJDK 25 in Android Studio, `ANDROID_HOME` pointing to `~/Library/Android/sdk`), mapped AndroidManifest audio and network permissions, and authored Android Studio signing runbook for `android-studio-rabbit1-mac_arm.dmg`.
 
 ---
 
@@ -242,6 +243,22 @@ Entry format:
 ```
 
 (Agent: add entries below this line.)
+
+### 2026-11-22, Milestone 4D — Mobile App & Android APK Packaging Architecture
+- Requested by owner: "next" -> execute Milestone 4D (Mobile App & Android APK Architecture) per ECP_Phase_Plan §7.1 and Brief §3.2.
+- Changed:
+  - `docs/MOBILE_APP_ARCHITECTURE.md`: Authored authoritative Android packaging architecture guide covering Path A (Trusted Web Activity via Bubblewrap, ~1MB APK, instant OTA updates, full Web Speech compatibility) and Path B (Capacitor Android Native Packaging). Configured exact local environment paths detected on the workstation (`JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`, `ANDROID_HOME="$HOME/Library/Android/sdk"`), documented `AndroidManifest.xml` permissions (`RECORD_AUDIO`, `INTERNET`), and authored keystore generation and signing runbook for `android-studio-rabbit1-mac_arm.dmg`.
+- Verified with:
+  - Validated local OpenJDK 25.0.3 execution via `/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java -version`.
+  - Validated local Android SDK presence at `~/Library/Android/sdk` (`platform-tools`, `build-tools`).
+  - `npm run check:frozen`: Passed (0 diff).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors/warnings).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (203/203 unit tests passing across 41 suites).
+  - `npm run build`: Passed (Next.js 16.4.6 static build succeeded, 109/109 static pages generated, 0 warnings).
+- Commit: `b4e99d4`
+- Open questions / follow-ups: none.
 
 ### 2026-11-22, Next.js 16 Proxy Migration
 - Requested by owner: "next" -> execute Next.js 16 build hardening and proxy convention migration.
