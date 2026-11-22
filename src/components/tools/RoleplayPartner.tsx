@@ -6,6 +6,7 @@ import {
   BotIcon,
   UserIcon,
   VolumeHighIcon,
+  VolumeMute01Icon,
   SentIcon,
   SparklesIcon,
   ArrowReloadHorizontalIcon,
@@ -27,6 +28,12 @@ import {
   generateRoleplayTurn,
   generateRoleplayFeedback,
 } from "@/lib/ai/roleplay";
+import {
+  getVoiceSpeedRate,
+  cleanSpokenTranscript,
+  formatVoiceStatusCue,
+  type VoiceSpeedSetting,
+} from "@/lib/ai/roleplay-voice";
 import type {
   RoleplayTurnResponse,
   RoleplayFeedbackResponse,
@@ -116,6 +123,14 @@ interface ChatMessage {
   hint?: string | null;
 }
 
+function FeedbackSectionHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="text-meta text-muted-foreground uppercase tracking-wider block font-sans">
+      {children}
+    </span>
+  );
+}
+
 export function RoleplayPartner() {
   const [selectedScenario, setSelectedScenario] = useState<RoleplayScenario>(SCENARIOS[0]);
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
@@ -139,7 +154,11 @@ export function RoleplayPartner() {
   });
   const [inputMessage, setInputMessage] = useState("");
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const [isAiSpeaking, setIsAiSpeaking] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [voiceMode, setVoiceMode] = useState(true);
+  const [voiceSpeed, setVoiceSpeed] = useState<VoiceSpeedSetting>("clear");
+  const [micError, setMicError] = useState<string | null>(null);
   const [activeHint, setActiveHint] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<RoleplayFeedbackResponse | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -147,31 +166,88 @@ export function RoleplayPartner() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
 
-  // Initialize greeting turn on scenario change
-  const startSession = useCallback((scenario: RoleplayScenario) => {
-    setSelectedScenario(scenario);
-    setFeedback(null);
-    setActiveHint(null);
+  // Play audio helper with configurable speed
+  const playAudio = useCallback(
+    (text: string, index?: number, onFinish?: () => void) => {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
 
-    const initialTurn = generateRoleplayTurn({
-      scenario_id: scenario.id,
-      scenario_title: scenario.title,
-      scenario_context: scenario.context,
-      ai_role: scenario.aiRole,
-      learner_role: scenario.learnerRole,
-      level: scenario.level,
-      transcript: [],
-      learner_message: "Hello",
-    });
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      utterance.rate = getVoiceSpeedRate(voiceSpeed);
 
-    setMessages([
-      {
-        speaker: "ai",
-        text: initialTurn.ai_reply,
-        hint: initialTurn.hint,
-      },
-    ]);
+      if (index !== undefined) {
+        setPlayingIndex(index);
+      }
+      setIsAiSpeaking(true);
+
+      utterance.onend = () => {
+        setIsAiSpeaking(false);
+        if (index !== undefined) setPlayingIndex(null);
+        if (onFinish) onFinish();
+      };
+
+      utterance.onerror = () => {
+        setIsAiSpeaking(false);
+        if (index !== undefined) setPlayingIndex(null);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    },
+    [voiceSpeed]
+  );
+
+  const stopAudio = useCallback(() => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      setPlayingIndex(null);
+      setIsAiSpeaking(false);
+    }
   }, []);
+
+  // Cleanup speech synthesis on unmount
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  // Initialize greeting turn on scenario change
+  const startSession = useCallback(
+    (scenario: RoleplayScenario) => {
+      stopAudio();
+      setSelectedScenario(scenario);
+      setFeedback(null);
+      setActiveHint(null);
+      setMicError(null);
+
+      const initialTurn = generateRoleplayTurn({
+        scenario_id: scenario.id,
+        scenario_title: scenario.title,
+        scenario_context: scenario.context,
+        ai_role: scenario.aiRole,
+        learner_role: scenario.learnerRole,
+        level: scenario.level,
+        transcript: [],
+        learner_message: "Hello",
+      });
+
+      setMessages([
+        {
+          speaker: "ai",
+          text: initialTurn.ai_reply,
+          hint: initialTurn.hint,
+        },
+      ]);
+
+      if (voiceMode) {
+        playAudio(initialTurn.ai_reply, 0);
+      }
+    },
+    [playAudio, stopAudio, voiceMode]
+  );
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -201,6 +277,8 @@ export function RoleplayPartner() {
         learner_message: text,
       });
 
+      const nextAiIndex = messages.length + 1;
+
       setMessages((prev) => [
         ...prev,
         {
@@ -215,6 +293,10 @@ export function RoleplayPartner() {
         },
       ]);
 
+      if (voiceMode) {
+        playAudio(response.ai_reply, nextAiIndex);
+      }
+
       if (response.hint) {
         setActiveHint(response.hint);
       }
@@ -226,6 +308,7 @@ export function RoleplayPartner() {
   };
 
   const handleEndSession = () => {
+    stopAudio();
     if (messages.length === 0) return;
 
     const transcript: TranscriptTurn[] = messages.map((m) => ({
@@ -244,29 +327,9 @@ export function RoleplayPartner() {
     });
   };
 
-  const playAudio = (text: string, index: number) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.95;
-
-      setPlayingIndex(index);
-      utterance.onend = () => setPlayingIndex(null);
-      utterance.onerror = () => setPlayingIndex(null);
-
-      window.speechSynthesis.speak(utterance);
-    }
-  };
-
-  const stopAudio = () => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      setPlayingIndex(null);
-    }
-  };
-
   const toggleSpeechRecognition = () => {
+    setMicError(null);
+
     if (isListening) {
       if (recognitionRef.current) {
         recognitionRef.current.stop();
@@ -280,6 +343,7 @@ export function RoleplayPartner() {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
+      setMicError("আপনার ব্রাউজারে স্পিচ রিকগনিশন সমর্থন করে না। আপনি লিখে উত্তর দিতে পারেন।");
       return;
     }
 
@@ -296,12 +360,14 @@ export function RoleplayPartner() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       recognition.onresult = (event: any) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const transcript = Array.from(event.results).map((r: any) => r[0].transcript).join("");
-        setInputMessage(transcript);
+        const rawTranscript = Array.from(event.results).map((r: any) => r[0].transcript).join("");
+        const cleaned = cleanSpokenTranscript(rawTranscript);
+        setInputMessage(cleaned);
       };
 
       recognition.onerror = () => {
         setIsListening(false);
+        setMicError("মাইক্রোফোন অ্যাক্সেস পাওয়া যায়নি বা কোনো শব্দ শোনা যায়নি। আপনি লিখে পাঠাতে পারেন।");
       };
 
       recognition.onend = () => {
@@ -312,8 +378,14 @@ export function RoleplayPartner() {
       recognition.start();
     } catch {
       setIsListening(false);
+      setMicError("মাইক্রোফোন সংযোগ ব্যর্থ হয়েছে। অনুগ্রহ করে ব্রাউজার পারমিশন চেক করুন।");
     }
   };
+
+  const voiceCue = formatVoiceStatusCue(
+    isAiSpeaking ? "ai_speaking" : isListening ? "learner_listening" : "awaiting_input",
+    selectedScenario.aiRole
+  );
 
   return (
     <div className="space-y-6 max-w-container mx-auto">
@@ -322,17 +394,17 @@ export function RoleplayPartner() {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Tag variant="brand" size="sm">
-              Milestone 2D
+              Milestones 2D &amp; 3B
             </Tag>
             <Pill variant="neutral" size="sm">
-              AI Partner (Text Roleplay)
+              AI Partner (Voice &amp; Text Roleplay)
             </Pill>
           </div>
           <h1 className="text-page-title text-foreground">
-            AI Conversation Partner
+            AI Voice &amp; Text Conversation Partner
           </h1>
           <p className="text-meta-bn text-muted-foreground">
-            বাস্তব পরিস্থিতিতে এআই সহযোগীর সাথে ইংরেজি অনুশীলন করুন এবং তাৎক্ষণিক ফিডব্যাক পান।
+            বাস্তব পরিস্থিতিতে এআই সহযোগীর সাথে মুখে বা লিখে ইংরেজি অনুশীলন করুন এবং তাৎক্ষণিক ফিডব্যাক পান।
           </p>
         </div>
 
@@ -353,6 +425,58 @@ export function RoleplayPartner() {
             );
           })}
         </div>
+      </div>
+
+      {/* Voice Mode & Speed Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-panel bg-muted/40 border border-border">
+        {/* Voice Mode Toggle */}
+        <div className="flex items-center gap-2">
+          <Button
+            variant={voiceMode ? "default" : "outline"}
+            size="sm"
+            onClick={() => {
+              const next = !voiceMode;
+              setVoiceMode(next);
+              if (!next) stopAudio();
+            }}
+            className="rounded-control text-chip gap-1.5 cursor-pointer"
+          >
+            <HugeiconsIcon icon={voiceMode ? VolumeHighIcon : VolumeMute01Icon} size={15} />
+            <span className="text-bangla">
+              {voiceMode ? "ভয়েস মোড: চালু" : "ভয়েস মোড: বন্ধ"}
+            </span>
+          </Button>
+
+          <span className="text-chip-bn text-muted-foreground">
+            {voiceMode ? "পার্টনার প্রতিটি কথা স্বয়ংক্রিয়ভাবে বলবে" : "শুধুমাত্র টেক্সট দেখা যাবে"}
+          </span>
+        </div>
+
+        {/* Voice Speed Controls */}
+        {voiceMode && (
+          <div className="flex items-center gap-1.5">
+            <span className="text-chip text-muted-foreground">গতি:</span>
+            {(["slow", "clear", "normal"] as VoiceSpeedSetting[]).map((spd) => {
+              const isCur = voiceSpeed === spd;
+              const spdLabel = spd === "slow" ? "ধীরে (0.75x)" : spd === "clear" ? "স্পষ্ট (0.88x)" : "স্বাভাবিক (1.0x)";
+              return (
+                <button
+                  key={spd}
+                  type="button"
+                  onClick={() => setVoiceSpeed(spd)}
+                  className={cn(
+                    "px-2 py-0.5 rounded-pill text-chip transition-colors cursor-pointer",
+                    isCur
+                      ? "bg-primary text-primary-foreground font-mono"
+                      : "bg-muted text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {spdLabel}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Roleplay Context Card */}
@@ -423,21 +547,19 @@ export function RoleplayPartner() {
                     <p className="leading-relaxed select-text">{msg.text}</p>
                   </ChatBubble>
 
-                  {isAi && (
-                    <Button
-                      variant="ghost"
-                      size="xs"
-                      onClick={() => (isPlaying ? stopAudio() : playAudio(msg.text, idx))}
-                      aria-label="Listen to turn"
-                      className="rounded-pill p-1.5 text-muted-foreground hover:text-primary transition-colors opacity-80 group-hover:opacity-100"
-                    >
-                      <HugeiconsIcon
-                        icon={isPlaying ? StopIcon : VolumeHighIcon}
-                        size={15}
-                        className={cn(isPlaying && "text-primary")}
-                      />
-                    </Button>
-                  )}
+                  <Button
+                    variant="ghost"
+                    size="xs"
+                    onClick={() => (isPlaying ? stopAudio() : playAudio(msg.text, idx))}
+                    aria-label="Listen to turn"
+                    className="rounded-pill p-1.5 text-muted-foreground hover:text-primary transition-colors opacity-80 group-hover:opacity-100"
+                  >
+                    <HugeiconsIcon
+                      icon={isPlaying ? StopIcon : VolumeHighIcon}
+                      size={15}
+                      className={cn(isPlaying && "text-primary")}
+                    />
+                  </Button>
                 </div>
 
                 {/* Inline Gentle Correction (Brief §9.2) */}
@@ -459,6 +581,39 @@ export function RoleplayPartner() {
           })}
           <div ref={messagesEndRef} />
         </div>
+
+        {/* Live Audio & Speaking Status Indicator */}
+        {isAiSpeaking && (
+          <div className="flex items-center justify-between p-2.5 rounded-panel bg-primary/10 border border-primary/20 text-primary text-chip animate-in fade-in">
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-pill bg-primary animate-ping" />
+              <span className="text-bangla">{voiceCue.labelBn}</span>
+            </div>
+            <Button
+              size="xs"
+              variant="ghost"
+              onClick={stopAudio}
+              className="rounded-control text-chip text-muted-foreground hover:text-foreground cursor-pointer"
+            >
+              <HugeiconsIcon icon={StopIcon} size={13} />
+              <span className="text-bangla">থামান (Stop)</span>
+            </Button>
+          </div>
+        )}
+
+        {/* Inline Mic Access Error Banner */}
+        {micError && (
+          <div className="flex items-center justify-between p-3 rounded-panel bg-destructive/10 border border-destructive/20 text-destructive text-chip animate-in fade-in">
+            <p className="text-bangla">{micError}</p>
+            <button
+              type="button"
+              onClick={() => setMicError(null)}
+              className="text-chip text-destructive hover:underline cursor-pointer ml-2"
+            >
+              বন্ধ করুন
+            </button>
+          </div>
+        )}
 
         {/* Inline Hint Banner */}
         {activeHint && !feedback && (
@@ -496,7 +651,7 @@ export function RoleplayPartner() {
               ))}
             </div>
 
-            {/* Input Form */}
+            {/* Input Form with Voice Speech Integration */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -508,7 +663,11 @@ export function RoleplayPartner() {
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  placeholder="Type your response in English..."
+                  placeholder={
+                    isListening
+                      ? "Listening... Speak in English..."
+                      : "Type your response or tap mic to speak..."
+                  }
                   disabled={isPending}
                   className="rounded-control text-label"
                 />
@@ -520,7 +679,10 @@ export function RoleplayPartner() {
                     onClick={toggleSpeechRecognition}
                     disabled={isPending}
                     title={isListening ? "Stop listening" : "Speak your message"}
-                    className="rounded-control text-chip px-2"
+                    className={cn(
+                      "rounded-control text-chip px-2",
+                      isListening && "animate-pulse"
+                    )}
                   >
                     <HugeiconsIcon icon={isListening ? StopIcon : Mic01Icon} size={15} />
                   </Button>
@@ -576,11 +738,41 @@ export function RoleplayPartner() {
             {feedback.summary}
           </div>
 
+          {/* Session Dialogue Audio Replay (Milestone 3B) */}
+          <div className="space-y-2 p-3.5 rounded-panel bg-muted/20 border border-border">
+            <FeedbackSectionHeader>
+              Dialogue Replay (কথোপকথন অডিও রিভিশন)
+            </FeedbackSectionHeader>
+            <div className="space-y-1.5">
+              {messages.map((turn, tIdx) => (
+                <div
+                  key={tIdx}
+                  className="flex items-center justify-between p-2 rounded-control bg-card border border-border text-chip"
+                >
+                  <span className="text-foreground">
+                    <strong className="text-primary font-mono mr-1">
+                      {turn.speaker === "ai" ? selectedScenario.aiRole : "You"}:
+                    </strong>
+                    {turn.text}
+                  </span>
+                  <Button
+                    size="xs"
+                    variant="ghost"
+                    onClick={() => playAudio(turn.text, tIdx)}
+                    className="rounded-pill p-1 text-muted-foreground hover:text-foreground cursor-pointer"
+                  >
+                    <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Strengths */}
           <div className="space-y-2">
-            <span className="text-meta text-muted-foreground uppercase tracking-wider block font-sans">
+            <FeedbackSectionHeader>
               Strengths (আপনার সবল দিকসমূহ)
-            </span>
+            </FeedbackSectionHeader>
             <div className="space-y-1.5">
               {feedback.strengths.map((str, sIdx) => (
                 <div key={sIdx} className="flex items-start gap-2 text-meta text-bangla text-foreground">
@@ -594,9 +786,9 @@ export function RoleplayPartner() {
           {/* Focus Areas */}
           {feedback.focus_areas && feedback.focus_areas.length > 0 && (
             <div className="space-y-2.5">
-              <span className="text-meta text-muted-foreground uppercase tracking-wider block font-sans">
+              <FeedbackSectionHeader>
                 Focus Areas (উন্নয়নের জায়গা)
-              </span>
+              </FeedbackSectionHeader>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {feedback.focus_areas.map((fa, fIdx) => (
                   <div
@@ -626,7 +818,7 @@ export function RoleplayPartner() {
           {/* Next Step */}
           <div className="p-3.5 rounded-panel bg-primary/5 border border-primary/20 space-y-1 text-meta text-bangla">
             <div className="flex items-center gap-1.5 text-label text-foreground">
-              <HugeiconsIcon icon={Target01Icon} size={16} className="text-primary" />
+              <HugeiconsIcon icon={Target01Icon} size={16} />
               <span>পরবর্তী পদক্ষেপ (Next Step):</span>
             </div>
             <p className="text-foreground">{feedback.next_step}</p>
