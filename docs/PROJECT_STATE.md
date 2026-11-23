@@ -1205,6 +1205,29 @@ Entry format:
 - Commit: `916f2f5`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, Input Active Typing Stroke Elimination (Only Rainbow Gradient Border)
+- Requested by owner: Review screenshots of active typing in inputs (Explore search, What Should I Say, Roleplay Partner) where an extra black/brand-colored border/ring appeared around the rainbow gradient border. Eliminate the extra border/stroke completely so only the animated rainbow gradient border is visible when typing.
+- Root Cause Identified:
+  - `inputVariants` previously had `focus-visible:ring-3 focus-visible:ring-ring/50` and `focus-visible:border-ring`. The 3px focus ring extended past the 2px `.rainbow-border::before` boundary, rendering an outer purple ring around the rainbow stroke.
+  - In `RoleplayPartner.tsx`, the input lacked `.rainbow-border` on focus and relied on `variant="outline"` which drew a standalone thick brand border.
+  - In `explore/page.tsx` and `WhatShouldISay.tsx`, redundant outer wrapper `div`s with `rainbow-border` surrounded `<InputGroup className="shadow-xs">`, creating nested border-radius outlines and shadow bleeding.
+- Changed:
+  - `src/components/ui/input-variants.ts`: Removed `focus-visible:ring-3 focus-visible:ring-ring/50` and `focus-visible:border-ring`. Set `ghost` variant to clean `border-0 bg-transparent hover:bg-transparent focus-visible:outline-none`.
+  - `src/components/ui/input-group.tsx`: Converted `InputGroup` into an interactive client component tracking `isFocused`. On focus, it dynamically switches from `border border-input shadow-xs` to `rainbow-border border border-transparent shadow-none`. Handled child focus retention via `contains(relatedTarget)`.
+  - `src/app/(app)/explore/page.tsx`: Removed redundant outer `div` and unused `isSearchFocused` state.
+  - `src/components/tools/WhatShouldISay.tsx`: Removed redundant outer `div` and unused `isFocused` state; added `pl-10` to input to prevent text collision with the Sparkles prefix icon.
+  - `src/components/tools/RoleplayPartner.tsx`: Updated input to `variant="ghost" className="pr-24"` inside `<InputGroup className="flex-1 bg-card">`, so chatting triggers the seamless rainbow gradient border with zero extra stroke.
+  - `src/app/(app)/vocabulary/page.tsx`: Updated to `<InputGroup className="bg-card">` with `<Input variant="ghost">`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (110/110 static pages successfully generated in 2.6s).
+- Commit: `6fd903d`
+- Open questions / follow-ups: None.
+
 ### 2026-11-23, Groq Live API Key Activated & Verified End-to-End
 - Requested by owner: Added Groq API key (`gsk_...`) and requested activation for live language model inference.
 - Changed:
