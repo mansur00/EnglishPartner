@@ -1205,6 +1205,31 @@ Entry format:
 - Commit: `916f2f5`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, Root-Cause Elimination of Outer Focus Ring (Global `:focus-visible` Override)
+- Requested by owner: Screenshots showed the outer purple ring RGB [104, 75, 167] was STILL visible around the rainbow border during active typing.
+- True Root Cause Discovered:
+  - Inside `src/styles/design-tokens.css` (imported at line 2 of `globals.css`), there was a global unlayered rule:
+    ```css
+    :focus-visible {
+      outline: 2px solid var(--ecp-focus-ring);
+      outline-offset: 2px;
+    }
+    ```
+  - `--ecp-focus-ring` is `var(--ecp-brand-700)` (#694CA7 / RGB [104, 75, 167]).
+  - Because it had `outline-offset: 2px;`, whenever any `<input>` received focus in the browser, the browser painted a 2px solid brand-purple outline exactly 2px outside the input — framing the outside of the 2px rainbow gradient border!
+- Changed:
+  - `src/styles/design-tokens.css`: Excluded inputs and textareas from the global outline rule (`:focus-visible:not(input):not(textarea):not([data-slot="input"])`), and explicitly set `input, textarea, [data-slot="input"] { outline: none; }`.
+  - Re-tested with Chrome Puppeteer on `/explore`, `/what-should-i-say`, and `/roleplay`.
+  - Ran pixel-by-pixel RGB analysis: confirmed 0 pixels of [104, 75, 167] remain. Pure rainbow gradient border is the ONLY frame.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+- Commit: `1a96ac6`
+- Open questions / follow-ups: None.
+
 ### 2026-11-23, Input Active Typing Stroke Elimination (Only Rainbow Gradient Border)
 - Requested by owner: Review screenshots of active typing in inputs (Explore search, What Should I Say, Roleplay Partner) where an extra black/brand-colored border/ring appeared around the rainbow gradient border. Eliminate the extra border/stroke completely so only the animated rainbow gradient border is visible when typing.
 - Root Cause Identified:
