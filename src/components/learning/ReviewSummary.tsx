@@ -13,6 +13,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { VocabularyEntry } from "@/content/seed/vocabulary";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/i18n";
 
 interface ReviewSummaryProps {
   scenarioTitleEn: string;
@@ -39,6 +40,8 @@ export function ReviewSummary({
   savedWords = new Set(),
   onSaveWordToggle,
 }: ReviewSummaryProps) {
+  const locale = useLocale();
+
   const playWord = (word: string) => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -59,14 +62,13 @@ export function ReviewSummary({
           </div>
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-pill text-chip text-success bg-success-bg border border-border mb-1">
-              <span>অভিনন্দন! (Well Done)</span>
+              <span>{locale === "bn" ? "অভিনন্দন!" : "Well Done!"}</span>
             </div>
-            <h3 className="text-card-title-bn">
-              আপনি {scenarioTitleBn} কথোপকথনটি সম্পন্ন করেছেন
+            <h3 className="text-card-title text-foreground">
+              {locale === "bn"
+                ? `আপনি ${scenarioTitleBn} কথোপকথনটি সম্পন্ন করেছেন`
+                : `You completed dialogue practice for: ${scenarioTitleEn}`}
             </h3>
-            <p className="text-meta text-muted-foreground font-sans">
-              Completed dialogue practice for: {scenarioTitleEn}
-            </p>
           </div>
         </div>
 

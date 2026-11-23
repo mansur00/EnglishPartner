@@ -5,7 +5,7 @@ import { NicheLadderRoadmap } from "@/components/learning/NicheLadderRoadmap";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
-import { PageContainer } from "@/components/shared";
+import { PageContainer, LocaleTitle } from "@/components/shared";
 import { SEED_SCENARIOS, CATEGORIES_LIST } from "@/content/seed/scenarios";
 import {
   NICHE_01_SHOPPING_MONEY,
@@ -76,12 +76,12 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
       ) : (
         <div className="space-y-6">
           <div>
-            <h1 className="text-page-title text-foreground">
-              {category?.name || "Category"}
-            </h1>
-            <p className="text-subtitle-bn">
-              {category?.nameBn} — বাস্তব কথোপকথন চর্চা করুন
-            </p>
+            <LocaleTitle
+              as="h1"
+              titleEn={category?.name || "Category"}
+              titleBn={category?.nameBn ? `${category.nameBn} — বাস্তব কথোপকথন` : undefined}
+              className="text-page-title text-foreground"
+            />
           </div>
 
           <div className="flex items-center justify-between text-chip text-muted-foreground border-b border-border pb-3">

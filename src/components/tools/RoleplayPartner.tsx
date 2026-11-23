@@ -40,6 +40,7 @@ import {
   generateRoleplayTurn,
   generateRoleplayFeedback,
 } from "@/lib/ai/roleplay";
+import { useLocale } from "@/lib/i18n";
 import {
   getVoiceSpeedRate,
   cleanSpokenTranscript,
@@ -289,6 +290,7 @@ function FeedbackSectionHeader({ children }: { children: React.ReactNode }) {
 }
 
 export function RoleplayPartner() {
+  const locale = useLocale();
   const [selectedScenario, setSelectedScenario] = useState<RoleplayScenario>(FREESTYLE_SCENARIO);
   const [customScenarios, setCustomScenarios] = useState<RoleplayScenario[]>([]);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -809,7 +811,9 @@ export function RoleplayPartner() {
               size={14}
               className={selectedScenario.id === "freestyle" ? "text-primary-foreground" : "text-primary"}
             />
-            <span>✨ Freestyle Talking (Open Chat)</span>
+            <span>
+              {locale === "bn" ? "✨ উন্মুক্ত আড্ডা (Open Chat)" : "✨ Freestyle Talking (Open Chat)"}
+            </span>
           </button>
 
           <span className="text-muted-foreground/40 text-chip hidden sm:inline">|</span>
@@ -817,6 +821,7 @@ export function RoleplayPartner() {
           {/* 2. 10 Curated Presets */}
           {PRESET_SCENARIOS.map((sc) => {
             const isSelected = selectedScenario.id === sc.id;
+            const scTitle = locale === "bn" ? sc.titleBn : sc.title;
             return (
               <button
                 key={sc.id}
@@ -829,7 +834,7 @@ export function RoleplayPartner() {
                     : "bg-background text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border"
                 )}
               >
-                <span>{sc.title}</span>
+                <span>{scTitle}</span>
                 <span
                   className={cn(
                     "px-1.5 py-0.2 rounded-pill text-chip leading-tight uppercase font-mono",
@@ -958,15 +963,28 @@ export function RoleplayPartner() {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-label text-foreground font-sans">
-                {selectedScenario.title}
+                {locale === "bn" ? selectedScenario.titleBn : selectedScenario.title}
               </span>
               <Tag variant="outline" size="sm">
-                {selectedScenario.id === "freestyle" ? "Open Chat" : `Level ${selectedScenario.level}`}
+                {selectedScenario.id === "freestyle"
+                  ? locale === "bn"
+                    ? "ওপেন চ্যাট"
+                    : "Open Chat"
+                  : `Level ${selectedScenario.level}`}
               </Tag>
             </div>
-            <p className="text-meta-bn text-muted-foreground mt-0.5">
-              আপনি: <strong className="text-foreground">{selectedScenario.learnerRoleBn}</strong> | পার্টনার:{" "}
-              <strong className="text-foreground">{selectedScenario.aiRoleBn}</strong> ({selectedScenario.contextBn})
+            <p className="text-meta text-muted-foreground mt-0.5">
+              {locale === "bn" ? (
+                <>
+                  আপনি: <strong className="text-foreground">{selectedScenario.learnerRoleBn}</strong> | পার্টনার:{" "}
+                  <strong className="text-foreground">{selectedScenario.aiRoleBn}</strong> ({selectedScenario.contextBn})
+                </>
+              ) : (
+                <>
+                  You: <strong className="text-foreground">{selectedScenario.learnerRole}</strong> | Partner:{" "}
+                  <strong className="text-foreground">{selectedScenario.aiRole}</strong> ({selectedScenario.context})
+                </>
+              )}
             </p>
           </div>
         </div>

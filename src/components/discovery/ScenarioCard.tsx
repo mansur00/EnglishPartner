@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { t } from "@/lib/i18n";
 import { Card } from "@/components/ui/card";
@@ -10,21 +12,34 @@ import {
   Clock01Icon,
   Briefcase01Icon,
 } from "@hugeicons/core-free-icons";
-import type { ScenarioItem } from "@/content/seed/scenarios";
+import { CATEGORIES_LIST, type ScenarioItem } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES } from "@/content/seed/dialogues";
 import { getCategoryTheme } from "@/lib/theme/category-theme";
 import { formatLanguageCoverageLine } from "@/lib/content/language-coverage";
-import { EmojiTile, CefrChip, type CefrLevel } from "@/components/shared";
+import { EmojiTile, CefrChip, type CefrLevel, LocaleTitle } from "@/components/shared";
+import { useLocale } from "@/lib/i18n";
 
 interface ScenarioCardProps {
   scenario: ScenarioItem;
 }
 
 export function ScenarioCard({ scenario }: ScenarioCardProps) {
+  const locale = useLocale();
   const primaryCat = scenario.categories[0]?.slug || "social-daily";
   const theme = getCategoryTheme(primaryCat);
   const scenarioLines = SEED_DIALOGUES[scenario.slug]?.[0]?.lines;
   const coverageLine = formatLanguageCoverageLine(scenario.languages, scenarioLines);
+
+  const catItem = CATEGORIES_LIST.find((c) => c.slug === primaryCat);
+  const categoryName =
+    locale === "bn"
+      ? catItem?.nameBn || scenario.categories[0]?.name
+      : scenario.categories[0]?.name || "Conversation";
+
+  const description =
+    locale === "bn"
+      ? scenario.descriptionBn || scenario.description
+      : scenario.description;
 
   return (
     <Card
@@ -39,7 +54,7 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
 
             <div>
               <span className="text-label text-topic-ink block">
-                {scenario.categories[0]?.name || "Conversation"}
+                {categoryName}
               </span>
               <div className="flex items-center gap-2 mt-1.5 flex-wrap">
                 <CefrChip level={(scenario.level as CefrLevel) || "A2"} />
@@ -58,19 +73,19 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
           )}
         </div>
 
-        {/* Title & Bangla Subtitle */}
+        {/* Single Title according to active language */}
         <div>
-          <h3 className="text-card-title text-foreground group-hover:text-primary transition-colors line-clamp-1">
-            {scenario.title}
-          </h3>
-          <p className="text-meta text-muted-foreground text-bangla mt-1 line-clamp-1">
-            {scenario.titleBn}
-          </p>
+          <LocaleTitle
+            as="h3"
+            titleEn={scenario.title}
+            titleBn={scenario.titleBn}
+            className="text-card-title text-foreground group-hover:text-primary transition-colors line-clamp-1"
+          />
         </div>
 
-        {/* Sample Line Preview or Description */}
+        {/* Description in active language */}
         <p className="text-body text-muted-foreground leading-relaxed line-clamp-2">
-          {scenario.description}
+          {description}
         </p>
       </div>
 

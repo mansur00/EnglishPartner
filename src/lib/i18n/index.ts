@@ -58,3 +58,4 @@ export function isRtlLocale(locale: string): boolean {
 }
 
 export { SUPPORTED_LOCALES };
+export { useLocale } from "./use-locale.ts";

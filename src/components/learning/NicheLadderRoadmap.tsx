@@ -8,7 +8,7 @@ import {
   ArrowRight01Icon,
   Book01Icon,
 } from "@hugeicons/core-free-icons";
-import { PageContainer } from "@/components/shared";
+import { PageContainer, LocaleTitle } from "@/components/shared";
 import { LadderStepItem } from "@/content/seed/niche_shopping_money";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -147,12 +147,12 @@ export function NicheLadderRoadmap({
                         </div>
 
                         <div>
-                          <h4 className="text-card-title text-foreground group-hover:text-primary transition-colors">
-                            {step.title}
-                          </h4>
-                          <p className="text-meta text-muted-foreground text-bangla mt-0.5 line-clamp-1">
-                            {step.titleBn}
-                          </p>
+                          <LocaleTitle
+                            as="h4"
+                            titleEn={step.title}
+                            titleBn={step.titleBn}
+                            className="text-card-title text-foreground group-hover:text-primary transition-colors"
+                          />
                         </div>
 
                         {/* Grammar Focus Pill */}

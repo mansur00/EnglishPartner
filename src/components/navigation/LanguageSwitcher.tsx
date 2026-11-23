@@ -139,6 +139,7 @@ export function LanguageSwitcher() {
     localStorage.setItem("ecp_user_locale", code);
     document.documentElement.lang = code;
     document.documentElement.dir = isRtlLanguage(code) ? "rtl" : "ltr";
+    window.dispatchEvent(new CustomEvent("ecp_locale_change", { detail: code }));
   };
 
   const currentMeta = LANGUAGES_REGISTRY[locale] || LANGUAGES_REGISTRY.bn;

@@ -21,6 +21,7 @@ import {
   DialogueOrderHint,
 } from "@/lib/practice/dialogue-order";
 import { Button } from "@/components/ui/button";
+import { LocaleTitle } from "@/components/shared";
 import { cn } from "@/lib/utils";
 
 interface DialogueOrderCardProps {
@@ -167,12 +168,12 @@ export function DialogueOrderCard({
           <span className="text-chip text-muted-foreground uppercase font-mono">
             {exercise.stepSlug} • Dialogue Sequencing
           </span>
-          <h3 className="text-card-title text-foreground">
-            {exercise.title}
-          </h3>
-          <p className="text-chip-bn text-muted-foreground">
-            {exercise.titleBn} (ডায়লগগুলো সঠিক ক্রমানুসারে সাজান)
-          </p>
+          <LocaleTitle
+            as="h3"
+            titleEn={exercise.title}
+            titleBn={exercise.titleBn}
+            className="text-card-title text-foreground"
+          />
         </div>
 
         <div className="flex items-center gap-2">

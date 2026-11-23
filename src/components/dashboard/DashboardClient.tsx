@@ -15,6 +15,7 @@ import {
   CefrChip,
   ChatBubble,
   Panel,
+  LocaleTitle,
 } from "@/components/shared";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -92,12 +93,12 @@ export function DashboardClient() {
                 </div>
 
                 <div>
-                  <h2 className="text-hero-title text-foreground">
-                    Asking for a Price & Product Details
-                  </h2>
-                  <p className="text-lead text-muted-foreground font-bangla text-bangla mt-1">
-                    দোকানে কোনো পণ্যের দাম ও বিবরণ জানতে চাওয়া
-                  </p>
+                  <LocaleTitle
+                    as="h2"
+                    titleEn="Asking for a Price & Product Details"
+                    titleBn="দোকানে কোনো পণ্যের দাম ও বিবরণ জানতে চাওয়া"
+                    className="text-hero-title text-foreground"
+                  />
                 </div>
 
                 <p className="text-body text-muted-foreground leading-relaxed">

@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { CATEGORIES_LIST } from "@/content/seed/scenarios";
 import { getCategoryTheme } from "@/lib/theme/category-theme";
+import { useLocale } from "@/lib/i18n";
 
 interface CategoryPillsProps {
   selectedCategory: string;
@@ -13,11 +14,15 @@ export function CategoryPills({
   selectedCategory,
   onSelectCategory,
 }: CategoryPillsProps) {
+  const locale = useLocale();
+
   return (
     <div className="flex items-center gap-2.5 overflow-x-auto pb-2 pt-1 no-scrollbar scroll-smooth">
       {CATEGORIES_LIST.map((cat) => {
         const isSelected = selectedCategory === cat.slug;
         const theme = getCategoryTheme(cat.slug);
+        const catName = locale === "bn" ? cat.nameBn : cat.name;
+
         return (
           <div
             key={cat.id}
@@ -34,7 +39,7 @@ export function CategoryPills({
                   : "border border-border bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
-              <span>{cat.name}</span>
+              <span>{catName}</span>
             </button>
           </div>
         );

@@ -10,7 +10,7 @@ import {
   CheckmarkCircle02Icon,
   Book01Icon,
 } from "@hugeicons/core-free-icons";
-import { PageContainer } from "@/components/shared";
+import { PageContainer, LocaleTitle } from "@/components/shared";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES, ConversationVersionData } from "@/content/seed/dialogues";
 import {
@@ -101,12 +101,12 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           </div>
 
           <div>
-            <h1 className="text-page-title text-foreground">
-              {ladderStep.title}
-            </h1>
-            <p className="text-subtitle-bn">
-              {ladderStep.titleBn}
-            </p>
+            <LocaleTitle
+              as="h1"
+              titleEn={ladderStep.title}
+              titleBn={ladderStep.titleBn}
+              className="text-page-title text-foreground"
+            />
           </div>
 
           {/* Grammar Focus Callout */}
@@ -219,12 +219,12 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         </div>
 
         <div>
-          <h1 className="text-page-title text-foreground">
-            {scenario.title}
-          </h1>
-          <p className="text-subtitle-bn">
-            {scenario.titleBn}
-          </p>
+          <LocaleTitle
+            as="h1"
+            titleEn={scenario.title}
+            titleBn={scenario.titleBn}
+            className="text-page-title text-foreground"
+          />
         </div>
 
         {/* Learning Objective Callout */}

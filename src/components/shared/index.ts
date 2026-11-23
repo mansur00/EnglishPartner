@@ -6,4 +6,5 @@ export * from "./EmojiTile";
 export * from "./CefrChip";
 export * from "./ChatBubble";
 export * from "./Panel";
+export * from "./LocaleTitle";
 

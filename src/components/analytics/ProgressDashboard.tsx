@@ -17,6 +17,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { Tag } from "@/components/ui/tag";
+import { LocaleTitle } from "@/components/shared";
 import {
   computeProgressMetrics,
   generatePersonalizedRecommendations,
@@ -321,12 +322,12 @@ export function ProgressDashboard() {
                 </div>
 
                 <div className="space-y-0.5">
-                  <h4 className="text-lead text-foreground font-sans leading-snug">
-                    {rec.title}
-                  </h4>
-                  <p className="text-meta-bn text-muted-foreground">
-                    {rec.titleBn}
-                  </p>
+                  <LocaleTitle
+                    as="h4"
+                    titleEn={rec.title}
+                    titleBn={rec.titleBn}
+                    className="text-lead text-foreground font-sans leading-snug"
+                  />
                 </div>
 
                 <p className="text-chip text-muted-foreground leading-relaxed pt-1">
