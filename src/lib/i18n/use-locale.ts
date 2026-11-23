@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { type SupportedLocale, SUPPORTED_LOCALES } from "./languages.ts";
+import { t } from "./index.ts";
 
 export function useLocale(): SupportedLocale {
   const [locale, setLocale] = useState<SupportedLocale>("bn");
@@ -35,4 +36,12 @@ export function useLocale(): SupportedLocale {
   }, []);
 
   return locale;
+}
+
+export function useTranslations() {
+  const locale = useLocale();
+  return {
+    locale,
+    t: (key: string) => t(key, locale),
+  };
 }

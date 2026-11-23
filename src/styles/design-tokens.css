@@ -149,15 +149,18 @@ body {
   line-height: var(--ecp-leading-relaxed);
 }
 
-:focus-visible:not(input):not(textarea):not([data-slot="input"]) {
+:focus-visible:not(input):not(textarea):not([data-slot="input"]):not([data-slot="input-group"]):not(.rainbow-border):not(:has(.rainbow-border)) {
   outline: 2px solid var(--ecp-focus-ring);
   outline-offset: 2px;
 }
 
 input,
 textarea,
-[data-slot="input"] {
-  outline: none;
+[data-slot="input"],
+[data-slot="input-group"],
+.rainbow-border,
+.rainbow-border * {
+  outline: none !important;
 }
 
 ::selection {

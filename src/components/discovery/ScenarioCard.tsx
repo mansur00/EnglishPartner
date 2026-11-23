@@ -18,6 +18,7 @@ import { getCategoryTheme } from "@/lib/theme/category-theme";
 import { formatLanguageCoverageLine } from "@/lib/content/language-coverage";
 import { EmojiTile, CefrChip, type CefrLevel, LocaleTitle } from "@/components/shared";
 import { useLocale } from "@/lib/i18n";
+import { ALL_PROFESSIONS } from "@/lib/professions/registry";
 
 interface ScenarioCardProps {
   scenario: ScenarioItem;
@@ -68,7 +69,9 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
           {scenario.profession && (
             <Badge variant="secondary" size="md" className="gap-1.5 shrink-0">
               <HugeiconsIcon icon={Briefcase01Icon} size={14} />
-              {scenario.profession.name}
+              {locale === "bn"
+                ? ALL_PROFESSIONS.find((p) => p.slug === scenario.profession?.slug)?.nameBn || scenario.profession.name
+                : scenario.profession.name}
             </Badge>
           )}
         </div>
@@ -94,18 +97,18 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
         <div className="flex items-center gap-4 text-meta text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={Clock01Icon} size={15} className="text-primary" />
-            {scenario.estimatedMinutes}m
+            {scenario.estimatedMinutes}{locale === "bn" ? "মি" : "m"}
           </span>
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={BookOpen01Icon} size={15} className="text-primary" />
-            {scenario.exchangesCount} turns
+            {scenario.exchangesCount} {locale === "bn" ? "ধাপ" : "turns"}
           </span>
         </div>
 
         <Link href={`/conversations/${scenario.slug}`}>
           <Button variant="default" size="sm" className="btn-press gap-2 rounded-control">
             <HugeiconsIcon icon={PlayCircleIcon} size={16} />
-            <span>{t("learning.practice")}</span>
+            <span>{t("learning.practice", locale)}</span>
           </Button>
         </Link>
       </div>

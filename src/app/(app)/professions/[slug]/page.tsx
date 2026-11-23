@@ -12,6 +12,7 @@ import {
   CheckmarkCircle02Icon,
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
+import { LocaleTitle } from "@/components/shared";
 import {
   ALL_PROFESSIONS,
   getProfessionBySlug,
@@ -46,7 +47,12 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
         <Link href="/professions">
           <Button variant="ghost" size="sm" className="btn-back-nav text-label">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-            <span className="text-bangla">সব প্রফেশনাল পাথ (All Career Tracks)</span>
+            <LocaleTitle
+              as="span"
+              titleEn="All Career Tracks"
+              titleBn="সব প্রফেশনাল পাথ"
+              className="text-bangla"
+            />
           </Button>
         </Link>
 
@@ -62,9 +68,12 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
             </Badge>
           </div>
 
-          <h1 className="text-page-title text-foreground">
-            {profession.name} — {profession.nameBn}
-          </h1>
+          <LocaleTitle
+            as="h1"
+            titleEn={profession.name}
+            titleBn={profession.nameBn}
+            className="text-page-title text-foreground"
+          />
 
           <p className="text-chip text-primary font-mono">
             {profession.tagline}

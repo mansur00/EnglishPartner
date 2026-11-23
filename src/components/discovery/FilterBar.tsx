@@ -1,6 +1,6 @@
 "use client";
 
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FilterIcon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import {
@@ -33,11 +33,13 @@ export function FilterBar({
   onReset,
   isFiltered,
 }: FilterBarProps) {
+  const locale = useLocale();
+
   return (
     <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-4 rounded-card bg-card/95 backdrop-blur shadow-xs border-0">
       <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-label mr-1">
         <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
-        <span>{t("discovery.filters")}</span>
+        <span>{t("discovery.filters", locale)}</span>
       </div>
 
       {/* Level Filter */}
@@ -48,23 +50,23 @@ export function FilterBar({
         <SelectTrigger className="w-48 h-control-md text-label border border-input bg-transparent">
           <SelectValue>
             {(val) => {
-              if (!val || val === "all") return t("discovery.allLevels");
+              if (!val || val === "all") return t("discovery.allLevels", locale);
               const map: Record<string, string> = {
-                A1: "A1 • Beginner",
-                A2: "A2 • Elementary",
-                B1: "B1 • Intermediate",
-                B2: "B2 • Upper Intermediate",
+                A1: locale === "bn" ? "A1 • শিক্ষানবিস" : "A1 • Beginner",
+                A2: locale === "bn" ? "A2 • প্রাথমিক" : "A2 • Elementary",
+                B1: locale === "bn" ? "B1 • মধ্যম" : "B1 • Intermediate",
+                B2: locale === "bn" ? "B2 • উচ্চ মধ্যম" : "B2 • Upper Intermediate",
               };
               return map[val as string] || val;
             }}
           </SelectValue>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">{t("discovery.allLevels")}</SelectItem>
-          <SelectItem value="A1">A1 • Beginner</SelectItem>
-          <SelectItem value="A2">A2 • Elementary</SelectItem>
-          <SelectItem value="B1">B1 • Intermediate</SelectItem>
-          <SelectItem value="B2">B2 • Upper Intermediate</SelectItem>
+          <SelectItem value="all">{t("discovery.allLevels", locale)}</SelectItem>
+          <SelectItem value="A1">{locale === "bn" ? "A1 • শিক্ষানবিস" : "A1 • Beginner"}</SelectItem>
+          <SelectItem value="A2">{locale === "bn" ? "A2 • প্রাথমিক" : "A2 • Elementary"}</SelectItem>
+          <SelectItem value="B1">{locale === "bn" ? "B1 • মধ্যম" : "B1 • Intermediate"}</SelectItem>
+          <SelectItem value="B2">{locale === "bn" ? "B2 • উচ্চ মধ্যম" : "B2 • Upper Intermediate"}</SelectItem>
         </SelectContent>
       </Select>
 
@@ -76,19 +78,19 @@ export function FilterBar({
         <SelectTrigger className="w-44 h-control-md text-label border border-input bg-transparent">
           <SelectValue>
             {(val) => {
-              if (!val || val === "all") return t("discovery.anyLength");
+              if (!val || val === "all") return t("discovery.anyLength", locale);
               const map: Record<string, string> = {
-                short: t("discovery.shortLength"),
-                medium: t("discovery.mediumLength"),
+                short: t("discovery.shortLength", locale),
+                medium: t("discovery.mediumLength", locale),
               };
               return map[val as string] || val;
             }}
           </SelectValue>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">{t("discovery.anyLength")}</SelectItem>
-          <SelectItem value="short">{t("discovery.shortLength")}</SelectItem>
-          <SelectItem value="medium">{t("discovery.mediumLength")}</SelectItem>
+          <SelectItem value="all">{t("discovery.anyLength", locale)}</SelectItem>
+          <SelectItem value="short">{t("discovery.shortLength", locale)}</SelectItem>
+          <SelectItem value="medium">{t("discovery.mediumLength", locale)}</SelectItem>
         </SelectContent>
       </Select>
 
@@ -100,21 +102,27 @@ export function FilterBar({
         <SelectTrigger className="w-48 h-control-md text-label border border-input bg-transparent">
           <SelectValue>
             {(val) => {
-              if (!val || val === "all") return t("discovery.anyStyle");
+              if (!val || val === "all") return t("discovery.anyStyle", locale);
               const map: Record<string, string> = {
-                casual: "Casual / Friendly",
-                neutral: "Neutral Everyday",
-                formal: "Formal / Professional",
+                casual: locale === "bn" ? "অনানুষ্ঠানিক / বন্ধুত্বপূর্ণ" : "Casual / Friendly",
+                neutral: locale === "bn" ? "স্বাভাবিক দৈনন্দিন" : "Neutral Everyday",
+                formal: locale === "bn" ? "আনুষ্ঠানিক / পেশাগত" : "Formal / Professional",
               };
               return map[val as string] || val;
             }}
           </SelectValue>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">{t("discovery.anyStyle")}</SelectItem>
-          <SelectItem value="casual">Casual / Friendly</SelectItem>
-          <SelectItem value="neutral">Neutral Everyday</SelectItem>
-          <SelectItem value="formal">Formal / Professional</SelectItem>
+          <SelectItem value="all">{t("discovery.anyStyle", locale)}</SelectItem>
+          <SelectItem value="casual">
+            {locale === "bn" ? "অনানুষ্ঠানিক / বন্ধুত্বপূর্ণ" : "Casual / Friendly"}
+          </SelectItem>
+          <SelectItem value="neutral">
+            {locale === "bn" ? "স্বাভাবিক দৈনন্দিন" : "Neutral Everyday"}
+          </SelectItem>
+          <SelectItem value="formal">
+            {locale === "bn" ? "আনুষ্ঠানিক / পেশাগত" : "Formal / Professional"}
+          </SelectItem>
         </SelectContent>
       </Select>
 
@@ -127,7 +135,7 @@ export function FilterBar({
           className="btn-press h-control-md text-label gap-1.5 ml-auto px-4 rounded-control"
         >
           <HugeiconsIcon icon={Cancel01Icon} size={16} />
-          <span>{t("discovery.resetFilters")}</span>
+          <span>{t("discovery.resetFilters", locale)}</span>
         </Button>
       )}
     </div>

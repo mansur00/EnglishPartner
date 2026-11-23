@@ -26,6 +26,7 @@ import {
 } from "@/content/seed/vocabulary";
 import type { VocabularyEntry } from "@/content/seed/vocabulary";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n";
 
 interface ReviewQueueProps {
   savedLemmas: string[];
@@ -35,6 +36,7 @@ interface ReviewQueueProps {
 const STORAGE_KEY = "ecp_vocabulary_srs";
 
 export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps) {
+  const locale = useLocale();
   const [srsMap, setSrsMap] = useState<Record<string, UserVocabularySRSItem>>({});
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -207,7 +209,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
         <div className="pt-3 flex flex-wrap items-center justify-center gap-3">
           <Link href="/explore">
             <Button variant="cta" size="md" className="rounded-control text-label text-bangla flex items-center gap-2">
-              <span>নতুন কথোপকথন খুঁজুন (Explore)</span>
+              <span>{locale === "bn" ? "নতুন কথোপকথন খুঁজুন" : "Explore New Conversations"}</span>
               <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
             </Button>
           </Link>
@@ -343,7 +345,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
         {isFlipped && (
           <div className="pt-6 border-t border-border space-y-2.5">
             <span className="text-chip-bn block text-center">
-              শব্দটি মনে করা কতটা সহজ ছিল? (Rate your recall):
+              {locale === "bn" ? "শব্দটি মনে করা কতটা সহজ ছিল?" : "Rate your recall:"}
             </span>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -356,7 +358,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                   "border-destructive/30 bg-destructive/10 text-destructive hover:bg-destructive/20"
                 )}
               >
-                <div className="text-label text-bangla">আবার (Again)</div>
+                <div className="text-label text-bangla">{locale === "bn" ? "আবার" : "Again"}</div>
                 <div className="text-chip opacity-80 font-mono mt-0.5">১ দিন</div>
               </button>
 
@@ -369,7 +371,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                   "border-border bg-card text-foreground hover:bg-muted/60"
                 )}
               >
-                <div className="text-label text-bangla">কঠিন (Hard)</div>
+                <div className="text-label text-bangla">{locale === "bn" ? "কঠিন" : "Hard"}</div>
                 <div className="text-chip opacity-70 font-mono mt-0.5">
                   {hardInterval} দিন
                 </div>
@@ -384,7 +386,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                   "border-primary/40 bg-primary/10 text-primary hover:bg-primary/20"
                 )}
               >
-                <div className="text-label text-bangla">ভালো (Good)</div>
+                <div className="text-label text-bangla">{locale === "bn" ? "ভালো" : "Good"}</div>
                 <div className="text-chip opacity-80 font-mono mt-0.5">
                   {goodInterval} দিন
                 </div>
@@ -399,7 +401,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                   "border-success/40 bg-success-bg text-success hover:bg-success-bg/80"
                 )}
               >
-                <div className="text-label text-bangla">সহজ (Easy)</div>
+                <div className="text-label text-bangla">{locale === "bn" ? "সহজ" : "Easy"}</div>
                 <div className="text-chip opacity-80 font-mono mt-0.5">
                   {easyInterval} দিন
                 </div>

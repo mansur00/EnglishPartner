@@ -34,14 +34,28 @@ function resolvePath(obj: MessageTree, path: string): string | undefined {
 
 /**
  * Meaning-based message lookup with fallback to English and key.
+ * If locale is omitted and running in browser, automatically picks active user locale from localStorage (default: bn).
  */
-export function t(key: string, locale: Locale = "en"): string {
-  const dict = dictionaries[locale] || dictionaries.en;
+export function t(key: string, locale?: Locale): string {
+  let targetLocale = locale;
+  if (!targetLocale && typeof window !== "undefined") {
+    try {
+      const saved = localStorage.getItem("ecp_user_locale") as Locale | null;
+      if (saved && (SUPPORTED_LOCALES as readonly string[]).includes(saved)) {
+        targetLocale = saved;
+      }
+    } catch {}
+  }
+  if (!targetLocale) {
+    targetLocale = "bn";
+  }
+
+  const dict = dictionaries[targetLocale] || dictionaries.en;
   const translated = resolvePath(dict, key);
   if (translated) return translated;
 
   // Fallback to English
-  if (locale !== "en") {
+  if (targetLocale !== "en") {
     const enFallback = resolvePath(dictionaries.en, key);
     if (enFallback) return enFallback;
   }
@@ -58,4 +72,4 @@ export function isRtlLocale(locale: string): boolean {
 }
 
 export { SUPPORTED_LOCALES };
-export { useLocale } from "./use-locale.ts";
+export { useLocale, useTranslations } from "./use-locale.ts";

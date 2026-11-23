@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -29,6 +29,7 @@ import {
 } from "@hugeicons/core-free-icons";
 
 export function DashboardClient() {
+  const locale = useLocale();
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
 
@@ -178,20 +179,24 @@ export function DashboardClient() {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <EmojiTile emoji="☕" />
-                <Badge variant="brand" size="md">20 Real Scenarios</Badge>
+                <Badge variant="brand" size="md">
+                  {locale === "bn" ? "২০টি বাস্তব দৃশ্যপট" : "20 Real Scenarios"}
+                </Badge>
               </div>
               <h3 className="text-card-title text-foreground">
-                Everyday & Social English
+                {locale === "bn" ? "দৈনন্দিন ও সামাজিক ইংরেজি" : "Everyday & Social English"}
               </h3>
               <p className="text-body text-muted-foreground mt-1.5 leading-relaxed">
-                Shopping, public transport, airport navigation, dining out, and daily social communications.
+                {locale === "bn"
+                  ? "কেনাকাটা, গণপরিবহন, বিমানবন্দর, রেস্তোরাঁ ও দৈনন্দিন সামাজিক যোগাযোগ।"
+                  : "Shopping, public transport, airport navigation, dining out, and daily social communications."}
               </p>
 
               {/* Progress bar motif */}
               <div className="mt-4 pt-3 border-t border-border">
                 <div className="flex items-center justify-between text-meta text-topic-ink mb-1.5">
-                  <span>Active Track Progress</span>
-                  <span>40% complete</span>
+                  <span>{locale === "bn" ? "চলমান ট্র্যাকের অগ্রগতি" : "Active Track Progress"}</span>
+                  <span>{locale === "bn" ? "৪০% সম্পন্ন" : "40% complete"}</span>
                 </div>
                 <div className="h-segment w-full bg-topic-tile rounded-pill overflow-hidden">
                   <div className="h-full bg-topic-accent rounded-pill w-progress-40" />
@@ -202,7 +207,7 @@ export function DashboardClient() {
             <div className="pt-5 mt-5 border-t border-border">
               <Link href="/explore">
                 <Button variant="default" size="md" className="btn-press w-full justify-between">
-                  <span>{t("dashboard.browseEveryday")}</span>
+                  <span>{t("dashboard.browseEveryday", locale)}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
                 </Button>
               </Link>
@@ -217,20 +222,24 @@ export function DashboardClient() {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <EmojiTile emoji="💼" />
-                <Badge variant="brand" size="md">30+ Job Roles</Badge>
+                <Badge variant="brand" size="md">
+                  {locale === "bn" ? "৩০+ পেশাগত ভূমিকা" : "30+ Job Roles"}
+                </Badge>
               </div>
               <h3 className="text-card-title text-foreground">
-                Professional Conversations
+                {locale === "bn" ? "পেশাগত কথোপকথন" : "Professional Conversations"}
               </h3>
               <p className="text-body text-muted-foreground mt-1.5 leading-relaxed">
-                Job-specific dialogues: UI/UX Designer, Software Engineer, Product Manager, Doctor, and Client Calls.
+                {locale === "bn"
+                  ? "পেশাভিত্তিক সংলাপ: ইউআই/ইউএক্স ডিজাইনার, সফটওয়্যার ইঞ্জিনিয়ার, প্রোডাক্ট ম্যানেজার, ডাক্তার ও ক্লায়েন্ট কল।"
+                  : "Job-specific dialogues: UI/UX Designer, Software Engineer, Product Manager, Doctor, and Client Calls."}
               </p>
 
               {/* Progress bar motif */}
               <div className="mt-4 pt-3 border-t border-border">
                 <div className="flex items-center justify-between text-meta text-topic-ink mb-1.5">
-                  <span>Professional Track</span>
-                  <span>15% complete</span>
+                  <span>{locale === "bn" ? "পেশাগত ট্র্যাক" : "Professional Track"}</span>
+                  <span>{locale === "bn" ? "১৫% সম্পন্ন" : "15% complete"}</span>
                 </div>
                 <div className="h-segment w-full bg-topic-tile rounded-pill overflow-hidden">
                   <div className="h-full bg-topic-accent rounded-pill w-progress-15" />
@@ -241,7 +250,7 @@ export function DashboardClient() {
             <div className="pt-5 mt-5 border-t border-border">
               <Link href="/explore?category=workplace-business">
                 <Button variant="default" size="md" className="btn-press w-full justify-between">
-                  <span>{t("dashboard.exploreProfessional")}</span>
+                  <span>{t("dashboard.exploreProfessional", locale)}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
                 </Button>
               </Link>
@@ -260,14 +269,16 @@ export function DashboardClient() {
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-card-title text-foreground">
-                      Continue Where You Left Off
+                      {locale === "bn" ? "যেখান থেকে শেষ করেছিলেন সেখান থেকে শুরু করুন" : "Continue Where You Left Off"}
                     </h3>
                     <Badge variant="success" size="md">
-                      {completedSteps.length} Completed
+                      {completedSteps.length} {locale === "bn" ? "টি সম্পন্ন" : "Completed"}
                     </Badge>
                   </div>
                   <p className="text-meta text-muted-foreground mt-1">
-                    Step 02: Asking for a Discount & Payment Method
+                    {locale === "bn"
+                      ? "ধাপ ০২: ছাড় চাওয়া ও মূল্য পরিশোধের পদ্ধতি"
+                      : "Step 02: Asking for a Discount & Payment Method"}
                   </p>
                 </div>
               </div>
@@ -275,7 +286,7 @@ export function DashboardClient() {
               <Link href="/conversations/asking-discount-and-payment" className="w-full sm:w-auto">
                 <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2">
                   <HugeiconsIcon icon={PlayCircleIcon} size={18} />
-                  <span>Continue Step 02</span>
+                  <span>{locale === "bn" ? "ধাপ ০২ চালিয়ে যান" : "Continue Step 02"}</span>
                 </Button>
               </Link>
             </div>
@@ -289,10 +300,12 @@ export function DashboardClient() {
                 </div>
                 <div>
                   <h3 className="text-card-title text-foreground">
-                    Start Your First Conversation
+                    {locale === "bn" ? "আপনার প্রথম কথোপকথন শুরু করুন" : "Start Your First Conversation"}
                   </h3>
                   <p className="text-body text-muted-foreground mt-1 max-w-lg">
-                    You haven&apos;t started any dialogues yet. Choose a real-world scenario from the library to track your vocabulary and fluency progress!
+                    {locale === "bn"
+                      ? "আপনি এখনও কোনো সংলাপ শুরু করেননি। আপনার শব্দভাণ্ডার ও কথা বলার দক্ষতা বাড়াতে লাইব্রেরি থেকে একটি বাস্তব দৃশ্যপট বেছে নিন!"
+                      : "You haven't started any dialogues yet. Choose a real-world scenario from the library to track your vocabulary and fluency progress!"}
                   </p>
                 </div>
               </div>
@@ -300,7 +313,7 @@ export function DashboardClient() {
               <Link href="/explore" className="w-full sm:w-auto">
                 <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2">
                   <HugeiconsIcon icon={PlayCircleIcon} size={18} />
-                  <span>{t("dashboard.startFirstConversation")}</span>
+                  <span>{t("dashboard.startFirstConversation", locale)}</span>
                 </Button>
               </Link>
             </div>

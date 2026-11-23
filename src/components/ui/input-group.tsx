@@ -32,9 +32,9 @@ function InputGroup({
         onBlur?.(e);
       }}
       className={cn(
-        "relative flex items-center w-full min-w-0 rounded-control transition-all duration-200",
+        "relative flex items-center w-full min-w-0 rounded-control transition-all duration-200 outline-none",
         hasRainbowFocus && isFocused
-          ? "rainbow-border border border-transparent shadow-none"
+          ? "rainbow-border border-0 shadow-none ring-0 outline-none"
           : "border border-input shadow-xs",
         className
       )}

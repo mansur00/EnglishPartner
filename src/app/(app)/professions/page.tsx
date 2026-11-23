@@ -1,5 +1,6 @@
+"use client";
+
 import Link from "next/link";
-import { Metadata } from "next";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Briefcase01Icon,
@@ -13,15 +14,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
+import { LocaleTitle } from "@/components/shared";
+import { useLocale } from "@/lib/i18n";
 import { ALL_PROFESSIONS } from "@/lib/professions/registry";
 
-export const metadata: Metadata = {
-  title: "Professional English Career Paths | EnglishPartner",
-  description:
-    "Explore tailored English conversation learning paths for UI/UX designers, software engineers, freelancers, healthcare workers, and educators.",
-};
-
 export default function ProfessionsIndexPage() {
+  const locale = useLocale();
+
   return (
     <PageContainer className="space-y-6">
       {/* Header Row */}
@@ -35,11 +34,16 @@ export default function ProfessionsIndexPage() {
           </Pill>
         </div>
 
-        <h1 className="text-page-title text-foreground">
-          পেশাগত ইংরেজি ক্যারিয়ার পাথ (Career Paths)
-        </h1>
+        <LocaleTitle
+          as="h1"
+          titleEn="Professional English Career Paths"
+          titleBn="পেশাগত ইংরেজি ক্যারিয়ার পাথ"
+          className="text-page-title text-foreground"
+        />
         <p className="text-subtitle-bn text-muted-foreground">
-          কর্মক্ষেত্রে আন্তর্জাতিক ক্লায়েন্ট, সহকর্মী ও স্টেকহোল্ডারদের সাথে পেশাদার ইংরেজি কথোপকথন অনুশীলন করুন।
+          {locale === "bn"
+            ? "কর্মক্ষেত্রে আন্তর্জাতিক ক্লায়েন্ট, সহকর্মী ও স্টেকহোল্ডারদের সাথে পেশাদার ইংরেজি কথোপকথন অনুশীলন করুন।"
+            : "Practice professional English conversations with global clients, colleagues, and stakeholders in your field."}
         </p>
       </div>
 
@@ -58,12 +62,12 @@ export default function ProfessionsIndexPage() {
                     <HugeiconsIcon icon={Briefcase01Icon} size={20} />
                   </div>
                   <div>
-                    <h3 className="text-card-title text-foreground">
-                      {profession.name}
-                    </h3>
-                    <p className="text-label text-muted-foreground text-bangla">
-                      {profession.nameBn}
-                    </p>
+                    <LocaleTitle
+                      as="h3"
+                      titleEn={profession.name}
+                      titleBn={profession.nameBn}
+                      className="text-card-title text-foreground"
+                    />
                   </div>
                 </div>
 
@@ -77,16 +81,16 @@ export default function ProfessionsIndexPage() {
                 {profession.tagline}
               </p>
               <p className="text-meta-bn text-muted-foreground leading-relaxed">
-                {profession.descriptionBn}
+                {locale === "bn" ? profession.descriptionBn : (profession.description || profession.descriptionBn)}
               </p>
 
               {/* Competencies Checklist */}
               <div className="space-y-1.5 pt-2 border-t border-border/50">
                 <span className="text-chip text-muted-foreground uppercase font-mono block">
-                  মূল দক্ষতা ও পরিস্থিতি (Key Competencies):
+                  {locale === "bn" ? "মূল দক্ষতা ও পরিস্থিতি:" : "Key Competencies:"}
                 </span>
                 <ul className="space-y-1">
-                  {profession.competenciesBn.slice(0, 3).map((comp, cIdx) => (
+                  {profession.competenciesBn.slice(0, 3).map((comp: string, cIdx: number) => (
                     <li
                       key={cIdx}
                       className="flex items-start gap-2 text-chip-bn text-foreground"
@@ -108,12 +112,12 @@ export default function ProfessionsIndexPage() {
               <div className="flex items-center gap-2 text-chip text-muted-foreground">
                 <span className="flex items-center gap-1 font-mono">
                   <HugeiconsIcon icon={Layers01Icon} size={14} />
-                  {profession.scenarioCount} Scenarios
+                  {profession.scenarioCount} {locale === "bn" ? "টি দৃশ্যপট" : "Scenarios"}
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1 font-mono">
                   <HugeiconsIcon icon={Clock01Icon} size={14} />
-                  ~{profession.estimatedHours}h
+                  ~{profession.estimatedHours}{locale === "bn" ? " ঘণ্টা" : "h"}
                 </span>
               </div>
 
@@ -122,7 +126,9 @@ export default function ProfessionsIndexPage() {
                   size="sm"
                   className="rounded-control gap-1.5 cursor-pointer text-chip"
                 >
-                  <span className="text-bangla">পাথ শুরু করুন</span>
+                  <span className="text-bangla">
+                    {locale === "bn" ? "পাথ শুরু করুন" : "Start Path"}
+                  </span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
                 </Button>
               </Link>

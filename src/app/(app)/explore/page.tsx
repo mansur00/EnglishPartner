@@ -17,7 +17,7 @@ import {
   Cancel01Icon,
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
-import { PageContainer } from "@/components/shared";
+import { PageContainer, LocaleTitle } from "@/components/shared";
 import { paginateItems } from "@/lib/pagination/faceted-pagination";
 import { FacetedPagination } from "@/components/discovery/FacetedPagination";
 
@@ -103,12 +103,18 @@ export default function ExplorePage() {
     <PageContainer className="space-y-6 pb-16">
       {/* Page Header */}
       <div>
-        <h1 className="text-page-title text-foreground">
-          Explore Conversations
-        </h1>
-        <p className="text-meta text-muted-foreground mt-1.5 text-bangla">
-          বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন (EN + BN)
-        </p>
+        <LocaleTitle
+          as="h1"
+          titleEn="Explore Conversations"
+          titleBn="কথোপকথন অন্বেষণ করুন"
+          className="text-page-title text-foreground"
+        />
+        <LocaleTitle
+          as="p"
+          titleEn="Explore and practice natural dialogues crafted for everyday real-world situations."
+          titleBn="বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন।"
+          className="text-meta text-muted-foreground mt-1.5"
+        />
       </div>
 
       {/* Search Input with Rainbow Border on Focus & Clear Button */}

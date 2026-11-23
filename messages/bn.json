@@ -53,7 +53,7 @@
   },
   "discovery": {
     "filters": "ফিল্টার:",
-    "allLevels": "সব লেভেল (CEFR)",
+    "allLevels": "সব লেভেল",
     "anyLength": "যেকোনো দৈর্ঘ্য",
     "shortLength": "সংক্ষিপ্ত (৪-৬ টার্ন)",
     "mediumLength": "মাঝারি (৭-১০ টার্ন)",

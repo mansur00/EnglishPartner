@@ -62,9 +62,12 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
           {/* Additional standalone scenarios in this category */}
           {categoryScenarios.length > 0 && (
             <div className="space-y-4 pt-4 border-t border-border">
-              <h3 className="text-card-title-bn">
-                অন্যান্য প্রাসঙ্গিক দৃশ্যপট (Additional Practice Scenarios)
-              </h3>
+              <LocaleTitle
+                as="h3"
+                titleEn="Additional Practice Scenarios"
+                titleBn="অন্যান্য প্রাসঙ্গিক দৃশ্যপট"
+                className="text-card-title-bn"
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {categoryScenarios.map((scenario) => (
                   <ScenarioCard key={scenario.id} scenario={scenario} />

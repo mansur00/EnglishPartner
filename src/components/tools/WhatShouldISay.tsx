@@ -21,6 +21,8 @@ import {
 } from "@hugeicons/core-free-icons";
 import { resolveSayItIntent } from "@/lib/ai/say-it";
 import type { SayItResponse, ToneType } from "@/lib/ai/say-it-schema";
+import { useLocale } from "@/lib/i18n";
+import { LocaleTitle } from "@/components/shared";
 
 const SAMPLE_INTENTS = [
   { label: "Need 2 more days", intent: "I want to tell my manager that I need two more days to finish the task." },
@@ -31,6 +33,7 @@ const SAMPLE_INTENTS = [
 ];
 
 export function WhatShouldISay() {
+  const locale = useLocale();
   const [intentInput, setIntentInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
@@ -124,9 +127,12 @@ export function WhatShouldISay() {
             <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center">
               <HugeiconsIcon icon={SparklesIcon} size={20} />
             </div>
-            <h1 className="text-page-title text-foreground">
-              What Should I Say?
-            </h1>
+            <LocaleTitle
+              as="h1"
+              titleEn="What Should I Say?"
+              titleBn="আমি কী বলতে পারি?"
+              className="text-page-title text-foreground"
+            />
           </div>
 
           {providerInfo && (
@@ -141,9 +147,12 @@ export function WhatShouldISay() {
             </Pill>
           )}
         </div>
-        <p className="text-meta-lead-bn">
-          আপনি কী বলতে চান তা নিজের ভাষায় (ইংরেজি, বাংলা বা বাংলিশ) লিখুন; মুহূর্তেই পেয়ে যান মার্জিত ও স্বাভাবিক ইংরেজি বিকল্প।
-        </p>
+        <LocaleTitle
+          as="p"
+          titleEn="Type what you want to say in your own words, and instantly get polished, natural English alternatives."
+          titleBn="আপনি কী বলতে চান তা নিজের ভাষায় লিখুন; মুহূর্তেই পেয়ে যান মার্জিত ও স্বাভাবিক ইংরেজি বিকল্প।"
+          className="text-meta-lead-bn"
+        />
       </div>
 
       {/* Input Group with Rainbow Border on Focus */}
@@ -162,7 +171,11 @@ export function WhatShouldISay() {
                 handleSearch();
               }
             }}
-            placeholder="e.g. আমি মিটিংয়ের সময় পরিবর্তন করতে চাই..."
+            placeholder={
+              locale === "bn"
+                ? "যেমন: আমি মিটিংয়ের সময় পরিবর্তন করতে চাই..."
+                : "e.g. I want to reschedule our meeting..."
+            }
             variant="ghost"
             inputSize="lg"
             className="w-full pl-10 pr-10 text-body"
