@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { t } from "@/lib/i18n";
+import { useLocale, t } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -19,9 +19,13 @@ import {
   Menu01Icon,
   DashboardSquare01Icon,
   CompassIcon,
+  Calendar03Icon,
   Briefcase01Icon,
   Bookmark02Icon,
   SparklesIcon,
+  BotIcon,
+  Analytics01Icon,
+  Settings01Icon,
   Logout01Icon,
   Login01Icon,
 } from "@hugeicons/core-free-icons";
@@ -66,14 +70,19 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
     return () => subscription.unsubscribe();
   }, [initialUser]);
 
+  const locale = useLocale();
   const account = getHeaderAccountState(user);
 
   const mobileNavLinks = [
-    { name: "Dashboard", href: "/dashboard", icon: DashboardSquare01Icon },
-    { name: "Explore", href: "/explore", icon: CompassIcon },
-    { name: "Shopping Ladder (20 Steps)", href: "/explore/category/shopping-and-money", icon: SparklesIcon },
-    { name: "Professional English", href: "/explore?category=workplace-business", icon: Briefcase01Icon },
-    { name: "My Vocabulary", href: "/vocabulary", icon: Bookmark02Icon },
+    { name: t("nav.dashboard", locale), href: "/dashboard", icon: DashboardSquare01Icon },
+    { name: t("nav.explore", locale), href: "/explore", icon: CompassIcon },
+    { name: t("nav.dailyPractice", locale), href: "/daily-practice", icon: Calendar03Icon },
+    { name: t("nav.professionalEnglish", locale), href: "/professions", icon: Briefcase01Icon },
+    { name: locale === "bn" ? "আমি কী বলতে পারি?" : "What Should I Say?", href: "/what-should-i-say", icon: SparklesIcon },
+    { name: locale === "bn" ? "এআই পার্টনার" : "AI Partner", href: "/roleplay", icon: BotIcon },
+    { name: t("nav.vocabulary", locale), href: "/vocabulary", icon: Bookmark02Icon },
+    { name: locale === "bn" ? "আমার অগ্রগতি" : "My Progress", href: "/progress", icon: Analytics01Icon },
+    { name: t("nav.settings", locale), href: "/settings", icon: Settings01Icon },
   ];
 
   return (

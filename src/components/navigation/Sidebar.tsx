@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import type { IconSvgElement } from "@hugeicons/react";
 import {
@@ -28,63 +28,62 @@ interface NavItem {
 
 export function Sidebar() {
   const pathname = usePathname();
+  const locale = useLocale();
 
   const navItems: NavItem[] = [
     {
-      name: t("nav.dashboard"),
+      name: t("nav.dashboard", locale),
       href: "/dashboard",
       icon: DashboardSquare01Icon,
       active: pathname === "/dashboard",
     },
     {
-      name: t("nav.explore"),
+      name: t("nav.explore", locale),
       href: "/explore",
       icon: CompassIcon,
       active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
     },
     {
-      name: "Daily Practice",
-      href: "#",
+      name: t("nav.dailyPractice", locale),
+      href: "/daily-practice",
       icon: Calendar03Icon,
-      active: false,
-      comingSoon: true,
+      active: pathname === "/daily-practice",
     },
     {
-      name: t("nav.professionalEnglish"),
+      name: t("nav.professionalEnglish", locale),
       href: "/professions",
       icon: Briefcase01Icon,
       active: pathname.startsWith("/professions"),
     },
     {
-      name: "What Should I Say?",
+      name: locale === "bn" ? "আমি কী বলতে পারি?" : "What Should I Say?",
       href: "/what-should-i-say",
       icon: SparklesIcon,
       active: pathname === "/what-should-i-say",
     },
     {
-      name: "AI Partner",
+      name: locale === "bn" ? "এআই পার্টনার" : "AI Partner",
       href: "/roleplay",
       icon: BotIcon,
       active: pathname === "/roleplay",
     },
     {
-      name: t("nav.vocabulary"),
+      name: t("nav.vocabulary", locale),
       href: "/vocabulary",
       icon: Bookmark02Icon,
       active: pathname === "/vocabulary",
     },
     {
-      name: "My Progress",
+      name: locale === "bn" ? "আমার অগ্রগতি" : "My Progress",
       href: "/progress",
       icon: Analytics01Icon,
       active: pathname === "/progress",
     },
     {
-      name: t("nav.settings"),
-      href: "#",
+      name: t("nav.settings", locale),
+      href: "/settings",
       icon: Settings01Icon,
-      active: false,
-      comingSoon: true,
+      active: pathname === "/settings",
     },
   ];
 

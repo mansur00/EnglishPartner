@@ -9,8 +9,13 @@ export interface DailyChallengeInfo {
   challengeDate: string; // YYYY-MM-DD
   scenarioSlug: string;
   scenarioTitle: string;
+  scenarioTitleBn?: string;
+  scenarioDescription?: string;
+  scenarioDescriptionBn?: string;
   scenarioLevel: string;
   categorySlug: string;
+  estimatedMinutes?: number;
+  exchangesCount?: number;
   status: "assigned" | "in_progress" | "completed" | "expired";
   completedAt?: string | null;
 }
@@ -91,8 +96,13 @@ export async function getOrCreateDailyChallenge(
           challengeDate: item.challengeDate,
           scenarioSlug: item.scenarioSlug,
           scenarioTitle: scenario.title,
+          scenarioTitleBn: scenario.titleBn,
+          scenarioDescription: scenario.description,
+          scenarioDescriptionBn: scenario.descriptionBn,
           scenarioLevel: scenario.level,
           categorySlug: scenario.categories[0]?.slug || "general",
+          estimatedMinutes: scenario.estimatedMinutes,
+          exchangesCount: scenario.exchangesCount,
           status: item.status as DailyChallengeInfo["status"],
           completedAt: item.completedAt ? item.completedAt.toISOString() : null,
         };
@@ -126,8 +136,13 @@ export async function getOrCreateDailyChallenge(
           challengeDate: created.challengeDate,
           scenarioSlug: created.scenarioSlug,
           scenarioTitle: chosenScenario.title,
+          scenarioTitleBn: chosenScenario.titleBn,
+          scenarioDescription: chosenScenario.description,
+          scenarioDescriptionBn: chosenScenario.descriptionBn,
           scenarioLevel: chosenScenario.level,
           categorySlug: chosenScenario.categories[0]?.slug || "general",
+          estimatedMinutes: chosenScenario.estimatedMinutes,
+          exchangesCount: chosenScenario.exchangesCount,
           status: "assigned",
           completedAt: null,
         };
@@ -145,8 +160,13 @@ export async function getOrCreateDailyChallenge(
     challengeDate: targetDate,
     scenarioSlug: fallbackScenario.slug,
     scenarioTitle: fallbackScenario.title,
+    scenarioTitleBn: fallbackScenario.titleBn,
+    scenarioDescription: fallbackScenario.description,
+    scenarioDescriptionBn: fallbackScenario.descriptionBn,
     scenarioLevel: fallbackScenario.level,
     categorySlug: fallbackScenario.categories[0]?.slug || "general",
+    estimatedMinutes: fallbackScenario.estimatedMinutes,
+    exchangesCount: fallbackScenario.exchangesCount,
     status: "assigned",
     completedAt: null,
   };

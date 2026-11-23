@@ -10,6 +10,7 @@ export interface TodayPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   streak?: number;
   minutesCompleted?: number;
   minutesGoal?: number;
+  variant?: "band" | "card";
 }
 
 export function TodayPanel({
@@ -17,16 +18,22 @@ export function TodayPanel({
   streak = 1,
   minutesCompleted = 7,
   minutesGoal = 10,
+  variant = "band",
   ...props
 }: TodayPanelProps) {
   const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
   const currentDayIndex = (new Date().getDay() + 6) % 7; // Monday = 0
   const remainingMinutes = Math.max(0, minutesGoal - minutesCompleted);
 
+  const isCard = variant === "card";
+
   return (
     <div
       className={cn(
-        "w-full md:w-auto bg-band-panel rounded-panel p-4 text-band-panel-ink shadow-xs space-y-3.5 min-w-0 sm:min-w-panel",
+        "w-full md:w-auto rounded-panel p-4 shadow-xs space-y-3.5 min-w-0 sm:min-w-panel",
+        isCard
+          ? "bg-card text-foreground shadow-card"
+          : "bg-band-panel text-band-panel-ink",
         className
       )}
       {...props}
@@ -36,8 +43,12 @@ export function TodayPanel({
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={FireIcon} size={20} className="text-sun-500 shrink-0" />
           <div className="flex items-baseline gap-1.5">
-            <span className="text-stat text-band-panel-ink">{streak}</span>
-            <span className="text-meta text-band-panel-ink/90">{t("dashboard.dayStreak")}</span>
+            <span className={cn("text-stat", isCard ? "text-foreground" : "text-band-panel-ink")}>
+              {streak}
+            </span>
+            <span className={cn("text-meta", isCard ? "text-muted-foreground" : "text-band-panel-ink/90")}>
+              {t("dashboard.dayStreak")}
+            </span>
           </div>
         </div>
 
@@ -56,8 +67,8 @@ export function TodayPanel({
                 className={cn(
                   "inline-flex items-center justify-center size-marker rounded-pill text-chip select-none",
                   isDone && "bg-sun-500 text-brand-950 shadow-xs",
-                  !isDone && isPast && "bg-band-panel-past text-band-panel-ink/80",
-                  isFuture && "border border-dashed border-band-panel-marker-border text-band-panel-ink/50"
+                  !isDone && isPast && (isCard ? "bg-muted text-muted-foreground" : "bg-band-panel-past text-band-panel-ink/80"),
+                  isFuture && (isCard ? "border border-dashed border-border text-muted-foreground/60" : "border border-dashed border-band-panel-marker-border text-band-panel-ink/50")
                 )}
               >
                 {day}
@@ -68,12 +79,12 @@ export function TodayPanel({
       </div>
 
       {/* Row 2: Daily Goal with 10-Segment Minute Bar */}
-      <div className="space-y-1.5 pt-1 border-t border-band-panel-border">
+      <div className={cn("space-y-1.5 pt-1 border-t", isCard ? "border-border" : "border-band-panel-border")}>
         <div className="flex items-center justify-between">
-          <span className="text-card-title text-band-panel-ink">
+          <span className={cn("text-card-title", isCard ? "text-foreground" : "text-band-panel-ink")}>
             {minutesCompleted} / {minutesGoal} min
           </span>
-          <span className="text-meta text-band-panel-ink/80">
+          <span className={cn("text-meta", isCard ? "text-muted-foreground" : "text-band-panel-ink/80")}>
             {remainingMinutes === 0 ? t("dashboard.goalReached") : `${remainingMinutes} ${t("dashboard.minutesToGo")}`}
           </span>
         </div>
@@ -90,7 +101,11 @@ export function TodayPanel({
               key={idx}
               className={cn(
                 "h-segment flex-1 rounded-segment transition-colors",
-                idx < minutesCompleted ? "bg-sun-500" : "bg-band-segment-empty"
+                idx < minutesCompleted
+                  ? "bg-sun-500"
+                  : isCard
+                    ? "bg-muted"
+                    : "bg-band-segment-empty"
               )}
             />
           ))}

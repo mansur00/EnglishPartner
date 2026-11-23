@@ -1402,6 +1402,40 @@ Entry format:
 - Commit: `d0f6e14`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, Daily Practice & Settings Implementation Completed
+- Requested by owner: "daily paractice and setting complete koro" (Complete Daily Practice and Settings).
+- Core Deliverables & Changes:
+  - `src/app/(app)/daily-practice/page.tsx` & `src/components/practice/DailyPracticeClient.tsx`:
+    - Full implementation of Daily Practice page at `/daily-practice`.
+    - Localized date header (Bangla/English) with page title and subtitle.
+    - Embedded `<TodayPanel variant="card">` with live streak count, weekday completion markers, and daily minutes progress.
+    - Today's Conversation Challenge card fetched from `/api/v1/challenges/daily` with CEFR chip, time estimate, turns count, localized title/description, 3-step action cards (Listen to Dialogue, Speaking Practice, Sentence Builder & Quiz), Start Challenge CTA, and interactive completion toggle.
+    - Spaced Repetition (SRS) Review Queue powered by SM-2 (`<ReviewQueue savedLemmas={savedLemmas}>`) for saved vocabulary due today, with empty state prompting starter words or vocabulary book link.
+    - 3 Quick Speaking Drill cards: What Should I Say (`/what-should-i-say`), AI Partner (`/roleplay`), Shopping Ladder (`/explore/category/shopping-and-money`).
+  - `src/app/(app)/settings/page.tsx` & `src/components/settings/SettingsClient.tsx`:
+    - Full implementation of Settings page at `/settings`.
+    - Language & Translation preferences: Interactive segmented selector for বাংলা (`bn`), English (`en`), हिन्दी (`hi`) triggering instantaneous locale changes; Bilingual assistance toggle (`ecp_bilingual_mode`).
+    - Audio & Speech preferences: Playback speed segmented options (`0.75x`, `0.88x`, `1.0x`, `1.25x` persisted to `ecp_audio_speed`), Auto-play dialogue audio toggle (`ecp_autoplay_audio`), Preferred voice accent selector (`US English`, `UK English`, `Global`).
+    - Daily Goals & Learning Level: Daily speaking target selector (`5m`, `10m`, `15m`, `20m`), Target CEFR level selector (`A1`, `A2`, `B1`, `B2`).
+    - Appearance & Display: Light, Dark, System theme mode buttons powered by `useTheme()`.
+    - Data & Storage Management: Live display of saved notebook words and completed ladder steps; Export progress data as JSON; Reset learning progress with destructive confirmation dialog and toast alert.
+    - About & Version card (`v1.2.0`).
+  - `src/components/navigation/Sidebar.tsx` & `src/components/navigation/Header.tsx`:
+    - Removed `comingSoon: true` and `#` placeholders; wired `/daily-practice` and `/settings` routes with active state detection and localized titles.
+  - `src/components/shared/TodayPanel.tsx`:
+    - Added `variant?: "band" | "card"` allowing standalone card rendering with optimal surface contrast in light/dark mode outside of hero bands.
+  - `messages/en.json`, `messages/bn.json`, `messages/hi.json`:
+    - Added full translation dictionaries for `dailyPractice` and `settings` across all 3 supported locales with 100% key parity (149 keys each).
+  - `tests/multi-language-coverage.test.mjs`:
+    - Updated parity assertion to 149 keys across all 3 locales.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 tests passing across 41 test suites).
+  - `npm run build`: Passed (112/112 static routes compiled cleanly).
+  - Visual verification with full-page Puppeteer screenshots in both Bangla and English modes: zero dual-language/parenthetical occurrences, optimal contrast, flawless design system token harmony.
+
 ### 2026-11-23, single language enforcement & clean input border
 - Requested by owner:
   - Eliminate all dual-language titles and English in parentheses after Bangla (e.g. `(Topic Title)`, `(Career Paths)`, `(Rate your recall)`).
