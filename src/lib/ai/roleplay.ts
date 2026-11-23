@@ -108,6 +108,19 @@ interface ScenarioDialogueRule {
 
 const SCENARIO_RULES: ScenarioDialogueRule[] = [
   {
+    // Freestyle / Open Chat
+    themeMatcher: /^(freestyle|open_chat|open conversation|unlimited|chatgpt)/i,
+    responses: {
+      greeting: "Hello! I am your AI conversation partner. We can chat about anything you'd like—daily life, your hobbies, work, or any English questions. What's on your mind today?",
+      pricing: "That's an interesting topic! Could you tell me a little more about that?",
+      bargain: "I see your perspective! What do you think would be the best way to handle that?",
+      checkout: "Sounds great! What else would you like to explore or talk about?",
+      hesitation: "Take your time! You can share something interesting about your day, or ask me any question in English.",
+      fallback: "That's wonderful! Tell me more about your thoughts on this.",
+      hint: "যেকোনো বিষয়ে কথা বলুন, যেমন: 'What hobbies do you enjoy?' বা 'How can I improve my English fluency?'",
+    },
+  },
+  {
     // Shopping & Money
     themeMatcher: /(shop|money|buy|store|price|bag|taka|discount|card|cash)/i,
     responses: {
@@ -214,9 +227,11 @@ export function generateRoleplayTurn(rawRequest: RoleplayTurnRequestInput): Role
   }
 
   // Find matching scenario template
-  const matchedRule =
-    SCENARIO_RULES.find((r) => r.themeMatcher.test(request.scenario_title + " " + request.scenario_context)) ||
-    SCENARIO_RULES[SCENARIO_RULES.length - 1];
+  const isFreestyle = request.scenario_id === "freestyle" || /freestyle/i.test(request.scenario_title);
+  const matchedRule = isFreestyle
+    ? SCENARIO_RULES[0]
+    : (SCENARIO_RULES.find((r) => r.themeMatcher.test(request.scenario_title + " " + request.scenario_context)) ||
+       SCENARIO_RULES[SCENARIO_RULES.length - 1]);
 
   // At most ONE gentle correction per turn
   const correction = extractSingleCorrection(userText);
@@ -340,9 +355,25 @@ export async function generateRoleplayTurnAsync(
     });
   }
 
+  const isFreestyle = request.scenario_id === "freestyle" || /freestyle/i.test(request.scenario_title);
+
   const systemPrompt = `
-Task M8 — In-Character Roleplay Turn
-You are playing the role of ${request.ai_role} in a short English practice conversation.
+Task M8 — ${isFreestyle ? "Freestyle Open English Conversation" : "In-Character Roleplay Turn"}
+${
+  isFreestyle
+    ? `You are an engaging, supportive English conversation partner and tutor like ChatGPT.
+The learner can freely chat about ANY topic, ask any questions, tell stories, practice daily English, or discuss whatever is on their mind.
+Learner CEFR Level: ${request.level || "General"}. Style: ${request.style || "casual"}.
+
+Rules:
+1. You are in open conversation mode like ChatGPT. Do NOT restrict the user to a fixed scenario. Actively respond to any topic, question, or story they bring up warmly and naturally.
+2. Keep your replies concise and conversational: 1 to 2 natural sentences at the learner's level.
+3. Ask a friendly, engaging follow-up question to keep the dialogue flowing naturally.
+4. If the learner asks a question or asks for English help, explain clearly and concisely in 1-2 sentences.
+5. If the learner says "I don't know", "help", or seems stuck, provide a short pedagogical hint in Bangla (max 20 words).
+6. At most ONE gentle correction per turn, only if there is a clear ESL error. Corrections are separate from your in-role reply. If no correction is needed, set "correction" to null.
+7. The correction "original" field MUST be an exact quote/substring from the learner's latest message.`
+    : `You are playing the role of ${request.ai_role} in a short English practice conversation.
 The learner plays ${request.learner_role}.
 Scenario: "${request.scenario_title}".
 Situation: ${request.scenario_context}.
@@ -350,13 +381,14 @@ Objective: ${request.learning_objective}.
 Learner CEFR Level: ${request.level}. Style: ${request.style}.
 
 Rules:
-1. Stay in character and strictly in scenario. If the learner goes off-topic, gently bring them back in character.
+1. Stay strictly in character as ${request.ai_role} and strictly in scenario "${request.scenario_title}". Keep the dialogue focused on this specific topic. If the learner goes off-topic, gently bring them back in character to this scenario.
 2. Speak in short, conversational turns: 1 to 2 sentences at the learner's level (${request.level}).
-3. Ask natural follow-up questions to keep the dialogue active.
+3. Ask natural follow-up questions to keep the dialogue active and in-character.
 4. If the learner says "I don't know", "help", or seems stuck, provide a short pedagogical hint in Bangla (max 20 words).
 5. At most ONE gentle correction per turn, only if there is a clear ESL error. Corrections are separate from your in-role reply. If no correction is needed, set "correction" to null.
-6. The correction "original" field MUST be an exact quote/substring from the learner's latest message.
-7. Output JSON strictly matching Schema R1:
+6. The correction "original" field MUST be an exact quote/substring from the learner's latest message.`
+}
+8. Output JSON strictly matching Schema R1:
 {
   "ai_reply": "string in English, 1 to 2 natural sentences in character",
   "hint": "string or null in Bangla, max 20 words",
