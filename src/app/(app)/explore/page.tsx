@@ -17,7 +17,6 @@ import {
   Cancel01Icon,
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
-import { cn } from "@/lib/utils";
 import { PageContainer } from "@/components/shared";
 import { paginateItems } from "@/lib/pagination/faceted-pagination";
 import { FacetedPagination } from "@/components/discovery/FacetedPagination";
@@ -30,7 +29,6 @@ export default function ExplorePage() {
   const [style, setStyle] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   // Multi-criteria Filtering
@@ -114,49 +112,45 @@ export default function ExplorePage() {
       </div>
 
       {/* Search Input with Rainbow Border on Focus & Clear Button */}
-      <div className={cn("rounded-control transition-all duration-200", isSearchFocused && "rainbow-border")}>
-        <InputGroup className="bg-card rounded-control shadow-xs">
-          <InputGroupPrefix>
-            <HugeiconsIcon
-              icon={Search01Icon}
-              size={20}
-              className="text-muted-foreground"
-            />
-          </InputGroupPrefix>
-          <Input
-            type="text"
-            value={searchQuery}
-            onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
-            onChange={(e) => {
-              const val = e.target.value;
-              startTransition(() => {
-                setSearchQuery(val);
-                setCurrentPage(1);
-              });
-            }}
-            placeholder={t("discovery.searchPlaceholder")}
-            variant="ghost"
-            inputSize="lg"
-            className="w-full pl-12 pr-12 text-body"
+      <InputGroup className="bg-card">
+        <InputGroupPrefix>
+          <HugeiconsIcon
+            icon={Search01Icon}
+            size={20}
+            className="text-muted-foreground"
           />
-          {searchQuery && (
-            <InputGroupSuffix>
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchQuery("");
-                  setCurrentPage(1);
-                }}
-                aria-label="Clear search"
-                className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-              >
-                <HugeiconsIcon icon={Cancel01Icon} size={18} />
-              </button>
-            </InputGroupSuffix>
-          )}
-        </InputGroup>
-      </div>
+        </InputGroupPrefix>
+        <Input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => {
+            const val = e.target.value;
+            startTransition(() => {
+              setSearchQuery(val);
+              setCurrentPage(1);
+            });
+          }}
+          placeholder={t("discovery.searchPlaceholder")}
+          variant="ghost"
+          inputSize="lg"
+          className="w-full pl-12 pr-12 text-body"
+        />
+        {searchQuery && (
+          <InputGroupSuffix>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery("");
+                setCurrentPage(1);
+              }}
+              aria-label="Clear search"
+              className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            >
+              <HugeiconsIcon icon={Cancel01Icon} size={18} />
+            </button>
+          </InputGroupSuffix>
+        )}
+      </InputGroup>
 
       {/* Category Horizontal Pills */}
       <CategoryPills

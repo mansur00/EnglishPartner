@@ -1,15 +1,43 @@
+"use client";
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
 export interface InputGroupProps extends React.ComponentProps<"div"> {
   className?: string;
+  hasRainbowFocus?: boolean;
 }
 
-function InputGroup({ className, children, ...props }: InputGroupProps) {
+function InputGroup({
+  className,
+  children,
+  hasRainbowFocus = true,
+  onFocus,
+  onBlur,
+  ...props
+}: InputGroupProps) {
+  const [isFocused, setIsFocused] = React.useState(false);
+
   return (
     <div
       data-slot="input-group"
-      className={cn("relative flex items-center w-full min-w-0", className)}
+      onFocus={(e) => {
+        setIsFocused(true);
+        onFocus?.(e);
+      }}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setIsFocused(false);
+        }
+        onBlur?.(e);
+      }}
+      className={cn(
+        "relative flex items-center w-full min-w-0 rounded-control transition-all duration-200",
+        hasRainbowFocus && isFocused
+          ? "rainbow-border border border-transparent shadow-none"
+          : "border border-input shadow-xs",
+        className
+      )}
       {...props}
     >
       {children}

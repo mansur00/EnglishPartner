@@ -32,7 +32,6 @@ const SAMPLE_INTENTS = [
 
 export function WhatShouldISay() {
   const [intentInput, setIntentInput] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
   const [response, setResponse] = useState<SayItResponse | null>(() =>
@@ -149,42 +148,38 @@ export function WhatShouldISay() {
 
       {/* Input Group with Rainbow Border on Focus */}
       <div className="space-y-3">
-        <div className={cn("rounded-control transition-all duration-200", isFocused && "rainbow-border")}>
-          <InputGroup className="bg-card rounded-control shadow-xs">
-            <InputGroupPrefix>
-              <HugeiconsIcon icon={SparklesIcon} size={18} className="text-muted-foreground" />
-            </InputGroupPrefix>
-            <Input
-              type="text"
-              value={intentInput}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onChange={(e) => setIntentInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  handleSearch();
-                }
-              }}
-              placeholder="e.g. আমি মিটিংয়ের সময় পরিবর্তন করতে চাই..."
-              variant="ghost"
-              inputSize="lg"
-              className="w-full text-body"
-            />
-            {intentInput && (
-              <InputGroupSuffix>
-                <button
-                  type="button"
-                  onClick={() => setIntentInput("")}
-                  aria-label="Clear intent"
-                  className="p-1 rounded-control text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  <HugeiconsIcon icon={Cancel01Icon} size={16} />
-                </button>
-              </InputGroupSuffix>
-            )}
-          </InputGroup>
-        </div>
+        <InputGroup className="bg-card">
+          <InputGroupPrefix>
+            <HugeiconsIcon icon={SparklesIcon} size={18} className="text-muted-foreground" />
+          </InputGroupPrefix>
+          <Input
+            type="text"
+            value={intentInput}
+            onChange={(e) => setIntentInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSearch();
+              }
+            }}
+            placeholder="e.g. আমি মিটিংয়ের সময় পরিবর্তন করতে চাই..."
+            variant="ghost"
+            inputSize="lg"
+            className="w-full pl-10 pr-10 text-body"
+          />
+          {intentInput && (
+            <InputGroupSuffix>
+              <button
+                type="button"
+                onClick={() => setIntentInput("")}
+                aria-label="Clear intent"
+                className="p-1 rounded-control text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              >
+                <HugeiconsIcon icon={Cancel01Icon} size={16} />
+              </button>
+            </InputGroupSuffix>
+          )}
+        </InputGroup>
 
         {/* Action Button & Suggestions */}
         <div className="flex items-center justify-between gap-3 flex-wrap">

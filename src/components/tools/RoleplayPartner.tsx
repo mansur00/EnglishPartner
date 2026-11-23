@@ -773,7 +773,7 @@ export function RoleplayPartner() {
               }}
               className="flex items-center gap-2"
             >
-              <InputGroup className="flex-1">
+              <InputGroup className="flex-1 bg-card">
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
@@ -787,7 +787,8 @@ export function RoleplayPartner() {
                       : "Type your response or tap mic to speak..."
                   }
                   disabled={isLoading || messages.filter((m) => m.speaker === "learner").length >= 20}
-                  className="rounded-control text-label"
+                  variant="ghost"
+                  className="rounded-control text-label pr-24"
                 />
                 <InputGroupSuffix>
                   <Button

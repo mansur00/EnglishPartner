@@ -245,7 +245,7 @@ function VocabularyContent() {
           <div className="flex flex-col sm:flex-row gap-3">
         {/* Search Input using Design System InputGroup */}
         <div className="flex-1">
-          <InputGroup>
+          <InputGroup className="bg-card">
             <InputGroupPrefix>
               <HugeiconsIcon icon={Search01Icon} size={18} />
             </InputGroupPrefix>
@@ -254,7 +254,7 @@ function VocabularyContent() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="শব্দ বা অর্থ দিয়ে খুঁজুন (Search English or Bangla)..."
-              variant="outline"
+              variant="ghost"
               inputSize="default"
               className="pl-10 text-body"
             />
