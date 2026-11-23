@@ -1402,6 +1402,48 @@ Entry format:
 - Commit: `d0f6e14`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, single language enforcement & clean input border
+- Requested by owner:
+  - Eliminate all dual-language titles and English in parentheses after Bangla (e.g. `(Topic Title)`, `(Career Paths)`, `(Rate your recall)`).
+  - When Bangla is active, show only Bangla; when English is active, show only English.
+  - Fix input fields so on focus/active typing ONLY the 2px animated rainbow border shows, removing the extra brand/black outer border.
+- Changed:
+  - `src/styles/design-tokens.css`:
+    - Updated `:focus-visible` selector to exclude `[data-slot="input-group"]` and `.rainbow-border` from the 2px `--ecp-focus-ring` brand outline.
+    - Set explicit `outline: none !important;` on `.rainbow-border`, inputs, and input groups.
+  - `src/components/ui/input-group.tsx`:
+    - On focus, switched from `border border-transparent` to `border-0 shadow-none ring-0 outline-none rainbow-border`, preventing double stroke.
+  - `src/components/ui/input-variants.ts`:
+    - Enhanced outline variant to support `focus:rainbow-border focus:border-0 outline-none` with zero external outline ring.
+  - `src/lib/i18n/index.ts` & `src/lib/i18n/use-locale.ts`:
+    - Updated `t()` so when locale is not explicitly provided on client, it automatically resolves the active user locale from `localStorage.getItem("ecp_user_locale")` (falling back to "bn").
+    - Exported `useTranslations()`.
+  - `src/components/tools/RoleplayPartner.tsx`:
+    - Removed parenthetical English labels and placeholders in the "Create Topic" modal.
+    - Clean single-language titles, buttons, and placeholders for chat input, header, pills, and context cards.
+    - Updated `FREESTYLE_SCENARIO.titleBn` to "উন্মুক্ত কথোপকথন" (removed "(Open Chat)").
+  - `src/components/dashboard/DashboardClient.tsx`:
+    - Localized Everyday & Social English, Professional Conversations, and Start Your First Conversation cards and buttons dynamically according to `useLocale()`.
+  - `src/components/discovery/FilterBar.tsx` & `src/components/discovery/ScenarioCard.tsx`:
+    - Converted FilterBar to use `useLocale()` and dynamic translation options.
+    - Localized filter options, practice button (`t("learning.practice", locale)`), and profession badge.
+  - `src/app/(app)/professions/page.tsx` & `src/app/(app)/professions/[slug]/page.tsx`:
+    - Replaced stacked double titles with `<LocaleTitle>`, removed `(Career Paths)` and `(Key Competencies)`.
+  - `src/components/learning/ReviewQueue.tsx`:
+    - Removed parenthetical English from rating buttons and prompts.
+  - `src/app/(app)/explore/page.tsx` & `src/components/tools/WhatShouldISay.tsx`:
+    - Localized headers, subtexts, and placeholders with `<LocaleTitle>`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (110/110 static pages successfully generated in 3.1s).
+  - Puppeteer pixel verification: exactly 2px rainbow border, 0px outer ring on active inputs.
+  - Automated browser text scanner: 0 dual-language / parenthetical English instances found across all routes.
+- Commit: `b8d10da`
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
