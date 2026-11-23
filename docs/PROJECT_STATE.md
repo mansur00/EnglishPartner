@@ -1342,6 +1342,37 @@ Entry format:
 - Commit: `d51ab66`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, Single Language Titles & Elimination of Double Stacked Titles
+- Requested by owner:
+  - Eliminate redundant double titles (stacked English + Bangla titles).
+  - When Bangla language is selected, show only the Bangla title; when English is selected, show only the English title.
+  - Where learning dialogues exist (e.g. Dialogue line and its Bengali translation underneath), keep the translation for ESL learner comprehension.
+- Changed:
+  - `src/lib/i18n/use-locale.ts`: Created reactive `useLocale()` hook that reads from `localStorage` ("bn" default) and listens to custom `ecp_locale_change` events.
+  - `src/lib/i18n/index.ts`: Exported `useLocale()`.
+  - `src/components/navigation/LanguageSwitcher.tsx`: Dispatched `ecp_locale_change` event on user selection so mounted components instantly re-render in the selected language.
+  - `src/components/shared/LocaleTitle.tsx`: Created reusable `<LocaleTitle>` component rendering single title based on active locale with Bengali typography class (`font-bangla text-bangla`).
+  - `src/components/discovery/ScenarioCard.tsx`: Removed duplicate Bangla subtitle paragraph; rendered single title with `<LocaleTitle>`. Localized category tag.
+  - `src/components/dashboard/DashboardClient.tsx`: Replaced stacked hero title and subtitle with single `<LocaleTitle>`.
+  - `src/app/(app)/conversations/[slug]/page.tsx`: Replaced stacked scenario header titles with single `<LocaleTitle>`.
+  - `src/app/(app)/explore/category/[slug]/page.tsx`: Replaced duplicate category heading with `<LocaleTitle>`.
+  - `src/components/learning/NicheLadderRoadmap.tsx`: Replaced duplicate step title subtitle with `<LocaleTitle>`.
+  - `src/components/practice/DialogueOrderCard.tsx`: Replaced duplicate sequencing title with `<LocaleTitle>`.
+  - `src/components/analytics/ProgressDashboard.tsx`: Replaced duplicate recommendation titles with `<LocaleTitle>`.
+  - `src/components/learning/ReviewSummary.tsx`: Switched completion title to single line based on active locale.
+  - `src/components/tools/RoleplayPartner.tsx`: Localized scenario topic pills and context card title.
+  - `src/components/discovery/CategoryPills.tsx`: Displayed active category name based on locale (`nameBn` vs `name`).
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (110/110 static pages successfully generated in 2.2s).
+  - Chrome Puppeteer: verified screenshots of single title in Bangla (`dashboard_single_title_bn.png`, `explore_single_title_bn.png`) and in English (`dashboard_single_title_en.png`, `explore_single_title_en.png`).
+- Commit: `a8c60dc`
+- Open questions / follow-ups: None.
+
 ### 2026-11-23, AI Partner Freestyle Open Chat, 10 Curated Scenarios, and Custom Topic Creation
 - Requested by owner:
   - Default mode: Freestyle Talking (ChatGPT-style open conversation, any question or story).
