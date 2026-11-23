@@ -1342,6 +1342,35 @@ Entry format:
 - Commit: `d51ab66`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, AI Partner Freestyle Open Chat, 10 Curated Scenarios, and Custom Topic Creation
+- Requested by owner:
+  - Default mode: Freestyle Talking (ChatGPT-style open conversation, any question or story).
+  - 10 curated preset scenarios covering real-world situations with CEFR level indicators.
+  - User can create custom topics (+ Create Topic) with Title, Situation/Context, AI Role, Learner Role, and Level, persisted in `localStorage`.
+  - When in a selected scenario (preset or custom), AI strictly adheres to that topic and provides focused practice and suggestions; when in Freestyle, AI freely discusses anything.
+- Changed:
+  - `src/lib/ai/roleplay.ts`:
+    - Added `freestyle` rule at index 0 of `SCENARIO_RULES` for offline/fallback engine.
+    - Updated `generateRoleplayTurn` to recognize `freestyle` scenario_id.
+    - Updated `generateRoleplayTurnAsync` system prompt: dynamically branches between open ChatGPT-style conversation tutor and strictly scoped in-character scenario roleplay based on `isFreestyle`.
+  - `src/components/tools/RoleplayPartner.tsx`:
+    - Defined `FREESTYLE_SCENARIO` as initial default state.
+    - Expanded presets from 3 to 10 curated scenarios: Store, Cafe, Taxi, Hotel, Restaurant, Airport, Doctor, Job Interview, Office Meeting, Product Return.
+    - Integrated `Dialog` from `@/components/ui/dialog` with shadcn `Field`, `Input`, `Button`, and CEFR pills for creating custom topics.
+    - Added custom scenario persistence in `localStorage` (`ecp_custom_roleplay_scenarios`) with deletion capability.
+    - Redesigned topic selection bar with prominent Freestyle pill, 10 curated preset pills, custom topic chips, and header "+ Create Topic" button.
+    - Fixed initial mount `scrollIntoView` behavior to prevent viewport jumps on page load.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (110/110 static pages successfully generated in 3.1s).
+  - Chrome Puppeteer: verified screenshots of default Freestyle mode (`roleplay_freestyle_and_topics.png`), modal dialog (`roleplay_create_topic_modal.png`), and live custom topic creation (`roleplay_custom_topic_created.png`).
+- Commit: `d0f6e14`
+- Open questions / follow-ups: None.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
