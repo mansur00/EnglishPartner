@@ -1205,6 +1205,26 @@ Entry format:
 - Commit: `916f2f5`
 - Open questions / follow-ups: None.
 
+### 2026-11-23, Groq Live API Key Activated & Verified End-to-End
+- Requested by owner: Added Groq API key (`gsk_...`) and requested activation for live language model inference.
+- Changed:
+  - Added `GROQ_API_KEY` and `GROQ_MODEL="openai/gpt-oss-120b"` into `english-partner/.env.local`.
+  - Audited Groq account model availability: discovered `openai/gpt-oss-120b` (131k context, structured JSON mode, high-speed reasoning) is the optimal active model on this account.
+  - Updated fallback default in `src/lib/ai/llm-client.ts` to `openai/gpt-oss-120b`.
+  - Restarted Next.js dev server with fresh environment variables.
+  - Verified live inference:
+    - `GET /api/v1/ai/status` returns `{"provider":"groq","model":"openai/gpt-oss-120b","isLive":true,"statusText":"Active (GROQ · openai/gpt-oss-120b)"}`.
+    - `POST /api/v1/ai/say-it` generated live high-speed pedagogical suggestions and phrases in ~1.5s.
+    - `POST /api/v1/ai/roleplay/turn` generated live dynamic context-aware dialogue turns in <1s.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npm run lint`: Passed (0 ESLint errors; 0 token violations across rules a–i).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+- Commit: `28171d3`
+- Open questions / follow-ups: None. Live AI is fully operational.
+
 ### 2026-11-23, Language Model Integration & Full Client-Server API Connection
 - Requested by owner: "language model implement koro porperly", "kaj korcena language model".
 - Problem Diagnosed:
