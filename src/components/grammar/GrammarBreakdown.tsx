@@ -4,6 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import type { LineAnnotation } from "@/lib/grammar/types";
 import { getLabel, getRuleCard } from "@/lib/grammar/taxonomy";
+import { useLocale } from "@/lib/i18n";
 import { Badge } from "@/components/ui/badge";
 
 interface GrammarBreakdownProps {
@@ -16,9 +17,11 @@ interface GrammarBreakdownProps {
 export function GrammarBreakdown({
   annotation,
   className,
-  lang = "bn",
+  lang: propLang,
   onRuleClick,
 }: GrammarBreakdownProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const isBn = lang === "bn";
 
   return (

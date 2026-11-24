@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import type { LineAnnotation, RenderToken } from "@/lib/grammar/types";
 import { resolveRenderTokens } from "@/lib/grammar/resolve";
 import { useGrammar } from "@/lib/grammar/context";
+import { useLocale } from "@/lib/i18n";
 
 interface GrammarTextProps {
   annotation: LineAnnotation;
@@ -18,9 +19,11 @@ export function GrammarText({
   annotation,
   onTokenClick,
   className,
-  lang = "bn",
+  lang: propLang,
   isGrammarActive = true,
 }: GrammarTextProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const { activeLayers, detailLevel, showLabels, focusedKey } = useGrammar();
 
   const renderTokens = resolveRenderTokens(annotation, {

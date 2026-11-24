@@ -8,10 +8,11 @@ import {
   CheckmarkCircle02Icon,
   ArrowDown01Icon,
   Settings01Icon,
+  Search01Icon,
 } from "@hugeicons/core-free-icons";
 import {
-  LANGUAGES_REGISTRY,
-  type LanguageMeta,
+  getLanguageMeta,
+  searchGlobalLanguages,
   type TranslationLocale,
 } from "@/lib/i18n/languages";
 import { useTranslations } from "@/lib/i18n";
@@ -20,16 +21,20 @@ import { cn } from "@/lib/utils";
 
 interface TranslationOptionProps {
   code: TranslationLocale;
-  label: string;
+  nativeName: string;
+  englishName?: string;
   badge?: string;
+  isRtl?: boolean;
   isSelected: boolean;
   onSelect: (code: TranslationLocale) => void;
 }
 
 function TranslationOptionItem({
   code,
-  label,
+  nativeName,
+  englishName,
   badge,
+  isRtl,
   isSelected,
   onSelect,
 }: TranslationOptionProps) {
@@ -46,9 +51,23 @@ function TranslationOptionItem({
           : "text-foreground hover:bg-muted"
       )}
     >
-      <span className="font-heading text-label leading-none">{label}</span>
+      <div className="flex flex-col min-w-0 pr-2">
+        <span className="font-heading text-label leading-tight truncate">
+          {nativeName}
+        </span>
+        {englishName && englishName !== nativeName && (
+          <span className="text-chip text-muted-foreground truncate">
+            {englishName}
+          </span>
+        )}
+      </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5 shrink-0">
+        {isRtl && (
+          <Tag variant="outline" size="sm">
+            RTL
+          </Tag>
+        )}
         {badge && (
           <Tag variant="warning" size="sm">
             {badge}
@@ -70,30 +89,12 @@ function TranslationOptionItem({
   );
 }
 
-function PlannedLanguageItem({ lang }: { lang: LanguageMeta }) {
-  return (
-    <div className="flex w-full items-center justify-between px-3 py-2 rounded-control opacity-60 text-muted-foreground">
-      <span className="font-heading text-label leading-none">
-        {lang.nativeName}
-      </span>
-      <div className="flex items-center gap-1.5">
-        {lang.direction === "rtl" && (
-          <Tag variant="outline" size="sm">
-            RTL
-          </Tag>
-        )}
-        <Tag variant="secondary" size="sm">
-          Soon
-        </Tag>
-      </div>
-    </div>
-  );
-}
-
 export function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
-  const { translationLocale, setTranslationLocale, t } = useTranslations();
+  const [searchQuery, setSearchQuery] = useState("");
+  const { locale, translationLocale, setTranslationLocale, t } = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -110,6 +111,9 @@ export function LanguageSwitcher() {
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleKeyDown);
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+    } else {
+      setSearchQuery("");
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -124,10 +128,13 @@ export function LanguageSwitcher() {
 
   const getActiveLabel = () => {
     if (translationLocale === "none") return t("header.englishOnlySubtitle");
-    return LANGUAGES_REGISTRY[translationLocale]?.nativeName || LANGUAGES_REGISTRY.bn.nativeName;
+    return getLanguageMeta(translationLocale)?.nativeName || "বাংলা";
   };
 
-  const plannedLangs = Object.values(LANGUAGES_REGISTRY).filter((l) => l.status === "planned");
+  const filteredLanguages = searchGlobalLanguages(searchQuery).filter((l) => l.code !== "en");
+  const showNoTranslation =
+    !searchQuery.trim() ||
+    "no translation off english only".includes(searchQuery.trim().toLowerCase());
 
   return (
     <div ref={containerRef} className="relative inline-block text-left">
@@ -152,50 +159,63 @@ export function LanguageSwitcher() {
         <div
           role="menu"
           aria-orientation="vertical"
-          className="absolute right-0 mt-1.5 w-sidebar rounded-card bg-card p-2 shadow-card z-modal animate-in fade-in zoom-in-95 duration-fast"
+          className="absolute right-0 mt-1.5 w-72 rounded-card bg-card p-2 shadow-card z-modal animate-in fade-in zoom-in-95 duration-fast"
         >
-          <div className="px-3 py-1.5 mb-1 border-b border-border">
+          <div className="px-2.5 py-1.5 mb-1.5 border-b border-border">
             <p className="text-chip text-muted-foreground uppercase tracking-wide">
               {t("header.translationLanguageHeader")}
             </p>
           </div>
 
-          <div className="space-y-1">
-            <TranslationOptionItem
-              code="bn"
-              label={LANGUAGES_REGISTRY.bn.nativeName}
-              isSelected={translationLocale === "bn"}
-              onSelect={handleSelect}
-            />
-            <TranslationOptionItem
-              code="hi"
-              label={LANGUAGES_REGISTRY.hi.nativeName}
-              badge="Beta"
-              isSelected={translationLocale === "hi"}
-              onSelect={handleSelect}
-            />
-            <TranslationOptionItem
-              code="none"
-              label={t("header.noTranslation")}
-              isSelected={translationLocale === "none"}
-              onSelect={handleSelect}
-            />
+          {/* Search Input */}
+          <div className="px-1.5 pb-2">
+            <div className="relative flex items-center">
+              <HugeiconsIcon
+                icon={Search01Icon}
+                size={15}
+                className="absolute left-2.5 text-muted-foreground pointer-events-none"
+              />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={locale === "bn" ? "ভাষা খুঁজুন (যেমন: Arabic, Urdu)..." : "Search language..."}
+                className="w-full h-control-sm pl-8 pr-3 rounded-control bg-muted/60 text-chip text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+            </div>
           </div>
 
-          {plannedLangs.length > 0 && (
-            <>
-              <div className="px-3 pt-2.5 pb-1 mt-2 border-t border-border">
-                <p className="text-chip text-muted-foreground uppercase tracking-wide">
-                  Upcoming Roadmap
-                </p>
-              </div>
-              <div className="space-y-1">
-                {plannedLangs.map((lang) => (
-                  <PlannedLanguageItem key={lang.code} lang={lang} />
-                ))}
-              </div>
-            </>
-          )}
+          <div className="max-h-60 overflow-y-auto space-y-1 pr-0.5">
+            {showNoTranslation && (
+              <TranslationOptionItem
+                code="none"
+                nativeName={t("header.noTranslation")}
+                englishName={t("header.englishOnlySubtitle")}
+                isSelected={translationLocale === "none"}
+                onSelect={handleSelect}
+              />
+            )}
+
+            {filteredLanguages.map((lang) => (
+              <TranslationOptionItem
+                key={lang.code}
+                code={lang.code}
+                nativeName={lang.nativeName}
+                englishName={lang.name}
+                badge={lang.status === "beta" ? "Beta" : undefined}
+                isRtl={lang.direction === "rtl"}
+                isSelected={translationLocale === lang.code}
+                onSelect={handleSelect}
+              />
+            ))}
+
+            {filteredLanguages.length === 0 && !showNoTranslation && (
+              <p className="px-3 py-4 text-center text-chip text-muted-foreground">
+                {locale === "bn" ? "কোনো ভাষা পাওয়া যায়নি" : "No language found"}
+              </p>
+            )}
+          </div>
 
           <div className="pt-2 mt-2 border-t border-border">
             <Link

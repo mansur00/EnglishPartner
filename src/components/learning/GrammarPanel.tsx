@@ -19,7 +19,7 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
-import { useLocale } from "@/lib/i18n";
+import { useTranslations } from "@/lib/i18n";
 
 interface GrammarPanelProps {
   entry: SentenceGrammarEntry | null;
@@ -45,7 +45,7 @@ function StructureRow({ label, value, isMonospace = true }: StructureRowProps) {
 }
 
 export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
-  const locale = useLocale();
+  const { locale, translationLocale } = useTranslations();
   if (!entry) return null;
 
   return (
@@ -111,15 +111,17 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
               </div>
             </div>
 
-            {/* Why Used in Bengali */}
-            <div className="bg-primary/5 dark:bg-primary/10 p-4 rounded-panel border border-primary/15">
-              <span className="text-chip text-primary block mb-1 text-bangla">
-                কেন এই গঠনটি ব্যবহার করা হয়েছে?
-              </span>
-              <p className="text-meta text-bangla text-foreground leading-relaxed">
-                {entry.structure.whyUsedBn}
-              </p>
-            </div>
+            {/* Why Used in Translation Language */}
+            {translationLocale === "bn" && entry.structure.whyUsedBn && (
+              <div className="bg-primary/5 dark:bg-primary/10 p-4 rounded-panel border border-primary/15">
+                <span className="text-chip text-primary block mb-1 text-bangla">
+                  কেন এই গঠনটি ব্যবহার করা হয়েছে?
+                </span>
+                <p className="text-meta text-bangla text-foreground leading-relaxed">
+                  {entry.structure.whyUsedBn}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Polite Natural Alternatives */}
@@ -161,20 +163,22 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
                     className="p-3.5 rounded-panel border border-destructive/20 bg-destructive/5 space-y-2"
                   >
                     <div className="flex items-start gap-2 text-meta">
-                      <span className="text-label text-destructive shrink-0">ভুল:</span>
+                      <span className="text-label text-destructive shrink-0">{locale === "bn" ? "ভুল:" : "Mistake:"}</span>
                       <span className="line-through text-destructive italic">
                         &ldquo;{mistake.mistake}&rdquo;
                       </span>
                     </div>
                     <div className="flex items-start gap-2 text-meta">
-                      <span className="text-label text-success shrink-0">সঠিক:</span>
+                      <span className="text-label text-success shrink-0">{locale === "bn" ? "সঠিক:" : "Correct:"}</span>
                       <span className="text-foreground italic">
                         &ldquo;{mistake.correction}&rdquo;
                       </span>
                     </div>
-                    <p className="text-chip text-bangla text-muted-foreground pt-1 border-t border-destructive/10 leading-relaxed">
-                      {mistake.explanationBn}
-                    </p>
+                    {translationLocale === "bn" && mistake.explanationBn && (
+                      <p className="text-chip text-bangla text-muted-foreground pt-1 border-t border-destructive/10 leading-relaxed">
+                        {mistake.explanationBn}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

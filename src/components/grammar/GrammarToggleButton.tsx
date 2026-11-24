@@ -52,7 +52,7 @@ export function GrammarToggleButton({
           isActive ? "text-primary" : "text-muted-foreground"
         )}
       />
-      <span className="hidden sm:inline font-bangla text-bangla">
+      <span className={cn("hidden sm:inline", lang === "bn" && "font-bangla text-bangla")}>
         {label}
       </span>
     </Button>

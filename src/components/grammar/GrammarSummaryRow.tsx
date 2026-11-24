@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import type { LineAnnotation } from "@/lib/grammar/types";
 import { getLabel, getRuleCard } from "@/lib/grammar/taxonomy";
 import { useGrammar } from "@/lib/grammar/context";
+import { useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { SparklesIcon } from "@hugeicons/core-free-icons";
 
@@ -19,8 +20,11 @@ export function GrammarSummaryRow({
   annotation,
   onRuleClick,
   className,
-  lang = "bn",
+  lang: propLang,
 }: GrammarSummaryRowProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
+  const isBn = lang === "bn";
   const { focusedKey, setFocusedKey, clearFocus } = useGrammar();
 
   // Extract all distinct summary items from groups and sentence properties
@@ -116,12 +120,13 @@ export function GrammarSummaryRow({
     <div className={cn("pt-2 flex flex-wrap items-center gap-1.5", className)}>
       <span className="text-chip text-muted-foreground inline-flex items-center gap-1 mr-1">
         <HugeiconsIcon icon={SparklesIcon} size={12} className="text-primary" />
-        <span className="font-bangla text-bangla">গঠন:</span>
+        <span className={cn(isBn && "font-bangla text-bangla")}>{isBn ? "গঠন:" : "Structure:"}</span>
       </span>
 
       {summaryItems.map((item) => {
         const isFocused = focusedKey === item.key;
         const hasRule = Boolean(getRuleCard(item.key, lang));
+        const displayLabel = isBn ? item.labelBn : item.labelEn;
 
         return (
           <button
@@ -137,11 +142,11 @@ export function GrammarSummaryRow({
             )}
             title={
               hasRule
-                ? `নিয়ম ও বিস্তারিত দেখতে ক্লিক করুন: ${item.labelBn}`
-                : `ফোকাস করতে ক্লিক করুন: ${item.labelBn}`
+                ? (isBn ? `নিয়ম ও বিস্তারিত দেখতে ক্লিক করুন: ${displayLabel}` : `Click for rule details: ${displayLabel}`)
+                : (isBn ? `ফোকাস করতে ক্লিক করুন: ${displayLabel}` : `Click to focus: ${displayLabel}`)
             }
           >
-            <span className="font-bangla text-bangla">{item.labelBn}</span>
+            <span className={cn(isBn && "font-bangla text-bangla")}>{displayLabel}</span>
             {hasRule && (
               <span className="text-chip opacity-70 ml-0.5">ℹ</span>
             )}

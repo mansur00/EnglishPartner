@@ -4,8 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import {
   type SupportedLocale,
   type TranslationLocale,
-  SUPPORTED_LOCALES,
-  TRANSLATION_LOCALES,
+  isValidGlobalLanguage,
   isRtlLanguage,
 } from "./languages.ts";
 import { t as translate } from "./index.ts";
@@ -21,21 +20,21 @@ export function LocaleProvider({
   initialTranslationLocale?: TranslationLocale;
 }) {
   const [locale, setLocaleState] = useState<SupportedLocale>(() => {
-    if ((SUPPORTED_LOCALES as readonly string[]).includes(initialLocale)) {
+    if (isValidGlobalLanguage(initialLocale) && initialLocale !== "none") {
       return initialLocale;
     }
     return "bn";
   });
 
   const [translationLocale, setTranslationLocaleState] = useState<TranslationLocale>(() => {
-    if ((TRANSLATION_LOCALES as readonly string[]).includes(initialTranslationLocale)) {
+    if (isValidGlobalLanguage(initialTranslationLocale)) {
       return initialTranslationLocale;
     }
     return "bn";
   });
 
   const setLocale = useCallback((newLocale: SupportedLocale) => {
-    if (!(SUPPORTED_LOCALES as readonly string[]).includes(newLocale)) return;
+    if (!isValidGlobalLanguage(newLocale) || newLocale === "none") return;
     setLocaleState(newLocale);
 
     try {
@@ -50,7 +49,7 @@ export function LocaleProvider({
   }, []);
 
   const setTranslationLocale = useCallback((newTrans: TranslationLocale) => {
-    if (!(TRANSLATION_LOCALES as readonly string[]).includes(newTrans)) return;
+    if (!isValidGlobalLanguage(newTrans)) return;
     setTranslationLocaleState(newTrans);
 
     try {
@@ -66,7 +65,7 @@ export function LocaleProvider({
   useEffect(() => {
     try {
       const savedLocale = localStorage.getItem("ecp_user_locale") as SupportedLocale | null;
-      if (savedLocale && (SUPPORTED_LOCALES as readonly string[]).includes(savedLocale) && savedLocale !== locale) {
+      if (savedLocale && isValidGlobalLanguage(savedLocale) && savedLocale !== "none" && savedLocale !== locale) {
         setLocaleState(savedLocale);
         document.cookie = `ecp_user_locale=${savedLocale}; path=/; max-age=31536000; SameSite=Lax`;
         document.documentElement.lang = savedLocale;
@@ -74,7 +73,7 @@ export function LocaleProvider({
       }
 
       const savedTrans = localStorage.getItem("ecp_translation_locale") as TranslationLocale | null;
-      if (savedTrans && (TRANSLATION_LOCALES as readonly string[]).includes(savedTrans) && savedTrans !== translationLocale) {
+      if (savedTrans && isValidGlobalLanguage(savedTrans) && savedTrans !== translationLocale) {
         setTranslationLocaleState(savedTrans);
         document.cookie = `ecp_translation_locale=${savedTrans}; path=/; max-age=31536000; SameSite=Lax`;
       }
@@ -86,7 +85,8 @@ export function LocaleProvider({
       const customEvent = e as CustomEvent<SupportedLocale>;
       if (
         customEvent.detail &&
-        (SUPPORTED_LOCALES as readonly string[]).includes(customEvent.detail)
+        isValidGlobalLanguage(customEvent.detail) &&
+        customEvent.detail !== "none"
       ) {
         setLocaleState(customEvent.detail);
       }
@@ -96,7 +96,7 @@ export function LocaleProvider({
       const customEvent = e as CustomEvent<TranslationLocale>;
       if (
         customEvent.detail &&
-        (TRANSLATION_LOCALES as readonly string[]).includes(customEvent.detail)
+        isValidGlobalLanguage(customEvent.detail)
       ) {
         setTranslationLocaleState(customEvent.detail);
       }

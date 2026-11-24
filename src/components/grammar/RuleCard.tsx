@@ -2,6 +2,7 @@
 
 import React from "react";
 import { getRuleCard, getLabel } from "@/lib/grammar/taxonomy";
+import { useLocale } from "@/lib/i18n";
 import {
   Dialog,
   DialogContent,
@@ -23,8 +24,10 @@ export function RuleCardDialog({
   ruleKey,
   isOpen,
   onClose,
-  lang = "bn",
+  lang: propLang,
 }: RuleCardDialogProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   if (!ruleKey) return null;
 
   const rule = getRuleCard(ruleKey, lang);

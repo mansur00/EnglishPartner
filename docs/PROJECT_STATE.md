@@ -1659,6 +1659,27 @@ Entry format:
   - `npm run build`: 112/112 routes compiled cleanly in Next.js 16.4.6 Turbopack.
   - Puppeteer visual captures (`twotier_settings_en_bn.png`, `twotier_header_dropdown.png`, `twotier_dashboard_en_bn.png`, `twotier_dashboard_en_none.png`) verified.
 
+### 2026-11-25, Global Searchable Language Model & Grammar Leak Elimination
+- **Requested by Owner:** Eliminate remaining hardcoded Bengali strings in Grammar components and make the language selector global and searchable so any language can be searched and selected.
+- **Changes Delivered:**
+  - `src/lib/i18n/languages.ts` & `src/lib/i18n/provider.tsx`:
+    - Added `GLOBAL_LANGUAGES` catalog with 24+ world languages (EN, BN, HI, UR, AR, ES, FR, DE, PT, TR, ID, MS, JA, KO, ZH, RU, IT, TH, VI, FA, TA, TE, MR, PA) with script and RTL/LTR direction metadata.
+    - Added `searchGlobalLanguages(query)` and `isValidGlobalLanguage(code)`.
+    - Updated `LocaleProvider` to accept any registered global language code with graceful English fallback in `t()` when a dedicated JSON dictionary is not yet authored.
+  - `src/components/navigation/LanguageSwitcher.tsx` & `src/components/settings/SettingsClient.tsx`:
+    - Added live search inputs to Header `LanguageSwitcher` (Translation Language) and Settings (both System Language and Translation Language).
+  - Grammar & Learning Leak Cleanup:
+    - Fixed `GrammarSummaryRow.tsx`: removed hardcoded `গঠন:`, hardcoded Bengali tooltips, and `lang = "bn"` default; now reads `useLocale()` and renders `Structure:` and English labels in English mode.
+    - Fixed `GrammarText.tsx`, `GrammarBreakdown.tsx`, `RuleCard.tsx`, `GrammarToggleButton.tsx`: now read `useLocale()` dynamically instead of defaulting to `"bn"`.
+    - Fixed `GrammarPanel.tsx`: localized `ভুল:` / `সঠিক:` (`Mistake:` / `Correct:`) and conditioned `whyUsedBn` / `explanationBn` on `translationLocale === "bn"`.
+- **Verification:**
+  - `npm run check:frozen`: Byte-identical to `db71d3c`.
+  - `npm run lint:ui`: Passed strictly.
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm test`: 209/209 passed across 41 suites.
+  - `npm run build`: 112/112 routes compiled cleanly in Next.js 16.4.6 Turbopack.
+  - Puppeteer visual captures (`global_grammar_en.png`, `global_settings_search.png`, `global_header_search.png`) verified.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

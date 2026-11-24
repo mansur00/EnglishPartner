@@ -31,9 +31,15 @@ import {
   CheckmarkCircle02Icon,
   Bookmark02Icon,
   TaskDone01Icon,
+  Search01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
-import type { SupportedLocale, TranslationLocale } from "@/lib/i18n/languages";
+import {
+  getLanguageMeta,
+  searchGlobalLanguages,
+  type SupportedLocale,
+  type TranslationLocale,
+} from "@/lib/i18n/languages";
 
 export function SettingsClient() {
   const { locale, setLocale, translationLocale, setTranslationLocale, t } = useTranslations();
@@ -53,6 +59,8 @@ export function SettingsClient() {
   // Dialog & Notification
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [showResetSuccess, setShowResetSuccess] = useState(false);
+  const [sysLangSearch, setSysLangSearch] = useState("");
+  const [transLangSearch, setTransLangSearch] = useState("");
 
   // Read saved settings from localStorage on mount
   useEffect(() => {
@@ -205,104 +213,139 @@ export function SettingsClient() {
 
         <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
           {/* Option 1: System Language (App Interface) */}
-          <div className="space-y-2.5">
-            <div className="space-y-1">
-              <label className="block font-heading text-label text-foreground">
-                {t("settings.systemLanguage")}
-              </label>
-              <p className="text-meta text-muted-foreground">
-                {t("settings.systemLanguageDesc")}
-              </p>
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="space-y-1">
+                <label className="block font-heading text-label text-foreground">
+                  {t("settings.systemLanguage")}
+                </label>
+                <p className="text-meta text-muted-foreground">
+                  {t("settings.systemLanguageDesc")}
+                </p>
+              </div>
+              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium">
+                {getLanguageMeta(locale)?.nativeName || locale.toUpperCase()}
+              </span>
             </div>
-            <div className="grid grid-cols-3 gap-2.5 max-w-md">
-              <button
-                type="button"
-                onClick={() => handleLocaleChange("bn")}
-                className={cn(
-                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
-                  locale === "bn"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
-              >
-                বাংলা
-              </button>
-              <button
-                type="button"
-                onClick={() => handleLocaleChange("en")}
-                className={cn(
-                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
-                  locale === "en"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
-              >
-                English
-              </button>
-              <button
-                type="button"
-                onClick={() => handleLocaleChange("hi")}
-                className={cn(
-                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
-                  locale === "hi"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
-              >
-                हिन्दी
-              </button>
+
+            <div className="relative max-w-md">
+              <HugeiconsIcon
+                icon={Search01Icon}
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+              />
+              <input
+                type="text"
+                value={sysLangSearch}
+                onChange={(e) => setSysLangSearch(e.target.value)}
+                placeholder={locale === "bn" ? "যেকোনো ভাষা খুঁজুন (যেমন: English, Arabic, Hindi)..." : "Search any language (e.g. English, Bengali, Arabic)..."}
+                className="w-full h-control-sm pl-9 pr-3 rounded-control bg-muted/60 text-chip text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 max-h-44 overflow-y-auto p-1">
+              {searchGlobalLanguages(sysLangSearch).map((lang) => {
+                const isSelected = locale === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => handleLocaleChange(lang.code)}
+                    className={cn(
+                      "inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer",
+                      isSelected
+                        ? "bg-primary text-primary-foreground shadow-xs"
+                        : "bg-muted/70 text-foreground hover:bg-muted"
+                    )}
+                  >
+                    <span>{lang.nativeName}</span>
+                    {lang.name !== lang.nativeName && (
+                      <span className={cn("opacity-75", isSelected ? "text-primary-foreground" : "text-muted-foreground")}>
+                        {lang.name}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           <div className="h-px bg-border" />
 
           {/* Option 2: Translation Language (Words & Sentences) */}
-          <div className="space-y-2.5">
-            <div className="space-y-1">
-              <label className="block font-heading text-label text-foreground">
-                {t("settings.translationLanguage")}
-              </label>
-              <p className="text-meta text-muted-foreground max-w-lg">
-                {t("settings.translationLanguageDesc")}
-              </p>
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="space-y-1">
+                <label className="block font-heading text-label text-foreground">
+                  {t("settings.translationLanguage")}
+                </label>
+                <p className="text-meta text-muted-foreground max-w-lg">
+                  {t("settings.translationLanguageDesc")}
+                </p>
+              </div>
+              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium">
+                {translationLocale === "none"
+                  ? t("settings.noTranslationOption")
+                  : (getLanguageMeta(translationLocale)?.nativeName || translationLocale.toUpperCase())}
+              </span>
             </div>
-            <div className="grid grid-cols-3 gap-2.5 max-w-lg">
-              <button
-                type="button"
-                onClick={() => handleTranslationLocaleChange("bn")}
-                className={cn(
-                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
-                  translationLocale === "bn"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
-              >
-                বাংলা
-              </button>
-              <button
-                type="button"
-                onClick={() => handleTranslationLocaleChange("hi")}
-                className={cn(
-                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
-                  translationLocale === "hi"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
-              >
-                हिन्दी
-              </button>
-              <button
-                type="button"
-                onClick={() => handleTranslationLocaleChange("none")}
-                className={cn(
-                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
-                  translationLocale === "none"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
-              >
-                {t("settings.noTranslationOption")}
-              </button>
+
+            <div className="relative max-w-md">
+              <HugeiconsIcon
+                icon={Search01Icon}
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+              />
+              <input
+                type="text"
+                value={transLangSearch}
+                onChange={(e) => setTransLangSearch(e.target.value)}
+                placeholder={locale === "bn" ? "অনুবাদের ভাষা খুঁজুন (যেমন: Bengali, Hindi, Urdu)..." : "Search translation language..."}
+                className="w-full h-control-sm pl-9 pr-3 rounded-control bg-muted/60 text-chip text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 max-h-44 overflow-y-auto p-1">
+              {(!transLangSearch.trim() || "off english only none no translation".includes(transLangSearch.trim().toLowerCase())) && (
+                <button
+                  type="button"
+                  onClick={() => handleTranslationLocaleChange("none")}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer",
+                    translationLocale === "none"
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "bg-muted/70 text-foreground hover:bg-muted"
+                  )}
+                >
+                  {t("settings.noTranslationOption")}
+                </button>
+              )}
+
+              {searchGlobalLanguages(transLangSearch)
+                .filter((l) => l.code !== "en")
+                .map((lang) => {
+                  const isSelected = translationLocale === lang.code;
+                  return (
+                    <button
+                      key={lang.code}
+                      type="button"
+                      onClick={() => handleTranslationLocaleChange(lang.code)}
+                      className={cn(
+                        "inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer",
+                        isSelected
+                          ? "bg-primary text-primary-foreground shadow-xs"
+                          : "bg-muted/70 text-foreground hover:bg-muted"
+                      )}
+                    >
+                      <span>{lang.nativeName}</span>
+                      {lang.name !== lang.nativeName && (
+                        <span className={cn("opacity-75", isSelected ? "text-primary-foreground" : "text-muted-foreground")}>
+                          {lang.name}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
             </div>
           </div>
         </Card>
