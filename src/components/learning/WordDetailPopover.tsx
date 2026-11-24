@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import { t, useTranslations, useLiveTranslations } from "@/lib/i18n";
 import { isRtlLanguage } from "@/lib/i18n/languages";
@@ -86,16 +87,11 @@ export function WordDetailPopover({
   if (!entry) return null;
 
   const playPronunciation = () => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      setIsPlayingAudio(true);
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(entry.word);
-      utterance.lang = "en-US";
-      utterance.rate = 0.85;
-      utterance.onend = () => setIsPlayingAudio(false);
-      utterance.onerror = () => setIsPlayingAudio(false);
-      window.speechSynthesis.speak(utterance);
-    }
+    setIsPlayingAudio(true);
+    speakText(entry.word, {
+      onEnd: () => setIsPlayingAudio(false),
+      onError: () => setIsPlayingAudio(false),
+    });
   };
 
   const posBadgeVariant = (pos: VocabularyEntry["partOfSpeech"]): "brand" | "neutral" | "accent" | "peach" => {

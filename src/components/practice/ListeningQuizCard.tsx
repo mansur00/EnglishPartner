@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { speakText, stopSpeech } from "@/lib/audio/speech-engine";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -48,28 +49,20 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
   const playPromptAudio = useCallback(
     (text?: string, slowOverride?: boolean) => {
       if (!text) return;
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "en-US";
-        const useSlow = slowOverride !== undefined ? slowOverride : isSlowAudio;
-        utterance.rate = useSlow ? 0.75 : 0.95;
-
-        setIsPlayingAudio(true);
-        utterance.onend = () => setIsPlayingAudio(false);
-        utterance.onerror = () => setIsPlayingAudio(false);
-
-        window.speechSynthesis.speak(utterance);
-      }
+      const useSlow = slowOverride !== undefined ? slowOverride : isSlowAudio;
+      setIsPlayingAudio(true);
+      speakText(text, {
+        rate: useSlow ? 0.75 : undefined,
+        onEnd: () => setIsPlayingAudio(false),
+        onError: () => setIsPlayingAudio(false),
+      });
     },
     [isSlowAudio]
   );
 
   const stopAudio = useCallback(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      setIsPlayingAudio(false);
-    }
+    stopSpeech();
+    setIsPlayingAudio(false);
   }, []);
 
   const handleSelectOption = useCallback(

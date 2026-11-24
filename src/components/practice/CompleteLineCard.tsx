@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { speakText } from "@/lib/audio/speech-engine";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   CheckmarkCircle01Icon,
@@ -33,13 +34,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
   const blank = currentItem?.blanks[0];
 
   const playSentenceAudio = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(text);
   };
 
   const handleSelectWord = (word: string) => {

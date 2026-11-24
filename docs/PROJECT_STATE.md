@@ -1744,6 +1744,15 @@ Entry format:
 - **Follow-up CI Python Venv Fix:** CI run on `6db1965` failed at `npm test` because `tests/grammar-tenses.test.mjs` unconditionally invoked gitignored `services/nlp/.venv/bin/python`. Updated `tests/grammar-tenses.test.mjs` to skip gracefully when `services/nlp/.venv/bin/python` is absent in CI (while still running all tense tests locally).
 - **Follow-up CI `.env.example` Fix:** Reproduced clean CI checkout locally via `git archive` and caught the exact remaining test failure: `tests/schema-invariants.test.mjs` asserts `.env.example` exists, which was ignored by `.env*` in `.gitignore`. Added `!.env.example` to `.gitignore` and tracked `.env.example`.
 
+### 2026-11-25, Global Audio & Voice Model (Gender + 4 Tones + System-Wide Speech Engine)
+- **Global Voice Model & Engine:**
+  - `src/lib/audio/voice-model.ts`: Created extensible, non-hardcoded registries `VOICE_ACCENTS` (`us`, `uk`, `global`), `VOICE_GENDERS` (`auto`, `female`, `male`), and `VOICE_TONES` (`natural`, `warm`, `expressive`, `professional`), plus `resolveSpeechParams()` and `inferVoiceGender()`.
+  - `src/lib/audio/speech-engine.ts`: Created centralized Web Speech synthesis engine (`getAudioPreferences`, `saveAudioPreferences`, `speakText`, `stopSpeech`, `previewVoiceSettings`) respecting Accent, Gender, Tone, and Speed across the entire app.
+- **Settings UI & i18n:**
+  - `src/components/settings/SettingsClient.tsx` & `messages/{en,bn,hi}.json`: Added Voice Gender selector, 4-option Voice Tone selector, and live "Preview Voice" button driven dynamically from `VOICE_ACCENTS`, `VOICE_GENDERS`, and `VOICE_TONES`.
+- **System-Wide Wiring:** Replaced all 14 raw `SpeechSynthesisUtterance` call sites (`AudioPlayer`, `AudioPlayButton`, `WordDetailPopover`, `ReviewQueue`, `ReviewSummary`, `WhatShouldISay`, `RoleplayPartner`, `vocabulary/page`, `CompleteLineCard`, `ListeningQuizCard`, `DialogueOrderCard`, `HideSpeakerPractice`, `ReadAloudCard`, `SentenceBuilderCard`) with `speakText` / `stopSpeech`.
+- **Tests:** Added `tests/voice-model.test.mjs` verifying registries, gender inference, fallback pitch offsets, and zero raw `SpeechSynthesisUtterance` leaks outside `speech-engine.ts`.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

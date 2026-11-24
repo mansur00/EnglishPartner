@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -108,18 +109,11 @@ export function WhatShouldISay() {
   };
 
   const handlePlayAudio = (text: string, index: number) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.95;
-      setPlayingIndex(index);
-
-      utterance.onend = () => setPlayingIndex(null);
-      utterance.onerror = () => setPlayingIndex(null);
-
-      window.speechSynthesis.speak(utterance);
-    }
+    setPlayingIndex(index);
+    speakText(text, {
+      onEnd: () => setPlayingIndex(null),
+      onError: () => setPlayingIndex(null),
+    });
   };
 
   const getToneBadge = (tone: ToneType) => {

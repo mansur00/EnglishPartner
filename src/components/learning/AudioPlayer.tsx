@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { speakText, stopSpeech } from "@/lib/audio/speech-engine";
 import { t, useLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
@@ -75,13 +76,10 @@ export function AudioPlayer({
       onActiveLineChange(index);
 
       const targetLine = lines[index];
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(targetLine.englishText);
-        utterance.lang = accent;
-        utterance.rate = playbackSpeed;
-
-        utterance.onend = () => {
+      speakText(targetLine.englishText, {
+        lang: accent,
+        rate: playbackSpeed,
+        onEnd: () => {
           if (isPlayingRef.current) {
             setTimeout(() => {
               if (isPlayingRef.current) {
@@ -89,15 +87,12 @@ export function AudioPlayer({
               }
             }, 600);
           }
-        };
-
-        utterance.onerror = () => {
+        },
+        onError: () => {
           setIsPlaying(false);
           isPlayingRef.current = false;
-        };
-
-        window.speechSynthesis.speak(utterance);
-      }
+        },
+      });
     },
     [lines, accent, playbackSpeed, onActiveLineChange]
   );
@@ -108,9 +103,7 @@ export function AudioPlayer({
 
   const seekToLine = (index: number) => {
     if (index < 0 || index >= lines.length) return;
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
+    stopSpeech();
     setIsCompleted(false);
     setLastSelectedIdx(index);
     onActiveLineChange(index);
@@ -156,9 +149,7 @@ export function AudioPlayer({
 
   const handleTogglePlay = () => {
     if (isPlaying) {
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopSpeech();
       setIsPlaying(false);
       isPlayingRef.current = false;
     } else {
@@ -170,9 +161,7 @@ export function AudioPlayer({
   };
 
   const handleReplay = () => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
+    stopSpeech();
     setIsPlaying(true);
     isPlayingRef.current = true;
     setIsCompleted(false);
@@ -189,9 +178,7 @@ export function AudioPlayer({
   useEffect(() => {
     return () => {
       isPlayingRef.current = false;
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopSpeech();
     };
   }, []);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { speakText, stopSpeech } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import { t, useLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
@@ -49,9 +50,7 @@ export function AudioPlayButton({
         audioRef.current.pause();
         audioRef.current = null;
       }
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopSpeech();
     };
   }, []);
 
@@ -64,9 +63,7 @@ export function AudioPlayButton({
       if (audioRef.current) {
         audioRef.current.pause();
       }
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopSpeech();
       setPlayingState(false);
       return;
     }
@@ -83,21 +80,13 @@ export function AudioPlayButton({
       return;
     }
 
-    // 2. Client SpeechSynthesis Fallback (Natural audio preview)
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      utterance.lang = accent === "en-GB" ? "en-GB" : "en-US";
-      utterance.rate = 0.95; // Clear natural learning pace
-
-      utterance.onend = () => setPlayingState(false);
-      utterance.onerror = () => setPlayingState(false);
-
-      setPlayingState(true);
-      window.speechSynthesis.speak(utterance);
-    } else {
-      setPlayingState(false);
-    }
+    // 2. Global Speech Engine (uses user Accent, Gender, Tone & Speed)
+    setPlayingState(true);
+    speakText(textToSpeak, {
+      lang: accent === "en-GB" ? "en-GB" : undefined,
+      onEnd: () => setPlayingState(false),
+      onError: () => setPlayingState(false),
+    });
   };
 
   if (!isAvailable) {

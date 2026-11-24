@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
+import { speakText } from "@/lib/audio/speech-engine";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   CheckmarkCircle01Icon,
@@ -155,13 +156,7 @@ function SentenceBuilderQuestionView({
   }, [placedChunks, currentItem]);
 
   const handleSpeak = useCallback((text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(text);
   }, []);
 
   const allChunksPlaced = placedChunks.length === availableChunks.length && availableChunks.length > 0;

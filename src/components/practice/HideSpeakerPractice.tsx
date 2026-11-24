@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { speakText } from "@/lib/audio/speech-engine";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -39,13 +40,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
   const isLearnerTurn = currentLine ? isLearnerLine(currentLine, learnerSpeakerId) : false;
 
   const playLineAudio = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(text);
   };
 
   const handleNextTurn = () => {

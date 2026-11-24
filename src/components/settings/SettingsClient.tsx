@@ -39,6 +39,21 @@ import {
   type SupportedLocale,
   type TranslationLocale,
 } from "@/lib/i18n/languages";
+import {
+  VOICE_ACCENTS,
+  VOICE_GENDERS,
+  VOICE_TONES,
+  parseSpeedValue,
+  type VoiceAccentId,
+  type VoiceGenderId,
+  type VoiceToneId,
+} from "@/lib/audio/voice-model";
+import {
+  getAudioPreferences,
+  previewVoiceSettings,
+  saveAudioPreferences,
+  stopSpeech,
+} from "@/lib/audio/speech-engine";
 
 export function SettingsClient() {
   const { locale, setLocale, translationLocale, setTranslationLocale, t } = useTranslations();
@@ -47,7 +62,10 @@ export function SettingsClient() {
   // Settings State
   const [audioSpeed, setAudioSpeed] = useState("1.0x");
   const [autoPlayAudio, setAutoPlayAudio] = useState(true);
-  const [voiceAccent, setVoiceAccent] = useState("us");
+  const [voiceAccent, setVoiceAccent] = useState<VoiceAccentId>("us");
+  const [voiceGender, setVoiceGender] = useState<VoiceGenderId>("auto");
+  const [voiceTone, setVoiceTone] = useState<VoiceToneId>("natural");
+  const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
   const [dailyGoalMins, setDailyGoalMins] = useState(15);
   const [targetLevel, setTargetLevel] = useState("A1");
 
@@ -65,14 +83,12 @@ export function SettingsClient() {
   useEffect(() => {
     queueMicrotask(() => {
       try {
-        const storedSpeed = localStorage.getItem("ecp_audio_speed");
-        if (storedSpeed) setAudioSpeed(storedSpeed);
-
-        const storedAutoPlay = localStorage.getItem("ecp_autoplay_audio");
-        if (storedAutoPlay !== null) setAutoPlayAudio(storedAutoPlay === "true");
-
-        const storedAccent = localStorage.getItem("ecp_voice_accent");
-        if (storedAccent) setVoiceAccent(storedAccent);
+        const audioPrefs = getAudioPreferences();
+        setAudioSpeed(`${audioPrefs.speed}x`);
+        setAutoPlayAudio(audioPrefs.autoPlay);
+        setVoiceAccent(audioPrefs.accent);
+        setVoiceGender(audioPrefs.gender);
+        setVoiceTone(audioPrefs.tone);
 
         const storedGoal = localStorage.getItem("ecp_daily_goal_mins");
         if (storedGoal) setDailyGoalMins(parseInt(storedGoal, 10));
@@ -109,17 +125,48 @@ export function SettingsClient() {
 
   const handleAudioSpeedChange = (speed: string) => {
     setAudioSpeed(speed);
-    localStorage.setItem("ecp_audio_speed", speed);
+    saveAudioPreferences({ speed: parseSpeedValue(speed) });
   };
 
   const handleAutoPlayChange = (checked: boolean) => {
     setAutoPlayAudio(checked);
-    localStorage.setItem("ecp_autoplay_audio", checked.toString());
+    saveAudioPreferences({ autoPlay: checked });
   };
 
-  const handleVoiceAccentChange = (accent: string) => {
+  const handleVoiceAccentChange = (accent: VoiceAccentId) => {
     setVoiceAccent(accent);
-    localStorage.setItem("ecp_voice_accent", accent);
+    saveAudioPreferences({ accent });
+  };
+
+  const handleVoiceGenderChange = (gender: VoiceGenderId) => {
+    setVoiceGender(gender);
+    saveAudioPreferences({ gender });
+  };
+
+  const handleVoiceToneChange = (tone: VoiceToneId) => {
+    setVoiceTone(tone);
+    saveAudioPreferences({ tone });
+  };
+
+  const handlePreviewVoice = () => {
+    if (isPreviewPlaying) {
+      stopSpeech();
+      setIsPreviewPlaying(false);
+      return;
+    }
+    previewVoiceSettings(
+      {
+        accent: voiceAccent,
+        gender: voiceGender,
+        tone: voiceTone,
+        speed: parseSpeedValue(audioSpeed),
+      },
+      {
+        onStart: () => setIsPreviewPlaying(true),
+        onEnd: () => setIsPreviewPlaying(false),
+        onError: () => setIsPreviewPlaying(false),
+      }
+    );
   };
 
   const handleDailyGoalChange = (mins: number) => {
@@ -415,11 +462,7 @@ export function SettingsClient() {
               {t("settings.voiceAccent", locale)}
             </label>
             <div className="grid grid-cols-3 gap-2.5 max-w-md">
-              {[
-                { id: "us", labelBn: "মার্কিন ইংরেজি", labelEn: "US English" },
-                { id: "uk", labelBn: "ব্রিটিশ ইংরেজি", labelEn: "UK English" },
-                { id: "global", labelBn: "আন্তর্জাতিক", labelEn: "Global" },
-              ].map((acc) => (
+              {VOICE_ACCENTS.map((acc) => (
                 <button
                   key={acc.id}
                   type="button"
@@ -431,7 +474,88 @@ export function SettingsClient() {
                       : "bg-muted/70 text-foreground hover:bg-muted"
                   )}
                 >
-                  {locale === "bn" ? acc.labelBn : acc.labelEn}
+                  {acc.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px bg-border" />
+
+          {/* Voice Gender */}
+          <div className="space-y-2.5">
+            <div>
+              <label className="block font-heading text-label text-foreground">
+                {t("settings.voiceGender", locale)}
+              </label>
+              <p className="text-meta text-muted-foreground mt-0.5">
+                {t("settings.voiceGenderDesc", locale)}
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-2.5 max-w-md">
+              {VOICE_GENDERS.map((g) => (
+                <button
+                  key={g.id}
+                  type="button"
+                  onClick={() => handleVoiceGenderChange(g.id)}
+                  className={cn(
+                    "h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer",
+                    voiceGender === g.id
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "bg-muted/70 text-foreground hover:bg-muted"
+                  )}
+                >
+                  {g.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px bg-border" />
+
+          {/* Voice Tone */}
+          <div className="space-y-2.5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <label className="block font-heading text-label text-foreground">
+                  {t("settings.voiceTone", locale)}
+                </label>
+                <p className="text-meta text-muted-foreground mt-0.5">
+                  {t("settings.voiceToneDesc", locale)}
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handlePreviewVoice}
+                className="gap-1.5"
+              >
+                <HugeiconsIcon icon={VolumeHighIcon} size={15} />
+                {isPreviewPlaying
+                  ? t("settings.stopPreview", locale)
+                  : t("settings.previewVoice", locale)}
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {VOICE_TONES.map((tone) => (
+                <button
+                  key={tone.id}
+                  type="button"
+                  onClick={() => handleVoiceToneChange(tone.id)}
+                  className={cn(
+                    "p-3 rounded-control text-left transition-all cursor-pointer border",
+                    voiceTone === tone.id
+                      ? "bg-primary/10 border-primary text-foreground shadow-xs"
+                      : "bg-muted/50 border-transparent text-foreground hover:bg-muted"
+                  )}
+                >
+                  <div className="font-heading text-label font-semibold">
+                    {tone.label}
+                  </div>
+                  <div className="text-meta text-muted-foreground mt-0.5">
+                    {tone.description}
+                  </div>
                 </button>
               ))}
             </div>

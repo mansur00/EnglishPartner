@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import { speakText, stopSpeech } from "@/lib/audio/speech-engine";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -96,51 +97,38 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopSpeech();
     };
   }, [recordedAudioUrl]);
 
-  // Model audio playback via Web Speech API with configurable rate
+  // Model audio playback via global speech engine
   const handlePlayModel = useCallback(
-    (rate = 0.85) => {
-      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(currentItem.targetSentence);
-      utterance.lang = "en-US";
-      utterance.rate = rate;
-
-      if (rate < 0.8) {
-        utterance.onstart = () => setIsPlayingSlowModel(true);
-        utterance.onend = () => setIsPlayingSlowModel(false);
-        utterance.onerror = () => setIsPlayingSlowModel(false);
+    (rate?: number) => {
+      const isSlow = rate !== undefined && rate < 0.8;
+      if (isSlow) {
+        setIsPlayingSlowModel(true);
       } else {
-        utterance.onstart = () => setIsPlayingModel(true);
-        utterance.onend = () => setIsPlayingModel(false);
-        utterance.onerror = () => setIsPlayingModel(false);
+        setIsPlayingModel(true);
       }
 
-      window.speechSynthesis.speak(utterance);
+      speakText(currentItem.targetSentence, {
+        rate,
+        onStart: () => (isSlow ? setIsPlayingSlowModel(true) : setIsPlayingModel(true)),
+        onEnd: () => (isSlow ? setIsPlayingSlowModel(false) : setIsPlayingModel(false)),
+        onError: () => (isSlow ? setIsPlayingSlowModel(false) : setIsPlayingModel(false)),
+      });
     },
     [currentItem.targetSentence]
   );
 
   // Isolated slow word playback
   const handlePlayWord = useCallback((word: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = "en-US";
-    utterance.rate = 0.7;
-
     setPlayingWord(word);
-    utterance.onend = () => setPlayingWord(null);
-    utterance.onerror = () => setPlayingWord(null);
-
-    window.speechSynthesis.speak(utterance);
+    speakText(word, {
+      rate: 0.75,
+      onEnd: () => setPlayingWord(null),
+      onError: () => setPlayingWord(null),
+    });
   }, []);
 
   // Start recording

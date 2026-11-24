@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { speakText, stopSpeech } from "@/lib/audio/speech-engine";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   BotIcon,
@@ -365,51 +366,40 @@ export function RoleplayPartner() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
 
-  // Play audio helper with configurable speed
+  // Play audio helper with configurable speed + global voice model
   const playAudio = useCallback(
     (text: string, index?: number, onFinish?: () => void) => {
-      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = getVoiceSpeedRate(voiceSpeed);
-
       if (index !== undefined) {
         setPlayingIndex(index);
       }
       setIsAiSpeaking(true);
 
-      utterance.onend = () => {
-        setIsAiSpeaking(false);
-        if (index !== undefined) setPlayingIndex(null);
-        if (onFinish) onFinish();
-      };
-
-      utterance.onerror = () => {
-        setIsAiSpeaking(false);
-        if (index !== undefined) setPlayingIndex(null);
-      };
-
-      window.speechSynthesis.speak(utterance);
+      speakText(text, {
+        rate: getVoiceSpeedRate(voiceSpeed),
+        onEnd: () => {
+          setIsAiSpeaking(false);
+          if (index !== undefined) setPlayingIndex(null);
+          if (onFinish) onFinish();
+        },
+        onError: () => {
+          setIsAiSpeaking(false);
+          if (index !== undefined) setPlayingIndex(null);
+        },
+      });
     },
     [voiceSpeed]
   );
 
   const stopAudio = useCallback(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      setPlayingIndex(null);
-      setIsAiSpeaking(false);
-    }
+    stopSpeech();
+    setPlayingIndex(null);
+    setIsAiSpeaking(false);
   }, []);
 
   // Cleanup speech synthesis on unmount
   useEffect(() => {
     return () => {
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopSpeech();
     };
   }, []);
 

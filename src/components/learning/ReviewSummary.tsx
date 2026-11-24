@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { speakText } from "@/lib/audio/speech-engine";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -44,13 +45,7 @@ export function ReviewSummary({
   const { locale, t } = useTranslations();
 
   const playWord = (word: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = "en-US";
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
-    }
+    speakText(word);
   };
 
   return (
