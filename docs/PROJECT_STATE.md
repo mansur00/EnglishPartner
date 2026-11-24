@@ -277,7 +277,7 @@ Entry format:
   - `npx tsc --noEmit`: Passed (0 TypeScript errors).
   - `npm test`: Passed (209/209 unit tests passing across 41 suites).
   - `npm run build`: Passed (112/112 static pages generated, 0 warnings).
-- Commit: pending
+- Commit: `a443197`
 - Open questions / follow-ups: none.
 
 ### 2026-11-24, Elimination of Dual Language Titles & Strict Single-Language Enforcement
