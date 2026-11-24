@@ -21,7 +21,8 @@ import { Pill } from "@/components/ui/pill";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageContainer } from "@/components/shared/PageContainer";
 import { LocaleTitle } from "@/components/shared/LocaleTitle";
-import { useTranslations } from "@/lib/i18n";
+import { useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { getDueReviewItems } from "@/lib/srs/sm2";
@@ -125,6 +126,24 @@ function VocabularyContent() {
       return matchesSearch && matchesPos;
     });
   }, [allEntries, searchQuery, selectedPos]);
+
+  const needsLiveVocab = translationLocale !== "none" && translationLocale !== "bn";
+  const vocabTextsToTranslate = useMemo(() => {
+    if (!needsLiveVocab) return [];
+    const list: string[] = [];
+    for (const item of filteredEntries) {
+      if (item.contextualMeaningEn) list.push(item.contextualMeaningEn);
+      if (item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn) {
+        list.push(item.generalMeaningEn);
+      }
+    }
+    return list;
+  }, [needsLiveVocab, filteredEntries]);
+
+  const { translations: liveVocabMap } = useLiveTranslations(
+    vocabTextsToTranslate,
+    needsLiveVocab ? translationLocale : "none"
+  );
 
   const dueCount = useMemo(() => {
     try {
@@ -349,15 +368,30 @@ function VocabularyContent() {
 
                 {/* Meanings */}
                 <div className="py-3 space-y-2">
-                  <div className={cn("text-body text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}>
+                  <div
+                    dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                    className={cn("text-body text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}
+                  >
                     {translationLocale === "bn"
                       ? item.contextualMeaningBn
-                      : (item.contextualMeaningEn || item.contextualMeaningBn)}
+                      : translationLocale === "none"
+                      ? (item.contextualMeaningEn || item.contextualMeaningBn)
+                      : (liveVocabMap[(item.contextualMeaningEn || "").trim()] ||
+                         item.contextualMeaningEn ||
+                         item.contextualMeaningBn)}
                   </div>
                   {((translationLocale === "bn" && item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn) ||
                     (translationLocale !== "bn" && item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn)) && (
-                    <div className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
-                      {t("vocabulary.generalMeaningLabel")}: {translationLocale === "bn" ? item.generalMeaningBn : item.generalMeaningEn}
+                    <div
+                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                      className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}
+                    >
+                      {t("vocabulary.generalMeaningLabel")}:{" "}
+                      {translationLocale === "bn"
+                        ? item.generalMeaningBn
+                        : translationLocale === "none"
+                        ? item.generalMeaningEn
+                        : (liveVocabMap[(item.generalMeaningEn || "").trim()] || item.generalMeaningEn)}
                     </div>
                   )}
 

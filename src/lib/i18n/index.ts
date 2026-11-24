@@ -64,3 +64,4 @@ export function isRtlLocale(locale: string): boolean {
 export { SUPPORTED_LOCALES, TRANSLATION_LOCALES, type TranslationLocale };
 export { LocaleContext, type LocaleContextValue } from "./context.ts";
 export { useLocale, useTranslationLocale, useTranslations, useLocaleContext } from "./use-locale.ts";
+export { useLiveTranslation, useLiveTranslations } from "./use-live-translation.ts";

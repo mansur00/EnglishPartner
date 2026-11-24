@@ -21,18 +21,31 @@ import {
 } from "@hugeicons/core-free-icons";
 import { resolveSayItIntent } from "@/lib/ai/say-it";
 import type { SayItResponse, ToneType } from "@/lib/ai/say-it-schema";
-import { useTranslations } from "@/lib/i18n";
+import { useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { LocaleTitle } from "@/components/shared";
 
 export function WhatShouldISay() {
   const { locale, translationLocale, t } = useTranslations();
-  const effectiveLang = translationLocale === "none" ? "en" : translationLocale;
+  const effectiveLang = translationLocale === "none" ? "en" : (translationLocale === "bn" ? "bn" : "en");
   const [intentInput, setIntentInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
   const [response, setResponse] = useState<SayItResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string }>({
+    isLive: false,
+    statusText: "",
+  });
+
+  const needsLiveSayIt = translationLocale !== "none" && translationLocale !== "bn";
+  const sayItTexts = needsLiveSayIt && response
+    ? [response.understood_intent, ...response.options.map((o) => o.english)].filter(Boolean)
+    : [];
+  const { translations: liveSayItMap } = useLiveTranslations(
+    sayItTexts,
+    needsLiveSayIt ? translationLocale : "none"
+  );
 
   useEffect(() => {
     // Initial sample query with current translation language
@@ -254,7 +267,14 @@ export function WhatShouldISay() {
               <span className="text-muted-foreground block text-chip uppercase tracking-wider mb-0.5">
                 {t("sayIt.understoodIntent")}
               </span>
-              <span className={cn(locale === "bn" && "text-bangla")}>{response.understood_intent}</span>
+              <span
+                dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                className={cn(translationLocale === "bn" && "text-bangla")}
+              >
+                {needsLiveSayIt
+                  ? (liveSayItMap[response.understood_intent.trim()] || response.understood_intent)
+                  : response.understood_intent}
+              </span>
             </div>
           </div>
 
@@ -310,9 +330,17 @@ export function WhatShouldISay() {
                   </div>
 
                   {/* Translation: only shown when translation language is enabled */}
-                  {translationLocale !== "none" && option.translation && (
-                    <div className="text-meta-bn text-muted-foreground border-t border-border/60 pt-2">
-                      {option.translation}
+                  {translationLocale !== "none" && (translationLocale === "bn" ? option.translation : true) && (
+                    <div
+                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                      className={cn(
+                        "text-meta text-muted-foreground border-t border-border/60 pt-2",
+                        translationLocale === "bn" && "text-meta-bn"
+                      )}
+                    >
+                      {translationLocale === "bn"
+                        ? option.translation
+                        : (liveSayItMap[option.english.trim()] || "...")}
                     </div>
                   )}
 

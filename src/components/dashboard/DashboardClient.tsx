@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { t, useTranslations } from "@/lib/i18n";
+import { t, useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
+import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -32,6 +34,14 @@ export function DashboardClient() {
   const { locale, translationLocale } = useTranslations();
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
+
+  const previewLine1 = "Excuse me, could you tell me how much this costs?";
+  const previewLine2 = "Certainly! It is forty-five dollars with a 10% discount.";
+  const needsLivePreview = translationLocale !== "none" && translationLocale !== "bn";
+  const { translations: livePreviewMap } = useLiveTranslations(
+    needsLivePreview ? [previewLine1, previewLine2] : [],
+    needsLivePreview ? translationLocale : "none"
+  );
 
   useEffect(() => {
     let resolvedCompleted: string[] = [];
@@ -147,10 +157,16 @@ export function DashboardClient() {
                       &ldquo;Excuse me, could you tell me how much this costs?&rdquo;
                     </p>
                     {translationLocale !== "none" && (
-                      <p className="text-meta text-muted-foreground font-bangla text-bangla mt-1">
-                        {translationLocale === "hi"
-                          ? "माफ कीजिए, क्या आप बता सकते हैं कि इसकी कीमत कितनी है?"
-                          : "মাফ করবেন, এটার দাম কত বলতে পারেন?"}
+                      <p
+                        dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                        className={cn(
+                          "text-meta text-muted-foreground mt-1",
+                          translationLocale === "bn" && "font-bangla text-bangla"
+                        )}
+                      >
+                        {translationLocale === "bn"
+                          ? "মাফ করবেন, এটার দাম কত বলতে পারেন?"
+                          : (livePreviewMap[previewLine1] || "...")}
                       </p>
                     )}
                   </ChatBubble>
@@ -163,10 +179,16 @@ export function DashboardClient() {
                       &ldquo;Certainly! It is forty-five dollars with a 10% discount.&rdquo;
                     </p>
                     {translationLocale !== "none" && (
-                      <p className="text-meta text-topic-ink/80 font-bangla text-bangla mt-1">
-                        {translationLocale === "hi"
-                          ? "ज़रूर! 10% छूट के साथ यह पैंतालीस डॉलर का है।"
-                          : "অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।"}
+                      <p
+                        dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                        className={cn(
+                          "text-meta text-topic-ink/80 mt-1",
+                          translationLocale === "bn" && "font-bangla text-bangla"
+                        )}
+                      >
+                        {translationLocale === "bn"
+                          ? "অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।"
+                          : (livePreviewMap[previewLine2] || "...")}
                       </p>
                     )}
                   </ChatBubble>

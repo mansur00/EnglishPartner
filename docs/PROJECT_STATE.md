@@ -1680,6 +1680,22 @@ Entry format:
   - `npm run build`: 112/112 routes compiled cleanly in Next.js 16.4.6 Turbopack.
   - Puppeteer visual captures (`global_grammar_en.png`, `global_settings_search.png`, `global_header_search.png`) verified.
 
+### 2026-11-25, Live Multi-Language Translation Engine (/api/v1/translate)
+- **Requested by Owner:** Activate live translation for all 24+ global languages so whichever `translationLocale` the user selects translates sentences and vocabulary dynamically instead of showing "Bangla translation coming soon".
+- **Changes Delivered:**
+  - `src/app/api/v1/translate/route.ts`:
+    - Created `POST /api/v1/translate` endpoint with server-side in-memory cache, fast GTX translation pipeline, and Groq LLM (`llama-3.3-70b-versatile`) fallback.
+  - `src/lib/i18n/use-live-translation.ts` & `src/lib/i18n/index.ts`:
+    - Created `useLiveTranslations` and `useLiveTranslation` hooks with memory + `localStorage` caching (`ecp_live_trans_v1_${lang}`).
+  - Wired into `ConversationTurn.tsx`, `DashboardClient.tsx`, `WordDetailPopover.tsx`, `vocabulary/page.tsx`, and `WhatShouldISay.tsx`.
+    - Bengali mode displays `translationBn` directly without "coming soon" placeholder; other selected languages (`hi`, `ar`, `ur`, `es`, `fr`, etc.) translate live via `/api/v1/translate` with RTL direction support.
+    - Preserved `getLineTranslationDisplay` contract so `tests/translations-review-status.test.mjs` remains passing.
+- **Verification:**
+  - `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`: Passed.
+  - `npm test`: 209/209 passed.
+  - `npm run build`: 113/113 routes compiled cleanly (including `/api/v1/translate`).
+  - Live Puppeteer verification (`live_reader_hi.png`, `live_reader_bn.png`, `live_vocab_es.png`) confirmed live translations across Hindi, Bengali, and Spanish.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { useTranslations, t } from "@/lib/i18n";
+import { useTranslations, t, useLiveTranslation } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { Button } from "@/components/ui/button";
 import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { SpeakerLabel } from "./SpeakerLabel";
@@ -64,6 +65,18 @@ export function ConversationTurn({
         annotation || createFallbackAnnotation(line.id, line.englishText);
 
     const translationDisplay = getLineTranslationDisplay(line, isAdminPreview);
+    const hasStaticBn = translationLocale === "bn" && Boolean(line.translationBn?.trim());
+    const needsLiveTranslation =
+        translationLocale !== "none" && !hasStaticBn;
+
+    const { translatedText: liveTranslation, isLoading: isTranslating } = useLiveTranslation(
+        needsLiveTranslation ? line.englishText : undefined,
+        needsLiveTranslation ? translationLocale : "none"
+    );
+
+    const activeTranslationText = hasStaticBn
+        ? line.translationBn!
+        : liveTranslation || (isTranslating ? "..." : translationDisplay.displayText);
 
     // If local toggle hasn't been clicked, follow global; otherwise follow local override
     const isTranslationShown =
@@ -203,15 +216,16 @@ export function ConversationTurn({
                 <div className="pt-2 border-t border-border/60 animate-in fade-in duration-200">
                     <div>
                         <p
+                            dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
                             className={cn(
-                                translationDisplay.isComingSoon
-                                    ? "text-meta text-muted-foreground italic font-sans"
-                                    : "text-meta text-muted-foreground text-bangla"
+                                "text-meta text-muted-foreground",
+                                translationLocale === "bn" && "text-bangla",
+                                isTranslating && !activeTranslationText && "italic opacity-70"
                             )}
                         >
-                            {translationDisplay.displayText}
+                            {activeTranslationText}
                         </p>
-                        {translationDisplay.isDraftPreview && (
+                        {isAdminPreview && translationDisplay.isDraftPreview && (
                             <span className="inline-block mt-1 text-chip text-warning bg-warning-bg px-2 py-0.5 rounded-pill border border-border">
                                 Draft Preview (Unreviewed)
                             </span>

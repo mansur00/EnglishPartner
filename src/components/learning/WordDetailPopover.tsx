@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-import { t, useTranslations } from "@/lib/i18n";
+import { t, useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -73,6 +74,14 @@ export function WordDetailPopover({
 }: WordDetailPopoverProps) {
   const { locale, translationLocale } = useTranslations();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+
+  const needsLive = Boolean(entry && translationLocale !== "none" && translationLocale !== "bn");
+  const { translations: liveWordMap } = useLiveTranslations(
+    needsLive && entry
+      ? [entry.contextualMeaningEn || entry.contextualMeaningBn, entry.generalMeaningEn || entry.generalMeaningBn].filter(Boolean)
+      : [],
+    needsLive ? translationLocale : "none"
+  );
 
   if (!entry) return null;
 
@@ -219,10 +228,17 @@ export function WordDetailPopover({
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>{t("vocabulary.contextualMeaningLabel", locale)}:</span>
             </div>
-            <p className={cn("text-meta text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}>
+            <p
+              dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+              className={cn("text-meta text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}
+            >
               {translationLocale === "bn"
                 ? entry.contextualMeaningBn
-                : (entry.contextualMeaningEn || entry.contextualMeaningBn)}
+                : translationLocale === "none"
+                ? (entry.contextualMeaningEn || entry.contextualMeaningBn)
+                : (liveWordMap[(entry.contextualMeaningEn || entry.contextualMeaningBn).trim()] ||
+                   entry.contextualMeaningEn ||
+                   entry.contextualMeaningBn)}
             </p>
           </div>
 
@@ -230,10 +246,17 @@ export function WordDetailPopover({
             <span className={cn("text-chip text-muted-foreground uppercase tracking-wider block mb-1", locale === "bn" && "text-bangla")}>
               {t("vocabulary.generalMeaningLabel", locale)}:
             </span>
-            <p className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
+            <p
+              dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+              className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}
+            >
               {translationLocale === "bn"
                 ? entry.generalMeaningBn
-                : (entry.generalMeaningEn || entry.generalMeaningBn)}
+                : translationLocale === "none"
+                ? (entry.generalMeaningEn || entry.generalMeaningBn)
+                : (liveWordMap[(entry.generalMeaningEn || entry.generalMeaningBn).trim()] ||
+                   entry.generalMeaningEn ||
+                   entry.generalMeaningBn)}
             </p>
           </div>
 
