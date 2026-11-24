@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageContainer } from "@/components/shared/PageContainer";
-import { ScenarioCard } from "@/components/discovery/ScenarioCard";
+import { ProfessionScenariosGrid } from "@/components/professions/ProfessionScenariosGrid";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -51,7 +51,6 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
               as="span"
               titleEn="All Career Tracks"
               titleBn="সব প্রফেশনাল পাথ"
-              className="text-bangla"
             />
           </Button>
         </Link>
@@ -120,11 +119,7 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {professionScenarios.map((scenario) => (
-          <ScenarioCard key={scenario.id} scenario={scenario} />
-        ))}
-      </div>
+      <ProfessionScenariosGrid scenarios={professionScenarios} />
     </PageContainer>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -17,9 +18,16 @@ import { Pill } from "@/components/ui/pill";
 import { LocaleTitle } from "@/components/shared";
 import { useTranslations } from "@/lib/i18n";
 import { ALL_PROFESSIONS } from "@/lib/professions/registry";
+import { SEED_SCENARIOS } from "@/content/seed/scenarios";
+import { cn } from "@/lib/utils";
 
 export default function ProfessionsIndexPage() {
   const { locale, t } = useTranslations();
+  const [selectedCat, setSelectedCat] = useState<string>("all");
+
+  const filteredProfessions = selectedCat === "all"
+    ? ALL_PROFESSIONS
+    : ALL_PROFESSIONS.filter((p) => p.category === selectedCat);
 
   return (
     <PageContainer className="space-y-6">
@@ -40,17 +48,48 @@ export default function ProfessionsIndexPage() {
           titleBn="পেশাগত ইংরেজি ক্যারিয়ার পাথ"
           className="text-page-title text-foreground"
         />
-        <p className="text-subtitle-bn text-muted-foreground">
+        <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-subtitle-bn")}>
           {t("professions.subtitle")}
         </p>
+
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 pt-2">
+          {[
+            { id: "all", labelEn: "All Tracks", labelBn: "সব ট্র্যাক" },
+            { id: "tech", labelEn: "Tech & Engineering", labelBn: "টেক ও ইঞ্জিনিয়ারিং" },
+            { id: "business", labelEn: "Business & Freelance", labelBn: "ব্যবসা ও ফ্রিল্যান্সিং" },
+            { id: "healthcare", labelEn: "Healthcare", labelBn: "স্বাস্থ্যসেবা" },
+            { id: "education", labelEn: "Education", labelBn: "শিক্ষা" },
+          ].map((cat) => {
+            const active = selectedCat === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setSelectedCat(cat.id)}
+                className={cn(
+                  "px-3.5 py-1.5 rounded-pill text-chip transition-all cursor-pointer",
+                  active
+                    ? "bg-primary text-primary-foreground shadow-xs"
+                    : "bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-muted"
+                )}
+              >
+                {locale === "bn" ? cat.labelBn : cat.labelEn}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Professions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {ALL_PROFESSIONS.map((profession) => {
+        {filteredProfessions.map((profession) => {
           const competencies = locale === "bn"
             ? profession.competenciesBn
             : (profession.competenciesEn || profession.competenciesBn);
+          const actualScenarioCount = SEED_SCENARIOS.filter(
+            (s) => s.profession?.slug === profession.slug
+          ).length || profession.scenarioCount;
 
           return (
             <Card
@@ -83,7 +122,7 @@ export default function ProfessionsIndexPage() {
                 <p className="text-chip text-primary font-mono">
                   {locale === "bn" ? profession.taglineBn : profession.tagline}
                 </p>
-                <p className="text-meta-bn text-muted-foreground leading-relaxed">
+                <p className={cn("text-meta text-muted-foreground leading-relaxed", locale === "bn" && "text-meta-bn")}>
                   {locale === "bn" ? profession.descriptionBn : (profession.description || profession.descriptionBn)}
                 </p>
 
@@ -96,7 +135,7 @@ export default function ProfessionsIndexPage() {
                     {competencies.slice(0, 3).map((comp: string, cIdx: number) => (
                       <li
                         key={cIdx}
-                        className="flex items-start gap-2 text-chip-bn text-foreground"
+                        className={cn("flex items-start gap-2 text-chip text-foreground", locale === "bn" && "text-chip-bn")}
                       >
                         <HugeiconsIcon
                           icon={CheckmarkCircle02Icon}
@@ -115,7 +154,7 @@ export default function ProfessionsIndexPage() {
                 <div className="flex items-center gap-2 text-chip text-muted-foreground">
                   <span className="flex items-center gap-1 font-mono">
                     <HugeiconsIcon icon={Layers01Icon} size={14} />
-                    {profession.scenarioCount} {t("professions.scenariosUnit")}
+                    {actualScenarioCount} {t("professions.scenariosUnit")}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1 font-mono">

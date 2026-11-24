@@ -1718,6 +1718,22 @@ Entry format:
   - `npm run build`: 130/130 routes compiled cleanly.
   - Puppeteer visual captures (`matrix_explore_c1_lengths.png`, `matrix_reader_c2_switchers.png`) verified.
 
+### 2026-11-25, Professional English Career Paths Update & GitHub Push
+- **Requested by Owner:** Update the Professional English Career Paths pages and push all updates to GitHub.
+- **Changes Delivered:**
+  - `src/app/(app)/professions/page.tsx`:
+    - Added interactive category filter pills (`All Tracks`, `Tech & Engineering`, `Business & Freelance`, `Healthcare`, `Education`).
+    - Computed live scenario counts per career track from `SEED_SCENARIOS`.
+    - Conditioned Bangla typography classes strictly on `locale === "bn"`.
+  - `src/components/professions/ProfessionScenariosGrid.tsx` & `src/app/(app)/professions/[slug]/page.tsx`:
+    - Integrated `FilterBar` (CEFR Level + level-dependent 4-tier Length + 3-Style matrix) directly into every Career Path detail page, passing `?length=...&style=...` to `ScenarioCard` and `ConversationReader`.
+- **Verification:**
+  - `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`: Passed.
+  - `npm test`: 209/209 passed across 41 suites.
+  - `npm run build`: 130/130 routes compiled cleanly.
+  - Puppeteer visual captures (`professions_updated_en.png`, `professions_detail_en.png`) verified.
+  - Pushed all commits to `origin/main` on GitHub.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
