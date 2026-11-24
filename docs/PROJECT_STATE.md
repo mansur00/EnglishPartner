@@ -257,6 +257,29 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-24, Elimination of SSR / Client Hydration Mismatches in i18n & Navigation
+- Requested by owner: Fix hydration mismatch recoverable error in `Header.tsx` (`aria-label="নেভিগেশন মেনু খুলুন"` vs `"Open navigation menu"`, and `"লগইন"` vs `"Log in"`).
+- Changed:
+  - `src/lib/i18n/index.ts`: Removed synchronous `localStorage.getItem("ecp_user_locale")` read inside `t(key, locale)` that caused client-side rendering to mismatch server-side HTML. Made default locale deterministically `"bn"` during SSR and initial hydration.
+  - `src/components/navigation/header-state.ts`: Added `locale?: Locale` parameter to `getHeaderAccountState` and passed `locale` to `t("auth.login", locale)`, `t("auth.logout", locale)`, `t("auth.profile", locale)`, and `t("auth.account", locale)`.
+  - `src/components/navigation/Header.tsx`: Passed reactive `locale` to `getHeaderAccountState(user, locale)` and `aria-label={t("nav.openMenu", locale)}`.
+  - `src/components/navigation/MobileBottomNav.tsx`: Added `useLocale()` and passed `locale` to all navigation items (`t("nav.dashboard", locale)`, `t("nav.explore", locale)`, `t("nav.vocabulary", locale)`, `t("auth.profile", locale)`).
+  - `src/components/navigation/Sidebar.tsx`: Passed `locale` to `t("nav.menu", locale)`, `t("nav.mainNav", locale)`, and `t("landing.soon", locale)`.
+  - `src/app/(app)/explore/page.tsx`: Added `useLocale()` and passed `locale` to search input placeholder and empty state title.
+  - `src/components/dashboard/DashboardClient.tsx`: Passed `locale` to hero start conversation button.
+  - `src/components/shared/TodayPanel.tsx`: Added `useLocale()` and passed `locale` to day streak and goal microcopy strings.
+  - `src/components/learning/AudioPlayer.tsx` & `AudioPlayButton.tsx`: Added `useLocale()` and passed `locale` to audio action titles and badges.
+  - `src/components/learning/WordDetailPopover.tsx`: Passed `locale` to word form badges, saved status, and synonyms header.
+- Verified with:
+  - Puppeteer headless browser test with pre-seeded `ecp_user_locale = "en"`: 0 hydration errors recorded across routes (`Recorded Errors count: 0`, `Hydration Errors count: 0`).
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (112/112 static pages generated, 0 warnings).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-24, Elimination of Dual Language Titles & Strict Single-Language Enforcement
 - Requested by owner: "akhono bangla english ixed ace aigulo thik korte hobe" -> Eliminate all dual titles, mixed parenthetical English strings (e.g. `বাংলা (English)` or `English (বাংলা)`), and enforce pure single language display across the application (pure Bangla in BN mode, pure English in EN mode).
 - Changed:

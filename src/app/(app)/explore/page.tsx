@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useTransition } from "react";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { CategoryPills } from "@/components/discovery/CategoryPills";
 import { FilterBar } from "@/components/discovery/FilterBar";
@@ -22,6 +22,7 @@ import { paginateItems } from "@/lib/pagination/faceted-pagination";
 import { FacetedPagination } from "@/components/discovery/FacetedPagination";
 
 export default function ExplorePage() {
+  const locale = useLocale();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [level, setLevel] = useState("all");
@@ -136,7 +137,7 @@ export default function ExplorePage() {
               setCurrentPage(1);
             });
           }}
-          placeholder={t("discovery.searchPlaceholder")}
+          placeholder={t("discovery.searchPlaceholder", locale)}
           variant="ghost"
           inputSize="lg"
           className="w-full pl-12 pr-12 text-body"
@@ -230,7 +231,7 @@ export default function ExplorePage() {
         </div>
       ) : (
         <EmptyState
-          title={t("discovery.noConversationsFound")}
+          title={t("discovery.noConversationsFound", locale)}
           description={`We couldn't find any situation matching "${searchQuery}". Try different keywords in English or বাংলা.`}
           icon={<HugeiconsIcon icon={SearchXIcon} size={28} />}
           action={

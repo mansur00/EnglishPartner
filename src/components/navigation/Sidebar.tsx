@@ -91,9 +91,9 @@ export function Sidebar() {
     <aside className="hidden md:flex w-sidebar flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 sticky top-header h-below-header overflow-y-auto z-sidebar">
       <div className="space-y-1.5">
         <span className="px-3 text-chip uppercase tracking-wider text-muted-foreground">
-          {t("nav.menu")}
+          {t("nav.menu", locale)}
         </span>
-        <nav className="space-y-1 pt-1.5" aria-label={t("nav.mainNav")}>
+        <nav className="space-y-1 pt-1.5" aria-label={t("nav.mainNav", locale)}>
           {navItems.map((item) => {
             if (item.comingSoon) {
               return (
@@ -108,7 +108,7 @@ export function Sidebar() {
                     <span>{item.name}</span>
                   </div>
                   <span className="text-chip bg-muted text-muted-foreground px-2 py-0.5 rounded-pill">
-                    {t("landing.soon")}
+                    {t("landing.soon", locale)}
                   </span>
                 </div>
               );

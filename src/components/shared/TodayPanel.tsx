@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FireIcon } from "@hugeicons/core-free-icons";
 
@@ -21,6 +21,7 @@ export function TodayPanel({
   variant = "band",
   ...props
 }: TodayPanelProps) {
+  const locale = useLocale();
   const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
   const currentDayIndex = (new Date().getDay() + 6) % 7; // Monday = 0
   const remainingMinutes = Math.max(0, minutesGoal - minutesCompleted);
@@ -47,7 +48,7 @@ export function TodayPanel({
               {streak}
             </span>
             <span className={cn("text-meta", isCard ? "text-muted-foreground" : "text-band-panel-ink/90")}>
-              {t("dashboard.dayStreak")}
+              {t("dashboard.dayStreak", locale)}
             </span>
           </div>
         </div>
@@ -85,7 +86,7 @@ export function TodayPanel({
             {minutesCompleted} / {minutesGoal} min
           </span>
           <span className={cn("text-meta", isCard ? "text-muted-foreground" : "text-band-panel-ink/80")}>
-            {remainingMinutes === 0 ? t("dashboard.goalReached") : `${remainingMinutes} ${t("dashboard.minutesToGo")}`}
+            {remainingMinutes === 0 ? t("dashboard.goalReached", locale) : `${remainingMinutes} ${t("dashboard.minutesToGo", locale)}`}
           </span>
         </div>
         {/* 10-Segment Minute Bar */}

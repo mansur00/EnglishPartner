@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -27,6 +27,7 @@ export function AudioPlayer({
   activeLineIndex,
   onActiveLineChange,
 }: AudioPlayerProps) {
+  const locale = useLocale();
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -232,7 +233,7 @@ export function AudioPlayer({
             variant="ghost"
             size="icon"
             onClick={handleReplay}
-            title={t("audio.replay")}
+            title={t("audio.replay", locale)}
             className="rounded-pill text-muted-foreground"
           >
             <HugeiconsIcon icon={ReloadIcon} size={16} />
@@ -248,7 +249,7 @@ export function AudioPlayer({
             </span>
           ) : (
             <div className="flex items-center gap-1.5">
-              <span>{t("audio.fullConversation")}</span>
+              <span>{t("audio.fullConversation", locale)}</span>
               <Pill variant="neutral" size="sm" className="font-mono">
                 {lines.length} lines
               </Pill>
@@ -263,7 +264,7 @@ export function AudioPlayer({
             type="button"
             onClick={handleSpeedToggle}
             className="px-2.5 py-1 rounded-control text-chip bg-muted border-0 text-foreground hover:bg-muted/80 transition-colors cursor-pointer"
-            title={t("audio.cycleSpeed")}
+            title={t("audio.cycleSpeed", locale)}
           >
             {playbackSpeed}x
           </button>

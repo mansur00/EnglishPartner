@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   DashboardSquare01Icon,
@@ -14,28 +14,29 @@ import {
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const locale = useLocale();
 
   const navItems = [
     {
-      name: t("nav.dashboard"),
+      name: t("nav.dashboard", locale),
       href: "/dashboard",
       icon: DashboardSquare01Icon,
       active: pathname === "/dashboard",
     },
     {
-      name: t("nav.explore"),
+      name: t("nav.explore", locale),
       href: "/explore",
       icon: CompassIcon,
       active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
     },
     {
-      name: t("nav.vocabulary"),
+      name: t("nav.vocabulary", locale),
       href: "/vocabulary",
       icon: Bookmark02Icon,
       active: pathname === "/vocabulary",
     },
     {
-      name: t("auth.profile"),
+      name: t("auth.profile", locale),
       href: "/dashboard",
       icon: UserIcon,
       active: false,

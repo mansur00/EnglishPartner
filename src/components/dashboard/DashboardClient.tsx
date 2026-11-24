@@ -119,7 +119,7 @@ export function DashboardClient() {
                   <Link href="/conversations/asking-price-product-details">
                     <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-xs gap-2">
                       <HugeiconsIcon icon={PlayCircleIcon} size={20} />
-                      <span>{t("dashboard.startConversation")}</span>
+                      <span>{t("dashboard.startConversation", locale)}</span>
                     </Button>
                   </Link>
                 </div>

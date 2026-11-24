@@ -34,22 +34,10 @@ function resolvePath(obj: MessageTree, path: string): string | undefined {
 
 /**
  * Meaning-based message lookup with fallback to English and key.
- * If locale is omitted and running in browser, automatically picks active user locale from localStorage (default: bn).
+ * Deterministic default locale is "bn" for hydration safety.
  */
 export function t(key: string, locale?: Locale): string {
-  let targetLocale = locale;
-  if (!targetLocale && typeof window !== "undefined") {
-    try {
-      const saved = localStorage.getItem("ecp_user_locale") as Locale | null;
-      if (saved && (SUPPORTED_LOCALES as readonly string[]).includes(saved)) {
-        targetLocale = saved;
-      }
-    } catch {}
-  }
-  if (!targetLocale) {
-    targetLocale = "bn";
-  }
-
+  const targetLocale = locale || "bn";
   const dict = dictionaries[targetLocale] || dictionaries.en;
   const translated = resolvePath(dict, key);
   if (translated) return translated;

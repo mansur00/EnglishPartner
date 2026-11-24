@@ -71,7 +71,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
   }, [initialUser]);
 
   const locale = useLocale();
-  const account = getHeaderAccountState(user);
+  const account = getHeaderAccountState(user, locale);
 
   const mobileNavLinks = [
     { name: t("nav.dashboard", locale), href: "/dashboard", icon: DashboardSquare01Icon },
@@ -92,7 +92,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
         {/* Mobile Hamburger Drawer Trigger */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger
-            aria-label={t("nav.openMenu")}
+            aria-label={t("nav.openMenu", locale)}
             className="md:hidden inline-flex items-center justify-center size-tap rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
           >
             <HugeiconsIcon icon={Menu01Icon} size={22} />

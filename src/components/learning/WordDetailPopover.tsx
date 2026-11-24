@@ -250,16 +250,16 @@ export function WordDetailPopover({
               </span>
               <div className="flex flex-wrap gap-2 text-chip">
                 {entry.wordForms.past && (
-                  <WordFormBadge label={t("learning.past")} value={entry.wordForms.past} />
+                  <WordFormBadge label={t("learning.past", locale)} value={entry.wordForms.past} />
                 )}
                 {entry.wordForms.pastParticiple && (
                   <WordFormBadge
-                    label={t("learning.pastParticiple")}
+                    label={t("learning.pastParticiple", locale)}
                     value={entry.wordForms.pastParticiple}
                   />
                 )}
                 {entry.wordForms.plural && (
-                  <WordFormBadge label={t("learning.plural")} value={entry.wordForms.plural} />
+                  <WordFormBadge label={t("learning.plural", locale)} value={entry.wordForms.plural} />
                 )}
               </div>
             </div>
@@ -269,7 +269,7 @@ export function WordDetailPopover({
           {entry.synonyms && entry.synonyms.length > 0 && (
             <div className="pt-1">
               <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1.5">
-                Synonyms / বিকল্প শব্দ:
+                {locale === "bn" ? "বিকল্প শব্দ:" : "Synonyms:"}
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {entry.synonyms.map((syn, idx) => (
@@ -296,12 +296,12 @@ export function WordDetailPopover({
             {isSaved ? (
               <>
                 <HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className="text-success" />
-                <span>{t("learning.saved")}</span>
+                <span>{t("learning.saved", locale)}</span>
               </>
             ) : (
               <>
                 <HugeiconsIcon icon={Bookmark01Icon} size={16} />
-                <span>{t("learning.saveWord")}</span>
+                <span>{t("learning.saveWord", locale)}</span>
               </>
             )}
           </Button>

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -32,6 +32,7 @@ export function AudioPlayButton({
   ariaLabel = "Play sentence audio",
   className,
 }: AudioPlayButtonProps) {
+  const locale = useLocale();
   const [internalIsPlaying, setInternalIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -103,10 +104,10 @@ export function AudioPlayButton({
     return (
       <span
         className="inline-flex items-center gap-1 px-2.5 py-1 rounded-pill text-chip text-muted-foreground bg-muted cursor-not-allowed select-none"
-        title={t("audio.generating")}
+        title={t("audio.generating", locale)}
       >
         <HugeiconsIcon icon={VolumeMute01Icon} size={13} />
-        <span>{t("audio.unavailable")}</span>
+        <span>{t("audio.unavailable", locale)}</span>
       </span>
     );
   }
