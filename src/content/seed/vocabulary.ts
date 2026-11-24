@@ -5,6 +5,8 @@ export interface VocabularyEntry {
   partOfSpeech: "verb" | "noun" | "adjective" | "adverb" | "phrase" | "preposition";
   contextualMeaningBn: string;
   generalMeaningBn: string;
+  contextualMeaningEn?: string;
+  generalMeaningEn?: string;
   exampleSentence: string;
   wordForms?: {
     past?: string;
@@ -43,6 +45,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "phrase",
     contextualMeaningBn: "কাউকে সম্মান প্রদর্শনপূর্বক দৃষ্টি আকর্ষণ করার মার্জিত ভঙ্গি (মাফ করবেন)।",
     generalMeaningBn: "ক্ষমা চাওয়া বা দৃষ্টি আকর্ষণ করা।",
+    contextualMeaningEn: "Used as a polite way of attracting someone's attention or apologizing.",
+    generalMeaningEn: "To forgive, overlook, or seek polite attention.",
     exampleSentence: "Excuse me, where is the customer care desk?",
     synonyms: ["Pardon me", "Sorry to bother you"],
   },
@@ -53,6 +57,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "verb",
     contextualMeaningBn: "কোনো পণ্যের মূল্য নির্ধারিত থাকা।",
     generalMeaningBn: "দাম বা খরচ হওয়া।",
+    contextualMeaningEn: "To have a specified price or expense.",
+    generalMeaningEn: "The amount of money needed to buy something.",
     exampleSentence: "How much does this winter coat cost?",
     wordForms: {
       past: "cost",
@@ -67,6 +73,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "শরীরের উপরিভাগে পরার কোট বা হালকা শীতবস্ত্র।",
     generalMeaningBn: "জ্যাকেট বা কোট।",
+    contextualMeaningEn: "An outer garment extending either to the waist or hips, worn for warmth or style.",
+    generalMeaningEn: "A short coat or outerwear.",
     exampleSentence: "I bought a waterproof jacket for my trip.",
     wordForms: {
       plural: "jackets",
@@ -79,6 +87,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "adverb",
     contextualMeaningBn: "বিনম্র ও আন্তরিকভাবে কারো অনুরোধ বা প্রশ্নের সম্মতি জ্ঞাপন করা (অবশ্যই)।",
     generalMeaningBn: "নিঃসন্দেহে বা নিশ্চিতভাবে।",
+    contextualMeaningEn: "Used to express complete agreement or polite consent ('of course').",
+    generalMeaningEn: "Without doubt; definitely or surely.",
     exampleSentence: "Certainly, I will prepare your invoice right away.",
     synonyms: ["Definitely", "Of course", "Absolutely"],
   },
@@ -89,6 +99,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "নির্ধারিত বিক্রয়মূল্য থেকে টাকার হ্রাস বা ছাড়।",
     generalMeaningBn: "ছাড় বা মূল্যহ্রাস।",
+    contextualMeaningEn: "A reduction in the usual price of an item or service.",
+    generalMeaningEn: "A price reduction or rebate.",
     exampleSentence: "Students receive a 15% discount at this bookstore.",
     wordForms: {
       plural: "discounts",
@@ -102,6 +114,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "শতকরা বা প্রতি শতে হিসাব (যেমন ১০%)।",
     generalMeaningBn: "শতাংশ।",
+    contextualMeaningEn: "One part in every hundred (e.g., 10%).",
+    generalMeaningEn: "Percentage or rate per hundred.",
     exampleSentence: "Inflation decreased by two percent this quarter.",
   },
   medium: {
@@ -111,6 +125,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "adjective",
     contextualMeaningBn: "পোশাকের মাঝারি মাপ (Small ও Large এর মাঝামাঝি)।",
     generalMeaningBn: "মাঝারি বা মধ্যম।",
+    contextualMeaningEn: "A middle size for clothing, between small and large.",
+    generalMeaningEn: "Intermediate in quantity, size, or quality.",
     exampleSentence: "This shirt fits best in medium size.",
   },
   fitting: {
@@ -120,6 +136,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "দোকানে পোশাক গায়ে দিয়ে ফিটিং যাচাই করার নির্ধারিত স্থান (ট্রায়াল রুম)।",
     generalMeaningBn: "ট্রায়াল রুম।",
+    contextualMeaningEn: "A designated room in a retail store for trying on clothes before purchasing.",
+    generalMeaningEn: "Fitting room or changing room.",
     exampleSentence: "The fitting rooms are located near the cashier.",
     synonyms: ["dressing room", "changing room"],
   },
@@ -132,6 +150,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "আন্তর্জাতিক ভ্রমণের জন্য সরকারি ভ্রমণ পরিচয়পত্র।",
     generalMeaningBn: "পাসপোর্ট।",
+    contextualMeaningEn: "An official government travel document certifying citizenship for international journeys.",
+    generalMeaningEn: "Official international travel ID.",
     exampleSentence: "Keep your passport in your carry-on bag.",
     wordForms: { plural: "passports" },
   },
@@ -142,6 +162,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "বিমানে এক শহর বা দেশ থেকে অন্য স্থানে যাত্রা।",
     generalMeaningBn: "বিমানযাত্রা।",
+    contextualMeaningEn: "A scheduled journey in an aircraft between two destinations.",
+    generalMeaningEn: "An airline journey.",
     exampleSentence: "Our flight departs at seven in the evening.",
     wordForms: { plural: "flights" },
   },
@@ -152,6 +174,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "যাত্রীর যে বড় লাগেজটি বিমানের কার্গো হোলে দেওয়া হয় (কেবিনে নেওয়া হয় না)।",
     generalMeaningBn: "বড় ভ্রমণ লাগেজ।",
+    contextualMeaningEn: "Luggage delivered to the airline to be stored in the cargo hold during a flight.",
+    generalMeaningEn: "Checked luggage.",
     exampleSentence: "You are allowed one checked bag weighing up to 23 kilograms.",
   },
 
@@ -163,6 +187,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "noun",
     contextualMeaningBn: "অ্যাপ বা ওয়েবসাইটের বেসিক গঠন ও লেআউটের ব্লুপ্রিন্ট স্কেচ।",
     generalMeaningBn: "স্কেচ বা কাঠামো নকশা।",
+    contextualMeaningEn: "A visual blueprint schematic showing the structure and layout of a webpage or screen.",
+    generalMeaningEn: "Basic structural screen blueprint.",
     exampleSentence: "We review wireframes before choosing final brand colors.",
     wordForms: { plural: "wireframes" },
   },
@@ -173,6 +199,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "verb",
     contextualMeaningBn: "কোনো জটিল বিষয়কে প্রশ্ন করে সুস্পষ্ট ও দ্বিধাহীন করা।",
     generalMeaningBn: "স্পষ্ট করা বা পরিষ্কার করা।",
+    contextualMeaningEn: "To make an idea, requirement, or situation clearer and easier to understand.",
+    generalMeaningEn: "To explain or make distinct.",
     exampleSentence: "Could you clarify the delivery timeline for this feature?",
     wordForms: { past: "clarified", pastParticiple: "clarified" },
     synonyms: ["explain", "make clear", "elucidate"],
@@ -184,6 +212,8 @@ export const SEED_VOCABULARY: Record<string, VocabularyEntry> = {
     partOfSpeech: "verb",
     contextualMeaningBn: "সব কাজের মধ্যে সবচেয়ে গুরুত্বপূর্ণ বিষয়টিকে প্রথমে রাখা।",
     generalMeaningBn: "অগ্রাধিকার দেওয়া।",
+    contextualMeaningEn: "To treat a task or feature as more important than others.",
+    generalMeaningEn: "To arrange in order of priority.",
     exampleSentence: "We must prioritize mobile performance for our app.",
     wordForms: { past: "prioritized", pastParticiple: "prioritized" },
   },

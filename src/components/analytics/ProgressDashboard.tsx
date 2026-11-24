@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { Tag } from "@/components/ui/tag";
 import { LocaleTitle } from "@/components/shared";
+import { useTranslations } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 import {
   computeProgressMetrics,
   generatePersonalizedRecommendations,
@@ -66,6 +68,7 @@ const INITIAL_CONTEXT: RecommendationContext = {
 };
 
 export function ProgressDashboard() {
+  const { locale, t } = useTranslations();
   const [stats] = useState<LearnerRawStats>(INITIAL_LEARNER_STATS);
   const [context] = useState<RecommendationContext>(INITIAL_CONTEXT);
 
@@ -74,36 +77,36 @@ export function ProgressDashboard() {
 
   const kpis = [
     {
-      label: "Daily Streak",
+      label: t("progress.streakLabel"),
       value: `${metrics.currentStreak}`,
-      unit: "দিন সক্রিয়",
-      subtitle: `সর্বোচ্চ রেকর্ড: ${metrics.bestStreak} দিন`,
+      unit: t("progress.streakUnit"),
+      subtitle: t("progress.streakBest").replace("{count}", String(metrics.bestStreak)),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: FireIcon as any,
       colorClass: "bg-warning-bg text-warning",
     },
     {
-      label: "Time Practiced",
+      label: t("progress.timePracticedLabel"),
       value: `${metrics.practiceTimeMinutes}`,
-      unit: "মিনিট",
-      subtitle: "সাপ্তাহিক লক্ষ্য: ১০০ মিনিট",
+      unit: t("progress.timeUnit"),
+      subtitle: t("progress.timeTarget"),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: Time02Icon as any,
       colorClass: "bg-primary/10 text-primary",
     },
     {
-      label: "Conversations",
+      label: t("progress.conversationsLabel"),
       value: `${metrics.completedScenariosCount} / ${metrics.totalScenariosAvailable}`,
-      subtitle: "শপিং ও মানি ল্যাডার সক্রিয়",
+      subtitle: t("progress.conversationsActive"),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: CheckmarkCircle01Icon as any,
       colorClass: "bg-success-bg text-success",
     },
     {
-      label: "Accuracy Rate",
+      label: t("progress.accuracyLabel"),
       value: `${metrics.practiceAccuracy}%`,
-      unit: "সঠিক",
-      subtitle: "কুইজ ও অনুশীলন গড়",
+      unit: t("progress.accuracyUnit"),
+      subtitle: t("progress.accuracySubtitle"),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: Target01Icon as any,
       colorClass: "bg-primary/10 text-primary",
@@ -128,8 +131,8 @@ export function ProgressDashboard() {
           titleBn="আমার অগ্রগতি"
           className="text-page-title text-foreground"
         />
-        <p className="text-meta-bn text-muted-foreground">
-          আপনার ধারাবাহিকতা, শব্দভাণ্ডার আয়ত্ত করার হার এবং পরবর্তী সুপারিশকৃত পাঠের বিস্তারিত ড্যাশবোর্ড।
+        <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-bangla")}>
+          {t("progress.subtitle")}
         </p>
       </div>
 
@@ -175,35 +178,35 @@ export function ProgressDashboard() {
                 <LocaleTitle
                   as="h3"
                   titleEn="Vocabulary Retention"
-                  titleBn="শব্দভাণ্ডার আয়ত্ত"
+                  titleBn="শব্দভাণ্ডার ধারণ ক্ষমতা"
                   className="text-card-title text-foreground"
                 />
                 <p className="text-meta text-muted-foreground">
-                  Spaced Repetition (SM-2) Stage Distribution
+                  {t("progress.retentionSubtitle")}
                 </p>
               </div>
             </div>
             <Pill variant="success" size="sm">
-              {metrics.vocabulary.retentionRate}% Retained
+              {metrics.vocabulary.retentionRate}% {t("progress.retained")}
             </Pill>
           </div>
 
           <div className="space-y-4">
             <div className="flex justify-between items-center text-chip text-muted-foreground">
-              <span>মোট সংরক্ষিত শব্দ: <strong className="text-foreground font-mono">{metrics.vocabulary.totalSaved}</strong></span>
-              <span>স্থায়ী ধারণ ক্ষমতা: <strong className="text-success font-mono">{metrics.vocabulary.retentionRate}%</strong></span>
+              <span>{t("progress.totalSaved")}: <strong className="text-foreground font-mono">{metrics.vocabulary.totalSaved}</strong></span>
+              <span>{t("progress.retained")}: <strong className="text-success font-mono">{metrics.vocabulary.retentionRate}%</strong></span>
             </div>
 
             {/* Stage Progress Breakdown */}
             <div className="space-y-3">
               {[
-                { label: "Learning (শুরু করেছি / Stages 0–2)", count: metrics.vocabulary.learning, barColor: "bg-primary/40" },
-                { label: "Reviewing (নিয়মিত চর্চা / Stages 3–5)", count: metrics.vocabulary.reviewing, barColor: "bg-primary" },
-                { label: "Mastered (আয়ত্তে এসেছে / Stages 6–8)", count: metrics.vocabulary.mastered, barColor: "bg-success" },
+                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-primary/40" },
+                { label: t("progress.stageReviewing"), count: metrics.vocabulary.reviewing, barColor: "bg-primary" },
+                { label: t("progress.stageMastered"), count: metrics.vocabulary.mastered, barColor: "bg-success" },
               ].map((stage, sIdx) => (
                 <div key={sIdx} className="space-y-1">
                   <div className="flex justify-between text-chip">
-                    <span className="text-foreground">{stage.label}</span>
+                    <span className={cn("text-foreground", locale === "bn" && "text-bangla")}>{stage.label}</span>
                     <span className="font-mono text-muted-foreground">{stage.count} words</span>
                   </div>
                   <div className="h-2 rounded-pill bg-muted overflow-hidden">
@@ -221,7 +224,7 @@ export function ProgressDashboard() {
             <div className="pt-2 flex justify-end">
               <Link href="/vocabulary">
                 <Button variant="outline" size="sm" className="rounded-control text-chip gap-1.5 cursor-pointer">
-                  <span>ভোকাবুলারি অনুশীলন করুন</span>
+                  <span className={locale === "bn" ? "text-bangla" : ""}>{t("progress.practiceVocabBtn")}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
                 </Button>
               </Link>
@@ -240,16 +243,16 @@ export function ProgressDashboard() {
                 <LocaleTitle
                   as="h3"
                   titleEn="Weekly Activity"
-                  titleBn="সাপ্তাহিক অনুশীলন"
+                  titleBn="সাপ্তাহিক সক্রিয়তা"
                   className="text-card-title text-foreground"
                 />
                 <p className="text-meta text-muted-foreground">
-                  Last 7 Days Practice Minutes
+                  {t("progress.weeklyActivitySubtitle")}
                 </p>
               </div>
             </div>
             <Pill variant="neutral" size="sm">
-              7 Days Active
+              7 {t("progress.daysActive")}
             </Pill>
           </div>
 
@@ -258,6 +261,7 @@ export function ProgressDashboard() {
             <div className="grid grid-cols-7 gap-2 items-end h-32 pt-4">
               {metrics.weeklyActivity.map((day, idx) => {
                 const heightPercent = Math.min(100, (day.minutes / 25) * 100);
+                const dayLabel = locale === "bn" ? day.dayBn : day.day;
 
                 return (
                   <div key={idx} className="flex flex-col items-center gap-1.5 h-full justify-end">
@@ -281,15 +285,15 @@ export function ProgressDashboard() {
                           : "text-chip text-muted-foreground"
                       }
                     >
-                      {day.dayBn}
+                      {dayLabel}
                     </span>
                   </div>
                 );
               })}
             </div>
 
-            <p className="text-meta-bn text-muted-foreground">
-              প্রতিদিন অন্তত ১০ মিনিট অনুশীলন করলে ফ্লুয়েন্সি ও স্মৃতিশক্তি সবচেয়ে দ্রুত বৃদ্ধি পায়।
+            <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-bangla")}>
+              {t("progress.weeklyTip")}
             </p>
           </div>
         </Card>
@@ -308,7 +312,7 @@ export function ProgressDashboard() {
             />
           </div>
           <Tag variant="brand" size="sm">
-            AI Personalized
+            {t("progress.personalizedTag")}
           </Tag>
         </div>
 
@@ -343,14 +347,19 @@ export function ProgressDashboard() {
                 </div>
 
                 <p className="text-chip text-muted-foreground leading-relaxed pt-1">
-                  <strong className="text-foreground">কেন প্রস্তাবিত?</strong> {rec.reasonBn}
+                  <strong className="text-foreground">
+                    {locale === "bn" ? "কেন প্রস্তাবিত?" : "Why recommended?"}
+                  </strong>{" "}
+                  {locale === "bn" ? rec.reasonBn : rec.reason}
                 </p>
               </div>
 
               <div className="pt-2">
                 <Link href={rec.actionUrl} className="w-full block">
                   <Button variant="default" size="sm" className="w-full rounded-control gap-1.5 cursor-pointer">
-                    <span>অনুশীলন শুরু করুন</span>
+                    <span className={locale === "bn" ? "text-bangla" : ""}>
+                      {t("progress.startPractice")}
+                    </span>
                     <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
                   </Button>
                 </Link>

@@ -94,18 +94,30 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
           />
 
           <div className="flex flex-wrap gap-4 pt-2 text-chip text-primary">
-            {profession.competenciesBn.map((comp, idx) => (
-              <span key={idx} className="flex items-center gap-1.5 text-chip-bn">
-                <HugeiconsIcon icon={CheckmarkCircle02Icon} size={15} />
-                <span>{comp}</span>
-              </span>
-            ))}
+            {profession.competenciesBn.map((compBn, idx) => {
+              const compEn = profession.competenciesEn?.[idx] || compBn;
+              return (
+                <span key={idx} className="flex items-center gap-1.5">
+                  <HugeiconsIcon icon={CheckmarkCircle02Icon} size={15} />
+                  <LocaleTitle
+                    as="span"
+                    titleEn={compEn}
+                    titleBn={compBn}
+                    className="text-chip"
+                  />
+                </span>
+              );
+            })}
           </div>
         </Card>
       </div>
 
       <div className="flex items-center justify-between text-chip text-muted-foreground border-b border-border pb-3">
-        <span>Step-by-Step Learning Sequence ({professionScenarios.length} Scenarios)</span>
+        <LocaleTitle
+          as="span"
+          titleEn={`Step-by-Step Learning Sequence (${professionScenarios.length} Scenarios)`}
+          titleBn={`ধাপে ধাপে শেখার দৃশ্যপট (${professionScenarios.length}টি দৃশ্যপট)`}
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

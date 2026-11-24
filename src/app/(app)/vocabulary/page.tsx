@@ -21,7 +21,7 @@ import { Pill } from "@/components/ui/pill";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageContainer } from "@/components/shared/PageContainer";
 import { LocaleTitle } from "@/components/shared/LocaleTitle";
-import { useLocale } from "@/lib/i18n";
+import { useTranslations } from "@/lib/i18n";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { getDueReviewItems } from "@/lib/srs/sm2";
@@ -44,7 +44,7 @@ export default function VocabularyPage() {
 }
 
 function VocabularyContent() {
-  const locale = useLocale();
+  const { locale, t } = useTranslations();
   const { isLineActive, toggleLine } = useGrammar();
   const [activeView, setActiveView] = useState<"words" | "srs">("words");
   const [searchQuery, setSearchQuery] = useState("");
@@ -185,19 +185,19 @@ function VocabularyContent() {
           variant="outline"
           size="sm"
           onClick={() => setIsAuthModalOpen(true)}
-          className="text-label gap-2 text-bangla rounded-control"
+          className={cn("text-label gap-2 rounded-control", locale === "bn" && "text-bangla")}
         >
           <HugeiconsIcon icon={Login01Icon} size={16} className="text-primary" />
-          <span>ক্লাউডে সিঙ্ক করুন</span>
+          <span>{t("vocabulary.syncCloud")}</span>
         </Button>
       </div>
 
       {/* Guest Mode Notice */}
-      <div className="flex items-center justify-between gap-3 p-4 rounded-panel bg-primary/10 text-chip text-muted-foreground text-bangla">
+      <div className={cn("flex items-center justify-between gap-3 p-4 rounded-panel bg-primary/10 text-chip text-muted-foreground", locale === "bn" && "text-bangla")}>
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={SparklesIcon} size={16} className="text-sun-500 shrink-0" />
           <span>
-            আপনি বর্তমানে গেস্ট হিসেবে শব্দ সংরক্ষণ করছেন ({savedLemmas.length}টি শব্দ সংরক্ষিত)।
+            {t("vocabulary.guestNotice").replace("{count}", String(savedLemmas.length))}
           </span>
         </div>
         <button
@@ -205,7 +205,7 @@ function VocabularyContent() {
           onClick={() => setIsAuthModalOpen(true)}
           className="text-primary hover:underline shrink-0 cursor-pointer text-label"
         >
-          লগইন করে সুরক্ষিত রাখুন
+          {t("vocabulary.guestLoginCta")}
         </button>
       </div>
 
@@ -222,7 +222,9 @@ function VocabularyContent() {
           )}
         >
           <HugeiconsIcon icon={Book01Icon} size={16} />
-          <span className="text-bangla">সংরক্ষিত শব্দাবলী ({allEntries.length})</span>
+          <span className={locale === "bn" ? "text-bangla" : ""}>
+            {t("vocabulary.savedWordsTab").replace("{count}", String(allEntries.length))}
+          </span>
         </button>
 
         <button
@@ -236,10 +238,12 @@ function VocabularyContent() {
           )}
         >
           <HugeiconsIcon icon={SparklesIcon} size={16} />
-          <span className="text-bangla">দৈনিক ফ্ল্যাশকার্ড রিভিউ</span>
+          <span className={locale === "bn" ? "text-bangla" : ""}>
+            {t("vocabulary.flashcardsTab")}
+          </span>
           {dueCount > 0 && (
             <Pill variant="warning" size="sm" className="font-mono">
-              {dueCount} due
+              {dueCount} {t("vocabulary.dueBadge")}
             </Pill>
           )}
         </button>
@@ -261,7 +265,7 @@ function VocabularyContent() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={locale === "bn" ? "শব্দ বা অর্থ দিয়ে খুঁজুন..." : "Search English or Bangla words..."}
+              placeholder={t("vocabulary.searchPlaceholder")}
               variant="ghost"
               inputSize="default"
               className="pl-10 text-body"
@@ -275,12 +279,12 @@ function VocabularyContent() {
             <HugeiconsIcon icon={FilterIcon} size={16} />
           </div>
           {[
-            { id: "all", label: "All / সব" },
-            { id: "verb", label: "Verbs" },
-            { id: "noun", label: "Nouns" },
-            { id: "adjective", label: "Adjectives" },
-            { id: "adverb", label: "Adverbs" },
-            { id: "phrase", label: "Phrases" },
+            { id: "all", label: t("vocabulary.posAll") },
+            { id: "verb", label: t("vocabulary.posVerbs") },
+            { id: "noun", label: t("vocabulary.posNouns") },
+            { id: "adjective", label: t("vocabulary.posAdjectives") },
+            { id: "adverb", label: t("vocabulary.posAdverbs") },
+            { id: "phrase", label: t("vocabulary.posPhrases") },
           ].map((cat) => (
             <Tag
               key={cat.id}
@@ -345,12 +349,15 @@ function VocabularyContent() {
 
                 {/* Meanings */}
                 <div className="py-3 space-y-2">
-                  <div className="text-body text-bangla text-foreground leading-relaxed">
-                    {item.contextualMeaningBn}
+                  <div className={cn("text-body text-foreground leading-relaxed", locale === "bn" && "text-bangla")}>
+                    {locale === "bn"
+                      ? item.contextualMeaningBn
+                      : (item.contextualMeaningEn || item.contextualMeaningBn)}
                   </div>
-                  {item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn && (
-                    <div className="text-meta text-bangla text-muted-foreground">
-                      সাধারণ অর্থ: {item.generalMeaningBn}
+                  {((locale === "bn" && item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn) ||
+                    (locale !== "bn" && item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn)) && (
+                    <div className={cn("text-meta text-muted-foreground", locale === "bn" && "text-bangla")}>
+                      {t("vocabulary.generalMeaningLabel")}: {locale === "bn" ? item.generalMeaningBn : item.generalMeaningEn}
                     </div>
                   )}
 
@@ -358,12 +365,13 @@ function VocabularyContent() {
                   {item.exampleSentence && (
                     <div className="pt-2.5 border-t border-border/60 space-y-1.5">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-chip text-muted-foreground uppercase tracking-wider text-bangla">
-                          উদাহরণ বাক্য
+                        <span className={cn("text-chip text-muted-foreground uppercase tracking-wider", locale === "bn" && "text-bangla")}>
+                          {t("vocabulary.exampleSentenceLabel")}
                         </span>
                         <GrammarToggleButton
                           isActive={isLineActive(`vocab-${item.lemma}`)}
                           onToggle={() => toggleLine(`vocab-${item.lemma}`)}
+                          lang={locale === "bn" ? "bn" : "en"}
                         />
                       </div>
                       {isLineActive(`vocab-${item.lemma}`) ? (
@@ -394,16 +402,18 @@ function VocabularyContent() {
         </div>
       ) : (
         <EmptyState
-          title="কোনো শব্দ পাওয়া যায়নি"
+          title={t("vocabulary.emptyTitle")}
           description={
             searchQuery
-              ? `"${searchQuery}" এর সাথে মিলে এমন কোনো শব্দ আপনার তালিকায় নেই।`
-              : "আপনার শব্দভান্ডারে এখনও কোনো শব্দ যোগ করা হয়নি।"
+              ? (locale === "bn"
+                  ? `"${searchQuery}" এর সাথে মিলে এমন কোনো শব্দ আপনার তালিকায় নেই।`
+                  : `No saved words found matching "${searchQuery}".`)
+              : t("vocabulary.emptyDescription")
           }
           action={
             <Link href="/explore">
-              <Button size="sm" className="font-bangla">
-                কথোপকথন এক্সপ্লোর করুন
+              <Button size="sm" className={locale === "bn" ? "text-bangla" : ""}>
+                {locale === "bn" ? "কথোপকথন এক্সপ্লোর করুন" : "Explore Conversations"}
               </Button>
             </Link>
           }

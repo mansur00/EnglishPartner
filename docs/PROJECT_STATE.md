@@ -1567,6 +1567,40 @@ Entry format:
   - Visual & DOM verification via headless Chrome runner on `/conversations/returning-damaged-product` across EN and BN modes: 0 hydration errors, 100% pure English text in EN mode, 100% pure Bangla text in BN mode.
 - Commit: `714ccbd`
 
+### 2026-11-24, Systemic Multi-Language Architecture & Full i18n Normalization
+- Requested by owner: Systemic resolution of multi-language architecture rather than piecemeal UI fixes. Build a future-proof foundation supporting English learning (L2) with any native/support interface language (L1: Bengali, English, Hindi, Urdu, Arabic). Adopt Option A for English vocabulary definitions (clear learner-friendly definitions in English mode). Eliminate all hardcoding and dual-language slash patterns (`All / সব`, `Learning (Stages 0-2)`).
+- Changed:
+  - `messages/en.json`, `messages/bn.json`, `messages/hi.json`:
+    - Added 60 new translation keys (total 209 keys each, 100% parity across all 3 languages) covering `vocabulary.*`, `professions.*`, and `progress.*`.
+  - `src/lib/professions/registry.ts`:
+    - Updated `ProfessionMeta` schema with `competenciesEn: string[]` and `roleExamplesEn: string[]`.
+    - Added comprehensive English competencies and role examples for all registered professions (`ui-ux-designer`, `software-engineer`, `remote-freelancer`, `healthcare-worker`, `teacher`).
+  - `src/content/seed/vocabulary.ts`:
+    - Updated `VocabularyEntry` schema with `contextualMeaningEn` and `generalMeaningEn`.
+    - Added Option A English definitions for all seed vocabulary items.
+  - `src/app/(app)/vocabulary/page.tsx`:
+    - Migrated to `useTranslations()`.
+    - Completely eliminated hardcoded JSX strings (Sync to Cloud, guest status, filter tabs, POS categories).
+    - Replaced `All / সব` with dynamic localized POS tags (`All`, `Verbs`... in EN; `সব`, `ক্রিয়া`... in BN).
+    - Dynamically renders English definitions in English mode and Bengali meanings in Bengali mode.
+  - `src/app/(app)/professions/page.tsx` & `src/app/(app)/professions/[slug]/page.tsx`:
+    - Uses `competenciesEn` in EN mode and `competenciesBn` in BN mode.
+    - Localized all action buttons, subtitle, and meta units via dictionary.
+  - `src/components/analytics/ProgressDashboard.tsx`:
+    - Fully dynamic KPI labels, metric units (`days active`, `min`), and week days (`Sat`, `Sun`... in EN; `শনি`, `রবি`... in BN).
+    - Localized stage breakdown labels: `Learning (Stages 0-2)` in EN, `শেখা শুরু (ধাপ ০-২)` in BN (zero bilingual slashes).
+    - Dynamically renders recommendation reasons in active locale (`rec.reason` in EN, `rec.reasonBn` in BN).
+  - `tests/multi-language-coverage.test.mjs`:
+    - Updated assertion to 209 keys with 100% key parity across EN, BN, and HI.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (112/112 static routes compiled cleanly).
+  - Puppeteer live screenshots across `/vocabulary`, `/professions`, and `/progress` in both `en` and `bn` modes: 0 bilingual slashes, 0 foreign language leaks, 100% clean visual rendering.
+- Commit: `b6542f9`
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

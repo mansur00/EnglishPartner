@@ -17,7 +17,9 @@ export interface ProfessionMeta {
   estimatedHours: number;
   scenarioCount: number;
   competenciesBn: string[];
+  competenciesEn: string[];
   roleExamplesBn: string[];
+  roleExamplesEn: string[];
 }
 
 export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
@@ -43,7 +45,15 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
       "ফিডব্যাক গ্রহণ ও স্কোপ পরিবর্তন নেগোসিয়েশন",
       "ইঞ্জিনিয়ারদের সাথে ডিজাইন সিস্টেম হ্যান্ডঅফ",
     ],
+    competenciesEn: [
+      "Project kickoff and client discovery meetings",
+      "Wireframe and interactive prototype presentations",
+      "Design rationale articulation based on user research",
+      "Constructive feedback intake and scope negotiation",
+      "Design system token and asset handoffs with developers",
+    ],
     roleExamplesBn: ["UI Designer", "Product Designer", "UX Researcher"],
+    roleExamplesEn: ["UI Designer", "Product Designer", "UX Researcher"],
   },
   "software-engineer": {
     id: "swe",
@@ -65,7 +75,13 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
       "গিটহাবে মার্জিত ও গঠনমূলক কোড রিভিউ মন্তব্য",
       "সিস্টেম ডিজাইন ও টেকনিক্যাল ট্রেড-অফ ডিসকাশন",
     ],
+    competenciesEn: [
+      "Daily standup progress and blocker updates",
+      "Constructive GitHub pull request code review discussions",
+      "System architecture trade-off discussions",
+    ],
     roleExamplesBn: ["Frontend Engineer", "Backend Developer", "Full-Stack Dev"],
+    roleExamplesEn: ["Frontend Engineer", "Backend Developer", "Full-Stack Dev"],
   },
   "remote-freelancer": {
     id: "freelancer",
@@ -87,7 +103,13 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
       "সময়মতো ডেডলাইন বৃদ্ধি ও মাইলস্টোন আপডেট",
       "বাজেট নেগোসিয়েশন ও ইনভয়েস ফলোআপ",
     ],
+    competenciesEn: [
+      "Proposal submissions and initial client discovery calls",
+      "Timely deadline extension and milestone updates",
+      "Budget negotiations and professional invoice follow-ups",
+    ],
     roleExamplesBn: ["Digital Marketer", "Virtual Assistant", "Independent Consultant"],
+    roleExamplesEn: ["Digital Marketer", "Virtual Assistant", "Independent Consultant"],
   },
   "healthcare-worker": {
     id: "health",
@@ -108,7 +130,12 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
       "রোগীর প্রাথমিক লক্ষণ ও অ্যালার্জি সংক্রান্ত ইতিহাস গ্রহণ",
       "ডাক্তারদের কাছে রোগীর ভাইটাল রিপোর্ট হ্যান্ডওভার",
     ],
+    competenciesEn: [
+      "Patient symptom triage and allergy history intake",
+      "Vital signs reporting and shift handover to senior doctors",
+    ],
     roleExamplesBn: ["Nurse", "Clinic Coordinator", "Medical Assistant"],
+    roleExamplesEn: ["Nurse", "Clinic Coordinator", "Medical Assistant"],
   },
   "teacher": {
     id: "edu",
@@ -129,7 +156,12 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
       "অভিভাবক মিটিংয়ে শিক্ষার্থীর পারফরম্যান্স আলোচনা",
       "শ্রেণিকক্ষে স্পষ্ট ও বিনম্র ইংরেজি নির্দেশনা",
     ],
+    competenciesEn: [
+      "Parent-teacher progress reviews and student feedback",
+      "Clear and polite classroom instructions in English",
+    ],
     roleExamplesBn: ["ESL Teacher", "School Coordinator", "Online Tutor"],
+    roleExamplesEn: ["ESL Teacher", "School Coordinator", "Online Tutor"],
   },
 };
 
