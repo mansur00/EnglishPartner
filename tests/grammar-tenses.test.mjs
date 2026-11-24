@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,6 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const PYTHON_BIN = path.resolve(__dirname, "../services/nlp/.venv/bin/python");
 const ANNOTATE_SCRIPT = path.resolve(__dirname, "../services/nlp/annotate.py");
+const HAS_NLP_VENV = fs.existsSync(PYTHON_BIN);
 
 function runAnnotator(text) {
   const stdout = execFileSync(PYTHON_BIN, [ANNOTATE_SCRIPT, "--text", text], {
@@ -23,7 +25,7 @@ function runAnnotator(text) {
   return JSON.parse(stdout.slice(jsonStart));
 }
 
-test("Grammar Tenses Unit Tests: All 12 Tenses, Passives, Inversions, and Negatives", async (t) => {
+test("Grammar Tenses Unit Tests: All 12 Tenses, Passives, Inversions, and Negatives", { skip: !HAS_NLP_VENV && "services/nlp/.venv/bin/python not installed in CI" }, async (t) => {
   const testCases = [
     {
       tense: "present-simple",
