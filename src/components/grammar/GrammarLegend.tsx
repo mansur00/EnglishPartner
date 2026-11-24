@@ -60,7 +60,7 @@ export function GrammarLegend({
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-1.5 text-label font-bangla text-bangla text-foreground">
           <HugeiconsIcon icon={SparklesIcon} size={14} className="text-primary" />
-          <span>{isBn ? "ব্যাকরণ লেজেন্ড (Legend)" : "Grammar Legend"}</span>
+          <span>{isBn ? "ব্যাকরণ নির্দেশিকা" : "Grammar Legend"}</span>
           {focusedKey && (
             <span className="text-chip px-2 py-0.5 rounded-pill bg-primary/10 text-primary">
               {isBn ? "ফোকাস চালু" : "Focus active"}

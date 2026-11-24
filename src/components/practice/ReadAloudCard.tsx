@@ -29,6 +29,7 @@ import { Button } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { Tag } from "@/components/ui/tag";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n";
 
 interface ReadAloudCardProps {
   exercises: ReadAloudExercise[];
@@ -61,6 +62,7 @@ interface WindowWithSpeech extends Window {
 }
 
 export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
+  const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
@@ -319,7 +321,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
             {currentItem.stepSlug} • Pronunciation & Read Aloud
           </span>
           <h3 className="text-card-title text-foreground">
-            উচ্চারণ ও রিড-আলাউড অনুশীলন (Read Aloud)
+            {locale === "bn" ? "উচ্চারণ ও পাঠ অনুশীলন" : "Pronunciation & Read Aloud"}
           </h3>
           <p className="text-chip-bn text-muted-foreground">
             মডেল অডিও শুনুন, নিজের কণ্ঠে উচ্চারণ রেকর্ড করুন এবং মিলিয়ে দেখুন
@@ -408,7 +410,9 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
               className="gap-2 rounded-control cursor-pointer bg-primary text-primary-foreground"
             >
               <HugeiconsIcon icon={Mic01Icon} size={18} />
-              <span className="text-bangla">রেকর্ড শুরু করুন (Record)</span>
+              <span className="text-bangla">
+                {locale === "bn" ? "রেকর্ড শুরু করুন" : "Start Recording"}
+              </span>
             </Button>
           ) : (
             <Button
@@ -416,7 +420,9 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
               className="gap-2 rounded-control cursor-pointer bg-destructive text-destructive-foreground animate-pulse"
             >
               <HugeiconsIcon icon={StopIcon} size={18} />
-              <span className="text-bangla">রেকর্ড থামান ({formatTime(recordingDuration)})</span>
+              <span className="text-bangla">
+                {locale === "bn" ? "রেকর্ড থামান" : "Stop Recording"} ({formatTime(recordingDuration)})
+              </span>
             </Button>
           )}
         </div>
@@ -609,7 +615,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
             {/* Honest Self-Check Rating Buttons */}
             <div className="space-y-2 pt-2 border-t border-border/60">
               <h4 className="text-label text-foreground text-bangla">
-                নিজের স্বর মূল্যায়ন করুন (Self Check):
+                {locale === "bn" ? "নিজের উচ্চারণ মূল্যায়ন করুন:" : "Self Check Rating:"}
               </h4>
               <p className="text-chip-bn">
                 মডেল অডিওর সাথে তুলনা করে আপনার উচ্চারণ কেমন মনে হয়েছে তা বেছে নিন:

@@ -23,7 +23,7 @@ export default function TermsPage() {
         <Card className="p-6 sm:p-8 bg-card border-border space-y-6 shadow-xs rounded-card">
           <div>
             <h1 className="text-page-title text-foreground font-sans">
-              Terms of Service (ব্যবহারের শর্তাবলী)
+              ব্যবহারের শর্তাবলী
             </h1>
             <p className="text-meta text-muted-foreground mt-1">
               Last Updated: November 2026 • English Conversation Partner (ECP)
@@ -33,7 +33,7 @@ export default function TermsPage() {
           <div className="space-y-4 text-body text-muted-foreground leading-relaxed">
             <section className="space-y-2">
               <h2 className="text-card-title-bn">
-                ১. শিক্ষামূলক উদ্দেশ্যে ব্যবহারের অধিকার (Educational Purpose)
+                ১. শিক্ষামূলক উদ্দেশ্যে ব্যবহারের অধিকার
               </h2>
               <p>
                 English Conversation Partner প্ল্যাটফর্মের সমস্ত লিখিত সংলাপ, বাংলা অনুবাদ এবং অডিও উপাদান শুধুমাত্র শিক্ষার্থীদের ব্যক্তিগত ও অ-বাণিজ্যিক ভাষা শিক্ষার উদ্দেশ্যে বিনামূল্যে উন্মুক্ত রাখা হয়েছে।
@@ -42,7 +42,7 @@ export default function TermsPage() {
 
             <section className="space-y-2">
               <h2 className="text-card-title-bn">
-                ২. বুদ্ধিবৃত্তিক সম্পত্তি ও অডিও লাইসেন্সিং (Licenses)
+                ২. বুদ্ধিবৃত্তিক সম্পত্তি ও অডিও লাইসেন্সিং
               </h2>
               <p>
                 আমাদের অডিও সিন্থেসিস পাইপলাইন ওপেন-সোর্স Piper TTS মডেল এবং CC-BY বা পারমিশনযুক্ত ভয়েস লাইব্রেরি ব্যবহার করে প্রস্তুতকৃত। সংলাপের মূল বিন্যাস এবং বাংলা প্রাসঙ্গিক ব্যাখ্যাসমূহ ECP কন্টেন্ট দলের দ্বারা সংকলিত।

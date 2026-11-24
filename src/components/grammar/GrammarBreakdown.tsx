@@ -28,7 +28,7 @@ export function GrammarBreakdown({
         <div className="p-3 rounded-panel bg-muted/40 flex items-center justify-between text-chip">
           <div>
             <span className="text-label text-muted-foreground block font-bangla text-bangla">
-              {isBn ? "বাক্যের ধরন (Sentence Structure):" : "Sentence Structure:"}
+              {isBn ? "বাক্যের ধরন:" : "Sentence Structure:"}
             </span>
             <span className="text-body text-foreground capitalize">
               {annotation.sentence.structure} • {annotation.sentence.function}
@@ -47,10 +47,10 @@ export function GrammarBreakdown({
         <table className="w-full text-left text-chip border border-border rounded-panel">
           <thead className="bg-muted/60 text-muted-foreground">
             <tr>
-              <th className="p-2 border-b border-border">{isBn ? "শব্দ (Word)" : "Word"}</th>
-              <th className="p-2 border-b border-border">{isBn ? "পদ (POS)" : "POS"}</th>
-              <th className="p-2 border-b border-border">{isBn ? "ভূমিকা (Role)" : "Role"}</th>
-              <th className="p-2 border-b border-border">{isBn ? "মূল রূপ (Lemma)" : "Lemma"}</th>
+              <th className="p-2 border-b border-border">{isBn ? "শব্দ" : "Word"}</th>
+              <th className="p-2 border-b border-border">{isBn ? "পদ প্রকরণ" : "Part of Speech"}</th>
+              <th className="p-2 border-b border-border">{isBn ? "বাক্যের ভূমিকা" : "Sentence Role"}</th>
+              <th className="p-2 border-b border-border">{isBn ? "মূল রূপ" : "Lemma"}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">

@@ -66,7 +66,7 @@ export function ConversationEditorClient({
           <div className="pt-2 flex flex-col gap-2">
             <Link href={`/admin?unauthorized=true&role=${userRole}&required=editor`}>
               <Button variant="outline" className="w-full text-label text-bangla rounded-control">
-                অ্যাডমিন কনসোলে ফিরে যান (Return to Admin)
+                অ্যাডমিন কনসোলে ফিরে যান
               </Button>
             </Link>
             <Link href={`/admin/conversations/${scenario.slug}/edit?role=admin`}>
@@ -149,17 +149,17 @@ export function ConversationEditorClient({
 
   const handleSaveDraft = () => {
     setIsSaved(true);
-    setPublishMessage("খসড়া সংরক্ষিত হয়েছে (Draft saved successfully).");
+    setPublishMessage("খসড়া সংরক্ষিত হয়েছে।");
     setTimeout(() => setPublishMessage(null), 3000);
   };
 
   const handlePublish = () => {
     if (!validation.isValid) {
-      alert("ত্রুটি সংশোধন না করে প্রকাশ করা সম্ভব নয় (Cannot publish with validation errors).");
+      alert("ত্রুটি সংশোধন না করে প্রকাশ করা সম্ভব নয়।");
       return;
     }
     setIsSaved(true);
-    setPublishMessage("অভিনন্দন! দৃশ্যপটটি সফলভাবে রিভিউ ও পাবলিশ হয়েছে (Published successfully).");
+    setPublishMessage("অভিনন্দন! দৃশ্যপটটি সফলভাবে রিভিউ ও পাবলিশ হয়েছে।");
     setTimeout(() => setPublishMessage(null), 4000);
   };
 
@@ -197,7 +197,7 @@ export function ConversationEditorClient({
             onClick={handleSaveDraft}
             className="text-label text-bangla rounded-control"
           >
-            {isSaved ? "সংরক্ষিত ✓" : "খসড়া সংরক্ষণ (Draft)"}
+            {isSaved ? "সংরক্ষিত ✓" : "খসড়া সংরক্ষণ"}
           </Button>
 
           <Button
@@ -207,7 +207,7 @@ export function ConversationEditorClient({
             className="text-label text-bangla gap-1.5 rounded-control"
           >
             <HugeiconsIcon icon={CheckmarkCircle01Icon} size={14} />
-            <span>প্রকাশ করুন (Publish)</span>
+            <span>প্রকাশ করুন</span>
           </Button>
         </div>
       </div>
@@ -301,7 +301,7 @@ export function ConversationEditorClient({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-card-title-bn">
-            কথোপকথনের বাক্যসমূহ (Turns)
+            কথোপকথনের বাক্যসমূহ
           </h2>
           <Button
             variant="outline"
@@ -413,7 +413,7 @@ export function ConversationEditorClient({
                     type="text"
                     value={line.learningNote || ""}
                     onChange={(e) => handleLineChange(index, "learningNote", e.target.value)}
-                    placeholder="শিক্ষণীয় নোট / Grammar tip (ঐচ্ছিক)..."
+                    placeholder="শিক্ষণীয় ব্যাকরণ নোট (ঐচ্ছিক)..."
                     className="w-full px-3 py-1.5 rounded-control border border-border text-chip bg-muted/40 text-foreground focus:outline-hidden focus:border-primary"
                   />
                 </div>
@@ -438,7 +438,7 @@ export function ConversationEditorClient({
           className="gap-2 text-bangla px-6 text-label rounded-control"
         >
           <HugeiconsIcon icon={Add01Icon} size={15} />
-          <span>আরেকটি বাক্য যোগ করুন (Add Turn)</span>
+          <span>আরেকটি বাক্য যোগ করুন</span>
         </Button>
       </div>
     </div>

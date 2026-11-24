@@ -20,6 +20,8 @@ import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageContainer } from "@/components/shared/PageContainer";
+import { LocaleTitle } from "@/components/shared/LocaleTitle";
+import { useLocale } from "@/lib/i18n";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { getDueReviewItems } from "@/lib/srs/sm2";
@@ -42,6 +44,7 @@ export default function VocabularyPage() {
 }
 
 function VocabularyContent() {
+  const locale = useLocale();
   const { isLineActive, toggleLine } = useGrammar();
   const [activeView, setActiveView] = useState<"words" | "srs">("words");
   const [searchQuery, setSearchQuery] = useState("");
@@ -163,11 +166,16 @@ function VocabularyContent() {
             <HugeiconsIcon icon={Book01Icon} size={24} />
           </div>
           <div>
-            <h1 className="text-page-title text-foreground text-bangla">
-              আমার শব্দভান্ডার (My Vocabulary Notebook)
-            </h1>
+            <LocaleTitle
+              as="h1"
+              titleEn="My Vocabulary Notebook"
+              titleBn="আমার শব্দভান্ডার"
+              className="text-page-title text-foreground"
+            />
             <p className="text-meta text-muted-foreground mt-0.5">
-              কথোপকথন থেকে সংরক্ষিত শব্দ এবং ব্যাকরণগত অর্থ
+              {locale === "bn"
+                ? "কথোপকথন থেকে সংরক্ষিত শব্দ এবং ব্যাকরণগত অর্থ"
+                : "Saved words from conversations with contextual grammar definitions"}
             </p>
           </div>
         </div>
@@ -253,7 +261,7 @@ function VocabularyContent() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="শব্দ বা অর্থ দিয়ে খুঁজুন (Search English or Bangla)..."
+              placeholder={locale === "bn" ? "শব্দ বা অর্থ দিয়ে খুঁজুন..." : "Search English or Bangla words..."}
               variant="ghost"
               inputSize="default"
               className="pl-10 text-body"
@@ -408,8 +416,8 @@ function VocabularyContent() {
       <AuthPromptModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-        title="শব্দভান্ডার ক্লাউডে সিঙ্ক করুন (Sync to Cloud)"
-        description="লগইন করলে আপনার সব ডিভাইসে সংরক্ষিত শব্দভান্ডার পাওয়া যাবে এবং কখনো মুছে যাবে না।"
+        title={locale === "bn" ? "শব্দভান্ডার ক্লাউডে সিঙ্ক করুন" : "Sync Vocabulary to Cloud"}
+        description={locale === "bn" ? "লগইন করলে আপনার সব ডিভাইসে সংরক্ষিত শব্দভান্ডার পাওয়া যাবে এবং কখনো মুছে যাবে না।" : "Sign in to keep your vocabulary synced across devices permanently."}
       />
     </PageContainer>
   );

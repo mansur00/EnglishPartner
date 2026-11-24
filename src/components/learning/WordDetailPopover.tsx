@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-import { t } from "@/lib/i18n";
+import { t, useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -71,6 +71,7 @@ export function WordDetailPopover({
   tokenData,
   onRuleClick,
 }: WordDetailPopoverProps) {
+  const locale = useLocale();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   if (!entry) return null;
@@ -157,23 +158,33 @@ export function WordDetailPopover({
           <div className="my-2 p-3.5 rounded-panel bg-muted/50 space-y-2.5 border-0">
             <div className="text-chip text-primary text-bangla flex items-center gap-1.5">
               <HugeiconsIcon icon={BookOpen01Icon} size={14} />
-              <span>ব্যাকরণগত বিশ্লেষণ (Grammar Breakdown):</span>
+              <span>{locale === "bn" ? "ব্যাকরণগত বিশ্লেষণ:" : "Grammar Breakdown:"}</span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-chip">
               {posLabel && (
                 <GrammarItemCard
-                  title="পদ (POS):"
+                  title={locale === "bn" ? "পদ প্রকরণ:" : "Part of Speech:"}
                   value={`${posLabel.name} ${subLabel ? `(${subLabel.name})` : ""}`}
                 />
               )}
               {roleLabel && (
-                <GrammarItemCard title="বাক্যের ভূমিকা (Role):" value={roleLabel.name} />
+                <GrammarItemCard
+                  title={locale === "bn" ? "বাক্যের ভূমিকা:" : "Sentence Role:"}
+                  value={roleLabel.name}
+                />
               )}
               {tokenData.lemma && (
-                <GrammarItemCard title="মূল শব্দ (Lemma):" value={tokenData.lemma} isMonospace />
+                <GrammarItemCard
+                  title={locale === "bn" ? "মূল শব্দ:" : "Lemma:"}
+                  value={tokenData.lemma}
+                  isMonospace
+                />
               )}
               {tenseLabel && (
-                <GrammarItemCard title="কাল (Tense):" value={tenseLabel.name} />
+                <GrammarItemCard
+                  title={locale === "bn" ? "ক্রিয়ার কাল:" : "Tense:"}
+                  value={tenseLabel.name}
+                />
               )}
             </div>
 
@@ -205,7 +216,7 @@ export function WordDetailPopover({
           <div className="bg-primary/5 dark:bg-primary/10 p-3.5 rounded-panel border-0">
             <div className="text-chip text-primary text-bangla mb-1 flex items-center gap-1.5">
               <HugeiconsIcon icon={SparklesIcon} size={14} />
-              <span>এই প্রসঙ্গের অর্থ (Contextual Meaning):</span>
+              <span>{locale === "bn" ? "প্রাসঙ্গিক অর্থ:" : "Contextual Meaning:"}</span>
             </div>
             <p className="text-meta text-bangla text-foreground leading-relaxed">
               {entry.contextualMeaningBn}
@@ -214,7 +225,7 @@ export function WordDetailPopover({
 
           <div>
             <span className="text-chip text-muted-foreground text-bangla uppercase tracking-wider block mb-1">
-              সাধারণ অর্থ (General Meaning):
+              {locale === "bn" ? "সাধারণ অর্থ:" : "General Meaning:"}
             </span>
             <p className="text-meta text-bangla text-muted-foreground">
               {entry.generalMeaningBn}

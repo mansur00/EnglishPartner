@@ -891,7 +891,7 @@ export function RoleplayPartner() {
                 </button>
                 <button
                   type="button"
-                  title="মুছে ফেলুন (Delete)"
+                  title={locale === "bn" ? "মুছে ফেলুন" : "Delete"}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteCustomScenario(sc.id);
@@ -1065,7 +1065,7 @@ export function RoleplayPartner() {
                   <div className="mt-1 p-2.5 rounded-panel bg-warning-bg text-meta text-bangla max-w-sm space-y-1 animate-in fade-in">
                     <div className="flex items-center gap-1.5 text-label text-foreground">
                       <HugeiconsIcon icon={SparklesIcon} size={14} className="text-warning shrink-0" />
-                      <span>জেন্টল কারেকশন (Friendly Tip):</span>
+                      <span>{locale === "bn" ? "সহজ পরামর্শ:" : "Friendly Tip:"}</span>
                     </div>
                     <p className="text-foreground">
                       &quot;<span className="line-through text-muted-foreground">{msg.correction.original}</span>&quot;{" "}
@@ -1094,7 +1094,7 @@ export function RoleplayPartner() {
               className="rounded-control text-chip text-muted-foreground hover:text-foreground cursor-pointer"
             >
               <HugeiconsIcon icon={StopIcon} size={13} />
-              <span className="text-bangla">থামান (Stop)</span>
+              <span className="text-bangla">{locale === "bn" ? "থামান" : "Stop"}</span>
             </Button>
           </div>
         )}
@@ -1239,10 +1239,10 @@ export function RoleplayPartner() {
               </div>
               <div>
                 <h3 className="text-card-title text-foreground">
-                  Session Feedback Summary (সেশন পর্যালোচনা)
+                  {locale === "bn" ? "সেশন পর্যালোচনা" : "Session Feedback Summary"}
                 </h3>
                 <p className="text-meta-bn text-muted-foreground">
-                  Schema F1 অনুযায়ী আপনার পারফরম্যান্স মূল্যায়ন
+                  {locale === "bn" ? "আপনার কথোপকথনের মূল্যায়ন ও পরামর্শ" : "Evaluation and tips based on your conversation"}
                 </p>
               </div>
             </div>
@@ -1266,7 +1266,7 @@ export function RoleplayPartner() {
           {/* Session Dialogue Audio Replay (Milestone 3B) */}
           <div className="space-y-2 p-3.5 rounded-panel bg-muted/20">
             <FeedbackSectionHeader>
-              Dialogue Replay (কথোপকথন অডিও রিভিশন)
+              {locale === "bn" ? "কথোপকথন অডিও রিভিশন" : "Dialogue Replay"}
             </FeedbackSectionHeader>
             <div className="space-y-1.5">
               {messages.map((turn, tIdx) => (
@@ -1296,7 +1296,7 @@ export function RoleplayPartner() {
           {/* Strengths */}
           <div className="space-y-2">
             <FeedbackSectionHeader>
-              Strengths (আপনার সবল দিকসমূহ)
+              {locale === "bn" ? "আপনার সবল দিকসমূহ" : "Strengths"}
             </FeedbackSectionHeader>
             <div className="space-y-1.5">
               {feedback.strengths.map((str, sIdx) => (
@@ -1312,7 +1312,7 @@ export function RoleplayPartner() {
           {feedback.focus_areas && feedback.focus_areas.length > 0 && (
             <div className="space-y-2.5">
               <FeedbackSectionHeader>
-                Focus Areas (উন্নয়নের জায়গা)
+                {locale === "bn" ? "উন্নয়নের জায়গা" : "Focus Areas"}
               </FeedbackSectionHeader>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {feedback.focus_areas.map((fa, fIdx) => (
@@ -1344,7 +1344,7 @@ export function RoleplayPartner() {
           <div className="p-3.5 rounded-panel bg-primary/10 space-y-1 text-meta text-bangla">
             <div className="flex items-center gap-1.5 text-label text-foreground">
               <HugeiconsIcon icon={Target01Icon} size={16} />
-              <span>পরবর্তী পদক্ষেপ (Next Step):</span>
+              <span>{locale === "bn" ? "পরবর্তী পদক্ষেপ:" : "Next Step:"}</span>
             </div>
             <p className="text-foreground">{feedback.next_step}</p>
           </div>

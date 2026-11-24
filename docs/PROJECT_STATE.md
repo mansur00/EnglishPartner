@@ -257,6 +257,38 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-24, Elimination of Dual Language Titles & Strict Single-Language Enforcement
+- Requested by owner: "akhono bangla english ixed ace aigulo thik korte hobe" -> Eliminate all dual titles, mixed parenthetical English strings (e.g. `বাংলা (English)` or `English (বাংলা)`), and enforce pure single language display across the application (pure Bangla in BN mode, pure English in EN mode).
+- Changed:
+  - `src/app/(app)/professions/page.tsx` & `src/app/(app)/professions/[slug]/page.tsx`: Localized hero header, badge/pill labels, competencies headers, and card taglines dynamically via `useLocale()`, removing developer milestone tags and English in parentheses.
+  - `src/app/(app)/conversations/[slug]/page.tsx`: Localized breadcrumb to `<LocaleTitle titleEn="Shopping Ladder" titleBn="শপিং ল্যাডার" />`.
+  - `src/app/(public)/privacy/page.tsx` & `src/app/(public)/terms/page.tsx`: Cleaned page headings and section titles of English parenthetical translations.
+  - `src/app/page.tsx`: Cleaned Start Learning CTA text to pure single language.
+  - `src/components/analytics/ProgressDashboard.tsx`: Replaced hardcoded dual titles for learning progress, vocabulary retention, weekly activity, and next steps with `<LocaleTitle>`.
+  - `src/components/admin/AdminDashboardClient.tsx` & `src/components/admin/ConversationEditorClient.tsx`: Cleaned 403 authorization messages, draft save notices, publish buttons, turn counters, and editor labels to pure single language.
+  - `src/components/learning/ConversationReader.tsx`: Localized guest auth prompt modal purposes to pure language without parenthetical English.
+  - `src/components/learning/GrammarPanel.tsx`: Localized sheet title, description, SVO labels (`কর্তা:`, `ক্রিয়া:`), polite alternatives, common mistakes, and close button.
+  - `src/components/learning/LadderStepContainer.tsx` & `src/components/learning/NicheLadderRoadmap.tsx`: Cleaned dialogue/practice tab labels and removed parenthetical CEFR/Story Arc English from all 5 roadmap tier titles.
+  - `src/components/learning/ReviewQueue.tsx` & `src/components/learning/ReviewSummary.tsx`: Cleaned review empty states, show answer button, contextual meaning/sentence headers, and practice again / explore buttons.
+  - `src/components/learning/WordDetailPopover.tsx`: Localized POS, Role, Lemma, Tense, contextual meaning, and general meaning labels.
+  - `src/components/grammar/GrammarBreakdown.tsx`, `GrammarLayerPicker.tsx`, `GrammarLegend.tsx`, `RuleCard.tsx`: Localized structure summary, table headers, grammar layer switches, and formula cards.
+  - `src/components/practice/PracticeWorkspace.tsx`, `CompleteLineCard.tsx`, `DialogueOrderCard.tsx`, `HideSpeakerPractice.tsx`, `ListeningQuizCard.tsx`, `ReadAloudCard.tsx`, `SentenceBuilderCard.tsx`: Localized all tab labels, role selection, audio cues, hints, word pool chips, and honest self-check ratings.
+  - `src/components/practice/DailyPracticeClient.tsx`: Localized practice mode titles to pure `এআই পার্টনার` and `শপিং ল্যাডার`.
+  - `src/components/tools/RoleplayPartner.tsx` & `WhatShouldISay.tsx`: Localized session feedback summary, dialogue replay, strengths, focus areas, and useful expressions headers.
+  - `src/components/settings/SettingsClient.tsx`: Localized voice accent labels to pure single language.
+  - `src/components/auth/AuthPromptModal.tsx`: Removed English parentheses from modal title and dismiss button.
+  - `src/content/seed/niche_shopping_money.ts`: Cleaned parenthetical English from all 7 shopping ladder titles.
+- Verified with:
+  - Custom AST / regex scanner across all `src/` files: 0 instances of dual-language titles or parenthetical English remaining in UI components.
+  - `npm run check:frozen`: Passed (0 byte diff on frozen `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 sub-12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (112/112 static pages generated, 0 warnings).
+  - Puppeteer live browser test on Next.js dev server: Verified H1 renders `পেশাগত ইংরেজি ক্যারিয়ার পাথ` in BN mode and `Professional English Career Paths` in EN mode.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-23, Provider-Agnostic Language Model (LLM) Integration & Production Pipeline
 - Requested by owner: "language model implement koro porperly" -> implement production-ready LLM integration layer with multi-provider support, structured JSON outputs, prompt injection defenses, and seamless fallback.
 - Changed:

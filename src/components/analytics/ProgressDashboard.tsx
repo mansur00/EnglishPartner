@@ -122,9 +122,12 @@ export function ProgressDashboard() {
             Personalised Analytics
           </Pill>
         </div>
-        <h1 className="text-page-title text-foreground">
-          My Learning Progress (আমার অগ্রগতি)
-        </h1>
+        <LocaleTitle
+          as="h1"
+          titleEn="My Learning Progress"
+          titleBn="আমার অগ্রগতি"
+          className="text-page-title text-foreground"
+        />
         <p className="text-meta-bn text-muted-foreground">
           আপনার ধারাবাহিকতা, শব্দভাণ্ডার আয়ত্ত করার হার এবং পরবর্তী সুপারিশকৃত পাঠের বিস্তারিত ড্যাশবোর্ড।
         </p>
@@ -169,9 +172,12 @@ export function ProgressDashboard() {
                 <HugeiconsIcon icon={BookOpen01Icon} size={18} />
               </div>
               <div>
-                <h3 className="text-card-title text-foreground">
-                  Vocabulary Retention (শব্দভাণ্ডার আয়ত্ত)
-                </h3>
+                <LocaleTitle
+                  as="h3"
+                  titleEn="Vocabulary Retention"
+                  titleBn="শব্দভাণ্ডার আয়ত্ত"
+                  className="text-card-title text-foreground"
+                />
                 <p className="text-meta text-muted-foreground">
                   Spaced Repetition (SM-2) Stage Distribution
                 </p>
@@ -231,9 +237,12 @@ export function ProgressDashboard() {
                 <HugeiconsIcon icon={Award01Icon} size={18} />
               </div>
               <div>
-                <h3 className="text-card-title text-foreground">
-                  Weekly Activity (সাপ্তাহিক অনুশীলন)
-                </h3>
+                <LocaleTitle
+                  as="h3"
+                  titleEn="Weekly Activity"
+                  titleBn="সাপ্তাহিক অনুশীলন"
+                  className="text-card-title text-foreground"
+                />
                 <p className="text-meta text-muted-foreground">
                   Last 7 Days Practice Minutes
                 </p>
@@ -291,9 +300,12 @@ export function ProgressDashboard() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <HugeiconsIcon icon={SparklesIcon} size={20} className="text-primary" />
-            <h2 className="text-section-title text-foreground">
-              Recommended Next Steps (আপনার জন্য প্রস্তাবিত পাঠ)
-            </h2>
+            <LocaleTitle
+              as="h2"
+              titleEn="Recommended Next Steps"
+              titleBn="আপনার জন্য প্রস্তাবিত পাঠ"
+              className="text-section-title text-foreground"
+            />
           </div>
           <Tag variant="brand" size="sm">
             AI Personalized

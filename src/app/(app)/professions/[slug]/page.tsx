@@ -61,7 +61,11 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
           <div className="flex items-center gap-2">
             <Badge variant="brand" size="sm" className="gap-1 text-chip">
               <HugeiconsIcon icon={Briefcase01Icon} size={12} />
-              Professional Career Track
+              <LocaleTitle
+                as="span"
+                titleEn="Professional Career Track"
+                titleBn="পেশাগত ক্যারিয়ার ট্র্যাক"
+              />
             </Badge>
             <Badge variant="accent" size="sm" className="text-chip">
               {profession.targetCefr}
@@ -75,13 +79,19 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
             className="text-page-title text-foreground"
           />
 
-          <p className="text-chip text-primary font-mono">
-            {profession.tagline}
-          </p>
+          <LocaleTitle
+            as="p"
+            titleEn={profession.tagline}
+            titleBn={profession.taglineBn}
+            className="text-chip text-primary font-mono"
+          />
 
-          <p className="text-body text-muted-foreground max-w-reading leading-relaxed">
-            {profession.descriptionBn}
-          </p>
+          <LocaleTitle
+            as="p"
+            titleEn={profession.description || profession.descriptionBn}
+            titleBn={profession.descriptionBn}
+            className="text-body text-muted-foreground max-w-reading leading-relaxed"
+          />
 
           <div className="flex flex-wrap gap-4 pt-2 text-chip text-primary">
             {profession.competenciesBn.map((comp, idx) => (

@@ -33,6 +33,7 @@ import {
   VocabularyEntry,
   SentenceGrammarEntry,
 } from "@/content/seed/vocabulary";
+import { useLocale } from "@/lib/i18n";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
@@ -64,6 +65,7 @@ function ConversationReaderInner({
   nextStepSlug,
   nextStepTitle,
 }: ConversationReaderProps) {
+  const locale = useLocale();
   const [selectedVersionId, setSelectedVersionId] = useState<string>(
     versions[0]?.versionId || ""
   );
@@ -201,7 +203,7 @@ function ConversationReaderInner({
       } else {
         updated.add(lemma);
         // Prompt guest user to sign in to sync with cloud
-        setAuthModalPurpose("শব্দভান্ডার সংরক্ষণ (Save Vocabulary)");
+        setAuthModalPurpose(locale === "bn" ? "শব্দভান্ডার সংরক্ষণ" : "Save Vocabulary");
         setIsAuthModalOpen(true);
       }
       try {
@@ -218,7 +220,7 @@ function ConversationReaderInner({
     setIsScenarioBookmarked((prev) => {
       const next = !prev;
       if (next) {
-        setAuthModalPurpose("দৃশ্যপট বুকমার্ক (Bookmark Scenario)");
+        setAuthModalPurpose(locale === "bn" ? "দৃশ্যপট বুকমার্ক" : "Bookmark Scenario");
         setIsAuthModalOpen(true);
       }
       try {

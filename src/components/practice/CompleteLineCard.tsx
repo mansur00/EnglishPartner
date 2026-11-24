@@ -11,6 +11,7 @@ import {
   RefreshIcon,
 } from "@hugeicons/core-free-icons";
 import { CompleteLineExercise } from "@/content/seed/exercises";
+import { useLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
@@ -22,6 +23,7 @@ interface CompleteLineCardProps {
 }
 
 export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProps) {
+  const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   const [hasChecked, setHasChecked] = useState(false);
@@ -155,7 +157,9 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-chip text-primary bg-primary/10 hover:bg-primary/15 transition-colors cursor-pointer"
             >
               <HugeiconsIcon icon={VolumeHighIcon} size={14} />
-              <span className="text-bangla">সম্পূর্ণ বাক্যটি শুনুন (Listen)</span>
+              <span className="text-bangla">
+                {locale === "bn" ? "সম্পূর্ণ বাক্যটি শুনুন" : "Listen to Full Sentence"}
+              </span>
             </button>
           </div>
         )}
@@ -164,7 +168,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
       {/* Word Options Chips via Design System Tag */}
       <div className="space-y-2.5">
         <span className="text-chip text-muted-foreground uppercase tracking-wider block">
-          শব্দ বেছে নিন (Choose Word):
+          {locale === "bn" ? "শব্দ বেছে নিন:" : "Choose Word:"}
         </span>
         <div className="flex flex-wrap gap-2.5">
           {blank.options.map((word) => {

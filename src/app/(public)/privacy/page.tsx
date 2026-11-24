@@ -27,7 +27,7 @@ export default function PrivacyPage() {
               <span>Learner-First Privacy</span>
             </div>
             <h1 className="text-page-title text-foreground font-sans">
-              Privacy Policy (গোপনীয়তা নীতি)
+              গোপনীয়তা নীতি
             </h1>
             <p className="text-meta text-muted-foreground mt-1">
               Last Updated: November 2026 • Effective Date: Gate 1 Launch
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
           <div className="space-y-4 text-body text-muted-foreground leading-relaxed">
             <section className="space-y-2">
               <h2 className="text-card-title-bn">
-                ১. উন্মুক্ত শিক্ষা ও কোনো লুকানো ট্র্যাকিং নেই (Free & Open Learning)
+                ১. উন্মুক্ত শিক্ষা ও কোনো লুকানো ট্র্যাকিং নেই
               </h2>
               <p>
                 English Conversation Partner প্ল্যাটফর্মের সমস্ত কথোপকথন, অডিও এবং ব্যাকরণগত নির্দেশিকা দেখার জন্য কোনো অ্যাকাউন্ট তৈরি বা ব্যক্তিগত তথ্য দেওয়া বাধ্যতামূলক নয়। আমরা কোনো গোপন বিজ্ঞাপন ট্র্যাকার বা থার্ড-পার্টি ডেটা ব্রোকার ব্যবহার করি না।
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
 
             <section className="space-y-2">
               <h2 className="text-card-title-bn">
-                ২. গেস্ট ডেটা সংরক্ষণ (Guest Storage)
+                ২. গেস্ট ডেটা সংরক্ষণ
               </h2>
               <p>
                 আপনি যদি সাইন-ইন ছাড়া শব্দ সেভ করেন বা বুকমার্ক করেন, তবে সেই তথ্য সম্পূর্ণ আপনার ডিভাইসের ব্রাউজারে (<code className="text-chip bg-muted px-1.5 py-0.5 rounded-control font-mono text-foreground">localStorage</code>) সংরক্ষিত থাকে। এই তথ্য আমাদের সার্ভারে পাঠানো হয় না।
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
 
             <section className="space-y-2">
               <h2 className="text-card-title-bn">
-                ৩. নিবন্ধিত অ্যাকাউন্ট ও ক্লাউড সিঙ্ক (Registered Users)
+                ৩. নিবন্ধিত অ্যাকাউন্ট ও ক্লাউড সিঙ্ক
               </h2>
               <p>
                 আপনি যখন ঐচ্ছিকভাবে সাইন-ইন করবেন, তখন আপনার নাম, ইমেইল এবং বুকমার্কসমূহ সুসংরক্ষিতভাবে ক্লাউড ডেটাবেজে সংরক্ষিত থাকে যাতে আপনি যেকোনো ডিভাইসে আপনার শেখার ধারাবাহিকতা বজায় রাখতে পারেন।

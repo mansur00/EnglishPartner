@@ -28,7 +28,7 @@ interface AuthPromptModalProps {
 export function AuthPromptModal({
   isOpen,
   onClose,
-  title = "সংরক্ষণ করতে সাইন-ইন করুন (Sign In to Save)",
+  title = "সংরক্ষণ করতে সাইন-ইন করুন",
   description = "কথোপকথন শোনা এবং পড়া সম্পূর্ণ ফ্রি। তবে আপনার ব্যক্তিগত শব্দভান্ডার এবং শেখার অগ্রগতি ক্লাউডে সংরক্ষণ করতে সাইন-ইন প্রয়োজন।",
   actionText = "শব্দটি সংরক্ষণ করতে সাইন-ইন করুন",
 }: AuthPromptModalProps) {
@@ -72,7 +72,7 @@ export function AuthPromptModal({
             onClick={onClose}
             className="btn-press w-full justify-center text-bangla text-label text-muted-foreground rounded-control"
           >
-            পরে করব (Continue)
+            পরে করব
           </Button>
         </div>
 

@@ -162,7 +162,7 @@ export function ReviewSummary({
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-control border border-border text-label text-foreground hover:bg-muted transition-colors text-bangla cursor-pointer"
         >
           <HugeiconsIcon icon={RefreshIcon} size={16} />
-          <span>পুনরায় শুরু করুন (Practice Again)</span>
+          <span>{locale === "bn" ? "পুনরায় শুরু করুন" : "Practice Again"}</span>
         </button>
 
         {nextScenarioSlug ? (
@@ -179,7 +179,7 @@ export function ReviewSummary({
             <Button
               className="w-full sm:w-auto justify-center gap-2 text-label rounded-control font-bangla"
             >
-              <span>আরও কথোপকথন খুঁজুন (Explore All)</span>
+              <span>{locale === "bn" ? "আরও কথোপকথন খুঁজুন" : "Explore All"}</span>
               <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
             </Button>
           </Link>

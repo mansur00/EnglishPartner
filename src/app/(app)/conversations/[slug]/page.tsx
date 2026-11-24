@@ -73,7 +73,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           <Link href="/explore/category/shopping-and-money">
             <Button variant="ghost" size="sm" className="btn-back-nav text-label">
               <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-              Shopping Ladder (সব ধাপ)
+              <LocaleTitle titleEn="Shopping Ladder" titleBn="শপিং ল্যাডার" />
             </Button>
           </Link>
 

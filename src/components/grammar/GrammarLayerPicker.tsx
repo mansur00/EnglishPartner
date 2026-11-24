@@ -28,28 +28,28 @@ const LAYERS: { id: GrammarLayerId; labelEn: string; labelBn: string; channelEn:
   {
     id: "pos",
     labelEn: "Parts of Speech",
-    labelBn: "পদ প্রকরণ (POS)",
+    labelBn: "পদ প্রকরণ",
     channelEn: "Color text",
     channelBn: "রঙিন পাঠ্য",
   },
   {
     id: "role",
     labelEn: "Sentence Roles",
-    labelBn: "বাক্যের ভূমিকা (Roles)",
+    labelBn: "বাক্যের ভূমিকা",
     channelEn: "Underline & tint",
     channelBn: "আন্ডারলাইন ও শেড",
   },
   {
     id: "tense",
     labelEn: "Verbs & Tenses",
-    labelBn: "ক্রিয়ার কাল (Tenses)",
+    labelBn: "ক্রিয়ার কাল",
     channelEn: "Tense bar",
     channelBn: "কাল নির্দেশক বার",
   },
   {
     id: "phrase",
     labelEn: "Phrases & Clauses",
-    labelBn: "বাক্যাংশ (Phrases)",
+    labelBn: "বাক্যাংশ ও ক্লজ",
     channelEn: "Brackets",
     channelBn: "ব্র্যাকেট বর্ডার",
   },
@@ -171,10 +171,10 @@ export function GrammarLayerPicker({
                 >
                   {level === "basic"
                     ? isBn
-                      ? "সাধারণ (Basic)"
+                      ? "সাধারণ"
                       : "Basic"
                     : isBn
-                      ? "বিস্তারিত (Advanced)"
+                      ? "বিস্তারিত"
                       : "Advanced"}
                 </button>
               );

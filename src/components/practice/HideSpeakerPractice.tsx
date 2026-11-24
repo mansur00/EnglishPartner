@@ -17,6 +17,7 @@ import { Pill } from "@/components/ui/pill";
 import { ChatBubble } from "@/components/shared/ChatBubble";
 import { EmojiTile } from "@/components/shared/EmojiTile";
 import { resolveSpeakerPerspective, isLearnerLine } from "@/lib/practice/hide-speaker";
+import { useLocale } from "@/lib/i18n";
 
 interface HideSpeakerPracticeProps {
   lines: LadderDialogueLine[];
@@ -24,6 +25,7 @@ interface HideSpeakerPracticeProps {
 }
 
 export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProps) {
+  const locale = useLocale();
   // Default to second speaker (typically the customer/learner)
   const [learnerSpeakerId, setLearnerSpeakerId] = useState<string>(
     speakers[1]?.id || speakers[0]?.id || ""
@@ -107,7 +109,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={UserGroupIcon} size={18} className="text-primary" />
           <span className="text-label text-foreground text-bangla">
-            আপনার চরিত্র বেছে নিন (Choose Your Role):
+            {locale === "bn" ? "আপনার চরিত্র বেছে নিন:" : "Choose Your Role:"}
           </span>
         </div>
 
@@ -138,11 +140,11 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
       {/* Progress & Turn Indicator */}
       <div className="flex items-center justify-between text-chip text-muted-foreground">
         <Pill variant="default" size="sm" className="font-mono">
-          সংলাপ {currentLineIndex + 1} / {lines.length}
+          {locale === "bn" ? "সংলাপ" : "Turn"} {currentLineIndex + 1} / {lines.length}
         </Pill>
         <Pill variant={isLearnerTurn ? "warning" : "neutral"} size="sm" dot>
           {isLearnerTurn
-            ? `আপনার পালা (${learnerSpeaker.name})`
+            ? (locale === "bn" ? `আপনার পালা (${learnerSpeaker.name})` : `Your turn (${learnerSpeaker.name})`)
             : `${partnerSpeaker.name} (${partnerSpeaker.role})`}
         </Pill>
       </div>
@@ -193,7 +195,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
                   ({learnerSpeaker.role})
                 </span>
                 <span className="text-label text-foreground">
-                  {learnerSpeaker.name} (আপনি)
+                  {learnerSpeaker.name} ({locale === "bn" ? "আপনি" : "You"})
                 </span>
               </div>
 
@@ -201,10 +203,10 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
                 <div className="flex items-center justify-between gap-2 border-b border-border/50 pb-1.5">
                   <span className="text-chip text-primary text-bangla flex items-center gap-1">
                     <HugeiconsIcon icon={SparklesIcon} size={14} />
-                    <span>আপনার বলার পালা!</span>
+                    <span>{locale === "bn" ? "আপনার বলার পালা!" : "Your turn to speak!"}</span>
                   </span>
                   <span className="text-chip text-muted-foreground">
-                    Speak your line in English
+                    {locale === "bn" ? "ইংরেজি বাক্যটি নিজে বলার চেষ্টা করুন" : "Speak your line in English"}
                   </span>
                 </div>
 
@@ -264,7 +266,9 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
       <div className="pt-2 flex justify-end">
         <Button onClick={handleNextTurn} className="btn-nav-action">
           <span>
-            {currentLineIndex < lines.length - 1 ? "পরবর্তী সংলাপ (Next)" : "অনুশীলন সমাপ্ত"}
+            {currentLineIndex < lines.length - 1
+              ? (locale === "bn" ? "পরবর্তী সংলাপ" : "Next Turn")
+              : (locale === "bn" ? "অনুশীলন সমাপ্ত" : "Finish Practice")}
           </span>
           <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
         </Button>

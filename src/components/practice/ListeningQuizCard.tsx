@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n";
 
 interface ListeningQuizCardProps {
   questions: ListeningQuizQuestion[];
@@ -32,6 +33,7 @@ interface ListeningQuizCardProps {
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
 export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardProps) {
+  const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [evaluation, setEvaluation] = useState<QuizAnswerEvaluation | null>(null);
@@ -211,7 +213,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
             className="rounded-control text-bangla gap-1.5"
           >
             <HugeiconsIcon icon={ArrowReloadHorizontalIcon} size={15} />
-            <span>পুনরায় কুইজ দিন (Try Again)</span>
+            <span>{locale === "bn" ? "পুনরায় কুইজ দিন" : "Try Again"}</span>
           </Button>
         </div>
       </Card>
@@ -226,7 +228,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
       <div className="flex items-center justify-between gap-3 pb-3 border-b border-border flex-wrap">
         <div className="flex items-center gap-2">
           <Pill variant="neutral" size="sm" className="font-mono">
-            প্রশ্ন {currentIndex + 1} / {questions.length}
+            {locale === "bn" ? `প্রশ্ন ${currentIndex + 1} / ${questions.length}` : `Question ${currentIndex + 1} / ${questions.length}`}
           </Pill>
 
           {!hasAnswered && (
@@ -237,7 +239,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
               className="text-muted-foreground hover:text-foreground text-chip rounded-control px-2"
               title="প্রশ্নটি বাদ দিতে ক্লিক করুন"
             >
-              বাদ দিন (Skip)
+              {locale === "bn" ? "বাদ দিন" : "Skip"}
             </Button>
           )}
         </div>
@@ -255,7 +257,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
             )}
             title="ধীরগতির অডিও গতি পরিবর্তন করুন"
           >
-            {isSlowAudio ? "0.75x ধীর" : "1.0x স্বাভাবিক"}
+            {isSlowAudio ? (locale === "bn" ? "0.75x ধীর" : "0.75x Slow") : (locale === "bn" ? "1.0x স্বাভাবিক" : "1.0x Normal")}
           </button>
 
           {/* Audio Listen Button */}
@@ -277,7 +279,7 @@ export function ListeningQuizCard({ questions, onComplete }: ListeningQuizCardPr
                 icon={isPlayingAudio ? StopIcon : VolumeHighIcon}
                 size={14}
               />
-              <span>{isPlayingAudio ? "থামান" : "শুনুন (Listen)"}</span>
+              <span>{isPlayingAudio ? (locale === "bn" ? "থামান" : "Stop") : (locale === "bn" ? "শুনুন" : "Listen")}</span>
             </Button>
           )}
         </div>

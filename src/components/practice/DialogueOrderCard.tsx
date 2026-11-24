@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { LocaleTitle } from "@/components/shared";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n";
 
 interface DialogueOrderCardProps {
   exercise: DialogueOrderExercise;
@@ -33,6 +34,7 @@ export function DialogueOrderCard({
   exercise,
   onComplete,
 }: DialogueOrderCardProps) {
+  const locale = useLocale();
   const [turns, setTurns] = useState<DialogueOrderTurn[]>(() => [
     ...exercise.shuffledTurns,
   ]);
@@ -322,7 +324,7 @@ export function DialogueOrderCard({
           </div>
           <div>
             <h4 className="text-label text-topic-ink text-bangla">
-              সহায়ক সংকেত (Hint)
+              {locale === "bn" ? "সহায়ক সংকেত" : "Hint"}
             </h4>
             <p className="text-meta text-muted-foreground mt-0.5 text-bangla">
               {hint.explanationBn}

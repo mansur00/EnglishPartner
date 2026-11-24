@@ -317,7 +317,7 @@ export function WhatShouldISay() {
           {response.useful_phrases && response.useful_phrases.length > 0 && (
             <Card className="p-4 bg-muted/40 rounded-panel space-y-2.5">
               <span className="text-meta text-muted-foreground uppercase tracking-wider block">
-                Useful Expressions (কাজের কিছু শব্দগুচ্ছ)
+                {locale === "bn" ? "কাজের কিছু শব্দগুচ্ছ" : "Useful Expressions"}
               </span>
               <div className="flex flex-wrap gap-2">
                 {response.useful_phrases.map((phrase, pIdx) => (

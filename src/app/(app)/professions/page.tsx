@@ -27,10 +27,10 @@ export default function ProfessionsIndexPage() {
       <div className="space-y-2 border-b border-border pb-4">
         <div className="flex items-center gap-2">
           <Tag variant="brand" size="sm">
-            Milestone 4A
+            {locale === "bn" ? "পেশাগত দক্ষতা" : "Professional Track"}
           </Tag>
           <Pill variant="neutral" size="sm">
-            Professional Career Paths
+            {locale === "bn" ? "ক্যারিয়ার পাথ" : "Career Paths"}
           </Pill>
         </div>
 
@@ -78,7 +78,7 @@ export default function ProfessionsIndexPage() {
 
               {/* Tagline & Description */}
               <p className="text-chip text-primary font-mono">
-                {profession.tagline}
+                {locale === "bn" ? profession.taglineBn : profession.tagline}
               </p>
               <p className="text-meta-bn text-muted-foreground leading-relaxed">
                 {locale === "bn" ? profession.descriptionBn : (profession.description || profession.descriptionBn)}

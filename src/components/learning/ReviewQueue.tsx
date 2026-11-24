@@ -197,7 +197,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
         </div>
         <div className="space-y-1.5">
           <h3 className="text-card-title text-foreground text-bangla">
-            আজকে কোনো রিভিউ বাকি নেই (Nothing due today)
+            {locale === "bn" ? "আজকে কোনো রিভিউ বাকি নেই" : "Nothing due today"}
           </h3>
           <p className="text-meta-lead-bn text-muted-foreground max-w-md mx-auto">
             {reviewedSessionCount > 0
@@ -296,7 +296,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                 className="rounded-control text-label text-bangla gap-2 cursor-pointer"
               >
                 <HugeiconsIcon icon={ViewIcon} size={16} />
-                <span>উত্তর দেখুন (Show Answer)</span>
+                <span>{locale === "bn" ? "উত্তর দেখুন" : "Show Answer"}</span>
               </Button>
             </div>
           ) : (
@@ -304,7 +304,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
               {/* Meaning Section */}
               <div className="space-y-1.5">
                 <span className="text-chip-bn">
-                  প্রাসঙ্গিক অর্থ (Meaning):
+                  {locale === "bn" ? "প্রাসঙ্গিক অর্থ:" : "Contextual Meaning:"}
                 </span>
                 <p className="text-card-title-bn text-foreground">
                   {currentVocabEntry.contextualMeaningBn}
@@ -321,7 +321,7 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                 <div className="p-3.5 rounded-panel bg-muted/20 border border-border space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-chip-bn">
-                      বাক্যে প্রয়োগ (Example Sentence):
+                      {locale === "bn" ? "বাক্যে প্রয়োগ:" : "Example Sentence:"}
                     </span>
                     <button
                       type="button"

@@ -32,31 +32,31 @@ export function NicheLadderRoadmap({
   const tiers = [
     {
       group: "A1 Beginner",
-      titleBn: "প্রারম্ভিক পর্যায় (A1 Beginner) — বেসিক কুশলাদি ও কেনাকাটা",
+      titleBn: "প্রারম্ভিক পর্যায় — বেসিক কুশলাদি ও কেনাকাটা",
       badgeVariant: "brand" as const,
       stepNumbers: [1, 2, 3, 4],
     },
     {
       group: "A2 Elementary",
-      titleBn: "প্রাথমিক পর্যায় (A2 Elementary) — ছাড়, তুলনা ও পণ্য বিনিময়",
+      titleBn: "প্রাথমিক পর্যায় — ছাড়, তুলনা ও পণ্য বিনিময়",
       badgeVariant: "accent" as const,
       stepNumbers: [5, 6, 7, 8, 9, 10],
     },
     {
       group: "B1 Intermediate",
-      titleBn: "মধ্যবর্তী পর্যায় (B1 Intermediate) — শর্ত, অভিযোগ ও পরামর্শ",
+      titleBn: "মধ্যবর্তী পর্যায় — শর্ত, অভিযোগ ও পরামর্শ",
       badgeVariant: "peach" as const,
       stepNumbers: [11, 12, 13, 14, 15, 16],
     },
     {
       group: "B2 Upper-Intermediate",
-      titleBn: "উচ্চ-মধ্যবর্তী পর্যায় (B2) — জটিল পরিস্থিতি, কার্ড সমস্যা ও দ্বিমত",
+      titleBn: "উচ্চ-মধ্যবর্তী পর্যায় — জটিল পরিস্থিতি, কার্ড সমস্যা ও দ্বিমত",
       badgeVariant: "neutral" as const,
       stepNumbers: [17, 18, 19],
     },
     {
       group: "C1 Advanced Story",
-      titleBn: "উন্নত গল্প ও বাস্তব আলাপন (Story Arc) — পূর্ণাঙ্গ মানবিক গল্প",
+      titleBn: "উন্নত গল্প ও বাস্তব আলাপন — পূর্ণাঙ্গ মানবিক গল্প",
       badgeVariant: "brand" as const,
       stepNumbers: [20],
     },

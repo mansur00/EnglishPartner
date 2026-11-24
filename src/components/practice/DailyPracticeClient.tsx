@@ -444,7 +444,7 @@ export function DailyPracticeClient() {
             </div>
             <div>
               <h3 className="font-heading text-card-title text-foreground group-hover:text-primary transition-colors">
-                {locale === "bn" ? "এআই পার্টনার (ফ্রি চ্যাট ও রোলপ্লে)" : "AI Partner (Voice & Roleplay)"}
+                {locale === "bn" ? "এআই পার্টনার" : "AI Partner"}
               </h3>
               <p className="text-meta text-muted-foreground mt-1">
                 {locale === "bn"
@@ -471,7 +471,7 @@ export function DailyPracticeClient() {
             </div>
             <div>
               <h3 className="font-heading text-card-title text-foreground group-hover:text-primary transition-colors">
-                {locale === "bn" ? "শপিং ল্যাডার (২০টি ধাপ)" : "Shopping Ladder (20 Steps)"}
+                {locale === "bn" ? "শপিং ল্যাডার" : "Shopping Ladder"}
               </h3>
               <p className="text-meta text-muted-foreground mt-1">
                 {locale === "bn"

@@ -160,7 +160,7 @@ export default function LandingPage() {
                 className="w-full sm:w-auto text-lead rounded-control shadow-sm gap-2.5 px-8"
               >
                 <HugeiconsIcon icon={PlayCircleIcon} size={22} />
-                <span>Start Learning (শুরু করুন)</span>
+                <span>Start Learning</span>
               </Button>
             </Link>
 

@@ -57,7 +57,7 @@ export function RuleCardDialog({
         {rule.formula && (
           <div className="p-3.5 rounded-control bg-primary/10 space-y-1">
             <span className="text-grammar-header text-primary">
-              {isBn ? "গঠন প্রণালী (Formula):" : "Formula:"}
+              {isBn ? "গঠন প্রণালী:" : "Formula:"}
             </span>
             <p className="text-meta font-mono text-foreground">
               {rule.formula}
@@ -68,7 +68,7 @@ export function RuleCardDialog({
         {/* Explanation */}
         <div className="space-y-1">
           <span className="text-grammar-header">
-            {isBn ? "ব্যাখ্যা ও প্রয়োগ (Explanation):" : "Explanation:"}
+            {isBn ? "ব্যাখ্যা ও প্রয়োগ:" : "Explanation:"}
           </span>
           <p className="text-body text-foreground leading-relaxed font-bangla text-bangla">
             {rule.explanation}
@@ -96,7 +96,7 @@ export function RuleCardDialog({
         {rule.examples && rule.examples.length > 0 && (
           <div className="space-y-2">
             <span className="text-grammar-header">
-              {isBn ? "উদাহরণসমূহ (Examples):" : "Examples:"}
+              {isBn ? "উদাহরণসমূহ:" : "Examples:"}
             </span>
             <div className="space-y-1.5">
               {rule.examples.map((ex, idx) => (

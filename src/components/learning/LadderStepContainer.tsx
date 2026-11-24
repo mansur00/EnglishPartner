@@ -11,6 +11,7 @@ import { ConversationVersionData } from "@/content/seed/dialogues";
 import { ConversationReader } from "./ConversationReader";
 import { PracticeWorkspace } from "@/components/practice/PracticeWorkspace";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useLocale } from "@/lib/i18n";
 
 interface LadderStepContainerProps {
   step: LadderStepItem;
@@ -18,6 +19,7 @@ interface LadderStepContainerProps {
 }
 
 export function LadderStepContainer({ step, ladderVersion }: LadderStepContainerProps) {
+  const locale = useLocale();
   return (
     <Tabs defaultValue="dialogue" className="space-y-6">
       {/* Primary Section Switcher */}
@@ -27,7 +29,7 @@ export function LadderStepContainer({ step, ladderVersion }: LadderStepContainer
           className="flex-1 sm:flex-initial gap-2 text-label rounded-control data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
         >
           <HugeiconsIcon icon={Book01Icon} size={16} />
-          <span className="text-bangla">সংলাপ ও অডিও পাঠ (Dialogue)</span>
+          <span className="text-bangla">{locale === "bn" ? "সংলাপ ও অডিও পাঠ" : "Dialogue & Audio"}</span>
         </TabsTrigger>
 
         <TabsTrigger
@@ -35,7 +37,7 @@ export function LadderStepContainer({ step, ladderVersion }: LadderStepContainer
           className="flex-1 sm:flex-initial gap-2 text-label rounded-control data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
         >
           <HugeiconsIcon icon={SparklesIcon} size={16} />
-          <span className="text-bangla">অনুশীলন ও কুইজ (Practice & Quiz)</span>
+          <span className="text-bangla">{locale === "bn" ? "অনুশীলন ও কুইজ" : "Practice & Quiz"}</span>
         </TabsTrigger>
       </TabsList>
 

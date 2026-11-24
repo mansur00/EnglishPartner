@@ -341,8 +341,8 @@ export function SettingsClient() {
             </label>
             <div className="grid grid-cols-3 gap-2.5 max-w-md">
               {[
-                { id: "us", labelBn: "মার্কিন (US)", labelEn: "US English" },
-                { id: "uk", labelBn: "ব্রিটিশ (UK)", labelEn: "UK English" },
+                { id: "us", labelBn: "মার্কিন ইংরেজি", labelEn: "US English" },
+                { id: "uk", labelBn: "ব্রিটিশ ইংরেজি", labelEn: "UK English" },
                 { id: "global", labelBn: "আন্তর্জাতিক", labelEn: "Global" },
               ].map((acc) => (
                 <button

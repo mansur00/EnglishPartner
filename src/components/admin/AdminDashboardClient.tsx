@@ -126,7 +126,7 @@ export function AdminDashboardClient() {
           </div>
 
           <h1 className="text-card-title text-foreground">
-            403 — অননুমোদিত অ্যাক্সেস (Unauthorized)
+            403 — অননুমোদিত অ্যাক্সেস
           </h1>
 
           <p className="text-meta-lead-bn">
@@ -136,7 +136,7 @@ export function AdminDashboardClient() {
           <div className="pt-3 flex flex-col gap-2">
             <Link href="/admin?role=admin">
               <Button className="w-full justify-center text-label text-bangla rounded-control">
-                অ্যাডমিন হিসেবে ডেমো দেখুন (Switch to Admin)
+                অ্যাডমিন হিসেবে ডেমো দেখুন
               </Button>
             </Link>
             <Link href="/dashboard">
@@ -165,7 +165,7 @@ export function AdminDashboardClient() {
         <div className="p-4 rounded-panel bg-destructive/10 border border-destructive/30 flex items-center gap-3 text-destructive">
           <HugeiconsIcon icon={Alert02Icon} size={20} className="shrink-0" />
           <div className="text-chip">
-            <strong>অননুমোদিত অ্যাক্সেস (Access Restricted):</strong> দৃশ্যপট সম্পাদনা করতে ‘{requiredRole}’ বা উচ্চতর ভূমিকা প্রয়োজন। আপনার বর্তমান ভূমিকা: ‘{currentRole}’।
+            <strong>অননুমোদিত অ্যাক্সেস:</strong> দৃশ্যপট সম্পাদনা করতে ‘{requiredRole}’ বা উচ্চতর ভূমিকা প্রয়োজন। আপনার বর্তমান ভূমিকা: ‘{currentRole}’।
           </div>
         </div>
       )}
@@ -248,7 +248,7 @@ export function AdminDashboardClient() {
           <div className="flex items-center gap-2">
             <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
             <h2 className="text-card-title-bn">
-              দৃশ্যপট তালিকা ও প্রকাশনা স্থিতি (Scenarios)
+              দৃশ্যপট তালিকা ও প্রকাশনা স্থিতি
             </h2>
           </div>
 
@@ -282,7 +282,7 @@ export function AdminDashboardClient() {
           <table className="w-full text-left text-meta">
             <thead className="bg-muted/40 text-muted-foreground border-b border-border text-chip uppercase tracking-wider">
               <tr>
-                <th className="p-3.5">দৃশ্যপট ও শিরোনাম (Scenario)</th>
+                <th className="p-3.5">দৃশ্যপট ও শিরোনাম</th>
                 <th className="p-3.5">ক্যাটাগরি</th>
                 <th className="p-3.5">CEFR লেভেল</th>
                 <th className="p-3.5">অনুবাদ ও অডিও</th>
@@ -390,7 +390,7 @@ export function AdminDashboardClient() {
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={SparklesIcon} size={18} className="text-primary" />
           <h3 className="text-card-title-bn">
-            ভাষা ও কভারেজ ম্যাট্রিক্স (Language Coverage Report)
+            ভাষা ও কভারেজ ম্যাট্রিক্স
           </h3>
         </div>
 
@@ -402,7 +402,7 @@ export function AdminDashboardClient() {
             description="Reviewed for CEFR progression (A1 to B2) and natural conversational authenticity."
           />
           <CoveragePanel
-            title="বাংলা অনুবাদ (Bengali Glosses)"
+            title="বাংলা অনুবাদ"
             status="১৭টি দৃশ্যপটের সব বাক্য অনুবাদকৃত"
             statusIcon={CheckmarkCircle01Icon}
             description="আক্ষরিক অনুবাদের পরিবর্তে প্রাসঙ্গিক ও সাবলীল প্রমিত বাংলা অর্থ নিশ্চিত করা হয়েছে।"
@@ -421,7 +421,7 @@ export function AdminDashboardClient() {
       {/* Audit Log */}
       <Card className="p-6 bg-card border-border rounded-card space-y-3">
         <h3 className="text-card-title-bn">
-          সাম্প্রতিক অডিট লগ (Audit Log)
+          সাম্প্রতিক অডিট লগ
         </h3>
         <div className="space-y-2 text-chip font-mono text-muted-foreground">
           <AuditLogRow

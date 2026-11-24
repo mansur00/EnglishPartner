@@ -14,6 +14,7 @@ import {
   Mic01Icon,
 } from "@hugeicons/core-free-icons";
 import { LadderDialogueLine, LadderSpeaker } from "@/content/seed/niche_shopping_money";
+import { useLocale } from "@/lib/i18n";
 import {
   getExercisesForStep,
   CompleteLineExercise,
@@ -49,6 +50,7 @@ export function PracticeWorkspace({
   nextStepSlug,
   nextStepTitle,
 }: PracticeWorkspaceProps) {
+  const locale = useLocale();
   const [activeTab, setActiveTab] = useState<"quiz" | "builder" | "order" | "aloud" | "roleplay" | "blanks">("quiz");
 
   const exerciseData = getExercisesForStep(stepSlug);
@@ -159,7 +161,7 @@ export function PracticeWorkspace({
           }`}
         >
           <HugeiconsIcon icon={VolumeHighIcon} size={16} />
-          <span className="text-bangla">লিসেনিং কুইজ (Quiz)</span>
+          <span>{locale === "bn" ? "লিসেনিং কুইজ" : "Listening Quiz"}</span>
         </button>
 
         <button
@@ -172,7 +174,7 @@ export function PracticeWorkspace({
           }`}
         >
           <HugeiconsIcon icon={Sorting01Icon} size={16} />
-          <span className="text-bangla">সেন্টেন্স বিল্ডার (Sentence Builder)</span>
+          <span>{locale === "bn" ? "সেন্টেন্স বিল্ডার" : "Sentence Builder"}</span>
         </button>
 
         <button
@@ -185,7 +187,7 @@ export function PracticeWorkspace({
           }`}
         >
           <HugeiconsIcon icon={SortByDown02Icon} size={16} />
-          <span className="text-bangla">ডায়লগ ক্রমানুসার (Dialogue Order)</span>
+          <span>{locale === "bn" ? "ডায়লগ ক্রমানুসার" : "Dialogue Order"}</span>
         </button>
 
         <button
@@ -198,7 +200,7 @@ export function PracticeWorkspace({
           }`}
         >
           <HugeiconsIcon icon={Mic01Icon} size={16} />
-          <span className="text-bangla">উচ্চারণ (Read Aloud)</span>
+          <span>{locale === "bn" ? "উচ্চারণ ও পাঠ" : "Read Aloud"}</span>
         </button>
 
         <button
@@ -211,7 +213,7 @@ export function PracticeWorkspace({
           }`}
         >
           <HugeiconsIcon icon={UserGroupIcon} size={16} />
-          <span className="text-bangla">রোলপ্লে: নিজের ডায়লগ বলুন (Roleplay)</span>
+          <span>{locale === "bn" ? "রোলপ্লে কথোপকথন" : "Roleplay Speaking"}</span>
         </button>
 
         <button
@@ -224,7 +226,7 @@ export function PracticeWorkspace({
           }`}
         >
           <HugeiconsIcon icon={PlayCircle02Icon} size={16} />
-          <span className="text-bangla">শূন্যস্থান পূরণ (Fill Blanks)</span>
+          <span>{locale === "bn" ? "শূন্যস্থান পূরণ" : "Fill in the Blanks"}</span>
         </button>
       </div>
 

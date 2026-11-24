@@ -16,6 +16,7 @@ import { SentenceBuilderExercise } from "@/content/seed/exercises";
 import { validateSentenceOrder } from "@/lib/practice/sentence-builder";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n";
 
 interface SentenceBuilderCardProps {
   exercises: SentenceBuilderExercise[];
@@ -48,6 +49,7 @@ function SentenceBuilderQuestionView({
   totalCount,
   onNext,
 }: QuestionViewProps) {
+  const locale = useLocale();
   const [placedChunks, setPlacedChunks] = useState<PoolChunk[]>([]);
   const [availableChunks, setAvailableChunks] = useState<PoolChunk[]>(() => {
     const rawChunks = currentItem.chunks.map((text, idx) => ({
@@ -191,7 +193,7 @@ function SentenceBuilderQuestionView({
             )}
           >
             <HugeiconsIcon icon={HelpCircleIcon} size={14} />
-            <span className="text-bangla">ইঙ্গিত (Hint)</span>
+            <span className="text-bangla">{locale === "bn" ? "ইঙ্গিত" : "Hint"}</span>
           </button>
 
           <button
@@ -237,7 +239,7 @@ function SentenceBuilderQuestionView({
       {/* Assembled Sentence Workspace Slot */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-chip text-muted-foreground">
-          <span>গঠিত বাক্য (Assembled Sentence):</span>
+          <span>{locale === "bn" ? "গঠিত বাক্য:" : "Assembled Sentence:"}</span>
           {placedChunks.length > 0 && !hasChecked && (
             <span className="text-bangla">শব্দে ট্যাপ করে ফেরত পাঠাতে পারেন</span>
           )}
@@ -296,7 +298,7 @@ function SentenceBuilderQuestionView({
       {/* Available Chunks Pool */}
       <div className="space-y-2">
         <span className="text-chip text-muted-foreground text-bangla">
-          ব্যবহারযোগ্য শব্দাংশ (Word Pool):
+          {locale === "bn" ? "ব্যবহারযোগ্য শব্দাংশ:" : "Word Pool:"}
         </span>
         <div className="flex flex-wrap items-center gap-2.5 p-3 rounded-panel bg-muted/20 min-h-slot">
           {availableChunks.map((chunk) => (
@@ -349,7 +351,7 @@ function SentenceBuilderQuestionView({
               title="সম্পূর্ণ বাক্যটির অডিও শুনুন"
             >
               <HugeiconsIcon icon={VolumeHighIcon} size={14} className="text-primary" />
-              <span>Listen</span>
+              <span>{locale === "bn" ? "শুনুন" : "Listen"}</span>
             </button>
           </div>
 
@@ -375,7 +377,7 @@ function SentenceBuilderQuestionView({
             size="md"
             className="rounded-control text-label text-bangla cursor-pointer min-w-36"
           >
-            <span>পরখ করুন (Check order)</span>
+            <span>{locale === "bn" ? "যাচাই করুন" : "Check Order"}</span>
           </Button>
         ) : (
           <Button
@@ -386,8 +388,8 @@ function SentenceBuilderQuestionView({
           >
             <span>
               {currentIndex < totalCount - 1
-                ? "পরবর্তী বাক্য (Next Sentence)"
-                : "অনুশীলন সম্পন্ন করুন (Finish)"}
+                ? (locale === "bn" ? "পরবর্তী বাক্য" : "Next Sentence")
+                : (locale === "bn" ? "অনুশীলন সম্পন্ন করুন" : "Finish Practice")}
             </span>
             <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
           </Button>
@@ -398,6 +400,7 @@ function SentenceBuilderQuestionView({
 }
 
 export function SentenceBuilderCard({ exercises, onComplete }: SentenceBuilderCardProps) {
+  const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [firstAttemptCorrectCount, setFirstAttemptCorrectCount] = useState(0);
@@ -450,7 +453,7 @@ export function SentenceBuilderCard({ exercises, onComplete }: SentenceBuilderCa
             size="md"
             className="rounded-control text-label text-bangla"
           >
-            আবার অনুশীলন করুন (Practice Again)
+            {locale === "bn" ? "আবার অনুশীলন করুন" : "Practice Again"}
           </Button>
         </div>
       </div>

@@ -19,6 +19,7 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { useLocale } from "@/lib/i18n";
 
 interface GrammarPanelProps {
   entry: SentenceGrammarEntry | null;
@@ -44,6 +45,7 @@ function StructureRow({ label, value, isMonospace = true }: StructureRowProps) {
 }
 
 export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
+  const locale = useLocale();
   if (!entry) return null;
 
   return (
@@ -60,10 +62,10 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
             </div>
             <div>
               <SheetTitle className="text-foreground text-card-title text-bangla">
-                ব্যাকরণ বিশ্লেষণ ও গঠন (Grammar Insights)
+                {locale === "bn" ? "ব্যাকরণ বিশ্লেষণ ও গঠন" : "Grammar Insights"}
               </SheetTitle>
               <SheetDescription className="text-chip text-muted-foreground mt-0.5">
-                Sentence Structure & Syntax Breakdown
+                {locale === "bn" ? "বাক্যের গঠন ও উপাংশ বিশ্লেষণ" : "Sentence Structure & Syntax Breakdown"}
               </SheetDescription>
             </div>
           </div>
@@ -74,7 +76,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
           {/* Target Sentence Banner */}
           <div className="bg-muted/40 p-4 rounded-panel border border-border">
             <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1">
-              মূল বাক্য (Target Sentence)
+              {locale === "bn" ? "মূল বাক্য" : "Target Sentence"}
             </span>
             <p className="text-body text-foreground italic leading-relaxed">
               &ldquo;{entry.sentenceText}&rdquo;
@@ -86,14 +88,14 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={SparklesIcon} size={16} className="text-primary" />
               <h4 className="text-label text-foreground text-bangla">
-                বাক্যের গঠন ও উপাংশ (S-V-O Breakdown)
+                {locale === "bn" ? "বাক্যের গঠন ও উপাংশ" : "S-V-O Breakdown"}
               </h4>
             </div>
 
             <div className="bg-card rounded-panel border border-border divide-y divide-border shadow-2xs">
-              <StructureRow label="Subject (কর্তা):" value={entry.structure.subject} />
-              <StructureRow label="Verb (ক্রিয়া):" value={entry.structure.verb} />
-              <StructureRow label="Object / Complement:" value={entry.structure.objectOrComplement} />
+              <StructureRow label={locale === "bn" ? "কর্তা:" : "Subject:"} value={entry.structure.subject} />
+              <StructureRow label={locale === "bn" ? "ক্রিয়া:" : "Verb:"} value={entry.structure.verb} />
+              <StructureRow label={locale === "bn" ? "কর্ম / পরিপূরক:" : "Object / Complement:"} value={entry.structure.objectOrComplement} />
               <div className="p-3 text-meta flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 bg-primary/5 dark:bg-primary/10">
                 <span className="text-label text-primary min-w-28 shrink-0">
                   Tense Pattern:
@@ -126,7 +128,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
               <div className="flex items-center gap-2">
                 <HugeiconsIcon icon={CheckmarkCircle01Icon} size={16} className="text-success" />
                 <h4 className="text-label text-foreground text-bangla">
-                  বিকল্প মার্জিত প্রকাশভঙ্গি (Polite Alternatives)
+                  {locale === "bn" ? "বিকল্প মার্জিত প্রকাশভঙ্গি" : "Polite Alternatives"}
                 </h4>
               </div>
               <div className="space-y-2">
@@ -149,7 +151,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
               <div className="flex items-center gap-2">
                 <HugeiconsIcon icon={InformationCircleIcon} size={16} className="text-destructive" />
                 <h4 className="text-label text-foreground text-bangla">
-                  সাধারণ ভুল ও সতর্কতা (Common Mistakes)
+                  {locale === "bn" ? "সাধারণ ভুল ও সতর্কতা" : "Common Mistakes"}
                 </h4>
               </div>
               <div className="space-y-3">
@@ -188,7 +190,7 @@ export function GrammarPanel({ entry, isOpen, onClose }: GrammarPanelProps) {
             onClick={onClose}
             className="btn-press text-bangla text-label rounded-control"
           >
-            বুঝেছি (Close)
+            {locale === "bn" ? "বুঝেছি" : "Close"}
           </Button>
         </div>
       </SheetContent>
