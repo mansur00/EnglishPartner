@@ -286,7 +286,7 @@ Entry format:
   - `npm test`: Passed (209/209 unit tests passing across 41 suites).
   - `npm run build`: Passed (112/112 static pages generated, 0 warnings).
   - Puppeteer live browser test on Next.js dev server: Verified H1 renders `পেশাগত ইংরেজি ক্যারিয়ার পাথ` in BN mode and `Professional English Career Paths` in EN mode.
-- Commit: pending
+- Commit: `39308c6`
 - Open questions / follow-ups: none.
 
 ### 2026-11-23, Provider-Agnostic Language Model (LLM) Integration & Production Pipeline
