@@ -1742,6 +1742,7 @@ Entry format:
 - **Verification:** `npm run check:frozen`, `npm run lint:ui`, `npm run lint` (0 errors/warnings), `npm test` (209/209 passed across 41 suites), and `npm run build` (130/130 routes) all passed.
 - **Follow-up CI Node.js Version Fix:** CI run on `432b96d` passed lint/frozen/UI checks but failed on `npm test` (`node: bad option: --experimental-strip-types`) because `.github/workflows/ci.yml` was pinned to `node-version: 20`. Updated `.github/workflows/ci.yml` to `node-version: 24` (matching local `v24.21.0`).
 - **Follow-up CI Python Venv Fix:** CI run on `6db1965` failed at `npm test` because `tests/grammar-tenses.test.mjs` unconditionally invoked gitignored `services/nlp/.venv/bin/python`. Updated `tests/grammar-tenses.test.mjs` to skip gracefully when `services/nlp/.venv/bin/python` is absent in CI (while still running all tense tests locally).
+- **Follow-up CI `.env.example` Fix:** Reproduced clean CI checkout locally via `git archive` and caught the exact remaining test failure: `tests/schema-invariants.test.mjs` asserts `.env.example` exists, which was ignored by `.env*` in `.gitignore`. Added `!.env.example` to `.gitignore` and tracked `.env.example`.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
