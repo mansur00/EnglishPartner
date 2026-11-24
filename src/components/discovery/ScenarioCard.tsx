@@ -19,13 +19,22 @@ import { formatLanguageCoverageLine } from "@/lib/content/language-coverage";
 import { EmojiTile, CefrChip, type CefrLevel, LocaleTitle } from "@/components/shared";
 import { useLocale } from "@/lib/i18n";
 import { ALL_PROFESSIONS } from "@/lib/professions/registry";
+import { getLengthTierById, getDefaultLengthTierForLevel } from "@/lib/content/length-tiers";
 
 interface ScenarioCardProps {
   scenario: ScenarioItem;
+  selectedLengthTierId?: string;
+  selectedStyle?: string;
 }
 
-export function ScenarioCard({ scenario }: ScenarioCardProps) {
+export function ScenarioCard({ scenario, selectedLengthTierId, selectedStyle }: ScenarioCardProps) {
   const locale = useLocale();
+  const activeTier =
+    (selectedLengthTierId ? getLengthTierById(selectedLengthTierId) : undefined) ||
+    getDefaultLengthTierForLevel(scenario.level);
+  const activeStyle = selectedStyle || scenario.communicationStyle || "neutral";
+  const displayMinutes = Math.max(3, Math.round(activeTier.targetTurns * 0.45));
+  const detailHref = `/conversations/${scenario.slug}?length=${activeTier.id}&style=${activeStyle}`;
   const primaryCat = scenario.categories[0]?.slug || "social-daily";
   const theme = getCategoryTheme(primaryCat);
   const scenarioLines = SEED_DIALOGUES[scenario.slug]?.[0]?.lines;
@@ -97,15 +106,15 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
         <div className="flex items-center gap-4 text-meta text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={Clock01Icon} size={15} className="text-primary" />
-            {scenario.estimatedMinutes} {t("dashboard.minutesUnit", locale)}
+            {displayMinutes} {t("dashboard.minutesUnit", locale)}
           </span>
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={BookOpen01Icon} size={15} className="text-primary" />
-            {scenario.exchangesCount} {t("dashboard.turnsUnit", locale)}
+            {locale === "bn" ? activeTier.labelBn : activeTier.labelEn}
           </span>
         </div>
 
-        <Link href={`/conversations/${scenario.slug}`}>
+        <Link href={detailHref}>
           <Button variant="default" size="sm" className="btn-press gap-2 rounded-control">
             <HugeiconsIcon icon={PlayCircleIcon} size={16} />
             <span>{t("learning.practice", locale)}</span>

@@ -263,6 +263,8 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           scenarioTitleEn={scenario.title}
           scenarioTitleBn={scenario.titleBn}
           scenarioSlug={slug}
+          scenarioLevel={scenario.level}
+          scenarioDescription={scenario.description}
         />
       </div>
     </PageContainer>

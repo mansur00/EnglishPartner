@@ -28,7 +28,7 @@ describe("Milestone 1E: Core Learning Loop & System Integrity", () => {
       slugSet.add(scenario.slug);
 
       assert.ok(
-        ["A1", "A2", "B1", "B2"].includes(scenario.level),
+        ["A1", "A2", "B1", "B2", "C1", "C2"].includes(scenario.level),
         `Invalid CEFR level in ${scenario.slug}: ${scenario.level}`
       );
       assert.ok(

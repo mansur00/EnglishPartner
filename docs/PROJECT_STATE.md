@@ -1696,6 +1696,28 @@ Entry format:
   - `npm run build`: 113/113 routes compiled cleanly (including `/api/v1/translate`).
   - Live Puppeteer verification (`live_reader_hi.png`, `live_reader_bn.png`, `live_vocab_es.png`) confirmed live translations across Hindi, Bengali, and Spanish.
 
+### 2026-11-25, 24-Tier CEFR Length & 3-Style Scalable Conversation Matrix (6-9 to 56-60 turns)
+- **Requested by Owner:** Scale conversation lengths from 2 options (`4-6`, `7-10`) to 24 progressive length options (4 per CEFR level from `A1` through `C2`, spanning `6-9` turns up to `56-60` turns) combined with 3 communication styles (`Casual`, `Neutral`, `Formal`) and progressive sentence complexity (`Hello...` simple sentences at A1 up to compound-complex at C2). Level filter dynamically filters Length dropdown to only that level's 4 options; inside any conversation, users can switch both Length and Style dynamically.
+- **Changes Delivered:**
+  - `src/lib/content/length-tiers.ts`:
+    - Created `LENGTH_TIERS` (24 tiers: 4 per level for `A1`, `A2`, `B1`, `B2`, `C1`, `C2`, from `6-9` to `56-60` turns), `CONVERSATION_STYLES`, and `getLengthTiersForLevel()`.
+  - `src/lib/content/dialogue-builder.ts` & `src/app/api/v1/conversations/generate/route.ts`:
+    - Built progressive dialogue generator & `POST /api/v1/conversations/generate` endpoint (AI-powered via Groq when key available, with deterministic progressive fallback and server cache) producing exact target turn counts with CEFR-appropriate sentence complexity (`basic_simple` → `mastery_compound_complex`) and register (`casual` / `neutral` / `formal`).
+  - `src/content/seed/scenarios.ts`:
+    - Extended `ScenarioItem` to `A1`–`C2` and added dedicated `C1` (`sc-28`..`sc-31`) and `C2` (`sc-24`..`sc-27`) scenarios across categories.
+  - `src/components/discovery/FilterBar.tsx`, `src/app/(app)/explore/page.tsx`, `src/components/discovery/ScenarioCard.tsx`:
+    - Selecting a CEFR level dynamically restricts the Length dropdown to that level's 4 length tiers.
+    - Selecting Length & Style on `/explore` passes `?length=...&style=...` to `/conversations/[slug]`.
+  - `src/components/learning/ConversationReader.tsx` & `src/app/(app)/conversations/[slug]/page.tsx`:
+    - Added in-reader **Length (4 tiers)** & **Style (`Casual`, `Neutral`, `Formal`)** switchers so users can dynamically change length and style inside any conversation.
+  - `tests/learning-loop.test.mjs`:
+    - Updated allowed CEFR levels assertion to include `C1` and `C2`.
+- **Verification:**
+  - `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`: Passed.
+  - `npm test`: 209/209 passed across 41 suites.
+  - `npm run build`: 130/130 routes compiled cleanly.
+  - Puppeteer visual captures (`matrix_explore_c1_lengths.png`, `matrix_reader_c2_switchers.png`) verified.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

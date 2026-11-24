@@ -20,6 +20,7 @@ import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { PageContainer, LocaleTitle } from "@/components/shared";
 import { paginateItems } from "@/lib/pagination/faceted-pagination";
 import { FacetedPagination } from "@/components/discovery/FacetedPagination";
+import { getLengthTierById } from "@/lib/content/length-tiers";
 
 export default function ExplorePage() {
   const locale = useLocale();
@@ -60,19 +61,17 @@ export default function ExplorePage() {
         return false;
       }
 
-      // 4. Length Type Filter
-      if (lengthType !== "all" && item.lengthType !== lengthType) {
-        return false;
-      }
-
-      // 5. Communication Style Filter
-      if (style !== "all" && item.communicationStyle !== style) {
-        return false;
+      // 4. Length Tier Filter (24-tier: matches CEFR level of selected tier; every scenario supports all 4 tiers & 3 styles)
+      if (lengthType !== "all") {
+        const tier = getLengthTierById(lengthType);
+        if (tier && item.level !== tier.cefrLevel) {
+          return false;
+        }
       }
 
       return true;
     });
-  }, [searchQuery, selectedCategory, level, lengthType, style]);
+  }, [searchQuery, selectedCategory, level, lengthType]);
 
   const isFiltered = Boolean(
     searchQuery || selectedCategory !== "all" || level !== "all" || lengthType !== "all" || style !== "all"
@@ -210,7 +209,12 @@ export default function ExplorePage() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {paginatedScenarios.items.map((scenario) => (
-              <ScenarioCard key={scenario.id} scenario={scenario} />
+              <ScenarioCard
+                key={scenario.id}
+                scenario={scenario}
+                selectedLengthTierId={lengthType !== "all" ? lengthType : undefined}
+                selectedStyle={style !== "all" ? style : undefined}
+              />
             ))}
           </div>
 

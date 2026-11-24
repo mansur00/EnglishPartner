@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ConversationTurn } from "./ConversationTurn";
 import { AudioPlayer } from "./AudioPlayer";
@@ -35,12 +36,23 @@ import {
   SentenceGrammarEntry,
 } from "@/content/seed/vocabulary";
 import { useTranslations, t } from "@/lib/i18n";
+import {
+  getLengthTiersForLevel,
+  getLengthTierById,
+  getDefaultLengthTierForLevel,
+  CONVERSATION_STYLES,
+  type CefrLevelCode,
+  type ConversationStyle,
+} from "@/lib/content/length-tiers";
+import { buildProgressiveDialogueVersion } from "@/lib/content/dialogue-builder";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
   scenarioTitleEn?: string;
   scenarioTitleBn?: string;
   scenarioSlug?: string;
+  scenarioLevel?: CefrLevelCode;
+  scenarioDescription?: string;
   stepNumber?: number;
   totalSteps?: number;
   stepFocus?: string;
@@ -62,11 +74,34 @@ function ConversationReaderInner({
   scenarioTitleEn = "English Conversation Practice",
   scenarioTitleBn = "ইংরেজি কথোপকথন অনুশীলন",
   scenarioSlug,
+  scenarioLevel,
+  scenarioDescription,
   prevStepSlug,
   nextStepSlug,
   nextStepTitle,
 }: ConversationReaderProps) {
   const { locale, translationLocale } = useTranslations();
+  const searchParams = useSearchParams();
+  const effectiveLevel = (scenarioLevel || (versions[0]?.level as CefrLevelCode) || "A1") as CefrLevelCode;
+  const levelTiers = useMemo(() => getLengthTiersForLevel(effectiveLevel), [effectiveLevel]);
+
+  const initialLengthParam = searchParams.get("length");
+  const initialStyleParam = searchParams.get("style") as ConversationStyle | null;
+
+  const [selectedTierId, setSelectedTierId] = useState<string>(() => {
+    const matched = initialLengthParam ? getLengthTierById(initialLengthParam) : undefined;
+    if (matched && matched.cefrLevel === effectiveLevel) return matched.id;
+    return getDefaultLengthTierForLevel(effectiveLevel).id;
+  });
+
+  const [selectedStyle, setSelectedStyle] = useState<ConversationStyle>(() => {
+    if (initialStyleParam && CONVERSATION_STYLES.includes(initialStyleParam)) {
+      return initialStyleParam;
+    }
+    return (versions[0]?.communicationStyle as ConversationStyle) || "neutral";
+  });
+
+  const [aiVersionsMap, setAiVersionsMap] = useState<Record<string, ConversationVersionData>>({});
   const [selectedVersionId, setSelectedVersionId] = useState<string>(
     versions[0]?.versionId || ""
   );
@@ -127,8 +162,55 @@ function ConversationReaderInner({
     }
   }, [scenarioSlug]);
 
-  const currentVersion =
-    versions.find((v) => v.versionId === selectedVersionId) || versions[0];
+  const dynamicKey = `${selectedTierId}:${selectedStyle}`;
+
+  useEffect(() => {
+    if (!scenarioLevel || !scenarioSlug) return;
+    if (aiVersionsMap[dynamicKey]) return;
+
+    let cancelled = false;
+    fetch("/api/v1/conversations/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        slug: scenarioSlug,
+        title: scenarioTitleEn,
+        description: scenarioDescription || scenarioTitleEn,
+        level: effectiveLevel,
+        lengthTierId: selectedTierId,
+        style: selectedStyle,
+        speakers: versions[0]?.speakers,
+      }),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data?.version) {
+          setAiVersionsMap((prev) => ({ ...prev, [dynamicKey]: data.version }));
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+    };
+  }, [scenarioLevel, scenarioSlug, scenarioTitleEn, scenarioDescription, effectiveLevel, selectedTierId, selectedStyle, dynamicKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const currentVersion = useMemo(() => {
+    if (scenarioLevel) {
+      return (
+        aiVersionsMap[dynamicKey] ||
+        buildProgressiveDialogueVersion({
+          slug: scenarioSlug || "conversation",
+          title: scenarioTitleEn,
+          level: effectiveLevel,
+          lengthTierId: selectedTierId,
+          style: selectedStyle,
+          speakers: versions[0]?.speakers,
+        })
+      );
+    }
+    return versions.find((v) => v.versionId === selectedVersionId) || versions[0];
+  }, [scenarioLevel, aiVersionsMap, dynamicKey, scenarioSlug, scenarioTitleEn, effectiveLevel, selectedTierId, selectedStyle, versions, selectedVersionId]);
 
   const presentCategories = useMemo(() => {
     const set = new Set<string>();
@@ -287,8 +369,63 @@ function ConversationReaderInner({
     <div className="space-y-6">
       {/* Top Controls Bar: Versions, Global Grammar Switches, Translation Toggle & Step Navigation */}
       <div className="flex flex-col gap-3 p-3 sm:p-4 bg-card rounded-panel border-0 shadow-xs">
-        {/* Dialogue Version Selector (if multiple versions exist) */}
-        {versions.length > 1 && (
+        {/* Dynamic Length (4 tiers for this level) & Style (3 registers) Switchers */}
+        {scenarioLevel ? (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2 border-b border-border/60 text-chip">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className={cn("text-muted-foreground whitespace-nowrap flex items-center gap-1 mr-1", locale === "bn" && "text-bangla")}>
+                <HugeiconsIcon icon={Layers01Icon} size={14} />
+                <span>{locale === "bn" ? `${effectiveLevel} দৈর্ঘ্য:` : `${effectiveLevel} Length:`}</span>
+              </span>
+              {levelTiers.map((tier) => (
+                <button
+                  key={tier.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedTierId(tier.id);
+                    setActiveLineIndex(null);
+                  }}
+                  className={cn(
+                    "px-2.5 py-1 rounded-control text-chip transition-all cursor-pointer",
+                    selectedTierId === tier.id
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
+                  )}
+                >
+                  {locale === "bn" ? tier.labelBn : tier.labelEn}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className={cn("text-muted-foreground whitespace-nowrap mr-1", locale === "bn" && "text-bangla")}>
+                {locale === "bn" ? "ধরন:" : "Style:"}
+              </span>
+              {CONVERSATION_STYLES.map((st) => (
+                <button
+                  key={st}
+                  type="button"
+                  onClick={() => {
+                    setSelectedStyle(st);
+                    setActiveLineIndex(null);
+                  }}
+                  className={cn(
+                    "px-2.5 py-1 rounded-control text-chip capitalize transition-all cursor-pointer",
+                    selectedStyle === st
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
+                  )}
+                >
+                  {st === "casual"
+                    ? (locale === "bn" ? "বন্ধুত্বপূর্ণ" : "Casual")
+                    : st === "formal"
+                    ? (locale === "bn" ? "আনুষ্ঠানিক" : "Formal")
+                    : (locale === "bn" ? "স্বাভাবিক" : "Neutral")}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : versions.length > 1 ? (
           <div className="flex items-center gap-2 overflow-x-auto pb-1 text-chip">
             <span className={cn("text-muted-foreground whitespace-nowrap flex items-center gap-1", locale === "bn" && "text-bangla")}>
               <HugeiconsIcon icon={Layers01Icon} size={14} />
@@ -313,7 +450,7 @@ function ConversationReaderInner({
               ))}
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* Global Action Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-2.5">
