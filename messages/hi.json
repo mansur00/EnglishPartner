@@ -27,7 +27,11 @@
     "title": "English Partner",
     "subtitle": "बातचीत अभ्यास",
     "bilingualMode": "द्विभाषी मोड: अंग्रेज़ी और हिन्दी",
-    "themeToggle": "थीम बदलें"
+    "themeToggle": "थीम बदलें",
+    "translationLanguageHeader": "अनुवाद की भाषा",
+    "noTranslation": "कोई अनुवाद नहीं",
+    "englishOnlySubtitle": "केवल अंग्रेजी",
+    "changeSystemInSettings": "सिस्टम भाषा: सेटिंग्स देखें"
   },
   "landing": {
     "heroTitle": "आत्मविश्वास के साथ रोज़मर्रा की अंग्रेज़ी सीखें",
@@ -230,7 +234,12 @@
     "resetConfirm": "क्या आप निश्चित हैं कि आप प्रगति रीसेट करना चाहते हैं?",
     "resetSuccess": "प्रगति सफलतापूर्वक रीसेट हो गई",
     "aboutSection": "इंग्लिश पार्टनर के बारे में",
-    "version": "संस्करण"
+    "version": "संस्करण",
+    "systemLanguage": "सिस्टम भाषा (ऐप इंटरफ़ेस)",
+    "systemLanguageDesc": "मेनू, नेविगेशन, बटन और ऐप लेबल की भाषा नियंत्रित करता है।",
+    "translationLanguage": "अनुवाद भाषा (शब्द और वाक्य)",
+    "translationLanguageDesc": "संवाद, शब्द अर्थ और एआई स्पष्टीकरण किस भाषा में अनुवादित होंगे, यह नियंत्रित करता है।",
+    "noTranslationOption": "बंद (केवल अंग्रेजी)"
   },
   "common": {
     "save": "सहेजें",

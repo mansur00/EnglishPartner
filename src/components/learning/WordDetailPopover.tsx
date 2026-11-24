@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-import { t, useLocale } from "@/lib/i18n";
+import { t, useTranslations } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
@@ -71,7 +71,7 @@ export function WordDetailPopover({
   tokenData,
   onRuleClick,
 }: WordDetailPopoverProps) {
-  const locale = useLocale();
+  const { locale, translationLocale } = useTranslations();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   if (!entry) return null;
@@ -105,16 +105,17 @@ export function WordDetailPopover({
   };
 
   // Grammar labels if tokenData provided
-  const posLabel = tokenData && tokenData.pos !== "unannotated" ? getLabel(tokenData.pos, "bn") : null;
-  const subLabel = tokenData && tokenData.sub ? getLabel(tokenData.sub, "bn") : null;
-  const roleLabel = tokenData && tokenData.role ? getLabel(tokenData.role, "bn") : null;
+  const grammarLang = locale === "bn" ? "bn" : "en";
+  const posLabel = tokenData && tokenData.pos !== "unannotated" ? getLabel(tokenData.pos, grammarLang) : null;
+  const subLabel = tokenData && tokenData.sub ? getLabel(tokenData.sub, grammarLang) : null;
+  const roleLabel = tokenData && tokenData.role ? getLabel(tokenData.role, grammarLang) : null;
 
   const tenseKey =
     tokenData && tokenData.tenseTime && tokenData.tenseAspect
       ? `${tokenData.tenseTime}-${tokenData.tenseAspect}`
       : null;
-  const tenseRule = tenseKey ? getRuleCard(tenseKey, "bn") : null;
-  const tenseLabel = tenseKey ? getLabel(tenseKey, "bn") : null;
+  const tenseRule = tenseKey ? getRuleCard(tenseKey, grammarLang) : null;
+  const tenseLabel = tenseKey ? getLabel(tenseKey, grammarLang) : null;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -129,8 +130,8 @@ export function WordDetailPopover({
               {entry.partOfSpeech}
             </Badge>
             {(grammarRole || roleLabel) && (
-              <Badge variant="accent" size="sm" className="text-chip text-bangla">
-                ভূমিকা: {roleLabel ? roleLabel.name : grammarRole}
+              <Badge variant="accent" size="sm" className={cn("text-chip", locale === "bn" && "text-bangla")}>
+                {locale === "bn" ? "ভূমিকা:" : "Role:"} {roleLabel ? roleLabel.name : grammarRole}
               </Badge>
             )}
           </div>
@@ -145,11 +146,11 @@ export function WordDetailPopover({
             variant={isPlayingAudio ? "default" : "outline"}
             size="sm"
             onClick={playPronunciation}
-            aria-label={`উচ্চারণ শুনুন: ${entry.word}`}
-            className="btn-press text-label gap-1.5 h-9 text-bangla rounded-control"
+            aria-label={`${t("reader.listen", locale)}: ${entry.word}`}
+            className={cn("btn-press text-label gap-1.5 h-9 rounded-control", locale === "bn" && "text-bangla")}
           >
             <HugeiconsIcon icon={VolumeHighIcon} size={15} />
-            <span>উচ্চারণ শুনুন</span>
+            <span>{t("reader.listen", locale)}</span>
           </Button>
         </div>
 
@@ -201,9 +202,9 @@ export function WordDetailPopover({
                       onClose();
                       onRuleClick(tenseKey);
                     }}
-                    className="text-chip text-primary hover:underline cursor-pointer text-bangla"
+                    className={cn("text-chip text-primary hover:underline cursor-pointer", locale === "bn" && "text-bangla")}
                   >
-                    নিয়ম দেখুন →
+                    {locale === "bn" ? "নিয়ম দেখুন →" : "View Rule →"}
                   </button>
                 )}
               </div>
@@ -214,21 +215,25 @@ export function WordDetailPopover({
         {/* Contextual Meaning */}
         <div className="space-y-3 my-2">
           <div className="bg-primary/5 dark:bg-primary/10 p-3.5 rounded-panel border-0">
-            <div className="text-chip text-primary text-bangla mb-1 flex items-center gap-1.5">
+            <div className={cn("text-chip text-primary mb-1 flex items-center gap-1.5", locale === "bn" && "text-bangla")}>
               <HugeiconsIcon icon={SparklesIcon} size={14} />
-              <span>{locale === "bn" ? "প্রাসঙ্গিক অর্থ:" : "Contextual Meaning:"}</span>
+              <span>{t("vocabulary.contextualMeaningLabel", locale)}:</span>
             </div>
-            <p className="text-meta text-bangla text-foreground leading-relaxed">
-              {entry.contextualMeaningBn}
+            <p className={cn("text-meta text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}>
+              {translationLocale === "bn"
+                ? entry.contextualMeaningBn
+                : (entry.contextualMeaningEn || entry.contextualMeaningBn)}
             </p>
           </div>
 
           <div>
-            <span className="text-chip text-muted-foreground text-bangla uppercase tracking-wider block mb-1">
-              {locale === "bn" ? "সাধারণ অর্থ:" : "General Meaning:"}
+            <span className={cn("text-chip text-muted-foreground uppercase tracking-wider block mb-1", locale === "bn" && "text-bangla")}>
+              {t("vocabulary.generalMeaningLabel", locale)}:
             </span>
-            <p className="text-meta text-bangla text-muted-foreground">
-              {entry.generalMeaningBn}
+            <p className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
+              {translationLocale === "bn"
+                ? entry.generalMeaningBn
+                : (entry.generalMeaningEn || entry.generalMeaningBn)}
             </p>
           </div>
 

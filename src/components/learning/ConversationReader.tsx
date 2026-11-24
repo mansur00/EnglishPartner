@@ -34,7 +34,7 @@ import {
   VocabularyEntry,
   SentenceGrammarEntry,
 } from "@/content/seed/vocabulary";
-import { useLocale, t } from "@/lib/i18n";
+import { useTranslations, t } from "@/lib/i18n";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
@@ -66,7 +66,7 @@ function ConversationReaderInner({
   nextStepSlug,
   nextStepTitle,
 }: ConversationReaderProps) {
-  const locale = useLocale();
+  const { locale, translationLocale } = useTranslations();
   const [selectedVersionId, setSelectedVersionId] = useState<string>(
     versions[0]?.versionId || ""
   );
@@ -303,11 +303,10 @@ function ConversationReaderInner({
                     setSelectedVersionId(ver.versionId);
                     setActiveLineIndex(null);
                   }}
-                  className={`px-3 py-1 rounded-control text-chip transition-all cursor-pointer ${
-                    selectedVersionId === ver.versionId
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-                  }`}
+                  className={`px-3 py-1 rounded-control text-chip transition-all cursor-pointer ${selectedVersionId === ver.versionId
+                    ? "bg-primary text-primary-foreground shadow-xs"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                    }`}
                 >
                   {ver.versionName} ({ver.lines.length} {locale === "bn" ? "বাক্য" : "turns"})
                 </button>
@@ -344,7 +343,7 @@ function ConversationReaderInner({
               </Link>
             )}
 
-            {locale === "bn" && (
+            {translationLocale !== "none" && (
               <Button
                 variant="outline"
                 size="sm"

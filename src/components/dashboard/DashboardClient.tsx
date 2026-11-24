@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { t, useLocale } from "@/lib/i18n";
+import { t, useTranslations } from "@/lib/i18n";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -29,7 +29,7 @@ import {
 } from "@hugeicons/core-free-icons";
 
 export function DashboardClient() {
-  const locale = useLocale();
+  const { locale, translationLocale } = useTranslations();
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
 
@@ -146,9 +146,11 @@ export function DashboardClient() {
                     <p className="text-card-title text-bubble-primary-ink">
                       &ldquo;Excuse me, could you tell me how much this costs?&rdquo;
                     </p>
-                    {locale === "bn" && (
+                    {translationLocale !== "none" && (
                       <p className="text-meta text-muted-foreground font-bangla text-bangla mt-1">
-                        মাফ করবেন, এটার দাম কত বলতে পারেন?
+                        {translationLocale === "hi"
+                          ? "माफ कीजिए, क्या आप बता सकते हैं कि इसकी कीमत कितनी है?"
+                          : "মাফ করবেন, এটার দাম কত বলতে পারেন?"}
                       </p>
                     )}
                   </ChatBubble>
@@ -160,9 +162,11 @@ export function DashboardClient() {
                     <p className="text-card-title text-topic-ink">
                       &ldquo;Certainly! It is forty-five dollars with a 10% discount.&rdquo;
                     </p>
-                    {locale === "bn" && (
+                    {translationLocale !== "none" && (
                       <p className="text-meta text-topic-ink/80 font-bangla text-bangla mt-1">
-                        অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।
+                        {translationLocale === "hi"
+                          ? "ज़रूर! 10% छूट के साथ यह पैंतालीस डॉलर का है।"
+                          : "অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।"}
                       </p>
                     )}
                   </ChatBubble>

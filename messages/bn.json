@@ -27,7 +27,11 @@
     "title": "ইংলিশ পার্টনার",
     "subtitle": "কথোপকথন অনুশীলন",
     "bilingualMode": "দ্বিভাষিক মোড: English ও বাংলা",
-    "themeToggle": "থিম পরিবর্তন"
+    "themeToggle": "থিম পরিবর্তন",
+    "translationLanguageHeader": "অনুবাদের ভাষা",
+    "noTranslation": "অনুবাদ বন্ধ",
+    "englishOnlySubtitle": "শুধুমাত্র ইংরেজি",
+    "changeSystemInSettings": "সিস্টেম ভাষা: সেটিংস দেখুন"
   },
   "landing": {
     "heroTitle": "প্রতিদিনের স্পোকেন ইংলিশে আত্মবিশ্বাসী হয়ে উঠুন",
@@ -230,7 +234,12 @@
     "resetConfirm": "আপনি কি নিশ্চিত যে আপনার স্থানীয় প্রগ্রেস ও সংরক্ষিত শব্দ মুছে ফেলতে চান? এটি পুনরায় ফিরিয়ে আনা যাবে না।",
     "resetSuccess": "প্রগ্রেস সফলভাবে রিসেট করা হয়েছে",
     "aboutSection": "ইংলিশ পার্টনার সম্পর্কে",
-    "version": "সংস্করণ"
+    "version": "সংস্করণ",
+    "systemLanguage": "সিস্টেম ভাষা (অ্যাপের ইন্টারফেস)",
+    "systemLanguageDesc": "মেনু, নেভিগেশন, বাটন ও অ্যাপের লেবেলের ভাষা নির্ধারণ করে।",
+    "translationLanguage": "অনুবাদের ভাষা (শব্দ ও বাক্যের অর্থ)",
+    "translationLanguageDesc": "সংলাপ, শব্দার্থ এবং এআই ব্যাখ্যার অনুবাদ কোন ভাষায় দেখাবে তা নির্ধারণ করে।",
+    "noTranslationOption": "বন্ধ (শুধু ইংরেজি)"
   },
   "common": {
     "save": "সংরক্ষণ",

@@ -1,38 +1,44 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Globe02Icon,
   CheckmarkCircle02Icon,
   ArrowDown01Icon,
+  Settings01Icon,
 } from "@hugeicons/core-free-icons";
 import {
   LANGUAGES_REGISTRY,
-  SUPPORTED_LOCALES,
-  isRtlLanguage,
   type LanguageMeta,
-  type SupportedLocale,
+  type TranslationLocale,
 } from "@/lib/i18n/languages";
 import { useTranslations } from "@/lib/i18n";
 import { Tag } from "@/components/ui/tag";
 import { cn } from "@/lib/utils";
 
-interface LanguageItemProps {
-  lang: LanguageMeta;
+interface TranslationOptionProps {
+  code: TranslationLocale;
+  label: string;
+  badge?: string;
   isSelected: boolean;
-  onSelect: (code: SupportedLocale) => void;
+  onSelect: (code: TranslationLocale) => void;
 }
 
-function ActiveLanguageItem({ lang, isSelected, onSelect }: LanguageItemProps) {
-  const isSupported = (SUPPORTED_LOCALES as readonly string[]).includes(lang.code);
-
+function TranslationOptionItem({
+  code,
+  label,
+  badge,
+  isSelected,
+  onSelect,
+}: TranslationOptionProps) {
   return (
     <button
       type="button"
       role="menuitem"
       aria-current={isSelected ? "true" : undefined}
-      onClick={() => isSupported && onSelect(lang.code as SupportedLocale)}
+      onClick={() => onSelect(code)}
       className={cn(
         "flex w-full items-center justify-between px-3 py-2 rounded-control text-left transition-colors cursor-pointer",
         isSelected
@@ -40,19 +46,12 @@ function ActiveLanguageItem({ lang, isSelected, onSelect }: LanguageItemProps) {
           : "text-foreground hover:bg-muted"
       )}
     >
-      <div className="flex items-center gap-2.5">
-        <span className="font-heading text-card-title leading-none">
-          {lang.nativeName}
-        </span>
-        <span className="text-chip text-muted-foreground">
-          ({lang.name})
-        </span>
-      </div>
+      <span className="font-heading text-label leading-none">{label}</span>
 
       <div className="flex items-center gap-2">
-        {lang.status === "beta" && (
+        {badge && (
           <Tag variant="warning" size="sm">
-            Beta
+            {badge}
           </Tag>
         )}
         {isSelected ? (
@@ -63,7 +62,7 @@ function ActiveLanguageItem({ lang, isSelected, onSelect }: LanguageItemProps) {
           />
         ) : (
           <span className="text-chip text-muted-foreground uppercase">
-            {lang.code}
+            {code === "none" ? "OFF" : code}
           </span>
         )}
       </div>
@@ -74,14 +73,9 @@ function ActiveLanguageItem({ lang, isSelected, onSelect }: LanguageItemProps) {
 function PlannedLanguageItem({ lang }: { lang: LanguageMeta }) {
   return (
     <div className="flex w-full items-center justify-between px-3 py-2 rounded-control opacity-60 text-muted-foreground">
-      <div className="flex items-center gap-2.5">
-        <span className="font-heading text-card-title leading-none">
-          {lang.nativeName}
-        </span>
-        <span className="text-chip">
-          ({lang.name})
-        </span>
-      </div>
+      <span className="font-heading text-label leading-none">
+        {lang.nativeName}
+      </span>
       <div className="flex items-center gap-1.5">
         {lang.direction === "rtl" && (
           <Tag variant="outline" size="sm">
@@ -98,7 +92,7 @@ function PlannedLanguageItem({ lang }: { lang: LanguageMeta }) {
 
 export function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
-  const { locale, setLocale } = useTranslations();
+  const { translationLocale, setTranslationLocale, t } = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -123,13 +117,16 @@ export function LanguageSwitcher() {
     };
   }, [isOpen]);
 
-  const handleSelect = (code: SupportedLocale) => {
-    setLocale(code);
+  const handleSelect = (code: TranslationLocale) => {
+    setTranslationLocale(code);
     setIsOpen(false);
   };
 
-  const currentMeta = LANGUAGES_REGISTRY[locale] || LANGUAGES_REGISTRY.bn;
-  const availableLangs = Object.values(LANGUAGES_REGISTRY).filter((l) => l.status !== "planned");
+  const getActiveLabel = () => {
+    if (translationLocale === "none") return t("header.englishOnlySubtitle");
+    return LANGUAGES_REGISTRY[translationLocale]?.nativeName || LANGUAGES_REGISTRY.bn.nativeName;
+  };
+
   const plannedLangs = Object.values(LANGUAGES_REGISTRY).filter((l) => l.status === "planned");
 
   return (
@@ -138,12 +135,12 @@ export function LanguageSwitcher() {
         type="button"
         aria-haspopup="menu"
         aria-expanded={isOpen}
-        aria-label="Select translation & interface language"
+        aria-label={t("header.translationLanguageHeader")}
         onClick={() => setIsOpen(!isOpen)}
         className="btn-press inline-flex items-center gap-1.5 h-control-sm px-2.5 sm:px-3 rounded-pill border border-border bg-transparent text-label text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
       >
         <HugeiconsIcon icon={Globe02Icon} size={16} className="text-primary shrink-0" />
-        <span className="font-heading text-card-title">{currentMeta.nativeName}</span>
+        <span className="font-heading text-label">{getActiveLabel()}</span>
         <HugeiconsIcon
           icon={ArrowDown01Icon}
           size={14}
@@ -159,19 +156,30 @@ export function LanguageSwitcher() {
         >
           <div className="px-3 py-1.5 mb-1 border-b border-border">
             <p className="text-chip text-muted-foreground uppercase tracking-wide">
-              Translations & Guidance
+              {t("header.translationLanguageHeader")}
             </p>
           </div>
 
           <div className="space-y-1">
-            {availableLangs.map((lang) => (
-              <ActiveLanguageItem
-                key={lang.code}
-                lang={lang}
-                isSelected={locale === lang.code}
-                onSelect={handleSelect}
-              />
-            ))}
+            <TranslationOptionItem
+              code="bn"
+              label={LANGUAGES_REGISTRY.bn.nativeName}
+              isSelected={translationLocale === "bn"}
+              onSelect={handleSelect}
+            />
+            <TranslationOptionItem
+              code="hi"
+              label={LANGUAGES_REGISTRY.hi.nativeName}
+              badge="Beta"
+              isSelected={translationLocale === "hi"}
+              onSelect={handleSelect}
+            />
+            <TranslationOptionItem
+              code="none"
+              label={t("header.noTranslation")}
+              isSelected={translationLocale === "none"}
+              onSelect={handleSelect}
+            />
           </div>
 
           {plannedLangs.length > 0 && (
@@ -188,6 +196,17 @@ export function LanguageSwitcher() {
               </div>
             </>
           )}
+
+          <div className="pt-2 mt-2 border-t border-border">
+            <Link
+              href="/settings"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-2 px-3 py-2 rounded-control text-chip text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <HugeiconsIcon icon={Settings01Icon} size={14} className="shrink-0" />
+              <span>{t("header.changeSystemInSettings")}</span>
+            </Link>
+          </div>
         </div>
       )}
     </div>

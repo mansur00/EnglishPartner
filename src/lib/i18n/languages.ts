@@ -74,6 +74,9 @@ export const LANGUAGES_REGISTRY: Record<string, LanguageMeta> = {
 export const SUPPORTED_LOCALES = ["en", "bn", "hi"] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
+export const TRANSLATION_LOCALES = ["bn", "hi", "none"] as const;
+export type TranslationLocale = (typeof TRANSLATION_LOCALES)[number];
+
 export function getLanguageMeta(code: string): LanguageMeta | undefined {
   return LANGUAGES_REGISTRY[code];
 }

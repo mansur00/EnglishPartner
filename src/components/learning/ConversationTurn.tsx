@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n";
+import { useTranslations, t } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { SpeakerLabel } from "./SpeakerLabel";
@@ -53,7 +53,7 @@ export function ConversationTurn({
     isAdminPreview = false,
     annotation,
 }: ConversationTurnProps) {
-    const locale = useLocale();
+    const { locale, translationLocale } = useTranslations();
     const [localTranslationVisible, setLocalTranslationVisible] = useState<boolean | null>(null);
 
     const { isLineActive, toggleLine } = useGrammar();
@@ -121,19 +121,19 @@ export function ConversationTurn({
                         </Button>
                     )}
 
-                    {/* Translation Toggle per Line (Shown when in Bengali/translation mode) */}
-                    {locale === "bn" && (
+                    {/* Translation Toggle per Line (Shown when translation language is enabled) */}
+                    {translationLocale !== "none" && (
                       <Button
                         type="button"
                         variant="outline"
                         size="sm"
                         onClick={() => setLocalTranslationVisible(!isTranslationShown)}
                         className="h-control-sm px-2.5 text-chip gap-1 text-muted-foreground hover:text-foreground rounded-control"
-                        title={isTranslationShown ? "অনুবাদ লুকান" : "অনুবাদ দেখুন"}
+                        title={isTranslationShown ? t("reader.hideTranslation", locale) : t("reader.showTranslation", locale)}
                       >
                         <HugeiconsIcon icon={isTranslationShown ? ViewOffIcon : ViewIcon} size={14} />
-                        <span className="hidden sm:inline font-bangla">
-                          {isTranslationShown ? "লুকান" : "অনুবাদ"}
+                        <span className={cn("hidden sm:inline", locale === "bn" && "font-bangla")}>
+                          {isTranslationShown ? t("reader.hide", locale) : t("reader.show", locale)}
                         </span>
                       </Button>
                     )}
@@ -198,8 +198,8 @@ export function ConversationTurn({
                 )}
             </div>
 
-            {/* Contextual Bangla Translation (shown only when user interface is in Bengali) */}
-            {locale === "bn" && isTranslationShown && (
+            {/* Contextual Translation (shown when translation language is enabled) */}
+            {translationLocale !== "none" && isTranslationShown && (
                 <div className="pt-2 border-t border-border/60 animate-in fade-in duration-200">
                     <div>
                         <p

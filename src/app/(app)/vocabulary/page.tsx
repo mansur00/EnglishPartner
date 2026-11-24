@@ -44,7 +44,7 @@ export default function VocabularyPage() {
 }
 
 function VocabularyContent() {
-  const { locale, t } = useTranslations();
+  const { locale, translationLocale, t } = useTranslations();
   const { isLineActive, toggleLine } = useGrammar();
   const [activeView, setActiveView] = useState<"words" | "srs">("words");
   const [searchQuery, setSearchQuery] = useState("");
@@ -349,15 +349,15 @@ function VocabularyContent() {
 
                 {/* Meanings */}
                 <div className="py-3 space-y-2">
-                  <div className={cn("text-body text-foreground leading-relaxed", locale === "bn" && "text-bangla")}>
-                    {locale === "bn"
+                  <div className={cn("text-body text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}>
+                    {translationLocale === "bn"
                       ? item.contextualMeaningBn
                       : (item.contextualMeaningEn || item.contextualMeaningBn)}
                   </div>
-                  {((locale === "bn" && item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn) ||
-                    (locale !== "bn" && item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn)) && (
-                    <div className={cn("text-meta text-muted-foreground", locale === "bn" && "text-bangla")}>
-                      {t("vocabulary.generalMeaningLabel")}: {locale === "bn" ? item.generalMeaningBn : item.generalMeaningEn}
+                  {((translationLocale === "bn" && item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn) ||
+                    (translationLocale !== "bn" && item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn)) && (
+                    <div className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
+                      {t("vocabulary.generalMeaningLabel")}: {translationLocale === "bn" ? item.generalMeaningBn : item.generalMeaningEn}
                     </div>
                   )}
 

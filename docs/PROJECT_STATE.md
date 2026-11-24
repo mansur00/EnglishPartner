@@ -1632,6 +1632,33 @@ Entry format:
   - `npm run build`: 112/112 static and partial-prerendered routes compiled cleanly with Turbopack.
   - Live Puppeteer visual captures across `/dashboard`, `/explore`, `/conversations/...`, `/what-should-i-say`, `/roleplay`, `/professions`, and `/vocabulary` in both `en` and `bn` modes confirmed zero leaks and zero dual titles.
 
+### 2026-11-25, Two-Tier Language Architecture (System Language vs Translation Language)
+- **Requested by Owner:** Split language controls into two independent tiers:
+  1. **System Language (App Interface):** Controls menus, navigation, dashboard, buttons, labels, and settings UI. Managed exclusively from `/settings`.
+  2. **Translation Language (Words & Sentences):** Controls sentence translations, vocabulary meanings, and AI explanations (`bn`, `hi`, `none`/English Only). Managed from both `/settings` and the Header dropdown.
+- **Changes Delivered:**
+  - `src/lib/i18n/languages.ts`, `context.ts`, `provider.tsx`, `use-locale.ts`, `index.ts`:
+    - Added `TRANSLATION_LOCALES = ["bn", "hi", "none"]` and `TranslationLocale`.
+    - Extended `LocaleProvider` with `translationLocale` and `setTranslationLocale` persisted in `localStorage` (`ecp_translation_locale`) and cookies.
+    - Exported `useTranslationLocale()` and updated `useTranslations()` to return both `locale` (system) and `translationLocale`.
+  - `src/components/navigation/LanguageSwitcher.tsx`:
+    - Refactored Header dropdown to exclusively control `translationLocale` (`বাংলা`, `हिन्दी`, `No Translation`) with a link to `/settings` for System Language.
+  - `src/components/settings/SettingsClient.tsx`:
+    - Replaced single language + boolean toggle with two explicit selectors: **System Language (App Interface)** (`bn`, `en`, `hi`) and **Translation Language (Words & Sentences)** (`bn`, `hi`, `none`).
+  - `messages/en.json`, `bn.json`, `hi.json` & `tests/multi-language-coverage.test.mjs`:
+    - Expanded to 305 keys with 100% parity across EN, BN, and HI.
+  - Learning Components (`DashboardClient.tsx`, `ConversationReader.tsx`, `ConversationTurn.tsx`, `WordDetailPopover.tsx`, `vocabulary/page.tsx`, `WhatShouldISay.tsx`):
+    - Strictly separated UI labels (`locale`) from learning translations (`translationLocale`).
+    - When `translationLocale === "none"`, all Bengali translations are hidden and English definitions/explanations are shown.
+    - When `System Language = EN` and `Translation Language = BN`, UI is 100% English while dialogue/word translations render in Bengali.
+- **Verification:**
+  - `npm run check:frozen`: Byte-identical to `db71d3c`.
+  - `npm run lint:ui`: Passed strictly.
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm test`: 209/209 passed across 41 suites.
+  - `npm run build`: 112/112 routes compiled cleanly in Next.js 16.4.6 Turbopack.
+  - Puppeteer visual captures (`twotier_settings_en_bn.png`, `twotier_header_dropdown.png`, `twotier_dashboard_en_bn.png`, `twotier_dashboard_en_none.png`) verified.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

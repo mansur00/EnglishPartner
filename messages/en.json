@@ -27,7 +27,11 @@
     "title": "English Partner",
     "subtitle": "Conversation Practice",
     "bilingualMode": "Bilingual mode: English & বাংলা",
-    "themeToggle": "Toggle theme"
+    "themeToggle": "Toggle theme",
+    "translationLanguageHeader": "Translation Language",
+    "noTranslation": "No Translation",
+    "englishOnlySubtitle": "English Only",
+    "changeSystemInSettings": "System language in Settings"
   },
   "landing": {
     "heroTitle": "Master Everyday Spoken English with Confidence",
@@ -230,7 +234,12 @@
     "resetConfirm": "Are you sure you want to reset your local progress and saved words? This cannot be undone.",
     "resetSuccess": "Progress reset successfully",
     "aboutSection": "About English Partner",
-    "version": "Version"
+    "version": "Version",
+    "systemLanguage": "System Language (App Interface)",
+    "systemLanguageDesc": "Controls menus, navigation, buttons, and app labels.",
+    "translationLanguage": "Translation Language (Words & Sentences)",
+    "translationLanguageDesc": "Controls what language dialogues, word meanings, and AI explanations are translated into.",
+    "noTranslationOption": "Off (English Only)"
   },
   "common": {
     "save": "Save",

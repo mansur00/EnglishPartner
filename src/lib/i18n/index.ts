@@ -4,7 +4,9 @@ import hiMessages from "../../../messages/hi.json" with { type: "json" };
 import {
   isRtlLanguage,
   SUPPORTED_LOCALES,
+  TRANSLATION_LOCALES,
   type SupportedLocale,
+  type TranslationLocale,
 } from "./languages.ts";
 
 export type Locale = SupportedLocale;
@@ -59,6 +61,6 @@ export function isRtlLocale(locale: string): boolean {
   return isRtlLanguage(locale);
 }
 
-export { SUPPORTED_LOCALES };
+export { SUPPORTED_LOCALES, TRANSLATION_LOCALES, type TranslationLocale };
 export { LocaleContext, type LocaleContextValue } from "./context.ts";
-export { useLocale, useTranslations, useLocaleContext } from "./use-locale.ts";
+export { useLocale, useTranslationLocale, useTranslations, useLocaleContext } from "./use-locale.ts";

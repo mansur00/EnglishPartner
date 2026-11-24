@@ -25,7 +25,8 @@ import { useTranslations } from "@/lib/i18n";
 import { LocaleTitle } from "@/components/shared";
 
 export function WhatShouldISay() {
-  const { locale, t } = useTranslations();
+  const { locale, translationLocale, t } = useTranslations();
+  const effectiveLang = translationLocale === "none" ? "en" : translationLocale;
   const [intentInput, setIntentInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
@@ -34,15 +35,15 @@ export function WhatShouldISay() {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    // Initial sample query with current locale
+    // Initial sample query with current translation language
     const initRes = resolveSayItIntent({
-      intent: locale === "bn"
+      intent: effectiveLang === "bn"
         ? "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।"
         : "I want to tell my manager that I need two more days to finish the task.",
-      output_lang: locale,
+      output_lang: effectiveLang,
     });
     setResponse(initRes);
-  }, [locale]);
+  }, [effectiveLang]);
 
   useEffect(() => {
     fetch("/api/v1/ai/status")
@@ -65,7 +66,7 @@ export function WhatShouldISay() {
       const res = await fetch("/api/v1/ai/say-it", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ intent: query, output_lang: locale }),
+        body: JSON.stringify({ intent: query, output_lang: effectiveLang }),
       });
 
       if (!res.ok) {
@@ -76,7 +77,7 @@ export function WhatShouldISay() {
       setResponse(data);
     } catch {
       // Seamless local fallback
-      const fallbackResult = resolveSayItIntent({ intent: query, output_lang: locale });
+      const fallbackResult = resolveSayItIntent({ intent: query, output_lang: effectiveLang });
       setResponse(fallbackResult);
     } finally {
       setIsLoading(false);
@@ -308,8 +309,8 @@ export function WhatShouldISay() {
                     {option.english}
                   </div>
 
-                  {/* Translation: only shown when user interface is in Bengali */}
-                  {locale === "bn" && option.translation && (
+                  {/* Translation: only shown when translation language is enabled */}
+                  {translationLocale !== "none" && option.translation && (
                     <div className="text-meta-bn text-muted-foreground border-t border-border/60 pt-2">
                       {option.translation}
                     </div>

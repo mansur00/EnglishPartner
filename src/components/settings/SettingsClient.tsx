@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useLocale, t } from "@/lib/i18n";
+import { useTranslations } from "@/lib/i18n";
 import { useTheme } from "next-themes";
 import { PageContainer } from "@/components/shared";
 import { Button } from "@/components/ui/button";
@@ -33,14 +33,13 @@ import {
   TaskDone01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
-import type { SupportedLocale } from "@/lib/i18n/languages";
+import type { SupportedLocale, TranslationLocale } from "@/lib/i18n/languages";
 
 export function SettingsClient() {
-  const locale = useLocale();
+  const { locale, setLocale, translationLocale, setTranslationLocale, t } = useTranslations();
   const { theme, setTheme } = useTheme();
 
   // Settings State
-  const [bilingualMode, setBilingualMode] = useState(true);
   const [audioSpeed, setAudioSpeed] = useState("1.0x");
   const [autoPlayAudio, setAutoPlayAudio] = useState(true);
   const [voiceAccent, setVoiceAccent] = useState("us");
@@ -58,9 +57,6 @@ export function SettingsClient() {
   // Read saved settings from localStorage on mount
   useEffect(() => {
     try {
-      const storedBilingual = localStorage.getItem("ecp_bilingual_mode");
-      if (storedBilingual !== null) setBilingualMode(storedBilingual === "true");
-
       const storedSpeed = localStorage.getItem("ecp_audio_speed");
       if (storedSpeed) setAudioSpeed(storedSpeed);
 
@@ -95,14 +91,11 @@ export function SettingsClient() {
 
   // Handlers
   const handleLocaleChange = (newLocale: SupportedLocale) => {
-    localStorage.setItem("ecp_user_locale", newLocale);
-    document.documentElement.lang = newLocale;
-    window.dispatchEvent(new CustomEvent("ecp_locale_change", { detail: newLocale }));
+    setLocale(newLocale);
   };
 
-  const handleBilingualChange = (checked: boolean) => {
-    setBilingualMode(checked);
-    localStorage.setItem("ecp_bilingual_mode", checked.toString());
+  const handleTranslationLocaleChange = (newTrans: TranslationLocale) => {
+    setTranslationLocale(newTrans);
   };
 
   const handleAudioSpeedChange = (speed: string) => {
@@ -211,11 +204,16 @@ export function SettingsClient() {
         </div>
 
         <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
-          {/* Interface Language */}
+          {/* Option 1: System Language (App Interface) */}
           <div className="space-y-2.5">
-            <label className="block font-heading text-label text-foreground">
-              {t("settings.appLanguage", locale)}
-            </label>
+            <div className="space-y-1">
+              <label className="block font-heading text-label text-foreground">
+                {t("settings.systemLanguage")}
+              </label>
+              <p className="text-meta text-muted-foreground">
+                {t("settings.systemLanguageDesc")}
+              </p>
+            </div>
             <div className="grid grid-cols-3 gap-2.5 max-w-md">
               <button
                 type="button"
@@ -258,21 +256,54 @@ export function SettingsClient() {
 
           <div className="h-px bg-border" />
 
-          {/* Bilingual Assistance Toggle */}
-          <div className="flex items-center justify-between gap-4">
+          {/* Option 2: Translation Language (Words & Sentences) */}
+          <div className="space-y-2.5">
             <div className="space-y-1">
-              <span className="block font-heading text-label text-foreground">
-                {t("settings.bilingualAssistance", locale)}
-              </span>
+              <label className="block font-heading text-label text-foreground">
+                {t("settings.translationLanguage")}
+              </label>
               <p className="text-meta text-muted-foreground max-w-lg">
-                {t("settings.bilingualAssistanceDesc", locale)}
+                {t("settings.translationLanguageDesc")}
               </p>
             </div>
-            <Switch
-              checked={bilingualMode}
-              onCheckedChange={handleBilingualChange}
-              aria-label={t("settings.bilingualAssistance", locale)}
-            />
+            <div className="grid grid-cols-3 gap-2.5 max-w-lg">
+              <button
+                type="button"
+                onClick={() => handleTranslationLocaleChange("bn")}
+                className={cn(
+                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
+                  translationLocale === "bn"
+                    ? "bg-primary text-primary-foreground shadow-xs"
+                    : "bg-muted/70 text-foreground hover:bg-muted"
+                )}
+              >
+                বাংলা
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTranslationLocaleChange("hi")}
+                className={cn(
+                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
+                  translationLocale === "hi"
+                    ? "bg-primary text-primary-foreground shadow-xs"
+                    : "bg-muted/70 text-foreground hover:bg-muted"
+                )}
+              >
+                हिन्दी
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTranslationLocaleChange("none")}
+                className={cn(
+                  "h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
+                  translationLocale === "none"
+                    ? "bg-primary text-primary-foreground shadow-xs"
+                    : "bg-muted/70 text-foreground hover:bg-muted"
+                )}
+              >
+                {t("settings.noTranslationOption")}
+              </button>
+            </div>
           </div>
         </Card>
       </section>
