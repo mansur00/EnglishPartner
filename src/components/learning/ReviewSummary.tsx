@@ -76,11 +76,10 @@ export function ReviewSummary({
         <button
           type="button"
           onClick={onBookmarkScenario}
-          className={`flex items-center gap-2 px-3.5 py-2 rounded-control text-label border transition-all cursor-pointer ${
-            isScenarioBookmarked
-              ? "bg-primary/10 text-primary border-primary/30"
-              : "bg-muted text-muted-foreground border-border hover:bg-card"
-          }`}
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-control text-label border transition-all cursor-pointer ${isScenarioBookmarked
+            ? "bg-primary/10 text-primary border-primary/30"
+            : "bg-muted text-muted-foreground border-border hover:bg-card"
+            }`}
         >
           {isScenarioBookmarked ? (
             <>
@@ -146,11 +145,10 @@ export function ReviewSummary({
                         type="button"
                         onClick={() => onSaveWordToggle(item.lemma)}
                         aria-label={`Save ${item.word}`}
-                        className={`p-1.5 rounded-control transition-colors cursor-pointer ${
-                          isSaved
-                            ? "text-success bg-success-bg"
-                            : "text-muted-foreground hover:text-primary hover:bg-card"
-                        }`}
+                        className={`p-1.5 rounded-control transition-colors cursor-pointer ${isSaved
+                          ? "text-success bg-success-bg"
+                          : "text-muted-foreground hover:text-primary hover:bg-card"
+                          }`}
                       >
                         <HugeiconsIcon icon={isSaved ? BookmarkCheck01Icon : Bookmark01Icon} size={16} />
                       </button>
