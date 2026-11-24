@@ -63,23 +63,25 @@ export function LocaleProvider({
   }, []);
 
   useEffect(() => {
-    try {
-      const savedLocale = localStorage.getItem("ecp_user_locale") as SupportedLocale | null;
-      if (savedLocale && isValidGlobalLanguage(savedLocale) && savedLocale !== "none" && savedLocale !== locale) {
-        setLocaleState(savedLocale);
-        document.cookie = `ecp_user_locale=${savedLocale}; path=/; max-age=31536000; SameSite=Lax`;
-        document.documentElement.lang = savedLocale;
-        document.documentElement.dir = isRtlLanguage(savedLocale) ? "rtl" : "ltr";
-      }
+    queueMicrotask(() => {
+      try {
+        const savedLocale = localStorage.getItem("ecp_user_locale") as SupportedLocale | null;
+        if (savedLocale && isValidGlobalLanguage(savedLocale) && savedLocale !== "none" && savedLocale !== locale) {
+          setLocaleState(savedLocale);
+          document.cookie = `ecp_user_locale=${savedLocale}; path=/; max-age=31536000; SameSite=Lax`;
+          document.documentElement.lang = savedLocale;
+          document.documentElement.dir = isRtlLanguage(savedLocale) ? "rtl" : "ltr";
+        }
 
-      const savedTrans = localStorage.getItem("ecp_translation_locale") as TranslationLocale | null;
-      if (savedTrans && isValidGlobalLanguage(savedTrans) && savedTrans !== translationLocale) {
-        setTranslationLocaleState(savedTrans);
-        document.cookie = `ecp_translation_locale=${savedTrans}; path=/; max-age=31536000; SameSite=Lax`;
+        const savedTrans = localStorage.getItem("ecp_translation_locale") as TranslationLocale | null;
+        if (savedTrans && isValidGlobalLanguage(savedTrans) && savedTrans !== translationLocale) {
+          setTranslationLocaleState(savedTrans);
+          document.cookie = `ecp_translation_locale=${savedTrans}; path=/; max-age=31536000; SameSite=Lax`;
+        }
+      } catch {
+        // LocalStorage unavailable
       }
-    } catch {
-      // LocalStorage unavailable
-    }
+    });
 
     const handleLocaleChange = (e: Event) => {
       const customEvent = e as CustomEvent<SupportedLocale>;

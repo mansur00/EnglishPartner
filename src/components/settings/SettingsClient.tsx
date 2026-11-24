@@ -14,7 +14,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -64,37 +63,39 @@ export function SettingsClient() {
 
   // Read saved settings from localStorage on mount
   useEffect(() => {
-    try {
-      const storedSpeed = localStorage.getItem("ecp_audio_speed");
-      if (storedSpeed) setAudioSpeed(storedSpeed);
+    queueMicrotask(() => {
+      try {
+        const storedSpeed = localStorage.getItem("ecp_audio_speed");
+        if (storedSpeed) setAudioSpeed(storedSpeed);
 
-      const storedAutoPlay = localStorage.getItem("ecp_autoplay_audio");
-      if (storedAutoPlay !== null) setAutoPlayAudio(storedAutoPlay === "true");
+        const storedAutoPlay = localStorage.getItem("ecp_autoplay_audio");
+        if (storedAutoPlay !== null) setAutoPlayAudio(storedAutoPlay === "true");
 
-      const storedAccent = localStorage.getItem("ecp_voice_accent");
-      if (storedAccent) setVoiceAccent(storedAccent);
+        const storedAccent = localStorage.getItem("ecp_voice_accent");
+        if (storedAccent) setVoiceAccent(storedAccent);
 
-      const storedGoal = localStorage.getItem("ecp_daily_goal_mins");
-      if (storedGoal) setDailyGoalMins(parseInt(storedGoal, 10));
+        const storedGoal = localStorage.getItem("ecp_daily_goal_mins");
+        if (storedGoal) setDailyGoalMins(parseInt(storedGoal, 10));
 
-      const storedLevel = localStorage.getItem("ecp_user_target_level");
-      if (storedLevel) setTargetLevel(storedLevel);
+        const storedLevel = localStorage.getItem("ecp_user_target_level");
+        if (storedLevel) setTargetLevel(storedLevel);
 
-      // Counts
-      const vocabRaw = localStorage.getItem("ecp_saved_vocabulary");
-      if (vocabRaw) {
-        const parsed = JSON.parse(vocabRaw);
-        if (Array.isArray(parsed)) setSavedWordsCount(parsed.length);
+        // Counts
+        const vocabRaw = localStorage.getItem("ecp_saved_vocabulary");
+        if (vocabRaw) {
+          const parsed = JSON.parse(vocabRaw);
+          if (Array.isArray(parsed)) setSavedWordsCount(parsed.length);
+        }
+
+        const stepsRaw = localStorage.getItem("ecp_completed_steps");
+        if (stepsRaw) {
+          const parsed = JSON.parse(stepsRaw);
+          if (Array.isArray(parsed)) setCompletedStepsCount(parsed.length);
+        }
+      } catch {
+        // LocalStorage access fallback
       }
-
-      const stepsRaw = localStorage.getItem("ecp_completed_steps");
-      if (stepsRaw) {
-        const parsed = JSON.parse(stepsRaw);
-        if (Array.isArray(parsed)) setCompletedStepsCount(parsed.length);
-      }
-    } catch {
-      // LocalStorage access fallback
-    }
+    });
   }, []);
 
   // Handlers

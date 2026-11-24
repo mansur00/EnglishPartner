@@ -49,13 +49,15 @@ export function WhatShouldISay() {
 
   useEffect(() => {
     // Initial sample query with current translation language
-    const initRes = resolveSayItIntent({
-      intent: effectiveLang === "bn"
-        ? "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।"
-        : "I want to tell my manager that I need two more days to finish the task.",
-      output_lang: effectiveLang,
+    queueMicrotask(() => {
+      const initRes = resolveSayItIntent({
+        intent: effectiveLang === "bn"
+          ? "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।"
+          : "I want to tell my manager that I need two more days to finish the task.",
+        output_lang: effectiveLang,
+      });
+      setResponse(initRes);
     });
-    setResponse(initRes);
   }, [effectiveLang]);
 
   useEffect(() => {

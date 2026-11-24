@@ -51,8 +51,10 @@ export function useLiveTranslations(texts: string[], targetLang: string) {
 
   useEffect(() => {
     if (!targetLang || targetLang === "none" || targetLang === "en" || !textsKey) {
-      setResolvedMap({});
-      setIsLoading(false);
+      queueMicrotask(() => {
+        setResolvedMap({});
+        setIsLoading(false);
+      });
       return;
     }
 
@@ -78,16 +80,22 @@ export function useLiveTranslations(texts: string[], targetLang: string) {
     }
 
     if (Object.keys(initial).length > 0) {
-      setResolvedMap((prev) => ({ ...prev, ...initial }));
+      queueMicrotask(() => {
+        setResolvedMap((prev) => ({ ...prev, ...initial }));
+      });
     }
 
     if (missing.length === 0) {
-      setIsLoading(false);
+      queueMicrotask(() => {
+        setIsLoading(false);
+      });
       return;
     }
 
     let cancelled = false;
-    setIsLoading(true);
+    queueMicrotask(() => {
+      if (!cancelled) setIsLoading(true);
+    });
 
     fetch("/api/v1/translate", {
       method: "POST",

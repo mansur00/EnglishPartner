@@ -100,11 +100,13 @@ export function LanguageSwitcher() {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setIsOpen(false);
+        setSearchQuery("");
       }
     }
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
         setIsOpen(false);
+        setSearchQuery("");
       }
     }
 
@@ -112,8 +114,6 @@ export function LanguageSwitcher() {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleKeyDown);
       setTimeout(() => searchInputRef.current?.focus(), 50);
-    } else {
-      setSearchQuery("");
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -124,6 +124,7 @@ export function LanguageSwitcher() {
   const handleSelect = (code: TranslationLocale) => {
     setTranslationLocale(code);
     setIsOpen(false);
+    setSearchQuery("");
   };
 
   const getActiveLabel = () => {

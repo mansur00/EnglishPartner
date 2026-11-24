@@ -1,11 +1,324 @@
 {
-  "a_colors": [],
-  "b_typography": [],
+  "a_colors": [
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 203,
+      "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, text-emerald-300",
+      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 321,
+      "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
+      "code": "className={cn(isCompleted && \"text-emerald-600 dark:text-emerald-400\")}"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 411,
+      "detail": "Tailwind raw palette color: bg-amber-500/10, text-amber-600, text-amber-400",
+      "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 438,
+      "detail": "Tailwind raw palette color: bg-purple-500/10, text-purple-600, text-purple-400",
+      "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 465,
+      "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-600, text-emerald-400",
+      "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 198,
+      "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, text-emerald-300",
+      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 611,
+      "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
+      "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
+    }
+  ],
+  "b_typography": [
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 306,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className={cn(buttonVariants({ size: \"lg\" }), \"rounded-control font-semibold\")}"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 200,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<p className=\"text-label font-medium\">{t(\"settings.resetSuccess\", locale)}</p>"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 227,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 256,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 287,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 315,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 335,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 379,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"h-control rounded-control text-label font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 428,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 471,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"h-control rounded-control text-label font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 507,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer text-center\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 542,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 556,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 570,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "\"flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 601,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"text-chip font-medium uppercase tracking-wider\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 605,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"text-display font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 613,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"text-chip font-medium uppercase tracking-wider\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 617,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"text-display font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 661,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"text-label text-foreground font-medium\">English Partner</span>"
+    }
+  ],
   "c_radius": [],
-  "d_layout_magic": [],
+  "d_layout_magic": [
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 152,
+      "detail": "Hardcoded layout constant / magic number: max-w-5xl",
+      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-8 max-w-5xl\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 163,
+      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
+      "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 228,
+      "detail": "Hardcoded layout constant / magic number: max-w-3xl",
+      "code": "<p className=\"text-body text-muted-foreground max-w-3xl leading-relaxed\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 181,
+      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
+      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-8 max-w-4xl\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 191,
+      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
+      "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
+    }
+  ],
   "e_inline_styles": [],
-  "f_duplication": [],
+  "f_duplication": [
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-chip text-muted-foreground font-mono",
+      "files": [
+        "src/components/learning/GrammarPanel.tsx",
+        "src/components/practice/SentenceBuilderCard.tsx",
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 11 times",
+      "className": "font-heading text-card-title text-foreground",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "group p-4 rounded-panel bg-muted/60 hover:bg-muted transition-colors flex flex-col justify-between space-y-3 cursor-pointer",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 6 times",
+      "className": "font-heading text-card-title text-foreground group-hover:text-primary transition-colors",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center gap-1 text-chip text-primary",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "group block p-5 rounded-card bg-card shadow-card hover:shadow-md transition-shadow space-y-3 cursor-pointer",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-muted-foreground group-hover:text-primary transition-colors",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 6 times",
+      "className": "size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center",
+      "files": [
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "bg-card p-5 md:p-6 space-y-6 shadow-card",
+      "files": [
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 8 times",
+      "className": "block font-heading text-label text-foreground",
+      "files": [
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    }
+  ],
   "g_ts_data_colors": [],
-  "h_dark_mode": [],
+  "h_dark_mode": [
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 203,
+      "detail": "Raw color with dark: prefix: dark:text-emerald-300",
+      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 321,
+      "detail": "Raw color with dark: prefix: dark:text-emerald-400",
+      "code": "className={cn(isCompleted && \"text-emerald-600 dark:text-emerald-400\")}"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 411,
+      "detail": "Raw color with dark: prefix: dark:text-amber-400",
+      "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 438,
+      "detail": "Raw color with dark: prefix: dark:text-purple-400",
+      "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 465,
+      "detail": "Raw color with dark: prefix: dark:text-emerald-400",
+      "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 198,
+      "detail": "Raw color with dark: prefix: dark:text-emerald-300",
+      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 611,
+      "detail": "Raw color with dark: prefix: dark:text-emerald-400",
+      "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
+    }
+  ],
   "i_ui_primitives": []
 }

@@ -1734,6 +1734,13 @@ Entry format:
   - Puppeteer visual captures (`professions_updated_en.png`, `professions_detail_en.png`) verified.
   - Pushed all commits to `origin/main` on GitHub.
 
+### 2026-11-25, GitHub CI ESLint Fix
+- **Root Cause:** `npm run lint` failed in GitHub Actions CI on commit `a6eb10f` with 6 `react-hooks/set-state-in-effect` errors and 1 unused import warning (`DialogClose`).
+- **Fixes Applied:**
+  - `src/components/navigation/LanguageSwitcher.tsx`: Moved `setSearchQuery("")` out of `useEffect` into event callbacks (`handleClickOutside`, `handleKeyDown`, `handleSelect`).
+  - `src/components/practice/DailyPracticeClient.tsx`, `src/components/settings/SettingsClient.tsx`, `src/components/tools/WhatShouldISay.tsx`, `src/lib/i18n/provider.tsx`, `src/lib/i18n/use-live-translation.ts`: Wrapped synchronous `localStorage`/initial state hydration inside `queueMicrotask(() => { ... })` in `useEffect`; removed unused `DialogClose` import in `SettingsClient.tsx`.
+- **Verification:** `npm run check:frozen`, `npm run lint:ui`, `npm run lint` (0 errors/warnings), `npm test` (209/209 passed across 41 suites), and `npm run build` (130/130 routes) all passed.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

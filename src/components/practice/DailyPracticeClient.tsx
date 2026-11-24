@@ -46,33 +46,35 @@ export function DailyPracticeClient() {
   // Load daily challenge, streak, and saved vocabulary
   useEffect(() => {
     // 1. Goal & Streak from localStorage
-    try {
-      const storedGoal = localStorage.getItem("ecp_daily_goal_mins");
-      if (storedGoal) setMinutesGoal(parseInt(storedGoal, 10));
+    queueMicrotask(() => {
+      try {
+        const storedGoal = localStorage.getItem("ecp_daily_goal_mins");
+        if (storedGoal) setMinutesGoal(parseInt(storedGoal, 10));
 
-      const storedStreak = localStorage.getItem("ecp_streak_count");
-      if (storedStreak) setStreak(parseInt(storedStreak, 10));
+        const storedStreak = localStorage.getItem("ecp_streak_count");
+        if (storedStreak) setStreak(parseInt(storedStreak, 10));
 
-      const storedMins = localStorage.getItem("ecp_today_minutes");
-      if (storedMins) setMinutesCompleted(parseInt(storedMins, 10));
+        const storedMins = localStorage.getItem("ecp_today_minutes");
+        if (storedMins) setMinutesCompleted(parseInt(storedMins, 10));
 
-      // 2. Saved words for SRS
-      const vocabRaw = localStorage.getItem("ecp_saved_vocabulary");
-      if (vocabRaw) {
-        const parsed = JSON.parse(vocabRaw);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setSavedLemmas(parsed);
+        // 2. Saved words for SRS
+        const vocabRaw = localStorage.getItem("ecp_saved_vocabulary");
+        if (vocabRaw) {
+          const parsed = JSON.parse(vocabRaw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setSavedLemmas(parsed);
+          }
         }
-      }
 
-      // 3. Challenge completed state
-      const completedKey = `ecp_daily_challenge_${todayDateStr}`;
-      if (localStorage.getItem(completedKey) === "completed") {
-        setIsCompleted(true);
+        // 3. Challenge completed state
+        const completedKey = `ecp_daily_challenge_${todayDateStr}`;
+        if (localStorage.getItem(completedKey) === "completed") {
+          setIsCompleted(true);
+        }
+      } catch {
+        // LocalStorage access fallback
       }
-    } catch {
-      // LocalStorage access fallback
-    }
+    });
 
     // 4. Fetch daily challenge from API
     async function fetchChallenge() {
