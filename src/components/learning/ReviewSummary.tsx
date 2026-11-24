@@ -14,7 +14,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { VocabularyEntry } from "@/content/seed/vocabulary";
 import { Button } from "@/components/ui/button";
-import { useLocale } from "@/lib/i18n";
+import { useTranslations } from "@/lib/i18n";
 
 interface ReviewSummaryProps {
   scenarioTitleEn: string;
@@ -41,7 +41,7 @@ export function ReviewSummary({
   savedWords = new Set(),
   onSaveWordToggle,
 }: ReviewSummaryProps) {
-  const locale = useLocale();
+  const { locale, t } = useTranslations();
 
   const playWord = (word: string) => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -86,14 +86,14 @@ export function ReviewSummary({
             <>
               <HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className="text-primary" />
               <span className={cn(locale === "bn" && "text-bangla")}>
-                {locale === "bn" ? "বুকমার্ক করা আছে" : "Bookmarked"}
+                {t("reader.bookmarked")}
               </span>
             </>
           ) : (
             <>
               <HugeiconsIcon icon={Bookmark01Icon} size={16} />
               <span className={cn(locale === "bn" && "text-bangla")}>
-                {locale === "bn" ? "বুকমার্ক করুন" : "Bookmark Scenario"}
+                {t("reader.bookmark")}
               </span>
             </>
           )}

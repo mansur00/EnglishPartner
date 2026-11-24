@@ -16,8 +16,8 @@ export function SpeakerLabel({ speaker }: SpeakerLabelProps) {
     peach: "bg-topic-tile text-topic-ink border-topic-border",
   };
 
-  const name = locale === "bn" ? (speaker.nameBn || speaker.name) : speaker.name;
-  const role = locale === "bn" ? (speaker.roleBn || speaker.role) : (speaker.role || speaker.roleBn);
+  const name = locale === "bn" ? (speaker.nameBn || speaker.name || "বক্তা") : (speaker.name || "Speaker");
+  const role = locale === "bn" ? (speaker.roleBn || speaker.role || "অংশগ্রহণকারী") : (speaker.role || "Participant");
 
   return (
     <div className="flex items-center gap-2.5">

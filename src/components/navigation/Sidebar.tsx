@@ -56,13 +56,13 @@ export function Sidebar() {
       active: pathname.startsWith("/professions"),
     },
     {
-      name: locale === "bn" ? "আমি কী বলতে পারি?" : "What Should I Say?",
+      name: t("nav.sayIt", locale),
       href: "/what-should-i-say",
       icon: SparklesIcon,
       active: pathname === "/what-should-i-say",
     },
     {
-      name: locale === "bn" ? "এআই পার্টনার" : "AI Partner",
+      name: t("nav.roleplay", locale),
       href: "/roleplay",
       icon: BotIcon,
       active: pathname === "/roleplay",
@@ -74,7 +74,7 @@ export function Sidebar() {
       active: pathname === "/vocabulary",
     },
     {
-      name: locale === "bn" ? "আমার অগ্রগতি" : "My Progress",
+      name: t("nav.progress", locale),
       href: "/progress",
       icon: Analytics01Icon,
       active: pathname === "/progress",
@@ -88,7 +88,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="hidden md:flex w-sidebar flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 sticky top-header h-below-header overflow-y-auto z-sidebar">
+    <aside suppressHydrationWarning className="hidden md:flex w-sidebar flex-col border-r border-border bg-card p-4 space-y-6 shrink-0 sticky top-header h-below-header overflow-y-auto z-sidebar">
       <div className="space-y-1.5">
         <span className="px-3 text-chip uppercase tracking-wider text-muted-foreground">
           {t("nav.menu", locale)}

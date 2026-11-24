@@ -1,47 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { type SupportedLocale, SUPPORTED_LOCALES } from "./languages.ts";
-import { t } from "./index.ts";
+import { useContext } from "react";
+import { LocaleContext, type LocaleContextValue } from "./context.ts";
+import { t as translate } from "./index.ts";
+import type { SupportedLocale } from "./languages.ts";
+
+export function useLocaleContext(): LocaleContextValue {
+  const ctx = useContext(LocaleContext);
+  if (!ctx) {
+    return {
+      locale: "bn",
+      setLocale: () => {},
+      t: (key: string) => translate(key, "bn"),
+    };
+  }
+  return ctx;
+}
 
 export function useLocale(): SupportedLocale {
-  const [locale, setLocale] = useState<SupportedLocale>("bn");
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("ecp_user_locale") as SupportedLocale | null;
-      if (saved && (SUPPORTED_LOCALES as readonly string[]).includes(saved)) {
-        queueMicrotask(() => {
-          setLocale(saved);
-        });
-      }
-    } catch {
-      // LocalStorage unavailable
-    }
-
-    const handleLocaleChange = (e: Event) => {
-      const customEvent = e as CustomEvent<SupportedLocale>;
-      if (
-        customEvent.detail &&
-        (SUPPORTED_LOCALES as readonly string[]).includes(customEvent.detail)
-      ) {
-        setLocale(customEvent.detail);
-      }
-    };
-
-    window.addEventListener("ecp_locale_change", handleLocaleChange);
-    return () => {
-      window.removeEventListener("ecp_locale_change", handleLocaleChange);
-    };
-  }, []);
-
-  return locale;
+  const ctx = useLocaleContext();
+  return ctx.locale;
 }
 
 export function useTranslations() {
-  const locale = useLocale();
+  const ctx = useLocaleContext();
   return {
-    locale,
-    t: (key: string) => t(key, locale),
+    locale: ctx.locale,
+    setLocale: ctx.setLocale,
+    t: ctx.t,
   };
 }

@@ -121,22 +121,22 @@ export function ConversationTurn({
                         </Button>
                     )}
 
-                    {/* Translation Toggle per Line */}
-                    <Button
+                    {/* Translation Toggle per Line (Shown when in Bengali/translation mode) */}
+                    {locale === "bn" && (
+                      <Button
                         type="button"
                         variant="outline"
                         size="sm"
                         onClick={() => setLocalTranslationVisible(!isTranslationShown)}
                         className="h-control-sm px-2.5 text-chip gap-1 text-muted-foreground hover:text-foreground rounded-control"
-                        title={isTranslationShown ? (locale === "bn" ? "অনুবাদ লুকান" : "Hide translation") : (locale === "bn" ? "অনুবাদ দেখুন" : "Show translation")}
-                    >
+                        title={isTranslationShown ? "অনুবাদ লুকান" : "অনুবাদ দেখুন"}
+                      >
                         <HugeiconsIcon icon={isTranslationShown ? ViewOffIcon : ViewIcon} size={14} />
                         <span className="hidden sm:inline font-bangla">
-                            {isTranslationShown
-                                ? (locale === "bn" ? "লুকান" : "Hide")
-                                : (locale === "bn" ? "অনুবাদ" : "Translate")}
+                          {isTranslationShown ? "লুকান" : "অনুবাদ"}
                         </span>
-                    </Button>
+                      </Button>
+                    )}
                 </div>
             </div>
 
@@ -198,8 +198,8 @@ export function ConversationTurn({
                 )}
             </div>
 
-            {/* Contextual Bangla Translation (Multi-Language §6.2) */}
-            {isTranslationShown && (
+            {/* Contextual Bangla Translation (shown only when user interface is in Bengali) */}
+            {locale === "bn" && isTranslationShown && (
                 <div className="pt-2 border-t border-border/60 animate-in fade-in duration-200">
                     <div>
                         <p

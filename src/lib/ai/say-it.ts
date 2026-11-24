@@ -211,14 +211,19 @@ const INTENT_RULES: IntentRule[] = [
 export function resolveSayItIntent(rawRequest: SayItRequest): SayItResponse {
   const request = SayItRequestSchema.parse(rawRequest);
   const trimmed = request.intent.trim();
+  const isEn = request.output_lang === "en";
 
   // If intent is blank or too short to have clear semantic meaning
   if (trimmed.length < 3) {
     return {
-      understood_intent: "The provided message is too brief to identify a specific conversation goal.",
+      understood_intent: isEn
+        ? "The provided message is too brief to identify a specific conversation goal."
+        : "কথোপকথনের উদ্দেশ্য বোঝার জন্য আপনার ইনপুটটি খুবই সংক্ষিপ্ত।",
       options: [],
       useful_phrases: [],
-      clarifying_question: "Could you describe in a few words who you want to talk to and what your goal is?",
+      clarifying_question: isEn
+        ? "Could you describe in a few words who you want to talk to and what your goal is?"
+        : "আপনি কার সাথে কথা বলতে চান এবং আপনার মূল উদ্দেশ্য কী, তা কয়েকটি শব্দে বর্ণনা করতে পারেন?",
     };
   }
 
@@ -252,7 +257,7 @@ export function resolveSayItIntent(rawRequest: SayItRequest): SayItResponse {
     });
 
     return SayItResponseSchema.parse({
-      understood_intent: matchedRule.understoodBn,
+      understood_intent: isEn ? matchedRule.understoodEn : matchedRule.understoodBn,
       options: rawOptions,
       useful_phrases: matchedRule.usefulPhrases.slice(0, 5),
       clarifying_question: null,
@@ -261,7 +266,9 @@ export function resolveSayItIntent(rawRequest: SayItRequest): SayItResponse {
 
   // General fallback for unindexed intents preserving user's words with zero invented commitments
   return SayItResponseSchema.parse({
-    understood_intent: `আপনি যে বিষয়টি প্রকাশ করতে চান: "${trimmed}"`,
+    understood_intent: isEn
+      ? `What you want to express: "${trimmed}"`
+      : `আপনি যে বিষয়টি প্রকাশ করতে চান: "${trimmed}"`,
     options: [
       {
         tone: "polite_professional",
@@ -283,8 +290,8 @@ export function resolveSayItIntent(rawRequest: SayItRequest): SayItResponse {
       },
     ],
     useful_phrases: [
-      { phrase: "I would like to discuss...", meaning: "আমি ... আলোচনা করতে চাই" },
-      { phrase: "whenever you have a moment", meaning: "যখন আপনার একটু সময় হবে" },
+      { phrase: "I would like to discuss...", meaning: isEn ? "I would like to discuss..." : "আমি ... আলোচনা করতে চাই" },
+      { phrase: "whenever you have a moment", meaning: isEn ? "whenever you have a moment" : "যখন আপনার একটু সময় হবে" },
     ],
     clarifying_question: null,
   });

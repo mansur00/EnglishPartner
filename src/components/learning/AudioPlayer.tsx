@@ -226,7 +226,7 @@ export function AudioPlayer({
             className="rounded-pill shadow-xs gap-1.5 min-w-24"
           >
             <HugeiconsIcon icon={isPlaying ? PauseIcon : PlayIcon} size={18} />
-            <span>{isPlaying ? "Pause" : "Play Full"}</span>
+            <span>{isPlaying ? t("reader.pause", locale) : t("reader.playFull", locale)}</span>
           </Button>
 
           <Button

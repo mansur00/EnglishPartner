@@ -78,15 +78,15 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
     { name: t("nav.explore", locale), href: "/explore", icon: CompassIcon },
     { name: t("nav.dailyPractice", locale), href: "/daily-practice", icon: Calendar03Icon },
     { name: t("nav.professionalEnglish", locale), href: "/professions", icon: Briefcase01Icon },
-    { name: locale === "bn" ? "আমি কী বলতে পারি?" : "What Should I Say?", href: "/what-should-i-say", icon: SparklesIcon },
-    { name: locale === "bn" ? "এআই পার্টনার" : "AI Partner", href: "/roleplay", icon: BotIcon },
+    { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
+    { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon },
     { name: t("nav.vocabulary", locale), href: "/vocabulary", icon: Bookmark02Icon },
-    { name: locale === "bn" ? "আমার অগ্রগতি" : "My Progress", href: "/progress", icon: Analytics01Icon },
+    { name: t("nav.progress", locale), href: "/progress", icon: Analytics01Icon },
     { name: t("nav.settings", locale), href: "/settings", icon: Settings01Icon },
   ];
 
   return (
-    <header className="sticky top-0 z-header flex h-header w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
+    <header suppressHydrationWarning className="sticky top-0 z-header flex h-header w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
       {/* Brand & Mobile Hamburger */}
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}

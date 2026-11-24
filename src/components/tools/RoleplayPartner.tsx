@@ -41,7 +41,7 @@ import {
   generateRoleplayTurn,
   generateRoleplayFeedback,
 } from "@/lib/ai/roleplay";
-import { useLocale } from "@/lib/i18n";
+import { useTranslations } from "@/lib/i18n";
 import {
   getVoiceSpeedRate,
   cleanSpokenTranscript,
@@ -291,7 +291,7 @@ function FeedbackSectionHeader({ children }: { children: React.ReactNode }) {
 }
 
 export function RoleplayPartner() {
-  const locale = useLocale();
+  const { locale, t } = useTranslations();
   const [selectedScenario, setSelectedScenario] = useState<RoleplayScenario>(FREESTYLE_SCENARIO);
   const [customScenarios, setCustomScenarios] = useState<RoleplayScenario[]>([]);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -924,23 +924,27 @@ export function RoleplayPartner() {
             className="rounded-control text-chip gap-1.5 cursor-pointer"
           >
             <HugeiconsIcon icon={voiceMode ? VolumeHighIcon : VolumeMute01Icon} size={15} />
-            <span className="text-bangla">
-              {voiceMode ? "ভয়েস মোড: চালু" : "ভয়েস মোড: বন্ধ"}
+            <span className={locale === "bn" ? "text-bangla" : ""}>
+              {voiceMode ? t("roleplay.voiceModeOn") : t("roleplay.voiceModeOff")}
             </span>
           </Button>
 
-          <span className="text-chip-bn text-muted-foreground">
-            {voiceMode ? "পার্টনার প্রতিটি কথা স্বয়ংক্রিয়ভাবে বলবে" : "শুধুমাত্র টেক্সট দেখা যাবে"}
+          <span className={cn("text-chip text-muted-foreground", locale === "bn" && "text-bangla")}>
+            {voiceMode ? t("roleplay.voiceAutoSpeak") : t("roleplay.voiceTextOnly")}
           </span>
         </div>
 
         {/* Voice Speed Controls */}
         {voiceMode && (
           <div className="flex items-center gap-1.5">
-            <span className="text-chip text-muted-foreground">গতি:</span>
+            <span className="text-chip text-muted-foreground">{t("roleplay.speedLabel")}</span>
             {(["slow", "clear", "normal"] as VoiceSpeedSetting[]).map((spd) => {
               const isCur = voiceSpeed === spd;
-              const spdLabel = spd === "slow" ? "ধীরে (0.75x)" : spd === "clear" ? "স্পষ্ট (0.88x)" : "স্বাভাবিক (1.0x)";
+              const spdLabel = spd === "slow"
+                ? t("roleplay.speedSlow")
+                : spd === "clear"
+                ? t("roleplay.speedClear")
+                : t("roleplay.speedNormal");
               return (
                 <button
                   key={spd}
@@ -986,12 +990,12 @@ export function RoleplayPartner() {
             <p className="text-meta text-muted-foreground mt-0.5">
               {locale === "bn" ? (
                 <>
-                  আপনি: <strong className="text-foreground">{selectedScenario.learnerRoleBn}</strong> | পার্টনার:{" "}
+                  {t("roleplay.you")}: <strong className="text-foreground">{selectedScenario.learnerRoleBn}</strong> | {t("roleplay.partner")}:{" "}
                   <strong className="text-foreground">{selectedScenario.aiRoleBn}</strong> ({selectedScenario.contextBn})
                 </>
               ) : (
                 <>
-                  You: <strong className="text-foreground">{selectedScenario.learnerRole}</strong> | Partner:{" "}
+                  {t("roleplay.you")}: <strong className="text-foreground">{selectedScenario.learnerRole}</strong> | {t("roleplay.partner")}:{" "}
                   <strong className="text-foreground">{selectedScenario.aiRole}</strong> ({selectedScenario.context})
                 </>
               )}
@@ -1094,7 +1098,7 @@ export function RoleplayPartner() {
               className="rounded-control text-chip text-muted-foreground hover:text-foreground cursor-pointer"
             >
               <HugeiconsIcon icon={StopIcon} size={13} />
-              <span className="text-bangla">{locale === "bn" ? "থামান" : "Stop"}</span>
+              <span className={locale === "bn" ? "text-bangla" : ""}>{t("roleplay.stop")}</span>
             </Button>
           </div>
         )}
@@ -1102,30 +1106,30 @@ export function RoleplayPartner() {
         {/* Inline Mic Access Error Banner */}
         {micError && (
           <div className="flex items-center justify-between p-3 rounded-panel bg-destructive/10 text-destructive text-chip animate-in fade-in">
-            <p className="text-bangla">{micError}</p>
+            <p className={locale === "bn" ? "text-bangla" : ""}>{micError}</p>
             <button
               type="button"
               onClick={() => setMicError(null)}
               className="text-chip text-destructive hover:underline cursor-pointer ml-2"
             >
-              বন্ধ করুন
+              {t("roleplay.close")}
             </button>
           </div>
         )}
 
         {/* Inline Hint Banner */}
         {activeHint && !feedback && (
-          <div className="p-3 rounded-panel bg-primary/10 flex items-center justify-between gap-2 text-chip text-bangla animate-in fade-in">
+          <div className="p-3 rounded-panel bg-primary/10 flex items-center justify-between gap-2 text-chip animate-in fade-in">
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={HelpCircleIcon} size={15} className="text-primary shrink-0" />
-              <span className="text-foreground">{activeHint}</span>
+              <span className={cn("text-foreground", locale === "bn" && "text-bangla")}>{activeHint}</span>
             </div>
             <button
               type="button"
               onClick={() => setActiveHint(null)}
               className="text-muted-foreground hover:text-foreground text-chip cursor-pointer"
             >
-              বন্ধ করুন
+              {t("roleplay.close")}
             </button>
           </div>
         )}
@@ -1152,7 +1156,7 @@ export function RoleplayPartner() {
             {/* Session Turn Limit Notice per ECP_API_Contract §4.7 */}
             {messages.filter((m) => m.speaker === "learner").length >= 20 && (
               <div className="p-2.5 rounded-control bg-primary/10 text-chip text-primary flex items-center justify-between gap-2">
-                <span>সেশনের ২০টি কথোপকথন পূর্ণ হয়েছে। অগ্রগতি দেখতে সেশন সমাপ্ত করুন।</span>
+                <span>{t("roleplay.sessionLimitReached")}</span>
                 <Button
                   variant="default"
                   size="sm"
@@ -1326,13 +1330,13 @@ export function RoleplayPartner() {
                       </Tag>
                     </div>
                     <p className="text-chip text-muted-foreground font-sans">
-                      আপনার বাক্য: &quot;<span className="text-foreground">{fa.example_from_learner}</span>&quot;
+                      {t("roleplay.learnerSentence")} &quot;<span className="text-foreground">{fa.example_from_learner}</span>&quot;
                     </p>
-                    <p className="text-chip text-bangla text-muted-foreground">
-                      পরামর্শ: {fa.suggestion}
+                    <p className={cn("text-chip text-muted-foreground", locale === "bn" && "text-bangla")}>
+                      {t("roleplay.suggestion")} {fa.suggestion}
                     </p>
                     <p className="text-chip font-sans text-primary border-t border-border/50 pt-1">
-                      বিকল্প: &quot;{fa.natural_alternative}&quot;
+                      {t("roleplay.alternative")} &quot;{fa.natural_alternative}&quot;
                     </p>
                   </div>
                 ))}
@@ -1341,16 +1345,16 @@ export function RoleplayPartner() {
           )}
 
           {/* Next Step */}
-          <div className="p-3.5 rounded-panel bg-primary/10 space-y-1 text-meta text-bangla">
+          <div className="p-3.5 rounded-panel bg-primary/10 space-y-1 text-meta">
             <div className="flex items-center gap-1.5 text-label text-foreground">
               <HugeiconsIcon icon={Target01Icon} size={16} />
               <span>{locale === "bn" ? "পরবর্তী পদক্ষেপ:" : "Next Step:"}</span>
             </div>
-            <p className="text-foreground">{feedback.next_step}</p>
+            <p className={cn("text-foreground", locale === "bn" && "text-bangla")}>{feedback.next_step}</p>
           </div>
 
           {/* Limitations Disclaimer */}
-          <p className="text-chip text-muted-foreground text-bangla border-t border-border pt-2 italic">
+          <p className={cn("text-chip text-muted-foreground border-t border-border pt-2 italic", locale === "bn" && "text-bangla")}>
             {feedback.limitations}
           </p>
         </Card>
@@ -1361,23 +1365,21 @@ export function RoleplayPartner() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>
-              {locale === "bn" ? "নতুন কথোপকথন টপিক তৈরি করুন" : "Create New Conversation Topic"}
+              {t("roleplay.createTopicTitle")}
             </DialogTitle>
             <DialogDescription>
-              {locale === "bn"
-                ? "আপনার পছন্দমতো যেকোনো দৃশ্যপট ও ভূমিকা তৈরি করে এআই পার্টনারের সাথে ইংরেজি অনুশীলন করুন।"
-                : "Create your own custom scenario and roles to practice conversational English with your AI partner."}
+              {t("roleplay.createTopicDesc")}
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4 py-2">
             <Field>
               <FieldLabel htmlFor="custom-topic-title">
-                {locale === "bn" ? "টপিকের শিরোনাম *" : "Topic Title *"}
+                {t("roleplay.topicTitleLabel")}
               </FieldLabel>
               <Input
                 id="custom-topic-title"
-                placeholder={locale === "bn" ? "যেমন: প্রিয় সিনেমা নিয়ে আলোচনা" : "e.g. Discussing Favorite Movies"}
+                placeholder={t("roleplay.topicTitlePlaceholder")}
                 value={createForm.title}
                 onChange={(e) =>
                   setCreateForm((prev) => ({ ...prev, title: e.target.value }))
@@ -1387,15 +1389,11 @@ export function RoleplayPartner() {
 
             <Field>
               <FieldLabel htmlFor="custom-topic-context">
-                {locale === "bn" ? "পরিস্থিতি বা প্রেক্ষাপট" : "Context & Situation"}
+                {t("roleplay.contextLabel")}
               </FieldLabel>
               <Input
                 id="custom-topic-context"
-                placeholder={
-                  locale === "bn"
-                    ? "যেমন: সাম্প্রতিক সিনেমা, অভিনেতা ও গল্প নিয়ে কথা বলা"
-                    : "e.g. Talking about recent movies, actors, and cinema genres"
-                }
+                placeholder={t("roleplay.contextPlaceholder")}
                 value={createForm.context}
                 onChange={(e) =>
                   setCreateForm((prev) => ({ ...prev, context: e.target.value }))
@@ -1406,11 +1404,11 @@ export function RoleplayPartner() {
             <div className="grid grid-cols-2 gap-3">
               <Field>
                 <FieldLabel htmlFor="custom-ai-role">
-                  {locale === "bn" ? "AI এর ভূমিকা" : "AI Role"}
+                  {t("roleplay.aiRoleLabel")}
                 </FieldLabel>
                 <Input
                   id="custom-ai-role"
-                  placeholder={locale === "bn" ? "যেমন: চলচ্চিত্র সমালোচক বা বন্ধু" : "e.g. Film Critic / Friend"}
+                  placeholder={t("roleplay.aiRolePlaceholder")}
                   value={createForm.aiRole}
                   onChange={(e) =>
                     setCreateForm((prev) => ({ ...prev, aiRole: e.target.value }))
@@ -1420,11 +1418,11 @@ export function RoleplayPartner() {
 
               <Field>
                 <FieldLabel htmlFor="custom-learner-role">
-                  {locale === "bn" ? "আপনার ভূমিকা" : "Your Role"}
+                  {t("roleplay.learnerRoleLabel")}
                 </FieldLabel>
                 <Input
                   id="custom-learner-role"
-                  placeholder={locale === "bn" ? "যেমন: সিনেমা অনুরাগী" : "e.g. Movie Fan"}
+                  placeholder={t("roleplay.learnerRolePlaceholder")}
                   value={createForm.learnerRole}
                   onChange={(e) =>
                     setCreateForm((prev) => ({ ...prev, learnerRole: e.target.value }))
@@ -1435,7 +1433,7 @@ export function RoleplayPartner() {
 
             <Field>
               <FieldLabel>
-                {locale === "bn" ? "দক্ষতার লেভেল" : "CEFR Level"}
+                {t("roleplay.cefrLevelLabel")}
               </FieldLabel>
               <div className="flex items-center gap-2">
                 {(["A1", "A2", "B1", "B2", "C1"] as const).map((lvl) => {
@@ -1467,7 +1465,7 @@ export function RoleplayPartner() {
               onClick={() => setIsCreateOpen(false)}
               className="rounded-control text-chip"
             >
-              {locale === "bn" ? "বাতিল" : "Cancel"}
+              {t("roleplay.cancel")}
             </Button>
             <Button
               variant="default"
@@ -1476,7 +1474,7 @@ export function RoleplayPartner() {
               disabled={!createForm.title.trim()}
               className="rounded-control text-chip"
             >
-              {locale === "bn" ? "টপিক শুরু করুন" : "Start Topic"}
+              {t("roleplay.startTopic")}
             </Button>
           </DialogFooter>
         </DialogContent>

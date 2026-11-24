@@ -34,7 +34,7 @@ import {
   VocabularyEntry,
   SentenceGrammarEntry,
 } from "@/content/seed/vocabulary";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, t } from "@/lib/i18n";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
@@ -328,44 +328,46 @@ function ConversationReaderInner({
           <div className="flex flex-wrap items-center gap-2">
             {prevStepSlug && (
               <Link href={`/conversations/${prevStepSlug}`}>
-                <Button variant="outline" size="sm" className="h-9 text-label rounded-control font-bangla gap-1">
+                <Button variant="outline" size="sm" className="h-9 text-label rounded-control gap-1">
                   <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-                  <span>{locale === "bn" ? "আগের ধাপ" : "Previous Step"}</span>
+                  <span>{t("reader.previousStep", locale)}</span>
                 </Button>
               </Link>
             )}
 
             {nextStepSlug && (
               <Link href={`/conversations/${nextStepSlug}`}>
-                <Button variant="default" size="sm" className="h-9 text-label rounded-control font-bangla gap-1">
-                  <span>{locale === "bn" ? "পরের ধাপ" : "Next Step"}</span>
+                <Button variant="default" size="sm" className="h-9 text-label rounded-control gap-1">
+                  <span>{t("reader.nextStep", locale)}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
                 </Button>
               </Link>
             )}
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
-              className="h-9 text-label rounded-control gap-1.5 font-bangla"
-            >
-              <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
-              <span>
-                {isGlobalTranslationVisible
-                  ? (locale === "bn" ? "অনুবাদ লুকান" : "Hide Translation")
-                  : (locale === "bn" ? "সব অনুবাদ" : "Show Translation")}
-              </span>
-            </Button>
+            {locale === "bn" && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
+                className="h-9 text-label rounded-control gap-1.5"
+              >
+                <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
+                <span>
+                  {isGlobalTranslationVisible
+                    ? t("reader.hideTranslation", locale)
+                    : t("reader.showTranslation", locale)}
+                </span>
+              </Button>
+            )}
 
             <Button
               variant={isCompleted ? "secondary" : "outline"}
               size="sm"
               onClick={() => setIsCompleted(!isCompleted)}
-              className="h-9 text-label rounded-control gap-1.5 font-bangla"
+              className="h-9 text-label rounded-control gap-1.5"
             >
               <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
-              <span>{isCompleted ? (locale === "bn" ? "সম্পন্ন ✓" : "Completed ✓") : (locale === "bn" ? "পাঠ সমাপ্ত" : "Finish Lesson")}</span>
+              <span>{isCompleted ? t("reader.completedLesson", locale) : t("reader.finishLesson", locale)}</span>
             </Button>
           </div>
         </div>
@@ -379,9 +381,9 @@ function ConversationReaderInner({
         {currentVersion.lines.map((line, index) => {
           const speaker = speakerMap.get(line.speakerId) || {
             id: line.speakerId,
-            name: "Speaker",
+            name: t("reader.speaker", locale),
             nameBn: "বক্তা",
-            role: "Participant",
+            role: t("reader.participant", locale),
             roleBn: "অংশগ্রহণকারী",
             avatarChar: "S",
             colorScheme: "brand" as const,

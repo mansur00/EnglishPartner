@@ -4,7 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { useGrammar } from "@/lib/grammar/context";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { BookOpen01Icon } from "@hugeicons/core-free-icons";
 
@@ -21,7 +21,7 @@ export function GrammarModeSwitch({
   const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const { isGlobalOn, toggleGlobal } = useGrammar();
 
-  const label = lang === "bn" ? "সব বাক্যে ব্যাকরণ" : "Grammar (all lines)";
+  const label = t("reader.grammarAllLines", lang);
 
   return (
     <div
@@ -40,7 +40,7 @@ export function GrammarModeSwitch({
       />
       <label
         htmlFor="grammar-global-switch"
-        className="text-label font-bangla text-bangla text-foreground cursor-pointer"
+        className={cn("text-label text-foreground cursor-pointer", lang === "bn" && "font-bangla text-bangla")}
       >
         {label}
       </label>

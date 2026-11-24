@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   SlidersHorizontalIcon,
@@ -89,11 +89,11 @@ export function GrammarLayerPicker({
           "inline-flex items-center justify-center gap-1.5 h-9 px-3 rounded-control border border-border bg-transparent hover:bg-muted text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary",
           className
         )}
-        aria-label={isBn ? "ব্যাকরণ লেয়ার ও সেটিংস" : "Grammar Layers & Settings"}
+        aria-label={t("reader.layerSettings", lang)}
       >
         <HugeiconsIcon icon={SlidersHorizontalIcon} size={15} />
-        <span className="hidden sm:inline text-label font-bangla text-bangla">
-          {isBn ? "লেয়ার সেটিংস" : "Layers"}
+        <span className={cn("hidden sm:inline text-label", isBn && "font-bangla text-bangla")}>
+          {t("reader.layerSettings", lang)}
         </span>
       </PopoverTrigger>
 

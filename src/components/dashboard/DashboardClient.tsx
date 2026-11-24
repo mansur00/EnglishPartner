@@ -59,10 +59,10 @@ export function DashboardClient() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <h1 className="text-page-title text-band-panel-ink">
-                Good day, Learner! 👋
+                {t("dashboard.heroTitle", locale)}
               </h1>
               <p className="text-meta text-band-panel-ink/80 mt-1.5">
-                Ready to practice real-life English conversation today?
+                {t("dashboard.heroSubtitle", locale)}
               </p>
             </div>
 
@@ -85,11 +85,11 @@ export function DashboardClient() {
               <div className="lg:col-span-7 space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="accent" size="md">
-                    ✨ Daily Recommendation
+                    ✨ {t("dashboard.dailyRecommendation", locale)}
                   </Badge>
-                  <CefrChip level="A2" label="A2 • Elementary" />
+                  <CefrChip level="A2" label={locale === "bn" ? "A2 • প্রাথমিক" : "A2 • Elementary"} />
                   <span className="inline-flex items-center px-3 py-1 rounded-pill text-chip bg-topic-tile text-topic-ink shadow-2xs">
-                    Shopping & Money
+                    {locale === "bn" ? "কেনাকাটা ও লেনদেন" : "Shopping & Money"}
                   </span>
                 </div>
 
@@ -103,15 +103,17 @@ export function DashboardClient() {
                 </div>
 
                 <p className="text-body text-muted-foreground leading-relaxed">
-                  Master natural retail phrases to inquire about sizes, verify discount offers, and confirm prices without hesitation.
+                  {locale === "bn"
+                    ? "দোকানে কোনো পণ্যের আকার জানতে, ছাড় যাচাই করতে এবং আত্মবিশ্বাসের সাথে দাম নিশ্চিত করতে স্বাভাবিক বাক্যগুলো আয়ত্ত করুন।"
+                    : "Master natural retail phrases to inquire about sizes, verify discount offers, and confirm prices without hesitation."}
                 </p>
 
                 <div className="flex items-center gap-5 text-meta text-muted-foreground pt-1">
                   <span className="flex items-center gap-1.5">
-                    <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" /> 5-8 minutes
+                    <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" /> 5-8 {t("dashboard.minutesUnit", locale)}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" /> 8 dialogue turns
+                    <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" /> 8 {t("dashboard.dialogueTurnsUnit", locale)}
                   </span>
                 </div>
 
@@ -130,9 +132,9 @@ export function DashboardClient() {
                 <div className="flex items-center justify-between text-meta text-topic-ink uppercase tracking-wider pb-2 border-b border-border">
                   <span className="flex items-center gap-1.5">
                     <HugeiconsIcon icon={Message01Icon} size={16} />
-                    Dialogue Preview
+                    {t("dashboard.dialoguePreview", locale)}
                   </span>
-                  <span className="text-meta">2 turns</span>
+                  <span className="text-meta">2 {t("dashboard.turnsUnit", locale)}</span>
                 </div>
 
                 {/* Bubble 1: Customer (Speaker 1) */}
@@ -144,9 +146,11 @@ export function DashboardClient() {
                     <p className="text-card-title text-bubble-primary-ink">
                       &ldquo;Excuse me, could you tell me how much this costs?&rdquo;
                     </p>
-                    <p className="text-meta text-muted-foreground font-bangla text-bangla mt-1">
-                      মাফ করবেন, এটার দাম কত বলতে পারেন?
-                    </p>
+                    {locale === "bn" && (
+                      <p className="text-meta text-muted-foreground font-bangla text-bangla mt-1">
+                        মাফ করবেন, এটার দাম কত বলতে পারেন?
+                      </p>
+                    )}
                   </ChatBubble>
                 </div>
 
@@ -156,9 +160,11 @@ export function DashboardClient() {
                     <p className="text-card-title text-topic-ink">
                       &ldquo;Certainly! It is forty-five dollars with a 10% discount.&rdquo;
                     </p>
-                    <p className="text-meta text-topic-ink/80 font-bangla text-bangla mt-1">
-                      অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।
-                    </p>
+                    {locale === "bn" && (
+                      <p className="text-meta text-topic-ink/80 font-bangla text-bangla mt-1">
+                        অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।
+                      </p>
+                    )}
                   </ChatBubble>
                   <span className="size-marker rounded-pill bg-sun-500 text-brand-950 flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs">
                     S
@@ -180,23 +186,21 @@ export function DashboardClient() {
               <div className="flex items-center justify-between mb-4">
                 <EmojiTile emoji="☕" />
                 <Badge variant="brand" size="md">
-                  {locale === "bn" ? "২০টি বাস্তব দৃশ্যপট" : "20 Real Scenarios"}
+                  {t("dashboard.everydayBadge", locale)}
                 </Badge>
               </div>
               <h3 className="text-card-title text-foreground">
-                {locale === "bn" ? "দৈনন্দিন ও সামাজিক ইংরেজি" : "Everyday & Social English"}
+                {t("dashboard.everydayTitle", locale)}
               </h3>
               <p className="text-body text-muted-foreground mt-1.5 leading-relaxed">
-                {locale === "bn"
-                  ? "কেনাকাটা, গণপরিবহন, বিমানবন্দর, রেস্তোরাঁ ও দৈনন্দিন সামাজিক যোগাযোগ।"
-                  : "Shopping, public transport, airport navigation, dining out, and daily social communications."}
+                {t("dashboard.everydayDesc", locale)}
               </p>
 
               {/* Progress bar motif */}
               <div className="mt-4 pt-3 border-t border-border">
                 <div className="flex items-center justify-between text-meta text-topic-ink mb-1.5">
-                  <span>{locale === "bn" ? "চলমান ট্র্যাকের অগ্রগতি" : "Active Track Progress"}</span>
-                  <span>{locale === "bn" ? "৪০% সম্পন্ন" : "40% complete"}</span>
+                  <span>{t("dashboard.activeTrackProgress", locale)}</span>
+                  <span>40% {t("dashboard.percentComplete", locale)}</span>
                 </div>
                 <div className="h-segment w-full bg-topic-tile rounded-pill overflow-hidden">
                   <div className="h-full bg-topic-accent rounded-pill w-progress-40" />
@@ -223,23 +227,21 @@ export function DashboardClient() {
               <div className="flex items-center justify-between mb-4">
                 <EmojiTile emoji="💼" />
                 <Badge variant="brand" size="md">
-                  {locale === "bn" ? "৩০+ পেশাগত ভূমিকা" : "30+ Job Roles"}
+                  {t("dashboard.professionalBadge", locale)}
                 </Badge>
               </div>
               <h3 className="text-card-title text-foreground">
-                {locale === "bn" ? "পেশাগত কথোপকথন" : "Professional Conversations"}
+                {t("dashboard.professionalTitle", locale)}
               </h3>
               <p className="text-body text-muted-foreground mt-1.5 leading-relaxed">
-                {locale === "bn"
-                  ? "পেশাভিত্তিক সংলাপ: ইউআই/ইউএক্স ডিজাইনার, সফটওয়্যার ইঞ্জিনিয়ার, প্রোডাক্ট ম্যানেজার, ডাক্তার ও ক্লায়েন্ট কল।"
-                  : "Job-specific dialogues: UI/UX Designer, Software Engineer, Product Manager, Doctor, and Client Calls."}
+                {t("dashboard.professionalDesc", locale)}
               </p>
 
               {/* Progress bar motif */}
               <div className="mt-4 pt-3 border-t border-border">
                 <div className="flex items-center justify-between text-meta text-topic-ink mb-1.5">
-                  <span>{locale === "bn" ? "পেশাগত ট্র্যাক" : "Professional Track"}</span>
-                  <span>{locale === "bn" ? "১৫% সম্পন্ন" : "15% complete"}</span>
+                  <span>{t("dashboard.professionalTrack", locale)}</span>
+                  <span>15% {t("dashboard.percentComplete", locale)}</span>
                 </div>
                 <div className="h-segment w-full bg-topic-tile rounded-pill overflow-hidden">
                   <div className="h-full bg-topic-accent rounded-pill w-progress-15" />
@@ -269,16 +271,14 @@ export function DashboardClient() {
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-card-title text-foreground">
-                      {locale === "bn" ? "যেখান থেকে শেষ করেছিলেন সেখান থেকে শুরু করুন" : "Continue Where You Left Off"}
+                      {t("dashboard.continueWhereLeft", locale)}
                     </h3>
                     <Badge variant="success" size="md">
-                      {completedSteps.length} {locale === "bn" ? "টি সম্পন্ন" : "Completed"}
+                      {completedSteps.length} {t("dashboard.completedBadge", locale)}
                     </Badge>
                   </div>
                   <p className="text-meta text-muted-foreground mt-1">
-                    {locale === "bn"
-                      ? "ধাপ ০২: ছাড় চাওয়া ও মূল্য পরিশোধের পদ্ধতি"
-                      : "Step 02: Asking for a Discount & Payment Method"}
+                    {t("dashboard.step02Title", locale)}
                   </p>
                 </div>
               </div>
@@ -286,7 +286,7 @@ export function DashboardClient() {
               <Link href="/conversations/asking-discount-and-payment" className="w-full sm:w-auto">
                 <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2">
                   <HugeiconsIcon icon={PlayCircleIcon} size={18} />
-                  <span>{locale === "bn" ? "ধাপ ০২ চালিয়ে যান" : "Continue Step 02"}</span>
+                  <span>{t("dashboard.continueStep", locale)}</span>
                 </Button>
               </Link>
             </div>
@@ -300,12 +300,10 @@ export function DashboardClient() {
                 </div>
                 <div>
                   <h3 className="text-card-title text-foreground">
-                    {locale === "bn" ? "আপনার প্রথম কথোপকথন শুরু করুন" : "Start Your First Conversation"}
+                    {t("dashboard.startFirstTitle", locale)}
                   </h3>
                   <p className="text-body text-muted-foreground mt-1 max-w-lg">
-                    {locale === "bn"
-                      ? "আপনি এখনও কোনো সংলাপ শুরু করেননি। আপনার শব্দভাণ্ডার ও কথা বলার দক্ষতা বাড়াতে লাইব্রেরি থেকে একটি বাস্তব দৃশ্যপট বেছে নিন!"
-                      : "You haven't started any dialogues yet. Choose a real-world scenario from the library to track your vocabulary and fluency progress!"}
+                    {t("dashboard.startFirstDesc", locale)}
                   </p>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useGrammar } from "@/lib/grammar/context";
 import { getTaxonomy, getLabel } from "@/lib/grammar/taxonomy";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, t } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { SparklesIcon, Cancel01Icon } from "@hugeicons/core-free-icons";
 
@@ -61,9 +61,9 @@ export function GrammarLegend({
       )}
     >
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <div className="flex items-center gap-1.5 text-label font-bangla text-bangla text-foreground">
+        <div className={cn("flex items-center gap-1.5 text-label text-foreground", isBn && "font-bangla text-bangla")}>
           <HugeiconsIcon icon={SparklesIcon} size={14} className="text-primary" />
-          <span>{isBn ? "ব্যাকরণ নির্দেশিকা" : "Grammar Legend"}</span>
+          <span>{t("reader.grammarGuide", lang)}</span>
           {focusedKey && (
             <span className="text-chip px-2 py-0.5 rounded-pill bg-primary/10 text-primary">
               {isBn ? "ফোকাস চালু" : "Focus active"}
@@ -86,15 +86,9 @@ export function GrammarLegend({
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="text-chip text-primary hover:underline cursor-pointer font-bangla text-bangla"
+            className={cn("text-chip text-primary hover:underline cursor-pointer", isBn && "font-bangla text-bangla")}
           >
-            {showAll
-              ? isBn
-                ? "শুধুমাত্র বাক্যের পদ"
-                : "Active only"
-              : isBn
-                ? "সব ক্যাটাগরি দেখুন"
-                : "Show all"}
+            {showAll ? t("reader.activeOnlyCategories", lang) : t("reader.showAllCategories", lang)}
           </button>
         </div>
       </div>

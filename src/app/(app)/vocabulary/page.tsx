@@ -329,18 +329,18 @@ function VocabularyContent() {
                     <button
                       type="button"
                       onClick={() => playWord(item.word)}
-                      aria-label={`উচ্চারণ শুনুন: ${item.word}`}
+                      aria-label={`${t("reader.listen")}: ${item.word}`}
                       className="size-control rounded-control text-primary bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer flex items-center justify-center"
-                      title="উচ্চারণ শুনুন"
+                      title={t("reader.listen")}
                     >
                       <HugeiconsIcon icon={VolumeHighIcon} size={18} />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleRemoveWord(item.lemma)}
-                      aria-label={`তালিকা থেকে মুছুন: ${item.word}`}
+                      aria-label={`${t("vocabulary.removeWord")}: ${item.word}`}
                       className="size-control rounded-control text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center"
-                      title="তালিকা থেকে বাদ দিন"
+                      title={t("vocabulary.removeWord")}
                     >
                       <HugeiconsIcon icon={BookmarkRemove01Icon} size={18} />
                     </button>

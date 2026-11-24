@@ -21,27 +21,28 @@ import {
 } from "@hugeicons/core-free-icons";
 import { resolveSayItIntent } from "@/lib/ai/say-it";
 import type { SayItResponse, ToneType } from "@/lib/ai/say-it-schema";
-import { useLocale } from "@/lib/i18n";
+import { useTranslations } from "@/lib/i18n";
 import { LocaleTitle } from "@/components/shared";
 
-const SAMPLE_INTENTS = [
-  { label: "Need 2 more days", intent: "I want to tell my manager that I need two more days to finish the task." },
-  { label: "Ask for discount", intent: "দাম কি একটু কমিয়ে রাখা যাবে?" },
-  { label: "Running 15 mins late", intent: "I am stuck in traffic and running 15 minutes late." },
-  { label: "Speak slower", intent: "একটু ধীরে কথা বললে ভালো হতো, বুঝতে পারছি না।" },
-  { label: "Order food", intent: "আমি ঝাল ছাড়া খাবার অর্ডার করতে চাই।" },
-];
-
 export function WhatShouldISay() {
-  const locale = useLocale();
+  const { locale, t } = useTranslations();
   const [intentInput, setIntentInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
-  const [response, setResponse] = useState<SayItResponse | null>(() =>
-    resolveSayItIntent({ intent: "I want to tell my manager that I need two more days to finish the task." })
-  );
+  const [response, setResponse] = useState<SayItResponse | null>(null);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Initial sample query with current locale
+    const initRes = resolveSayItIntent({
+      intent: locale === "bn"
+        ? "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।"
+        : "I want to tell my manager that I need two more days to finish the task.",
+      output_lang: locale,
+    });
+    setResponse(initRes);
+  }, [locale]);
 
   useEffect(() => {
     fetch("/api/v1/ai/status")
@@ -64,7 +65,7 @@ export function WhatShouldISay() {
       const res = await fetch("/api/v1/ai/say-it", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ intent: query }),
+        body: JSON.stringify({ intent: query, output_lang: locale }),
       });
 
       if (!res.ok) {
@@ -75,7 +76,7 @@ export function WhatShouldISay() {
       setResponse(data);
     } catch {
       // Seamless local fallback
-      const fallbackResult = resolveSayItIntent({ intent: query });
+      const fallbackResult = resolveSayItIntent({ intent: query, output_lang: locale });
       setResponse(fallbackResult);
     } finally {
       setIsLoading(false);
@@ -198,7 +199,22 @@ export function WhatShouldISay() {
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-chip text-muted-foreground">Try:</span>
-            {SAMPLE_INTENTS.map((sample, idx) => (
+            {(locale === "bn"
+              ? [
+                  { label: "২ দিন সময় বৃদ্ধি", intent: "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।" },
+                  { label: "ছাড় বা ডিসকাউন্ট", intent: "দাম কি একটু কমিয়ে রাখা যাবে?" },
+                  { label: "১৫ মিনিট দেরি", intent: "আমি ট্রাফিকে আটকেছি, ১৫ মিনিট দেরি হবে।" },
+                  { label: "ধীরে কথা বলা", intent: "একটু ধীরে কথা বললে ভালো হতো, বুঝতে পারছি না।" },
+                  { label: "খাবার অর্ডার", intent: "আমি ঝাল ছাড়া খাবার অর্ডার করতে চাই।" },
+                ]
+              : [
+                  { label: "Need 2 more days", intent: "I want to tell my manager that I need two more days to finish the task." },
+                  { label: "Ask for discount", intent: "Could you offer a discount on this item?" },
+                  { label: "Running 15 mins late", intent: "I am stuck in traffic and running 15 minutes late." },
+                  { label: "Speak slower", intent: "Could you speak a little slower please?" },
+                  { label: "Order food", intent: "I would like to order food without spicy sauce." },
+                ]
+            ).map((sample, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -235,9 +251,9 @@ export function WhatShouldISay() {
             <HugeiconsIcon icon={HelpCircleIcon} size={18} className="text-primary shrink-0 mt-0.5" />
             <div className="text-chip text-foreground leading-relaxed">
               <span className="text-muted-foreground block text-chip uppercase tracking-wider mb-0.5">
-                Understood Intent
+                {t("sayIt.understoodIntent")}
               </span>
-              <span className="text-bangla">{response.understood_intent}</span>
+              <span className={cn(locale === "bn" && "text-bangla")}>{response.understood_intent}</span>
             </div>
           </div>
 
@@ -267,7 +283,7 @@ export function WhatShouldISay() {
                         )}
                       >
                         <HugeiconsIcon icon={VolumeHighIcon} size={14} />
-                        <span className="hidden sm:inline">Listen</span>
+                        <span className="hidden sm:inline">{t("sayIt.listen")}</span>
                       </Button>
 
                       <Button
@@ -282,7 +298,7 @@ export function WhatShouldISay() {
                           size={14}
                           className={cn(isCopied && "text-success")}
                         />
-                        <span>{isCopied ? "Copied" : "Copy"}</span>
+                        <span>{isCopied ? t("sayIt.copied") : t("sayIt.copy")}</span>
                       </Button>
                     </div>
                   </div>
@@ -292,15 +308,17 @@ export function WhatShouldISay() {
                     {option.english}
                   </div>
 
-                  {/* Translation */}
-                  <div className="text-meta-bn text-muted-foreground border-t border-border/60 pt-2">
-                    {option.translation}
-                  </div>
+                  {/* Translation: only shown when user interface is in Bengali */}
+                  {locale === "bn" && option.translation && (
+                    <div className="text-meta-bn text-muted-foreground border-t border-border/60 pt-2">
+                      {option.translation}
+                    </div>
+                  )}
 
                   {/* Placeholders note */}
                   {option.placeholders && option.placeholders.length > 0 && (
                     <div className="flex items-center gap-1.5 pt-1">
-                      <span className="text-chip text-muted-foreground">Fill in:</span>
+                      <span className="text-chip text-muted-foreground">{t("sayIt.fillIn")}</span>
                       {option.placeholders.map((ph, pIdx) => (
                         <Pill key={pIdx} variant="neutral" size="sm" className="font-mono text-chip">
                           {ph}
@@ -317,7 +335,7 @@ export function WhatShouldISay() {
           {response.useful_phrases && response.useful_phrases.length > 0 && (
             <Card className="p-4 bg-muted/40 rounded-panel space-y-2.5">
               <span className="text-meta text-muted-foreground uppercase tracking-wider block">
-                {locale === "bn" ? "কাজের কিছু শব্দগুচ্ছ" : "Useful Expressions"}
+                {t("sayIt.usefulExpressions")}
               </span>
               <div className="flex flex-wrap gap-2">
                 {response.useful_phrases.map((phrase, pIdx) => (
@@ -326,7 +344,7 @@ export function WhatShouldISay() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-card text-chip shadow-2xs"
                   >
                     <span className="text-label text-foreground">{phrase.phrase}</span>
-                    <span className="text-muted-foreground text-bangla">— {phrase.meaning}</span>
+                    <span className={cn("text-muted-foreground", locale === "bn" && "text-bangla")}>— {phrase.meaning}</span>
                   </div>
                 ))}
               </div>

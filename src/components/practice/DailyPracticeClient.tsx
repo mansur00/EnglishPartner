@@ -417,7 +417,7 @@ export function DailyPracticeClient() {
             </div>
             <div>
               <h3 className="font-heading text-card-title text-foreground group-hover:text-primary transition-colors">
-                {locale === "bn" ? "আমি কী বলতে পারি?" : "What Should I Say?"}
+                {t("nav.sayIt", locale)}
               </h3>
               <p className="text-meta text-muted-foreground mt-1">
                 {locale === "bn"
@@ -444,7 +444,7 @@ export function DailyPracticeClient() {
             </div>
             <div>
               <h3 className="font-heading text-card-title text-foreground group-hover:text-primary transition-colors">
-                {locale === "bn" ? "এআই পার্টনার" : "AI Partner"}
+                {t("nav.roleplay", locale)}
               </h3>
               <p className="text-meta text-muted-foreground mt-1">
                 {locale === "bn"

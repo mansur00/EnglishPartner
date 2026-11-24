@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { PwaRegister } from "@/components/pwa/PwaRegister";
+import { LocaleProvider } from "@/lib/i18n/provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,8 +51,10 @@ export default function RootLayout({
     >
       <body className="antialiased min-h-screen font-sans bg-background text-foreground transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <PwaRegister />
-          {children}
+          <LocaleProvider>
+            <PwaRegister />
+            {children}
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

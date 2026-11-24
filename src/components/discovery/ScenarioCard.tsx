@@ -97,11 +97,11 @@ export function ScenarioCard({ scenario }: ScenarioCardProps) {
         <div className="flex items-center gap-4 text-meta text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={Clock01Icon} size={15} className="text-primary" />
-            {scenario.estimatedMinutes}{locale === "bn" ? "মি" : "m"}
+            {scenario.estimatedMinutes} {t("dashboard.minutesUnit", locale)}
           </span>
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={BookOpen01Icon} size={15} className="text-primary" />
-            {scenario.exchangesCount} {locale === "bn" ? "ধাপ" : "turns"}
+            {scenario.exchangesCount} {t("dashboard.turnsUnit", locale)}
           </span>
         </div>
 

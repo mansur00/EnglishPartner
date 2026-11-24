@@ -1601,6 +1601,37 @@ Entry format:
   - Puppeteer live screenshots across `/vocabulary`, `/professions`, and `/progress` in both `en` and `bn` modes: 0 bilingual slashes, 0 foreign language leaks, 100% clean visual rendering.
 - Commit: `b6542f9`
 
+### 2026-11-24, Global Multi-Language Systemic Architecture & Zero Hardcoding Overhaul
+- **Requested by Owner:** Permanent resolution of hardcoding, dual titles in parentheses (e.g. `(Topic Title)`, `(Career Paths)`, `All / সব`), hydration mismatch error on `Header.tsx`, and cross-language leaks (Bengali appearing while English is selected). Architecture must scale cleanly to any native language (BN, EN, HI, UR, AR) without page-specific hacks.
+- **Architectural Overhaul Delivered:**
+  1. **Global Cookie & Context Synchronization:**
+     - Created `src/lib/i18n/context.ts` and `src/lib/i18n/provider.tsx` implementing a unified `LocaleProvider` context.
+     - Saves active locale to both `localStorage` and `document.cookie` (`ecp_user_locale`) on selection.
+     - Permanent hydration mismatch prevention: wrapped top-level shell with `LocaleProvider` and marked dynamic localized headers with `suppressHydrationWarning`.
+  2. **100% Central Dictionary Coverage (Zero Hardcoded UI Strings):**
+     - Expanded `messages/en.json`, `messages/bn.json`, and `messages/hi.json` to 296 keys with exact key parity (0 missing keys, 0 untranslated keys).
+     - Added comprehensive coverage for `dashboard`, `discovery`, `reader`, `roleplay`, `sayIt`, `professions`, and `nav`.
+  3. **Strict Single-Language Enforcement (Zero Dual Titles / Zero Leaks):**
+     - Completely purged all parenthetical dual titles (`(Topic Title)`, `(Career Paths)`, `All / সব`, `(AI Role)`).
+     - In English mode: 100% pure English across all UI elements, options, and buttons; translation subtitles are strictly hidden (`{locale === "bn" && ...}`).
+     - In Bengali mode: Pure Bengali interface, guidance, and definitions, with English learning dialogue.
+  4. **Component Refactoring:**
+     - `DashboardClient.tsx`: All hero, card, and metric strings migrated to `t("dashboard.*")`; dialogue preview translations only rendered in Bengali mode.
+     - `FilterBar.tsx` & `ScenarioCard.tsx`: All level, style, and metric filters migrated to dictionary keys.
+     - `ConversationReader.tsx` & `ConversationTurn.tsx`: Controls localized via `t("reader.*")`; individual and global translation toggles conditioned on Bengali mode.
+     - `GrammarModeSwitch.tsx`, `GrammarLayerPicker.tsx`, `GrammarLegend.tsx`: Fully dictionary-driven labels.
+     - `RoleplayPartner.tsx`: Topic creation modal, voice controls, and feedback sections 100% dictionary-driven with zero parentheses.
+     - `SpeakerLabel.tsx`: Zero Bengali fallback in English mode.
+     - `WhatShouldISay.tsx` & `src/lib/ai/say-it.ts`: Output language awareness prevents Bengali intent or subtitle leakage in English mode.
+     - `Vocabulary`: POS filter tags and cards show English definitions in English mode, Bengali meanings in Bengali mode.
+- **Verification:**
+  - `npm run check:frozen`: Byte-identical to baseline commit `db71d3c`.
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex colors).
+  - `npx tsc --noEmit`: 0 TypeScript errors.
+  - `npm test`: 209/209 unit tests passing across 41 suites.
+  - `npm run build`: 112/112 static and partial-prerendered routes compiled cleanly with Turbopack.
+  - Live Puppeteer visual captures across `/dashboard`, `/explore`, `/conversations/...`, `/what-should-i-say`, `/roleplay`, `/professions`, and `/vocabulary` in both `en` and `bn` modes confirmed zero leaks and zero dual titles.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

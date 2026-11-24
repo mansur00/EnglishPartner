@@ -14,6 +14,7 @@ import {
   type LanguageMeta,
   type SupportedLocale,
 } from "@/lib/i18n/languages";
+import { useTranslations } from "@/lib/i18n";
 import { Tag } from "@/components/ui/tag";
 import { cn } from "@/lib/utils";
 
@@ -97,19 +98,8 @@ function PlannedLanguageItem({ lang }: { lang: LanguageMeta }) {
 
 export function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
-  const [locale, setLocale] = useState<SupportedLocale>("bn");
+  const { locale, setLocale } = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    queueMicrotask(() => {
-      const saved = localStorage.getItem("ecp_user_locale") as SupportedLocale | null;
-      if (saved && (SUPPORTED_LOCALES as readonly string[]).includes(saved)) {
-        setLocale(saved);
-        document.documentElement.lang = saved;
-        document.documentElement.dir = isRtlLanguage(saved) ? "rtl" : "ltr";
-      }
-    });
-  }, []);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -136,10 +126,6 @@ export function LanguageSwitcher() {
   const handleSelect = (code: SupportedLocale) => {
     setLocale(code);
     setIsOpen(false);
-    localStorage.setItem("ecp_user_locale", code);
-    document.documentElement.lang = code;
-    document.documentElement.dir = isRtlLanguage(code) ? "rtl" : "ltr";
-    window.dispatchEvent(new CustomEvent("ecp_locale_change", { detail: code }));
   };
 
   const currentMeta = LANGUAGES_REGISTRY[locale] || LANGUAGES_REGISTRY.bn;

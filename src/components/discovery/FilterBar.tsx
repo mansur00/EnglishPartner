@@ -52,10 +52,10 @@ export function FilterBar({
             {(val) => {
               if (!val || val === "all") return t("discovery.allLevels", locale);
               const map: Record<string, string> = {
-                A1: locale === "bn" ? "A1 • শিক্ষানবিস" : "A1 • Beginner",
-                A2: locale === "bn" ? "A2 • প্রাথমিক" : "A2 • Elementary",
-                B1: locale === "bn" ? "B1 • মধ্যম" : "B1 • Intermediate",
-                B2: locale === "bn" ? "B2 • উচ্চ মধ্যম" : "B2 • Upper Intermediate",
+                A1: t("discovery.beginner", locale),
+                A2: t("discovery.elementary", locale),
+                B1: t("discovery.intermediate", locale),
+                B2: t("discovery.upperIntermediate", locale),
               };
               return map[val as string] || val;
             }}
@@ -63,10 +63,10 @@ export function FilterBar({
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">{t("discovery.allLevels", locale)}</SelectItem>
-          <SelectItem value="A1">{locale === "bn" ? "A1 • শিক্ষানবিস" : "A1 • Beginner"}</SelectItem>
-          <SelectItem value="A2">{locale === "bn" ? "A2 • প্রাথমিক" : "A2 • Elementary"}</SelectItem>
-          <SelectItem value="B1">{locale === "bn" ? "B1 • মধ্যম" : "B1 • Intermediate"}</SelectItem>
-          <SelectItem value="B2">{locale === "bn" ? "B2 • উচ্চ মধ্যম" : "B2 • Upper Intermediate"}</SelectItem>
+          <SelectItem value="A1">{t("discovery.beginner", locale)}</SelectItem>
+          <SelectItem value="A2">{t("discovery.elementary", locale)}</SelectItem>
+          <SelectItem value="B1">{t("discovery.intermediate", locale)}</SelectItem>
+          <SelectItem value="B2">{t("discovery.upperIntermediate", locale)}</SelectItem>
         </SelectContent>
       </Select>
 
@@ -104,9 +104,9 @@ export function FilterBar({
             {(val) => {
               if (!val || val === "all") return t("discovery.anyStyle", locale);
               const map: Record<string, string> = {
-                casual: locale === "bn" ? "অনানুষ্ঠানিক / বন্ধুত্বপূর্ণ" : "Casual / Friendly",
-                neutral: locale === "bn" ? "স্বাভাবিক দৈনন্দিন" : "Neutral Everyday",
-                formal: locale === "bn" ? "আনুষ্ঠানিক / পেশাগত" : "Formal / Professional",
+                casual: t("discovery.casual", locale),
+                neutral: t("discovery.neutral", locale),
+                formal: t("discovery.formal", locale),
               };
               return map[val as string] || val;
             }}
@@ -114,15 +114,9 @@ export function FilterBar({
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">{t("discovery.anyStyle", locale)}</SelectItem>
-          <SelectItem value="casual">
-            {locale === "bn" ? "অনানুষ্ঠানিক / বন্ধুত্বপূর্ণ" : "Casual / Friendly"}
-          </SelectItem>
-          <SelectItem value="neutral">
-            {locale === "bn" ? "স্বাভাবিক দৈনন্দিন" : "Neutral Everyday"}
-          </SelectItem>
-          <SelectItem value="formal">
-            {locale === "bn" ? "আনুষ্ঠানিক / পেশাগত" : "Formal / Professional"}
-          </SelectItem>
+          <SelectItem value="casual">{t("discovery.casual", locale)}</SelectItem>
+          <SelectItem value="neutral">{t("discovery.neutral", locale)}</SelectItem>
+          <SelectItem value="formal">{t("discovery.formal", locale)}</SelectItem>
         </SelectContent>
       </Select>
 
