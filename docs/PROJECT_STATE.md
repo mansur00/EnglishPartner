@@ -1533,6 +1533,40 @@ Entry format:
   - Automated browser text scanner: 0 dual-language / parenthetical English instances found across all routes.
 - Commit: `b8d10da`
 
+### 2026-11-24, Conversation Reader Language Synchronization & Speaker Label Localization
+- Requested by owner: "dekho language select kora english but button pill speaker name bangla english double akhono roye gece" (In English mode, buttons, pills, grammar switches, and speaker names were still appearing in Bangla or showing bilingual double labels).
+- Changed:
+  - `src/components/learning/SpeakerLabel.tsx`:
+    - Converted to client component using `useLocale()`.
+    - In BN mode: renders `{speaker.nameBn || speaker.name}` and `{speaker.roleBn || speaker.role}`.
+    - In EN mode: renders `{speaker.name}` and `{speaker.role || speaker.roleBn}`.
+    - Eliminates bilingual double labels (`Speaker A` / `অংশগ্রহণকারী`).
+  - `src/components/learning/ConversationTurn.tsx`:
+    - Added `useLocale()` hook.
+    - Passed dynamic `lang` to `<GrammarToggleButton>`.
+    - Localized explanation button (`বিশ্লেষণ` / `Explain`) and turn translation toggle (`লুকান` / `অনুবাদ` / `Hide` / `Translate`).
+  - Grammar System UI Controls (`src/components/grammar/`):
+    - `GrammarToggleButton.tsx`, `GrammarModeSwitch.tsx`, `GrammarLayerPicker.tsx`, `GrammarLegend.tsx`: Added `useLocale()` with locale fallback so they automatically react to the active language switcher even when used without explicit `lang` prop.
+    - Switches dynamically between Bangla (`সব বাক্যে ব্যাকরণ`, `লেয়ার সেটিংস`, `ব্যাকরণ নির্দেশিকা`, `সব ক্যাটাগরি দেখুন`) and English (`Grammar (all lines)`, `Layers`, `Grammar Legend`, `Show all`).
+  - `src/components/learning/ConversationReader.tsx`:
+    - Added `import { cn } from "@/lib/utils";`.
+    - Localized version badge label (`সংস্করণ:` / `Version:`), turn count (`বাক্য` / `turns`), step navigation (`আগের ধাপ` / `পরের ধাপ` / `Previous Step` / `Next Step`), global translation button (`অনুবাদ লুকান` / `সব অনুবাদ` / `Hide Translation` / `Show Translation`), and lesson completion button (`পাঠ সমাপ্ত` / `সম্পন্ন ✓` / `Finish Lesson` / `Completed ✓`).
+    - Localized non-blocking auth prompt modal.
+  - `src/components/learning/ReviewSummary.tsx`:
+    - Added missing `import { cn } from "@/lib/utils";` (resolved SSR ReferenceError).
+    - Localized scenario bookmark button, key vocabulary checklist title, and next scenario navigation button.
+  - `src/app/(app)/conversations/[slug]/page.tsx`:
+    - Wrapped breadcrumb and bookmark button in `<LocaleTitle>`.
+    - Wrapped ladder step badge and section headings in `<LocaleTitle>`.
+- Verified with:
+  - `npm run check:frozen`: Passed (0 diff on `.rainbow-border`).
+  - `npm run lint:ui`: Passed (0 under 12px, 0 font-bold/700+, 0 arbitrary hex).
+  - `npx tsc --noEmit`: Passed (0 TypeScript errors).
+  - `npm test`: Passed (209/209 unit tests passing across 41 suites).
+  - `npm run build`: Passed (112/112 static routes compiled cleanly).
+  - Visual & DOM verification via headless Chrome runner on `/conversations/returning-damaged-product` across EN and BN modes: 0 hydration errors, 100% pure English text in EN mode, 100% pure Bangla text in BN mode.
+- Commit: `714ccbd`
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

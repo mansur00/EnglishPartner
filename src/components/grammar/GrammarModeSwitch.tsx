@@ -4,6 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { useGrammar } from "@/lib/grammar/context";
+import { useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { BookOpen01Icon } from "@hugeicons/core-free-icons";
 
@@ -14,8 +15,10 @@ interface GrammarModeSwitchProps {
 
 export function GrammarModeSwitch({
   className,
-  lang = "bn",
+  lang: propLang,
 }: GrammarModeSwitchProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const { isGlobalOn, toggleGlobal } = useGrammar();
 
   const label = lang === "bn" ? "সব বাক্যে ব্যাকরণ" : "Grammar (all lines)";

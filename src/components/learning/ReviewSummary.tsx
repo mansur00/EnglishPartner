@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   SparklesIcon,
@@ -84,12 +85,16 @@ export function ReviewSummary({
           {isScenarioBookmarked ? (
             <>
               <HugeiconsIcon icon={BookmarkCheck01Icon} size={16} className="text-primary" />
-              <span className="text-bangla">বুকমার্ক করা আছে</span>
+              <span className={cn(locale === "bn" && "text-bangla")}>
+                {locale === "bn" ? "বুকমার্ক করা আছে" : "Bookmarked"}
+              </span>
             </>
           ) : (
             <>
               <HugeiconsIcon icon={Bookmark01Icon} size={16} />
-              <span className="text-bangla">বুকমার্ক করুন</span>
+              <span className={cn(locale === "bn" && "text-bangla")}>
+                {locale === "bn" ? "বুকমার্ক করুন" : "Bookmark Scenario"}
+              </span>
             </>
           )}
         </button>
@@ -98,8 +103,12 @@ export function ReviewSummary({
       {/* Vocabulary Learned Checklist */}
       {vocabularyList && vocabularyList.length > 0 && (
         <div className="py-6">
-          <h4 className="text-card-title text-foreground mb-3 text-bangla flex items-center gap-2">
-            <span>এই পাঠের প্রয়োজনীয় শব্দভান্ডার ({vocabularyList.length}টি শব্দ)</span>
+          <h4 className={cn("text-card-title text-foreground mb-3 flex items-center gap-2", locale === "bn" && "text-bangla")}>
+            <span>
+              {locale === "bn"
+                ? `এই পাঠের প্রয়োজনীয় শব্দভান্ডার (${vocabularyList.length}টি শব্দ)`
+                : `Key Vocabulary in this Lesson (${vocabularyList.length} words)`}
+            </span>
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {vocabularyList.map((item) => {
@@ -170,7 +179,7 @@ export function ReviewSummary({
             <Button
               className="w-full sm:w-auto justify-center gap-2 text-label rounded-control font-bangla"
             >
-              <span>পরবর্তী কথোপকথন: {nextScenarioTitle || "Next"}</span>
+              <span>{locale === "bn" ? `পরবর্তী কথোপকথন: ${nextScenarioTitle || "পরবর্তী"}` : `Next Scenario: ${nextScenarioTitle || "Next"}`}</span>
               <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
             </Button>
           </Link>

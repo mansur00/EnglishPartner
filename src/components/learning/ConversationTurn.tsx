@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { SpeakerLabel } from "./SpeakerLabel";
@@ -52,6 +53,7 @@ export function ConversationTurn({
     isAdminPreview = false,
     annotation,
 }: ConversationTurnProps) {
+    const locale = useLocale();
     const [localTranslationVisible, setLocalTranslationVisible] = useState<boolean | null>(null);
 
     const { isLineActive, toggleLine } = useGrammar();
@@ -100,6 +102,7 @@ export function ConversationTurn({
                     <GrammarToggleButton
                         isActive={isGrammarActive}
                         onToggle={() => toggleLine(line.id)}
+                        lang={locale === "bn" ? "bn" : "en"}
                         size="sm"
                     />
 
@@ -111,10 +114,10 @@ export function ConversationTurn({
                             size="sm"
                             onClick={() => onGrammarClick?.(line.id)}
                             className="h-control-sm px-2.5 text-chip gap-1 text-primary hover:text-primary rounded-control"
-                            title="বাক্যের ব্যাকরণ ও গঠন বিশ্লেষণ দেখুন"
+                            title={locale === "bn" ? "বাক্যের ব্যাকরণ ও গঠন বিশ্লেষণ দেখুন" : "View sentence grammar and syntax breakdown"}
                         >
                             <HugeiconsIcon icon={BookOpen01Icon} size={14} />
-                            <span className="hidden sm:inline font-bangla">বিশ্লেষণ</span>
+                            <span className="hidden sm:inline font-bangla">{locale === "bn" ? "বিশ্লেষণ" : "Explain"}</span>
                         </Button>
                     )}
 
@@ -125,10 +128,14 @@ export function ConversationTurn({
                         size="sm"
                         onClick={() => setLocalTranslationVisible(!isTranslationShown)}
                         className="h-control-sm px-2.5 text-chip gap-1 text-muted-foreground hover:text-foreground rounded-control"
-                        title={isTranslationShown ? "Hide Bangla translation" : "Show Bangla translation"}
+                        title={isTranslationShown ? (locale === "bn" ? "অনুবাদ লুকান" : "Hide translation") : (locale === "bn" ? "অনুবাদ দেখুন" : "Show translation")}
                     >
                         <HugeiconsIcon icon={isTranslationShown ? ViewOffIcon : ViewIcon} size={14} />
-                        <span className="hidden sm:inline font-bangla">{isTranslationShown ? "লুকান" : "বাংলা"}</span>
+                        <span className="hidden sm:inline font-bangla">
+                            {isTranslationShown
+                                ? (locale === "bn" ? "লুকান" : "Hide")
+                                : (locale === "bn" ? "অনুবাদ" : "Translate")}
+                        </span>
                     </Button>
                 </div>
             </div>

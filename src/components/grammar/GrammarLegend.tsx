@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useGrammar } from "@/lib/grammar/context";
 import { getTaxonomy, getLabel } from "@/lib/grammar/taxonomy";
+import { useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { SparklesIcon, Cancel01Icon } from "@hugeicons/core-free-icons";
 
@@ -16,8 +17,10 @@ interface GrammarLegendProps {
 export function GrammarLegend({
   presentCategories = [],
   className,
-  lang = "bn",
+  lang: propLang,
 }: GrammarLegendProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const { activeLayers, detailLevel, focusedKey, setFocusedKey, clearFocus } =
     useGrammar();
   const [showAll, setShowAll] = useState(false);

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   SlidersHorizontalIcon,
@@ -64,8 +65,10 @@ const LAYERS: { id: GrammarLayerId; labelEn: string; labelBn: string; channelEn:
 
 export function GrammarLayerPicker({
   className,
-  lang = "bn",
+  lang: propLang,
 }: GrammarLayerPickerProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const {
     activeLayers,
     toggleLayer,

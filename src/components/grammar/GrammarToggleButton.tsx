@@ -3,6 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/i18n";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { BookOpen01Icon } from "@hugeicons/core-free-icons";
 
@@ -18,9 +19,11 @@ export function GrammarToggleButton({
   isActive,
   onToggle,
   className,
-  lang = "bn",
+  lang: propLang,
   size = "default",
 }: GrammarToggleButtonProps) {
+  const currentLocale = useLocale();
+  const lang = propLang || (currentLocale === "bn" ? "bn" : "en");
   const label = lang === "bn" ? "ব্যাকরণ" : "Grammar";
 
   return (

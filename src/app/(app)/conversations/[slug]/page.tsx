@@ -79,7 +79,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
 
           <Button variant="outline" size="sm" className="gap-1.5 text-label rounded-control">
             <HugeiconsIcon icon={Bookmark02Icon} size={14} />
-            Bookmark
+            <LocaleTitle titleEn="Bookmark" titleBn="বুকমার্ক" />
           </Button>
         </div>
 
@@ -90,7 +90,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
               Niche 01: Shopping & Money
             </Badge>
             <Badge variant="neutral" size="default" className="font-mono">
-              ধাপ {ladderStep.stepNumber.toString().padStart(2, "0")} / 20
+              <LocaleTitle titleEn={`Step ${ladderStep.stepNumber.toString().padStart(2, "0")} / 20`} titleBn={`ধাপ ${ladderStep.stepNumber.toString().padStart(2, "0")} / ২০`} />
             </Badge>
             <Badge variant="accent" size="default">
               {ladderStep.level} • CEFR
@@ -192,13 +192,13 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
         <Link href="/explore">
           <Button variant="ghost" size="sm" className="btn-back-nav text-label">
             <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-            Back to Explore
+            <LocaleTitle titleEn="Back to Explore" titleBn="এক্সপ্লোরে ফিরে যান" />
           </Button>
         </Link>
 
         <Button variant="outline" size="sm" className="gap-1.5 text-label rounded-control">
           <HugeiconsIcon icon={Bookmark02Icon} size={14} />
-          Bookmark
+          <LocaleTitle titleEn="Bookmark" titleBn="বুকমার্ক" />
         </Button>
       </div>
 
@@ -244,12 +244,18 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
       {/* Interactive Conversation Reader */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-card-title text-foreground">
-            Dialogue Turns & Listening Practice
-          </h2>
-          <span className="text-chip text-muted-foreground">
-            Tap words to explore meaning
-          </span>
+          <LocaleTitle
+            as="h2"
+            titleEn="Dialogue Turns & Listening Practice"
+            titleBn="কথোপকথন ও লিসেনিং অনুশীলন"
+            className="text-card-title text-foreground"
+          />
+          <LocaleTitle
+            as="span"
+            titleEn="Tap words to explore meaning"
+            titleBn="অর্থ ও ব্যাকরণ দেখতে শব্দে ট্যাপ করুন"
+            className="text-chip text-muted-foreground"
+          />
         </div>
 
         <ConversationReader

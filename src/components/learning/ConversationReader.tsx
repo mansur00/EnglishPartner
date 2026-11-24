@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { ConversationTurn } from "./ConversationTurn";
 import { AudioPlayer } from "./AudioPlayer";
 import { WordDetailPopover } from "./WordDetailPopover";
@@ -289,9 +290,9 @@ function ConversationReaderInner({
         {/* Dialogue Version Selector (if multiple versions exist) */}
         {versions.length > 1 && (
           <div className="flex items-center gap-2 overflow-x-auto pb-1 text-chip">
-            <span className="text-muted-foreground whitespace-nowrap flex items-center gap-1 text-bangla">
+            <span className={cn("text-muted-foreground whitespace-nowrap flex items-center gap-1", locale === "bn" && "text-bangla")}>
               <HugeiconsIcon icon={Layers01Icon} size={14} />
-              <span>সংস্করণ:</span>
+              <span>{locale === "bn" ? "সংস্করণ:" : "Version:"}</span>
             </span>
             <div className="flex items-center gap-1.5">
               {versions.map((ver) => (
@@ -308,7 +309,7 @@ function ConversationReaderInner({
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                   }`}
                 >
-                  {ver.versionName} ({ver.lines.length} turns)
+                  {ver.versionName} ({ver.lines.length} {locale === "bn" ? "বাক্য" : "turns"})
                 </button>
               ))}
             </div>
@@ -319,8 +320,8 @@ function ConversationReaderInner({
         <div className="flex flex-wrap items-center justify-between gap-2.5">
           {/* Left: Grammar Controls (Global Switch + Layer Picker) */}
           <div className="flex flex-wrap items-center gap-2">
-            <GrammarModeSwitch />
-            <GrammarLayerPicker />
+            <GrammarModeSwitch lang={locale === "bn" ? "bn" : "en"} />
+            <GrammarLayerPicker lang={locale === "bn" ? "bn" : "en"} />
           </div>
 
           {/* Right: Navigation, Translation Toggle & Complete */}
@@ -329,7 +330,7 @@ function ConversationReaderInner({
               <Link href={`/conversations/${prevStepSlug}`}>
                 <Button variant="outline" size="sm" className="h-9 text-label rounded-control font-bangla gap-1">
                   <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-                  <span>আগের ধাপ</span>
+                  <span>{locale === "bn" ? "আগের ধাপ" : "Previous Step"}</span>
                 </Button>
               </Link>
             )}
@@ -337,7 +338,7 @@ function ConversationReaderInner({
             {nextStepSlug && (
               <Link href={`/conversations/${nextStepSlug}`}>
                 <Button variant="default" size="sm" className="h-9 text-label rounded-control font-bangla gap-1">
-                  <span>পরের ধাপ</span>
+                  <span>{locale === "bn" ? "পরের ধাপ" : "Next Step"}</span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
                 </Button>
               </Link>
@@ -352,8 +353,8 @@ function ConversationReaderInner({
               <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
               <span>
                 {isGlobalTranslationVisible
-                  ? "অনুবাদ লুকান"
-                  : "সব অনুবাদ"}
+                  ? (locale === "bn" ? "অনুবাদ লুকান" : "Hide Translation")
+                  : (locale === "bn" ? "সব অনুবাদ" : "Show Translation")}
               </span>
             </Button>
 
@@ -364,13 +365,13 @@ function ConversationReaderInner({
               className="h-9 text-label rounded-control gap-1.5 font-bangla"
             >
               <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
-              <span>{isCompleted ? "সম্পন্ন ✓" : "পাঠ সমাপ্ত"}</span>
+              <span>{isCompleted ? (locale === "bn" ? "সম্পন্ন ✓" : "Completed ✓") : (locale === "bn" ? "পাঠ সমাপ্ত" : "Finish Lesson")}</span>
             </Button>
           </div>
         </div>
 
         {/* Contextual Grammar Legend */}
-        <GrammarLegend presentCategories={presentCategories} />
+        <GrammarLegend presentCategories={presentCategories} lang={locale === "bn" ? "bn" : "en"} />
       </div>
 
       {/* Ordered Dialogue Turns */}
