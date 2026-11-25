@@ -25,6 +25,8 @@ interface MagicWordSidebarProps {
   selectedWord: MagicWordItem | null;
   isSaved: boolean;
   onToggleSave: (lemma: string) => void;
+  onRemoveFromCategory?: (lemma: string) => void;
+  activeCategoryLabel?: string | null;
   totalCards: number;
   totalWords: number;
   savedCount: number;
@@ -35,6 +37,8 @@ export function MagicWordSidebar({
   selectedWord,
   isSaved,
   onToggleSave,
+  onRemoveFromCategory,
+  activeCategoryLabel,
   totalCards,
   totalWords,
   savedCount,
@@ -173,14 +177,26 @@ export function MagicWordSidebar({
           />
           <span>
             {isSaved
-              ? locale === "bn"
-                ? "নোটবুকে সেভ করা আছে"
-                : "Saved in My Notebook"
+              ? activeCategoryLabel
+                ? `${locale === "bn" ? "সেভ করা:" : "Saved in"} ${activeCategoryLabel}`
+                : locale === "bn"
+                ? "নোটবুকে সেভ করা আছে (ক্যাটাগরি বদলান)"
+                : "Saved (Manage Category)"
               : locale === "bn"
-              ? "নোটবুকে সেভ করুন"
-              : "Save to My Notebook"}
+              ? "ক্যাটাগরিতে সেভ করুন"
+              : "Save to Category"}
           </span>
         </Button>
+
+        {onRemoveFromCategory && isSaved && (
+          <button
+            type="button"
+            onClick={() => onRemoveFromCategory(selectedWord.lemma)}
+            className="w-full text-center text-chip text-destructive hover:underline cursor-pointer"
+          >
+            {locale === "bn" ? "এই ক্যাটাগরি থেকে সরান" : "Remove from this category"}
+          </button>
+        )}
       </div>
 
       {/* Live Translation */}

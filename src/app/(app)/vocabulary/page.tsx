@@ -2,26 +2,30 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { speakText } from "@/lib/audio/speech-engine";
-import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   VolumeHighIcon,
-  BookmarkRemove01Icon,
   SparklesIcon,
-  FilterIcon,
   Book01Icon,
   Search01Icon,
   Login01Icon,
   ArrowLeft01Icon,
+  Add01Icon,
+  CheckmarkCircle02Icon,
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { InputGroup, InputGroupPrefix } from "@/components/ui/input-group";
-import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
-import { EmptyState } from "@/components/ui/empty-state";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import {
   Sheet,
   SheetContent,
@@ -29,8 +33,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { LocaleTitle } from "@/components/shared/LocaleTitle";
-import { useTranslations, useLiveTranslations } from "@/lib/i18n";
-import { isRtlLanguage } from "@/lib/i18n/languages";
+import { useTranslations } from "@/lib/i18n";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { MagicWordSidebar } from "@/components/vocabulary/MagicWordSidebar";
@@ -41,15 +44,18 @@ import {
   type MagicCardDeck,
   type MagicWordItem,
 } from "@/content/seed/magic-cards";
-import { getDueReviewItems } from "@/lib/srs/sm2";
 import {
-  SEED_VOCABULARY,
-  VocabularyEntry,
-} from "@/content/seed/vocabulary";
-import { GrammarProvider, useGrammar } from "@/lib/grammar/context";
-import { GrammarText } from "@/components/grammar/GrammarText";
-import { GrammarToggleButton } from "@/components/grammar/GrammarToggleButton";
-import { createFallbackAnnotation } from "@/lib/grammar/fallback";
+  DEFAULT_CATEGORY_EMOJIS,
+  addLemmaToCategory,
+  createCategoryInList,
+  loadSavedCategories,
+  persistSavedCategories,
+  removeLemmaFromCategory,
+  type SavedVocabCategory,
+} from "@/lib/vocabulary/saved-categories";
+import { getDueReviewItems } from "@/lib/srs/sm2";
+import { SEED_VOCABULARY } from "@/content/seed/vocabulary";
+import { GrammarProvider } from "@/lib/grammar/context";
 import { cn } from "@/lib/utils";
 
 export default function VocabularyPage() {
@@ -61,21 +67,27 @@ export default function VocabularyPage() {
 }
 
 function VocabularyContent() {
-  const { locale, translationLocale, t } = useTranslations();
-  const { isLineActive, toggleLine } = useGrammar();
+  const { locale, t } = useTranslations();
   const [activeView, setActiveView] = useState<"magic" | "words" | "srs">("magic");
   const [magicCategory, setMagicCategory] = useState<"all" | MagicCardCategory>("all");
   const [magicSearch, setMagicSearch] = useState("");
   const [activeDeckSlug, setActiveDeckSlug] = useState<string | null>(null);
   const [selectedMagicWord, setSelectedMagicWord] = useState<MagicWordItem | null>(null);
   const [isMobileWordSheetOpen, setIsMobileWordSheetOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPos, setSelectedPos] = useState<string>("all");
+
+  // Saved Vocabulary Categories state
+  const [savedCategories, setSavedCategories] = useState<SavedVocabCategory[]>([]);
+  const [activeSavedCatId, setActiveSavedCatId] = useState<string | null>(null);
+  const [savedSearch, setSavedSearch] = useState("");
+  const [savePickerLemma, setSavePickerLemma] = useState<string | null>(null);
+  const [isCreateCatOpen, setIsCreateCatOpen] = useState(false);
+  const [newCatName, setNewCatName] = useState("");
+  const [newCatEmoji, setNewCatEmoji] = useState("⭐");
+
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  // Load saved vocabulary from localStorage
+  // Load saved vocabulary & categories from localStorage
   useEffect(() => {
     let resolvedList = ["excuse", "cost", "jacket", "certainly", "discount", "passport", "wireframes"];
     try {
@@ -90,38 +102,122 @@ function VocabularyContent() {
       // LocalStorage unavailable
     }
 
+    const cats = loadSavedCategories(resolvedList);
+    const mergedLemmas = Array.from(
+      new Set([...resolvedList, ...cats.flatMap((c) => c.lemmas)])
+    );
+
     queueMicrotask(() => {
-      setSavedLemmas(resolvedList);
-      setIsLoaded(true);
+      setSavedCategories(cats);
+      setSavedLemmas(mergedLemmas);
     });
   }, []);
 
-  const playWord = (word: string) => {
-    speakText(word);
+  const handleOpenSavePicker = (lemma: string) => {
+    setSavePickerLemma(lemma.toLowerCase().trim());
   };
 
-  const handleRemoveWord = (lemma: string) => {
-    const updated = savedLemmas.filter((item) => item !== lemma);
-    setSavedLemmas(updated);
-    try {
-      localStorage.setItem("ecp_saved_vocabulary", JSON.stringify(updated));
-    } catch {
-      // ignore
+  const handleAssignToCategory = (lemma: string, categoryId: string) => {
+    const clean = lemma.toLowerCase().trim();
+    const targetCat = savedCategories.find((c) => c.id === categoryId);
+    const alreadyInCat = targetCat?.lemmas.includes(clean);
+    const nextCats = alreadyInCat
+      ? removeLemmaFromCategory(savedCategories, clean, categoryId)
+      : addLemmaToCategory(savedCategories, clean, categoryId);
+    setSavedCategories(nextCats);
+    const nextAll = persistSavedCategories(nextCats);
+    setSavedLemmas(nextAll);
+  };
+
+  const handleCreateCategoryAndSave = () => {
+    if (!newCatName.trim()) return;
+    const { categories: withNew, created } = createCategoryInList(
+      savedCategories,
+      newCatName,
+      newCatEmoji
+    );
+    const nextCats = savePickerLemma
+      ? addLemmaToCategory(withNew, savePickerLemma, created.id)
+      : withNew;
+    setSavedCategories(nextCats);
+    const nextAll = persistSavedCategories(nextCats);
+    setSavedLemmas(nextAll);
+    setNewCatName("");
+    setNewCatEmoji("⭐");
+    setIsCreateCatOpen(false);
+    if (savePickerLemma) {
+      setSavePickerLemma(null);
     }
   };
 
-  const handleToggleSaveLemma = (lemma: string) => {
-    const exists = savedLemmas.includes(lemma);
-    const updated = exists
-      ? savedLemmas.filter((item) => item !== lemma)
-      : [...savedLemmas, lemma];
-    setSavedLemmas(updated);
-    try {
-      localStorage.setItem("ecp_saved_vocabulary", JSON.stringify(updated));
-    } catch {
-      // ignore
+  const handleRemoveFromActiveCategory = (lemma: string) => {
+    if (!activeSavedCatId) return;
+    const nextCats = removeLemmaFromCategory(savedCategories, lemma, activeSavedCatId);
+    setSavedCategories(nextCats);
+    const nextAll = persistSavedCategories(nextCats);
+    setSavedLemmas(nextAll);
+    if (selectedMagicWord?.lemma === lemma) {
+      setSelectedMagicWord(null);
     }
   };
+
+  // Lookup any lemma across MAGIC_CARDS and SEED_VOCABULARY
+  const magicWordByLemma = useMemo(() => {
+    const map = new Map<string, MagicWordItem>();
+    for (const deck of MAGIC_CARDS) {
+      for (const w of deck.words) {
+        if (!map.has(w.lemma)) map.set(w.lemma, w);
+      }
+    }
+    return map;
+  }, []);
+
+  const resolveLemmaToWordItem = useMemo(() => {
+    return (lemma: string): MagicWordItem => {
+      const clean = lemma.toLowerCase().trim();
+      const fromMagic = magicWordByLemma.get(clean);
+      if (fromMagic) return fromMagic;
+
+      const fromSeed =
+        SEED_VOCABULARY[clean] ||
+        Object.values(SEED_VOCABULARY).find((v) => v.lemma.toLowerCase() === clean);
+      if (fromSeed) {
+        return {
+          id: `saved-${clean}`,
+          word: fromSeed.word,
+          lemma: fromSeed.lemma,
+          pos: fromSeed.partOfSpeech,
+          ipa: fromSeed.ipa,
+          meaning: fromSeed.contextualMeaningEn || fromSeed.contextualMeaningBn,
+          example: fromSeed.exampleSentence,
+        };
+      }
+      return {
+        id: `saved-${clean}`,
+        word: clean.charAt(0).toUpperCase() + clean.slice(1),
+        lemma: clean,
+        pos: "noun",
+        ipa: `/${clean}/`,
+        meaning: "Saved vocabulary word",
+        example: `Practice using "${clean}" in your daily conversations.`,
+      };
+    };
+  }, [magicWordByLemma]);
+
+  const activeSavedCategory = useMemo(
+    () => savedCategories.find((c) => c.id === activeSavedCatId) ?? null,
+    [savedCategories, activeSavedCatId]
+  );
+
+  const activeSavedWords = useMemo(() => {
+    if (!activeSavedCategory) return [];
+    const items = activeSavedCategory.lemmas.map(resolveLemmaToWordItem);
+    const q = savedSearch.trim().toLowerCase();
+    if (!q) return items;
+    return items.filter(
+      (w) => w.word.toLowerCase().includes(q) || w.meaning.toLowerCase().includes(q)
+    );
+  }, [activeSavedCategory, resolveLemmaToWordItem, savedSearch]);
 
   const activeDeck: MagicCardDeck | null = useMemo(
     () => MAGIC_CARDS.find((d) => d.slug === activeDeckSlug) ?? null,
@@ -157,56 +253,6 @@ function VocabularyContent() {
     []
   );
 
-  // Resolve saved entries
-  const allEntries: VocabularyEntry[] = useMemo(() => {
-    return savedLemmas.map((lemma) => {
-      const found =
-        SEED_VOCABULARY[lemma] ||
-        Object.values(SEED_VOCABULARY).find((v) => v.lemma.toLowerCase() === lemma.toLowerCase());
-      if (found) return found;
-      return {
-        word: lemma.charAt(0).toUpperCase() + lemma.slice(1),
-        lemma,
-        ipa: `/${lemma}/`,
-        partOfSpeech: "noun" as const,
-        contextualMeaningBn: "সংরক্ষিত শব্দ",
-        generalMeaningBn: "সংরক্ষিত শব্দ",
-        exampleSentence: `Practice using "${lemma}" in your conversations.`,
-      };
-    });
-  }, [savedLemmas]);
-
-  // Filter entries
-  const filteredEntries = useMemo(() => {
-    return allEntries.filter((entry) => {
-      const matchesSearch =
-        entry.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        entry.contextualMeaningBn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        entry.generalMeaningBn.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesPos =
-        selectedPos === "all" || entry.partOfSpeech === selectedPos;
-      return matchesSearch && matchesPos;
-    });
-  }, [allEntries, searchQuery, selectedPos]);
-
-  const needsLiveVocab = translationLocale !== "none" && translationLocale !== "bn";
-  const vocabTextsToTranslate = useMemo(() => {
-    if (!needsLiveVocab) return [];
-    const list: string[] = [];
-    for (const item of filteredEntries) {
-      if (item.contextualMeaningEn) list.push(item.contextualMeaningEn);
-      if (item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn) {
-        list.push(item.generalMeaningEn);
-      }
-    }
-    return list;
-  }, [needsLiveVocab, filteredEntries]);
-
-  const { translations: liveVocabMap } = useLiveTranslations(
-    vocabTextsToTranslate,
-    needsLiveVocab ? translationLocale : "none"
-  );
-
   const dueCount = useMemo(() => {
     try {
       const raw =
@@ -223,22 +269,7 @@ function VocabularyContent() {
     return savedLemmas.length;
   }, [savedLemmas]);
 
-  const posBadgeVariant = (pos: VocabularyEntry["partOfSpeech"]): "brand" | "neutral" | "accent" | "peach" => {
-    switch (pos) {
-      case "verb":
-        return "brand";
-      case "noun":
-        return "neutral";
-      case "adjective":
-        return "accent";
-      case "adverb":
-        return "peach";
-      default:
-        return "brand";
-    }
-  };
-
-  const showRightSidebar = activeView === "magic";
+  const showRightSidebar = activeView === "magic" || activeView === "words";
 
   return (
     <div className={cn("w-full", showRightSidebar && "lg:pr-80 xl:pr-96")}>
@@ -315,7 +346,7 @@ function VocabularyContent() {
             >
               <HugeiconsIcon icon={Book01Icon} size={15} />
               <span className={locale === "bn" ? "text-bangla" : ""}>
-                {t("vocabulary.savedWordsTab").replace("{count}", String(allEntries.length))}
+                {t("vocabulary.savedWordsTab").replace("{count}", String(savedLemmas.length))}
               </span>
             </button>
 
@@ -481,18 +512,20 @@ function VocabularyContent() {
                   <p className="text-chip text-muted-foreground">{activeDeck.tagline}</p>
                 </div>
 
-                <InputGroup className="bg-muted/40 rounded-control w-full sm:w-64">
-                  <InputGroupPrefix>
-                    <HugeiconsIcon icon={Search01Icon} size={15} className="text-muted-foreground" />
-                  </InputGroupPrefix>
+                <div className="relative w-full sm:w-64">
+                  <HugeiconsIcon
+                    icon={Search01Icon}
+                    size={15}
+                    className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                  />
                   <Input
                     type="text"
                     value={magicSearch}
                     onChange={(e) => setMagicSearch(e.target.value)}
                     placeholder={locale === "bn" ? "কার্ডে শব্দ খুঁজুন..." : "Filter words in deck..."}
-                    className="border-0 bg-transparent shadow-none focus-visible:ring-0 h-9"
+                    className="pl-9 h-9 bg-muted/40 border-border/60 rounded-control"
                   />
-                </InputGroup>
+                </div>
               </div>
 
               {/* Words Grid inside Open Magic Card */}
@@ -558,190 +591,344 @@ function VocabularyContent() {
       ) : activeView === "srs" ? (
         <ReviewQueue savedLemmas={savedLemmas} />
       ) : (
-        <>
-          {/* Search & Filter Bar */}
-          <div className="flex flex-col sm:flex-row gap-3">
-        {/* Search Input using Design System InputGroup */}
-        <div className="flex-1">
-          <InputGroup className="bg-card">
-            <InputGroupPrefix>
-              <HugeiconsIcon icon={Search01Icon} size={18} />
-            </InputGroupPrefix>
-            <Input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("vocabulary.searchPlaceholder")}
-              variant="ghost"
-              inputSize="default"
-              className="pl-10 text-body"
-            />
-          </InputGroup>
-        </div>
-
-        {/* Part of Speech Filter using Design System Tag */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-          <div className="text-muted-foreground shrink-0 hidden sm:block ml-2">
-            <HugeiconsIcon icon={FilterIcon} size={16} />
-          </div>
-          {[
-            { id: "all", label: t("vocabulary.posAll") },
-            { id: "verb", label: t("vocabulary.posVerbs") },
-            { id: "noun", label: t("vocabulary.posNouns") },
-            { id: "adjective", label: t("vocabulary.posAdjectives") },
-            { id: "adverb", label: t("vocabulary.posAdverbs") },
-            { id: "phrase", label: t("vocabulary.posPhrases") },
-          ].map((cat) => (
-            <Tag
-              key={cat.id}
-              selected={selectedPos === cat.id}
-              onClick={() => setSelectedPos(cat.id)}
-              variant={selectedPos === cat.id ? "brand" : "outline"}
-              size="default"
-              className="whitespace-nowrap cursor-pointer text-chip"
-            >
-              {cat.label}
-            </Tag>
-          ))}
-        </div>
-      </div>
-
-      {/* Word Cards Grid */}
-      {isLoaded && filteredEntries.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredEntries.map((item) => (
-            <div
-              key={item.lemma}
-              className="p-5 rounded-card bg-card shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between"
-            >
-              <div>
-                {/* Word & Audio */}
-                <div className="flex items-start justify-between gap-3 pb-3 border-b border-border">
-                  <div>
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      <h3 className="text-card-title text-foreground font-sans">
-                        {item.word}
-                      </h3>
-                      <Badge variant={posBadgeVariant(item.partOfSpeech)} size="sm" className="text-chip">
-                        {item.partOfSpeech}
-                      </Badge>
-                    </div>
-                    <span className="text-chip font-mono text-muted-foreground mt-1 block">
-                      {item.ipa}
-                    </span>
+        /* SAVED VOCABULARY: Category Cards + Magic Word Tiles + Right Sidebar */
+        <div className="space-y-5">
+          {!activeSavedCategory ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              {savedCategories.map((cat) => (
+                <Card
+                  key={cat.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => {
+                    setActiveSavedCatId(cat.id);
+                    setSavedSearch("");
+                    const first = cat.lemmas[0] ? resolveLemmaToWordItem(cat.lemmas[0]) : null;
+                    setSelectedMagicWord(first);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveSavedCatId(cat.id);
+                      setSavedSearch("");
+                      const first = cat.lemmas[0] ? resolveLemmaToWordItem(cat.lemmas[0]) : null;
+                      setSelectedMagicWord(first);
+                    }
+                  }}
+                  className="p-5 bg-card rounded-card border border-border/60 shadow-2xs hover:shadow-card hover:border-primary/40 transition-all cursor-pointer flex flex-col justify-between gap-3"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-page-title leading-none">{cat.emoji}</span>
+                    <Badge variant="brand" size="sm" className="font-mono">
+                      {cat.lemmas.length} {locale === "bn" ? "শব্দ" : "words"}
+                    </Badge>
                   </div>
+                  <div>
+                    <h3 className="font-heading text-card-title text-foreground">
+                      {cat.name}
+                    </h3>
+                    <p className="text-chip text-muted-foreground mt-1">
+                      {locale === "bn"
+                        ? "আপনার সেভ করা শব্দের নিজস্ব কালেকশন"
+                        : "Your custom saved word collection"}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-border/50 text-chip text-primary font-medium">
+                    {locale === "bn" ? "ক্যাটাগরি খুলুন →" : "Open Category →"}
+                  </div>
+                </Card>
+              ))}
 
-                  <div className="flex items-center gap-1">
-                    <button
-                      type="button"
-                      onClick={() => playWord(item.word)}
-                      aria-label={`${t("reader.listen")}: ${item.word}`}
-                      className="size-control rounded-control text-primary bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer flex items-center justify-center"
-                      title={t("reader.listen")}
-                    >
-                      <HugeiconsIcon icon={VolumeHighIcon} size={18} />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveWord(item.lemma)}
-                      aria-label={`${t("vocabulary.removeWord")}: ${item.word}`}
-                      className="size-control rounded-control text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer flex items-center justify-center"
-                      title={t("vocabulary.removeWord")}
-                    >
-                      <HugeiconsIcon icon={BookmarkRemove01Icon} size={18} />
-                    </button>
+              {/* Create New Category Card */}
+              <Card
+                role="button"
+                tabIndex={0}
+                onClick={() => setIsCreateCatOpen(true)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setIsCreateCatOpen(true);
+                  }
+                }}
+                className="p-5 bg-muted/30 rounded-card border border-dashed border-border hover:border-primary/60 hover:bg-muted/50 transition-all cursor-pointer flex flex-col items-center justify-center text-center gap-2 min-h-36"
+              >
+                <div className="size-10 rounded-pill bg-primary/10 text-primary flex items-center justify-center">
+                  <HugeiconsIcon icon={Add01Icon} size={20} />
+                </div>
+                <p className="font-heading text-label font-semibold text-foreground">
+                  {locale === "bn" ? "নতুন ক্যাটাগরি তৈরি করুন" : "Create New Category"}
+                </p>
+                <p className="text-chip text-muted-foreground">
+                  {locale === "bn" ? "পছন্দের শব্দ আলাদা করে সাজিয়ে রাখুন" : "Organize your favorite words your way"}
+                </p>
+              </Card>
+            </div>
+          ) : (
+            /* Open Saved Category View (Magic Word Tiles) */
+            <Card className="p-5 sm:p-6 bg-card rounded-card border border-border/60 shadow-card space-y-5">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60">
+                <div className="space-y-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveSavedCatId(null);
+                      setSavedSearch("");
+                      setSelectedMagicWord(null);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-chip text-primary hover:underline cursor-pointer mb-1"
+                  >
+                    <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+                    <span>
+                      {locale === "bn" ? "সব সেভ করা ক্যাটাগরিতে ফিরুন" : "Back to Saved Categories"}
+                    </span>
+                  </button>
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <span className="text-page-title leading-none">{activeSavedCategory.emoji}</span>
+                    <h2 className="font-heading text-section-heading text-foreground">
+                      {activeSavedCategory.name}
+                    </h2>
+                    <Badge variant="neutral" size="sm" className="font-mono">
+                      {activeSavedCategory.lemmas.length} {locale === "bn" ? "শব্দ" : "words"}
+                    </Badge>
                   </div>
                 </div>
 
-                {/* Meanings */}
-                <div className="py-3 space-y-2">
-                  <div
-                    dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
-                    className={cn("text-body text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}
-                  >
-                    {translationLocale === "bn"
-                      ? item.contextualMeaningBn
-                      : translationLocale === "none"
-                      ? (item.contextualMeaningEn || item.contextualMeaningBn)
-                      : (liveVocabMap[(item.contextualMeaningEn || "").trim()] ||
-                         item.contextualMeaningEn ||
-                         item.contextualMeaningBn)}
-                  </div>
-                  {((translationLocale === "bn" && item.generalMeaningBn && item.generalMeaningBn !== item.contextualMeaningBn) ||
-                    (translationLocale !== "bn" && item.generalMeaningEn && item.generalMeaningEn !== item.contextualMeaningEn)) && (
-                    <div
-                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
-                      className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}
-                    >
-                      {t("vocabulary.generalMeaningLabel")}:{" "}
-                      {translationLocale === "bn"
-                        ? item.generalMeaningBn
-                        : translationLocale === "none"
-                        ? item.generalMeaningEn
-                        : (liveVocabMap[(item.generalMeaningEn || "").trim()] || item.generalMeaningEn)}
-                    </div>
-                  )}
-
-                  {/* Example Sentence with Grammar Support */}
-                  {item.exampleSentence && (
-                    <div className="pt-2.5 border-t border-border/60 space-y-1.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className={cn("text-chip text-muted-foreground uppercase tracking-wider", locale === "bn" && "text-bangla")}>
-                          {t("vocabulary.exampleSentenceLabel")}
-                        </span>
-                        <GrammarToggleButton
-                          isActive={isLineActive(`vocab-${item.lemma}`)}
-                          onToggle={() => toggleLine(`vocab-${item.lemma}`)}
-                          lang={locale === "bn" ? "bn" : "en"}
-                        />
-                      </div>
-                      {isLineActive(`vocab-${item.lemma}`) ? (
-                        <div className="text-body py-1">
-                          <GrammarText
-                            annotation={createFallbackAnnotation(`vocab-${item.lemma}`, item.exampleSentence)}
-                          />
-                        </div>
-                      ) : (
-                        <p className="text-meta text-muted-foreground italic">
-                          &ldquo;{item.exampleSentence}&rdquo;
-                        </p>
-                      )}
-                    </div>
-                  )}
+                <div className="relative w-full sm:w-64">
+                  <HugeiconsIcon
+                    icon={Search01Icon}
+                    size={15}
+                    className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                  />
+                  <Input
+                    type="text"
+                    value={savedSearch}
+                    onChange={(e) => setSavedSearch(e.target.value)}
+                    placeholder={locale === "bn" ? "শব্দ খুঁজুন..." : "Filter saved words..."}
+                    className="pl-9 h-9 bg-muted/40 border-border/60 rounded-control"
+                  />
                 </div>
               </div>
 
-              {/* Word Forms / Synonyms footer */}
-              {item.wordForms && (
-                <div className="pt-2 text-chip text-muted-foreground flex flex-wrap gap-2">
-                  {item.wordForms.past && <span>Past: {item.wordForms.past}</span>}
-                  {item.wordForms.plural && <span>Plural: {item.wordForms.plural}</span>}
+              {activeSavedWords.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2.5">
+                  {activeSavedWords.map((w) => {
+                    const isSelected = selectedMagicWord?.lemma === w.lemma;
+                    return (
+                      <div
+                        key={w.id}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => {
+                          setSelectedMagicWord(w);
+                          if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                            setIsMobileWordSheetOpen(true);
+                          }
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setSelectedMagicWord(w);
+                            if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                              setIsMobileWordSheetOpen(true);
+                            }
+                          }
+                        }}
+                        className={cn(
+                          "p-3 rounded-control border text-left transition-all cursor-pointer flex items-start justify-between gap-2",
+                          isSelected
+                            ? "bg-primary/10 border-primary ring-2 ring-primary/30 shadow-xs"
+                            : "bg-muted/40 border-border/60 hover:bg-muted/80 hover:border-primary/40"
+                        )}
+                      >
+                        <div className="min-w-0">
+                          <p className="font-heading text-label font-semibold text-foreground truncate">
+                            {w.word}
+                          </p>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <span className="text-chip text-primary font-medium">{w.pos}</span>
+                            <span className="text-chip font-mono text-muted-foreground truncate">
+                              {w.ipa}
+                            </span>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            speakText(w.word);
+                          }}
+                          aria-label={`Pronounce ${w.word}`}
+                          className="size-7 rounded-pill bg-card border border-border/60 flex items-center justify-center text-muted-foreground hover:text-primary shrink-0 cursor-pointer"
+                        >
+                          <HugeiconsIcon icon={VolumeHighIcon} size={13} />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="py-10 text-center space-y-2 text-meta text-muted-foreground">
+                  <p>
+                    {locale === "bn"
+                      ? "এই ক্যাটাগরিতে এখনো কোনো শব্দ নেই। Magic Cards থেকে শব্দ সেভ করুন!"
+                      : "No words in this category yet. Save words from Magic Cards!"}
+                  </p>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setActiveView("magic")}
+                  >
+                    {locale === "bn" ? "Magic Cards দেখুন" : "Browse Magic Cards"}
+                  </Button>
                 </div>
               )}
-            </div>
-          ))}
+            </Card>
+          )}
         </div>
-      ) : (
-        <EmptyState
-          title={t("vocabulary.emptyTitle")}
-          description={
-            searchQuery
-              ? (locale === "bn"
-                  ? `"${searchQuery}" এর সাথে মিলে এমন কোনো শব্দ আপনার তালিকায় নেই।`
-                  : `No saved words found matching "${searchQuery}".`)
-              : t("vocabulary.emptyDescription")
-          }
-          action={
-            <Link href="/explore">
-              <Button size="sm" className={locale === "bn" ? "text-bangla" : ""}>
-                {locale === "bn" ? "কথোপকথন এক্সপ্লোর করুন" : "Explore Conversations"}
+      )}
+
+      {/* Save-to-Category Picker Dialog */}
+      <Dialog open={Boolean(savePickerLemma)} onOpenChange={(o) => !o && setSavePickerLemma(null)}>
+        <DialogContent className="sm:max-w-md bg-card rounded-card border border-border">
+          <DialogHeader>
+            <DialogTitle className="font-heading text-card-title text-foreground">
+              {locale === "bn" ? "কোন ক্যাটাগরিতে সেভ করবেন?" : "Save Word to Category"}
+            </DialogTitle>
+            <DialogDescription className="text-chip text-muted-foreground">
+              {locale === "bn"
+                ? `"${savePickerLemma}" শব্দটি কোন ক্যাটাগরিতে রাখবেন বেছে নিন অথবা নতুন তৈরি করুন।`
+                : `Choose a category for "${savePickerLemma}" or create a new one.`}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-2 max-h-60 overflow-y-auto py-1">
+            {savedCategories.map((cat) => {
+              const inCat = savePickerLemma ? cat.lemmas.includes(savePickerLemma) : false;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => savePickerLemma && handleAssignToCategory(savePickerLemma, cat.id)}
+                  className={cn(
+                    "w-full p-3 rounded-control border flex items-center justify-between gap-2 transition-all cursor-pointer text-left",
+                    inCat
+                      ? "bg-primary/10 border-primary text-foreground"
+                      : "bg-muted/40 border-border/60 hover:bg-muted text-foreground"
+                  )}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-card-title">{cat.emoji}</span>
+                    <div>
+                      <p className="text-label font-medium">{cat.name}</p>
+                      <p className="text-chip text-muted-foreground font-mono">
+                        {cat.lemmas.length} {locale === "bn" ? "শব্দ" : "words"}
+                      </p>
+                    </div>
+                  </div>
+                  {inCat && (
+                    <HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} className="text-primary" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="pt-3 border-t border-border/60 space-y-2.5">
+            <p className="text-chip font-semibold text-foreground">
+              {locale === "bn" ? "+ নতুন ক্যাটাগরি তৈরি করে সেভ করুন" : "+ Create New Category & Save"}
+            </p>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {DEFAULT_CATEGORY_EMOJIS.map((em) => (
+                <button
+                  key={em}
+                  type="button"
+                  onClick={() => setNewCatEmoji(em)}
+                  className={cn(
+                    "size-8 rounded-control border flex items-center justify-center cursor-pointer transition-all",
+                    newCatEmoji === em
+                      ? "bg-primary/15 border-primary"
+                      : "bg-muted/40 border-border/60 hover:bg-muted"
+                  )}
+                >
+                  {em}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-2">
+              <Input
+                type="text"
+                value={newCatName}
+                onChange={(e) => setNewCatName(e.target.value)}
+                placeholder={locale === "bn" ? "ক্যাটাগরির নাম..." : "New category name..."}
+                className="h-9"
+              />
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleCreateCategoryAndSave}
+                disabled={!newCatName.trim()}
+              >
+                {locale === "bn" ? "তৈরি ও সেভ" : "Create & Save"}
               </Button>
-            </Link>
-          }
-        />
-      )}
-        </>
-      )}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Standalone Create Category Dialog */}
+      <Dialog open={isCreateCatOpen} onOpenChange={setIsCreateCatOpen}>
+        <DialogContent className="sm:max-w-sm bg-card rounded-card border border-border">
+          <DialogHeader>
+            <DialogTitle className="font-heading text-card-title text-foreground">
+              {locale === "bn" ? "নতুন ক্যাটাগরি তৈরি করুন" : "Create Saved Category"}
+            </DialogTitle>
+            <DialogDescription className="text-chip text-muted-foreground">
+              {locale === "bn"
+                ? "আপনার পছন্দের শব্দগুলো গুছিয়ে রাখতে একটি নাম ও আইকন দিন।"
+                : "Pick an icon and name for your new vocabulary collection."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 py-2">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {DEFAULT_CATEGORY_EMOJIS.map((em) => (
+                <button
+                  key={em}
+                  type="button"
+                  onClick={() => setNewCatEmoji(em)}
+                  className={cn(
+                    "size-8 rounded-control border flex items-center justify-center cursor-pointer transition-all",
+                    newCatEmoji === em
+                      ? "bg-primary/15 border-primary"
+                      : "bg-muted/40 border-border/60 hover:bg-muted"
+                  )}
+                >
+                  {em}
+                </button>
+              ))}
+            </div>
+            <Input
+              type="text"
+              value={newCatName}
+              onChange={(e) => setNewCatName(e.target.value)}
+              placeholder={locale === "bn" ? "যেমন: Office Power Words" : "e.g., Office Power Words"}
+            />
+          </div>
+          <DialogFooter>
+            <Button type="button" variant="outline" size="sm" onClick={() => setIsCreateCatOpen(false)}>
+              {locale === "bn" ? "বাতিল" : "Cancel"}
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              onClick={handleCreateCategoryAndSave}
+              disabled={!newCatName.trim()}
+            >
+              {locale === "bn" ? "তৈরি করুন" : "Create"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Auth Prompt Modal */}
       <AuthPromptModal
@@ -756,10 +943,20 @@ function VocabularyContent() {
       {showRightSidebar && (
         <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4">
           <MagicWordSidebar
-            activeDeck={activeDeck}
+            activeDeck={activeView === "magic" ? activeDeck : null}
             selectedWord={selectedMagicWord}
             isSaved={selectedMagicWord ? savedLemmas.includes(selectedMagicWord.lemma) : false}
-            onToggleSave={handleToggleSaveLemma}
+            onToggleSave={handleOpenSavePicker}
+            onRemoveFromCategory={
+              activeView === "words" && activeSavedCategory
+                ? handleRemoveFromActiveCategory
+                : undefined
+            }
+            activeCategoryLabel={
+              activeView === "words" && activeSavedCategory
+                ? `${activeSavedCategory.emoji} ${activeSavedCategory.name}`
+                : null
+            }
             totalCards={MAGIC_CARDS.length}
             totalWords={totalMagicWordsCount}
             savedCount={savedLemmas.length}
@@ -780,10 +977,20 @@ function VocabularyContent() {
           </SheetHeader>
           <div className="pt-4">
             <MagicWordSidebar
-              activeDeck={activeDeck}
+              activeDeck={activeView === "magic" ? activeDeck : null}
               selectedWord={selectedMagicWord}
               isSaved={selectedMagicWord ? savedLemmas.includes(selectedMagicWord.lemma) : false}
-              onToggleSave={handleToggleSaveLemma}
+              onToggleSave={handleOpenSavePicker}
+              onRemoveFromCategory={
+                activeView === "words" && activeSavedCategory
+                  ? handleRemoveFromActiveCategory
+                  : undefined
+              }
+              activeCategoryLabel={
+                activeView === "words" && activeSavedCategory
+                  ? `${activeSavedCategory.emoji} ${activeSavedCategory.name}`
+                  : null
+              }
               totalCards={MAGIC_CARDS.length}
               totalWords={totalMagicWordsCount}
               savedCount={savedLemmas.length}
