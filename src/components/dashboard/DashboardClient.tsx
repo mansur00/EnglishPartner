@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { t, useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { speakText } from "@/lib/audio/speech-engine";
 import { isRtlLanguage } from "@/lib/i18n/languages";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +30,7 @@ import {
   BotIcon,
   Bookmark02Icon,
   CheckmarkBadge01Icon,
+  VolumeHighIcon,
 } from "@hugeicons/core-free-icons";
 
 export function DashboardClient() {
@@ -181,24 +183,37 @@ export function DashboardClient() {
                 </span>
               </div>
 
-              <div className="pt-2">
-                <Link href="/conversations/asking-price-product-details">
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Link href="/conversations/asking-price-product-details" className="w-full sm:w-auto">
                   <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-xs gap-2 cursor-pointer">
                     <HugeiconsIcon icon={PlayCircleIcon} size={20} />
                     <span>{t("dashboard.startConversation", locale)}</span>
+                  </Button>
+                </Link>
+                <Link href="/explore" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto gap-2 cursor-pointer">
+                    <span>{locale === "bn" ? "সব কথোপকথন" : "Browse All"}</span>
+                    <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
                   </Button>
                 </Link>
               </div>
             </div>
 
             {/* Right Column: Mini Interactive Dialogue Preview */}
-            <Panel variant="topic" className="lg:col-span-5 p-5 space-y-3">
-              <div className="flex items-center justify-between text-meta text-topic-ink uppercase tracking-wider pb-2 border-b border-border">
+            <Panel variant="topic" className="lg:col-span-5 p-4 sm:p-5 space-y-3">
+              <div className="flex items-center justify-between text-chip text-topic-ink uppercase tracking-wider pb-2 border-b border-border/70">
                 <span className="flex items-center gap-1.5">
-                  <HugeiconsIcon icon={Message01Icon} size={16} />
+                  <HugeiconsIcon icon={Message01Icon} size={15} />
                   {t("dashboard.dialoguePreview", locale)}
                 </span>
-                <span className="text-meta">2 {t("dashboard.turnsUnit", locale)}</span>
+                <button
+                  type="button"
+                  onClick={() => speakText(`${previewLine1} ${previewLine2}`)}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-pill bg-card/80 border border-border/60 text-chip text-foreground hover:text-primary transition-colors cursor-pointer normal-case"
+                >
+                  <HugeiconsIcon icon={VolumeHighIcon} size={13} />
+                  <span>{locale === "bn" ? "শুনুন" : "Listen"}</span>
+                </button>
               </div>
 
               {/* Bubble 1: Customer (Speaker 1) */}
@@ -206,15 +221,15 @@ export function DashboardClient() {
                 <span className="size-marker rounded-pill bg-brand-800 text-band-panel-ink flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs">
                   C
                 </span>
-                <ChatBubble speaker="1">
-                  <p className="text-card-title text-bubble-primary-ink">
-                    &ldquo;Excuse me, could you tell me how much this costs?&rdquo;
+                <ChatBubble speaker="1" className="flex-1">
+                  <p className="text-body text-bubble-primary-ink leading-snug">
+                    &ldquo;{previewLine1}&rdquo;
                   </p>
                   {translationLocale !== "none" && (
                     <p
                       dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
                       className={cn(
-                        "text-meta text-muted-foreground mt-1",
+                        "text-chip text-muted-foreground mt-1",
                         translationLocale === "bn" && "font-bangla text-bangla"
                       )}
                     >
@@ -227,16 +242,16 @@ export function DashboardClient() {
               </div>
 
               {/* Bubble 2: Shop Assistant (Speaker 2) */}
-              <div className="flex items-start gap-2.5 justify-end text-right">
-                <ChatBubble speaker="2">
-                  <p className="text-card-title text-topic-ink">
-                    &ldquo;Certainly! It is forty-five dollars with a 10% discount.&rdquo;
+              <div className="flex items-start gap-2.5 justify-end">
+                <ChatBubble speaker="2" className="flex-1 text-left">
+                  <p className="text-body text-topic-ink leading-snug">
+                    &ldquo;{previewLine2}&rdquo;
                   </p>
                   {translationLocale !== "none" && (
                     <p
                       dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
                       className={cn(
-                        "text-meta text-topic-ink/80 mt-1",
+                        "text-chip text-topic-ink/80 mt-1",
                         translationLocale === "bn" && "font-bangla text-bangla"
                       )}
                     >

@@ -1839,7 +1839,7 @@ Entry format:
 - **Dashboard (`src/components/dashboard/DashboardClient.tsx`):**
   - Replaced full-bleed `HeroBand` + overlapping cards with `<PageContainer>` containing a rounded `<HeroBand className="rounded-card p-6 md:p-7 shadow-card">` followed by 3 structured rows:
     1. **Row 1 (2-column):** **Level Assessment Quiz** (`/dashboard/level-assessment`) + **AI Conversation Partner** (`/roleplay`).
-    2. **Row 2 (Full-width):** **Start Conversation** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with Dialogue Preview).
+    2. **Row 2 (Full-width):** **Start Conversation** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with `Browse All` secondary action, interactive **Listen** button on Dialogue Preview, and proportional left-aligned `text-body` dialogue bubbles).
     3. **Row 3 (2-column):** **Vocabulary & Magic Cards** (`/vocabulary`) + **Conversation Quiz Practice** (`/quiz`).
   - Removed extra lower track/empty cards for a clean, clutter-free dashboard.
 
