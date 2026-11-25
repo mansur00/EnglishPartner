@@ -46,7 +46,7 @@ export function RuleCardDialog({
               <HugeiconsIcon icon={SparklesIcon} size={18} />
             </div>
             <div>
-              <DialogTitle className="text-card-title text-foreground tracking-tight font-sans">
+              <DialogTitle className="text-card-title text-foreground tracking-tight">
                 {rule.title}
               </DialogTitle>
               <p className="text-chip text-muted-foreground font-bangla text-bangla">

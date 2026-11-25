@@ -45,8 +45,10 @@ body {
 }
 
 @theme inline {
-  --font-heading: var(--font-sans), sans-serif;
-  --font-sans: var(--font-sans), sans-serif;
+  --font-heading: var(--font-heading), var(--font-bangla), sans-serif;
+  --font-sans: var(--font-sans), var(--font-bangla), sans-serif;
+  --font-conversation: var(--font-conversation), var(--font-bangla), sans-serif;
+  --font-mono: var(--font-sans), var(--font-bangla), sans-serif;
   --font-bangla: var(--font-bangla), var(--font-bangla-fallback), sans-serif;
 
   /* Typography Scale (Section 2.3) */
@@ -266,6 +268,15 @@ body {
 @utility text-bangla {
   font-family: var(--font-bangla);
   line-height: 1.75;
+}
+@utility font-conversation {
+  font-family: var(--font-conversation);
+}
+@utility text-conversation {
+  font-family: var(--font-conversation);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  font-weight: var(--font-weight-regular);
 }
 
 @utility h-header {
@@ -936,6 +947,9 @@ body {
 @layer base {
   b, strong, th, h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
   *, ::after, ::before {
     border-color: var(--border);

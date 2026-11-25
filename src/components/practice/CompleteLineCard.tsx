@@ -117,7 +117,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
 
       {/* Masked Sentence Display */}
       <div className="p-5 rounded-panel bg-muted/40 border border-border space-y-3 text-center">
-        <p className="text-card-title text-foreground font-sans leading-relaxed">
+        <p className="text-card-title text-foreground font-conversation leading-relaxed">
           {currentItem.maskedSentence.split("___").map((part, idx, arr) => (
             <React.Fragment key={idx}>
               {part}

@@ -265,7 +265,7 @@ export function SettingsClient() {
           <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="space-y-1">
-                <label className="block font-heading text-label text-foreground">
+                <label className="block text-label text-foreground">
                   {t("settings.systemLanguage")}
                 </label>
                 <p className="text-meta text-muted-foreground">
@@ -333,7 +333,7 @@ export function SettingsClient() {
           <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="space-y-1">
-                <label className="block font-heading text-label text-foreground">
+                <label className="block text-label text-foreground">
                   {t("settings.translationLanguage")}
                 </label>
                 <p className="text-meta text-muted-foreground max-w-lg">
@@ -414,7 +414,7 @@ export function SettingsClient() {
           {/* Default Playback Speed & Auto-Play */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="space-y-2.5">
-              <label className="block font-heading text-label text-foreground">
+              <label className="block text-label text-foreground">
                 {t("settings.playbackSpeed", locale)}
               </label>
               <div className="flex flex-wrap gap-2">
@@ -438,7 +438,7 @@ export function SettingsClient() {
 
             <div className="flex items-center justify-between gap-4 rounded-control bg-muted/35 border border-border/60 p-3.5">
               <div className="space-y-0.5">
-                <span className="block font-heading text-label text-foreground">
+                <span className="block text-label text-foreground">
                   {t("settings.autoPlay", locale)}
                 </span>
                 <p className="text-meta text-muted-foreground">
@@ -458,7 +458,7 @@ export function SettingsClient() {
           {/* Voice Accent & Voice Gender */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="space-y-2.5">
-              <label className="block font-heading text-label text-foreground">
+              <label className="block text-label text-foreground">
                 {t("settings.voiceAccent", locale)}
               </label>
               <div className="flex flex-wrap gap-2">
@@ -482,7 +482,7 @@ export function SettingsClient() {
 
             <div className="space-y-2.5">
               <div>
-                <label className="block font-heading text-label text-foreground">
+                <label className="block text-label text-foreground">
                   {t("settings.voiceGender", locale)}
                 </label>
                 <p className="text-meta text-muted-foreground mt-0.5">
@@ -515,7 +515,7 @@ export function SettingsClient() {
           <div className="space-y-2.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <label className="block font-heading text-label text-foreground">
+                <label className="block text-label text-foreground">
                   {t("settings.voiceTone", locale)}
                 </label>
                 <p className="text-meta text-muted-foreground mt-0.5">
@@ -575,7 +575,7 @@ export function SettingsClient() {
         <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
           {/* Daily Speaking Goal */}
           <div className="space-y-2.5">
-            <label className="block font-heading text-label text-foreground">
+            <label className="block text-label text-foreground">
               {t("settings.dailySpeakingGoal", locale)}
             </label>
             <div className="flex flex-wrap gap-2">
@@ -607,7 +607,7 @@ export function SettingsClient() {
           {/* Target CEFR Level */}
           <div className="space-y-2.5">
             <div>
-              <label className="block font-heading text-label text-foreground">
+              <label className="block text-label text-foreground">
                 {t("settings.targetLevel", locale)}
               </label>
               <p className="text-meta text-muted-foreground mt-0.5">
@@ -655,7 +655,7 @@ export function SettingsClient() {
 
         <Card className="bg-card p-5 md:p-6 space-y-4 shadow-card">
           <div className="space-y-2.5">
-            <label className="block font-heading text-label text-foreground">
+            <label className="block text-label text-foreground">
               {t("settings.themeMode", locale)}
             </label>
             <div className="flex flex-wrap gap-2.5">

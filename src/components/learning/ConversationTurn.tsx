@@ -155,7 +155,7 @@ export function ConversationTurn({
 
             {/* English Dialogue Line */}
             <div className="pt-1">
-                <div className="text-lead text-foreground tracking-tight">
+                <div className="text-conversation text-foreground tracking-tight">
                     {isGrammarActive ? (
                         <GrammarText
                             annotation={resolvedAnnotation}

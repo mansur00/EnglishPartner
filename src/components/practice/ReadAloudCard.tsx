@@ -334,7 +334,7 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
           )}
         </div>
 
-        <h2 className="text-card-title text-foreground">
+        <h2 className="text-card-title font-conversation text-foreground">
           &ldquo;{currentItem.targetSentence}&rdquo;
         </h2>
 

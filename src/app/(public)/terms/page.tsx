@@ -22,7 +22,7 @@ export default function TermsPage() {
 
         <Card className="p-6 sm:p-8 bg-card border-border space-y-6 shadow-xs rounded-card">
           <div>
-            <h1 className="text-page-title text-foreground font-sans">
+            <h1 className="text-page-title text-foreground">
               ব্যবহারের শর্তাবলী
             </h1>
             <p className="text-meta text-muted-foreground mt-1">

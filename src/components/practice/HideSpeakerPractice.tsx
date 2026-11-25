@@ -161,7 +161,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
               </div>
 
               <ChatBubble speaker="1" className="space-y-2">
-                <p className="text-lead text-foreground font-sans leading-relaxed">
+                <p className="text-lead text-foreground font-conversation leading-relaxed">
                   &ldquo;{currentLine.englishText}&rdquo;
                 </p>
                 <p className="text-meta text-bangla text-muted-foreground border-t border-border/60 pt-1.5">
@@ -233,7 +233,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
                 ) : (
                   <div className="space-y-2 pt-2 border-t border-border/60 animate-in fade-in">
                     <div className="p-3 rounded-control bg-card shadow-2xs">
-                      <p className="text-card-title text-foreground font-sans italic">
+                      <p className="text-card-title text-foreground font-conversation italic">
                         &ldquo;{currentLine.englishText}&rdquo;
                       </p>
                     </div>

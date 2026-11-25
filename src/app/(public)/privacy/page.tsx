@@ -26,7 +26,7 @@ export default function PrivacyPage() {
               <HugeiconsIcon icon={SparklesIcon} size={14} />
               <span>Learner-First Privacy</span>
             </div>
-            <h1 className="text-page-title text-foreground font-sans">
+            <h1 className="text-page-title text-foreground">
               গোপনীয়তা নীতি
             </h1>
             <p className="text-meta text-muted-foreground mt-1">

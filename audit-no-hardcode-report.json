@@ -725,13 +725,6 @@
       ]
     },
     {
-      "detail": "ClassName repeated 10 times",
-      "className": "block font-heading text-label text-foreground",
-      "files": [
-        "src/components/settings/SettingsClient.tsx"
-      ]
-    },
-    {
       "detail": "ClassName repeated 3 times",
       "className": "rounded-card border border-border/60 bg-muted/25 p-3 space-y-2.5",
       "files": [

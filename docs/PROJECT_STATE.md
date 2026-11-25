@@ -1847,6 +1847,16 @@ Entry format:
     3. **Row 3 (2-column):** **Vocabulary & Magic Cards** (`/vocabulary`) + **Conversation Quiz Practice** (`/quiz`).
   - Removed extra lower track/empty cards for a clean, clutter-free dashboard.
 
+### 2026-11-26, System-Wide 3-Font English Typography (Nunito + Comic Neue + Manrope)
+- **Font Loading (`src/app/layout.tsx`):**
+  - Replaced `Inter` with strictly 3 Google Fonts for English: **Nunito** (`--font-heading`, weights `400, 500, 600`), **Comic Neue** (`--font-conversation`, weights `400, 700`), and **Manrope** (`--font-sans`, weights `400, 500, 600`), while keeping **Hind Siliguri** + **Noto Sans Bengali** (`--font-bangla`) for Bangla.
+- **Design System Tokens (`src/app/globals.css`):**
+  - Mapped `--font-heading`, `--font-sans`, `--font-conversation`, and `--font-mono` (aliased to Manrope so strictly 3 English fonts exist) in `@theme inline` with `--font-bangla` fallback.
+  - Added `@utility font-conversation` and `@utility text-conversation`; set `h1..h6 { font-family: var(--font-heading); }` in `@layer base`.
+- **Conversation & Heading Cleanup:**
+  - Applied `font-conversation` / `text-conversation` to `ChatBubble.tsx` (covering `RoleplayPartner.tsx` and `HideSpeakerPractice.tsx`), `ConversationTurn.tsx`, `CompleteLineCard.tsx`, `DialogueOrderCard.tsx`, and `ReadAloudCard.tsx`.
+  - Removed overriding `font-sans` on `<h1>`/`<DialogTitle>` (`privacy/page.tsx`, `terms/page.tsx`, `RuleCard.tsx`) and `font-heading` on non-heading `<label>`/`<span>` elements in `SettingsClient.tsx`.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
