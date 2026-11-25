@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { PageContainer } from "@/components/shared";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ export default function LevelAssessmentPage() {
   const [source, setSource] = useState<"ai" | "hybrid" | "fallback">("fallback");
   const [isRefreshing, setIsRefreshing] = useState(true);
   const [quizKey, setQuizKey] = useState(0);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const fetchAiAssessment = useCallback(async () => {
     setIsRefreshing(true);
@@ -86,7 +88,8 @@ export default function LevelAssessmentPage() {
   }, []);
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-6">
+    <div className={cn("w-full transition-all", isSubmitted && "lg:pr-80 xl:pr-96")}>
+      <PageContainer className="py-6 sm:py-8 space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link href="/dashboard">
           <Button variant="ghost" size="sm" className="gap-1.5 cursor-pointer">
@@ -128,7 +131,9 @@ export default function LevelAssessmentPage() {
         source={source}
         isRefreshing={isRefreshing}
         onRefresh={fetchAiAssessment}
+        onSubmittedChange={setIsSubmitted}
       />
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 }

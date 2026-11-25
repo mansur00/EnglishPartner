@@ -41,6 +41,7 @@ interface QuizRunnerProps {
   lengthTierId?: string;
   lengthTierLabel?: string;
   style?: ConversationStyle;
+  onSubmittedChange?: (submitted: boolean) => void;
 }
 
 export function QuizRunner({
@@ -58,6 +59,7 @@ export function QuizRunner({
   lengthTierId,
   lengthTierLabel,
   style,
+  onSubmittedChange,
 }: QuizRunnerProps) {
   const { locale } = useTranslations();
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -114,6 +116,7 @@ export function QuizRunner({
 
     saveQuizSessionResult(result);
     setSubmittedResult(result);
+    onSubmittedChange?.(true);
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -122,6 +125,7 @@ export function QuizRunner({
   const handleRestartWithRefresh = async () => {
     setAnswers({});
     setSubmittedResult(null);
+    onSubmittedChange?.(false);
     await onRefresh();
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -267,7 +271,7 @@ export function QuizRunner({
   );
 
   return (
-    <div className={cn("space-y-5", isSubmitted && "lg:pr-80 xl:pr-96")}>
+    <div className="space-y-5">
       {/* Top Status & Refresh Bar */}
       <Card className="p-4 sm:p-5 bg-card border border-border space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">

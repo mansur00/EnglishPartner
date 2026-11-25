@@ -4,6 +4,7 @@ import React, { useMemo, useState, useCallback } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PageContainer, CefrChip } from "@/components/shared";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -72,6 +73,7 @@ export function ConversationQuizPlayClient() {
   const [seedOffset, setSeedOffset] = useState(0);
   const [aiQuestions, setAiQuestions] = useState<QuizQuestion[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const deterministicQuestions = useMemo(
     () =>
@@ -124,7 +126,8 @@ export function ConversationQuizPlayClient() {
   }, [seedOffset, scenario.title, effectiveLevel, effectiveStyle, builtLines]);
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-6">
+    <div className={cn("w-full transition-all", isSubmitted && "lg:pr-80 xl:pr-96")}>
+      <PageContainer className="py-6 sm:py-8 space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Link href={`/conversations/${scenario.slug}`}>
@@ -178,7 +181,9 @@ export function ConversationQuizPlayClient() {
         lengthTierId={matchedTier.id}
         lengthTierLabel={matchedTier.labelEn}
         style={effectiveStyle}
+        onSubmittedChange={setIsSubmitted}
       />
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 }

@@ -1824,7 +1824,7 @@ Entry format:
 - **Single-Page Scrollable Quiz + Post-Submit Score Sidebar (`src/components/quiz/QuizRunner.tsx`):**
   - Renders all questions (`Q1..Qn`) on one scrollable page.
   - Learners can freely change selected options before clicking **Submit Quiz**, with zero right/wrong spoilers until submission.
-  - On **Submit Quiz**, answers lock, each question reveals Right/Wrong + explanation, and a fixed **Right Sidebar** (plus mobile summary card) appears showing the score, CEFR estimation (for Level Assessment), **View Score Details** (`/quiz/results?sessionId=...`), and **Refresh & Retake**.
+  - On **Submit Quiz**, answers lock, each question reveals Right/Wrong + explanation, and a fixed **Right Sidebar** (plus mobile summary card) appears showing the score, CEFR estimation (for Level Assessment), **View Score Details** (`/quiz/results?sessionId=...`), and **Refresh & Retake** — with outer `lg:pr-80 xl:pr-96` applied on both `ConversationQuizPlayClient.tsx` and `dashboard/level-assessment/page.tsx` via `onSubmittedChange` so header cards and questions stay aligned without clipping under the sidebar.
   - Updated `/quiz` header filter bar (`src/app/(app)/quiz/page.tsx`) to a single-row 4-control toolbar: Search input + Level, Style, and Length `appearance-none h-11` `<select>` dropdowns with chevron icons matching `<Input>` height.
   - Updated `/vocabulary` header card (`src/app/(app)/vocabulary/page.tsx`) so mode tabs stay on one clean row and Search + `All 40 Cards` category dropdown sit side-by-side on one `h-11` line.
   - Consolidated `What Should I Say?` (`src/components/tools/WhatShouldISay.tsx`) header, inline input + `Show Options` CTA button, and `Try:` sample chips into one compact `<Card>`.
