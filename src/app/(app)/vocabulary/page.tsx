@@ -10,6 +10,7 @@ import {
   Search01Icon,
   Login01Icon,
   ArrowLeft01Icon,
+  ArrowDown01Icon,
   Add01Icon,
   CheckmarkCircle02Icon,
 } from "@hugeicons/core-free-icons";
@@ -313,70 +314,71 @@ function VocabularyContent() {
           </div>
         </div>
 
-        {/* Row 2: Mode Tabs + Search (when browsing Magic Cards) */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pt-3 border-t border-border/60">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => setActiveView("magic")}
-              className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer",
-                activeView === "magic"
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-              )}
-            >
-              <HugeiconsIcon icon={SparklesIcon} size={15} />
-              <span className={locale === "bn" ? "text-bangla" : ""}>
-                {locale === "bn"
-                  ? `ম্যাজিক কার্ডস (${MAGIC_CARDS.length})`
-                  : `Magic Cards (${MAGIC_CARDS.length})`}
-              </span>
-            </button>
+        {/* Row 2: Mode Tabs (Full-width single row) */}
+        <div className="flex flex-wrap items-center gap-1.5 pt-3 border-t border-border/60">
+          <button
+            type="button"
+            onClick={() => setActiveView("magic")}
+            className={cn(
+              "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer whitespace-nowrap",
+              activeView === "magic"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+            )}
+          >
+            <HugeiconsIcon icon={SparklesIcon} size={15} />
+            <span className={locale === "bn" ? "text-bangla" : ""}>
+              {locale === "bn"
+                ? `ম্যাজিক কার্ডস (${MAGIC_CARDS.length})`
+                : `Magic Cards (${MAGIC_CARDS.length})`}
+            </span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveView("words")}
-              className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer",
-                activeView === "words"
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-              )}
-            >
-              <HugeiconsIcon icon={Book01Icon} size={15} />
-              <span className={locale === "bn" ? "text-bangla" : ""}>
-                {t("vocabulary.savedWordsTab").replace("{count}", String(savedLemmas.length))}
-              </span>
-            </button>
+          <button
+            type="button"
+            onClick={() => setActiveView("words")}
+            className={cn(
+              "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer whitespace-nowrap",
+              activeView === "words"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+            )}
+          >
+            <HugeiconsIcon icon={Book01Icon} size={15} />
+            <span className={locale === "bn" ? "text-bangla" : ""}>
+              {t("vocabulary.savedWordsTab").replace("{count}", String(savedLemmas.length))}
+            </span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveView("srs")}
-              className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer",
-                activeView === "srs"
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-              )}
-            >
-              <HugeiconsIcon icon={SparklesIcon} size={15} />
-              <span className={locale === "bn" ? "text-bangla" : ""}>
-                {t("vocabulary.flashcardsTab")}
-              </span>
-              {dueCount > 0 && (
-                <Pill variant="warning" size="sm" className="font-mono">
-                  {dueCount} {t("vocabulary.dueBadge")}
-                </Pill>
-              )}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setActiveView("srs")}
+            className={cn(
+              "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer whitespace-nowrap",
+              activeView === "srs"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+            )}
+          >
+            <HugeiconsIcon icon={SparklesIcon} size={15} />
+            <span className={locale === "bn" ? "text-bangla" : ""}>
+              {t("vocabulary.flashcardsTab")}
+            </span>
+            {dueCount > 0 && (
+              <Pill variant="warning" size="sm" className="font-mono">
+                {dueCount} {t("vocabulary.dueBadge")}
+              </Pill>
+            )}
+          </button>
+        </div>
 
-          {activeView === "magic" && !activeDeck && (
-            <div className="relative w-full lg:w-72 shrink-0">
+        {/* Row 3: Search + Category Dropdown on One Line (when browsing Magic Cards) */}
+        {activeView === "magic" && !activeDeck && (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 pt-3 border-t border-border/40 items-center">
+            <div className="md:col-span-7 relative">
               <HugeiconsIcon
                 icon={Search01Icon}
-                size={15}
+                size={16}
                 className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
               />
               <Input
@@ -388,30 +390,31 @@ function VocabularyContent() {
                     ? "৪০টি ম্যাজিক কার্ড বা শব্দ খুঁজুন..."
                     : "Search 40 magic cards or words..."
                 }
-                className="pl-9 h-9 bg-muted/40 border-border/60 rounded-control"
+                className="pl-9 h-11 bg-muted/40 border-border/60 rounded-control"
               />
             </div>
-          )}
-        </div>
 
-        {/* Row 3: Category Filter Pills (when browsing Magic Cards) */}
-        {activeView === "magic" && !activeDeck && (
-          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-border/40">
-            {MAGIC_CARD_CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setMagicCategory(cat.id)}
-                className={cn(
-                  "px-3 py-1 rounded-pill text-chip transition-all cursor-pointer",
-                  magicCategory === cat.id
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
-                )}
+            <div className="md:col-span-5 relative">
+              <select
+                aria-label={locale === "bn" ? "কার্ড ক্যাটাগরি নির্বাচন করুন" : "Filter Magic Cards by category"}
+                value={magicCategory}
+                onChange={(e) =>
+                  setMagicCategory(e.target.value as MagicCardCategory | "all")
+                }
+                className="w-full h-11 appearance-none rounded-control border border-border/60 bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
               >
-                {cat.label}
-              </button>
-            ))}
+                {MAGIC_CARD_CATEGORIES.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.label}
+                  </option>
+                ))}
+              </select>
+              <HugeiconsIcon
+                icon={ArrowDown01Icon}
+                size={16}
+                className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              />
+            </div>
           </div>
         )}
       </Card>

@@ -1826,6 +1826,7 @@ Entry format:
   - Learners can freely change selected options before clicking **Submit Quiz**, with zero right/wrong spoilers until submission.
   - On **Submit Quiz**, answers lock, each question reveals Right/Wrong + explanation, and a fixed **Right Sidebar** (plus mobile summary card) appears showing the score, CEFR estimation (for Level Assessment), **View Score Details** (`/quiz/results?sessionId=...`), and **Refresh & Retake**.
   - Updated `/quiz` header filter bar (`src/app/(app)/quiz/page.tsx`) to a single-row 4-control toolbar: Search input + Level, Style, and Length `appearance-none h-11` `<select>` dropdowns with chevron icons matching `<Input>` height.
+  - Updated `/vocabulary` header card (`src/app/(app)/vocabulary/page.tsx`) so mode tabs stay on one clean row and Search + `All 40 Cards` category dropdown sit side-by-side on one `h-11` line.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

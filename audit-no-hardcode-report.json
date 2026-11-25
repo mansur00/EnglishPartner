@@ -52,55 +52,55 @@
   "b_typography": [
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 469,
+      "line": 472,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"font-mono text-primary font-medium\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 563,
+      "line": 566,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 567,
+      "line": 570,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip text-primary font-medium\">{w.pos}</span>"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 636,
+      "line": 639,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"pt-3 border-t border-border/50 text-chip text-primary font-medium\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 658,
+      "line": 661,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 744,
+      "line": 747,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 748,
+      "line": 751,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip text-primary font-medium\">{w.pos}</span>"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 823,
+      "line": 826,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-label font-medium\">{cat.name}</p>"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 838,
+      "line": 841,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
@@ -331,19 +331,31 @@
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 515,
+      "line": 393,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"pl-9 h-11 bg-muted/40 border-border/60 rounded-control\""
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 404,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border/60 bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 518,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 696,
+      "line": 699,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 971,
+      "line": 974,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -470,13 +482,6 @@
     {
       "detail": "ClassName repeated 3 times",
       "className": "text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none",
-      "files": [
-        "src/app/(app)/vocabulary/page.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "pl-9 h-9 bg-muted/40 border-border/60 rounded-control",
       "files": [
         "src/app/(app)/vocabulary/page.tsx"
       ]
