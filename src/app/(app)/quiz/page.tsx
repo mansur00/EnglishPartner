@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Link from "next/link";
 import { PageContainer, CefrChip } from "@/components/shared";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { SEED_SCENARIOS, type ScenarioItem } from "@/content/seed/scenarios";
-import { SEED_DIALOGUES } from "@/content/seed/dialogues";
-import { buildProgressiveDialogueVersion } from "@/lib/content/dialogue-builder";
+import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import {
   CONVERSATION_STYLES,
   getDefaultLengthTierForLevel,
@@ -17,7 +16,6 @@ import {
   type ConversationStyle,
 } from "@/lib/content/length-tiers";
 import { getQuestionCountForLevel } from "@/lib/quiz/types";
-import { ConversationQuizDialog } from "@/components/quiz/ConversationQuizDialog";
 import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -37,13 +35,14 @@ const ALL_LEVELS: ("ALL" | CefrLevelCode)[] = [
   "C2",
 ];
 
+const LENGTH_KEYS = ["short", "medium", "long", "story"] as const;
+
 export default function QuizHubPage() {
   const { locale } = useTranslations();
   const [selectedLevel, setSelectedLevel] = useState<"ALL" | CefrLevelCode>("ALL");
   const [selectedStyle, setSelectedStyle] = useState<ConversationStyle>("neutral");
   const [selectedLengthIdx, setSelectedLengthIdx] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeScenario, setActiveScenario] = useState<ScenarioItem | null>(null);
 
   const filteredScenarios = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
@@ -57,32 +56,6 @@ export default function QuizHubPage() {
       );
     });
   }, [selectedLevel, searchQuery]);
-
-  const activeQuizPayload = useMemo(() => {
-    if (!activeScenario) return null;
-    const versions = SEED_DIALOGUES[activeScenario.slug] || [];
-    const tiers = getLengthTiersForLevel(activeScenario.level);
-    const matchedTier =
-      tiers[selectedLengthIdx] ||
-      getDefaultLengthTierForLevel(activeScenario.level);
-    const baseVersion = versions[0];
-    const builtVersion = buildProgressiveDialogueVersion({
-      slug: activeScenario.slug,
-      title: activeScenario.title,
-      level: activeScenario.level,
-      lengthTierId: matchedTier.id,
-      style: selectedStyle,
-      speakers: baseVersion?.speakers,
-    });
-    return {
-      scenario: activeScenario,
-      lines: builtVersion.lines,
-      level: activeScenario.level,
-      lengthTierId: matchedTier.id,
-      lengthTierLabel: matchedTier.labelEn,
-      style: selectedStyle,
-    };
-  }, [activeScenario, selectedLengthIdx, selectedStyle]);
 
   return (
     <PageContainer className="py-6 sm:py-8 space-y-6">
@@ -162,7 +135,7 @@ export default function QuizHubPage() {
             <span className="text-chip text-muted-foreground mr-1">
               {locale === "bn" ? "দৈর্ঘ্য:" : "Length:"}
             </span>
-            {(["short", "medium", "long", "story"] as const).map((len, idx) => (
+            {LENGTH_KEYS.map((len, idx) => (
               <button
                 key={len}
                 type="button"
@@ -211,6 +184,10 @@ export default function QuizHubPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {filteredScenarios.map((sc) => {
           const qCount = getQuestionCountForLevel(sc.level);
+          const tiers = getLengthTiersForLevel(sc.level);
+          const tier = tiers[selectedLengthIdx] || getDefaultLengthTierForLevel(sc.level);
+          const playHref = `/quiz/play?slug=${encodeURIComponent(sc.slug)}&level=${sc.level}&length=${encodeURIComponent(tier.id)}&style=${selectedStyle}`;
+
           return (
             <Card
               key={sc.id}
@@ -234,35 +211,23 @@ export default function QuizHubPage() {
 
               <div className="pt-3 border-t border-border flex items-center justify-between gap-2">
                 <span className="text-chip text-muted-foreground capitalize">
-                  {selectedStyle} • {(["short", "medium", "long", "story"] as const)[selectedLengthIdx]}
+                  {selectedStyle} • {LENGTH_KEYS[selectedLengthIdx]}
                 </span>
-                <Button
-                  size="sm"
-                  variant="cta"
-                  onClick={() => setActiveScenario(sc)}
-                  className="gap-1.5 cursor-pointer"
-                >
-                  <HugeiconsIcon icon={PlayCircleIcon} size={15} />
-                  <span>{locale === "bn" ? "কুইজ শুরু" : "Start Quiz"}</span>
-                </Button>
+                <Link href={playHref}>
+                  <Button
+                    size="sm"
+                    variant="cta"
+                    className="gap-1.5 cursor-pointer"
+                  >
+                    <HugeiconsIcon icon={PlayCircleIcon} size={15} />
+                    <span>{locale === "bn" ? "কুইজ শুরু" : "Start Quiz"}</span>
+                  </Button>
+                </Link>
               </div>
             </Card>
           );
         })}
       </div>
-
-      {activeQuizPayload && (
-        <ConversationQuizDialog
-          isOpen={Boolean(activeQuizPayload)}
-          onClose={() => setActiveScenario(null)}
-          scenario={activeQuizPayload.scenario}
-          lines={activeQuizPayload.lines}
-          level={activeQuizPayload.level}
-          lengthTierId={activeQuizPayload.lengthTierId}
-          lengthTierLabel={activeQuizPayload.lengthTierLabel}
-          style={activeQuizPayload.style}
-        />
-      )}
     </PageContainer>
   );
 }

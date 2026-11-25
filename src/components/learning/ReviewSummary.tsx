@@ -29,7 +29,7 @@ interface ReviewSummaryProps {
   nextScenarioTitle?: string;
   savedWords?: Set<string>;
   onSaveWordToggle?: (lemma: string) => void;
-  onStartQuiz?: () => void;
+  quizHref?: string;
   quizQuestionCount?: number;
 }
 
@@ -44,7 +44,7 @@ export function ReviewSummary({
   nextScenarioTitle,
   savedWords = new Set(),
   onSaveWordToggle,
-  onStartQuiz,
+  quizHref,
   quizQuestionCount,
 }: ReviewSummaryProps) {
   const { locale, t } = useTranslations();
@@ -173,20 +173,21 @@ export function ReviewSummary({
             <span>{locale === "bn" ? "পুনরায় শুরু করুন" : "Practice Again"}</span>
           </button>
 
-          {onStartQuiz && (
-            <Button
-              type="button"
-              variant="cta"
-              onClick={onStartQuiz}
-              className="w-full sm:w-auto justify-center gap-2 text-label rounded-control cursor-pointer"
-            >
-              <HugeiconsIcon icon={CheckmarkBadge01Icon} size={16} />
-              <span>
-                {locale === "bn"
-                  ? `কুইজ শুরু করুন (${quizQuestionCount ?? 10}টি প্রশ্ন)`
-                  : `Start Quiz (${quizQuestionCount ?? 10} Questions)`}
-              </span>
-            </Button>
+          {quizHref && (
+            <Link href={quizHref} className="w-full sm:w-auto">
+              <Button
+                type="button"
+                variant="cta"
+                className="w-full sm:w-auto justify-center gap-2 text-label rounded-control cursor-pointer"
+              >
+                <HugeiconsIcon icon={CheckmarkBadge01Icon} size={16} />
+                <span>
+                  {locale === "bn"
+                    ? `কুইজ শুরু করুন (${quizQuestionCount ?? 10}টি প্রশ্ন)`
+                    : `Start Quiz (${quizQuestionCount ?? 10} Questions)`}
+                </span>
+              </Button>
+            </Link>
           )}
         </div>
 

@@ -306,12 +306,6 @@
   "c_radius": [],
   "d_layout_magic": [
     {
-      "file": "src/app/(app)/dashboard/level-assessment/page.tsx",
-      "line": 89,
-      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
-      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-6 max-w-4xl\">"
-    },
-    {
       "file": "src/app/(app)/vocabulary/page.tsx",
       "line": 515,
       "detail": "Hardcoded layout constant / magic number: w-64",
@@ -349,7 +343,7 @@
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 591,
+      "line": 588,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -370,18 +364,6 @@
       "line": 228,
       "detail": "Hardcoded layout constant / magic number: max-w-3xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-3xl leading-relaxed\">"
-    },
-    {
-      "file": "src/components/quiz/ConversationQuizDialog.tsx",
-      "line": 98,
-      "detail": "Arbitrary layout [Npx] utility: h-[90vh]",
-      "code": "<DialogContent className=\"max-w-2xl max-h-[90vh] overflow-y-auto bg-background\">"
-    },
-    {
-      "file": "src/components/quiz/ConversationQuizDialog.tsx",
-      "line": 98,
-      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
-      "code": "<DialogContent className=\"max-w-2xl max-h-[90vh] overflow-y-auto bg-background\">"
     },
     {
       "file": "src/components/quiz/QuizResultDetailClient.tsx",
@@ -435,12 +417,13 @@
   "e_inline_styles": [],
   "f_duplication": [
     {
-      "detail": "ClassName repeated 5 times",
+      "detail": "ClassName repeated 6 times",
       "className": "flex flex-wrap items-center justify-between gap-3",
       "files": [
         "src/app/(app)/dashboard/level-assessment/page.tsx",
         "src/components/learning/AudioPlayer.tsx",
         "src/components/practice/ReadAloudCard.tsx",
+        "src/components/quiz/ConversationQuizPlayClient.tsx",
         "src/components/quiz/QuizResultDetailClient.tsx",
         "src/components/quiz/QuizRunner.tsx"
       ]
@@ -491,11 +474,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
         "src/components/learning/ConversationReader.tsx",
+        "src/components/quiz/QuizRunner.tsx",
         "src/components/tools/RoleplayPartner.tsx"
       ]
     },
@@ -528,12 +512,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 6 times",
       "className": "text-chip font-mono text-muted-foreground",
       "files": [
         "src/components/admin/AdminDashboardClient.tsx",
         "src/components/learning/ConversationInspectorSidebar.tsx",
         "src/components/learning/ReviewSummary.tsx",
+        "src/components/quiz/QuizRunner.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },

@@ -86,7 +86,7 @@ export default function LevelAssessmentPage() {
   }, []);
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-6 max-w-4xl">
+    <PageContainer className="py-6 sm:py-8 space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link href="/dashboard">
           <Button variant="ghost" size="sm" className="gap-1.5 cursor-pointer">

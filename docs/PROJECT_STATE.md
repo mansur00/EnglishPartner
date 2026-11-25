@@ -1819,6 +1819,13 @@ Entry format:
   - **Conversation Quiz Popup & `/quiz` Hub:** Added `Start Quiz` button in `ReviewSummary.tsx` / `ConversationReader.tsx` opening `ConversationQuizDialog.tsx`; added `/quiz` page (`Sidebar.tsx`) with Level (`A1–C2`), Length, and Style filters across all conversations; added `/quiz/results/[sessionId]` inner review page showing wrong vs right answers and explanations.
   - **Tests:** Added `tests/quiz-engine.test.mjs`.
 
+### 2026-11-25, Full-Page Scrollable Quiz Flow & Post-Submit Right Sidebar
+- **Dedicated Redirect Page (`/quiz/play`):** Replaced the conversation quiz modal popup with a dedicated full-page route (`src/app/(app)/quiz/play/page.tsx` + `ConversationQuizPlayClient.tsx`) linked from both `ReviewSummary.tsx` and `/quiz`.
+- **Single-Page Scrollable Quiz + Post-Submit Score Sidebar (`src/components/quiz/QuizRunner.tsx`):**
+  - Renders all questions (`Q1..Qn`) on one scrollable page.
+  - Learners can freely change selected options before clicking **Submit Quiz**, with zero right/wrong spoilers until submission.
+  - On **Submit Quiz**, answers lock, each question reveals Right/Wrong + explanation, and a fixed **Right Sidebar** (plus mobile summary card) appears showing the score, CEFR estimation (for Level Assessment), **View Score Details** (`/quiz/results?sessionId=...`), and **Refresh & Retake**.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

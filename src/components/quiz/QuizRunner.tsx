@@ -41,7 +41,6 @@ interface QuizRunnerProps {
   lengthTierId?: string;
   lengthTierLabel?: string;
   style?: ConversationStyle;
-  onClose?: () => void;
 }
 
 export function QuizRunner({
@@ -59,43 +58,30 @@ export function QuizRunner({
   lengthTierId,
   lengthTierLabel,
   style,
-  onClose,
 }: QuizRunnerProps) {
   const { locale } = useTranslations();
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [completedResult, setCompletedResult] =
+  const [submittedResult, setSubmittedResult] =
     useState<QuizSessionResult | null>(null);
 
   const total = questions.length;
-  const currentQuestion = questions[currentIndex];
-  const selectedOption = currentQuestion
-    ? answers[currentQuestion.id]
-    : undefined;
-  const isLocked = selectedOption !== undefined;
   const answeredCount = Object.keys(answers).length;
-  const progressPct = total > 0 ? Math.round(((currentIndex + (isLocked ? 1 : 0)) / total) * 100) : 0;
+  const isSubmitted = submittedResult !== null;
+  const progressPct = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
 
-  const handleSelectOption = (optionIdx: number) => {
-    if (!currentQuestion || isLocked || isRefreshing) return;
-    setAnswers((prev) => {
-      if (prev[currentQuestion.id] !== undefined) return prev;
-      return { ...prev, [currentQuestion.id]: optionIdx };
-    });
+  const handleSelectOption = (questionId: string, optionIdx: number) => {
+    if (isSubmitted || isRefreshing) return;
+    setAnswers((prev) => ({ ...prev, [questionId]: optionIdx }));
   };
 
-  const handleNextOrFinish = () => {
-    if (!isLocked) return;
-    if (currentIndex + 1 < total) {
-      setCurrentIndex((prev) => prev + 1);
-      return;
-    }
+  const handleSubmitQuiz = () => {
+    if (isSubmitted || total === 0) return;
 
     let score = 0;
     for (const q of questions) {
       if (answers[q.id] === q.correctIndex) score += 1;
     }
-    const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
+    const percentage = Math.round((score / total) * 100);
     const breakdown =
       kind === "level-assessment"
         ? computeLevelBreakdown(questions, answers)
@@ -127,14 +113,19 @@ export function QuizRunner({
     };
 
     saveQuizSessionResult(result);
-    setCompletedResult(result);
+    setSubmittedResult(result);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handleRestartWithRefresh = async () => {
-    setCurrentIndex(0);
     setAnswers({});
-    setCompletedResult(null);
+    setSubmittedResult(null);
     await onRefresh();
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   if (total === 0) {
@@ -153,328 +144,400 @@ export function QuizRunner({
     );
   }
 
-  // Completed Summary View
-  if (completedResult) {
-    return (
-      <div className="space-y-5">
-        <Card className="p-5 sm:p-6 bg-card space-y-5 border border-border">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div className="space-y-1">
-              <Badge variant="brand" size="sm" className="gap-1">
-                <HugeiconsIcon icon={SparklesIcon} size={13} />
-                <span>
-                  {kind === "level-assessment"
-                    ? locale === "bn"
-                      ? "লেভেল যাচাই সম্পন্ন"
-                      : "Level Assessment Complete"
-                    : locale === "bn"
-                    ? "কুইজ সম্পন্ন"
-                    : "Quiz Completed"}
-                </span>
-              </Badge>
-              <h3 className="text-card-title text-foreground">
-                {locale === "bn" && titleBn ? titleBn : title}
-              </h3>
-            </div>
-
-            <div className="text-right">
-              <div className="text-hero-title text-primary font-mono">
-                {completedResult.score}/{completedResult.total}
-              </div>
-              <div className="text-chip text-muted-foreground">
-                {completedResult.percentage}%{" "}
-                {locale === "bn" ? "সঠিক" : "Accuracy"}
-              </div>
-            </div>
-          </div>
-
-          {kind === "level-assessment" && completedResult.estimatedLevel && (
-            <div className="rounded-panel bg-primary/10 border border-primary/25 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="space-y-0.5">
-                <span className="text-chip uppercase tracking-wider text-primary">
-                  {locale === "bn" ? "আপনার আনুমানিক CEFR লেভেল" : "Estimated CEFR Level"}
-                </span>
-                <p className="text-meta text-muted-foreground">
-                  {locale === "bn"
-                    ? "এটি কেবল আপনার বর্তমান যাচাই ফলাফল; সেটিংস পরিবর্তন করা হয়নি।"
-                    : "Diagnostic result only — your Settings target level was not modified."}
-                </p>
-              </div>
-              <Badge variant="brand" size="md" className="text-card-title px-4 py-1.5 font-mono shrink-0">
-                CEFR {completedResult.estimatedLevel}
-              </Badge>
-            </div>
-          )}
-
-          {completedResult.levelBreakdown && (
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-              {(["A1", "A2", "B1", "B2", "C1", "C2"] as CefrLevelCode[]).map((lvl) => {
-                const stat = completedResult.levelBreakdown?.[lvl];
-                if (!stat || stat.total === 0) return null;
-                return (
-                  <div
-                    key={lvl}
-                    className="rounded-control bg-muted/50 border border-border p-2.5 text-center"
-                  >
-                    <div className="text-chip font-mono text-foreground">{lvl}</div>
-                    <div className="text-label text-primary font-mono mt-0.5">
-                      {stat.correct}/{stat.total}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t border-border">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleRestartWithRefresh}
-              disabled={isRefreshing}
-              className="gap-2 cursor-pointer"
-            >
-              <HugeiconsIcon
-                icon={RefreshIcon}
-                size={16}
-                className={isRefreshing ? "animate-spin" : ""}
-              />
-              <span>
-                {isRefreshing
-                  ? locale === "bn"
-                    ? "নতুন প্রশ্ন তৈরি হচ্ছে..."
-                    : "Generating New Questions..."
-                  : locale === "bn"
-                  ? "রিফ্রেশ করে আবার শুরু করুন"
-                  : "Refresh & Retake Quiz"}
-              </span>
-            </Button>
-
-            <div className="flex items-center gap-2">
-              {onClose && (
-                <Button type="button" variant="ghost" onClick={onClose} className="cursor-pointer">
-                  {locale === "bn" ? "বন্ধ করুন" : "Close"}
-                </Button>
-              )}
-              <Link
-                href={`/quiz/results?sessionId=${completedResult.sessionId}`}
-                onClick={() => onClose?.()}
-                className="w-full sm:w-auto"
-              >
-                <Button variant="cta" className="w-full sm:w-auto gap-2 cursor-pointer">
-                  <HugeiconsIcon icon={Analytics01Icon} size={16} />
-                  <span>
-                    {locale === "bn" ? "বিস্তারিত স্কোর ও ভুল উত্তর দেখুন" : "View Score Details"}
-                  </span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
-  return (
+  const scoreSidebarContent = submittedResult && (
     <div className="space-y-4">
-      {/* Top Bar: Title, Source Badge, Refresh Button */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="min-w-0 space-y-0.5">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant={source === "ai" ? "brand" : "neutral"} size="sm" className="gap-1">
-              <HugeiconsIcon icon={SparklesIcon} size={12} />
-              <span>
-                {source === "ai"
-                  ? "AI Generated"
-                  : source === "hybrid"
-                  ? "Hybrid Quiz"
-                  : "Practice Bank"}
-              </span>
-            </Badge>
-            {currentQuestion?.cefrLevel && (
-              <Badge variant="outline" size="sm" className="font-mono">
-                {currentQuestion.cefrLevel}
-              </Badge>
-            )}
-            {currentQuestion?.skillTag && (
-              <Badge variant="neutral" size="sm">
-                {currentQuestion.skillTag}
-              </Badge>
-            )}
-          </div>
-          {(subtitle || subtitleBn) && (
-            <p className="text-meta text-muted-foreground">
-              {locale === "bn" && subtitleBn ? subtitleBn : subtitle}
-            </p>
-          )}
+      <div className="rounded-card border border-border bg-muted/25 p-4 space-y-3">
+        <div className="flex items-center justify-between gap-2">
+          <Badge variant="brand" size="sm" className="gap-1">
+            <HugeiconsIcon icon={SparklesIcon} size={12} />
+            <span>
+              {kind === "level-assessment"
+                ? locale === "bn"
+                  ? "লেভেল যাচাই স্কোর"
+                  : "Assessment Score"
+                : locale === "bn"
+                ? "কুইজ স্কোর"
+                : "Quiz Score"}
+            </span>
+          </Badge>
+          <span className="text-chip font-mono text-muted-foreground">
+            {submittedResult.percentage}%
+          </span>
         </div>
+
+        <div className="flex items-baseline justify-between gap-2">
+          <div className="text-hero-title text-primary font-mono">
+            {submittedResult.score}/{submittedResult.total}
+          </div>
+          <div className="text-chip text-muted-foreground">
+            {submittedResult.total - submittedResult.score}{" "}
+            {locale === "bn" ? "টি ভুল" : "wrong"}
+          </div>
+        </div>
+
+        <div className="h-2 w-full rounded-pill bg-muted overflow-hidden">
+          <div
+            className="h-full bg-primary rounded-pill transition-all"
+            style={{ width: `${submittedResult.percentage}%` }}
+          />
+        </div>
+      </div>
+
+      {kind === "level-assessment" && submittedResult.estimatedLevel && (
+        <div className="rounded-card border border-primary/25 bg-primary/10 p-4 space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-chip uppercase tracking-wider text-primary">
+              {locale === "bn" ? "আনুমানিক CEFR লেভেল" : "Estimated Level"}
+            </span>
+            <Badge variant="brand" size="md" className="font-mono">
+              CEFR {submittedResult.estimatedLevel}
+            </Badge>
+          </div>
+          <p className="text-chip text-muted-foreground leading-snug">
+            {locale === "bn"
+              ? "এটি কেবল আপনার বর্তমান যাচাই ফলাফল; সেটিংস পরিবর্তন করা হয়নি।"
+              : "Diagnostic only — your Settings target level was not modified."}
+          </p>
+        </div>
+      )}
+
+      {submittedResult.levelBreakdown && (
+        <div className="rounded-card border border-border bg-muted/25 p-3.5 space-y-2">
+          <span className="text-label text-foreground block">
+            {locale === "bn" ? "লেভেল অনুযায়ী ফলাফল" : "Level Breakdown"}
+          </span>
+          <div className="grid grid-cols-3 gap-1.5">
+            {(["A1", "A2", "B1", "B2", "C1", "C2"] as CefrLevelCode[]).map((lvl) => {
+              const stat = submittedResult.levelBreakdown?.[lvl];
+              if (!stat || stat.total === 0) return null;
+              return (
+                <div
+                  key={lvl}
+                  className="rounded-control bg-background border border-border/70 p-2 text-center"
+                >
+                  <div className="text-chip font-mono text-muted-foreground">{lvl}</div>
+                  <div className="text-label text-primary font-mono">
+                    {stat.correct}/{stat.total}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2 pt-1">
+        <Link
+          href={`/quiz/results?sessionId=${submittedResult.sessionId}`}
+          className="block w-full"
+        >
+          <Button variant="cta" className="w-full gap-2 cursor-pointer">
+            <HugeiconsIcon icon={Analytics01Icon} size={16} />
+            <span>
+              {locale === "bn" ? "বিস্তারিত স্কোর দেখুন" : "View Score Details"}
+            </span>
+            <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
+          </Button>
+        </Link>
 
         <Button
           type="button"
           variant="outline"
-          size="sm"
           onClick={handleRestartWithRefresh}
           disabled={isRefreshing}
-          className="gap-1.5 cursor-pointer shrink-0"
+          className="w-full gap-2 cursor-pointer"
         >
           <HugeiconsIcon
             icon={RefreshIcon}
-            size={14}
+            size={16}
             className={isRefreshing ? "animate-spin" : ""}
           />
           <span>
             {isRefreshing
               ? locale === "bn"
-                ? "রিফ্রেশ হচ্ছে..."
-                : "Refreshing..."
+                ? "নতুন প্রশ্ন তৈরি হচ্ছে..."
+                : "Generating New Questions..."
               : locale === "bn"
-              ? "নতুন প্রশ্ন (Refresh)"
-              : "Refresh Questions"}
+              ? "রিফ্রেশ করে আবার দিন"
+              : "Refresh & Retake"}
           </span>
         </Button>
       </div>
+    </div>
+  );
 
-      {/* Progress Bar */}
-      <div className="space-y-1.5">
-        <div className="flex items-center justify-between text-chip text-muted-foreground">
-          <span>
-            {locale === "bn"
-              ? `প্রশ্ন ${currentIndex + 1} / ${total}`
-              : `Question ${currentIndex + 1} of ${total}`}
-          </span>
-          <span className="font-mono">
-            {answeredCount}/{total} {locale === "bn" ? "উত্তর দেওয়া হয়েছে" : "answered"}
-          </span>
+  return (
+    <div className={cn("space-y-5", isSubmitted && "lg:pr-80 xl:pr-96")}>
+      {/* Top Status & Refresh Bar */}
+      <Card className="p-4 sm:p-5 bg-card border border-border space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0 space-y-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant={source === "ai" ? "brand" : "neutral"} size="sm" className="gap-1">
+                <HugeiconsIcon icon={SparklesIcon} size={12} />
+                <span>
+                  {source === "ai"
+                    ? "AI Generated"
+                    : source === "hybrid"
+                    ? "Hybrid Quiz"
+                    : "Practice Bank"}
+                </span>
+              </Badge>
+              <Badge variant="outline" size="sm" className="font-mono">
+                {total} {locale === "bn" ? "প্রশ্ন" : "Questions"}
+              </Badge>
+              {!isSubmitted && (
+                <Badge variant="neutral" size="sm">
+                  {locale === "bn"
+                    ? "সাবমিটের আগে উত্তর পরিবর্তন করা যাবে"
+                    : "You can change answers before submitting"}
+                </Badge>
+              )}
+            </div>
+            {(subtitle || subtitleBn) && (
+              <p className="text-meta text-muted-foreground">
+                {locale === "bn" && subtitleBn ? subtitleBn : subtitle}
+              </p>
+            )}
+          </div>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={handleRestartWithRefresh}
+            disabled={isRefreshing}
+            className="gap-1.5 cursor-pointer shrink-0"
+          >
+            <HugeiconsIcon
+              icon={RefreshIcon}
+              size={14}
+              className={isRefreshing ? "animate-spin" : ""}
+            />
+            <span>
+              {isRefreshing
+                ? locale === "bn"
+                  ? "রিফ্রেশ হচ্ছে..."
+                  : "Refreshing..."
+                : locale === "bn"
+                ? "নতুন প্রশ্ন (Refresh)"
+                : "Refresh Questions"}
+            </span>
+          </Button>
         </div>
-        <div className="h-2 w-full rounded-pill bg-muted overflow-hidden">
-          <div
-            className="h-full bg-primary rounded-pill transition-all duration-300"
-            style={{ width: `${progressPct}%` }}
-          />
+
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-chip text-muted-foreground">
+            <span>
+              {locale === "bn"
+                ? `উত্তর দেওয়া হয়েছে: ${answeredCount} / ${total}`
+                : `Answered: ${answeredCount} of ${total}`}
+            </span>
+            <span className="font-mono">{progressPct}%</span>
+          </div>
+          <div className="h-2 w-full rounded-pill bg-muted overflow-hidden">
+            <div
+              className="h-full bg-primary rounded-pill transition-all duration-300"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
         </div>
-      </div>
+      </Card>
 
-      {/* Question Card */}
-      <Card className="p-5 sm:p-6 bg-card border border-border space-y-5">
-        <div className="space-y-1.5">
-          <h3 className="text-card-title text-foreground leading-snug">
-            {currentQuestion.prompt}
-          </h3>
-          {locale === "bn" && currentQuestion.promptBn && (
-            <p className="text-meta text-muted-foreground text-bangla">
-              {currentQuestion.promptBn}
-            </p>
-          )}
-        </div>
+      {/* Mobile/Tablet Score Card after Submit (< lg) */}
+      {isSubmitted && (
+        <div className="lg:hidden">{scoreSidebarContent}</div>
+      )}
 
-        {/* 4 Options (Locked once answered) */}
-        <div className="grid grid-cols-1 gap-2.5">
-          {currentQuestion.options.map((optionText, idx) => {
-            const isSelected = selectedOption === idx;
-            const isCorrect = idx === currentQuestion.correctIndex;
-            const optionLetter = ["A", "B", "C", "D"][idx];
+      {/* All Questions Rendered Vertically on One Scrollable Page */}
+      <div className="space-y-4">
+        {questions.map((q, qIdx) => {
+          const selectedOption = answers[q.id];
+          const isCorrect = isSubmitted && selectedOption === q.correctIndex;
+          const isWrong =
+            isSubmitted &&
+            selectedOption !== undefined &&
+            selectedOption !== q.correctIndex;
 
-            let stateClass =
-              "bg-background border-border text-foreground hover:bg-muted/60 hover:border-primary/40";
-            if (isLocked) {
-              if (isCorrect) {
-                stateClass =
-                  "bg-success-bg border-success text-foreground";
-              } else if (isSelected && !isCorrect) {
-                stateClass =
-                  "bg-destructive/10 border-destructive text-foreground";
-              } else {
-                stateClass =
-                  "bg-muted/30 border-border/60 text-muted-foreground opacity-75";
-              }
-            }
-
-            return (
-              <button
-                key={`${currentQuestion.id}-opt-${idx}`}
-                type="button"
-                disabled={isLocked || isRefreshing}
-                onClick={() => handleSelectOption(idx)}
-                className={cn(
-                  "w-full flex items-center justify-between gap-3 p-3.5 rounded-control border text-left transition-all",
-                  isLocked ? "cursor-default" : "cursor-pointer",
-                  stateClass
-                )}
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <span
-                    className={cn(
-                      "size-7 rounded-pill flex items-center justify-center text-chip font-mono shrink-0 border",
-                      isLocked && isCorrect
-                        ? "bg-success text-primary-foreground border-success"
-                        : isLocked && isSelected && !isCorrect
-                        ? "bg-destructive text-destructive-foreground border-destructive"
-                        : "bg-muted text-foreground border-border"
+          return (
+            <Card
+              key={q.id}
+              className={cn(
+                "p-5 sm:p-6 bg-card border space-y-4",
+                isWrong
+                  ? "border-destructive/50"
+                  : isCorrect
+                  ? "border-success/50"
+                  : "border-border"
+              )}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="outline" size="sm" className="font-mono">
+                      Q{qIdx + 1}
+                    </Badge>
+                    {q.cefrLevel && (
+                      <Badge variant="neutral" size="sm" className="font-mono">
+                        {q.cefrLevel}
+                      </Badge>
                     )}
-                  >
-                    {optionLetter}
-                  </span>
-                  <span className="text-body leading-snug">{optionText}</span>
+                    {q.skillTag && (
+                      <Badge variant="neutral" size="sm">
+                        {q.skillTag}
+                      </Badge>
+                    )}
+                  </div>
+                  <h3 className="text-card-title text-foreground leading-snug">
+                    {q.prompt}
+                  </h3>
+                  {locale === "bn" && q.promptBn && (
+                    <p className="text-meta text-muted-foreground text-bangla">
+                      {q.promptBn}
+                    </p>
+                  )}
                 </div>
 
-                {isLocked && isCorrect && (
-                  <HugeiconsIcon
-                    icon={CheckmarkCircle02Icon}
-                    size={18}
-                    className="text-success shrink-0"
-                  />
+                {isSubmitted && (
+                  <Badge
+                    variant={isCorrect ? "success" : "destructive"}
+                    size="sm"
+                    className="gap-1 shrink-0"
+                  >
+                    <HugeiconsIcon
+                      icon={isCorrect ? CheckmarkCircle02Icon : Cancel01Icon}
+                      size={14}
+                    />
+                    <span>
+                      {isCorrect
+                        ? locale === "bn"
+                          ? "সঠিক"
+                          : "Right"
+                        : locale === "bn"
+                        ? "ভুল"
+                        : "Wrong"}
+                    </span>
+                  </Badge>
                 )}
-                {isLocked && isSelected && !isCorrect && (
-                  <HugeiconsIcon
-                    icon={Cancel01Icon}
-                    size={18}
-                    className="text-destructive shrink-0"
-                  />
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Locked Explanation + Next Button */}
-        {isLocked && (
-          <div className="pt-3 border-t border-border space-y-3">
-            <div className="rounded-control bg-muted/45 border border-border/70 p-3 space-y-1">
-              <div className="text-chip text-muted-foreground">
-                {locale === "bn"
-                  ? "উত্তর লক করা হয়েছে (পরিবর্তনযোগ্য নয়)"
-                  : "Answer locked (cannot be changed)"}
               </div>
-              <p className="text-meta text-foreground leading-relaxed">
-                {locale === "bn" && currentQuestion.explanationBn
-                  ? currentQuestion.explanationBn
-                  : currentQuestion.explanation}
-              </p>
-            </div>
 
-            <div className="flex justify-end">
-              <Button
-                type="button"
-                variant="cta"
-                onClick={handleNextOrFinish}
-                className="gap-2 cursor-pointer"
-              >
-                <span>
-                  {currentIndex + 1 < total
-                    ? locale === "bn"
-                      ? "পরবর্তী প্রশ্ন"
-                      : "Next Question"
-                    : locale === "bn"
-                    ? "ফলাফল দেখুন"
-                    : "Finish & See Score"}
-                </span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
-              </Button>
-            </div>
+              {/* 4 Options: Free to change before submit; reveals right/wrong after submit */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {q.options.map((optionText, idx) => {
+                  const isSelected = selectedOption === idx;
+                  const isRightOption = idx === q.correctIndex;
+                  const optionLetter = ["A", "B", "C", "D"][idx];
+
+                  let stateClass = isSelected
+                    ? "bg-primary/10 border-primary text-foreground shadow-2xs"
+                    : "bg-background border-border text-foreground hover:bg-muted/60 hover:border-primary/40";
+
+                  if (isSubmitted) {
+                    if (isRightOption) {
+                      stateClass = "bg-success-bg border-success text-foreground";
+                    } else if (isSelected && !isRightOption) {
+                      stateClass =
+                        "bg-destructive/10 border-destructive text-foreground";
+                    } else {
+                      stateClass =
+                        "bg-muted/30 border-border/60 text-muted-foreground opacity-75";
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={`${q.id}-opt-${idx}`}
+                      type="button"
+                      disabled={isSubmitted || isRefreshing}
+                      onClick={() => handleSelectOption(q.id, idx)}
+                      className={cn(
+                        "w-full flex items-center justify-between gap-2.5 p-3 rounded-control border text-left transition-all",
+                        isSubmitted ? "cursor-default" : "cursor-pointer",
+                        stateClass
+                      )}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <span
+                          className={cn(
+                            "size-7 rounded-pill flex items-center justify-center text-chip font-mono shrink-0 border",
+                            isSubmitted && isRightOption
+                              ? "bg-success text-primary-foreground border-success"
+                              : isSubmitted && isSelected && !isRightOption
+                              ? "bg-destructive text-destructive-foreground border-destructive"
+                              : !isSubmitted && isSelected
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-muted text-foreground border-border"
+                          )}
+                        >
+                          {optionLetter}
+                        </span>
+                        <span className="text-body leading-snug">{optionText}</span>
+                      </div>
+
+                      {isSubmitted && isRightOption && (
+                        <HugeiconsIcon
+                          icon={CheckmarkCircle02Icon}
+                          size={18}
+                          className="text-success shrink-0"
+                        />
+                      )}
+                      {isSubmitted && isSelected && !isRightOption && (
+                        <HugeiconsIcon
+                          icon={Cancel01Icon}
+                          size={18}
+                          className="text-destructive shrink-0"
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Explanation shown ONLY after Submit */}
+              {isSubmitted && (
+                <div className="rounded-control bg-muted/45 border border-border/70 p-3 text-meta text-foreground leading-relaxed">
+                  {locale === "bn" && q.explanationBn
+                    ? q.explanationBn
+                    : q.explanation}
+                </div>
+              )}
+            </Card>
+          );
+        })}
+      </div>
+
+      {/* Bottom Submit Action (Before Submit) */}
+      {!isSubmitted && (
+        <Card className="p-4 sm:p-5 bg-card border border-border flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-4 z-10 shadow-card">
+          <div className="text-meta text-muted-foreground">
+            {answeredCount < total
+              ? locale === "bn"
+                ? `আরও ${total - answeredCount}টি প্রশ্ন বাকি আছে (এখনো উত্তর পরিবর্তন করতে পারবেন)`
+                : `${total - answeredCount} unanswered remaining — you can still change any option`
+              : locale === "bn"
+              ? "সব প্রশ্নের উত্তর দেওয়া হয়েছে! সাবমিট করে স্কোর দেখুন।"
+              : "All questions answered! Submit to view your score and right/wrong answers."}
           </div>
-        )}
-      </Card>
+          <Button
+            type="button"
+            variant="cta"
+            size="md"
+            disabled={answeredCount === 0 || isRefreshing}
+            onClick={handleSubmitQuiz}
+            className="w-full sm:w-auto gap-2 cursor-pointer"
+          >
+            <span>{locale === "bn" ? "কুইজ সাবমিট করুন" : "Submit Quiz"}</span>
+            <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
+          </Button>
+        </Card>
+      )}
+
+      {/* Desktop Right Sidebar — Appears ONLY after Submit */}
+      {isSubmitted && (
+        <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4">
+          {scoreSidebarContent}
+        </aside>
+      )}
     </div>
   );
 }
