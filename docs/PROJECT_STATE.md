@@ -1774,7 +1774,7 @@ Entry format:
   - Updated Desktop Right Sidebar to mirror the Left Sidebar (`fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar`), with `src/app/(app)/conversations/[slug]/page.tsx` reserving `lg:pr-80 xl:pr-96` and `lg:px-9` (36px spacing) and consolidating the breadcrumb, bookmark, scenario header, goal, and lesson controls cleanly into two organized cards.
   - Moved `AudioPlayer` (`variant="sidebar"`) into the Desktop Right Sidebar so the center conversation card has zero floating bottom overlay (keeping floating player on `< lg` mobile/tablet).
 - **AI Partner (`/roleplay`) Right Sidebar Layout (`src/app/(app)/roleplay/page.tsx`, `src/components/tools/RoleplayPartner.tsx`):**
-  - Applied the same 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9` 36px spacing): middle content area shows ONLY the AI Partner conversation chat area, while header, topic/mode pills, voice/speed controls, and scenario context live in the fixed Right Sidebar (and a `<Sheet side="bottom">` drawer on `< lg`).
+  - Applied the same 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9` 36px spacing): middle content area shows ONLY the AI Partner conversation chat area (responsive full viewport height `h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)]`), while header, topic/mode pills, voice/speed controls, and scenario context live in the fixed Right Sidebar (and a `<Sheet side="bottom">` drawer on `< lg`).
   - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
 
 ### 2026-11-17, state file created

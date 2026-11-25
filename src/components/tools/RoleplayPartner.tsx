@@ -1022,9 +1022,9 @@ export function RoleplayPartner() {
         </Button>
       </div>
 
-      {/* Main Conversation Stream (Center Chat Area Only) */}
-      <Card className="p-4 sm:p-6 bg-card rounded-card space-y-4 min-h-96 flex flex-col justify-between shadow-xs">
-        <div className="space-y-4 overflow-y-auto max-h-96 pr-1">
+      {/* Main Conversation Stream (Center Chat Area Only — Responsive Full Height) */}
+      <Card className="p-4 sm:p-6 bg-card rounded-card gap-4 h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)] min-h-[420px] flex flex-col justify-between shadow-xs">
+        <div className="space-y-4 overflow-y-auto flex-1 min-h-0 pr-1">
           {messages.map((msg, idx) => {
             const isAi = msg.speaker === "ai";
             const isPlaying = playingIndex === idx;

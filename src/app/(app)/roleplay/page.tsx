@@ -8,7 +8,7 @@ export const metadata = {
 export default function RoleplayPage() {
   return (
     <div className="w-full lg:pr-80 xl:pr-96">
-      <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-16">
+      <div className="w-full px-4 sm:px-6 lg:px-9 py-4 lg:py-6">
         <RoleplayPartner />
       </div>
     </div>
