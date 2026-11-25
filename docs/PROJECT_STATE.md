@@ -1835,6 +1835,14 @@ Entry format:
   - Replaced the 4-row language pill grids in Settings (`src/components/settings/SettingsClient.tsx`) with inline Search + `appearance-none h-11` `<select>` dropdowns for both System Language and Translation Language.
   - Fixed locale hydration mismatch in `MobileBottomNav.tsx` (`suppressHydrationWarning` on `<nav>` and nav label `<span>`).
 
+### 2026-11-26, Dashboard Layout Redesign (Owner Wireframe)
+- **Dashboard (`src/components/dashboard/DashboardClient.tsx`):**
+  - Replaced full-bleed `HeroBand` + overlapping cards with a clean rounded hero card (`bg-band-panel rounded-card`) followed by 3 structured rows:
+    1. **Row 1 (2-column):** **Level Assessment Quiz** (`/dashboard/level-assessment`) + **AI Conversation Partner** (`/roleplay`).
+    2. **Row 2 (Full-width):** **Start Conversation** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with Dialogue Preview).
+    3. **Row 3 (2-column):** **Vocabulary & Magic Cards** (`/vocabulary`) + **Conversation Quiz Practice** (`/quiz`).
+  - Removed extra lower track/empty cards for a clean, clutter-free dashboard.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

@@ -360,12 +360,6 @@
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
     {
-      "file": "src/components/dashboard/DashboardClient.tsx",
-      "line": 309,
-      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
-      "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
-    },
-    {
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 102,
       "detail": "Arbitrary layout [Npx] utility: max-w-[85%], max-w-[78%]",
@@ -647,12 +641,31 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
-      "className": "text-body text-muted-foreground max-w-2xl",
+      "detail": "ClassName repeated 4 times",
+      "className": "p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs",
       "files": [
-        "src/components/dashboard/DashboardClient.tsx",
-        "src/components/practice/DailyPracticeClient.tsx",
-        "src/components/settings/SettingsClient.tsx"
+        "src/components/dashboard/DashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
+      "files": [
+        "src/components/dashboard/DashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 5 times",
+      "className": "text-body text-muted-foreground leading-relaxed",
+      "files": [
+        "src/components/dashboard/DashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "btn-press w-full sm:w-auto gap-2 cursor-pointer",
+      "files": [
+        "src/components/dashboard/DashboardClient.tsx"
       ]
     },
     {
