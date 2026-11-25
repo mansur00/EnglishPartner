@@ -430,6 +430,14 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none",
+      "files": [
+        "src/app/(app)/quiz/page.tsx",
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none",
       "files": [
         "src/app/(app)/vocabulary/page.tsx"

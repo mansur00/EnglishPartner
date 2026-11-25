@@ -17,7 +17,6 @@ import {
 } from "@/lib/content/length-tiers";
 import { getQuestionCountForLevel } from "@/lib/quiz/types";
 import { useTranslations } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Search01Icon,
@@ -90,13 +89,13 @@ export default function QuizHubPage() {
           </div>
         </div>
 
-        {/* Search + Style + Length Controls */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 pt-2 border-t border-border">
-          <div className="lg:col-span-5 relative">
+        {/* Single-Line Filter Bar: Search + Level + Style + Length Dropdowns */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 pt-3 border-t border-border items-center">
+          <div className="md:col-span-5 relative">
             <HugeiconsIcon
               icon={Search01Icon}
               size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
             />
             <Input
               value={searchQuery}
@@ -106,77 +105,65 @@ export default function QuizHubPage() {
                   ? "কথোপকথন কুইজ খুঁজুন..."
                   : "Search conversation quizzes..."
               }
-              className="pl-9"
+              className="pl-9 h-control"
             />
           </div>
 
-          <div className="lg:col-span-4 flex flex-wrap items-center gap-1.5">
-            <span className="text-chip text-muted-foreground mr-1">
-              {locale === "bn" ? "স্টাইল:" : "Style:"}
-            </span>
-            {CONVERSATION_STYLES.map((st) => (
-              <button
-                key={st}
-                type="button"
-                onClick={() => setSelectedStyle(st)}
-                className={cn(
-                  "px-3 py-1.5 rounded-control text-chip capitalize transition-colors cursor-pointer",
-                  selectedStyle === st
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {st}
-              </button>
-            ))}
+          <div className="md:col-span-3">
+            <select
+              aria-label={locale === "bn" ? "লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
+              value={selectedLevel}
+              onChange={(e) =>
+                setSelectedLevel(e.target.value as "ALL" | CefrLevelCode)
+              }
+              className="w-full h-control rounded-control border border-border bg-background px-3 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {ALL_LEVELS.map((lvl) => {
+                const qCount = lvl === "ALL" ? null : getQuestionCountForLevel(lvl);
+                return (
+                  <option key={lvl} value={lvl}>
+                    {lvl === "ALL"
+                      ? locale === "bn"
+                        ? "সব লেভেল (A1–C2)"
+                        : "Level: All (A1–C2)"
+                      : `${lvl} (${qCount} ${locale === "bn" ? "প্রশ্ন" : "Q"})`}
+                  </option>
+                );
+              })}
+            </select>
           </div>
 
-          <div className="lg:col-span-3 flex flex-wrap items-center gap-1.5">
-            <span className="text-chip text-muted-foreground mr-1">
-              {locale === "bn" ? "দৈর্ঘ্য:" : "Length:"}
-            </span>
-            {LENGTH_KEYS.map((len, idx) => (
-              <button
-                key={len}
-                type="button"
-                onClick={() => setSelectedLengthIdx(idx)}
-                className={cn(
-                  "px-2.5 py-1.5 rounded-control text-chip capitalize transition-colors cursor-pointer",
-                  selectedLengthIdx === idx
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {len}
-              </button>
-            ))}
+          <div className="md:col-span-2">
+            <select
+              aria-label={locale === "bn" ? "স্টাইল নির্বাচন করুন" : "Select conversation style"}
+              value={selectedStyle}
+              onChange={(e) =>
+                setSelectedStyle(e.target.value as ConversationStyle)
+              }
+              className="w-full h-control rounded-control border border-border bg-background px-3 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {CONVERSATION_STYLES.map((st) => (
+                <option key={st} value={st} className="capitalize">
+                  {locale === "bn" ? `স্টাইল: ${st}` : `Style: ${st}`}
+                </option>
+              ))}
+            </select>
           </div>
-        </div>
 
-        {/* CEFR Level Filter Pills */}
-        <div className="flex flex-wrap gap-2">
-          {ALL_LEVELS.map((lvl) => {
-            const isSelected = selectedLevel === lvl;
-            const qCount = lvl === "ALL" ? null : getQuestionCountForLevel(lvl);
-            return (
-              <button
-                key={lvl}
-                type="button"
-                onClick={() => setSelectedLevel(lvl)}
-                className={cn(
-                  "px-3 py-1.5 rounded-pill text-chip transition-colors cursor-pointer flex items-center gap-1.5",
-                  isSelected
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <span>{lvl === "ALL" ? (locale === "bn" ? "সব লেভেল" : "All Levels") : lvl}</span>
-                {qCount !== null && (
-                  <span className="opacity-80 font-mono">({qCount}Q)</span>
-                )}
-              </button>
-            );
-          })}
+          <div className="md:col-span-2">
+            <select
+              aria-label={locale === "bn" ? "দৈর্ঘ্য নির্বাচন করুন" : "Select conversation length"}
+              value={selectedLengthIdx}
+              onChange={(e) => setSelectedLengthIdx(Number(e.target.value))}
+              className="w-full h-control rounded-control border border-border bg-background px-3 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {LENGTH_KEYS.map((len, idx) => (
+                <option key={len} value={idx} className="capitalize">
+                  {locale === "bn" ? `দৈর্ঘ্য: ${len}` : `Length: ${len}`}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </Card>
 
