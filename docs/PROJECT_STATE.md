@@ -1753,6 +1753,10 @@ Entry format:
 - **System-Wide Wiring:** Replaced all 14 raw `SpeechSynthesisUtterance` call sites (`AudioPlayer`, `AudioPlayButton`, `WordDetailPopover`, `ReviewQueue`, `ReviewSummary`, `WhatShouldISay`, `RoleplayPartner`, `vocabulary/page`, `CompleteLineCard`, `ListeningQuizCard`, `DialogueOrderCard`, `HideSpeakerPractice`, `ReadAloudCard`, `SentenceBuilderCard`) with `speakText` / `stopSpeech`.
 - **Tests:** Added `tests/voice-model.test.mjs` verifying registries, gender inference, fallback pitch offsets, and zero raw `SpeechSynthesisUtterance` leaks outside `speech-engine.ts`.
 
+### 2026-11-25, SSR Hydration Fix for `<Suspense>` Boundaries
+- **Root Cause:** `LocaleProvider` (`src/lib/i18n/provider.tsx`) used `queueMicrotask` to hydrate `ecp_user_locale` from `localStorage`, which flushed before `<Suspense><MobileBottomNav /></Suspense>` finished hydrating, causing a server (`ড্যাশবোর্ড`) vs. client (`Dashboard`) hydration mismatch.
+- **Fix:** Deferred `localStorage` locale hydration to a macrotask (`setTimeout(..., 0)` with `clearTimeout` cleanup) so all `<Suspense>` boundaries complete hydration with `initialLocale` before switching to the saved client locale.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

@@ -63,7 +63,9 @@ export function LocaleProvider({
   }, []);
 
   useEffect(() => {
-    queueMicrotask(() => {
+    // Defer localStorage hydration to a macrotask so all <Suspense> boundaries
+    // finish hydrating with the server's initialLocale before switching.
+    const hydrateTimer = setTimeout(() => {
       try {
         const savedLocale = localStorage.getItem("ecp_user_locale") as SupportedLocale | null;
         if (savedLocale && isValidGlobalLanguage(savedLocale) && savedLocale !== "none" && savedLocale !== locale) {
@@ -81,7 +83,7 @@ export function LocaleProvider({
       } catch {
         // LocalStorage unavailable
       }
-    });
+    }, 0);
 
     const handleLocaleChange = (e: Event) => {
       const customEvent = e as CustomEvent<SupportedLocale>;
@@ -107,6 +109,7 @@ export function LocaleProvider({
     window.addEventListener("ecp_locale_change", handleLocaleChange);
     window.addEventListener("ecp_translation_locale_change", handleTransChange);
     return () => {
+      clearTimeout(hydrateTimer);
       window.removeEventListener("ecp_locale_change", handleLocaleChange);
       window.removeEventListener("ecp_translation_locale_change", handleTransChange);
     };
