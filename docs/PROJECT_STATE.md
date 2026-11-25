@@ -1830,7 +1830,7 @@ Entry format:
   - Consolidated `What Should I Say?` (`src/components/tools/WhatShouldISay.tsx`) header, inline input + `Show Options` CTA button, and `Try:` sample chips into one compact `<Card>`.
   - Consolidated `/explore` (`src/app/(app)/explore/page.tsx`, `src/components/discovery/FilterBar.tsx`) header, count badge, search bar, category pills, and embedded `FilterBar` into one unified `<Card>`.
   - Consolidated `/professions` (`src/app/(app)/professions/page.tsx`) header, track badges, and single-row Track + CEFR Level (`A1–C2`) `appearance-none h-11` `<select>` dropdowns into one unified `<Card>`.
-  - Consolidated `/daily-practice` (`src/components/practice/DailyPracticeClient.tsx`) date, title, subtitle, and `TodayPanel` into one unified `<Card>`.
+  - Consolidated `/daily-practice` (`src/components/practice/DailyPracticeClient.tsx`) date, title, subtitle, and `TodayPanel` into one unified `<Card>`, and grouped the Spaced Repetition Vocabulary Review section (`ReviewQueue` + header) into its own unified `<Card>`.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

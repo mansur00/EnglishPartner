@@ -334,9 +334,11 @@ export function DailyPracticeClient() {
       </section>
 
       {/* 3. Spaced Repetition (SRS) Review Section */}
-      <section className="space-y-4">
-        <div className="flex items-center gap-2">
-          <HugeiconsIcon icon={Bookmark02Icon} size={20} className="text-primary" />
+      <Card className="p-5 sm:p-6 bg-card border border-border space-y-5 shadow-xs">
+        <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
+          <div className="size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
+            <HugeiconsIcon icon={Bookmark02Icon} size={18} />
+          </div>
           <div>
             <h2 className="font-heading text-card-title text-foreground">
               {t("dailyPractice.vocabularyReviewTitle", locale)}
@@ -361,7 +363,7 @@ export function DailyPracticeClient() {
             }}
           />
         ) : (
-          <Card className="p-8 text-center bg-card space-y-4">
+          <div className="p-6 text-center rounded-panel bg-muted/30 border border-border/60 space-y-4">
             <div className="mx-auto size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center">
               <HugeiconsIcon icon={Bookmark02Icon} size={24} />
             </div>
@@ -393,9 +395,9 @@ export function DailyPracticeClient() {
                 <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
               </Link>
             </div>
-          </Card>
+          </div>
         )}
-      </section>
+      </Card>
 
       {/* 4. Quick Speaking Workouts */}
       <section className="space-y-4">

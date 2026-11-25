@@ -14,19 +14,19 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 413,
+      "line": 415,
       "detail": "Tailwind raw palette color: bg-amber-500/10, text-amber-600, text-amber-400",
       "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 440,
+      "line": 442,
       "detail": "Tailwind raw palette color: bg-purple-500/10, text-purple-600, text-purple-400",
       "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 467,
+      "line": 469,
       "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-600, text-emerald-400",
       "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
     },
@@ -756,19 +756,19 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 413,
+      "line": 415,
       "detail": "Raw color with dark: prefix: dark:text-amber-400",
       "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 440,
+      "line": 442,
       "detail": "Raw color with dark: prefix: dark:text-purple-400",
       "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 467,
+      "line": 469,
       "detail": "Raw color with dark: prefix: dark:text-emerald-400",
       "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
     },
