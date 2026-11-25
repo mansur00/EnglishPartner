@@ -1837,7 +1837,7 @@ Entry format:
 
 ### 2026-11-26, Dashboard Layout Redesign (Owner Wireframe)
 - **Dashboard (`src/components/dashboard/DashboardClient.tsx`):**
-  - Replaced full-bleed `HeroBand` + overlapping cards with a clean rounded `<HeroBand className="rounded-card p-6 md:p-7 shadow-card">` followed by 3 structured rows:
+  - Replaced full-bleed `HeroBand` + overlapping cards with a full-width responsive container (`w-full px-4 sm:px-6 lg:px-9`) containing a rounded `<HeroBand className="rounded-card p-6 md:p-7 shadow-card">` followed by 3 structured rows:
     1. **Row 1 (2-column):** **Level Assessment Quiz** (`/dashboard/level-assessment`) + **AI Conversation Partner** (`/roleplay`).
     2. **Row 2 (Full-width):** **Start Conversation** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with Dialogue Preview).
     3. **Row 3 (2-column):** **Vocabulary & Magic Cards** (`/vocabulary`) + **Conversation Quiz Practice** (`/quiz`).

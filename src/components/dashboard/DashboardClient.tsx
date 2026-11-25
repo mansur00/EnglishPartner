@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-  PageContainer,
   HeroBand,
   TodayPanel,
   TopicCard,
@@ -43,7 +42,7 @@ export function DashboardClient() {
   );
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-6 pb-16">
+    <div className="w-full px-4 sm:px-6 lg:px-9 py-6 space-y-6 pb-16">
       {/* 1. Rounded Deep-Violet Hero Banner Card */}
       <HeroBand className="rounded-card p-6 md:p-7 shadow-card">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -329,6 +328,6 @@ export function DashboardClient() {
           </div>
         </Card>
       </div>
-    </PageContainer>
+    </div>
   );
 }
