@@ -3,6 +3,8 @@
  * Complies with ECP_Phase_Plan.md §7.1 (Track 4A) and ECP_System_Framework.md §4.
  */
 
+export type ProfessionCefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+
 export interface ProfessionMeta {
   id: string;
   slug: string;
@@ -14,6 +16,7 @@ export interface ProfessionMeta {
   descriptionBn: string;
   category: "tech" | "business" | "service" | "education";
   targetCefr: string;
+  supportedLevels: ProfessionCefrLevel[];
   estimatedHours: number;
   scenarioCount: number;
   competenciesBn: string[];
@@ -35,9 +38,10 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
     descriptionBn:
       "রিমোট প্রজেক্টে ক্লায়েন্ট মিটিং পরিচালনা, ওয়্যারফ্রেম প্রেজেন্টেশন এবং ডেভেলপারদের সাথে ডিজাইন টোকেন নিয়ে আত্মবিশ্বাসী আলোচনা শিখুন।",
     category: "tech",
-    targetCefr: "B1 - B2",
-    estimatedHours: 6,
-    scenarioCount: 5,
+    targetCefr: "A2 - C2",
+    supportedLevels: ["A2", "B1", "B2", "C1", "C2"],
+    estimatedHours: 10,
+    scenarioCount: 8,
     competenciesBn: [
       "প্রজেক্ট কিকঅফ ও ডিসকভারি মিটিং",
       "ওয়্যারফ্রেম ও প্রোটোটাইপ প্রেজেন্টেশন",
@@ -67,9 +71,10 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
     descriptionBn:
       "গ্লোবাল এজাইল স্প্রিন্টে ব্লকার জানানো, পিআরে গঠনমূলক কোড রিভিউ দেওয়া এবং সিস্টেম আর্কিটেকচারের সুবিধা-অসুবিধা যুক্তি দিয়ে বোঝানো শিখুন।",
     category: "tech",
-    targetCefr: "B1 - B2",
-    estimatedHours: 5,
-    scenarioCount: 3,
+    targetCefr: "A1 - C2",
+    supportedLevels: ["A1", "B1", "B2", "C1", "C2"],
+    estimatedHours: 8,
+    scenarioCount: 5,
     competenciesBn: [
       "ডেইলি স্ট্যান্ডআপে অগ্রগতি ও ব্লকার উপস্থাপন",
       "গিটহাবে মার্জিত ও গঠনমূলক কোড রিভিউ মন্তব্য",
@@ -95,9 +100,10 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
     descriptionBn:
       "আপওয়ার্ক বা ফাইভার ক্লায়েন্টদের সাথে প্রজেক্টের বাজেট নির্ধারণ, সময়সীমা বৃদ্ধি এবং পারিশ্রমিক সংক্রান্ত পেশাদার যোগাযোগ শিখুন।",
     category: "business",
-    targetCefr: "B1 - B2",
-    estimatedHours: 5,
-    scenarioCount: 3,
+    targetCefr: "A2 - C2",
+    supportedLevels: ["A2", "B1", "B2", "C1", "C2"],
+    estimatedHours: 8,
+    scenarioCount: 5,
     competenciesBn: [
       "প্রপোজাল সাবমিশন ও প্রথম ক্লায়েন্ট কল",
       "সময়মতো ডেডলাইন বৃদ্ধি ও মাইলস্টোন আপডেট",
@@ -123,9 +129,10 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
     descriptionBn:
       "হাসপাতাল বা ক্লিনিকে রোগীর লক্ষণ নির্ভুলভাবে লিপিবদ্ধ করা, শিফট হস্তান্তরের সময় রিপোর্ট ব্রিফিং এবং ডাক্তারদের সাথে সমন্বয় শিখুন।",
     category: "service",
-    targetCefr: "A2 - B1",
-    estimatedHours: 4,
-    scenarioCount: 2,
+    targetCefr: "A1 - C2",
+    supportedLevels: ["A1", "A2", "B1", "C1", "C2"],
+    estimatedHours: 8,
+    scenarioCount: 5,
     competenciesBn: [
       "রোগীর প্রাথমিক লক্ষণ ও অ্যালার্জি সংক্রান্ত ইতিহাস গ্রহণ",
       "ডাক্তারদের কাছে রোগীর ভাইটাল রিপোর্ট হ্যান্ডওভার",
@@ -149,9 +156,10 @@ export const PROFESSIONS_REGISTRY: Record<string, ProfessionMeta> = {
     descriptionBn:
       "অভিভাবকদের সাথে শিক্ষার্থীর অগ্রগতি পর্যালোচনা, ইতিবাচক ফিডব্যাক প্রদান এবং আন্তর্জাতিক সেমিনারে পাঠদান উপস্থাপন শিখুন।",
     category: "education",
-    targetCefr: "B1 - B2",
-    estimatedHours: 4,
-    scenarioCount: 2,
+    targetCefr: "A1 - C2",
+    supportedLevels: ["A1", "B1", "B2", "C1", "C2"],
+    estimatedHours: 8,
+    scenarioCount: 5,
     competenciesBn: [
       "অভিভাবক মিটিংয়ে শিক্ষার্থীর পারফরম্যান্স আলোচনা",
       "শ্রেণিকক্ষে স্পষ্ট ও বিনম্র ইংরেজি নির্দেশনা",

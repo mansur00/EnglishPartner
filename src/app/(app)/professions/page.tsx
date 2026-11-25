@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -17,17 +17,37 @@ import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
 import { LocaleTitle } from "@/components/shared";
 import { useTranslations } from "@/lib/i18n";
-import { ALL_PROFESSIONS } from "@/lib/professions/registry";
+import { ALL_PROFESSIONS, type ProfessionCefrLevel } from "@/lib/professions/registry";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { cn } from "@/lib/utils";
+
+const CEFR_LEVELS: readonly ("all" | ProfessionCefrLevel)[] = ["all", "A1", "A2", "B1", "B2", "C1", "C2"];
 
 export default function ProfessionsIndexPage() {
   const { locale, t } = useTranslations();
   const [selectedCat, setSelectedCat] = useState<string>("all");
+  const [selectedLevel, setSelectedLevel] = useState<"all" | ProfessionCefrLevel>("all");
+  const [userTargetLevel, setUserTargetLevel] = useState<string | null>(null);
 
-  const filteredProfessions = selectedCat === "all"
-    ? ALL_PROFESSIONS
-    : ALL_PROFESSIONS.filter((p) => p.category === selectedCat);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      try {
+        const saved = localStorage.getItem("ecp_user_target_level");
+        if (saved && ["A1", "A2", "B1", "B2", "C1", "C2"].includes(saved)) {
+          setUserTargetLevel(saved);
+        }
+      } catch {
+        // Ignore storage errors
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const filteredProfessions = ALL_PROFESSIONS.filter((p) => {
+    if (selectedCat !== "all" && p.category !== selectedCat) return false;
+    if (selectedLevel !== "all" && !p.supportedLevels.includes(selectedLevel)) return false;
+    return true;
+  });
 
   return (
     <PageContainer className="space-y-6">
@@ -52,13 +72,13 @@ export default function ProfessionsIndexPage() {
           {t("professions.subtitle")}
         </p>
 
-        {/* Category Filter Pills */}
+        {/* Category Track Pills */}
         <div className="flex flex-wrap items-center gap-2 pt-2">
           {[
             { id: "all", labelEn: "All Tracks", labelBn: "সব ট্র্যাক" },
             { id: "tech", labelEn: "Tech & Engineering", labelBn: "টেক ও ইঞ্জিনিয়ারিং" },
             { id: "business", labelEn: "Business & Freelance", labelBn: "ব্যবসা ও ফ্রিল্যান্সিং" },
-            { id: "healthcare", labelEn: "Healthcare", labelBn: "স্বাস্থ্যসেবা" },
+            { id: "service", labelEn: "Healthcare", labelBn: "স্বাস্থ্যসেবা" },
             { id: "education", labelEn: "Education", labelBn: "শিক্ষা" },
           ].map((cat) => {
             const active = selectedCat === cat.id;
@@ -79,6 +99,34 @@ export default function ProfessionsIndexPage() {
             );
           })}
         </div>
+
+        {/* CEFR Level Filter Pills (A1 - C2) */}
+        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          <span className="text-chip text-muted-foreground mr-1 font-mono">
+            {locale === "bn" ? "লেভেল:" : "CEFR Level:"}
+          </span>
+          {CEFR_LEVELS.map((lvl) => {
+            const active = selectedLevel === lvl;
+            const isUserLevel = userTargetLevel === lvl;
+            return (
+              <button
+                key={lvl}
+                type="button"
+                onClick={() => setSelectedLevel(lvl)}
+                className={cn(
+                  "px-2.5 py-1 rounded-control text-chip font-mono transition-all cursor-pointer",
+                  active
+                    ? "bg-primary text-primary-foreground shadow-xs"
+                    : isUserLevel
+                    ? "bg-primary/15 text-primary border border-primary/30 hover:bg-primary/20"
+                    : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
+                )}
+              >
+                {lvl === "all" ? (locale === "bn" ? "সব লেভেল" : "All Levels") : lvl}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Professions Grid */}
@@ -87,9 +135,12 @@ export default function ProfessionsIndexPage() {
           const competencies = locale === "bn"
             ? profession.competenciesBn
             : (profession.competenciesEn || profession.competenciesBn);
-          const actualScenarioCount = SEED_SCENARIOS.filter(
-            (s) => s.profession?.slug === profession.slug
-          ).length || profession.scenarioCount;
+          const matchingScenarios = SEED_SCENARIOS.filter((s) => {
+            if (s.profession?.slug !== profession.slug) return false;
+            if (selectedLevel !== "all" && s.level !== selectedLevel) return false;
+            return true;
+          });
+          const actualScenarioCount = matchingScenarios.length;
 
           return (
             <Card

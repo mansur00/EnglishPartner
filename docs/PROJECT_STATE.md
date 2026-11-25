@@ -1757,6 +1757,14 @@ Entry format:
 - **Root Cause:** `LocaleProvider` (`src/lib/i18n/provider.tsx`) used `queueMicrotask` to hydrate `ecp_user_locale` from `localStorage`, which flushed before `<Suspense><MobileBottomNav /></Suspense>` finished hydrating, causing a server (`ড্যাশবোর্ড`) vs. client (`Dashboard`) hydration mismatch.
 - **Fix:** Deferred `localStorage` locale hydration to a macrotask (`setTimeout(..., 0)` with `clearTimeout` cleanup) so all `<Suspense>` boundaries complete hydration with `initialLocale` before switching to the saved client locale.
 
+### 2026-11-25, Level-Aligned Professional English Career Paths (A1–C2)
+- **Registry & Scenarios (`A1`–`C2`):**
+  - `src/lib/professions/registry.ts`: Added `supportedLevels: ProfessionCefrLevel[]` and updated `targetCefr` ranges (`A1 - C2` / `A2 - C2`), `scenarioCount`, and `estimatedHours` across all 5 career paths.
+  - `src/content/seed/scenarios.ts`: Linked `sc-24`, `sc-26`, `sc-28`, `sc-29`, `sc-30`, `sc-31` and added `sc-32`–`sc-42` so every career track has real scenarios across beginner (`A1`/`A2`), intermediate (`B1`/`B2`), and mastery (`C1`/`C2`) tiers.
+- **Professions Page (`src/app/(app)/professions/page.tsx`):**
+  - Fixed the Healthcare track filter bug (`id: "service"` matching `healthcare-worker` category).
+  - Added interactive CEFR Level filter pills (`All Levels`, `A1`, `A2`, `B1`, `B2`, `C1`, `C2`) with live scenario counts per level and highlight for the user's saved `ecp_user_target_level`.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
