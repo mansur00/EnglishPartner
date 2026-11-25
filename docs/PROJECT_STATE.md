@@ -1861,6 +1861,9 @@ Entry format:
 ### 2026-11-26, AI Partner Voice Silence Auto-Send (`RoleplayPartner.tsx`)
 - Enabled `recognition.continuous = true` in `RoleplayPartner.tsx` and added a `useEffect`-driven 4-second silence countdown (`autoSendSeconds` + `silenceResetTick` + `isAutoSendingRef`) after the last speech result (`onresult`), preserving the countdown across `no-speech` `onerror`/`onend` events once speech is captured, with a live inline countdown banner + `Cancel` button (and automatic cancellation when editing input or sending manually).
 
+### 2026-11-26, Thin Animated Rainbow Border on Active Conversation Bubble
+- Added `.rainbow-border-thin` (`1.5px` animated conic rainbow gradient, leaving frozen `.rainbow-border` untouched) in `src/app/globals.css` and applied it to `ChatTurnBubble.tsx` for both `isSelected` (tapped) and `isCurrentlyPlaying` (audio playing) states.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
