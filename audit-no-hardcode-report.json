@@ -41,9 +41,33 @@
       "line": 735,
       "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
       "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
+    },
+    {
+      "file": "src/content/seed/magic-cards.ts",
+      "line": 1872,
+      "detail": "Hex literal: #4821",
+      "code": "[\"Ticket\", \"noun\", \"/ˈtɪkɪt/\", \"Logged support request case\", \"Your support ticket is #4821.\"],"
     }
   ],
   "b_typography": [
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 442,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"font-mono text-primary font-medium\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 534,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"font-heading text-label font-semibold text-foreground truncate\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 538,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"text-chip text-primary font-medium\">{w.pos}</span>"
+    },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 80,
@@ -235,10 +259,70 @@
       "line": 1009,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-label font-semibold text-foreground truncate\">"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 96,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-mono font-semibold text-foreground\">{totalCards}</span>"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 102,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-mono font-semibold text-foreground\">{totalWords}</span>"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 108,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-mono font-semibold text-primary\">{savedCount}</span>"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 124,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"text-chip font-medium text-muted-foreground truncate\">"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 189,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 215,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-label font-semibold text-primary\">"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 228,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/vocabulary/MagicWordSidebar.tsx",
+      "line": 240,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
     }
   ],
   "c_radius": [],
   "d_layout_magic": [
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 488,
+      "detail": "Hardcoded layout constant / magic number: w-64",
+      "code": "<InputGroup className=\"bg-muted/40 rounded-control w-full sm:w-64\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 778,
+      "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
+      "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
+    },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 102,
@@ -303,12 +387,51 @@
   "e_inline_styles": [],
   "f_duplication": [
     {
+      "detail": "ClassName repeated 14 times",
+      "className": "font-heading text-card-title text-foreground",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/learning/ConversationReader.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/settings/SettingsClient.tsx",
+        "src/components/vocabulary/MagicWordSidebar.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 3 times",
+      "className": "hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/learning/ConversationReader.tsx",
+        "src/components/tools/RoleplayPartner.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/learning/ConversationReader.tsx",
+        "src/components/tools/RoleplayPartner.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "pb-3 border-b border-border/60 text-left",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/learning/ConversationReader.tsx",
+        "src/components/tools/RoleplayPartner.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
       "className": "text-chip font-mono text-muted-foreground",
       "files": [
         "src/components/admin/AdminDashboardClient.tsx",
         "src/components/learning/ConversationInspectorSidebar.tsx",
-        "src/components/learning/ReviewSummary.tsx"
+        "src/components/learning/ReviewSummary.tsx",
+        "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },
     {
@@ -323,19 +446,11 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 7 times",
       "className": "text-chip font-semibold text-foreground flex items-center gap-1.5",
       "files": [
-        "src/components/learning/ConversationInspectorSidebar.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 12 times",
-      "className": "font-heading text-card-title text-foreground",
-      "files": [
-        "src/components/learning/ConversationReader.tsx",
-        "src/components/practice/DailyPracticeClient.tsx",
-        "src/components/settings/SettingsClient.tsx"
+        "src/components/learning/ConversationInspectorSidebar.tsx",
+        "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },
     {
@@ -415,9 +530,23 @@
       "files": [
         "src/components/settings/SettingsClient.tsx"
       ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center justify-between text-chip",
+      "files": [
+        "src/components/vocabulary/MagicWordSidebar.tsx"
+      ]
     }
   ],
-  "g_ts_data_colors": [],
+  "g_ts_data_colors": [
+    {
+      "file": "src/content/seed/magic-cards.ts",
+      "line": 1872,
+      "detail": "Color literal or raw utility found in TS data file",
+      "code": "[\"Ticket\", \"noun\", \"/ˈtɪkɪt/\", \"Logged support request case\", \"Your support ticket is #4821.\"],"
+    }
+  ],
   "h_dark_mode": [
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",

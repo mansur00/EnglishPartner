@@ -1775,6 +1775,15 @@ Entry format:
   - Moved `AudioPlayer` (`variant="sidebar"`) into the Desktop Right Sidebar so the center conversation card has zero floating bottom overlay (keeping floating player on `< lg` mobile/tablet).
 - **AI Partner (`/roleplay`) Right Sidebar Layout (`src/app/(app)/roleplay/page.tsx`, `src/components/tools/RoleplayPartner.tsx`):**
   - Applied the same 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9` 36px spacing): middle content area shows ONLY the AI Partner conversation chat area (responsive full viewport height `h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)]`), while header, topic/mode pills, voice/speed controls, and scenario context live in the fixed Right Sidebar (and a `<Sheet side="bottom">` drawer on `< lg`).
+
+### 2026-11-25, 40 Vocabulary Magic Cards & Right Word Inspector Sidebar
+- **40 Magic Cards Dataset (`src/content/seed/magic-cards.ts`):**
+  - Created 40 themed Magic Card decks (`mc-01`–`mc-40`) with catchy names, emojis, CEFR levels (`A1`–`C2`), and 25 curated words per card (1,000 total words) with POS, IPA, English meaning, and conversational example sentences.
+- **Right Word Inspector Sidebar (`src/components/vocabulary/MagicWordSidebar.tsx`):**
+  - Displays tapped word's pronunciation (`speakText`), IPA, Save to Notebook toggle (`ecp_saved_vocabulary`), live multi-language translation (`useLiveTranslations`), meaning, example sentence, and grammar breakdown (`GrammarSummaryRow` + `createFallbackAnnotation`).
+- **`/vocabulary` Page (`src/app/(app)/vocabulary/page.tsx`):**
+  - Added `Magic Cards (40)` as the primary tab alongside `Saved Vocabulary` and `Daily Flashcard Review`, using the 36px 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9`) and a `<Sheet side="bottom">` drawer on mobile (`< lg`).
+- **Tests:** Added `tests/magic-cards.test.mjs` verifying all 40 Magic Cards and 20–40 words per deck.
   - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
 
 ### 2026-11-17, state file created
