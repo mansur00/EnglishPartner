@@ -924,48 +924,6 @@ body {
 }
 
 /* Micro-interactions */
-/* Thin animated rainbow border for active/tapped conversation bubbles */
-.rainbow-border-thin {
-  position: relative;
-}
-
-.rainbow-border-thin::before {
-  content: "";
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: conic-gradient(
-    from var(--angle),
-    #F43F5E,
-    #FB923C,
-    #FBBF24,
-    #34D399,
-    #38BDF8,
-    #818CF8,
-    #C084FC,
-    #F43F5E
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: rainbow-rotate 4s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rainbow-border-thin::before {
-    animation: none;
-    background: linear-gradient(135deg, #F43F5E, #FBBF24, #38BDF8, #818CF8);
-  }
-}
-
 .btn-press {
   transition: transform 150ms ease-out, background-color 150ms ease-out;
 }

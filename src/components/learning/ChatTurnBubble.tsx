@@ -104,7 +104,7 @@ export function ChatTurnBubble({
             ? "rounded-card rounded-br-sm bg-primary/10 border-primary/15 hover:bg-primary/15"
             : "rounded-card rounded-bl-sm bg-muted/70 border-border/70 hover:bg-muted",
           (isSelected || isCurrentlyPlaying) &&
-            "rainbow-border-thin border-transparent shadow-xs"
+            "rainbow-border border-transparent shadow-xs"
         )}
       >
         <div className="flex items-start justify-between gap-2.5">
