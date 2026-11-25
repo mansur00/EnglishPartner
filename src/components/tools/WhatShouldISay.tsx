@@ -131,127 +131,127 @@ export function WhatShouldISay() {
 
   return (
     <div className="space-y-6 w-full max-w-reading mx-auto">
-      {/* Header Banner */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-2">
-            <div className="size-control rounded-control bg-primary/10 text-primary flex items-center justify-center">
-              <HugeiconsIcon icon={SparklesIcon} size={20} />
+      {/* Unified Compact Header & Input Card */}
+      <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2.5">
+              <div className="size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <HugeiconsIcon icon={SparklesIcon} size={18} />
+              </div>
+              <LocaleTitle
+                as="h1"
+                titleEn="What Should I Say?"
+                titleBn="আমি কী বলতে পারি?"
+                className="text-card-title text-foreground"
+              />
             </div>
-            <LocaleTitle
-              as="h1"
-              titleEn="What Should I Say?"
-              titleBn="আমি কী বলতে পারি?"
-              className="text-page-title text-foreground"
-            />
+
+            {providerInfo && (
+              <Pill
+                variant={providerInfo.isLive ? "brand" : "neutral"}
+                size="sm"
+                className="gap-1 font-mono text-chip"
+                title={providerInfo.statusText}
+              >
+                <HugeiconsIcon icon={CpuIcon} size={12} />
+                <span>{providerInfo.statusText}</span>
+              </Pill>
+            )}
           </div>
-
-          {providerInfo && (
-            <Pill
-              variant={providerInfo.isLive ? "brand" : "neutral"}
-              size="sm"
-              className="gap-1 font-mono text-chip"
-              title={providerInfo.statusText}
-            >
-              <HugeiconsIcon icon={CpuIcon} size={12} />
-              <span>{providerInfo.statusText}</span>
-            </Pill>
-          )}
-        </div>
-        <LocaleTitle
-          as="p"
-          titleEn="Type what you want to say in your own words, and instantly get polished, natural English alternatives."
-          titleBn="আপনি কী বলতে চান তা নিজের ভাষায় লিখুন; মুহূর্তেই পেয়ে যান মার্জিত ও স্বাভাবিক ইংরেজি বিকল্প।"
-          className="text-meta-lead-bn"
-        />
-      </div>
-
-      {/* Input Group with Rainbow Border on Focus */}
-      <div className="space-y-3">
-        <InputGroup className="bg-card">
-          <InputGroupPrefix>
-            <HugeiconsIcon icon={SparklesIcon} size={18} className="text-muted-foreground" />
-          </InputGroupPrefix>
-          <Input
-            type="text"
-            value={intentInput}
-            onChange={(e) => setIntentInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                handleSearch();
-              }
-            }}
-            placeholder={
-              locale === "bn"
-                ? "যেমন: আমি মিটিংয়ের সময় পরিবর্তন করতে চাই..."
-                : "e.g. I want to reschedule our meeting..."
-            }
-            variant="ghost"
-            inputSize="lg"
-            className="w-full pl-10 pr-10 text-body"
+          <LocaleTitle
+            as="p"
+            titleEn="Type what you want to say in your own words, and instantly get natural English alternatives."
+            titleBn="আপনি কী বলতে চান তা নিজের ভাষায় লিখুন; মুহূর্তেই পেয়ে যান স্বাভাবিক ইংরেজি বিকল্প।"
+            className="text-meta text-muted-foreground"
           />
-          {intentInput && (
-            <InputGroupSuffix>
-              <button
-                type="button"
-                onClick={() => setIntentInput("")}
-                aria-label="Clear intent"
-                className="p-1 rounded-control text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              >
-                <HugeiconsIcon icon={Cancel01Icon} size={16} />
-              </button>
-            </InputGroupSuffix>
-          )}
-        </InputGroup>
+        </div>
 
-        {/* Action Button & Suggestions */}
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-chip text-muted-foreground">Try:</span>
-            {(locale === "bn"
-              ? [
-                  { label: "২ দিন সময় বৃদ্ধি", intent: "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।" },
-                  { label: "ছাড় বা ডিসকাউন্ট", intent: "দাম কি একটু কমিয়ে রাখা যাবে?" },
-                  { label: "১৫ মিনিট দেরি", intent: "আমি ট্রাফিকে আটকেছি, ১৫ মিনিট দেরি হবে।" },
-                  { label: "ধীরে কথা বলা", intent: "একটু ধীরে কথা বললে ভালো হতো, বুঝতে পারছি না।" },
-                  { label: "খাবার অর্ডার", intent: "আমি ঝাল ছাড়া খাবার অর্ডার করতে চাই।" },
-                ]
-              : [
-                  { label: "Need 2 more days", intent: "I want to tell my manager that I need two more days to finish the task." },
-                  { label: "Ask for discount", intent: "Could you offer a discount on this item?" },
-                  { label: "Running 15 mins late", intent: "I am stuck in traffic and running 15 minutes late." },
-                  { label: "Speak slower", intent: "Could you speak a little slower please?" },
-                  { label: "Order food", intent: "I would like to order food without spicy sauce." },
-                ]
-            ).map((sample, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => {
-                  setIntentInput(sample.intent);
-                  handleSearch(sample.intent);
-                }}
-                className="px-2.5 py-1 rounded-pill bg-muted/60 hover:bg-muted text-chip text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              >
-                {sample.label}
-              </button>
-            ))}
-          </div>
+        {/* Inline Input + Show Options Button */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+          <InputGroup className="bg-muted/30 flex-1">
+            <InputGroupPrefix>
+              <HugeiconsIcon icon={SparklesIcon} size={17} className="text-muted-foreground" />
+            </InputGroupPrefix>
+            <Input
+              type="text"
+              value={intentInput}
+              onChange={(e) => setIntentInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleSearch();
+                }
+              }}
+              placeholder={
+                locale === "bn"
+                  ? "যেমন: আমি মিটিংয়ের সময় পরিবর্তন করতে চাই..."
+                  : "e.g. I want to reschedule our meeting..."
+              }
+              variant="ghost"
+              inputSize="default"
+              className="w-full pl-10 pr-10 text-body h-11"
+            />
+            {intentInput && (
+              <InputGroupSuffix>
+                <button
+                  type="button"
+                  onClick={() => setIntentInput("")}
+                  aria-label="Clear intent"
+                  className="p-1 rounded-control text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                >
+                  <HugeiconsIcon icon={Cancel01Icon} size={16} />
+                </button>
+              </InputGroupSuffix>
+            )}
+          </InputGroup>
 
           <Button
-            variant="default"
-            size="sm"
+            variant="cta"
+            size="md"
             onClick={() => handleSearch()}
             disabled={!intentInput.trim() || isLoading}
             loading={isLoading}
-            className="rounded-control gap-1.5 text-label btn-press"
+            className="h-11 px-5 rounded-control gap-1.5 text-label btn-press shrink-0 cursor-pointer"
           >
-            <HugeiconsIcon icon={SentIcon} size={14} />
+            <HugeiconsIcon icon={SentIcon} size={15} />
             <span>Show Options</span>
           </Button>
         </div>
-      </div>
+
+        {/* Quick Sample Chips */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-chip text-muted-foreground">Try:</span>
+          {(locale === "bn"
+            ? [
+                { label: "২ দিন সময় বৃদ্ধি", intent: "আমার কাজটি শেষ করতে আরও দুই দিন সময় লাগবে।" },
+                { label: "ছাড় বা ডিসকাউন্ট", intent: "দাম কি একটু কমিয়ে রাখা যাবে?" },
+                { label: "১৫ মিনিট দেরি", intent: "আমি ট্রাফিকে আটকেছি, ১৫ মিনিট দেরি হবে।" },
+                { label: "ধীরে কথা বলা", intent: "একটু ধীরে কথা বললে ভালো হতো, বুঝতে পারছি না।" },
+                { label: "খাবার অর্ডার", intent: "আমি ঝাল ছাড়া খাবার অর্ডার করতে চাই।" },
+              ]
+            : [
+                { label: "Need 2 more days", intent: "I want to tell my manager that I need two more days to finish the task." },
+                { label: "Ask for discount", intent: "Could you offer a discount on this item?" },
+                { label: "Running 15 mins late", intent: "I am stuck in traffic and running 15 minutes late." },
+                { label: "Speak slower", intent: "Could you speak a little slower please?" },
+                { label: "Order food", intent: "I would like to order food without spicy sauce." },
+              ]
+          ).map((sample, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => {
+                setIntentInput(sample.intent);
+                handleSearch(sample.intent);
+              }}
+              className="px-2.5 py-1 rounded-pill bg-muted/60 hover:bg-muted text-chip text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            >
+              {sample.label}
+            </button>
+          ))}
+        </div>
+      </Card>
 
       {/* Results View */}
       {response && (

@@ -448,6 +448,18 @@
       "line": 1515,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
+    },
+    {
+      "file": "src/components/tools/WhatShouldISay.tsx",
+      "line": 193,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full pl-10 pr-10 text-body h-11\""
+    },
+    {
+      "file": "src/components/tools/WhatShouldISay.tsx",
+      "line": 215,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"h-11 px-5 rounded-control gap-1.5 text-label btn-press shrink-0 cursor-pointer\""
     }
   ],
   "e_inline_styles": [],
