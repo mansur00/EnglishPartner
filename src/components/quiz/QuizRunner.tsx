@@ -362,6 +362,7 @@ export function QuizRunner({
             isSubmitted &&
             selectedOption !== undefined &&
             selectedOption !== q.correctIndex;
+          const isSkipped = isSubmitted && selectedOption === undefined;
 
           return (
             <Card
@@ -404,22 +405,28 @@ export function QuizRunner({
 
                 {isSubmitted && (
                   <Badge
-                    variant={isCorrect ? "success" : "destructive"}
+                    variant={isCorrect ? "success" : isWrong ? "destructive" : "neutral"}
                     size="sm"
                     className="gap-1 shrink-0"
                   >
-                    <HugeiconsIcon
-                      icon={isCorrect ? CheckmarkCircle02Icon : Cancel01Icon}
-                      size={14}
-                    />
+                    {!isSkipped && (
+                      <HugeiconsIcon
+                        icon={isCorrect ? CheckmarkCircle02Icon : Cancel01Icon}
+                        size={14}
+                      />
+                    )}
                     <span>
                       {isCorrect
                         ? locale === "bn"
                           ? "সঠিক"
                           : "Right"
+                        : isWrong
+                        ? locale === "bn"
+                          ? "ভুল"
+                          : "Wrong"
                         : locale === "bn"
-                        ? "ভুল"
-                        : "Wrong"}
+                        ? "উত্তর দেওয়া হয়নি"
+                        : "Skipped"}
                     </span>
                   </Badge>
                 )}
