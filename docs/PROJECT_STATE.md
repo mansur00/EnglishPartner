@@ -1858,6 +1858,9 @@ Entry format:
   - Used distinct `next/font/google` CSS variables (`--font-manrope`, `--font-nunito`, `--font-comic-neue`) in `layout.tsx` and mapped `--font-heading`, `--font-sans`, `--font-conversation`, `--font-mono` on `html` in `@layer base` + `@theme inline` in `globals.css`.
   - Removed overriding `font-sans` on `<h1>`/`<DialogTitle>` (`privacy/page.tsx`, `terms/page.tsx`, `RuleCard.tsx`) and `font-heading` on non-heading `<label>`/`<span>` elements in `SettingsClient.tsx`.
 
+### 2026-11-26, AI Partner Voice Silence Auto-Send (`RoleplayPartner.tsx`)
+- Enabled `recognition.continuous = true` in `RoleplayPartner.tsx` and added a 4-second silence countdown (`autoSendSeconds`) after the last speech result (`onresult`), with a live inline countdown banner + `Cancel` button (and automatic cancellation when editing input or sending manually).
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

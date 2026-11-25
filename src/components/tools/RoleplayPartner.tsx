@@ -373,6 +373,61 @@ export function RoleplayPartner() {
   }, []);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
+  const [autoSendSeconds, setAutoSendSeconds] = useState<number | null>(null);
+  const autoSendIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const latestVoiceTextRef = useRef<string>("");
+  const handleSendRef = useRef<((textToSend?: string) => Promise<void>) | null>(null);
+
+  const cancelAutoSend = useCallback(() => {
+    if (autoSendIntervalRef.current) {
+      clearInterval(autoSendIntervalRef.current);
+      autoSendIntervalRef.current = null;
+    }
+    setAutoSendSeconds(null);
+  }, []);
+
+  const startAutoSendCountdown = useCallback((transcriptText: string) => {
+    if (autoSendIntervalRef.current) {
+      clearInterval(autoSendIntervalRef.current);
+      autoSendIntervalRef.current = null;
+    }
+    const trimmed = transcriptText.trim();
+    if (!trimmed) {
+      setAutoSendSeconds(null);
+      return;
+    }
+    latestVoiceTextRef.current = trimmed;
+    let remaining = 4;
+    setAutoSendSeconds(remaining);
+
+    autoSendIntervalRef.current = setInterval(() => {
+      remaining -= 1;
+      if (remaining <= 0) {
+        if (autoSendIntervalRef.current) {
+          clearInterval(autoSendIntervalRef.current);
+          autoSendIntervalRef.current = null;
+        }
+        setAutoSendSeconds(null);
+        if (recognitionRef.current) {
+          try {
+            recognitionRef.current.stop();
+          } catch {
+            // ignore stop errors
+          }
+        }
+        setIsListening(false);
+        handleSendRef.current?.(latestVoiceTextRef.current);
+      } else {
+        setAutoSendSeconds(remaining);
+      }
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      cancelAutoSend();
+    };
+  }, [cancelAutoSend]);
 
   // Play audio helper with configurable speed + global voice model
   const playAudio = useCallback(
@@ -519,6 +574,7 @@ export function RoleplayPartner() {
   }, [messages]);
 
   const handleSendMessage = async (textToSend?: string) => {
+    cancelAutoSend();
     const text = (textToSend ?? inputMessage).trim();
     if (!text || isLoading || feedback) return;
 
@@ -665,6 +721,10 @@ export function RoleplayPartner() {
     }
   };
 
+  useEffect(() => {
+    handleSendRef.current = handleSendMessage;
+  });
+
   const toggleSpeechRecognition = () => {
     setMicError(null);
 
@@ -688,10 +748,12 @@ export function RoleplayPartner() {
     try {
       const recognition = new SpeechRecognition();
       recognition.lang = "en-US";
-      recognition.continuous = false;
+      recognition.continuous = true;
       recognition.interimResults = true;
 
       recognition.onstart = () => {
+        cancelAutoSend();
+        latestVoiceTextRef.current = "";
         setIsListening(true);
       };
 
@@ -701,20 +763,26 @@ export function RoleplayPartner() {
         const rawTranscript = Array.from(event.results).map((r: any) => r[0].transcript).join("");
         const cleaned = cleanSpokenTranscript(rawTranscript);
         setInputMessage(cleaned);
+        startAutoSendCountdown(cleaned);
       };
 
       recognition.onerror = () => {
+        cancelAutoSend();
         setIsListening(false);
         setMicError("মাইক্রোফোন অ্যাক্সেস পাওয়া যায়নি বা কোনো শব্দ শোনা যায়নি। আপনি লিখে পাঠাতে পারেন।");
       };
 
       recognition.onend = () => {
         setIsListening(false);
+        if (!autoSendIntervalRef.current && latestVoiceTextRef.current.trim()) {
+          startAutoSendCountdown(latestVoiceTextRef.current);
+        }
       };
 
       recognitionRef.current = recognition;
       recognition.start();
     } catch {
+      cancelAutoSend();
       setIsListening(false);
       setMicError("মাইক্রোফোন সংযোগ ব্যর্থ হয়েছে। অনুগ্রহ করে ব্রাউজার পারমিশন চেক করুন।");
     }
@@ -1193,6 +1261,26 @@ export function RoleplayPartner() {
               </div>
             )}
 
+            {/* Voice Auto-Send Countdown Bar */}
+            {autoSendSeconds !== null && (
+              <div className="px-3 py-2 rounded-control bg-primary/10 text-chip text-primary flex items-center justify-between gap-2 animate-in fade-in">
+                <span className={cn(locale === "bn" && "text-bangla")}>
+                  {locale === "bn"
+                    ? `নীরবতা শনাক্ত হয়েছে — ${autoSendSeconds} সেকেন্ডে অটো-সেন্ড হচ্ছে...`
+                    : `Silence detected — auto-sending in ${autoSendSeconds}s...`}
+                </span>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  onClick={cancelAutoSend}
+                  className="rounded-control text-chip text-foreground hover:bg-card"
+                >
+                  {locale === "bn" ? "বাতিল" : "Cancel"}
+                </Button>
+              </div>
+            )}
+
             {/* Input Form with Voice Speech Integration */}
             <form
               onSubmit={(e) => {
@@ -1204,7 +1292,10 @@ export function RoleplayPartner() {
               <InputGroup className="flex-1 bg-card">
                 <Input
                   value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
+                  onChange={(e) => {
+                    cancelAutoSend();
+                    setInputMessage(e.target.value);
+                  }}
                   placeholder={
                     messages.filter((m) => m.speaker === "learner").length >= 20
                       ? (locale === "bn" ? "সেশনের সীমা পূর্ণ হয়েছে..." : "Session turn limit reached...")
