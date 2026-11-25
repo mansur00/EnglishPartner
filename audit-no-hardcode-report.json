@@ -32,7 +32,7 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 245,
+      "line": 246,
       "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, text-emerald-300",
       "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all\">"
     },
@@ -172,39 +172,21 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 247,
+      "line": 248,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-label font-medium\">{t(\"settings.resetSuccess\", locale)}</p>"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 274,
+      "line": 275,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 303,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 334,
+      "line": 343,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 362,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 382,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer\","
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -439,15 +421,39 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 228,
+      "line": 229,
       "detail": "Hardcoded layout constant / magic number: max-w-4xl",
       "code": "<PageContainer className=\"py-6 sm:py-8 space-y-8 max-w-4xl\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 238,
+      "line": 239,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 292,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 301,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 362,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 373,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -513,11 +519,20 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
+      "className": "w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring",
+      "files": [
+        "src/app/(app)/professions/page.tsx",
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 5 times",
       "className": "text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none",
       "files": [
         "src/app/(app)/professions/page.tsx",
-        "src/app/(app)/vocabulary/page.tsx"
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
@@ -783,7 +798,7 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 245,
+      "line": 246,
       "detail": "Raw color with dark: prefix: dark:text-emerald-300",
       "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all\">"
     },

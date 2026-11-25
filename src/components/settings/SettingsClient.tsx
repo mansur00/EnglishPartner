@@ -31,6 +31,7 @@ import {
   Bookmark02Icon,
   TaskDone01Icon,
   Search01Icon,
+  ArrowDown01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 import {
@@ -276,45 +277,53 @@ export function SettingsClient() {
               </span>
             </div>
 
-            <div className="relative max-w-md">
-              <HugeiconsIcon
-                icon={Search01Icon}
-                size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-              />
-              <input
-                type="text"
-                value={sysLangSearch}
-                onChange={(e) => setSysLangSearch(e.target.value)}
-                placeholder={locale === "bn" ? "যেকোনো ভাষা খুঁজুন (যেমন: English, Arabic, Hindi)..." : "Search any language (e.g. English, Bengali, Arabic)..."}
-                className="w-full h-control-sm pl-9 pr-3 rounded-control bg-muted/60 text-chip text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-              />
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">
+              <div className="md:col-span-6 relative">
+                <HugeiconsIcon
+                  icon={Search01Icon}
+                  size={16}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+                />
+                <input
+                  type="text"
+                  value={sysLangSearch}
+                  onChange={(e) => setSysLangSearch(e.target.value)}
+                  placeholder={locale === "bn" ? "যেকোনো ভাষা খুঁজুন (যেমন: English, Arabic, Hindi)..." : "Search any language (e.g. English, Bengali, Arabic)..."}
+                  className="w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                />
+              </div>
 
-            <div className="flex flex-wrap gap-2 max-h-44 overflow-y-auto p-1">
-              {searchGlobalLanguages(sysLangSearch).map((lang) => {
-                const isSelected = locale === lang.code;
-                return (
-                  <button
-                    key={lang.code}
-                    type="button"
-                    onClick={() => handleLocaleChange(lang.code)}
-                    className={cn(
-                      "inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer",
-                      isSelected
-                        ? "bg-primary text-primary-foreground shadow-xs"
-                        : "bg-muted/70 text-foreground hover:bg-muted"
-                    )}
-                  >
-                    <span>{lang.nativeName}</span>
-                    {lang.name !== lang.nativeName && (
-                      <span className={cn("opacity-75", isSelected ? "text-primary-foreground" : "text-muted-foreground")}>
-                        {lang.name}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+              <div className="md:col-span-6 relative">
+                <select
+                  aria-label={t("settings.systemLanguage")}
+                  value={locale}
+                  onChange={(e) => handleLocaleChange(e.target.value as SupportedLocale)}
+                  className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+                >
+                  {(() => {
+                    const results = searchGlobalLanguages(sysLangSearch);
+                    if (results.length === 0) {
+                      return (
+                        <option value={locale} disabled>
+                          {locale === "bn" ? "কোনো ভাষা পাওয়া যায়নি" : "No matching language"}
+                        </option>
+                      );
+                    }
+                    return results.map((lang) => (
+                      <option key={lang.code} value={lang.code}>
+                        {lang.name !== lang.nativeName
+                          ? `${lang.nativeName} (${lang.name})`
+                          : lang.nativeName}
+                      </option>
+                    ));
+                  })()}
+                </select>
+                <HugeiconsIcon
+                  icon={ArrowDown01Icon}
+                  size={16}
+                  className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                />
+              </div>
             </div>
           </div>
 
@@ -338,62 +347,53 @@ export function SettingsClient() {
               </span>
             </div>
 
-            <div className="relative max-w-md">
-              <HugeiconsIcon
-                icon={Search01Icon}
-                size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-              />
-              <input
-                type="text"
-                value={transLangSearch}
-                onChange={(e) => setTransLangSearch(e.target.value)}
-                placeholder={locale === "bn" ? "অনুবাদের ভাষা খুঁজুন (যেমন: Bengali, Hindi, Urdu)..." : "Search translation language..."}
-                className="w-full h-control-sm pl-9 pr-3 rounded-control bg-muted/60 text-chip text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-              />
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">
+              <div className="md:col-span-6 relative">
+                <HugeiconsIcon
+                  icon={Search01Icon}
+                  size={16}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+                />
+                <input
+                  type="text"
+                  value={transLangSearch}
+                  onChange={(e) => setTransLangSearch(e.target.value)}
+                  placeholder={locale === "bn" ? "অনুবাদের ভাষা খুঁজুন (যেমন: Bengali, Hindi, Urdu)..." : "Search translation language..."}
+                  className="w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                />
+              </div>
 
-            <div className="flex flex-wrap gap-2 max-h-44 overflow-y-auto p-1">
-              {(!transLangSearch.trim() || "off english only none no translation".includes(transLangSearch.trim().toLowerCase())) && (
-                <button
-                  type="button"
-                  onClick={() => handleTranslationLocaleChange("none")}
-                  className={cn(
-                    "inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer",
-                    translationLocale === "none"
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "bg-muted/70 text-foreground hover:bg-muted"
-                  )}
+              <div className="md:col-span-6 relative">
+                <select
+                  aria-label={t("settings.translationLanguage")}
+                  value={translationLocale}
+                  onChange={(e) =>
+                    handleTranslationLocaleChange(e.target.value as TranslationLocale)
+                  }
+                  className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
                 >
-                  {t("settings.noTranslationOption")}
-                </button>
-              )}
-
-              {searchGlobalLanguages(transLangSearch)
-                .filter((l) => l.code !== "en")
-                .map((lang) => {
-                  const isSelected = translationLocale === lang.code;
-                  return (
-                    <button
-                      key={lang.code}
-                      type="button"
-                      onClick={() => handleTranslationLocaleChange(lang.code)}
-                      className={cn(
-                        "inline-flex items-center gap-1.5 h-control-sm px-3 rounded-control text-chip font-medium transition-all cursor-pointer",
-                        isSelected
-                          ? "bg-primary text-primary-foreground shadow-xs"
-                          : "bg-muted/70 text-foreground hover:bg-muted"
-                      )}
-                    >
-                      <span>{lang.nativeName}</span>
-                      {lang.name !== lang.nativeName && (
-                        <span className={cn("opacity-75", isSelected ? "text-primary-foreground" : "text-muted-foreground")}>
-                          {lang.name}
-                        </span>
-                      )}
-                    </button>
-                  );
-                })}
+                  {(!transLangSearch.trim() ||
+                    "off english only none no translation".includes(
+                      transLangSearch.trim().toLowerCase()
+                    )) && (
+                    <option value="none">{t("settings.noTranslationOption")}</option>
+                  )}
+                  {searchGlobalLanguages(transLangSearch)
+                    .filter((l) => l.code !== "en")
+                    .map((lang) => (
+                      <option key={lang.code} value={lang.code}>
+                        {lang.name !== lang.nativeName
+                          ? `${lang.nativeName} (${lang.name})`
+                          : lang.nativeName}
+                      </option>
+                    ))}
+                </select>
+                <HugeiconsIcon
+                  icon={ArrowDown01Icon}
+                  size={16}
+                  className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                />
+              </div>
             </div>
           </div>
         </Card>
