@@ -1801,9 +1801,11 @@ Entry format:
     3. **Voice & Speed Controls:** Replaced single-line truncated speed pills (`Clear (0.88...`) with clean 2-line stacked speed buttons (`Slow` / `0.75x`, `Clear` / `0.88x`, `Normal` / `1.0x`) so labels never truncate.
     4. **Active Session Context:** Compact `You` / `Partner` role summary and `End Session & Get Feedback` action, now visible without scrolling past 11 topic pills.
 
-### 2026-11-25, Settings Target CEFR Level Extended to A1–C2
+### 2026-11-25, Settings Target CEFR Level Extended to A1–C2 & UX Polish
 - **Settings (`src/components/settings/SettingsClient.tsx`):**
   - Expanded Target CEFR Level selector from `A1–B2` to full `A1–C2` (`A1 Beginner`, `A2 Elementary`, `B1 Intermediate`, `B2 Upper Intermediate`, `C1 Advanced`, `C2 Mastery` with EN/BN labels) in a clean responsive `grid-cols-2 sm:grid-cols-3` layout.
+  - Fixed `audioSpeed` initialization (`1` -> `"1.0x"`) so default `1.0x` highlights properly.
+  - Reorganized Audio & Speech Preferences into balanced 2-column responsive rows (`Default Playback Speed` + `Auto-Play`, `Preferred Voice Accent` + `Voice Gender`) with roomy `px-3.5 py-2` buttons, fixed `System Default` 2-line button wrapping in Appearance & Display (`whitespace-nowrap px-4 py-2`), and updated About badge to `v1.2.0 (CEFR A1–C2)`.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

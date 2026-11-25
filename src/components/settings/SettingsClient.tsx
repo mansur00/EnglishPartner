@@ -84,7 +84,7 @@ export function SettingsClient() {
     queueMicrotask(() => {
       try {
         const audioPrefs = getAudioPreferences();
-        setAudioSpeed(`${audioPrefs.speed}x`);
+        setAudioSpeed(audioPrefs.speed === 1 ? "1.0x" : `${audioPrefs.speed}x`);
         setAutoPlayAudio(audioPrefs.autoPlay);
         setVoiceAccent(audioPrefs.accent);
         setVoiceGender(audioPrefs.gender);
@@ -411,103 +411,101 @@ export function SettingsClient() {
         </div>
 
         <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
-          {/* Default Playback Speed */}
-          <div className="space-y-2.5">
-            <label className="block font-heading text-label text-foreground">
-              {t("settings.playbackSpeed", locale)}
-            </label>
-            <div className="grid grid-cols-4 gap-2 max-w-sm">
-              {["0.75x", "0.88x", "1.0x", "1.25x"].map((spd) => (
-                <button
-                  key={spd}
-                  type="button"
-                  onClick={() => handleAudioSpeedChange(spd)}
-                  className={cn(
-                    "h-control rounded-control text-label font-medium transition-all cursor-pointer",
-                    audioSpeed === spd
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "bg-muted/70 text-foreground hover:bg-muted"
-                  )}
-                >
-                  {spd}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="h-px bg-border" />
-
-          {/* Auto-Play Audio Toggle */}
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="block font-heading text-label text-foreground">
-                {t("settings.autoPlay", locale)}
-              </span>
-              <p className="text-meta text-muted-foreground max-w-lg">
-                {t("settings.autoPlayDesc", locale)}
-              </p>
-            </div>
-            <Switch
-              checked={autoPlayAudio}
-              onCheckedChange={handleAutoPlayChange}
-              aria-label={t("settings.autoPlay", locale)}
-            />
-          </div>
-
-          <div className="h-px bg-border" />
-
-          {/* Voice Accent */}
-          <div className="space-y-2.5">
-            <label className="block font-heading text-label text-foreground">
-              {t("settings.voiceAccent", locale)}
-            </label>
-            <div className="grid grid-cols-3 gap-2.5 max-w-md">
-              {VOICE_ACCENTS.map((acc) => (
-                <button
-                  key={acc.id}
-                  type="button"
-                  onClick={() => handleVoiceAccentChange(acc.id)}
-                  className={cn(
-                    "h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer",
-                    voiceAccent === acc.id
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "bg-muted/70 text-foreground hover:bg-muted"
-                  )}
-                >
-                  {acc.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="h-px bg-border" />
-
-          {/* Voice Gender */}
-          <div className="space-y-2.5">
-            <div>
+          {/* Default Playback Speed & Auto-Play */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div className="space-y-2.5">
               <label className="block font-heading text-label text-foreground">
-                {t("settings.voiceGender", locale)}
+                {t("settings.playbackSpeed", locale)}
               </label>
-              <p className="text-meta text-muted-foreground mt-0.5">
-                {t("settings.voiceGenderDesc", locale)}
-              </p>
+              <div className="flex flex-wrap gap-2">
+                {["0.75x", "0.88x", "1.0x", "1.25x"].map((spd) => (
+                  <button
+                    key={spd}
+                    type="button"
+                    onClick={() => handleAudioSpeedChange(spd)}
+                    className={cn(
+                      "px-3.5 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
+                      audioSpeed === spd
+                        ? "bg-primary text-primary-foreground shadow-xs"
+                        : "bg-muted/70 text-foreground hover:bg-muted"
+                    )}
+                  >
+                    {spd}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-3 gap-2.5 max-w-md">
-              {VOICE_GENDERS.map((g) => (
-                <button
-                  key={g.id}
-                  type="button"
-                  onClick={() => handleVoiceGenderChange(g.id)}
-                  className={cn(
-                    "h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer",
-                    voiceGender === g.id
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "bg-muted/70 text-foreground hover:bg-muted"
-                  )}
-                >
-                  {g.label}
-                </button>
-              ))}
+
+            <div className="flex items-center justify-between gap-4 rounded-control bg-muted/35 border border-border/60 p-3.5">
+              <div className="space-y-0.5">
+                <span className="block font-heading text-label text-foreground">
+                  {t("settings.autoPlay", locale)}
+                </span>
+                <p className="text-meta text-muted-foreground">
+                  {t("settings.autoPlayDesc", locale)}
+                </p>
+              </div>
+              <Switch
+                checked={autoPlayAudio}
+                onCheckedChange={handleAutoPlayChange}
+                aria-label={t("settings.autoPlay", locale)}
+              />
+            </div>
+          </div>
+
+          <div className="h-px bg-border" />
+
+          {/* Voice Accent & Voice Gender */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div className="space-y-2.5">
+              <label className="block font-heading text-label text-foreground">
+                {t("settings.voiceAccent", locale)}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {VOICE_ACCENTS.map((acc) => (
+                  <button
+                    key={acc.id}
+                    type="button"
+                    onClick={() => handleVoiceAccentChange(acc.id)}
+                    className={cn(
+                      "px-3.5 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
+                      voiceAccent === acc.id
+                        ? "bg-primary text-primary-foreground shadow-xs"
+                        : "bg-muted/70 text-foreground hover:bg-muted"
+                    )}
+                  >
+                    {acc.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2.5">
+              <div>
+                <label className="block font-heading text-label text-foreground">
+                  {t("settings.voiceGender", locale)}
+                </label>
+                <p className="text-meta text-muted-foreground mt-0.5">
+                  {t("settings.voiceGenderDesc", locale)}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {VOICE_GENDERS.map((g) => (
+                  <button
+                    key={g.id}
+                    type="button"
+                    onClick={() => handleVoiceGenderChange(g.id)}
+                    className={cn(
+                      "px-3.5 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
+                      voiceGender === g.id
+                        ? "bg-primary text-primary-foreground shadow-xs"
+                        : "bg-muted/70 text-foreground hover:bg-muted"
+                    )}
+                  >
+                    {g.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -580,7 +578,7 @@ export function SettingsClient() {
             <label className="block font-heading text-label text-foreground">
               {t("settings.dailySpeakingGoal", locale)}
             </label>
-            <div className="grid grid-cols-4 gap-2 max-w-sm">
+            <div className="flex flex-wrap gap-2">
               {[
                 { mins: 5, bn: "৫ মিনিট", en: "5m" },
                 { mins: 10, bn: "১০ মিনিট", en: "10m" },
@@ -592,7 +590,7 @@ export function SettingsClient() {
                   type="button"
                   onClick={() => handleDailyGoalChange(g.mins)}
                   className={cn(
-                    "h-control rounded-control text-label font-medium transition-all cursor-pointer",
+                    "px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
                     dailyGoalMins === g.mins
                       ? "bg-primary text-primary-foreground shadow-xs"
                       : "bg-muted/70 text-foreground hover:bg-muted"
@@ -660,12 +658,12 @@ export function SettingsClient() {
             <label className="block font-heading text-label text-foreground">
               {t("settings.themeMode", locale)}
             </label>
-            <div className="grid grid-cols-3 gap-2.5 max-w-md">
+            <div className="flex flex-wrap gap-2.5">
               <button
                 type="button"
                 onClick={() => setTheme("light")}
                 className={cn(
-                  "flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
+                  "flex items-center justify-center gap-2 px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
                   theme === "light"
                     ? "bg-primary text-primary-foreground shadow-xs"
                     : "bg-muted/70 text-foreground hover:bg-muted"
@@ -679,7 +677,7 @@ export function SettingsClient() {
                 type="button"
                 onClick={() => setTheme("dark")}
                 className={cn(
-                  "flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
+                  "flex items-center justify-center gap-2 px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
                   theme === "dark"
                     ? "bg-primary text-primary-foreground shadow-xs"
                     : "bg-muted/70 text-foreground hover:bg-muted"
@@ -693,7 +691,7 @@ export function SettingsClient() {
                 type="button"
                 onClick={() => setTheme("system")}
                 className={cn(
-                  "flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer",
+                  "flex items-center justify-center gap-2 px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
                   theme === "system"
                     ? "bg-primary text-primary-foreground shadow-xs"
                     : "bg-muted/70 text-foreground hover:bg-muted"
@@ -785,7 +783,7 @@ export function SettingsClient() {
         <Card className="bg-card p-5 md:p-6 space-y-3 shadow-card">
           <div className="flex items-center justify-between">
             <span className="text-label text-foreground font-medium">English Partner</span>
-            <span className="text-chip text-muted-foreground font-mono">v1.2.0 (CEFR A1–B2)</span>
+            <span className="text-chip text-muted-foreground font-mono">v1.2.0 (CEFR A1–C2)</span>
           </div>
           <p className="text-meta text-muted-foreground">
             {locale === "bn"

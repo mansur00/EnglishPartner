@@ -38,7 +38,7 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 737,
+      "line": 735,
       "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
       "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
     },
@@ -208,85 +208,43 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 426,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"h-control rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 471,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 502,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 553,
+      "line": 551,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-heading text-label font-semibold\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 595,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"h-control rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 633,
+      "line": 631,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "\"min-h-control px-3 py-1.5 rounded-control text-label font-medium transition-all cursor-pointer text-center\","
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 668,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 682,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 696,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "\"flex items-center justify-center gap-2 h-control px-3 rounded-control text-label font-medium transition-all cursor-pointer\","
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 727,
+      "line": 725,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip font-medium uppercase tracking-wider\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 731,
+      "line": 729,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-display font-semibold text-foreground\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 739,
+      "line": 737,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip font-medium uppercase tracking-wider\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 743,
+      "line": 741,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-display font-semibold text-foreground\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 787,
+      "line": 785,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-label text-foreground font-medium\">English Partner</span>"
     },
@@ -415,7 +373,7 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 619,
+      "line": 617,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<div className=\"grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-2xl\">"
     },
@@ -656,7 +614,7 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 737,
+      "line": 735,
       "detail": "Raw color with dark: prefix: dark:text-emerald-400",
       "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
     }
