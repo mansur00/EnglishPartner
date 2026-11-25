@@ -20,6 +20,7 @@ import { useTranslations, useLiveTranslation } from "@/lib/i18n";
 import { isRtlLanguage, getLanguageMeta } from "@/lib/i18n/languages";
 import { getLineTranslationDisplay } from "@/lib/content/translation-status";
 import { speakText } from "@/lib/audio/speech-engine";
+import { AudioPlayer } from "./AudioPlayer";
 import {
   CONVERSATION_STYLES,
   type CefrLevelCode,
@@ -53,6 +54,10 @@ interface ConversationInspectorSidebarProps {
   selectedSpeaker: DialogueSpeaker | null;
   selectedAnnotation?: LineAnnotation;
   accent?: "en-US" | "en-GB";
+  onAccentChange?: (accent: "en-US" | "en-GB") => void;
+  lines?: DialogueLineItem[];
+  activeLineIndex?: number | null;
+  onActiveLineChange?: (index: number | null) => void;
   onOpenFullGrammarModal?: (lineId: string) => void;
   onRuleClick?: (ruleKey: string) => void;
 }
@@ -73,6 +78,10 @@ export function ConversationInspectorSidebar({
   selectedSpeaker,
   selectedAnnotation,
   accent = "en-US",
+  onAccentChange,
+  lines = [],
+  activeLineIndex = null,
+  onActiveLineChange,
   onOpenFullGrammarModal,
   onRuleClick,
 }: ConversationInspectorSidebarProps) {
@@ -126,6 +135,18 @@ export function ConversationInspectorSidebar({
 
   return (
     <div className="space-y-4">
+      {/* 0. Full Conversation Audio Player (Sidebar Mode) */}
+      {lines.length > 0 && onAccentChange && onActiveLineChange && (
+        <AudioPlayer
+          variant="sidebar"
+          lines={lines}
+          accent={accent}
+          onAccentChange={onAccentChange}
+          activeLineIndex={activeLineIndex}
+          onActiveLineChange={onActiveLineChange}
+        />
+      )}
+
       {/* 1. Length & Style Controls */}
       <div className="rounded-card bg-card p-4 shadow-xs border border-border/60 space-y-3.5">
         {scenarioLevel ? (

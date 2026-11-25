@@ -58,49 +58,49 @@
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 136,
+      "line": 157,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 167,
+      "line": 188,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground block\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 201,
+      "line": 222,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 229,
+      "line": 250,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground block\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 269,
+      "line": 290,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-meta font-medium text-foreground leading-relaxed\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 277,
+      "line": 298,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 309,
+      "line": 330,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 339,
+      "line": 360,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"font-medium text-foreground text-right\">"
     },
@@ -241,13 +241,13 @@
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
-      "line": 263,
+      "line": 284,
       "detail": "Hardcoded layout constant / magic number: h-8",
       "code": "className=\"h-8 px-2.5 text-chip gap-1.5 rounded-control\""
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 576,
+      "line": 585,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },

@@ -503,17 +503,19 @@ function ConversationReaderInner({
           </div>
         </Card>
 
-        {/* Sticky Full Audio Player */}
-        <AudioPlayer
-          lines={currentVersion.lines}
-          accent={accent}
-          onAccentChange={setAccent}
-          activeLineIndex={activeLineIndex}
-          onActiveLineChange={(idx) => {
-            setActiveLineIndex(idx);
-            if (idx !== null) setSelectedLineIndex(idx);
-          }}
-        />
+        {/* Sticky Full Audio Player (Mobile/Tablet only — Desktop uses Right Sidebar) */}
+        <div className="lg:hidden">
+          <AudioPlayer
+            lines={currentVersion.lines}
+            accent={accent}
+            onAccentChange={setAccent}
+            activeLineIndex={activeLineIndex}
+            onActiveLineChange={(idx) => {
+              setActiveLineIndex(idx);
+              if (idx !== null) setSelectedLineIndex(idx);
+            }}
+          />
+        </div>
 
         {/* Review Summary */}
         <ReviewSummary
@@ -564,6 +566,13 @@ function ConversationReaderInner({
           selectedSpeaker={selectedSpeaker}
           selectedAnnotation={selectedLineAnnotation}
           accent={accent}
+          onAccentChange={setAccent}
+          lines={currentVersion.lines}
+          activeLineIndex={activeLineIndex}
+          onActiveLineChange={(idx) => {
+            setActiveLineIndex(idx);
+            if (idx !== null) setSelectedLineIndex(idx);
+          }}
           onOpenFullGrammarModal={handleGrammarClick}
           onRuleClick={handleRuleClick}
         />

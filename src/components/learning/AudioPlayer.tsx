@@ -19,6 +19,7 @@ interface AudioPlayerProps {
   onAccentChange: (accent: "en-US" | "en-GB") => void;
   activeLineIndex: number | null;
   onActiveLineChange: (index: number | null) => void;
+  variant?: "floating" | "sidebar";
 }
 
 export function AudioPlayer({
@@ -27,6 +28,7 @@ export function AudioPlayer({
   onAccentChange,
   activeLineIndex,
   onActiveLineChange,
+  variant = "floating",
 }: AudioPlayerProps) {
   const locale = useLocale();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -182,8 +184,16 @@ export function AudioPlayer({
     };
   }, []);
 
+  const isSidebar = variant === "sidebar";
+
   return (
-    <div className="sticky bottom-4 z-20 mx-auto max-w-reading w-full bg-card/95 backdrop-blur-md border border-border rounded-card p-4 shadow-xl space-y-3">
+    <div
+      className={
+        isSidebar
+          ? "rounded-card bg-muted/30 border border-border/60 p-3.5 space-y-3"
+          : "sticky bottom-4 z-20 mx-auto max-w-reading w-full bg-card/95 backdrop-blur-md border border-border rounded-card p-4 shadow-xl space-y-3"
+      }
+    >
       {/* Interactive Seek Bar (KI-13) */}
       <div
         ref={progressBarRef}
