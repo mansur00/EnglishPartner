@@ -18,8 +18,6 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PlayCircleIcon,
   ArrowRight01Icon,
-  BookOpen01Icon,
-  Clock01Icon,
   SparklesIcon,
   BotIcon,
   Bookmark02Icon,
@@ -132,49 +130,33 @@ export function DashboardClient() {
           className="p-6 md:p-8"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            {/* Left Column: Daily Conversation Focus & CTAs */}
-            <div className="lg:col-span-7 space-y-4">
+            {/* Left Column: Concise Daily Conversation Focus & CTAs */}
+            <div className="lg:col-span-7 space-y-3.5">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant="accent" size="md">
-                  ✨ {locale === "bn" ? "দৈনিক কথোপকথন ফোকাস" : "Daily Conversation Focus"}
+                  ✨ {locale === "bn" ? "দৈনিক কথোপকথন" : "Daily Conversation"}
                 </Badge>
                 <CefrChip level="A1" label="A1–C2" />
-                <span className="inline-flex items-center px-3 py-1 rounded-pill text-chip bg-topic-tile text-topic-ink shadow-2xs">
-                  {locale === "bn" ? "দৈনন্দিন ও কর্মক্ষেত্র" : "Real-Life Dialogues"}
-                </span>
               </div>
 
-              <div>
-                <LocaleTitle
-                  as="h2"
-                  titleEn="Build Fluency with Daily English Conversations"
-                  titleBn="প্রতিদিনের বাস্তব ইংরেজি কথোপকথনে সাবলীল হয়ে উঠুন"
-                  className="text-hero-title text-foreground"
-                />
-              </div>
+              <LocaleTitle
+                as="h2"
+                titleEn="Daily English Conversations"
+                titleBn="দৈনিক ইংরেজি কথোপকথন"
+                className="text-hero-title text-foreground"
+              />
 
-              <p className="text-body text-muted-foreground leading-relaxed">
+              <p className="text-body text-muted-foreground">
                 {locale === "bn"
-                  ? "দোকান, ভ্রমণ, অফিস ও দৈনন্দিন জীবনের বাস্তব সংলাপগুলো শুনে ও বলে অনুশীলন করুন — আপনার লেভেল অনুযায়ী দৈর্ঘ্য ও স্টাইল বেছে নিয়ে।"
-                  : "Practice natural, everyday dialogues across shopping, travel, work, and social life — tailored to your CEFR level, preferred length, and speaking style."}
+                  ? "প্রতিদিন বাস্তব জীবনের ইংরেজি বলার অনুশীলন করুন।"
+                  : "Practice real-life English speaking every day."}
               </p>
 
-              <div className="flex flex-wrap items-center gap-5 text-meta text-muted-foreground pt-1">
-                <span className="flex items-center gap-1.5">
-                  <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" />
-                  {locale === "bn" ? "প্রতিদিন ১০–১৫ মিনিট" : "10–15 min daily"}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" />
-                  {locale === "bn" ? "৪২+ বাস্তব কথোপকথন" : "42+ real-world dialogues"}
-                </span>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <Link href="/daily-practice" className="w-full sm:w-auto">
                   <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-xs gap-2 cursor-pointer">
                     <HugeiconsIcon icon={PlayCircleIcon} size={20} />
-                    <span>{locale === "bn" ? "দৈনিক অনুশীলন শুরু করুন" : "Start Daily Practice"}</span>
+                    <span>{locale === "bn" ? "দৈনিক অনুশীলন" : "Start Daily Practice"}</span>
                   </Button>
                 </Link>
                 <Link href="/explore" className="w-full sm:w-auto">

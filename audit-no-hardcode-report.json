@@ -631,7 +631,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 5 times",
+      "detail": "ClassName repeated 4 times",
       "className": "text-body text-muted-foreground leading-relaxed",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
