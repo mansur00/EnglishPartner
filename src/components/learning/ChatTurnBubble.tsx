@@ -99,12 +99,12 @@ export function ChatTurnBubble({
         aria-pressed={isSelected}
         aria-label={`Select sentence ${line.sequenceNumber} by ${speaker.name}`}
         className={cn(
-          "relative max-w-[85%] sm:max-w-[78%] px-4 py-3 transition-all duration-150 cursor-pointer text-left border",
+          "relative max-w-[85%] sm:max-w-[78%] px-4 py-3 transition-all duration-150 cursor-pointer text-left border-0",
           isRight
-            ? "rounded-card rounded-br-sm bg-primary/10 border-primary/15 hover:bg-primary/15"
-            : "rounded-card rounded-bl-sm bg-muted/70 border-border/70 hover:bg-muted",
+            ? "rounded-card rounded-br-sm bg-bubble-speaker-b"
+            : "rounded-card rounded-bl-sm bg-bubble-speaker-a",
           (isSelected || isCurrentlyPlaying) &&
-            "rainbow-border border-transparent shadow-xs"
+            "rainbow-border shadow-xs"
         )}
       >
         <div className="flex items-start justify-between gap-2.5">

@@ -1864,6 +1864,10 @@ Entry format:
 ### 2026-11-26, 2px Animated Rainbow Border on Active Conversation Bubble
 - Applied the frozen `.rainbow-border` (`2px` animated conic rainbow gradient) to `ChatTurnBubble.tsx` for both `isSelected` (tapped) and `isCurrentlyPlaying` (audio playing) states.
 
+### 2026-11-26, Speaker A / Speaker B Bubble Background Tokens (`#FDFBE8` & `#F0FDF0`)
+- Added semantic tokens `--color-bubble-speaker-a` (`#FDFBE8` light / `#262417` dark) and `--color-bubble-speaker-b` (`#F0FDF0` light / `#15261B` dark) in `src/app/globals.css`.
+- Updated `ChatTurnBubble.tsx` (`/conversations/[slug]`, borderless `border-0` default with `2px` `.rainbow-border` when active) and `ChatBubble.tsx` (`/roleplay` and `HideSpeakerPractice`) to use Speaker A (`bg-bubble-speaker-a`) and Speaker B (`bg-bubble-speaker-b`).
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

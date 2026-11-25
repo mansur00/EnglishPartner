@@ -145,6 +145,8 @@ body {
   --color-band-segment-empty: var(--band-segment-empty);
   --color-bubble-primary: var(--bubble-primary-bg);
   --color-bubble-primary-ink: var(--bubble-primary-ink);
+  --color-bubble-speaker-a: var(--bubble-speaker-a-bg);
+  --color-bubble-speaker-b: var(--bubble-speaker-b-bg);
   --color-panel-brand: var(--panel-brand-bg);
   --color-overlay: var(--overlay-bg);
 
@@ -667,6 +669,8 @@ body {
   --band-segment-empty: rgba(255, 255, 255, 0.2);
   --bubble-primary-bg: #F4E8FC;
   --bubble-primary-ink: #2A0F44;
+  --bubble-speaker-a-bg: #FDFBE8;
+  --bubble-speaker-b-bg: #F0FDF0;
   --panel-brand-bg: #F4E8FC;
   --overlay-bg: rgba(0, 0, 0, 0.1);
 }
@@ -770,6 +774,8 @@ body {
   --band-segment-empty: rgba(255, 255, 255, 0.15);
   --bubble-primary-bg: rgba(42, 15, 68, 0.4);
   --bubble-primary-ink: #F4E8FC;
+  --bubble-speaker-a-bg: #262417;
+  --bubble-speaker-b-bg: #15261B;
   --panel-brand-bg: rgba(42, 15, 68, 0.4);
   --overlay-bg: rgba(0, 0, 0, 0.4);
 }

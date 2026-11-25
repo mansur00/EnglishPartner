@@ -11,8 +11,8 @@ export function ChatBubble({ speaker = "1", className, children, ...props }: Cha
       className={cn(
         "rounded-bubble p-3.5 shadow-2xs text-conversation max-w-bubble",
         speaker === "1"
-          ? "rounded-bubble-tail-tl bg-bubble-primary text-bubble-primary-ink"
-          : "rounded-bubble-tail-tr bg-topic-tile text-topic-ink",
+          ? "rounded-bubble-tail-tl bg-bubble-speaker-a text-foreground"
+          : "rounded-bubble-tail-tr bg-bubble-speaker-b text-foreground",
         className
       )}
       {...props}

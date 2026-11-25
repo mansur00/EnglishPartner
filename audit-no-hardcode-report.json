@@ -363,7 +363,7 @@
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 102,
       "detail": "Arbitrary layout [Npx] utility: max-w-[85%], max-w-[78%]",
-      "code": "\"relative max-w-[85%] sm:max-w-[78%] px-4 py-3 transition-all duration-150 cursor-pointer text-left border\","
+      "code": "\"relative max-w-[85%] sm:max-w-[78%] px-4 py-3 transition-all duration-150 cursor-pointer text-left border-0\","
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
