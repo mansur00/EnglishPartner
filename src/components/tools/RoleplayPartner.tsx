@@ -374,39 +374,38 @@ export function RoleplayPartner() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
   const [autoSendSeconds, setAutoSendSeconds] = useState<number | null>(null);
-  const autoSendIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [silenceResetTick, setSilenceResetTick] = useState(0);
   const latestVoiceTextRef = useRef<string>("");
+  const isAutoSendingRef = useRef<boolean>(false);
   const handleSendRef = useRef<((textToSend?: string) => Promise<void>) | null>(null);
 
   const cancelAutoSend = useCallback(() => {
-    if (autoSendIntervalRef.current) {
-      clearInterval(autoSendIntervalRef.current);
-      autoSendIntervalRef.current = null;
-    }
+    isAutoSendingRef.current = false;
     setAutoSendSeconds(null);
   }, []);
 
   const startAutoSendCountdown = useCallback((transcriptText: string) => {
-    if (autoSendIntervalRef.current) {
-      clearInterval(autoSendIntervalRef.current);
-      autoSendIntervalRef.current = null;
-    }
     const trimmed = transcriptText.trim();
     if (!trimmed) {
+      latestVoiceTextRef.current = "";
+      isAutoSendingRef.current = false;
       setAutoSendSeconds(null);
       return;
     }
     latestVoiceTextRef.current = trimmed;
-    let remaining = 4;
-    setAutoSendSeconds(remaining);
+    isAutoSendingRef.current = true;
+    setAutoSendSeconds(4);
+    setSilenceResetTick((t) => t + 1);
+  }, []);
 
-    autoSendIntervalRef.current = setInterval(() => {
-      remaining -= 1;
-      if (remaining <= 0) {
-        if (autoSendIntervalRef.current) {
-          clearInterval(autoSendIntervalRef.current);
-          autoSendIntervalRef.current = null;
-        }
+  useEffect(() => {
+    if (autoSendSeconds === null || autoSendSeconds <= 0) return;
+
+    const timer = setTimeout(() => {
+      if (autoSendSeconds <= 1) {
+        const textToSend = latestVoiceTextRef.current.trim();
+        latestVoiceTextRef.current = "";
+        isAutoSendingRef.current = false;
         setAutoSendSeconds(null);
         if (recognitionRef.current) {
           try {
@@ -416,18 +415,15 @@ export function RoleplayPartner() {
           }
         }
         setIsListening(false);
-        handleSendRef.current?.(latestVoiceTextRef.current);
+        if (textToSend) {
+          handleSendRef.current?.(textToSend);
+        }
       } else {
-        setAutoSendSeconds(remaining);
+        setAutoSendSeconds(autoSendSeconds - 1);
       }
     }, 1000);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      cancelAutoSend();
-    };
-  }, [cancelAutoSend]);
+    return () => clearTimeout(timer);
+  }, [autoSendSeconds, silenceResetTick]);
 
   // Play audio helper with configurable speed + global voice model
   const playAudio = useCallback(
@@ -574,6 +570,7 @@ export function RoleplayPartner() {
   }, [messages]);
 
   const handleSendMessage = async (textToSend?: string) => {
+    latestVoiceTextRef.current = "";
     cancelAutoSend();
     const text = (textToSend ?? inputMessage).trim();
     if (!text || isLoading || feedback) return;
@@ -767,14 +764,16 @@ export function RoleplayPartner() {
       };
 
       recognition.onerror = () => {
-        cancelAutoSend();
         setIsListening(false);
-        setMicError("মাইক্রোফোন অ্যাক্সেস পাওয়া যায়নি বা কোনো শব্দ শোনা যায়নি। আপনি লিখে পাঠাতে পারেন।");
+        if (!latestVoiceTextRef.current.trim()) {
+          cancelAutoSend();
+          setMicError("মাইক্রোফোন অ্যাক্সেস পাওয়া যায়নি বা কোনো শব্দ শোনা যায়নি। আপনি লিখে পাঠাতে পারেন।");
+        }
       };
 
       recognition.onend = () => {
         setIsListening(false);
-        if (!autoSendIntervalRef.current && latestVoiceTextRef.current.trim()) {
+        if (latestVoiceTextRef.current.trim() && !isAutoSendingRef.current) {
           startAutoSendCountdown(latestVoiceTextRef.current);
         }
       };
