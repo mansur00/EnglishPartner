@@ -387,74 +387,69 @@ function ConversationReaderInner({
   return (
     <div>
       {/* CENTER: Conversation Content Area */}
-      <div className="space-y-6 min-w-0">
-        {/* Top Navigation & Mobile Controls Trigger */}
-        <div className="flex flex-wrap items-center justify-between gap-2.5">
-          <div className="flex flex-wrap items-center gap-2">
-            {prevStepSlug && (
-              <Link href={`/conversations/${prevStepSlug}`}>
-                <Button variant="outline" size="sm" className="h-9 text-label rounded-control gap-1">
-                  <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-                  <span>{t("reader.previousStep", locale)}</span>
-                </Button>
-              </Link>
-            )}
-            {nextStepSlug && (
-              <Link href={`/conversations/${nextStepSlug}`}>
-                <Button variant="default" size="sm" className="h-9 text-label rounded-control gap-1">
-                  <span>{t("reader.nextStep", locale)}</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-                </Button>
-              </Link>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2">
-            {/* Mobile Inspector & Style/Length Drawer Trigger */}
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => setIsMobileInspectorOpen(true)}
-              className="lg:hidden h-9 text-label rounded-control gap-1.5"
-            >
-              <HugeiconsIcon icon={SlidersHorizontalIcon} size={15} />
-              <span>{locale === "bn" ? "স্টাইল, গ্রামার ও অনুবাদ" : "Style, Grammar & Translate"}</span>
-            </Button>
-
-            <Button
-              variant={isCompleted ? "secondary" : "outline"}
-              size="sm"
-              onClick={() => setIsCompleted(!isCompleted)}
-              className="h-9 text-label rounded-control gap-1.5"
-            >
-              <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
-              <span>{isCompleted ? t("reader.completedLesson", locale) : t("reader.finishLesson", locale)}</span>
-            </Button>
-          </div>
-        </div>
-
+      <div className="space-y-5 min-w-0">
         {/* Single Unified 2-Sided Chat Conversation Card */}
         <Card className="p-4 sm:p-6 bg-card rounded-card shadow-card border border-border/60 space-y-5">
-          {/* Conversation Card Header */}
+          {/* Conversation Card Header (with Step Nav, Mobile Controls & Finish Lesson) */}
           <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60">
             <div className="space-y-1">
-              <h2 className="font-heading text-card-title text-foreground">
-                {locale === "bn" ? scenarioTitleBn : scenarioTitleEn}
-              </h2>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="font-heading text-card-title text-foreground">
+                  {locale === "bn" ? "কথোপকথন ও লিসেনিং অনুশীলন" : "Dialogue Turns & Listening Practice"}
+                </h2>
+                <Badge variant="neutral" size="sm" className="font-mono">
+                  {currentVersion.lines.length} {locale === "bn" ? "বাক্য" : "turns"}
+                </Badge>
+                <Badge variant="brand" size="sm" className="capitalize">
+                  {selectedStyle}
+                </Badge>
+              </div>
               <p className="text-chip text-muted-foreground">
                 {locale === "bn"
                   ? "যেকোনো বাক্যে ট্যাপ করলে ডানপাশে অনুবাদ ও গ্রামার দেখাবে"
                   : "Tap any sentence to view its translation and grammar in the sidebar"}
               </p>
             </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="neutral" size="sm" className="font-mono">
-                {currentVersion.lines.length} {locale === "bn" ? "বাক্য" : "turns"}
-              </Badge>
-              <Badge variant="brand" size="sm" className="capitalize">
-                {selectedStyle}
-              </Badge>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {prevStepSlug && (
+                <Link href={`/conversations/${prevStepSlug}`}>
+                  <Button variant="outline" size="sm" className="h-9 text-label rounded-control gap-1">
+                    <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+                    <span>{t("reader.previousStep", locale)}</span>
+                  </Button>
+                </Link>
+              )}
+              {nextStepSlug && (
+                <Link href={`/conversations/${nextStepSlug}`}>
+                  <Button variant="default" size="sm" className="h-9 text-label rounded-control gap-1">
+                    <span>{t("reader.nextStep", locale)}</span>
+                    <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+                  </Button>
+                </Link>
+              )}
+
+              {/* Mobile Inspector & Style/Length Drawer Trigger */}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setIsMobileInspectorOpen(true)}
+                className="lg:hidden h-9 text-label rounded-control gap-1.5"
+              >
+                <HugeiconsIcon icon={SlidersHorizontalIcon} size={15} />
+                <span>{locale === "bn" ? "স্টাইল, গ্রামার ও অনুবাদ" : "Style, Grammar & Translate"}</span>
+              </Button>
+
+              <Button
+                variant={isCompleted ? "secondary" : "outline"}
+                size="sm"
+                onClick={() => setIsCompleted(!isCompleted)}
+                className="h-9 text-label rounded-control gap-1.5"
+              >
+                <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
+                <span>{isCompleted ? t("reader.completedLesson", locale) : t("reader.finishLesson", locale)}</span>
+              </Button>
             </div>
           </div>
 

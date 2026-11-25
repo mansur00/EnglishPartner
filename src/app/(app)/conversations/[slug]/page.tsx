@@ -187,78 +187,71 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
 
   return (
     <div className="w-full lg:pr-80 xl:pr-96">
-      <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-12 space-y-6">
-      {/* Top Breadcrumb & Action */}
-      <div className="flex items-center justify-between">
-        <Link href="/explore">
-          <Button variant="ghost" size="sm" className="btn-back-nav text-label">
-            <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-            <LocaleTitle titleEn="Back to Explore" titleBn="এক্সপ্লোরে ফিরে যান" />
-          </Button>
-        </Link>
+      <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-12 space-y-5">
+        {/* Unified Scenario Header Card */}
+        <Card className="p-5 sm:p-6 bg-card border border-border/60 shadow-card rounded-card space-y-4">
+          {/* Top Breadcrumb & Bookmark */}
+          <div className="flex items-center justify-between gap-2 pb-3 border-b border-border/60">
+            <Link href="/explore">
+              <Button variant="ghost" size="sm" className="btn-back-nav text-label -ml-2">
+                <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+                <LocaleTitle titleEn="Back to Explore" titleBn="এক্সপ্লোরে ফিরে যান" />
+              </Button>
+            </Link>
 
-        <Button variant="outline" size="sm" className="gap-1.5 text-label rounded-control">
-          <HugeiconsIcon icon={Bookmark02Icon} size={14} />
-          <LocaleTitle titleEn="Bookmark" titleBn="বুকমার্ক" />
-        </Button>
-      </div>
+            <Button variant="outline" size="sm" className="gap-1.5 text-label rounded-control">
+              <HugeiconsIcon icon={Bookmark02Icon} size={14} />
+              <LocaleTitle titleEn="Bookmark" titleBn="বুকমার্ক" />
+            </Button>
+          </div>
 
-      {/* Scenario Header Card */}
-      <Card className="space-y-3.5 p-6 md:p-7 bg-card border-0 shadow-card rounded-card">
-        <div className="flex flex-wrap items-center gap-2">
-          {scenario.categories.map((cat) => (
-            <Badge key={cat.id} variant="neutral" size="default">
-              {cat.name}
-            </Badge>
-          ))}
-          <Badge variant="brand" size="default">
-            {scenario.level} • CEFR
-          </Badge>
-          <Badge variant="accent" size="default" className="capitalize">
-            {scenario.communicationStyle} Register
-          </Badge>
-        </div>
+          {/* Badges + Title */}
+          <div className="space-y-2.5">
+            <div className="flex flex-wrap items-center gap-2">
+              {scenario.categories.map((cat) => (
+                <Badge key={cat.id} variant="neutral" size="default">
+                  {cat.name}
+                </Badge>
+              ))}
+              <Badge variant="brand" size="default">
+                {scenario.level} • CEFR
+              </Badge>
+              <Badge variant="accent" size="default" className="capitalize">
+                {scenario.communicationStyle} Register
+              </Badge>
+            </div>
 
-        <div>
-          <LocaleTitle
-            as="h1"
-            titleEn={scenario.title}
-            titleBn={scenario.titleBn}
-            className="text-page-title text-foreground"
-          />
-        </div>
+            <LocaleTitle
+              as="h1"
+              titleEn={scenario.title}
+              titleBn={scenario.titleBn}
+              className="text-page-title text-foreground"
+            />
+          </div>
 
-        {/* Learning Objective Callout */}
-        <div className="flex items-start gap-2 pt-2 text-chip text-muted-foreground border-t border-border">
-          <HugeiconsIcon
-            icon={CheckmarkCircle02Icon}
-            size={16}
-            className="text-success shrink-0 mt-0.5"
-          />
-          <span>
-            <strong className="text-foreground">Goal: </strong>
-            {scenario.learningObjective}
-          </span>
-        </div>
-      </Card>
+          {/* Learning Objective + Helper Hint */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-3 text-chip text-muted-foreground border-t border-border/60">
+            <div className="flex items-start gap-2">
+              <HugeiconsIcon
+                icon={CheckmarkCircle02Icon}
+                size={16}
+                className="text-success shrink-0 mt-0.5"
+              />
+              <span>
+                <strong className="text-foreground">Goal: </strong>
+                {scenario.learningObjective}
+              </span>
+            </div>
+            <LocaleTitle
+              as="span"
+              titleEn="Tap words or sentences to inspect"
+              titleBn="অর্থ ও ব্যাকরণ দেখতে বাক্যে ট্যাপ করুন"
+              className="text-chip text-muted-foreground"
+            />
+          </div>
+        </Card>
 
-      {/* Interactive Conversation Reader */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <LocaleTitle
-            as="h2"
-            titleEn="Dialogue Turns & Listening Practice"
-            titleBn="কথোপকথন ও লিসেনিং অনুশীলন"
-            className="text-card-title text-foreground"
-          />
-          <LocaleTitle
-            as="span"
-            titleEn="Tap words to explore meaning"
-            titleBn="অর্থ ও ব্যাকরণ দেখতে শব্দে ট্যাপ করুন"
-            className="text-chip text-muted-foreground"
-          />
-        </div>
-
+        {/* Interactive Conversation Reader */}
         <ConversationReader
           versions={versions}
           scenarioTitleEn={scenario.title}
@@ -267,7 +260,6 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           scenarioLevel={scenario.level}
           scenarioDescription={scenario.description}
         />
-      </div>
       </div>
     </div>
   );

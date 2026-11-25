@@ -1771,7 +1771,7 @@ Entry format:
   - Tapping any sentence bubble selects it and updates the inspector panel.
 - **Fixed Right Inspector Sidebar & Mobile Slide-Up Drawer (`src/components/learning/ConversationInspectorSidebar.tsx`):**
   - Desktop (`lg+`): Sticky right sidebar holding Length (4 tiers), Style (Casual/Neutral/Formal), Grammar Highlight controls, and the tapped sentence's live/static Translation + Grammar & Structure breakdown.
-  - Updated Desktop Right Sidebar to mirror the Left Sidebar (`fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar`), with `src/app/(app)/conversations/[slug]/page.tsx` reserving `lg:pr-80 xl:pr-96` and `lg:px-9` (36px spacing) so the entire conversation content area fills the center cleanly.
+  - Updated Desktop Right Sidebar to mirror the Left Sidebar (`fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar`), with `src/app/(app)/conversations/[slug]/page.tsx` reserving `lg:pr-80 xl:pr-96` and `lg:px-9` (36px spacing) and consolidating the breadcrumb, bookmark, scenario header, goal, and lesson controls cleanly into two organized cards.
   - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
 
 ### 2026-11-17, state file created
