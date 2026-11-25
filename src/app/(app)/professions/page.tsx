@@ -51,29 +51,36 @@ export default function ProfessionsIndexPage() {
 
   return (
     <PageContainer className="space-y-6">
-      {/* Header Row */}
-      <div className="space-y-2 border-b border-border pb-4">
-        <div className="flex items-center gap-2">
-          <Tag variant="brand" size="sm">
-            {t("professions.trackBadge")}
-          </Tag>
-          <Pill variant="neutral" size="sm">
-            {t("professions.careerPathBadge")}
-          </Pill>
+      {/* Unified Header & Filters Card */}
+      <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <Tag variant="brand" size="sm">
+                {t("professions.trackBadge")}
+              </Tag>
+              <Pill variant="neutral" size="sm">
+                {t("professions.careerPathBadge")}
+              </Pill>
+            </div>
+            <Pill variant="neutral" size="sm" className="font-mono">
+              {filteredProfessions.length} {locale === "bn" ? "টি ট্র্যাক" : "Tracks"}
+            </Pill>
+          </div>
+
+          <LocaleTitle
+            as="h1"
+            titleEn="Professional English Career Paths"
+            titleBn="পেশাগত ইংরেজি ক্যারিয়ার পাথ"
+            className="text-page-title text-foreground"
+          />
+          <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-subtitle-bn")}>
+            {t("professions.subtitle")}
+          </p>
         </div>
 
-        <LocaleTitle
-          as="h1"
-          titleEn="Professional English Career Paths"
-          titleBn="পেশাগত ইংরেজি ক্যারিয়ার পাথ"
-          className="text-page-title text-foreground"
-        />
-        <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-subtitle-bn")}>
-          {t("professions.subtitle")}
-        </p>
-
         {/* Category Track Pills */}
-        <div className="flex flex-wrap items-center gap-2 pt-2">
+        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-border/60">
           {[
             { id: "all", labelEn: "All Tracks", labelBn: "সব ট্র্যাক" },
             { id: "tech", labelEn: "Tech & Engineering", labelBn: "টেক ও ইঞ্জিনিয়ারিং" },
@@ -127,7 +134,7 @@ export default function ProfessionsIndexPage() {
             );
           })}
         </div>
-      </div>
+      </Card>
 
       {/* Professions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

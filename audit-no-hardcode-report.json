@@ -484,6 +484,15 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs",
+      "files": [
+        "src/app/(app)/explore/page.tsx",
+        "src/app/(app)/professions/page.tsx",
+        "src/components/tools/WhatShouldISay.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
       "files": [
         "src/app/(app)/explore/page.tsx",
