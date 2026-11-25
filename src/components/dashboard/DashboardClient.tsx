@@ -2,10 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { t, useTranslations, useLiveTranslations } from "@/lib/i18n";
-import { speakText } from "@/lib/audio/speech-engine";
-import { isRtlLanguage } from "@/lib/i18n/languages";
-import { cn } from "@/lib/utils";
+import { t, useTranslations } from "@/lib/i18n";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -15,8 +12,6 @@ import {
   TodayPanel,
   TopicCard,
   CefrChip,
-  ChatBubble,
-  Panel,
   LocaleTitle,
 } from "@/components/shared";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -25,24 +20,14 @@ import {
   ArrowRight01Icon,
   BookOpen01Icon,
   Clock01Icon,
-  Message01Icon,
   SparklesIcon,
   BotIcon,
   Bookmark02Icon,
   CheckmarkBadge01Icon,
-  VolumeHighIcon,
 } from "@hugeicons/core-free-icons";
 
 export function DashboardClient() {
-  const { locale, translationLocale } = useTranslations();
-
-  const previewLine1 = "Excuse me, could you tell me how much this costs?";
-  const previewLine2 = "Certainly! It is forty-five dollars with a 10% discount.";
-  const needsLivePreview = translationLocale !== "none" && translationLocale !== "bn";
-  const { translations: livePreviewMap } = useLiveTranslations(
-    needsLivePreview ? [previewLine1, previewLine2] : [],
-    needsLivePreview ? translationLocale : "none"
-  );
+  const { locale } = useTranslations();
 
   return (
     <PageContainer className="py-6 space-y-6 pb-16">
@@ -140,54 +125,56 @@ export function DashboardClient() {
         </Card>
       </div>
 
-      {/* 3. Row 2: Full-Width Start Conversation Feature Card (Rainbow Border) */}
+      {/* 3. Row 2: Full-Width Daily Conversation Practice Card (Rainbow Border) */}
       <div className="rainbow-border rounded-card">
         <TopicCard
           topic="shopping"
           className="p-6 md:p-8"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            {/* Left Column: Recommendation Info & CTA */}
+            {/* Left Column: Daily Conversation Focus & CTAs */}
             <div className="lg:col-span-7 space-y-4">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant="accent" size="md">
-                  ✨ {t("dashboard.dailyRecommendation", locale)}
+                  ✨ {locale === "bn" ? "দৈনিক কথোপকথন ফোকাস" : "Daily Conversation Focus"}
                 </Badge>
-                <CefrChip level="A2" label={locale === "bn" ? "A2 • প্রাথমিক" : "A2 • Elementary"} />
+                <CefrChip level="A1" label="A1–C2" />
                 <span className="inline-flex items-center px-3 py-1 rounded-pill text-chip bg-topic-tile text-topic-ink shadow-2xs">
-                  {locale === "bn" ? "কেনাকাটা ও লেনদেন" : "Shopping & Money"}
+                  {locale === "bn" ? "দৈনন্দিন ও কর্মক্ষেত্র" : "Real-Life Dialogues"}
                 </span>
               </div>
 
               <div>
                 <LocaleTitle
                   as="h2"
-                  titleEn="Asking for a Price & Product Details"
-                  titleBn="দোকানে কোনো পণ্যের দাম ও বিবরণ জানতে চাওয়া"
+                  titleEn="Build Fluency with Daily English Conversations"
+                  titleBn="প্রতিদিনের বাস্তব ইংরেজি কথোপকথনে সাবলীল হয়ে উঠুন"
                   className="text-hero-title text-foreground"
                 />
               </div>
 
               <p className="text-body text-muted-foreground leading-relaxed">
                 {locale === "bn"
-                  ? "দোকানে কোনো পণ্যের আকার জানতে, ছাড় যাচাই করতে এবং আত্মবিশ্বাসের সাথে দাম নিশ্চিত করতে স্বাভাবিক বাক্যগুলো আয়ত্ত করুন।"
-                  : "Master natural retail phrases to inquire about sizes, verify discount offers, and confirm prices without hesitation."}
+                  ? "দোকান, ভ্রমণ, অফিস ও দৈনন্দিন জীবনের বাস্তব সংলাপগুলো শুনে ও বলে অনুশীলন করুন — আপনার লেভেল অনুযায়ী দৈর্ঘ্য ও স্টাইল বেছে নিয়ে।"
+                  : "Practice natural, everyday dialogues across shopping, travel, work, and social life — tailored to your CEFR level, preferred length, and speaking style."}
               </p>
 
-              <div className="flex items-center gap-5 text-meta text-muted-foreground pt-1">
+              <div className="flex flex-wrap items-center gap-5 text-meta text-muted-foreground pt-1">
                 <span className="flex items-center gap-1.5">
-                  <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" /> 5-8 {t("dashboard.minutesUnit", locale)}
+                  <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" />
+                  {locale === "bn" ? "প্রতিদিন ১০–১৫ মিনিট" : "10–15 min daily"}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" /> 8 {t("dashboard.dialogueTurnsUnit", locale)}
+                  <HugeiconsIcon icon={BookOpen01Icon} size={16} className="text-primary" />
+                  {locale === "bn" ? "৪২+ বাস্তব কথোপকথন" : "42+ real-world dialogues"}
                 </span>
               </div>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Link href="/conversations/asking-price-product-details" className="w-full sm:w-auto">
+                <Link href="/daily-practice" className="w-full sm:w-auto">
                   <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-xs gap-2 cursor-pointer">
                     <HugeiconsIcon icon={PlayCircleIcon} size={20} />
-                    <span>{t("dashboard.startConversation", locale)}</span>
+                    <span>{locale === "bn" ? "দৈনিক অনুশীলন শুরু করুন" : "Start Daily Practice"}</span>
                   </Button>
                 </Link>
                 <Link href="/explore" className="w-full sm:w-auto">
@@ -199,73 +186,17 @@ export function DashboardClient() {
               </div>
             </div>
 
-            {/* Right Column: Mini Interactive Dialogue Preview */}
-            <Panel variant="topic" className="lg:col-span-5 p-4 sm:p-5 space-y-3">
-              <div className="flex items-center justify-between text-chip text-topic-ink uppercase tracking-wider pb-2 border-b border-border/70">
-                <span className="flex items-center gap-1.5">
-                  <HugeiconsIcon icon={Message01Icon} size={15} />
-                  {t("dashboard.dialoguePreview", locale)}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => speakText(`${previewLine1} ${previewLine2}`)}
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-pill bg-card/80 border border-border/60 text-chip text-foreground hover:text-primary transition-colors cursor-pointer normal-case"
-                >
-                  <HugeiconsIcon icon={VolumeHighIcon} size={13} />
-                  <span>{locale === "bn" ? "শুনুন" : "Listen"}</span>
-                </button>
+            {/* Right Column: Drive Illustration SVG */}
+            <div className="lg:col-span-5 flex items-center justify-center">
+              <div className="w-full rounded-panel bg-card/85 border border-border/60 p-4 flex items-center justify-center shadow-2xs">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/dashboard-illustration.svg"
+                  alt="Daily English Conversation Practice"
+                  className="w-full max-h-64 object-contain"
+                />
               </div>
-
-              {/* Bubble 1: Customer (Speaker 1) */}
-              <div className="flex items-start gap-2.5 text-left">
-                <span className="size-marker rounded-pill bg-brand-800 text-band-panel-ink flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs">
-                  C
-                </span>
-                <ChatBubble speaker="1" className="flex-1">
-                  <p className="text-body text-bubble-primary-ink leading-snug">
-                    &ldquo;{previewLine1}&rdquo;
-                  </p>
-                  {translationLocale !== "none" && (
-                    <p
-                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
-                      className={cn(
-                        "text-chip text-muted-foreground mt-1",
-                        translationLocale === "bn" && "font-bangla text-bangla"
-                      )}
-                    >
-                      {translationLocale === "bn"
-                        ? "মাফ করবেন, এটার দাম কত বলতে পারেন?"
-                        : (livePreviewMap[previewLine1] || "...")}
-                    </p>
-                  )}
-                </ChatBubble>
-              </div>
-
-              {/* Bubble 2: Shop Assistant (Speaker 2) */}
-              <div className="flex items-start gap-2.5 justify-end">
-                <ChatBubble speaker="2" className="flex-1 text-left">
-                  <p className="text-body text-topic-ink leading-snug">
-                    &ldquo;{previewLine2}&rdquo;
-                  </p>
-                  {translationLocale !== "none" && (
-                    <p
-                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
-                      className={cn(
-                        "text-chip text-topic-ink/80 mt-1",
-                        translationLocale === "bn" && "font-bangla text-bangla"
-                      )}
-                    >
-                      {translationLocale === "bn"
-                        ? "অবশ্যই! এটা ৪৫ ডলার, এবং ১০% ছাড় আছে।"
-                        : (livePreviewMap[previewLine2] || "...")}
-                    </p>
-                  )}
-                </ChatBubble>
-                <span className="size-marker rounded-pill bg-sun-500 text-brand-950 flex items-center justify-center text-chip shrink-0 mt-0.5 shadow-xs">
-                  S
-                </span>
-              </div>
-            </Panel>
+            </div>
           </div>
         </TopicCard>
       </div>
