@@ -20,6 +20,7 @@ import {
   CpuIcon,
   Add01Icon,
   Delete02Icon,
+  SlidersHorizontalIcon,
 } from "@hugeicons/core-free-icons";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,12 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { ChatBubble } from "@/components/shared/ChatBubble";
 import { LocaleTitle } from "@/components/shared";
 import {
@@ -333,6 +340,7 @@ export function RoleplayPartner() {
   const [activeHint, setActiveHint] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<RoleplayFeedbackResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobileControlsOpen, setIsMobileControlsOpen] = useState(false);
   const [providerInfo, setProviderInfo] = useState<{ isLive: boolean; statusText: string } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -717,108 +725,86 @@ export function RoleplayPartner() {
     selectedScenario.aiRole
   );
 
-  return (
-    <div className="space-y-6 max-w-container mx-auto">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-border">
-        <div>
-          <div className="flex items-center gap-2 mb-1 flex-wrap">
-            <Tag variant="brand" size="sm">
-              Milestones 2D &amp; 3B
-            </Tag>
-            <Pill variant="neutral" size="sm">
-              AI Partner (Voice &amp; Text Roleplay)
+  const sidebarControls = (
+    <div className="space-y-4">
+      {/* 1. Header & Create Topic */}
+      <div className="space-y-2.5 pb-3 border-b border-border">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <Tag variant="brand" size="sm">
+            Milestones 2D &amp; 3B
+          </Tag>
+          <Pill variant="neutral" size="sm">
+            AI Partner
+          </Pill>
+          {providerInfo && (
+            <Pill
+              variant={providerInfo.isLive ? "brand" : "neutral"}
+              size="sm"
+              className="gap-1 font-mono text-chip"
+              title={providerInfo.statusText}
+            >
+              <HugeiconsIcon icon={CpuIcon} size={12} />
+              <span>{providerInfo.statusText}</span>
             </Pill>
-            {providerInfo && (
-              <Pill
-                variant={providerInfo.isLive ? "brand" : "neutral"}
-                size="sm"
-                className="gap-1 font-mono text-chip"
-                title={providerInfo.statusText}
-              >
-                <HugeiconsIcon icon={CpuIcon} size={12} />
-                <span>{providerInfo.statusText}</span>
-              </Pill>
-            )}
-          </div>
-          <LocaleTitle
-            as="h1"
-            titleEn="AI Voice & Text Conversation Partner"
-            titleBn="এআই ভয়েস ও টেক্সট কথোপকথন পার্টনার"
-            className="text-page-title text-foreground"
-          />
-          <p className="text-meta-bn text-muted-foreground">
-            {locale === "bn"
-              ? "বাস্তব পরিস্থিতিতে এআই সহযোগীর সাথে মুখে বা লিখে ইংরেজি অনুশীলন করুন এবং তাৎক্ষণিক ফিডব্যাক পান।"
-              : "Practice conversational English through voice or text roleplay with your AI partner in real-world scenarios."}
-          </p>
+          )}
         </div>
-
-        {/* Action button in header */}
+        <LocaleTitle
+          as="h1"
+          titleEn="AI Voice & Text Partner"
+          titleBn="এআই ভয়েস ও টেক্সট পার্টনার"
+          className="text-card-title text-foreground"
+        />
+        <p className="text-chip text-muted-foreground leading-relaxed">
+          {locale === "bn"
+            ? "বাস্তব পরিস্থিতিতে এআই সহযোগীর সাথে মুখে বা লিখে ইংরেজি অনুশীলন করুন এবং তাৎক্ষণিক ফিডব্যাক পান।"
+            : "Practice conversational English through voice or text roleplay with your AI partner."}
+        </p>
         <Button
           variant="outline"
           size="sm"
           onClick={() => setIsCreateOpen(true)}
-          className="rounded-control text-chip gap-1.5 cursor-pointer shrink-0"
+          className="w-full rounded-control text-chip gap-1.5 cursor-pointer"
         >
           <HugeiconsIcon icon={Add01Icon} size={14} />
           <span>{locale === "bn" ? "+ নতুন টপিক" : "+ Create Topic"}</span>
         </Button>
       </div>
 
-      {/* Topic Selection Bar */}
-      <div className="space-y-2.5 p-3.5 rounded-panel bg-card border border-border shadow-2xs">
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <div className="flex items-center gap-2">
-            <span className="text-label text-foreground font-sans">
-              {locale === "bn" ? "কথোপকথনের টপিক ও মোড:" : "Conversation Topics & Mode:"}
-            </span>
-            <span className="text-chip text-muted-foreground">
-              ({1 + PRESET_SCENARIOS.length + customScenarios.length} {locale === "bn" ? "টি অপশন" : "options"})
-            </span>
-          </div>
-          {selectedScenario.id === "freestyle" ? (
-            <span className="text-chip-bn text-primary flex items-center gap-1 font-sans">
-              <HugeiconsIcon icon={SparklesIcon} size={13} />
-              {locale === "bn"
-                ? "উন্মুক্ত আড্ডা মোড: যেকোনো প্রশ্ন বা গল্প করতে পারেন"
-                : "Freestyle Mode: Ask any questions or chat freely"}
-            </span>
-          ) : (
-            <span className="text-chip-bn text-muted-foreground font-sans">
-              {locale === "bn"
-                ? "টপিক মোড: নির্ধারিত বিষয়ে ফোকাসড প্র্যাকটিস ও সাজেশন"
-                : "Topic Mode: Focused practice and targeted suggestions"}
-            </span>
-          )}
+      {/* 2. Topic Selection */}
+      <div className="space-y-2.5 pb-3 border-b border-border">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-label text-foreground font-sans">
+            {locale === "bn" ? "কথোপকথনের টপিক ও মোড" : "Topics & Mode"}
+          </span>
+          <span className="text-chip text-muted-foreground">
+            ({1 + PRESET_SCENARIOS.length + customScenarios.length})
+          </span>
         </div>
 
-        {/* Scenario Pills Row */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar flex-wrap">
-          {/* 1. Freestyle Pill (Primary / Default) */}
+        <div className="flex flex-wrap gap-1.5">
+          {/* 1. Freestyle Pill */}
           <button
             type="button"
-            onClick={() => startSession(FREESTYLE_SCENARIO)}
+            onClick={() => {
+              startSession(FREESTYLE_SCENARIO);
+              setIsMobileControlsOpen(false);
+            }}
             className={cn(
-              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control text-chip transition-all cursor-pointer whitespace-nowrap",
+              "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-chip transition-all cursor-pointer",
               selectedScenario.id === "freestyle"
-                ? "bg-primary text-primary-foreground font-sans shadow-xs ring-2 ring-primary/20"
+                ? "bg-primary text-primary-foreground font-sans shadow-xs"
                 : "bg-muted/70 text-muted-foreground hover:text-foreground hover:bg-muted border border-border"
             )}
           >
             <HugeiconsIcon
               icon={SparklesIcon}
-              size={14}
+              size={13}
               className={selectedScenario.id === "freestyle" ? "text-primary-foreground" : "text-primary"}
             />
-            <span>
-              {locale === "bn" ? "✨ উন্মুক্ত আড্ডা" : "✨ Freestyle Talking"}
-            </span>
+            <span>{locale === "bn" ? "✨ উন্মুক্ত আড্ডা" : "✨ Freestyle"}</span>
           </button>
 
-          <span className="text-muted-foreground/40 text-chip hidden sm:inline">|</span>
-
-          {/* 2. 10 Curated Presets */}
+          {/* 2. Presets */}
           {PRESET_SCENARIOS.map((sc) => {
             const isSelected = selectedScenario.id === sc.id;
             const scTitle = locale === "bn" ? sc.titleBn : sc.title;
@@ -826,9 +812,12 @@ export function RoleplayPartner() {
               <button
                 key={sc.id}
                 type="button"
-                onClick={() => startSession(sc)}
+                onClick={() => {
+                  startSession(sc);
+                  setIsMobileControlsOpen(false);
+                }}
                 className={cn(
-                  "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control text-chip transition-all cursor-pointer whitespace-nowrap",
+                  "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-chip transition-all cursor-pointer text-left",
                   isSelected
                     ? "bg-primary text-primary-foreground font-sans shadow-xs"
                     : "bg-background text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border"
@@ -856,7 +845,7 @@ export function RoleplayPartner() {
               <div
                 key={sc.id}
                 className={cn(
-                  "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control text-chip transition-all whitespace-nowrap",
+                  "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-chip transition-all",
                   isSelected
                     ? "bg-primary text-primary-foreground font-sans shadow-xs"
                     : "bg-background text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border"
@@ -864,7 +853,10 @@ export function RoleplayPartner() {
               >
                 <button
                   type="button"
-                  onClick={() => startSession(sc)}
+                  onClick={() => {
+                    startSession(sc);
+                    setIsMobileControlsOpen(false);
+                  }}
                   className="cursor-pointer flex items-center gap-1.5"
                 >
                   <span>{sc.title}</span>
@@ -899,10 +891,9 @@ export function RoleplayPartner() {
         </div>
       </div>
 
-      {/* Voice Mode & Speed Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-panel bg-muted/40">
-        {/* Voice Mode Toggle */}
-        <div className="flex items-center gap-2">
+      {/* 3. Voice Mode & Speed Controls */}
+      <div className="space-y-2.5 pb-3 border-b border-border">
+        <div className="flex items-center justify-between gap-2">
           <Button
             variant={voiceMode ? "default" : "outline"}
             size="sm"
@@ -911,86 +902,85 @@ export function RoleplayPartner() {
               setVoiceMode(next);
               if (!next) stopAudio();
             }}
-            className="rounded-control text-chip gap-1.5 cursor-pointer"
+            className="w-full rounded-control text-chip gap-1.5 cursor-pointer"
           >
             <HugeiconsIcon icon={voiceMode ? VolumeHighIcon : VolumeMute01Icon} size={15} />
             <span className={locale === "bn" ? "text-bangla" : ""}>
               {voiceMode ? t("roleplay.voiceModeOn") : t("roleplay.voiceModeOff")}
             </span>
           </Button>
-
-          <span className={cn("text-chip text-muted-foreground", locale === "bn" && "text-bangla")}>
-            {voiceMode ? t("roleplay.voiceAutoSpeak") : t("roleplay.voiceTextOnly")}
-          </span>
         </div>
 
-        {/* Voice Speed Controls */}
+        <p className={cn("text-chip text-muted-foreground", locale === "bn" && "text-bangla")}>
+          {voiceMode ? t("roleplay.voiceAutoSpeak") : t("roleplay.voiceTextOnly")}
+        </p>
+
         {voiceMode && (
-          <div className="flex items-center gap-1.5">
-            <span className="text-chip text-muted-foreground">{t("roleplay.speedLabel")}</span>
-            {(["slow", "clear", "normal"] as VoiceSpeedSetting[]).map((spd) => {
-              const isCur = voiceSpeed === spd;
-              const spdLabel = spd === "slow"
-                ? t("roleplay.speedSlow")
-                : spd === "clear"
-                ? t("roleplay.speedClear")
-                : t("roleplay.speedNormal");
-              return (
-                <button
-                  key={spd}
-                  type="button"
-                  onClick={() => setVoiceSpeed(spd)}
-                  className={cn(
-                    "px-2 py-0.5 rounded-pill text-chip transition-colors cursor-pointer",
-                    isCur
-                      ? "bg-primary text-primary-foreground font-mono"
-                      : "bg-muted text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {spdLabel}
-                </button>
-              );
-            })}
+          <div className="space-y-1.5">
+            <span className="text-chip text-muted-foreground block">{t("roleplay.speedLabel")}</span>
+            <div className="grid grid-cols-3 gap-1.5">
+              {(["slow", "clear", "normal"] as VoiceSpeedSetting[]).map((spd) => {
+                const isCur = voiceSpeed === spd;
+                const spdLabel = spd === "slow"
+                  ? t("roleplay.speedSlow")
+                  : spd === "clear"
+                  ? t("roleplay.speedClear")
+                  : t("roleplay.speedNormal");
+                return (
+                  <button
+                    key={spd}
+                    type="button"
+                    onClick={() => setVoiceSpeed(spd)}
+                    className={cn(
+                      "px-2 py-1 rounded-control text-chip transition-colors cursor-pointer text-center truncate",
+                      isCur
+                        ? "bg-primary text-primary-foreground font-mono"
+                        : "bg-muted text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {spdLabel}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
 
-      {/* Roleplay Context Card */}
-      <Card className="p-4 bg-muted/40 rounded-panel flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-pill bg-primary/10 text-primary">
-            <HugeiconsIcon
-              icon={selectedScenario.id === "freestyle" ? SparklesIcon : BotIcon}
-              size={20}
-            />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-label text-foreground font-sans">
-                {locale === "bn" ? selectedScenario.titleBn : selectedScenario.title}
-              </span>
-              <Tag variant="outline" size="sm">
-                {selectedScenario.id === "freestyle"
-                  ? locale === "bn"
-                    ? "ওপেন চ্যাট"
-                    : "Open Chat"
-                  : `Level ${selectedScenario.level}`}
-              </Tag>
+      {/* 4. Active Roleplay Context & End Session */}
+      <div className="space-y-3">
+        <div className="p-3 rounded-control bg-muted/40 border border-border/60 space-y-2">
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 rounded-pill bg-primary/10 text-primary shrink-0">
+              <HugeiconsIcon
+                icon={selectedScenario.id === "freestyle" ? SparklesIcon : BotIcon}
+                size={16}
+              />
             </div>
-            <p className="text-meta text-muted-foreground mt-0.5">
-              {locale === "bn" ? (
-                <>
-                  {t("roleplay.you")}: <strong className="text-foreground">{selectedScenario.learnerRoleBn}</strong> | {t("roleplay.partner")}:{" "}
-                  <strong className="text-foreground">{selectedScenario.aiRoleBn}</strong> ({selectedScenario.contextBn})
-                </>
-              ) : (
-                <>
-                  {t("roleplay.you")}: <strong className="text-foreground">{selectedScenario.learnerRole}</strong> | {t("roleplay.partner")}:{" "}
-                  <strong className="text-foreground">{selectedScenario.aiRole}</strong> ({selectedScenario.context})
-                </>
-              )}
-            </p>
+            <span className="text-label text-foreground font-sans truncate">
+              {locale === "bn" ? selectedScenario.titleBn : selectedScenario.title}
+            </span>
+            <Tag variant="outline" size="sm" className="shrink-0">
+              {selectedScenario.id === "freestyle"
+                ? locale === "bn"
+                  ? "ওপেন চ্যাট"
+                  : "Open Chat"
+                : selectedScenario.level}
+            </Tag>
           </div>
+          <p className="text-chip text-muted-foreground leading-relaxed">
+            {locale === "bn" ? (
+              <>
+                {t("roleplay.you")}: <strong className="text-foreground">{selectedScenario.learnerRoleBn}</strong> | {t("roleplay.partner")}:{" "}
+                <strong className="text-foreground">{selectedScenario.aiRoleBn}</strong> — {selectedScenario.contextBn}
+              </>
+            ) : (
+              <>
+                {t("roleplay.you")}: <strong className="text-foreground">{selectedScenario.learnerRole}</strong> | {t("roleplay.partner")}:{" "}
+                <strong className="text-foreground">{selectedScenario.aiRole}</strong> — {selectedScenario.context}
+              </>
+            )}
+          </p>
         </div>
 
         {!feedback && messages.length > 2 && (
@@ -999,14 +989,40 @@ export function RoleplayPartner() {
             size="sm"
             onClick={handleEndSession}
             disabled={isLoading}
-            className="rounded-control text-chip text-destructive hover:bg-destructive/10 border-destructive/30"
+            className="w-full rounded-control text-chip text-destructive hover:bg-destructive/10 border-destructive/30"
           >
             <span>{locale === "bn" ? "সেশন সমাপ্তি ও ফিডব্যাক" : "End Session & Get Feedback"}</span>
           </Button>
         )}
-      </Card>
+      </div>
+    </div>
+  );
 
-      {/* Main Conversation Stream */}
+  return (
+    <div className="space-y-4">
+      {/* Mobile / Tablet Compact Header Bar (< lg) */}
+      <div className="lg:hidden flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <Tag variant="brand" size="sm">
+            {selectedScenario.id === "freestyle" ? "Freestyle" : selectedScenario.level}
+          </Tag>
+          <span className="text-label font-semibold text-foreground truncate">
+            {locale === "bn" ? selectedScenario.titleBn : selectedScenario.title}
+          </span>
+        </div>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => setIsMobileControlsOpen(true)}
+          className="h-9 text-chip rounded-control gap-1.5 shrink-0"
+        >
+          <HugeiconsIcon icon={SlidersHorizontalIcon} size={14} />
+          <span>{locale === "bn" ? "টপিক ও ভয়েস" : "Topics & Voice"}</span>
+        </Button>
+      </div>
+
+      {/* Main Conversation Stream (Center Chat Area Only) */}
       <Card className="p-4 sm:p-6 bg-card rounded-card space-y-4 min-h-96 flex flex-col justify-between shadow-xs">
         <div className="space-y-4 overflow-y-auto max-h-96 pr-1">
           {messages.map((msg, idx) => {
@@ -1469,6 +1485,26 @@ export function RoleplayPartner() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* RIGHT FIXED SIDEBAR (Desktop lg+) */}
+      <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4">
+        {sidebarControls}
+      </aside>
+
+      {/* MOBILE / TABLET CONTROLS DRAWER (< lg) */}
+      <Sheet open={isMobileControlsOpen} onOpenChange={setIsMobileControlsOpen}>
+        <SheetContent
+          side="bottom"
+          className="lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background"
+        >
+          <SheetHeader className="pb-3 border-b border-border/60 text-left">
+            <SheetTitle className="text-card-title text-foreground">
+              {locale === "bn" ? "টপিক, মোড ও ভয়েস সেটিংস" : "Topics, Mode & Voice Controls"}
+            </SheetTitle>
+          </SheetHeader>
+          <div className="pt-4">{sidebarControls}</div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

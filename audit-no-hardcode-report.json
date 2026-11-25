@@ -229,6 +229,12 @@
       "line": 785,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-label text-foreground font-medium\">English Partner</span>"
+    },
+    {
+      "file": "src/components/tools/RoleplayPartner.tsx",
+      "line": 1009,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-label font-semibold text-foreground truncate\">"
     }
   ],
   "c_radius": [],
@@ -280,6 +286,12 @@
       "line": 238,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
+    },
+    {
+      "file": "src/components/tools/RoleplayPartner.tsx",
+      "line": 1498,
+      "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
+      "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     }
   ],
   "e_inline_styles": [],
@@ -318,6 +330,14 @@
         "src/components/learning/ConversationReader.tsx",
         "src/components/practice/DailyPracticeClient.tsx",
         "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-chip text-muted-foreground leading-relaxed",
+      "files": [
+        "src/components/navigation/Sidebar.tsx",
+        "src/components/tools/RoleplayPartner.tsx"
       ]
     },
     {

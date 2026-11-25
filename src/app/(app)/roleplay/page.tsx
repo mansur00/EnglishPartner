@@ -1,4 +1,3 @@
-import { PageContainer } from "@/components/shared";
 import { RoleplayPartner } from "@/components/tools/RoleplayPartner";
 
 export const metadata = {
@@ -8,8 +7,10 @@ export const metadata = {
 
 export default function RoleplayPage() {
   return (
-    <PageContainer className="py-6 sm:py-10 pb-16">
-      <RoleplayPartner />
-    </PageContainer>
+    <div className="w-full lg:pr-80 xl:pr-96">
+      <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-16">
+        <RoleplayPartner />
+      </div>
+    </div>
   );
 }
