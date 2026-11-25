@@ -1784,6 +1784,12 @@ Entry format:
 - **`/vocabulary` Page (`src/app/(app)/vocabulary/page.tsx`):**
   - Added `Magic Cards (40)` as the primary tab alongside `Saved Vocabulary` and `Daily Flashcard Review`, using the 36px 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9`) and a `<Sheet side="bottom">` drawer on mobile (`< lg`), with header, guest sync, tabs, search, and category pills consolidated into one unified top card.
   - Upgraded `Saved Vocabulary` (`src/lib/vocabulary/saved-categories.ts`) into custom Magic-style category cards: saving any word opens a Save-to-Category picker (select existing category or create a new one with emoji + name), and opening any saved category shows Magic-style word tiles whose details inspect in the fixed Right Sidebar.
+
+### 2026-11-25, System-Wide Button Text Contrast & Responsive Modal Fix
+- **Root Cause (`src/lib/utils.ts`):** Custom `@utility` classes from `globals.css` (`text-bangla`, `text-card-title-bn`, `text-subtitle-bn`, `text-meta-bn`, `text-meta-lead-bn`, `text-chip-bn`, `text-chip-mono`, `text-grammar-header`, `text-section-heading`) were not registered in `extendTailwindMerge`, causing `twMerge` to misclassify them as `text-color` classes and strip `text-primary-foreground` / `text-foreground` from buttons across light and dark modes.
+- **Fixes:**
+  - `src/lib/utils.ts`: Registered `text-bangla` in `font-family` and all custom `text-*` typography utilities in `font-size` inside `extendTailwindMerge`.
+  - `src/components/auth/AuthPromptModal.tsx`: Fixed button row overflow (`w-full sm:flex-1 min-w-0`) so action buttons stay cleanly inside the modal on all viewports.
 - **Tests:** Added `tests/magic-cards.test.mjs` verifying all 40 Magic Cards and 20–40 words per deck.
   - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
 

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { buttonVariants } from "../src/components/ui/button-variants.ts";
 import { inputVariants } from "../src/components/ui/input-variants.ts";
 import { badgeVariants } from "../src/components/ui/badge-variants.ts";
+import { cn } from "../src/lib/utils.ts";
 
 test("Design System: buttonVariants covers all spec variants", () => {
   const defaultClasses = buttonVariants({ variant: "default" });
@@ -103,4 +104,14 @@ test("Design System: badgeVariants covers semantic status variants, sizes, and s
 
   const rounded = badgeVariants({ shape: "rounded" });
   assert.ok(rounded.includes("rounded-panel"));
+});
+
+test("Design System: cn() preserves button text-primary-foreground alongside text-bangla & custom text utilities", () => {
+  const merged = cn(
+    buttonVariants({ variant: "default" }),
+    "text-bangla text-label text-chip-bn text-meta-bn"
+  );
+  assert.ok(merged.includes("bg-primary"), "bg-primary preserved");
+  assert.ok(merged.includes("text-primary-foreground"), "text-primary-foreground must not be stripped by twMerge");
+  assert.ok(merged.includes("text-bangla"), "text-bangla preserved");
 });

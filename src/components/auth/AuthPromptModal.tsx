@@ -61,7 +61,7 @@ export function AuthPromptModal({
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
-          <Link href="/auth/login?reason=save" className="w-full">
+          <Link href="/auth/login?reason=save" className="w-full sm:flex-1 min-w-0">
             <Button className="btn-press w-full justify-center gap-2 text-bangla text-label rounded-control">
               <HugeiconsIcon icon={Login01Icon} size={16} />
               <span>লগইন / সাইন-আপ করুন</span>
@@ -70,7 +70,7 @@ export function AuthPromptModal({
           <Button
             variant="outline"
             onClick={onClose}
-            className="btn-press w-full justify-center text-bangla text-label text-muted-foreground rounded-control"
+            className="btn-press w-full sm:flex-1 min-w-0 justify-center text-bangla text-label text-muted-foreground rounded-control"
           >
             পরে করব
           </Button>
