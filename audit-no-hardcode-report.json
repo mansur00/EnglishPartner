@@ -624,6 +624,15 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
+      "files": [
+        "src/components/analytics/ProgressDashboard.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/tools/WhatShouldISay.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "text-body text-muted-foreground max-w-2xl",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",

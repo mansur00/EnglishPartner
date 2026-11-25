@@ -84,6 +84,7 @@ export function ProgressDashboard() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: FireIcon as any,
       colorClass: "bg-warning-bg text-warning",
+      accentBorder: "border-warning/30",
     },
     {
       label: t("progress.timePracticedLabel"),
@@ -93,6 +94,7 @@ export function ProgressDashboard() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: Time02Icon as any,
       colorClass: "bg-primary/10 text-primary",
+      accentBorder: "border-primary/25",
     },
     {
       label: t("progress.conversationsLabel"),
@@ -101,6 +103,7 @@ export function ProgressDashboard() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: CheckmarkCircle01Icon as any,
       colorClass: "bg-success-bg text-success",
+      accentBorder: "border-success/30",
     },
     {
       label: t("progress.accuracyLabel"),
@@ -110,41 +113,63 @@ export function ProgressDashboard() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: Target01Icon as any,
       colorClass: "bg-primary/10 text-primary",
+      accentBorder: "border-primary/25",
     },
   ];
 
   return (
-    <div className="space-y-8 max-w-container mx-auto">
-      {/* Header */}
-      <div className="space-y-1 pb-2 border-b border-border">
-        <div className="flex items-center gap-2 mb-1">
-          <Tag variant="brand" size="sm">
-            Milestone 3D & 3E
-          </Tag>
-          <Pill variant="neutral" size="sm">
-            Personalised Analytics
-          </Pill>
+    <div className="space-y-6 max-w-container mx-auto">
+      {/* Unified Header Card */}
+      <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <Pill variant="brand" size="sm">
+                {locale === "bn" ? "ব্যক্তিগত বিশ্লেষণ" : "Personalised Analytics"}
+              </Pill>
+            </div>
+            <LocaleTitle
+              as="h1"
+              titleEn="My Learning Progress"
+              titleBn="আমার অগ্রগতি"
+              className="text-page-title text-foreground"
+            />
+            <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-bangla")}>
+              {t("progress.subtitle")}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <Link href="/daily-practice">
+              <Button variant="cta" size="sm" className="gap-1.5 cursor-pointer">
+                <span>{locale === "bn" ? "দৈনিক অনুশীলন" : "Daily Practice"}</span>
+                <HugeiconsIcon icon={ArrowRight01Icon} size={15} />
+              </Button>
+            </Link>
+            <Link href="/quiz">
+              <Button variant="outline" size="sm" className="gap-1.5 cursor-pointer">
+                <span>{locale === "bn" ? "কুইজ দিন" : "Take Quiz"}</span>
+              </Button>
+            </Link>
+          </div>
         </div>
-        <LocaleTitle
-          as="h1"
-          titleEn="My Learning Progress"
-          titleBn="আমার অগ্রগতি"
-          className="text-page-title text-foreground"
-        />
-        <p className={cn("text-meta text-muted-foreground", locale === "bn" && "text-bangla")}>
-          {t("progress.subtitle")}
-        </p>
-      </div>
+      </Card>
 
       {/* Top 4 KPI Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, idx) => (
-          <Card key={idx} className="p-4 sm:p-5 bg-card rounded-card space-y-3 shadow-xs">
-            <div className="flex items-center justify-between">
+          <Card
+            key={idx}
+            className={cn(
+              "p-4 sm:p-5 bg-card rounded-card border flex flex-col justify-between space-y-3 shadow-xs",
+              kpi.accentBorder
+            )}
+          >
+            <div className="flex items-center justify-between gap-2">
               <span className="text-meta uppercase font-sans text-muted-foreground">
                 {kpi.label}
               </span>
-              <div className={`p-2 rounded-pill ${kpi.colorClass}`}>
+              <div className={cn("size-9 rounded-control flex items-center justify-center shrink-0", kpi.colorClass)}>
                 <HugeiconsIcon icon={kpi.icon} size={18} />
               </div>
             </div>
@@ -157,7 +182,7 @@ export function ProgressDashboard() {
                   <span className="text-meta-bn text-muted-foreground">{kpi.unit}</span>
                 )}
               </div>
-              <p className="text-chip text-muted-foreground mt-1">
+              <p className="text-chip text-muted-foreground mt-1.5">
                 {kpi.subtitle}
               </p>
             </div>
@@ -168,30 +193,30 @@ export function ProgressDashboard() {
       {/* Vocabulary Retention & Weekly Activity Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Vocabulary Retention Stages (SM-2 Breakdown) */}
-        <Card className="p-5 sm:p-6 bg-card rounded-card space-y-4 shadow-xs">
-          <div className="flex justify-between items-center pb-3 border-b border-border">
-            <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-pill bg-primary/10 text-primary">
-                <HugeiconsIcon icon={BookOpen01Icon} size={18} />
-              </div>
-              <div>
-                <LocaleTitle
-                  as="h3"
-                  titleEn="Vocabulary Retention"
-                  titleBn="শব্দভাণ্ডার ধারণ ক্ষমতা"
-                  className="text-card-title text-foreground"
-                />
-                <p className="text-meta text-muted-foreground">
-                  {t("progress.retentionSubtitle")}
-                </p>
-              </div>
-            </div>
-            <Pill variant="success" size="sm">
-              {metrics.vocabulary.retentionRate}% {t("progress.retained")}
-            </Pill>
-          </div>
-
+        <Card className="p-5 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
           <div className="space-y-4">
+            <div className="flex justify-between items-center gap-2 pb-3 border-b border-border">
+              <div className="flex items-center gap-2.5">
+                <div className="size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <HugeiconsIcon icon={BookOpen01Icon} size={18} />
+                </div>
+                <div>
+                  <LocaleTitle
+                    as="h3"
+                    titleEn="Vocabulary Retention"
+                    titleBn="শব্দভাণ্ডার ধারণ ক্ষমতা"
+                    className="text-card-title text-foreground"
+                  />
+                  <p className="text-meta text-muted-foreground">
+                    {t("progress.retentionSubtitle")}
+                  </p>
+                </div>
+              </div>
+              <Pill variant="success" size="sm" className="shrink-0">
+                {metrics.vocabulary.retentionRate}% {t("progress.retained")}
+              </Pill>
+            </div>
+
             <div className="flex justify-between items-center text-chip text-muted-foreground">
               <span>{t("progress.totalSaved")}: <strong className="text-foreground font-mono">{metrics.vocabulary.totalSaved}</strong></span>
               <span>{t("progress.retained")}: <strong className="text-success font-mono">{metrics.vocabulary.retentionRate}%</strong></span>
@@ -200,7 +225,7 @@ export function ProgressDashboard() {
             {/* Stage Progress Breakdown */}
             <div className="space-y-3">
               {[
-                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-primary/40" },
+                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-primary/45" },
                 { label: t("progress.stageReviewing"), count: metrics.vocabulary.reviewing, barColor: "bg-primary" },
                 { label: t("progress.stageMastered"), count: metrics.vocabulary.mastered, barColor: "bg-success" },
               ].map((stage, sIdx) => (
@@ -209,7 +234,7 @@ export function ProgressDashboard() {
                     <span className={cn("text-foreground", locale === "bn" && "text-bangla")}>{stage.label}</span>
                     <span className="font-mono text-muted-foreground">{stage.count} words</span>
                   </div>
-                  <div className="h-2 rounded-pill bg-muted overflow-hidden">
+                  <div className="h-2.5 rounded-pill bg-muted/70 overflow-hidden">
                     <div
                       className={`h-full ${stage.barColor} rounded-pill transition-all`}
                       style={{
@@ -220,23 +245,23 @@ export function ProgressDashboard() {
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="pt-2 flex justify-end">
-              <Link href="/vocabulary">
-                <Button variant="outline" size="sm" className="rounded-control text-chip gap-1.5 cursor-pointer">
-                  <span className={locale === "bn" ? "text-bangla" : ""}>{t("progress.practiceVocabBtn")}</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-                </Button>
-              </Link>
-            </div>
+          <div className="pt-3 border-t border-border/60 flex justify-end">
+            <Link href="/vocabulary">
+              <Button variant="default" size="sm" className="rounded-control text-chip gap-1.5 cursor-pointer">
+                <span className={locale === "bn" ? "text-bangla" : ""}>{t("progress.practiceVocabBtn")}</span>
+                <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+              </Button>
+            </Link>
           </div>
         </Card>
 
         {/* Weekly Practice Activity */}
-        <Card className="p-5 sm:p-6 bg-card rounded-card space-y-4 shadow-xs">
-          <div className="flex justify-between items-center pb-3 border-b border-border">
+        <Card className="p-5 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
+          <div className="flex justify-between items-center gap-2 pb-3 border-b border-border">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-pill bg-warning-bg text-warning">
+              <div className="size-9 rounded-control bg-warning-bg text-warning flex items-center justify-center shrink-0">
                 <HugeiconsIcon icon={Award01Icon} size={18} />
               </div>
               <div>
@@ -251,7 +276,7 @@ export function ProgressDashboard() {
                 </p>
               </div>
             </div>
-            <Pill variant="neutral" size="sm">
+            <Pill variant="brand" size="sm" className="shrink-0">
               7 {t("progress.daysActive")}
             </Pill>
           </div>
