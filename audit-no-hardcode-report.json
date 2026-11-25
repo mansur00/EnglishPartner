@@ -306,6 +306,12 @@
   "c_radius": [],
   "d_layout_magic": [
     {
+      "file": "src/app/(app)/explore/page.tsx",
+      "line": 151,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full pl-11 pr-11 text-body h-11\""
+    },
+    {
       "file": "src/app/(app)/quiz/page.tsx",
       "line": 109,
       "detail": "Hardcoded layout constant / magic number: h-11",
@@ -474,6 +480,15 @@
         "src/components/quiz/ConversationQuizPlayClient.tsx",
         "src/components/quiz/QuizResultDetailClient.tsx",
         "src/components/quiz/QuizRunner.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
+      "files": [
+        "src/app/(app)/explore/page.tsx",
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/admin/AdminDashboardClient.tsx"
       ]
     },
     {

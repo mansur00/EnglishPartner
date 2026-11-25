@@ -22,6 +22,7 @@ interface FilterBarProps {
   setStyle: (st: string) => void;
   onReset: () => void;
   isFiltered: boolean;
+  embedded?: boolean;
 }
 
 export function FilterBar({
@@ -33,6 +34,7 @@ export function FilterBar({
   setStyle,
   onReset,
   isFiltered,
+  embedded = false,
 }: FilterBarProps) {
   const locale = useLocale();
   const visibleTiers = getLengthTiersForLevel(level);
@@ -49,7 +51,13 @@ export function FilterBar({
   };
 
   return (
-    <div className="sticky top-header z-10 flex flex-wrap items-center gap-3 p-4 rounded-card bg-card/95 backdrop-blur shadow-xs border-0">
+    <div
+      className={
+        embedded
+          ? "flex flex-wrap items-center gap-3"
+          : "sticky top-header z-10 flex flex-wrap items-center gap-3 p-4 rounded-card bg-card/95 backdrop-blur shadow-xs border-0"
+      }
+    >
       <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-label mr-1">
         <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
         <span>{t("discovery.filters", locale)}</span>

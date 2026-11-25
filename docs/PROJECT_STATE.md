@@ -1828,6 +1828,7 @@ Entry format:
   - Updated `/quiz` header filter bar (`src/app/(app)/quiz/page.tsx`) to a single-row 4-control toolbar: Search input + Level, Style, and Length `appearance-none h-11` `<select>` dropdowns with chevron icons matching `<Input>` height.
   - Updated `/vocabulary` header card (`src/app/(app)/vocabulary/page.tsx`) so mode tabs stay on one clean row and Search + `All 40 Cards` category dropdown sit side-by-side on one `h-11` line.
   - Consolidated `What Should I Say?` (`src/components/tools/WhatShouldISay.tsx`) header, inline input + `Show Options` CTA button, and `Try:` sample chips into one compact `<Card>`.
+  - Consolidated `/explore` (`src/app/(app)/explore/page.tsx`, `src/components/discovery/FilterBar.tsx`) header, count badge, search bar, category pills, and embedded `FilterBar` into one unified `<Card>`.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

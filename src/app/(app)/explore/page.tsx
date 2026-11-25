@@ -7,6 +7,8 @@ import { CategoryPills } from "@/components/discovery/CategoryPills";
 import { FilterBar } from "@/components/discovery/FilterBar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupPrefix, InputGroupSuffix } from "@/components/ui/input-group";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -101,92 +103,93 @@ export default function ExplorePage() {
 
   return (
     <PageContainer className="space-y-6 pb-16">
-      {/* Page Header */}
-      <div>
-        <LocaleTitle
-          as="h1"
-          titleEn="Explore Conversations"
-          titleBn="কথোপকথন অন্বেষণ করুন"
-          className="text-page-title text-foreground"
-        />
-        <LocaleTitle
-          as="p"
-          titleEn="Explore and practice natural dialogues crafted for everyday real-world situations."
-          titleBn="বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন।"
-          className="text-meta text-muted-foreground mt-1.5"
-        />
-      </div>
+      {/* Unified Header, Search, Categories & Filters Card */}
+      <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <LocaleTitle
+              as="h1"
+              titleEn="Explore Conversations"
+              titleBn="কথোপকথন অন্বেষণ করুন"
+              className="text-page-title text-foreground"
+            />
+            <LocaleTitle
+              as="p"
+              titleEn="Explore and practice natural dialogues crafted for everyday real-world situations."
+              titleBn="বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন।"
+              className="text-meta text-muted-foreground mt-1"
+            />
+          </div>
+          <Badge variant="outline" size="sm" className="shrink-0 font-mono self-start sm:self-center">
+            {filteredScenarios.length} {locale === "bn" ? "কথোপকথন" : `conversation${filteredScenarios.length !== 1 ? "s" : ""}`}
+            {filteredScenarios.length > pageSize ? ` • ${paginatedScenarios.currentPage}/${paginatedScenarios.totalPages}` : ""}
+          </Badge>
+        </div>
 
-      {/* Search Input with Rainbow Border on Focus & Clear Button */}
-      <InputGroup className="bg-card">
-        <InputGroupPrefix>
-          <HugeiconsIcon
-            icon={Search01Icon}
-            size={20}
-            className="text-muted-foreground"
-          />
-        </InputGroupPrefix>
-        <Input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => {
-            const val = e.target.value;
-            startTransition(() => {
-              setSearchQuery(val);
-              setCurrentPage(1);
-            });
-          }}
-          placeholder={t("discovery.searchPlaceholder", locale)}
-          variant="ghost"
-          inputSize="lg"
-          className="w-full pl-12 pr-12 text-body"
-        />
-        {searchQuery && (
-          <InputGroupSuffix>
-            <button
-              type="button"
-              onClick={() => {
-                setSearchQuery("");
+        {/* Search Input with Rainbow Border on Focus & Clear Button */}
+        <InputGroup className="bg-muted/30">
+          <InputGroupPrefix>
+            <HugeiconsIcon
+              icon={Search01Icon}
+              size={18}
+              className="text-muted-foreground"
+            />
+          </InputGroupPrefix>
+          <Input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => {
+              const val = e.target.value;
+              startTransition(() => {
+                setSearchQuery(val);
                 setCurrentPage(1);
-              }}
-              aria-label="Clear search"
-              className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-            >
-              <HugeiconsIcon icon={Cancel01Icon} size={18} />
-            </button>
-          </InputGroupSuffix>
-        )}
-      </InputGroup>
-
-      {/* Category Horizontal Pills */}
-      <CategoryPills
-        selectedCategory={selectedCategory}
-        onSelectCategory={handleCategorySelect}
-      />
-
-      {/* Sticky Advanced Filter Bar */}
-      <FilterBar
-        level={level}
-        setLevel={(l) => startTransition(() => { setLevel(l); setCurrentPage(1); })}
-        lengthType={lengthType}
-        setLengthType={(len) => startTransition(() => { setLengthType(len); setCurrentPage(1); })}
-        style={style}
-        setStyle={(st) => startTransition(() => { setStyle(st); setCurrentPage(1); })}
-        onReset={handleResetFilters}
-        isFiltered={isFiltered}
-      />
-
-      {/* Results Count Summary */}
-      <div className="flex items-center justify-between pt-1">
-        <p className="text-meta text-muted-foreground">
-          Showing <span className="text-primary">{filteredScenarios.length}</span> conversation{filteredScenarios.length !== 1 ? "s" : ""}
-          {filteredScenarios.length > pageSize && (
-            <span className="ml-1 text-chip text-muted-foreground">
-              (Page {paginatedScenarios.currentPage} of {paginatedScenarios.totalPages})
-            </span>
+              });
+            }}
+            placeholder={t("discovery.searchPlaceholder", locale)}
+            variant="ghost"
+            inputSize="default"
+            className="w-full pl-11 pr-11 text-body h-11"
+          />
+          {searchQuery && (
+            <InputGroupSuffix>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setCurrentPage(1);
+                }}
+                aria-label="Clear search"
+                className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+              >
+                <HugeiconsIcon icon={Cancel01Icon} size={18} />
+              </button>
+            </InputGroupSuffix>
           )}
-        </p>
-      </div>
+        </InputGroup>
+
+        {/* Category Horizontal Pills */}
+        <div className="pt-1">
+          <CategoryPills
+            selectedCategory={selectedCategory}
+            onSelectCategory={handleCategorySelect}
+          />
+        </div>
+
+        {/* Embedded Filter Bar */}
+        <div className="pt-3 border-t border-border/60">
+          <FilterBar
+            level={level}
+            setLevel={(l) => startTransition(() => { setLevel(l); setCurrentPage(1); })}
+            lengthType={lengthType}
+            setLengthType={(len) => startTransition(() => { setLengthType(len); setCurrentPage(1); })}
+            style={style}
+            setStyle={(st) => startTransition(() => { setStyle(st); setCurrentPage(1); })}
+            onReset={handleResetFilters}
+            isFiltered={isFiltered}
+            embedded
+          />
+        </div>
+      </Card>
 
       {/* Scenarios Grid / Skeletons / Empty State */}
       {isPending ? (
