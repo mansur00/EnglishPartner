@@ -1831,7 +1831,7 @@ Entry format:
   - Consolidated `/explore` (`src/app/(app)/explore/page.tsx`, `src/components/discovery/FilterBar.tsx`) header, count badge, search bar, category pills, and embedded `FilterBar` into one unified `<Card>`.
   - Consolidated `/professions` (`src/app/(app)/professions/page.tsx`) header, track badges, and single-row Track + CEFR Level (`A1–C2`) `appearance-none h-11` `<select>` dropdowns into one unified `<Card>`.
   - Consolidated `/daily-practice` (`src/components/practice/DailyPracticeClient.tsx`) date, title, subtitle, and `TodayPanel` into one unified `<Card>`, and grouped the Spaced Repetition Vocabulary Review section (`ReviewQueue` + header) into its own unified `<Card>`.
-  - Upgraded `/progress` (`src/components/analytics/ProgressDashboard.tsx`) with a unified header `<Card>` (quick `Daily Practice` + `Take Quiz` CTAs), semantic accent borders/icon tiles on KPI cards, and cohesive brand/success/warning token colors across Vocabulary Retention and Weekly Activity.
+  - Upgraded `/progress` (`src/components/analytics/ProgressDashboard.tsx`) with a unified header `<Card>` (quick `Daily Practice` + `Take Quiz` CTAs), semantic accent borders/icon tiles on KPI cards, yellow (`bg-chart-2` / `bg-chart-2/60`) bars for Weekly Activity, and blue (`bg-chart-4`), orange (`bg-warning`), and green (`bg-chart-3`) bars for Vocabulary Retention.
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

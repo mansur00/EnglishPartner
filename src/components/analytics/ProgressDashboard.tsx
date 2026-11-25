@@ -225,9 +225,9 @@ export function ProgressDashboard() {
             {/* Stage Progress Breakdown */}
             <div className="space-y-3">
               {[
-                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-primary/45" },
-                { label: t("progress.stageReviewing"), count: metrics.vocabulary.reviewing, barColor: "bg-primary" },
-                { label: t("progress.stageMastered"), count: metrics.vocabulary.mastered, barColor: "bg-success" },
+                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-chart-4" },
+                { label: t("progress.stageReviewing"), count: metrics.vocabulary.reviewing, barColor: "bg-warning" },
+                { label: t("progress.stageMastered"), count: metrics.vocabulary.mastered, barColor: "bg-chart-3" },
               ].map((stage, sIdx) => (
                 <div key={sIdx} className="space-y-1">
                   <div className="flex justify-between text-chip">
@@ -297,8 +297,8 @@ export function ProgressDashboard() {
                       <div
                         className={
                           day.isToday
-                            ? "w-full bg-primary rounded-control transition-all"
-                            : "w-full bg-primary/40 rounded-control transition-all"
+                            ? "w-full bg-chart-2 rounded-control transition-all"
+                            : "w-full bg-chart-2/60 rounded-control transition-all"
                         }
                         style={{ height: `${heightPercent}%` }}
                       />
@@ -306,7 +306,7 @@ export function ProgressDashboard() {
                     <span
                       className={
                         day.isToday
-                          ? "text-chip text-primary"
+                          ? "text-chip text-warning"
                           : "text-chip text-muted-foreground"
                       }
                     >
