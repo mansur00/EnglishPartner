@@ -9,21 +9,21 @@ import { LocaleProvider } from "@/lib/i18n/provider";
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-sans",
+  variable: "--font-manrope",
   display: "swap",
 });
 
 const nunito = Nunito({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-heading",
+  variable: "--font-nunito",
   display: "swap",
 });
 
 const comicNeue = Comic_Neue({
   subsets: ["latin"],
   weight: ["400", "700"],
-  variable: "--font-conversation",
+  variable: "--font-comic-neue",
   display: "swap",
 });
 

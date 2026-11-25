@@ -287,7 +287,7 @@ export function ConversationInspectorSidebar({
                   <span>{locale === "bn" ? "শুনুন" : "Listen"}</span>
                 </Button>
               </div>
-              <p className="text-meta font-medium text-foreground leading-relaxed">
+              <p className="text-meta font-conversation font-medium text-foreground leading-relaxed">
                 &ldquo;{selectedLine.englishText}&rdquo;
               </p>
             </div>

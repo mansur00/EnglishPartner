@@ -144,7 +144,7 @@
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
       "line": 290,
       "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-meta font-medium text-foreground leading-relaxed\">"
+      "code": "<p className=\"text-meta font-conversation font-medium text-foreground leading-relaxed\">"
     },
     {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",

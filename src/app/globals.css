@@ -45,10 +45,10 @@ body {
 }
 
 @theme inline {
-  --font-heading: var(--font-heading), var(--font-bangla), sans-serif;
-  --font-sans: var(--font-sans), var(--font-bangla), sans-serif;
-  --font-conversation: var(--font-conversation), var(--font-bangla), sans-serif;
-  --font-mono: var(--font-sans), var(--font-bangla), sans-serif;
+  --font-heading: var(--font-nunito), var(--font-bangla), sans-serif;
+  --font-sans: var(--font-manrope), var(--font-bangla), sans-serif;
+  --font-conversation: var(--font-comic-neue), var(--font-bangla), sans-serif;
+  --font-mono: var(--font-manrope), var(--font-bangla), sans-serif;
   --font-bangla: var(--font-bangla), var(--font-bangla-fallback), sans-serif;
 
   /* Typography Scale (Section 2.3) */

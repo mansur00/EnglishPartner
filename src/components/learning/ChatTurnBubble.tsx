@@ -123,7 +123,7 @@ export function ChatTurnBubble({
               </span>
             </div>
 
-            <div className="text-body text-foreground leading-relaxed">
+            <div className="text-body font-conversation text-foreground leading-relaxed">
               {isGrammarActive ? (
                 <GrammarText
                   annotation={resolvedAnnotation}

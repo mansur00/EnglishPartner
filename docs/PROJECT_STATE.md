@@ -1854,7 +1854,8 @@ Entry format:
   - Mapped `--font-heading`, `--font-sans`, `--font-conversation`, and `--font-mono` (aliased to Manrope so strictly 3 English fonts exist) in `@theme inline` with `--font-bangla` fallback.
   - Added `@utility font-conversation` and `@utility text-conversation`; set `h1..h6 { font-family: var(--font-heading); }` in `@layer base`.
 - **Conversation & Heading Cleanup:**
-  - Applied `font-conversation` / `text-conversation` to `ChatBubble.tsx` (covering `RoleplayPartner.tsx` and `HideSpeakerPractice.tsx`), `ConversationTurn.tsx`, `CompleteLineCard.tsx`, `DialogueOrderCard.tsx`, and `ReadAloudCard.tsx`.
+  - Applied `font-conversation` / `text-conversation` to `ChatTurnBubble.tsx` (`/conversations/[slug]`), `ConversationInspectorSidebar.tsx` (selected sentence preview), `ChatBubble.tsx` (covering `RoleplayPartner.tsx` and `HideSpeakerPractice.tsx`), `ConversationTurn.tsx`, `CompleteLineCard.tsx`, `DialogueOrderCard.tsx`, and `ReadAloudCard.tsx`.
+  - Used distinct `next/font/google` CSS variables (`--font-manrope`, `--font-nunito`, `--font-comic-neue`) in `layout.tsx` mapped cleanly in `globals.css` `@theme inline` to prevent circular CSS variable resolution.
   - Removed overriding `font-sans` on `<h1>`/`<DialogTitle>` (`privacy/page.tsx`, `terms/page.tsx`, `RuleCard.tsx`) and `font-heading` on non-heading `<label>`/`<span>` elements in `SettingsClient.tsx`.
 
 ### 2026-11-17, state file created
