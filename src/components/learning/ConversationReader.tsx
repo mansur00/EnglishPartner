@@ -385,7 +385,7 @@ function ConversationReaderInner({
   });
 
   return (
-    <div className="lg:pr-80 xl:pr-96">
+    <div>
       {/* CENTER: Conversation Content Area */}
       <div className="space-y-6 min-w-0">
         {/* Top Navigation & Mobile Controls Trigger */}

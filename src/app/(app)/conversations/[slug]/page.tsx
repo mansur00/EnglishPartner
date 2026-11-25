@@ -186,7 +186,8 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
   ];
 
   return (
-    <PageContainer className="space-y-6 pb-12">
+    <div className="w-full lg:pr-80 xl:pr-96">
+      <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-12 space-y-6">
       {/* Top Breadcrumb & Action */}
       <div className="flex items-center justify-between">
         <Link href="/explore">
@@ -267,6 +268,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           scenarioDescription={scenario.description}
         />
       </div>
-    </PageContainer>
+      </div>
+    </div>
   );
 }
