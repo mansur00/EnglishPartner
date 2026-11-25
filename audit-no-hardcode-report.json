@@ -52,19 +52,19 @@
   "b_typography": [
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 442,
+      "line": 438,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"font-mono text-primary font-medium\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 534,
+      "line": 530,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 538,
+      "line": 534,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip text-primary font-medium\">{w.pos}</span>"
     },
@@ -313,13 +313,13 @@
   "d_layout_magic": [
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 488,
+      "line": 484,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<InputGroup className=\"bg-muted/40 rounded-control w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 778,
+      "line": 774,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },

@@ -1782,7 +1782,7 @@ Entry format:
 - **Right Word Inspector Sidebar (`src/components/vocabulary/MagicWordSidebar.tsx`):**
   - Displays tapped word's pronunciation (`speakText`), IPA, Save to Notebook toggle (`ecp_saved_vocabulary`), live multi-language translation (`useLiveTranslations`), meaning, example sentence, and grammar breakdown (`GrammarSummaryRow` + `createFallbackAnnotation`).
 - **`/vocabulary` Page (`src/app/(app)/vocabulary/page.tsx`):**
-  - Added `Magic Cards (40)` as the primary tab alongside `Saved Vocabulary` and `Daily Flashcard Review`, using the 36px 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9`) and a `<Sheet side="bottom">` drawer on mobile (`< lg`).
+  - Added `Magic Cards (40)` as the primary tab alongside `Saved Vocabulary` and `Daily Flashcard Review`, using the 36px 3-column layout (`lg:pr-80 xl:pr-96`, `lg:px-9`) and a `<Sheet side="bottom">` drawer on mobile (`< lg`), with header, guest sync, tabs, search, and category pills consolidated into one unified top card.
 - **Tests:** Added `tests/magic-cards.test.mjs` verifying all 40 Magic Cards and 20–40 words per deck.
   - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
 
