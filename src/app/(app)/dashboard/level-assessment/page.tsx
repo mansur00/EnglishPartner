@@ -89,7 +89,7 @@ export default function LevelAssessmentPage() {
 
   return (
     <div className={cn("w-full transition-all", isSubmitted && "lg:pr-80 xl:pr-96")}>
-      <PageContainer className="py-6 sm:py-8 space-y-6">
+      <PageContainer className="py-6 space-y-6 pb-16">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link href="/dashboard">
           <Button variant="ghost" size="sm" className="gap-1.5 cursor-pointer">

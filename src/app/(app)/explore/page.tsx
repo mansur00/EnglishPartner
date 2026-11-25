@@ -102,7 +102,7 @@ export default function ExplorePage() {
   };
 
   return (
-    <PageContainer className="space-y-6 pb-16">
+    <PageContainer className="py-6 space-y-6 pb-16">
       {/* Unified Header, Search, Categories & Filters Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">

@@ -51,7 +51,7 @@ export default function ProfessionsIndexPage() {
   });
 
   return (
-    <PageContainer className="space-y-6">
+    <PageContainer className="py-6 space-y-6 pb-16">
       {/* Unified Header & Filters Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
         <div className="space-y-1.5">

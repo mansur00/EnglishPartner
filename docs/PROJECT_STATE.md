@@ -1842,6 +1842,8 @@ Entry format:
     2. **Row 2 (Full-width):** **Start Conversation** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with `Browse All` secondary action, interactive **Listen** button on Dialogue Preview, and proportional left-aligned `text-body` dialogue bubbles).
 - **Brand Logo (`public/logo.svg`, `src/app/icon.svg`, `src/components/navigation/Header.tsx`):**
   - Replaced the placeholder `E` monogram in `Header.tsx` with the official `logo.svg` (`454x150`, resized to `h-9 sm:h-10 w-auto object-contain`) from Google Drive and configured `src/app/icon.svg` for browser favicon support.
+- **Standardized Content Width & Top Bar Spacing (`PageContainer` + `py-6`):**
+  - Unified all standard app pages (`DashboardClient.tsx`, `explore/page.tsx`, `explore/category/[slug]/page.tsx`, `DailyPracticeClient.tsx`, `professions/page.tsx`, `professions/[slug]/page.tsx`, `what-should-i-say/page.tsx`, `WhatShouldISay.tsx`, `quiz/page.tsx`, `ConversationQuizPlayClient.tsx`, `QuizResultDetailClient.tsx`, `dashboard/level-assessment/page.tsx`, `progress/page.tsx`, `ProgressDashboard.tsx`, `SettingsClient.tsx`) to `PageContainer` (`container-app` 1200px) with consistent `py-6` (24px) top gap from the header bar (excluding the 3 full-width + right-sidebar pages: `/conversations/[slug]`, `/roleplay`, `/vocabulary`).
     3. **Row 3 (2-column):** **Vocabulary & Magic Cards** (`/vocabulary`) + **Conversation Quiz Practice** (`/quiz`).
   - Removed extra lower track/empty cards for a clean, clutter-free dashboard.
 

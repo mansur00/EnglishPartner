@@ -42,7 +42,7 @@ export default async function ProfessionDetailPage({ params }: ProfessionPagePro
   );
 
   return (
-    <PageContainer className="space-y-6">
+    <PageContainer className="py-6 space-y-6 pb-16">
       <div className="space-y-3">
         <Link href="/professions">
           <Button variant="ghost" size="sm" className="btn-back-nav text-label">

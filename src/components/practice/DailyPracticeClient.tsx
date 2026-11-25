@@ -149,7 +149,7 @@ export function DailyPracticeClient() {
   const scenarioLevel = challenge?.scenarioLevel || "A1";
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-8 max-w-5xl">
+    <PageContainer className="py-6 space-y-8 pb-16">
       {/* 1. Unified Header & Today Panel Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">

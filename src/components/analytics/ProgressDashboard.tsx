@@ -118,7 +118,7 @@ export function ProgressDashboard() {
   ];
 
   return (
-    <div className="space-y-6 max-w-container mx-auto">
+    <div className="space-y-6 w-full">
       {/* Unified Header Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

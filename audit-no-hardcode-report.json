@@ -385,12 +385,6 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 152,
-      "detail": "Hardcoded layout constant / magic number: max-w-5xl",
-      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-8 max-w-5xl\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
       "line": 164,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
@@ -400,30 +394,6 @@
       "line": 230,
       "detail": "Hardcoded layout constant / magic number: max-w-3xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-3xl leading-relaxed\">"
-    },
-    {
-      "file": "src/components/quiz/QuizResultDetailClient.tsx",
-      "line": 42,
-      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
-      "code": "<PageContainer className=\"py-8 max-w-4xl\">"
-    },
-    {
-      "file": "src/components/quiz/QuizResultDetailClient.tsx",
-      "line": 52,
-      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
-      "code": "<PageContainer className=\"py-8 max-w-4xl space-y-4\">"
-    },
-    {
-      "file": "src/components/quiz/QuizResultDetailClient.tsx",
-      "line": 91,
-      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
-      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-6 max-w-4xl\">"
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 229,
-      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
-      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-8 max-w-4xl\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",

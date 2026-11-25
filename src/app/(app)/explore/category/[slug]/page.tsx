@@ -38,7 +38,7 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
   const isShoppingCategory = slug === "shopping-and-money" || slug === "shopping-money";
 
   return (
-    <PageContainer className="space-y-6 pb-16">
+    <PageContainer className="py-6 space-y-6 pb-16">
       <div className="space-y-3">
         <Link href="/explore">
           <Button variant="ghost" size="sm" className="btn-back-nav text-label">

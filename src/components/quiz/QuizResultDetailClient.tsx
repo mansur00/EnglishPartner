@@ -39,7 +39,7 @@ export function QuizResultDetailClient() {
 
   if (!loaded) {
     return (
-      <PageContainer className="py-8 max-w-4xl">
+      <PageContainer className="py-6 pb-16">
         <Card className="p-6 bg-card text-center text-muted-foreground">
           {locale === "bn" ? "ফলাফল লোড হচ্ছে..." : "Loading quiz details..."}
         </Card>
@@ -49,7 +49,7 @@ export function QuizResultDetailClient() {
 
   if (!result) {
     return (
-      <PageContainer className="py-8 max-w-4xl space-y-4">
+      <PageContainer className="py-6 space-y-4 pb-16">
         <Card className="p-6 bg-card text-center space-y-3">
           <h1 className="text-card-title text-foreground">
             {locale === "bn" ? "কুইজ ফলাফল পাওয়া যায়নি" : "Quiz Result Not Found"}
@@ -88,7 +88,7 @@ export function QuizResultDetailClient() {
   });
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-6 max-w-4xl">
+    <PageContainer className="py-6 space-y-6 pb-16">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link href={backHref}>
           <Button variant="ghost" size="sm" className="gap-1.5 cursor-pointer">

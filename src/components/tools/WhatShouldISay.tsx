@@ -130,7 +130,7 @@ export function WhatShouldISay() {
   };
 
   return (
-    <div className="space-y-6 w-full max-w-reading mx-auto">
+    <div className="space-y-6 w-full">
       {/* Unified Compact Header & Input Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
         <div className="space-y-1.5">

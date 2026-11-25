@@ -226,7 +226,7 @@ export function SettingsClient() {
   };
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-8 max-w-4xl">
+    <PageContainer className="py-6 space-y-8 pb-16">
       {/* 1. Page Header */}
       <div className="border-b border-border pb-6 space-y-1.5">
         <div className="flex items-center gap-2 text-chip text-muted-foreground uppercase tracking-wider">

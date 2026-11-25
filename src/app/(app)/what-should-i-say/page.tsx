@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function WhatShouldISayPage() {
   return (
-    <PageContainer className="py-6 sm:py-10 pb-16">
+    <PageContainer className="py-6 pb-16">
       <WhatShouldISay />
     </PageContainer>
   );

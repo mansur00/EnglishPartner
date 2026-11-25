@@ -58,7 +58,7 @@ export default function QuizHubPage() {
   }, [selectedLevel, searchQuery]);
 
   return (
-    <PageContainer className="py-6 sm:py-8 space-y-6">
+    <PageContainer className="py-6 space-y-6 pb-16">
       {/* Header & Filters Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border space-y-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
