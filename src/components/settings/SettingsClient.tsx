@@ -616,19 +616,21 @@ export function SettingsClient() {
                 {t("settings.targetLevelDesc", locale)}
               </p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-lg">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-2xl">
               {[
                 { lvl: "A1", labelBn: "A1 শিক্ষানবিস", labelEn: "A1 Beginner" },
                 { lvl: "A2", labelBn: "A2 প্রাথমিক", labelEn: "A2 Elementary" },
                 { lvl: "B1", labelBn: "B1 মধ্যবর্তী", labelEn: "B1 Intermediate" },
                 { lvl: "B2", labelBn: "B2 উচ্চ মধ্যবর্তী", labelEn: "B2 Upper Intermediate" },
+                { lvl: "C1", labelBn: "C1 অগ্রসর", labelEn: "C1 Advanced" },
+                { lvl: "C2", labelBn: "C2 দক্ষতা", labelEn: "C2 Mastery" },
               ].map((item) => (
                 <button
                   key={item.lvl}
                   type="button"
                   onClick={() => handleTargetLevelChange(item.lvl)}
                   className={cn(
-                    "h-control px-2.5 rounded-control text-label font-medium transition-all cursor-pointer text-center",
+                    "min-h-control px-3 py-1.5 rounded-control text-label font-medium transition-all cursor-pointer text-center",
                     targetLevel === item.lvl
                       ? "bg-primary text-primary-foreground shadow-xs"
                       : "bg-muted/70 text-foreground hover:bg-muted"

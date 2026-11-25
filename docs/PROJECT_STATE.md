@@ -1801,6 +1801,10 @@ Entry format:
     3. **Voice & Speed Controls:** Replaced single-line truncated speed pills (`Clear (0.88...`) with clean 2-line stacked speed buttons (`Slow` / `0.75x`, `Clear` / `0.88x`, `Normal` / `1.0x`) so labels never truncate.
     4. **Active Session Context:** Compact `You` / `Partner` role summary and `End Session & Get Feedback` action, now visible without scrolling past 11 topic pills.
 
+### 2026-11-25, Settings Target CEFR Level Extended to A1–C2
+- **Settings (`src/components/settings/SettingsClient.tsx`):**
+  - Expanded Target CEFR Level selector from `A1–B2` to full `A1–C2` (`A1 Beginner`, `A2 Elementary`, `B1 Intermediate`, `B2 Upper Intermediate`, `C1 Advanced`, `C2 Mastery` with EN/BN labels) in a clean responsive `grid-cols-2 sm:grid-cols-3` layout.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
