@@ -7,6 +7,7 @@ import {
   Briefcase01Icon,
   CheckmarkCircle02Icon,
   ArrowRight01Icon,
+  ArrowDown01Icon,
   Clock01Icon,
   Layers01Icon,
 } from "@hugeicons/core-free-icons";
@@ -79,60 +80,61 @@ export default function ProfessionsIndexPage() {
           </p>
         </div>
 
-        {/* Category Track Pills */}
-        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-border/60">
-          {[
-            { id: "all", labelEn: "All Tracks", labelBn: "সব ট্র্যাক" },
-            { id: "tech", labelEn: "Tech & Engineering", labelBn: "টেক ও ইঞ্জিনিয়ারিং" },
-            { id: "business", labelEn: "Business & Freelance", labelBn: "ব্যবসা ও ফ্রিল্যান্সিং" },
-            { id: "service", labelEn: "Healthcare", labelBn: "স্বাস্থ্যসেবা" },
-            { id: "education", labelEn: "Education", labelBn: "শিক্ষা" },
-          ].map((cat) => {
-            const active = selectedCat === cat.id;
-            return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setSelectedCat(cat.id)}
-                className={cn(
-                  "px-3.5 py-1.5 rounded-pill text-chip transition-all cursor-pointer",
-                  active
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-muted"
-                )}
-              >
-                {locale === "bn" ? cat.labelBn : cat.labelEn}
-              </button>
-            );
-          })}
-        </div>
+        {/* Track & CEFR Level Dropdowns on One Line */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-3 border-t border-border/60">
+          <div className="relative">
+            <select
+              aria-label={locale === "bn" ? "ক্যারিয়ার ট্র্যাক নির্বাচন করুন" : "Select career track"}
+              value={selectedCat}
+              onChange={(e) => setSelectedCat(e.target.value)}
+              className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {[
+                { id: "all", labelEn: "Track: All Tracks", labelBn: "ট্র্যাক: সব ট্র্যাক" },
+                { id: "tech", labelEn: "Track: Tech & Engineering", labelBn: "ট্র্যাক: টেক ও ইঞ্জিনিয়ারিং" },
+                { id: "business", labelEn: "Track: Business & Freelance", labelBn: "ট্র্যাক: ব্যবসা ও ফ্রিল্যান্সিং" },
+                { id: "service", labelEn: "Track: Healthcare", labelBn: "ট্র্যাক: স্বাস্থ্যসেবা" },
+                { id: "education", labelEn: "Track: Education", labelBn: "ট্র্যাক: শিক্ষা" },
+              ].map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {locale === "bn" ? cat.labelBn : cat.labelEn}
+                </option>
+              ))}
+            </select>
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              size={16}
+              className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+            />
+          </div>
 
-        {/* CEFR Level Filter Pills (A1 - C2) */}
-        <div className="flex flex-wrap items-center gap-1.5 pt-1">
-          <span className="text-chip text-muted-foreground mr-1 font-mono">
-            {locale === "bn" ? "লেভেল:" : "CEFR Level:"}
-          </span>
-          {CEFR_LEVELS.map((lvl) => {
-            const active = selectedLevel === lvl;
-            const isUserLevel = userTargetLevel === lvl;
-            return (
-              <button
-                key={lvl}
-                type="button"
-                onClick={() => setSelectedLevel(lvl)}
-                className={cn(
-                  "px-2.5 py-1 rounded-control text-chip font-mono transition-all cursor-pointer",
-                  active
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : isUserLevel
-                    ? "bg-primary/15 text-primary border border-primary/30 hover:bg-primary/20"
-                    : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
-                )}
-              >
-                {lvl === "all" ? (locale === "bn" ? "সব লেভেল" : "All Levels") : lvl}
-              </button>
-            );
-          })}
+          <div className="relative">
+            <select
+              aria-label={locale === "bn" ? "CEFR লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
+              value={selectedLevel}
+              onChange={(e) =>
+                setSelectedLevel(e.target.value as "all" | ProfessionCefrLevel)
+              }
+              className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {CEFR_LEVELS.map((lvl) => (
+                <option key={lvl} value={lvl}>
+                  {lvl === "all"
+                    ? locale === "bn"
+                      ? "CEFR লেভেল: সব লেভেল (A1–C2)"
+                      : "CEFR Level: All Levels (A1–C2)"
+                    : userTargetLevel === lvl
+                    ? `${locale === "bn" ? "CEFR লেভেল:" : "CEFR Level:"} ${lvl} (${locale === "bn" ? "আপনার লক্ষ্য" : "Your Target"})`
+                    : `${locale === "bn" ? "CEFR লেভেল:" : "CEFR Level:"} ${lvl}`}
+                </option>
+              ))}
+            </select>
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              size={16}
+              className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+            />
+          </div>
         </div>
       </Card>
 
