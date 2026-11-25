@@ -1868,6 +1868,10 @@ Entry format:
 - Added semantic tokens `--color-bubble-speaker-a` (`#FDFBE8` light / `#262417` dark) and `--color-bubble-speaker-b` (`#F0FDF0` light / `#15261B` dark) in `src/app/globals.css`.
 - Updated `ChatTurnBubble.tsx` (`/conversations/[slug]`, borderless `border-0` default with `2px` `.rainbow-border` when active) and `ChatBubble.tsx` (`/roleplay` and `HideSpeakerPractice`) to use Speaker A (`bg-bubble-speaker-a`) and Speaker B (`bg-bubble-speaker-b`).
 
+### 2026-11-26, Comprehensive AI Word Intelligence (Popup & Vocabulary Sidebar)
+- Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching and deterministic fallback).
+- Added shared `src/components/shared/WordDetailsSections.tsx` displaying Synonyms, Antonyms, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in both `WordDetailPopover.tsx` and `MagicWordSidebar.tsx`.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

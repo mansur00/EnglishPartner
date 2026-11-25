@@ -19,6 +19,8 @@ import { useTranslations, useLiveTranslations } from "@/lib/i18n";
 import { isRtlLanguage, getLanguageMeta } from "@/lib/i18n/languages";
 import { speakText } from "@/lib/audio/speech-engine";
 import type { MagicCardDeck, MagicWordItem } from "@/content/seed/magic-cards";
+import { useWordDetails } from "@/lib/ai/use-word-details";
+import { WordDetailsSections } from "@/components/shared/WordDetailsSections";
 
 interface MagicWordSidebarProps {
   activeDeck: MagicCardDeck | null;
@@ -63,6 +65,24 @@ export function MagicWordSidebar({
     if (!selectedWord) return null;
     return createFallbackAnnotation(selectedWord.id, selectedWord.example);
   }, [selectedWord]);
+
+  const wordDetailsReq = useMemo(
+    () =>
+      selectedWord
+        ? {
+            word: selectedWord.word,
+            partOfSpeech: selectedWord.pos,
+            contextSentence: selectedWord.example,
+            existingMeaning: selectedWord.meaning,
+          }
+        : null,
+    [selectedWord]
+  );
+
+  const { details, isLoading: isLoadingDetails } = useWordDetails(
+    wordDetailsReq,
+    Boolean(selectedWord)
+  );
 
   if (!selectedWord) {
     return (
@@ -288,6 +308,13 @@ export function MagicWordSidebar({
           />
         )}
       </div>
+
+      {/* Rich Word Intelligence: Synonyms, Antonyms, Tense/POS Forms, Sentence Making */}
+      <WordDetailsSections
+        details={details}
+        isLoading={isLoadingDetails}
+        locale={locale}
+      />
     </div>
   );
 }

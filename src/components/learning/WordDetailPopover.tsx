@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import { t, useTranslations, useLiveTranslations } from "@/lib/i18n";
@@ -24,6 +24,8 @@ import {
 } from "@/components/ui/dialog";
 import type { RenderToken } from "@/lib/grammar/types";
 import { getLabel, getRuleCard } from "@/lib/grammar/taxonomy";
+import { useWordDetails } from "@/lib/ai/use-word-details";
+import { WordDetailsSections } from "@/components/shared/WordDetailsSections";
 
 interface WordDetailPopoverProps {
   entry: VocabularyEntry | null;
@@ -75,6 +77,26 @@ export function WordDetailPopover({
 }: WordDetailPopoverProps) {
   const { locale, translationLocale } = useTranslations();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+
+  const wordDetailsReq = useMemo(
+    () =>
+      entry && isOpen
+        ? {
+            word: entry.word,
+            partOfSpeech: entry.partOfSpeech,
+            contextSentence: entry.exampleSentence?.startsWith("Practice using")
+              ? undefined
+              : entry.exampleSentence,
+            existingMeaning: entry.generalMeaningEn,
+          }
+        : null,
+    [entry, isOpen]
+  );
+
+  const { details, isLoading: isLoadingDetails } = useWordDetails(
+    wordDetailsReq,
+    Boolean(entry && isOpen)
+  );
 
   const needsLive = Boolean(entry && translationLocale !== "none" && translationLocale !== "bn");
   const { translations: liveWordMap } = useLiveTranslations(
@@ -145,7 +167,7 @@ export function WordDetailPopover({
         {/* Pronunciation & Audio */}
         <div className="flex items-center gap-3 py-2">
           <span className="text-chip font-mono text-muted-foreground bg-muted px-2.5 py-1 rounded-control border-0">
-            {entry.ipa}
+            {details?.ipa || entry.ipa}
           </span>
           <Button
             variant={isPlayingAudio ? "default" : "outline"}
@@ -229,10 +251,11 @@ export function WordDetailPopover({
               className={cn("text-meta text-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}
             >
               {translationLocale === "bn"
-                ? entry.contextualMeaningBn
+                ? (details?.contextualMeaningBn || entry.contextualMeaningBn)
                 : translationLocale === "none"
-                ? (entry.contextualMeaningEn || entry.contextualMeaningBn)
+                ? (details?.meaningEn || entry.contextualMeaningEn || entry.contextualMeaningBn)
                 : (liveWordMap[(entry.contextualMeaningEn || entry.contextualMeaningBn).trim()] ||
+                   details?.meaningEn ||
                    entry.contextualMeaningEn ||
                    entry.contextualMeaningBn)}
             </p>
@@ -244,68 +267,81 @@ export function WordDetailPopover({
             </span>
             <p
               dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
-              className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}
+              className={cn("text-meta text-muted-foreground leading-relaxed", translationLocale === "bn" && "text-bangla")}
             >
               {translationLocale === "bn"
-                ? entry.generalMeaningBn
+                ? (details?.meaningBn || entry.generalMeaningBn)
                 : translationLocale === "none"
-                ? (entry.generalMeaningEn || entry.generalMeaningBn)
+                ? (details?.meaningEn || entry.generalMeaningEn || entry.generalMeaningBn)
                 : (liveWordMap[(entry.generalMeaningEn || entry.generalMeaningBn).trim()] ||
+                   details?.meaningEn ||
                    entry.generalMeaningEn ||
                    entry.generalMeaningBn)}
             </p>
+            {details?.meaningEn && translationLocale === "bn" && (
+              <p className="text-chip text-muted-foreground mt-1">{details.meaningEn}</p>
+            )}
           </div>
 
-          {/* Example Sentence */}
-          <div className="bg-muted/40 p-3.5 rounded-panel border-0">
-            <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1">
-              Example Sentence:
-            </span>
-            <p className="text-body text-foreground italic font-sans leading-relaxed">
-              &ldquo;{entry.exampleSentence}&rdquo;
-            </p>
-          </div>
+          {/* Rich AI Word Details: Synonyms, Antonyms, Tense & POS Word Forms, Sentence Making */}
+          <WordDetailsSections
+            details={details}
+            isLoading={isLoadingDetails}
+            locale={locale}
+          />
 
-          {/* Word Forms if available */}
-          {entry.wordForms && (
-            <div className="pt-1">
-              <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1.5">
-                Word Forms:
-              </span>
-              <div className="flex flex-wrap gap-2 text-chip">
-                {entry.wordForms.past && (
-                  <WordFormBadge label={t("learning.past", locale)} value={entry.wordForms.past} />
-                )}
-                {entry.wordForms.pastParticiple && (
-                  <WordFormBadge
-                    label={t("learning.pastParticiple", locale)}
-                    value={entry.wordForms.pastParticiple}
-                  />
-                )}
-                {entry.wordForms.plural && (
-                  <WordFormBadge label={t("learning.plural", locale)} value={entry.wordForms.plural} />
-                )}
+          {/* Static fallback when AI details haven't loaded */}
+          {!details && !isLoadingDetails && (
+            <>
+              <div className="bg-muted/40 p-3.5 rounded-panel border-0">
+                <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1">
+                  Example Sentence:
+                </span>
+                <p className="text-body text-foreground italic font-sans leading-relaxed">
+                  &ldquo;{entry.exampleSentence}&rdquo;
+                </p>
               </div>
-            </div>
-          )}
 
-          {/* Synonyms if available */}
-          {entry.synonyms && entry.synonyms.length > 0 && (
-            <div className="pt-1">
-              <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1.5">
-                {locale === "bn" ? "বিকল্প শব্দ:" : "Synonyms:"}
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {entry.synonyms.map((syn, idx) => (
-                  <span
-                    key={idx}
-                    className="text-chip px-2.5 py-1 rounded-pill bg-muted text-muted-foreground border-0"
-                  >
-                    {syn}
+              {entry.wordForms && (
+                <div className="pt-1">
+                  <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1.5">
+                    Word Forms:
                   </span>
-                ))}
-              </div>
-            </div>
+                  <div className="flex flex-wrap gap-2 text-chip">
+                    {entry.wordForms.past && (
+                      <WordFormBadge label={t("learning.past", locale)} value={entry.wordForms.past} />
+                    )}
+                    {entry.wordForms.pastParticiple && (
+                      <WordFormBadge
+                        label={t("learning.pastParticiple", locale)}
+                        value={entry.wordForms.pastParticiple}
+                      />
+                    )}
+                    {entry.wordForms.plural && (
+                      <WordFormBadge label={t("learning.plural", locale)} value={entry.wordForms.plural} />
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {entry.synonyms && entry.synonyms.length > 0 && (
+                <div className="pt-1">
+                  <span className="text-chip text-muted-foreground uppercase tracking-wider block mb-1.5">
+                    {locale === "bn" ? "বিকল্প শব্দ:" : "Synonyms:"}
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {entry.synonyms.map((syn, idx) => (
+                      <span
+                        key={idx}
+                        className="text-chip px-2.5 py-1 rounded-pill bg-muted text-muted-foreground border-0"
+                      >
+                        {syn}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
 
