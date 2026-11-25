@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   PageContainer,
+  HeroBand,
   TodayPanel,
   TopicCard,
   CefrChip,
@@ -44,7 +45,7 @@ export function DashboardClient() {
   return (
     <PageContainer className="py-6 sm:py-8 space-y-6 pb-16">
       {/* 1. Rounded Deep-Violet Hero Banner Card */}
-      <div className="rounded-card bg-band-panel border border-band-panel-border text-band-panel-ink p-6 md:p-7 shadow-card">
+      <HeroBand className="rounded-card p-6 md:p-7 shadow-card">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-page-title text-band-panel-ink">
@@ -57,7 +58,7 @@ export function DashboardClient() {
 
           <TodayPanel />
         </div>
-      </div>
+      </HeroBand>
 
       {/* 2. Row 1: Level Assessment Quiz Card + AI Partner CTA Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
