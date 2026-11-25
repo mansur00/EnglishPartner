@@ -139,18 +139,13 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
         </Sheet>
 
         {/* Logo */}
-        <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex size-control items-center justify-center rounded-control bg-primary text-primary-foreground font-heading text-card-title shadow-xs group-hover:opacity-90 transition-opacity shrink-0">
-            E
-          </div>
-          <div className="hidden sm:flex flex-col">
-            <span className="font-heading text-card-title leading-tight text-foreground">
-              English Partner
-            </span>
-            <span className="text-chip text-muted-foreground">
-              Conversation Practice
-            </span>
-          </div>
+        <Link href="/dashboard" className="flex items-center group shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.svg"
+            alt="English Partner"
+            className="h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity"
+          />
         </Link>
       </div>
 

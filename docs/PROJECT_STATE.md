@@ -1840,6 +1840,8 @@ Entry format:
   - Replaced full-bleed `HeroBand` + overlapping cards with `<PageContainer>` containing a rounded `<HeroBand className="rounded-card p-6 md:p-7 shadow-card">` followed by 3 structured rows:
     1. **Row 1 (2-column):** **Level Assessment Quiz** (`/dashboard/level-assessment`) + **AI Conversation Partner** (`/roleplay`).
     2. **Row 2 (Full-width):** **Start Conversation** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with `Browse All` secondary action, interactive **Listen** button on Dialogue Preview, and proportional left-aligned `text-body` dialogue bubbles).
+- **Brand Logo (`public/logo.svg`, `src/app/icon.svg`, `src/components/navigation/Header.tsx`):**
+  - Replaced the placeholder `E` monogram in `Header.tsx` with the official `logo.svg` (`454x150`, resized to `h-9 sm:h-10 w-auto object-contain`) from Google Drive and configured `src/app/icon.svg` for browser favicon support.
     3. **Row 3 (2-column):** **Vocabulary & Magic Cards** (`/vocabulary`) + **Conversation Quiz Practice** (`/quiz`).
   - Removed extra lower track/empty cards for a clean, clutter-free dashboard.
 

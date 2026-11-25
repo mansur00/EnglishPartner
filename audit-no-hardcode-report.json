@@ -378,6 +378,12 @@
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
     {
+      "file": "src/components/navigation/Header.tsx",
+      "line": 147,
+      "detail": "Hardcoded layout constant / magic number: h-10",
+      "code": "className=\"h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
+    },
+    {
       "file": "src/components/practice/DailyPracticeClient.tsx",
       "line": 152,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl",
