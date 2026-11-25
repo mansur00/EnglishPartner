@@ -22,6 +22,7 @@ import {
   Search01Icon,
   PlayCircleIcon,
   SparklesIcon,
+  ArrowDown01Icon,
 } from "@hugeicons/core-free-icons";
 
 const ALL_LEVELS: ("ALL" | CefrLevelCode)[] = [
@@ -105,18 +106,18 @@ export default function QuizHubPage() {
                   ? "কথোপকথন কুইজ খুঁজুন..."
                   : "Search conversation quizzes..."
               }
-              className="pl-9 h-control"
+              className="pl-9 h-11"
             />
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-3 relative">
             <select
               aria-label={locale === "bn" ? "লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
               value={selectedLevel}
               onChange={(e) =>
                 setSelectedLevel(e.target.value as "ALL" | CefrLevelCode)
               }
-              className="w-full h-control rounded-control border border-border bg-background px-3 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
             >
               {ALL_LEVELS.map((lvl) => {
                 const qCount = lvl === "ALL" ? null : getQuestionCountForLevel(lvl);
@@ -131,16 +132,21 @@ export default function QuizHubPage() {
                 );
               })}
             </select>
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              size={16}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+            />
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 relative">
             <select
               aria-label={locale === "bn" ? "স্টাইল নির্বাচন করুন" : "Select conversation style"}
               value={selectedStyle}
               onChange={(e) =>
                 setSelectedStyle(e.target.value as ConversationStyle)
               }
-              className="w-full h-control rounded-control border border-border bg-background px-3 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
             >
               {CONVERSATION_STYLES.map((st) => (
                 <option key={st} value={st} className="capitalize">
@@ -148,14 +154,19 @@ export default function QuizHubPage() {
                 </option>
               ))}
             </select>
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              size={16}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+            />
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 relative">
             <select
               aria-label={locale === "bn" ? "দৈর্ঘ্য নির্বাচন করুন" : "Select conversation length"}
               value={selectedLengthIdx}
               onChange={(e) => setSelectedLengthIdx(Number(e.target.value))}
-              className="w-full h-control rounded-control border border-border bg-background px-3 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
             >
               {LENGTH_KEYS.map((len, idx) => (
                 <option key={len} value={idx} className="capitalize">
@@ -163,6 +174,11 @@ export default function QuizHubPage() {
                 </option>
               ))}
             </select>
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              size={16}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+            />
           </div>
         </div>
       </Card>
