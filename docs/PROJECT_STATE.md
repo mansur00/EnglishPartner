@@ -1793,6 +1793,14 @@ Entry format:
 - **Tests:** Added `tests/magic-cards.test.mjs` verifying all 40 Magic Cards and 20–40 words per deck.
   - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
 
+### 2026-11-25, AI Partner (`/roleplay`) Right Sidebar UX Cleanup
+- **Organized Card Grouping (`src/components/tools/RoleplayPartner.tsx`):**
+  - Grouped `sidebarControls` into 4 clean, bordered sub-cards (`rounded-card border border-border/60 bg-muted/25 p-3`):
+    1. **Compact Header & New Topic:** Removed redundant `Milestones 2D & 3B` / `AI Partner` stacked tags and duplicate `+` text; condensed status to a compact `Live` / `Offline` pill with tooltip for full model info.
+    2. **Topics & Mode:** Replaced the 11+ sprawling wrapped pills with a pinned full-width `Freestyle Talking` button and a compact scrollable topic list (`max-h-48 overflow-y-auto`) with left-aligned titles and right-aligned CEFR/Custom badges.
+    3. **Voice & Speed Controls:** Replaced single-line truncated speed pills (`Clear (0.88...`) with clean 2-line stacked speed buttons (`Slow` / `0.75x`, `Clear` / `0.88x`, `Normal` / `1.0x`) so labels never truncate.
+    4. **Active Session Context:** Compact `You` / `Partner` role summary and `End Session & Get Feedback` action, now visible without scrolling past 11 topic pills.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

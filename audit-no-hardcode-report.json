@@ -292,7 +292,7 @@
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1009,
+      "line": 1026,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-label font-semibold text-foreground truncate\">"
     },
@@ -415,13 +415,13 @@
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1026,
+      "line": 1043,
       "detail": "Arbitrary layout [Npx] utility: h-[calc(100dvh-11.5rem)], h-[calc(100dvh-7.5rem)], min-h-[420px]",
       "code": "<Card className=\"p-4 sm:p-6 bg-card rounded-card gap-4 h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)] min-h-[420px] flex flex-col justify-between shadow-xs\">"
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1498,
+      "line": 1515,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     }
@@ -520,14 +520,6 @@
     },
     {
       "detail": "ClassName repeated 3 times",
-      "className": "text-chip text-muted-foreground leading-relaxed",
-      "files": [
-        "src/components/navigation/Sidebar.tsx",
-        "src/components/tools/RoleplayPartner.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
       "className": "group p-4 rounded-panel bg-muted/60 hover:bg-muted transition-colors flex flex-col justify-between space-y-3 cursor-pointer",
       "files": [
         "src/components/practice/DailyPracticeClient.tsx"
@@ -594,6 +586,13 @@
       "className": "block font-heading text-label text-foreground",
       "files": [
         "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "rounded-card border border-border/60 bg-muted/25 p-3 space-y-2.5",
+      "files": [
+        "src/components/tools/RoleplayPartner.tsx"
       ]
     },
     {
