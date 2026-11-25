@@ -170,7 +170,7 @@ export function DashboardClient() {
 
             {/* Right Column: Drive Illustration SVG */}
             <div className="lg:col-span-5 flex items-center justify-center">
-              <div className="w-full rounded-panel bg-card/85 border border-border/60 p-4 flex items-center justify-center shadow-2xs">
+              <div className="w-full rounded-panel bg-card/85 p-4 flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/dashboard-illustration.svg"

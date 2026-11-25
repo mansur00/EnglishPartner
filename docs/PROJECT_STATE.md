@@ -1839,7 +1839,7 @@ Entry format:
 - **Dashboard (`src/components/dashboard/DashboardClient.tsx`):**
   - Replaced full-bleed `HeroBand` + overlapping cards with `<PageContainer>` containing a rounded `<HeroBand className="rounded-card p-6 md:p-7 shadow-card">` followed by 3 structured rows:
     1. **Row 1 (2-column):** **Level Assessment Quiz** (`/dashboard/level-assessment`) + **AI Conversation Partner** (`/roleplay`).
-    2. **Row 2 (Full-width):** **Daily Conversation Practice** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with concise title + 1-line copy, `Start Daily Practice` + `Browse All` CTAs, and `public/dashboard-illustration.svg` on the right).
+    2. **Row 2 (Full-width):** **Daily Conversation Practice** feature card (`.rainbow-border` `<TopicCard topic="shopping">` with concise title + 1-line copy, `Start Daily Practice` + `Browse All` CTAs, and borderless `public/dashboard-illustration.svg` on the right).
 - **Brand Logo (`public/logo.svg`, `src/app/icon.svg`, `src/components/navigation/Header.tsx`):**
   - Replaced the placeholder `E` monogram in `Header.tsx` with the official `logo.svg` (`454x150`, resized to `h-9 sm:h-10 w-auto object-contain`) from Google Drive and configured `src/app/icon.svg` for browser favicon support.
 - **Standardized Content Width & Top Bar Spacing (`PageContainer` + `py-6`):**
