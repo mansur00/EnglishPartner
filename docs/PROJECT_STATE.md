@@ -1833,6 +1833,7 @@ Entry format:
   - Consolidated `/daily-practice` (`src/components/practice/DailyPracticeClient.tsx`) date, title, subtitle, and `TodayPanel` into one unified `<Card>`, and grouped the Spaced Repetition Vocabulary Review section (`ReviewQueue` + header) into its own unified `<Card>`.
   - Upgraded `/progress` (`src/components/analytics/ProgressDashboard.tsx`) with a unified header `<Card>` (quick `Daily Practice` + `Take Quiz` CTAs), semantic accent borders/icon tiles on KPI cards, yellow (`bg-chart-2` / `bg-chart-2/60`) bars for Weekly Activity, and blue (`bg-chart-4`), orange (`bg-warning`), and green (`bg-chart-3`) bars for Vocabulary Retention.
   - Replaced the 4-row language pill grids in Settings (`src/components/settings/SettingsClient.tsx`) with inline Search + `appearance-none h-11` `<select>` dropdowns for both System Language and Translation Language.
+  - Fixed locale hydration mismatch in `MobileBottomNav.tsx` (`suppressHydrationWarning` on `<nav>` and nav label `<span>`).
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

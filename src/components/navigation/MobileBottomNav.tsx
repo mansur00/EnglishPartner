@@ -44,7 +44,7 @@ export function MobileBottomNav() {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-bottom-nav w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs">
+    <nav suppressHydrationWarning className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-bottom-nav w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs">
       {navItems.map((item) => {
         return (
           <Link
@@ -58,7 +58,7 @@ export function MobileBottomNav() {
             )}
           >
             <HugeiconsIcon icon={item.icon} size={22} />
-            <span className="text-chip leading-none">{item.name}</span>
+            <span suppressHydrationWarning className="text-chip leading-none">{item.name}</span>
           </Link>
         );
       })}
