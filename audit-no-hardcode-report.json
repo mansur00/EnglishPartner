@@ -306,6 +306,12 @@
   "c_radius": [],
   "d_layout_magic": [
     {
+      "file": "src/app/(app)/dashboard/level-assessment/page.tsx",
+      "line": 89,
+      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
+      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-6 max-w-4xl\">"
+    },
+    {
       "file": "src/app/(app)/vocabulary/page.tsx",
       "line": 515,
       "detail": "Hardcoded layout constant / magic number: w-64",
@@ -324,6 +330,12 @@
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
     {
+      "file": "src/components/dashboard/DashboardClient.tsx",
+      "line": 309,
+      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
+      "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
+    },
+    {
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 102,
       "detail": "Arbitrary layout [Npx] utility: max-w-[85%], max-w-[78%]",
@@ -337,7 +349,7 @@
     },
     {
       "file": "src/components/learning/ConversationReader.tsx",
-      "line": 585,
+      "line": 591,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -358,6 +370,36 @@
       "line": 228,
       "detail": "Hardcoded layout constant / magic number: max-w-3xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-3xl leading-relaxed\">"
+    },
+    {
+      "file": "src/components/quiz/ConversationQuizDialog.tsx",
+      "line": 98,
+      "detail": "Arbitrary layout [Npx] utility: h-[90vh]",
+      "code": "<DialogContent className=\"max-w-2xl max-h-[90vh] overflow-y-auto bg-background\">"
+    },
+    {
+      "file": "src/components/quiz/ConversationQuizDialog.tsx",
+      "line": 98,
+      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
+      "code": "<DialogContent className=\"max-w-2xl max-h-[90vh] overflow-y-auto bg-background\">"
+    },
+    {
+      "file": "src/components/quiz/QuizResultDetailClient.tsx",
+      "line": 42,
+      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
+      "code": "<PageContainer className=\"py-8 max-w-4xl\">"
+    },
+    {
+      "file": "src/components/quiz/QuizResultDetailClient.tsx",
+      "line": 52,
+      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
+      "code": "<PageContainer className=\"py-8 max-w-4xl space-y-4\">"
+    },
+    {
+      "file": "src/components/quiz/QuizResultDetailClient.tsx",
+      "line": 91,
+      "detail": "Hardcoded layout constant / magic number: max-w-4xl",
+      "code": "<PageContainer className=\"py-6 sm:py-8 space-y-6 max-w-4xl\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -392,6 +434,17 @@
   ],
   "e_inline_styles": [],
   "f_duplication": [
+    {
+      "detail": "ClassName repeated 5 times",
+      "className": "flex flex-wrap items-center justify-between gap-3",
+      "files": [
+        "src/app/(app)/dashboard/level-assessment/page.tsx",
+        "src/components/learning/AudioPlayer.tsx",
+        "src/components/practice/ReadAloudCard.tsx",
+        "src/components/quiz/QuizResultDetailClient.tsx",
+        "src/components/quiz/QuizRunner.tsx"
+      ]
+    },
     {
       "detail": "ClassName repeated 3 times",
       "className": "text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none",
@@ -466,12 +519,31 @@
     },
     {
       "detail": "ClassName repeated 4 times",
+      "className": "text-meta text-muted-foreground text-bangla",
+      "files": [
+        "src/app/page.tsx",
+        "src/components/practice/ListeningQuizCard.tsx",
+        "src/components/quiz/QuizResultDetailClient.tsx",
+        "src/components/quiz/QuizRunner.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
       "className": "text-chip font-mono text-muted-foreground",
       "files": [
         "src/components/admin/AdminDashboardClient.tsx",
         "src/components/learning/ConversationInspectorSidebar.tsx",
         "src/components/learning/ReviewSummary.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-body text-muted-foreground max-w-2xl",
+      "files": [
+        "src/components/dashboard/DashboardClient.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
@@ -522,6 +594,15 @@
       "className": "text-muted-foreground group-hover:text-primary transition-colors",
       "files": [
         "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center justify-between text-chip text-muted-foreground",
+      "files": [
+        "src/components/practice/HideSpeakerPractice.tsx",
+        "src/components/practice/SentenceBuilderCard.tsx",
+        "src/components/quiz/QuizRunner.tsx"
       ]
     },
     {

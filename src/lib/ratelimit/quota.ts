@@ -40,6 +40,10 @@ export const DEFAULT_AI_QUOTAS = {
     maxTurnsPerSession: 20,
     dailySessionsQuota: 5,
   },
+  quiz: {
+    rateLimitPerMinute: 12,
+    dailyQuota: 60,
+  },
 } as const;
 
 export class MemoryQuotaStore {
@@ -55,7 +59,7 @@ export class MemoryQuotaStore {
    */
   checkAndRecord(
     identifier: string,
-    feature: "sayIt" | "roleplayTurn",
+    feature: "sayIt" | "roleplayTurn" | "quiz",
     config: QuotaConfig = DEFAULT_AI_QUOTAS[feature]
   ): QuotaCheckResult {
     const now = this.nowProvider();

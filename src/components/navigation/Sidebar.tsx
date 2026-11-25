@@ -16,6 +16,7 @@ import {
   Analytics01Icon,
   Settings01Icon,
   SparklesIcon,
+  CheckmarkBadge01Icon,
 } from "@hugeicons/core-free-icons";
 
 interface NavItem {
@@ -35,7 +36,7 @@ export function Sidebar() {
       name: t("nav.dashboard", locale),
       href: "/dashboard",
       icon: DashboardSquare01Icon,
-      active: pathname === "/dashboard",
+      active: pathname.startsWith("/dashboard"),
     },
     {
       name: t("nav.explore", locale),
@@ -72,6 +73,12 @@ export function Sidebar() {
       href: "/vocabulary",
       icon: Bookmark02Icon,
       active: pathname === "/vocabulary",
+    },
+    {
+      name: locale === "bn" ? "কুইজ" : "Quiz",
+      href: "/quiz",
+      icon: CheckmarkBadge01Icon,
+      active: pathname.startsWith("/quiz"),
     },
     {
       name: t("nav.progress", locale),

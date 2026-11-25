@@ -24,7 +24,7 @@ export interface StructuredLlmOptions<T> {
   userPrompt: string;
   messages?: LlmMessage[];
   schema: z.ZodSchema<T>;
-  taskName: "sayIt" | "roleplayTurn" | "roleplayFeedback" | "grammarNote";
+  taskName: "sayIt" | "roleplayTurn" | "roleplayFeedback" | "grammarNote" | "levelAssessmentQuiz" | "conversationQuiz";
   temperature?: number;
   maxTokens?: number;
   timeoutMs?: number;

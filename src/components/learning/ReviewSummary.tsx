@@ -12,6 +12,7 @@ import {
   BookmarkCheck01Icon,
   ArrowRight01Icon,
   RefreshIcon,
+  CheckmarkBadge01Icon,
 } from "@hugeicons/core-free-icons";
 import { VocabularyEntry } from "@/content/seed/vocabulary";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,8 @@ interface ReviewSummaryProps {
   nextScenarioTitle?: string;
   savedWords?: Set<string>;
   onSaveWordToggle?: (lemma: string) => void;
+  onStartQuiz?: () => void;
+  quizQuestionCount?: number;
 }
 
 export function ReviewSummary({
@@ -41,6 +44,8 @@ export function ReviewSummary({
   nextScenarioTitle,
   savedWords = new Set(),
   onSaveWordToggle,
+  onStartQuiz,
+  quizQuestionCount,
 }: ReviewSummaryProps) {
   const { locale, t } = useTranslations();
 
@@ -158,14 +163,32 @@ export function ReviewSummary({
 
       {/* Footer Navigation / Next Step */}
       <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
-        <button
-          type="button"
-          onClick={onRestart}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-control border border-border text-label text-foreground hover:bg-muted transition-colors text-bangla cursor-pointer"
-        >
-          <HugeiconsIcon icon={RefreshIcon} size={16} />
-          <span>{locale === "bn" ? "পুনরায় শুরু করুন" : "Practice Again"}</span>
-        </button>
+        <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+          <button
+            type="button"
+            onClick={onRestart}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-control border border-border text-label text-foreground hover:bg-muted transition-colors text-bangla cursor-pointer"
+          >
+            <HugeiconsIcon icon={RefreshIcon} size={16} />
+            <span>{locale === "bn" ? "পুনরায় শুরু করুন" : "Practice Again"}</span>
+          </button>
+
+          {onStartQuiz && (
+            <Button
+              type="button"
+              variant="cta"
+              onClick={onStartQuiz}
+              className="w-full sm:w-auto justify-center gap-2 text-label rounded-control cursor-pointer"
+            >
+              <HugeiconsIcon icon={CheckmarkBadge01Icon} size={16} />
+              <span>
+                {locale === "bn"
+                  ? `কুইজ শুরু করুন (${quizQuestionCount ?? 10}টি প্রশ্ন)`
+                  : `Start Quiz (${quizQuestionCount ?? 10} Questions)`}
+              </span>
+            </Button>
+          )}
+        </div>
 
         {nextScenarioSlug ? (
           <Link href={`/conversations/${nextScenarioSlug}`} className="w-full sm:w-auto">

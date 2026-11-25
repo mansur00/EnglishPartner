@@ -28,6 +28,7 @@ import {
   CheckmarkCircle02Icon,
   CompassIcon,
   Message01Icon,
+  SparklesIcon,
 } from "@hugeicons/core-free-icons";
 
 export function DashboardClient() {
@@ -285,6 +286,42 @@ export function DashboardClient() {
             </div>
           </TopicCard>
         </div>
+
+        {/* 3.5 AI Level Assessment Quiz Card (40 Questions • Dashboard Only) */}
+        <Card className="bg-card p-6 md:p-7 rounded-card border border-border shadow-xs">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div className="flex items-start gap-4">
+              <div className="size-tile rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <HugeiconsIcon icon={SparklesIcon} size={24} />
+              </div>
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="brand" size="sm">
+                    {locale === "bn" ? "৪০ প্রশ্ন • এআই কুইজ" : "40 Questions • AI Quiz"}
+                  </Badge>
+                  <CefrChip level="A1" label="A1–C2" />
+                </div>
+                <h3 className="text-card-title text-foreground">
+                  {locale === "bn"
+                    ? "আপনার ইংরেজি লেভেল যাচাই করুন"
+                    : "Check Your English Level (Level Assessment Quiz)"}
+                </h3>
+                <p className="text-body text-muted-foreground max-w-2xl">
+                  {locale === "bn"
+                    ? "প্রতিবার রিফ্রেশ করলে এআই থেকে নতুন ৪০টি প্রশ্ন তৈরি হবে। আপনার বর্তমান CEFR লেভেল যাচাই করে ভুল ও সঠিক উত্তর বিস্তারিত দেখুন।"
+                    : "Take a 40-question AI-powered diagnostic quiz across A1–C2. Tap Refresh anytime for 40 brand-new AI questions."}
+                </p>
+              </div>
+            </div>
+
+            <Link href="/dashboard/level-assessment" className="w-full md:w-auto shrink-0">
+              <Button variant="cta" size="md" className="btn-press w-full md:w-auto gap-2 cursor-pointer">
+                <span>{locale === "bn" ? "লেভেল কুইজ শুরু করুন" : "Start Level Quiz"}</span>
+                <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+              </Button>
+            </Link>
+          </div>
+        </Card>
 
         {/* 4. Active Progress or Actionable Empty State */}
         {isClient && completedSteps.length > 0 ? (

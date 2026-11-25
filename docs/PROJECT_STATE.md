@@ -1807,6 +1807,18 @@ Entry format:
   - Fixed `audioSpeed` initialization (`1` -> `"1.0x"`) so default `1.0x` highlights properly.
   - Reorganized Audio & Speech Preferences into balanced 2-column responsive rows (`Default Playback Speed` + `Auto-Play`, `Preferred Voice Accent` + `Voice Gender`) with roomy `px-3.5 py-2` buttons, fixed `System Default` 2-line button wrapping in Appearance & Display (`whitespace-nowrap px-4 py-2`), and updated About badge to `v1.2.0 (CEFR A1–C2)`.
 
+### 2026-11-25, Dual Quiz System (AI Level Assessment + Conversation Quizzes)
+- **Quiz Engine & Storage (`src/lib/quiz/types.ts`, `storage.ts`, `conversation-quiz.ts`, `level-assessment-bank.ts`):**
+  - Enforced locked-once-answered MCQ behavior and session persistence (`ecp_quiz_results_v1`) with retake/refresh regeneration.
+  - Conversation quiz question count scales by CEFR level (`A1=10`, `A2=14`, `B1=18`, `B2=22`, `C1=26`, `C2=30`).
+- **AI Quiz Endpoints (`src/app/api/v1/ai/quiz/level-assessment/route.ts`, `conversation/route.ts`):**
+  - Level Assessment generates 40 fresh 4-option AI MCQs across `A1–C2` on every Refresh (with deterministic 40-question fallback).
+  - Conversation Quiz hybrid endpoint enriches deterministic dialogue/grammar/vocab/register questions with fresh AI items on Refresh.
+- **UI Routes & Integrations:**
+  - **Dashboard-Only Level Assessment:** Card in `DashboardClient.tsx` linking to `/dashboard/level-assessment` (40 Q, Refresh for new AI questions, estimates CEFR level without overwriting Settings).
+  - **Conversation Quiz Popup & `/quiz` Hub:** Added `Start Quiz` button in `ReviewSummary.tsx` / `ConversationReader.tsx` opening `ConversationQuizDialog.tsx`; added `/quiz` page (`Sidebar.tsx`) with Level (`A1–C2`), Length, and Style filters across all conversations; added `/quiz/results/[sessionId]` inner review page showing wrong vs right answers and explanations.
+  - **Tests:** Added `tests/quiz-engine.test.mjs`.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

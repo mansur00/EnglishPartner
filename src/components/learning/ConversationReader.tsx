@@ -48,6 +48,9 @@ import {
   type ConversationStyle,
 } from "@/lib/content/length-tiers";
 import { buildProgressiveDialogueVersion } from "@/lib/content/dialogue-builder";
+import { ConversationQuizDialog } from "@/components/quiz/ConversationQuizDialog";
+import { SEED_SCENARIOS } from "@/content/seed/scenarios";
+import { getQuestionCountForLevel } from "@/lib/quiz/types";
 
 interface ConversationReaderProps {
   versions: ConversationVersionData[];
@@ -112,6 +115,7 @@ function ConversationReaderInner({
   const [activeLineIndex, setActiveLineIndex] = useState<number | null>(null);
   const [selectedLineIndex, setSelectedLineIndex] = useState<number>(0);
   const [isMobileInspectorOpen, setIsMobileInspectorOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
 
   // Active Word Popover, Grammar Panel, Auth Prompt Modal
   const [selectedWordEntry, setSelectedWordEntry] = useState<VocabularyEntry | null>(null);
@@ -533,6 +537,8 @@ function ConversationReaderInner({
           onSaveWordToggle={handleSaveWordToggle}
           nextScenarioSlug={nextStepSlug}
           nextScenarioTitle={nextStepTitle}
+          onStartQuiz={() => setIsQuizOpen(true)}
+          quizQuestionCount={getQuestionCountForLevel(effectiveLevel)}
         />
       </div>
 
@@ -662,6 +668,40 @@ function ConversationReaderInner({
         onClose={() => setIsAuthModalOpen(false)}
         title={`${authModalPurpose} সুরক্ষিত রাখতে সাইন-ইন করুন`}
         description="আপনার অনুশীলন ডিভাইস পরিবর্তনের পরও বজায় রাখতে লগইন করুন। আপনি কোনো পৃষ্ঠা না হারিয়ে তাৎক্ষণিকভাবে চালিয়ে যেতে পারেন।"
+      />
+
+      {/* Conversation Quiz Popup */}
+      <ConversationQuizDialog
+        isOpen={isQuizOpen}
+        onClose={() => setIsQuizOpen(false)}
+        scenario={
+          SEED_SCENARIOS.find((s) => s.slug === scenarioSlug) ?? {
+            id: scenarioSlug || "custom",
+            slug: scenarioSlug || "conversation",
+            title: scenarioTitleEn,
+            titleBn: scenarioTitleBn,
+            description: scenarioDescription || scenarioTitleEn,
+            descriptionBn: scenarioTitleBn,
+            context: scenarioDescription || scenarioTitleEn,
+            learningObjective: scenarioTitleEn,
+            categories: [],
+            level: effectiveLevel,
+            lengthType: "short",
+            communicationStyle: selectedStyle,
+            estimatedMinutes: 5,
+            exchangesCount: currentVersion.lines.length,
+            keywords: [],
+            languages: ["en", "bn"],
+          }
+        }
+        lines={currentVersion.lines}
+        level={effectiveLevel}
+        lengthTierId={selectedTierId}
+        lengthTierLabel={
+          levelTiers.find((t) => t.id === selectedTierId)?.labelEn ||
+          currentVersion.versionName
+        }
+        style={selectedStyle}
       />
     </div>
   );
