@@ -964,6 +964,10 @@ body {
     @apply bg-background text-foreground;
   }
   html {
+    --font-heading: var(--font-nunito), var(--font-bangla), sans-serif;
+    --font-sans: var(--font-manrope), var(--font-bangla), sans-serif;
+    --font-conversation: var(--font-comic-neue), var(--font-bangla), sans-serif;
+    --font-mono: var(--font-manrope), var(--font-bangla), sans-serif;
     @apply font-sans;
   }
 }
