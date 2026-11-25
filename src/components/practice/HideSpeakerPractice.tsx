@@ -161,7 +161,7 @@ export function HideSpeakerPractice({ lines, speakers }: HideSpeakerPracticeProp
               </div>
 
               <ChatBubble speaker="1" className="space-y-2">
-                <p className="text-lead text-foreground font-conversation leading-relaxed">
+                <p className="text-conversation text-foreground">
                   &ldquo;{currentLine.englishText}&rdquo;
                 </p>
                 <p className="text-meta text-bangla text-muted-foreground border-t border-border/60 pt-1.5">

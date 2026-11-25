@@ -274,9 +274,9 @@ body {
 }
 @utility text-conversation {
   font-family: var(--font-conversation);
-  font-size: 1.125rem;
-  line-height: 1.7;
-  font-weight: var(--font-weight-regular);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  font-weight: var(--font-weight-semibold);
 }
 
 @utility h-header {

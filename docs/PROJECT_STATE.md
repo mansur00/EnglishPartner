@@ -1852,7 +1852,7 @@ Entry format:
   - Replaced `Inter` with strictly 3 Google Fonts for English: **Nunito** (`--font-heading`, weights `400, 500, 600`), **Comic Neue** (`--font-conversation`, weights `400, 700`), and **Manrope** (`--font-sans`, weights `400, 500, 600`), while keeping **Hind Siliguri** + **Noto Sans Bengali** (`--font-bangla`) for Bangla.
 - **Design System Tokens (`src/app/globals.css`):**
   - Mapped `--font-heading`, `--font-sans`, `--font-conversation`, and `--font-mono` (aliased to Manrope so strictly 3 English fonts exist) in `@theme inline` with `--font-bangla` fallback.
-  - Added `@utility font-conversation` and `@utility text-conversation`; set `h1..h6 { font-family: var(--font-heading); }` in `@layer base`.
+  - Added `@utility font-conversation` and `@utility text-conversation` (`1.25rem` / `20px`, `font-weight: var(--font-weight-semibold)` which resolves to Comic Neue's `700` face via CSS font matching while honoring the max-600 lint rule); set `h1..h6 { font-family: var(--font-heading); }` in `@layer base`.
 - **Conversation & Heading Cleanup:**
   - Applied `font-conversation` / `text-conversation` to `ChatTurnBubble.tsx` (`/conversations/[slug]`), `ConversationInspectorSidebar.tsx` (selected sentence preview), `ChatBubble.tsx` (covering `RoleplayPartner.tsx` and `HideSpeakerPractice.tsx`), `ConversationTurn.tsx`, `CompleteLineCard.tsx`, `DialogueOrderCard.tsx`, and `ReadAloudCard.tsx`.
   - Used distinct `next/font/google` CSS variables (`--font-manrope`, `--font-nunito`, `--font-comic-neue`) in `layout.tsx` and mapped `--font-heading`, `--font-sans`, `--font-conversation`, `--font-mono` on `html` in `@layer base` + `@theme inline` in `globals.css`.

@@ -260,7 +260,7 @@ export function DialogueOrderCard({
                     </span>
                   </div>
 
-                  <p className="text-body font-conversation text-foreground break-words">
+                  <p className="text-conversation text-foreground break-words">
                     &ldquo;{turn.englishText}&rdquo;
                   </p>
                   <p className="text-chip-bn text-muted-foreground mt-0.5">
