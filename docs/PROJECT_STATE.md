@@ -1765,6 +1765,14 @@ Entry format:
   - Fixed the Healthcare track filter bug (`id: "service"` matching `healthcare-worker` category).
   - Added interactive CEFR Level filter pills (`All Levels`, `A1`, `A2`, `B1`, `B2`, `C1`, `C2`) with live scenario counts per level and highlight for the user's saved `ecp_user_target_level`.
 
+### 2026-11-25, Unified 2-Sided Chat Conversation Card & Right Inspector Sidebar
+- **Conversation-First Chat Card (`src/components/learning/ChatTurnBubble.tsx`, `ConversationReader.tsx`):**
+  - Replaced per-sentence stacked cards with a single unified `<Card>` containing left/right 2-sided speaker bubbles with avatars, pure English text only (zero inline translation clutter), and a compact per-line audio button.
+  - Tapping any sentence bubble selects it and updates the inspector panel.
+- **Fixed Right Inspector Sidebar & Mobile Slide-Up Drawer (`src/components/learning/ConversationInspectorSidebar.tsx`):**
+  - Desktop (`lg+`): Sticky right sidebar holding Length (4 tiers), Style (Casual/Neutral/Formal), Grammar Highlight controls, and the tapped sentence's live/static Translation + Grammar & Structure breakdown.
+  - Mobile/Tablet (`< lg`): Bottom slide-up `<Sheet side="bottom">` opens when tapping a sentence or the "Style, Grammar & Translate" button.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)

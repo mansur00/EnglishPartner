@@ -45,6 +45,66 @@
   ],
   "b_typography": [
     {
+      "file": "src/components/learning/ChatTurnBubble.tsx",
+      "line": 80,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"size-9 sm:size-10 rounded-pill flex items-center justify-center text-label font-semibold border shrink-0 select-none shadow-2xs\","
+    },
+    {
+      "file": "src/components/learning/ChatTurnBubble.tsx",
+      "line": 115,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"text-chip font-semibold tracking-tight\","
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 136,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 167,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground block\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 201,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 229,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground block\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 269,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<p className=\"text-meta font-medium text-foreground leading-relaxed\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 277,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 309,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground flex items-center gap-1.5\">"
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 339,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"font-medium text-foreground text-right\">"
+    },
+    {
       "file": "src/components/practice/DailyPracticeClient.tsx",
       "line": 306,
       "detail": "Direct font-weight utility in feature code: font-semibold",
@@ -174,6 +234,30 @@
   "c_radius": [],
   "d_layout_magic": [
     {
+      "file": "src/components/learning/ChatTurnBubble.tsx",
+      "line": 102,
+      "detail": "Arbitrary layout [Npx] utility: max-w-[85%], max-w-[78%]",
+      "code": "\"relative max-w-[85%] sm:max-w-[78%] px-4 py-3 transition-all duration-150 cursor-pointer text-left border\","
+    },
+    {
+      "file": "src/components/learning/ConversationInspectorSidebar.tsx",
+      "line": 263,
+      "detail": "Hardcoded layout constant / magic number: h-8",
+      "code": "className=\"h-8 px-2.5 text-chip gap-1.5 rounded-control\""
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 544,
+      "detail": "Arbitrary layout [Npx] utility: h-[calc(100vh-6rem)]",
+      "code": "<aside className=\"hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto pr-0.5\">"
+    },
+    {
+      "file": "src/components/learning/ConversationReader.tsx",
+      "line": 583,
+      "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
+      "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
+    },
+    {
       "file": "src/components/practice/DailyPracticeClient.tsx",
       "line": 152,
       "detail": "Hardcoded layout constant / magic number: max-w-5xl",
@@ -208,17 +292,36 @@
   "f_duplication": [
     {
       "detail": "ClassName repeated 3 times",
+      "className": "text-chip font-mono text-muted-foreground",
+      "files": [
+        "src/components/admin/AdminDashboardClient.tsx",
+        "src/components/learning/ConversationInspectorSidebar.tsx",
+        "src/components/learning/ReviewSummary.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 5 times",
       "className": "text-chip text-muted-foreground font-mono",
       "files": [
+        "src/components/learning/ChatTurnBubble.tsx",
+        "src/components/learning/ConversationInspectorSidebar.tsx",
         "src/components/learning/GrammarPanel.tsx",
         "src/components/practice/SentenceBuilderCard.tsx",
         "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 11 times",
+      "detail": "ClassName repeated 4 times",
+      "className": "text-chip font-semibold text-foreground flex items-center gap-1.5",
+      "files": [
+        "src/components/learning/ConversationInspectorSidebar.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 12 times",
       "className": "font-heading text-card-title text-foreground",
       "files": [
+        "src/components/learning/ConversationReader.tsx",
         "src/components/practice/DailyPracticeClient.tsx",
         "src/components/settings/SettingsClient.tsx"
       ]

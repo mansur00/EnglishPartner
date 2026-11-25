@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { ConversationTurn } from "./ConversationTurn";
+import { ChatTurnBubble } from "./ChatTurnBubble";
+import { ConversationInspectorSidebar } from "./ConversationInspectorSidebar";
 import { AudioPlayer } from "./AudioPlayer";
 import { WordDetailPopover } from "./WordDetailPopover";
 import { GrammarPanel } from "./GrammarPanel";
@@ -12,18 +12,21 @@ import { ReviewSummary } from "./ReviewSummary";
 import { AuthPromptModal } from "@/components/auth/AuthPromptModal";
 import { LoadingBox } from "@/components/shared/LoadingBox";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { GrammarProvider } from "@/lib/grammar/context";
-import { GrammarModeSwitch } from "@/components/grammar/GrammarModeSwitch";
-import { GrammarLayerPicker } from "@/components/grammar/GrammarLayerPicker";
-import { GrammarLegend } from "@/components/grammar/GrammarLegend";
 import { RuleCardDialog } from "@/components/grammar/RuleCard";
 import { loadConversationAnnotation } from "@/lib/grammar/loader";
 import type { ConversationAnnotation, RenderToken } from "@/lib/grammar/types";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  ViewIcon,
-  ViewOffIcon,
-  Layers01Icon,
+  SlidersHorizontalIcon,
   CheckmarkBadge01Icon,
   ArrowRight01Icon,
   ArrowLeft01Icon,
@@ -80,7 +83,7 @@ function ConversationReaderInner({
   nextStepSlug,
   nextStepTitle,
 }: ConversationReaderProps) {
-  const { locale, translationLocale } = useTranslations();
+  const { locale } = useTranslations();
   const searchParams = useSearchParams();
   const effectiveLevel = (scenarioLevel || (versions[0]?.level as CefrLevelCode) || "A1") as CefrLevelCode;
   const levelTiers = useMemo(() => getLengthTiersForLevel(effectiveLevel), [effectiveLevel]);
@@ -105,9 +108,10 @@ function ConversationReaderInner({
   const [selectedVersionId, setSelectedVersionId] = useState<string>(
     versions[0]?.versionId || ""
   );
-  const [isGlobalTranslationVisible, setIsGlobalTranslationVisible] = useState(true);
   const [accent, setAccent] = useState<"en-US" | "en-GB">("en-US");
   const [activeLineIndex, setActiveLineIndex] = useState<number | null>(null);
+  const [selectedLineIndex, setSelectedLineIndex] = useState<number>(0);
+  const [isMobileInspectorOpen, setIsMobileInspectorOpen] = useState(false);
 
   // Active Word Popover, Grammar Panel, Auth Prompt Modal
   const [selectedWordEntry, setSelectedWordEntry] = useState<VocabularyEntry | null>(null);
@@ -240,6 +244,21 @@ function ConversationReaderInner({
   }
 
   const speakerMap = new Map(currentVersion.speakers.map((s) => [s.id, s]));
+  const primaryLeftSpeakerId = currentVersion.speakers[0]?.id;
+
+  const safeSelectedLineIndex =
+    selectedLineIndex >= 0 && selectedLineIndex < currentVersion.lines.length
+      ? selectedLineIndex
+      : 0;
+  const selectedLine = currentVersion.lines[safeSelectedLineIndex] || null;
+  const selectedSpeaker = selectedLine
+    ? speakerMap.get(selectedLine.speakerId) || currentVersion.speakers[0] || null
+    : null;
+  const selectedLineAnnotation = selectedLine
+    ? annotation?.lines.find(
+        (l) => l.lineId === selectedLine.id || l.text.trim() === selectedLine.englishText.trim()
+      )
+    : undefined;
 
   // Word Lookup Function
   const handleWordClick = (word: string, tokenData?: RenderToken) => {
@@ -367,209 +386,244 @@ function ConversationReaderInner({
 
   return (
     <div className="space-y-6">
-      {/* Top Controls Bar: Versions, Global Grammar Switches, Translation Toggle & Step Navigation */}
-      <div className="flex flex-col gap-3 p-3 sm:p-4 bg-card rounded-panel border-0 shadow-xs">
-        {/* Dynamic Length (4 tiers for this level) & Style (3 registers) Switchers */}
-        {scenarioLevel ? (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2 border-b border-border/60 text-chip">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className={cn("text-muted-foreground whitespace-nowrap flex items-center gap-1 mr-1", locale === "bn" && "text-bangla")}>
-                <HugeiconsIcon icon={Layers01Icon} size={14} />
-                <span>{locale === "bn" ? `${effectiveLevel} দৈর্ঘ্য:` : `${effectiveLevel} Length:`}</span>
-              </span>
-              {levelTiers.map((tier) => (
-                <button
-                  key={tier.id}
-                  type="button"
-                  onClick={() => {
-                    setSelectedTierId(tier.id);
-                    setActiveLineIndex(null);
-                  }}
-                  className={cn(
-                    "px-2.5 py-1 rounded-control text-chip transition-all cursor-pointer",
-                    selectedTierId === tier.id
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
-                  )}
-                >
-                  {locale === "bn" ? tier.labelBn : tier.labelEn}
-                </button>
-              ))}
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_350px] gap-6 items-start">
+        {/* LEFT COLUMN: Focused Unified 2-Sided Conversation Card */}
+        <div className="space-y-6 min-w-0">
+          {/* Top Navigation & Mobile Controls Trigger */}
+          <div className="flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex flex-wrap items-center gap-2">
+              {prevStepSlug && (
+                <Link href={`/conversations/${prevStepSlug}`}>
+                  <Button variant="outline" size="sm" className="h-9 text-label rounded-control gap-1">
+                    <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+                    <span>{t("reader.previousStep", locale)}</span>
+                  </Button>
+                </Link>
+              )}
+              {nextStepSlug && (
+                <Link href={`/conversations/${nextStepSlug}`}>
+                  <Button variant="default" size="sm" className="h-9 text-label rounded-control gap-1">
+                    <span>{t("reader.nextStep", locale)}</span>
+                    <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+                  </Button>
+                </Link>
+              )}
             </div>
 
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className={cn("text-muted-foreground whitespace-nowrap mr-1", locale === "bn" && "text-bangla")}>
-                {locale === "bn" ? "ধরন:" : "Style:"}
-              </span>
-              {CONVERSATION_STYLES.map((st) => (
-                <button
-                  key={st}
-                  type="button"
-                  onClick={() => {
-                    setSelectedStyle(st);
-                    setActiveLineIndex(null);
-                  }}
-                  className={cn(
-                    "px-2.5 py-1 rounded-control text-chip capitalize transition-all cursor-pointer",
-                    selectedStyle === st
-                      ? "bg-primary text-primary-foreground shadow-xs"
-                      : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
-                  )}
-                >
-                  {st === "casual"
-                    ? (locale === "bn" ? "বন্ধুত্বপূর্ণ" : "Casual")
-                    : st === "formal"
-                    ? (locale === "bn" ? "আনুষ্ঠানিক" : "Formal")
-                    : (locale === "bn" ? "স্বাভাবিক" : "Neutral")}
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : versions.length > 1 ? (
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 text-chip">
-            <span className={cn("text-muted-foreground whitespace-nowrap flex items-center gap-1", locale === "bn" && "text-bangla")}>
-              <HugeiconsIcon icon={Layers01Icon} size={14} />
-              <span>{locale === "bn" ? "সংস্করণ:" : "Version:"}</span>
-            </span>
-            <div className="flex items-center gap-1.5">
-              {versions.map((ver) => (
-                <button
-                  key={ver.versionId}
-                  type="button"
-                  onClick={() => {
-                    setSelectedVersionId(ver.versionId);
-                    setActiveLineIndex(null);
-                  }}
-                  className={`px-3 py-1 rounded-control text-chip transition-all cursor-pointer ${selectedVersionId === ver.versionId
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-                    }`}
-                >
-                  {ver.versionName} ({ver.lines.length} {locale === "bn" ? "বাক্য" : "turns"})
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        {/* Global Action Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-2.5">
-          {/* Left: Grammar Controls (Global Switch + Layer Picker) */}
-          <div className="flex flex-wrap items-center gap-2">
-            <GrammarModeSwitch lang={locale === "bn" ? "bn" : "en"} />
-            <GrammarLayerPicker lang={locale === "bn" ? "bn" : "en"} />
-          </div>
-
-          {/* Right: Navigation, Translation Toggle & Complete */}
-          <div className="flex flex-wrap items-center gap-2">
-            {prevStepSlug && (
-              <Link href={`/conversations/${prevStepSlug}`}>
-                <Button variant="outline" size="sm" className="h-9 text-label rounded-control gap-1">
-                  <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-                  <span>{t("reader.previousStep", locale)}</span>
-                </Button>
-              </Link>
-            )}
-
-            {nextStepSlug && (
-              <Link href={`/conversations/${nextStepSlug}`}>
-                <Button variant="default" size="sm" className="h-9 text-label rounded-control gap-1">
-                  <span>{t("reader.nextStep", locale)}</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-                </Button>
-              </Link>
-            )}
-
-            {translationLocale !== "none" && (
+            <div className="flex items-center gap-2">
+              {/* Mobile Inspector & Style/Length Drawer Trigger */}
               <Button
+                type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => setIsGlobalTranslationVisible(!isGlobalTranslationVisible)}
+                onClick={() => setIsMobileInspectorOpen(true)}
+                className="lg:hidden h-9 text-label rounded-control gap-1.5"
+              >
+                <HugeiconsIcon icon={SlidersHorizontalIcon} size={15} />
+                <span>{locale === "bn" ? "স্টাইল, গ্রামার ও অনুবাদ" : "Style, Grammar & Translate"}</span>
+              </Button>
+
+              <Button
+                variant={isCompleted ? "secondary" : "outline"}
+                size="sm"
+                onClick={() => setIsCompleted(!isCompleted)}
                 className="h-9 text-label rounded-control gap-1.5"
               >
-                <HugeiconsIcon icon={isGlobalTranslationVisible ? ViewOffIcon : ViewIcon} size={15} />
-                <span>
-                  {isGlobalTranslationVisible
-                    ? t("reader.hideTranslation", locale)
-                    : t("reader.showTranslation", locale)}
-                </span>
+                <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
+                <span>{isCompleted ? t("reader.completedLesson", locale) : t("reader.finishLesson", locale)}</span>
               </Button>
-            )}
-
-            <Button
-              variant={isCompleted ? "secondary" : "outline"}
-              size="sm"
-              onClick={() => setIsCompleted(!isCompleted)}
-              className="h-9 text-label rounded-control gap-1.5"
-            >
-              <HugeiconsIcon icon={CheckmarkBadge01Icon} size={15} />
-              <span>{isCompleted ? t("reader.completedLesson", locale) : t("reader.finishLesson", locale)}</span>
-            </Button>
+            </div>
           </div>
+
+          {/* Single Unified 2-Sided Chat Conversation Card */}
+          <Card className="p-4 sm:p-6 bg-card rounded-card shadow-card border border-border/60 space-y-5">
+            {/* Conversation Card Header */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60">
+              <div className="space-y-1">
+                <h2 className="font-heading text-card-title text-foreground">
+                  {locale === "bn" ? scenarioTitleBn : scenarioTitleEn}
+                </h2>
+                <p className="text-chip text-muted-foreground">
+                  {locale === "bn"
+                    ? "যেকোনো বাক্যে ট্যাপ করলে ডানপাশে অনুবাদ ও গ্রামার দেখাবে"
+                    : "Tap any sentence to view its translation and grammar in the sidebar"}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <Badge variant="neutral" size="sm" className="font-mono">
+                  {currentVersion.lines.length} {locale === "bn" ? "বাক্য" : "turns"}
+                </Badge>
+                <Badge variant="brand" size="sm" className="capitalize">
+                  {selectedStyle}
+                </Badge>
+              </div>
+            </div>
+
+            {/* 2-Sided Chat Bubbles Stream (Pure English Only) */}
+            <div className="space-y-4">
+              {currentVersion.lines.map((line, index) => {
+                const speaker = speakerMap.get(line.speakerId) || {
+                  id: line.speakerId,
+                  name: t("reader.speaker", locale),
+                  nameBn: "বক্তা",
+                  role: t("reader.participant", locale),
+                  roleBn: "অংশগ্রহণকারী",
+                  avatarChar: "S",
+                  colorScheme: "brand" as const,
+                };
+
+                const lineAnnotation = annotation?.lines.find(
+                  (l) => l.lineId === line.id || l.text.trim() === line.englishText.trim()
+                );
+
+                // Alternate left/right by speaker (first speaker on left, second on right; fallback by index)
+                const isLeft = primaryLeftSpeakerId
+                  ? line.speakerId === primaryLeftSpeakerId
+                  : index % 2 === 0;
+
+                return (
+                  <ChatTurnBubble
+                    key={line.id}
+                    line={line}
+                    speaker={speaker}
+                    side={isLeft ? "left" : "right"}
+                    accent={accent}
+                    isSelected={safeSelectedLineIndex === index}
+                    isCurrentlyPlaying={activeLineIndex === index}
+                    annotation={lineAnnotation}
+                    onSelect={() => {
+                      setSelectedLineIndex(index);
+                      if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                        setIsMobileInspectorOpen(true);
+                      }
+                    }}
+                    onLinePlayStart={() => {
+                      setActiveLineIndex(index);
+                      setSelectedLineIndex(index);
+                    }}
+                    onLinePlayEnd={() => setActiveLineIndex(null)}
+                    onWordClick={handleWordClick}
+                  />
+                );
+              })}
+            </div>
+          </Card>
+
+          {/* Sticky Full Audio Player */}
+          <AudioPlayer
+            lines={currentVersion.lines}
+            accent={accent}
+            onAccentChange={setAccent}
+            activeLineIndex={activeLineIndex}
+            onActiveLineChange={(idx) => {
+              setActiveLineIndex(idx);
+              if (idx !== null) setSelectedLineIndex(idx);
+            }}
+          />
+
+          {/* Review Summary */}
+          <ReviewSummary
+            scenarioTitleEn={scenarioTitleEn}
+            scenarioTitleBn={scenarioTitleBn}
+            vocabularyList={scenarioVocabList}
+            onRestart={() => {
+              setActiveLineIndex(0);
+              setSelectedLineIndex(0);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            onBookmarkScenario={handleBookmarkScenario}
+            isScenarioBookmarked={isScenarioBookmarked}
+            savedWords={savedWords}
+            onSaveWordToggle={handleSaveWordToggle}
+            nextScenarioSlug={nextStepSlug}
+            nextScenarioTitle={nextStepTitle}
+          />
         </div>
 
-        {/* Contextual Grammar Legend */}
-        <GrammarLegend presentCategories={presentCategories} lang={locale === "bn" ? "bn" : "en"} />
+        {/* RIGHT FIXED / STICKY SIDEBAR (Desktop lg+) */}
+        <aside className="hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto pr-0.5">
+          <ConversationInspectorSidebar
+            scenarioLevel={scenarioLevel}
+            effectiveLevel={effectiveLevel}
+            levelTiers={levelTiers}
+            selectedTierId={selectedTierId}
+            onSelectTier={(tierId) => {
+              setSelectedTierId(tierId);
+              setActiveLineIndex(null);
+              setSelectedLineIndex(0);
+            }}
+            selectedStyle={selectedStyle}
+            onSelectStyle={(style) => {
+              setSelectedStyle(style);
+              setActiveLineIndex(null);
+              setSelectedLineIndex(0);
+            }}
+            versions={versions}
+            selectedVersionId={selectedVersionId}
+            onSelectVersion={(verId) => {
+              setSelectedVersionId(verId);
+              setActiveLineIndex(null);
+              setSelectedLineIndex(0);
+            }}
+            presentCategories={presentCategories}
+            selectedLine={selectedLine}
+            selectedSpeaker={selectedSpeaker}
+            selectedAnnotation={selectedLineAnnotation}
+            accent={accent}
+            onOpenFullGrammarModal={handleGrammarClick}
+            onRuleClick={handleRuleClick}
+          />
+        </aside>
       </div>
 
-      {/* Ordered Dialogue Turns */}
-      <div className="space-y-4">
-        {currentVersion.lines.map((line, index) => {
-          const speaker = speakerMap.get(line.speakerId) || {
-            id: line.speakerId,
-            name: t("reader.speaker", locale),
-            nameBn: "বক্তা",
-            role: t("reader.participant", locale),
-            roleBn: "অংশগ্রহণকারী",
-            avatarChar: "S",
-            colorScheme: "brand" as const,
-          };
-
-          const hasGrammar = Boolean(SEED_GRAMMAR_EXPLANATIONS[line.id]);
-
-          // Match static line annotation if loaded
-          const lineAnnotation = annotation?.lines.find(
-            (l) => l.lineId === line.id || l.text.trim() === line.englishText.trim()
-          );
-
-          return (
-            <ConversationTurn
-              key={line.id}
-              line={line}
-              speaker={speaker}
+      {/* MOBILE / TABLET SLIDE-UP DRAWER */}
+      <Sheet open={isMobileInspectorOpen} onOpenChange={setIsMobileInspectorOpen}>
+        <SheetContent
+          side="bottom"
+          className="lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background"
+        >
+          <SheetHeader className="pb-3 border-b border-border/60 text-left">
+            <SheetTitle className="text-card-title text-foreground">
+              {locale === "bn" ? "বাক্য বিশ্লেষণ ও সেটিংস" : "Sentence Inspector & Controls"}
+            </SheetTitle>
+          </SheetHeader>
+          <div className="pt-4">
+            <ConversationInspectorSidebar
+              scenarioLevel={scenarioLevel}
+              effectiveLevel={effectiveLevel}
+              levelTiers={levelTiers}
+              selectedTierId={selectedTierId}
+              onSelectTier={(tierId) => {
+                setSelectedTierId(tierId);
+                setActiveLineIndex(null);
+                setSelectedLineIndex(0);
+              }}
+              selectedStyle={selectedStyle}
+              onSelectStyle={(style) => {
+                setSelectedStyle(style);
+                setActiveLineIndex(null);
+                setSelectedLineIndex(0);
+              }}
+              versions={versions}
+              selectedVersionId={selectedVersionId}
+              onSelectVersion={(verId) => {
+                setSelectedVersionId(verId);
+                setActiveLineIndex(null);
+                setSelectedLineIndex(0);
+              }}
+              presentCategories={presentCategories}
+              selectedLine={selectedLine}
+              selectedSpeaker={selectedSpeaker}
+              selectedAnnotation={selectedLineAnnotation}
               accent={accent}
-              isGlobalTranslationVisible={isGlobalTranslationVisible}
-              isCurrentlyPlaying={activeLineIndex === index}
-              onLinePlayStart={() => setActiveLineIndex(index)}
-              onLinePlayEnd={() => setActiveLineIndex(null)}
-              onWordClick={handleWordClick}
-              onGrammarClick={handleGrammarClick}
+              onOpenFullGrammarModal={handleGrammarClick}
               onRuleClick={handleRuleClick}
-              hasGrammarExplanation={hasGrammar}
-              annotation={lineAnnotation}
             />
-          );
-        })}
-      </div>
+          </div>
+        </SheetContent>
+      </Sheet>
 
-      {/* Review Summary (shown when marked complete or always available at bottom) */}
-      <ReviewSummary
-        scenarioTitleEn={scenarioTitleEn}
-        scenarioTitleBn={scenarioTitleBn}
-        vocabularyList={scenarioVocabList}
-        onRestart={() => {
-          setActiveLineIndex(0);
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
-        onBookmarkScenario={handleBookmarkScenario}
-        isScenarioBookmarked={isScenarioBookmarked}
-        savedWords={savedWords}
-        onSaveWordToggle={handleSaveWordToggle}
-        nextScenarioSlug={nextStepSlug}
-        nextScenarioTitle={nextStepTitle}
-      />
-
-      {/* Word Detail Popover (with enhanced Grammar Breakdown) */}
+      {/* Word Detail Popover */}
       <WordDetailPopover
         entry={selectedWordEntry}
         isOpen={isWordPopoverOpen}
@@ -583,7 +637,7 @@ function ConversationReaderInner({
         onRuleClick={handleRuleClick}
       />
 
-      {/* Sentence Grammar Panel */}
+      {/* Full Sentence Grammar Panel Modal */}
       <GrammarPanel
         entry={selectedGrammarEntry}
         isOpen={isGrammarPanelOpen}
@@ -606,15 +660,6 @@ function ConversationReaderInner({
         onClose={() => setIsAuthModalOpen(false)}
         title={`${authModalPurpose} সুরক্ষিত রাখতে সাইন-ইন করুন`}
         description="আপনার অনুশীলন ডিভাইস পরিবর্তনের পরও বজায় রাখতে লগইন করুন। আপনি কোনো পৃষ্ঠা না হারিয়ে তাৎক্ষণিকভাবে চালিয়ে যেতে পারেন।"
-      />
-
-      {/* Sticky Full Audio Player */}
-      <AudioPlayer
-        lines={currentVersion.lines}
-        accent={accent}
-        onAccentChange={setAccent}
-        activeLineIndex={activeLineIndex}
-        onActiveLineChange={setActiveLineIndex}
       />
     </div>
   );
