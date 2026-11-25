@@ -2,31 +2,31 @@
   "a_colors": [
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 203,
+      "line": 205,
       "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, text-emerald-300",
       "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 321,
+      "line": 323,
       "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
       "code": "className={cn(isCompleted && \"text-emerald-600 dark:text-emerald-400\")}"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 411,
+      "line": 413,
       "detail": "Tailwind raw palette color: bg-amber-500/10, text-amber-600, text-amber-400",
       "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 438,
+      "line": 440,
       "detail": "Tailwind raw palette color: bg-purple-500/10, text-purple-600, text-purple-400",
       "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 465,
+      "line": 467,
       "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-600, text-emerald-400",
       "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
     },
@@ -166,7 +166,7 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 306,
+      "line": 308,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className={cn(buttonVariants({ size: \"lg\" }), \"rounded-control font-semibold\")}"
     },
@@ -409,13 +409,13 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 163,
+      "line": 164,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 228,
+      "line": 230,
       "detail": "Hardcoded layout constant / magic number: max-w-3xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-3xl leading-relaxed\">"
     },
@@ -744,31 +744,31 @@
   "h_dark_mode": [
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 203,
+      "line": 205,
       "detail": "Raw color with dark: prefix: dark:text-emerald-300",
       "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 321,
+      "line": 323,
       "detail": "Raw color with dark: prefix: dark:text-emerald-400",
       "code": "className={cn(isCompleted && \"text-emerald-600 dark:text-emerald-400\")}"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 411,
+      "line": 413,
       "detail": "Raw color with dark: prefix: dark:text-amber-400",
       "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 438,
+      "line": 440,
       "detail": "Raw color with dark: prefix: dark:text-purple-400",
       "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 465,
+      "line": 467,
       "detail": "Raw color with dark: prefix: dark:text-emerald-400",
       "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
     },

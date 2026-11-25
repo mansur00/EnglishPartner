@@ -150,30 +150,32 @@ export function DailyPracticeClient() {
 
   return (
     <PageContainer className="py-6 sm:py-8 space-y-8 max-w-5xl">
-      {/* 1. Header Banner & Date */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-6">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-2 text-chip text-muted-foreground uppercase tracking-wider">
-            <HugeiconsIcon icon={Calendar03Icon} size={16} className="text-primary shrink-0" />
-            <span>{formattedDate}</span>
+      {/* 1. Unified Header & Today Panel Card */}
+      <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 text-chip text-muted-foreground uppercase tracking-wider">
+              <HugeiconsIcon icon={Calendar03Icon} size={16} className="text-primary shrink-0" />
+              <span>{formattedDate}</span>
+            </div>
+            <h1 className="font-heading text-page-title text-foreground">
+              {t("dailyPractice.title", locale)}
+            </h1>
+            <p className="text-body text-muted-foreground max-w-2xl">
+              {t("dailyPractice.subtitle", locale)}
+            </p>
           </div>
-          <h1 className="font-heading text-page-title text-foreground">
-            {t("dailyPractice.title", locale)}
-          </h1>
-          <p className="text-body text-muted-foreground max-w-2xl">
-            {t("dailyPractice.subtitle", locale)}
-          </p>
-        </div>
 
-        {/* Live Streak & Today Panel */}
-        <TodayPanel
-          variant="card"
-          streak={streak}
-          minutesCompleted={minutesCompleted}
-          minutesGoal={minutesGoal}
-          className="shrink-0"
-        />
-      </div>
+          {/* Live Streak & Today Panel */}
+          <TodayPanel
+            variant="card"
+            streak={streak}
+            minutesCompleted={minutesCompleted}
+            minutesGoal={minutesGoal}
+            className="shrink-0 bg-muted/35 border border-border/60"
+          />
+        </div>
+      </Card>
 
       {/* 2. Today's Conversation Challenge */}
       <section className="space-y-4">
