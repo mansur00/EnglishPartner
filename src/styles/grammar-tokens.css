@@ -9,26 +9,26 @@
      1. PARTS OF SPEECH (Text Ink & Tint Background)
      All ink tokens strictly verified >= 4.5:1 WCAG contrast
      ======================================================== */
-  --gram-pos-noun-ink: #1e40af;       /* blue-800: 8.2:1 */
-  --gram-pos-noun-bg: #dbeafe;        /* blue-100 */
+  --gram-pos-noun-ink: #1F6FB5;
+  --gram-pos-noun-bg: #E8F1FA;
 
-  --gram-pos-pronoun-ink: #86198f;    /* fuchsia-800: 7.9:1 */
-  --gram-pos-pronoun-bg: #fce7f3;     /* fuchsia-100 */
+  --gram-pos-pronoun-ink: #A3315F;
+  --gram-pos-pronoun-bg: #FBE9F0;
 
-  --gram-pos-verb-ink: #991b1b;       /* red-800: 7.5:1 */
-  --gram-pos-verb-bg: #fee2e2;        /* red-100 */
+  --gram-pos-verb-ink: #276B37;
+  --gram-pos-verb-bg: #E8F5EA;
 
-  --gram-pos-adjective-ink: #0f766e;  /* teal-800: 7.2:1 */
-  --gram-pos-adjective-bg: #ccfbf1;   /* teal-100 */
+  --gram-pos-adjective-ink: #6B4A00;
+  --gram-pos-adjective-bg: #FFF4D6;
 
-  --gram-pos-adverb-ink: #c2410c;     /* orange-700: 5.2:1 */
-  --gram-pos-adverb-bg: #ffedd5;      /* orange-100 */
+  --gram-pos-adverb-ink: #6A3FA0;
+  --gram-pos-adverb-bg: #F1EAFA;
 
-  --gram-pos-preposition-ink: #166534;/* green-800: 7.3:1 */
-  --gram-pos-preposition-bg: #dcfce7; /* green-100 */
+  --gram-pos-preposition-ink: #0F6B6B;
+  --gram-pos-preposition-bg: #E3F4F4;
 
-  --gram-pos-conjunction-ink: #be185d;/* pink-800: 6.8:1 */
-  --gram-pos-conjunction-bg: #fce7f3; /* pink-100 */
+  --gram-pos-conjunction-ink: #4A5A50;
+  --gram-pos-conjunction-bg: #EDF1E8;
 
   --gram-pos-determiner-ink: #334155; /* slate-700: 9.1:1 */
   --gram-pos-determiner-bg: #f1f5f9;  /* slate-100 */
@@ -144,26 +144,26 @@
 
 .dark {
   /* Parts of Speech (Dark Theme Ink & BG) */
-  --gram-pos-noun-ink: #93c5fd;       /* blue-300: 8.6:1 */
-  --gram-pos-noun-bg: rgba(30, 58, 138, 0.35);
+  --gram-pos-noun-ink: #7DB9F2;
+  --gram-pos-noun-bg: #1B2A3A;
 
-  --gram-pos-pronoun-ink: #f472b6;    /* fuchsia-400: 7.8:1 */
-  --gram-pos-pronoun-bg: rgba(112, 26, 117, 0.35);
+  --gram-pos-pronoun-ink: #F29BBB;
+  --gram-pos-pronoun-bg: #3D2030;
 
-  --gram-pos-verb-ink: #fca5a5;       /* red-300: 7.6:1 */
-  --gram-pos-verb-bg: rgba(127, 29, 29, 0.35);
+  --gram-pos-verb-ink: #8FD99C;
+  --gram-pos-verb-bg: #1F3A27;
 
-  --gram-pos-adjective-ink: #5eead4;  /* teal-300: 9.3:1 */
-  --gram-pos-adjective-bg: rgba(19, 78, 74, 0.35);
+  --gram-pos-adjective-ink: #F2C14E;
+  --gram-pos-adjective-bg: #3A3016;
 
-  --gram-pos-adverb-ink: #fdba74;     /* orange-300: 7.7:1 */
-  --gram-pos-adverb-bg: rgba(124, 45, 18, 0.35);
+  --gram-pos-adverb-ink: #BFA0F0;
+  --gram-pos-adverb-bg: #2D2340;
 
-  --gram-pos-preposition-ink: #86efac;/* green-300: 8.9:1 */
-  --gram-pos-preposition-bg: rgba(20, 83, 45, 0.35);
+  --gram-pos-preposition-ink: #6FD0D0;
+  --gram-pos-preposition-bg: #17343A;
 
-  --gram-pos-conjunction-ink: #fb7185;/* rose-400: 8.1:1 */
-  --gram-pos-conjunction-bg: rgba(159, 18, 57, 0.35);
+  --gram-pos-conjunction-ink: #A9B6AD;
+  --gram-pos-conjunction-bg: #26302B;
 
   --gram-pos-determiner-ink: #cbd5e1; /* slate-300: 9.8:1 */
   --gram-pos-determiner-bg: rgba(30, 41, 59, 0.5);

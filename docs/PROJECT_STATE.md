@@ -257,6 +257,16 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Green (#55B266) + Amber (#FFCC66) Eye-Comfort Color System
+- Requested by owner: Update the central design system tokens (zero hardcoding in components) to the Green (`#55B266` / `#2F7D42` action / `#6FC47F` dark) + Amber (`#FFCC66` / `#FFD580` dark) + Warm Off-White (`#FBFAF6`) / Deep Green-Black (`#121714`) WCAG-verified palette, including Grammar POS tokens.
+- Changed:
+  - `src/app/globals.css`: Replaced `:root` and `.dark` brand, sun, neutral, surface, border, status, topic, and bubble tokens with the Green + Amber + Green-tinted Neutral system (`--background: #FBFAF6`, `--foreground: #1F2A24`, `--primary: #2F7D42`, `--secondary: #FFCC66`, `--ring: #1F6FB5`, dark `--background: #121714`, `--card: #1A211D`, `--foreground: #E6EBE7`, `--primary: #6FC47F`, `--ring: #FFD580`), plus `::selection`. Frozen `.rainbow-border` untouched.
+  - `src/styles/grammar-tokens.css`: Updated Light & Dark Parts of Speech (`--gram-pos-*`) tokens to WCAG AA/AAA values from §8.3.
+  - `src/components/ui/button-variants.ts`: Updated `secondary` variant to `bg-brand-50 text-brand-800 hover:bg-brand-100`.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Semantic Color Audit, Primitives & Variant Rollout
 - Requested by owner: Audit the webapp for semantic color usage, expand semantic color primitives/variants, and replace raw palette/dark-mode color classes.
 - Changed:
