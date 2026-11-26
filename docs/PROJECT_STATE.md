@@ -257,6 +257,15 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Update App Logo & Favicon SVGs
+- Requested by owner: Update `logo.svg` and `favicon.svg` from `~/Downloads` into the project.
+- Changed:
+  - `public/logo.svg`: Updated from `~/Downloads/logo.svg`.
+  - `src/app/icon.svg` & `public/favicon.svg`: Updated from `~/Downloads/favicon.svg`.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Subtle Disabled Color for ChatTurnBubble Speaker & Sequence Number
 - Requested by owner: Mute speaker name (`Customer:`, `Shop Assistant:`) and turn number (`#1`, `#2`) in conversation chat bubbles (`ChatTurnBubble.tsx`) to a disabled/subtle color (`text-muted-foreground/45`).
 - Changed:
