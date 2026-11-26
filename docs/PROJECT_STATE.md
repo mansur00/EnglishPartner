@@ -2156,7 +2156,7 @@ Entry format:
 
 ### 2026-11-27, Daily Practice Personalized Practice Generator & Daily Plan (`DailyPracticeClient.tsx`)
 - Added `src/lib/practice/personalized-generator.ts` (`detectWeakAreas`, `buildDailyPlan`, `getFallbackPracticeSet`, `runPersonalizedPracticeAsync`) and `POST /api/v1/ai/personalized-practice` to auto-detect weak areas (`tense`, `preposition`, `spelling`) from Spell Master, Quiz, and Grammar Path progress and generate targeted MCQ exercises with Groq LLM + offline curated fallback.
-- Added `src/components/practice/PersonalizedPracticeCard.tsx` above the SRS Vocabulary Review section in `/daily-practice`, plus **Next Recommended Lesson** and **Today's Daily Plan** in the right sidebar (and mobile view).
+- Added `src/components/practice/PersonalizedPracticeCard.tsx` (single-row Detected Focus badges + focus selector, interactive MCQ runner) above the SRS Vocabulary Review section in `/daily-practice`, plus **Next Recommended Lesson** and **Today's Daily Plan** in the right sidebar (and mobile view).
 
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.

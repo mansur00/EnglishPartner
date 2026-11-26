@@ -163,8 +163,8 @@ export function PersonalizedPracticeCard({
         </Button>
       </div>
 
-      {/* Detected Weak Areas + Focus Selector */}
-      <div className="space-y-3">
+      {/* Detected Weak Areas + Focus Selector (Single Row) */}
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-chip font-semibold text-muted-foreground">
             {isBn ? "চিহ্নিত দুর্বল দিক:" : "Detected Focus:"}
