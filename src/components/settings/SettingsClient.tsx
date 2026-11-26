@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
 import { AdminControlTab } from "@/components/settings/AdminControlTab";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import type { UserProfile } from "@/lib/auth/session";
 import {
@@ -335,6 +336,12 @@ export function SettingsClient() {
         <AdminControlTab currentUserId={currentUser.id} locale={locale} />
       ) : (
         <>
+          {!currentUser && (
+            <GuestLimitBanner
+              featureName={locale === "bn" ? "গেস্ট সেটিংস (সীমিত)" : "Guest Settings (Limited)"}
+              nextPath="/settings"
+            />
+          )}
 
       {/* Success Notification Banner */}
       {showResetSuccess && (
@@ -494,7 +501,9 @@ export function SettingsClient() {
         </Card>
       </section>
 
-      {/* 3. Audio & Speech Preferences */}
+      {/* 3. Audio & Speech Preferences (Logged-in users only) */}
+      {currentUser && (
+        <>
       <section className="space-y-4">
         <div className="flex items-center gap-2.5">
           <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
@@ -656,7 +665,7 @@ export function SettingsClient() {
         </Card>
       </section>
 
-      {/* 4. Daily Learning Goals & Level */}
+      {/* 4. Daily Learning Goals & Level (Logged-in users only) */}
       <section className="space-y-4">
         <div className="flex items-center gap-2.5">
           <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
@@ -736,6 +745,8 @@ export function SettingsClient() {
           </div>
         </Card>
       </section>
+        </>
+      )}
 
       {/* 5. Appearance & Display */}
       <section className="space-y-4">
@@ -800,7 +811,8 @@ export function SettingsClient() {
         </Card>
       </section>
 
-      {/* 6. Data & Storage Management */}
+      {/* 6. Data & Storage Management (Logged-in users only) */}
+      {currentUser && (
       <section className="space-y-4">
         <div className="flex items-center gap-2.5">
           <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
@@ -863,6 +875,7 @@ export function SettingsClient() {
           </div>
         </Card>
       </section>
+      )}
 
       {/* 7. About & Version Section */}
       <section className="space-y-4">

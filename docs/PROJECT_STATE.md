@@ -2154,6 +2154,9 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, Guest Mode Limited Settings (`SettingsClient.tsx`)
+- Restricted `/settings` in Guest mode (`!currentUser`) to show only basic preferences (**Language & Translation**, **Appearance**, and **About** + `GuestLimitBanner`), hiding **Audio & Speech Preferences**, **Daily Learning Goals & Level**, and **Data & Storage Management** until the user logs in.
+
 ### 2026-11-27, Session Isolation, Guest 5% Preview & Full Admin Controls
 - Added `supabase/migrations/20261127_app_settings_and_progress.sql` (`public.app_settings` + `public.user_app_state` with RLS) and API routes `/api/v1/app-config` and `/api/v1/user/progress`.
 - Added `SessionIsolationProvider.tsx` in `src/app/(app)/layout.tsx`:
