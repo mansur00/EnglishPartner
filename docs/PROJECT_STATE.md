@@ -2156,6 +2156,9 @@ Entry format:
 
 - Extended the 100% visible + 95% locked Guest mode across `GrammarPathClient.tsx` (Stage 1 unlocked, Stages 2–8 & AI Writing Checker locked), `RoleplayPartner.tsx` (1-turn 5% preview, then locked), `vocabulary/page.tsx` (first 5% Magic Decks unlocked, 95% locked), and `quiz/page.tsx` (first 5% quizzes unlocked, 95% locked).
 
+### 2026-11-27, Instant Signup Without Email Confirmation (`/api/v1/auth/signup`)
+- Added `POST /api/v1/auth/signup` creating immediately confirmed Supabase Auth users (`email_confirmed_at = now()`) + `public.profiles` rows via `DATABASE_URL`, and updated `src/app/auth/login/page.tsx` so new users sign up and log in immediately without sending confirmation emails or hitting Supabase email rate limits.
+
 ### 2026-11-27, Remove Hard-Coded Demo Progress Stats Across Dashboard, Daily Practice & Progress
 - Audited and removed all hard-coded demo stats that made Guest mode appear cached:
   - `TodayPanel.tsx`: Changed defaults from `streak=1, minutesCompleted=7, minutesGoal=10` to `0, 0, 15`.

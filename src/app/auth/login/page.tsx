@@ -75,28 +75,32 @@ function LoginForm() {
             : "Password reset link sent to your email."
         );
       } else {
-        const { data, error } = await supabase.auth.signUp({
-          email: email.trim(),
-          password,
-          options: {
-            data: { full_name: fullName.trim() || email.split("@")[0] },
-          },
+        const res = await fetch("/api/v1/auth/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email.trim(),
+            password,
+            fullName: fullName.trim() || email.split("@")[0],
+          }),
         });
-        if (error) {
-          setErrorMsg(error.message);
+        const signupData = await res.json();
+        if (!res.ok) {
+          setErrorMsg(signupData.error || "Signup failed");
           return;
         }
-        if (data.session) {
-          router.push(nextPath);
-          router.refresh();
-        } else {
-          setInfoMsg(
-            isBn
-              ? "অ্যাকাউন্ট তৈরি হয়েছে! ইমেইল কনফার্ম করে লগইন করুন।"
-              : "Account created! Please check your email to confirm, then sign in."
-          );
-          setMode("login");
+
+        const { error: signInErr } = await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
+        if (signInErr) {
+          setErrorMsg(signInErr.message);
+          return;
         }
+
+        router.push(nextPath);
+        router.refresh();
       }
     } catch {
       setErrorMsg("Authentication failed. Please try again.");

@@ -70,19 +70,19 @@
     },
     {
       "file": "src/app/auth/login/page.tsx",
-      "line": 173,
+      "line": 177,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/app/auth/login/page.tsx",
-      "line": 186,
+      "line": 190,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/app/auth/login/page.tsx",
-      "line": 201,
+      "line": 205,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-chip font-semibold text-foreground\">"
     },
