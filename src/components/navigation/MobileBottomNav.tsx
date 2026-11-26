@@ -9,7 +9,7 @@ import {
   DashboardSquare01Icon,
   CompassIcon,
   Bookmark02Icon,
-  UserIcon,
+  Analytics01Icon,
 } from "@hugeicons/core-free-icons";
 
 export function MobileBottomNav() {
@@ -21,7 +21,7 @@ export function MobileBottomNav() {
       name: t("nav.dashboard", locale),
       href: "/dashboard",
       icon: DashboardSquare01Icon,
-      active: pathname === "/dashboard",
+      active: pathname.startsWith("/dashboard"),
     },
     {
       name: t("nav.explore", locale),
@@ -33,32 +33,40 @@ export function MobileBottomNav() {
       name: t("nav.vocabulary", locale),
       href: "/vocabulary",
       icon: Bookmark02Icon,
-      active: pathname === "/vocabulary",
+      active: pathname.startsWith("/vocabulary"),
     },
     {
-      name: t("auth.profile", locale),
-      href: "/dashboard",
-      icon: UserIcon,
-      active: false,
+      name: t("nav.progress", locale),
+      href: "/progress",
+      icon: Analytics01Icon,
+      active: pathname.startsWith("/progress"),
     },
   ];
 
   return (
-    <nav suppressHydrationWarning className="md:hidden fixed bottom-0 left-0 right-0 z-20 flex h-bottom-nav w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-2 shadow-xs">
+    <nav
+      suppressHydrationWarning
+      className="md:hidden fixed bottom-0 left-0 right-0 z-header flex h-bottom-nav w-full items-center justify-around border-t border-border bg-card/95 backdrop-blur px-1 shadow-xs"
+    >
       {navItems.map((item) => {
         return (
           <Link
-            key={item.name}
+            key={item.href}
             href={item.href}
             className={cn(
-              "flex flex-col items-center justify-center gap-1 w-16 py-1 transition-all btn-press",
+              "flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-1.5 px-1 transition-colors btn-press",
               item.active
-                ? "text-primary"
+                ? "text-primary font-semibold"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <HugeiconsIcon icon={item.icon} size={22} />
-            <span suppressHydrationWarning className="text-chip leading-none">{item.name}</span>
+            <HugeiconsIcon icon={item.icon} size={20} />
+            <span
+              suppressHydrationWarning
+              className="text-chip leading-none truncate max-w-full"
+            >
+              {item.name}
+            </span>
           </Link>
         );
       })}

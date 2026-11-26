@@ -88,31 +88,26 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
   ];
 
   return (
-    <header suppressHydrationWarning className="sticky top-0 z-header flex h-header w-full items-center justify-between border-b border-border bg-card/90 backdrop-blur px-4 md:px-6">
+    <header suppressHydrationWarning className="sticky top-0 z-header flex h-header w-full items-center justify-between gap-2 border-b border-border bg-card/90 backdrop-blur px-3 sm:px-4 md:px-6">
       {/* Brand & Mobile Hamburger */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
         {/* Mobile Hamburger Drawer Trigger */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger
             aria-label={t("nav.openMenu", locale)}
-            className="md:hidden inline-flex items-center justify-center size-tap rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="md:hidden inline-flex items-center justify-center size-tap shrink-0 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
           >
             <HugeiconsIcon icon={Menu01Icon} size={22} />
           </SheetTrigger>
           <SheetContent side="left" className="w-72 bg-card border-r border-border p-6">
             <SheetHeader className="pb-4 border-b border-border text-left">
-              <SheetTitle className="flex items-center gap-3">
-                <div className="flex size-control items-center justify-center rounded-control bg-primary text-primary-foreground font-heading text-card-title shadow-xs">
-                  E
-                </div>
-                <div>
-                  <div className="font-heading text-card-title leading-tight text-foreground">
-                    English Partner
-                  </div>
-                  <div className="text-chip text-muted-foreground">
-                    Menu & Learning Paths
-                  </div>
-                </div>
+              <SheetTitle className="flex items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo.svg"
+                  alt="English Partner"
+                  className="h-9 w-auto object-contain"
+                />
               </SheetTitle>
             </SheetHeader>
 
@@ -146,13 +141,13 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
           <img
             src="/logo.svg"
             alt="English Partner"
-            className="h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity"
+            className="h-7 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity"
           />
         </Link>
       </div>
 
       {/* Right Controls: Grammar Toggle Slot, Language, Theme, User Profile */}
-      <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         {/* Language Switcher */}
         <LanguageSwitcher />
 

@@ -627,6 +627,26 @@ export default function LandingPage() {
                   </Link>{" "}
                   and receive learning updates.
                 </p>
+                <div className="pt-1 space-y-1 text-chip text-muted-foreground">
+                  <p>
+                    Email:{" "}
+                    <a
+                      href="mailto:mansurproverse@gmail.com"
+                      className="text-foreground hover:text-primary transition-colors"
+                    >
+                      mansurproverse@gmail.com
+                    </a>
+                  </p>
+                  <p>
+                    Phone:{" "}
+                    <a
+                      href="tel:+8801575040095"
+                      className="text-foreground hover:text-primary transition-colors"
+                    >
+                      +8801575040095
+                    </a>
+                  </p>
+                </div>
               </div>
 
               {/* Right Multi-Column Links */}

@@ -257,6 +257,16 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Add Landing Footer Contact Info & Fix Mobile Top/Bottom Nav Responsiveness
+- Requested by owner: Add email (`mansurproverse@gmail.com`) and phone (`+8801575040095`) to landing footer, and fix mobile responsiveness of the app shell top bar and bottom navigation bar.
+- Changed:
+  - `src/app/page.tsx`: Added clickable `mailto:mansurproverse@gmail.com` and `tel:+8801575040095` contact lines in the footer brand column.
+  - `src/components/navigation/Header.tsx`: Compacted mobile header padding/gaps (`px-3 sm:px-4`), scaled logo to `h-7 sm:h-9 md:h-10` to prevent 360px overflow, and replaced old `[E]` placeholder in mobile drawer `SheetHeader` with `/logo.svg`.
+  - `src/components/navigation/MobileBottomNav.tsx`: Replaced fixed `w-16` items with `flex-1 min-w-0` + `truncate` labels, raised z-index to `z-header`, and linked the 4th tab to `/progress` (`nav.progress`) with active state.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Remove Smart Progress Tracking Card from Our Features Bento Grid
 - Requested by owner: Remove the full-width `Smart Progress Tracking & SM-2 Vocabulary` card from the `Our Features` section on `/`.
 - Changed:

@@ -202,25 +202,25 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 635,
+      "line": 655,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Learning</p>"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 643,
+      "line": 663,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Practice</p>"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 652,
+      "line": 672,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Account</p>"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 660,
+      "line": 680,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Legal</p>"
     },
@@ -361,6 +361,12 @@
       "line": 360,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"font-medium text-foreground text-right\">"
+    },
+    {
+      "file": "src/components/navigation/MobileBottomNav.tsx",
+      "line": 59,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "? \"text-primary font-semibold\""
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
@@ -649,9 +655,9 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 149,
-      "detail": "Hardcoded layout constant / magic number: h-10",
-      "code": "className=\"h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
+      "line": 144,
+      "detail": "Hardcoded layout constant / magic number: h-7, h-10",
+      "code": "className=\"h-7 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
