@@ -254,7 +254,7 @@ export default function QuizHubPage() {
                   </Badge>
                 </div>
 
-                <h2 className="text-card-title text-foreground leading-snug">
+                <h2 className="text-card-title text-foreground leading-snug line-clamp-2 break-words">
                   {locale === "bn" ? sc.titleBn : sc.title}
                 </h2>
                 <p className="text-meta text-muted-foreground line-clamp-2">
@@ -263,7 +263,7 @@ export default function QuizHubPage() {
               </div>
 
               <div className="pt-3 border-t border-border flex items-center justify-between gap-2">
-                <span className="text-chip text-muted-foreground capitalize">
+                <span className="text-chip text-muted-foreground capitalize truncate min-w-0">
                   {selectedStyle} • {LENGTH_KEYS[selectedLengthIdx]}
                 </span>
                 {isLocked ? (

@@ -2224,6 +2224,9 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, UX Audit Step 4: Long Title & Long Description Overflow Guards
+- Added `min-w-0`, `truncate`, `line-clamp-2`, and `break-words` overflow protection on card headers, titles, and descriptions across `ScenarioCard.tsx`, `src/app/(app)/quiz/page.tsx`, `src/app/(app)/vocabulary/page.tsx`, and `GrammarPathClient.tsx`.
+
 ### 2026-11-27, UX Audit Step 3: Pill / Badge / Tag Consistency
 - Replaced all 6 remaining `rounded-full` classes with `rounded-pill` / `pill` across `GrammarBreakdown.tsx`, `GrammarLegend.tsx`, `DailyPracticeClient.tsx`, and `ThemeToggle.tsx`.
 - Converted inline status/language/level pill `<span>`s to `<Badge>` and `<Pill>` in `SettingsClient.tsx` and `RoleplayPartner.tsx`.

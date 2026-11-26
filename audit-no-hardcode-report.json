@@ -292,7 +292,15 @@
       ]
     },
     {
-      "detail": "ClassName repeated 25 times",
+      "detail": "ClassName repeated 3 times",
+      "className": "flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/learning/ConversationReader.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 23 times",
       "className": "font-heading text-card-title text-foreground",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
@@ -305,14 +313,6 @@
         "src/components/settings/AdminControlTab.tsx",
         "src/components/settings/SettingsClient.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60",
-      "files": [
-        "src/app/(app)/vocabulary/page.tsx",
-        "src/components/learning/ConversationReader.tsx"
       ]
     },
     {

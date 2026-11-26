@@ -235,7 +235,7 @@ export function GrammarPathClient() {
                   </Pill>
                 </div>
 
-                <h2 className="text-card-title text-foreground">{stage.title}</h2>
+                <h2 className="text-card-title text-foreground line-clamp-2 break-words">{stage.title}</h2>
 
                 <p
                   className={cn(

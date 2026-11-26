@@ -59,11 +59,11 @@ export function ScenarioCard({ scenario, selectedLengthTierId, selectedStyle }: 
       <div className="space-y-4">
         {/* Header: Category Icon Tile + Tags */}
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <EmojiTile emoji={theme.emoji} title={theme.name} />
 
-            <div>
-              <span className="text-label text-topic-ink block">
+            <div className="min-w-0">
+              <span className="text-label text-topic-ink block truncate">
                 {categoryName}
               </span>
               <div className="flex items-center gap-2 mt-1.5 flex-wrap">
@@ -76,11 +76,13 @@ export function ScenarioCard({ scenario, selectedLengthTierId, selectedStyle }: 
           </div>
 
           {scenario.profession && (
-            <Badge variant="secondary" size="md" className="gap-1.5 shrink-0">
-              <HugeiconsIcon icon={Briefcase01Icon} size={14} />
-              {locale === "bn"
-                ? ALL_PROFESSIONS.find((p) => p.slug === scenario.profession?.slug)?.nameBn || scenario.profession.name
-                : scenario.profession.name}
+            <Badge variant="secondary" size="md" className="gap-1.5 shrink-0 max-w-full">
+              <HugeiconsIcon icon={Briefcase01Icon} size={14} className="shrink-0" />
+              <span className="truncate">
+                {locale === "bn"
+                  ? ALL_PROFESSIONS.find((p) => p.slug === scenario.profession?.slug)?.nameBn || scenario.profession.name
+                  : scenario.profession.name}
+              </span>
             </Badge>
           )}
         </div>
@@ -91,7 +93,7 @@ export function ScenarioCard({ scenario, selectedLengthTierId, selectedStyle }: 
             as="h3"
             titleEn={scenario.title}
             titleBn={scenario.titleBn}
-            className="text-card-title text-foreground group-hover:text-primary transition-colors line-clamp-1"
+            className="text-card-title text-foreground group-hover:text-primary transition-colors line-clamp-2 break-words"
           />
         </div>
 

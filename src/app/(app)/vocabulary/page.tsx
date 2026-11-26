@@ -458,11 +458,11 @@ function VocabularyContent() {
                                   <span>{locale === "bn" ? "লকড" : "Locked"}</span>
                                 </Badge>
                               </div>
-                              <div>
-                                <h3 className="font-heading text-card-title text-foreground">
+                              <div className="min-w-0">
+                                <h3 className="font-heading text-card-title text-foreground line-clamp-2 break-words">
                                   {deck.title}
                                 </h3>
-                                <p className="text-chip text-muted-foreground mt-1 leading-relaxed">
+                                <p className="text-chip text-muted-foreground mt-1 leading-relaxed line-clamp-2">
                                   {deck.tagline}
                                 </p>
                               </div>
@@ -512,11 +512,11 @@ function VocabularyContent() {
                           </Badge>
                         </div>
 
-                        <div>
-                          <h3 className="font-heading text-card-title text-foreground">
+                        <div className="min-w-0">
+                          <h3 className="font-heading text-card-title text-foreground line-clamp-2 break-words">
                             {deck.title}
                           </h3>
-                          <p className="text-chip text-muted-foreground mt-1 leading-relaxed">
+                          <p className="text-chip text-muted-foreground mt-1 leading-relaxed line-clamp-2">
                             {deck.tagline}
                           </p>
                         </div>
