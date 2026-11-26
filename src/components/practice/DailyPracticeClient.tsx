@@ -27,6 +27,12 @@ import {
   detectWeakAreas,
   type UserProgressSnapshot,
 } from "@/lib/practice/personalized-generator";
+import {
+  CHALLENGE_90_STORAGE_KEY,
+  DEFAULT_CHALLENGE_90_STATE,
+  getPhaseForDay,
+  type Challenge90State,
+} from "@/lib/practice/challenge-90";
 
 export function DailyPracticeClient() {
   const locale = useLocale();
@@ -40,6 +46,9 @@ export function DailyPracticeClient() {
   const [ruleMistakesCount, setRuleMistakesCount] = useState(0);
   const [quizLowCategories, setQuizLowCategories] = useState<string[]>([]);
   const [completedGrammarIds, setCompletedGrammarIds] = useState<string[]>([]);
+  const [challengeState, setChallengeState] = useState<Challenge90State>(
+    DEFAULT_CHALLENGE_90_STATE
+  );
 
   const formattedDate = new Intl.DateTimeFormat(locale === "bn" ? "bn-BD" : "en-US", {
     weekday: "long",
@@ -113,6 +122,14 @@ export function DailyPracticeClient() {
             );
           }
         }
+
+        const challengeRaw = localStorage.getItem(CHALLENGE_90_STORAGE_KEY);
+        if (challengeRaw) {
+          const challengeParsed = JSON.parse(challengeRaw);
+          if (challengeParsed && typeof challengeParsed.currentDay === "number") {
+            setChallengeState({ ...DEFAULT_CHALLENGE_90_STATE, ...challengeParsed });
+          }
+        }
       } catch {
         // LocalStorage access fallback
       }
@@ -153,6 +170,18 @@ export function DailyPracticeClient() {
       // Best effort
     }
   };
+
+  const handleChallengeChange = (next: Challenge90State) => {
+    setChallengeState(next);
+    try {
+      localStorage.setItem(CHALLENGE_90_STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      // Best effort
+    }
+  };
+
+  const topWeakArea = weakAreas[0];
+  const challengePhase = getPhaseForDay(challengeState.currentDay);
 
   const handleAddStarterWords = () => {
     const starter = ["reservation", "discount", "receipt", "recommendation", "appointment"];
@@ -209,6 +238,34 @@ export function DailyPracticeClient() {
 
   const continueLearningSidebar = (
     <>
+      {/* AI Coach Insight & 90-Day Snapshot */}
+      <div className="rounded-card bg-muted/40 border border-border p-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <Badge variant="success" size="sm">
+            {locale === "bn" ? "AI কোচ ইনসাইট" : "AI Coach Insight"}
+          </Badge>
+          <span className="text-chip font-mono text-muted-foreground">
+            Day {challengeState.currentDay}/90
+          </span>
+        </div>
+        <p className="text-meta text-foreground leading-snug">
+          {challengeState.enrolled
+            ? locale === "bn"
+              ? `${challengePhase.titleBn} — আজকের স্পোকেন প্র্যাকটিসে ${topWeakArea ? topWeakArea.labelBn : "বাক্য গঠন"} উন্নত করতে AI পার্টনারের সাথে কথা বলুন।`
+              : `${challengePhase.titleEn} — Focus today's speaking session on ${topWeakArea ? topWeakArea.labelEn : "natural flow"} with live roleplay.`
+            : locale === "bn"
+              ? "৯০-দিনের স্পোকেন ইংলিশ চ্যালেঞ্জ শুরু করলে আপনার স্পিকিং অগ্রগতি অনুযায়ী প্রতিদিন কাস্টম প্ল্যান পাবেন।"
+              : "Enroll in the 90-Day Spoken English Challenge for an adaptive daily speaking plan."}
+        </p>
+        <Link
+          href="/roleplay"
+          className="inline-flex items-center gap-1 text-chip font-semibold text-primary hover:underline"
+        >
+          <span>{locale === "bn" ? "AI Roleplay খুলুন" : "Open AI Roleplay"}</span>
+          <HugeiconsIcon icon={ArrowRight01Icon} size={12} />
+        </Link>
+      </div>
+
       {/* Next Recommended Lesson */}
       <div className="rounded-card bg-primary/10 border border-primary/25 p-4 space-y-2.5">
         <div className="flex items-center justify-between gap-2">
@@ -332,11 +389,11 @@ export function DailyPracticeClient() {
           </div>
         </Card>
 
-        {/* 2. Personalized Practice Generator */}
+        {/* 2. 90-Day Personalized Spoken English Challenge */}
         <PersonalizedPracticeCard
           locale={locale === "bn" ? "bn" : "en"}
-          weakAreas={weakAreas}
-          weakWords={weakWords.map((w) => w.word)}
+          challengeState={challengeState}
+          onChallengeChange={handleChallengeChange}
           onPracticeMinutesEarned={addPracticeMinutes}
         />
 
