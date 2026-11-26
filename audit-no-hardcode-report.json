@@ -165,12 +165,6 @@
       "code": "\"size-9 sm:size-10 rounded-pill flex items-center justify-center text-label font-semibold border shrink-0 select-none shadow-2xs\","
     },
     {
-      "file": "src/components/learning/ChatTurnBubble.tsx",
-      "line": 115,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "\"text-chip font-semibold tracking-tight\","
-    },
-    {
       "file": "src/components/learning/ConversationInspectorSidebar.tsx",
       "line": 157,
       "detail": "Direct font-weight utility in feature code: font-semibold",
@@ -701,11 +695,10 @@
       ]
     },
     {
-      "detail": "ClassName repeated 6 times",
+      "detail": "ClassName repeated 5 times",
       "className": "text-chip text-muted-foreground font-mono",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
-        "src/components/learning/ChatTurnBubble.tsx",
         "src/components/learning/ConversationInspectorSidebar.tsx",
         "src/components/learning/GrammarPanel.tsx",
         "src/components/practice/SentenceBuilderCard.tsx",

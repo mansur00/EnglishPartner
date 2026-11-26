@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Subtle Disabled Color for ChatTurnBubble Speaker & Sequence Number
+- Requested by owner: Mute speaker name (`Customer:`, `Shop Assistant:`) and turn number (`#1`, `#2`) in conversation chat bubbles (`ChatTurnBubble.tsx`) to a disabled/subtle color (`text-muted-foreground/45`).
+- Changed:
+  - `src/components/learning/ChatTurnBubble.tsx`: Updated `speaker.name` and `#sequenceNumber` to `text-muted-foreground/45`.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Daily Practice Fixed Right Sidebar Layout
 - Requested by owner: Remove Today's Conversation Challenge card and show only the 4 Continue Learning Path cards (Conversation, Grammar, Vocabulary, Quiz) in the fixed right sidebar (`w-80 xl:w-96`) on `/daily-practice`.
 - Changed:

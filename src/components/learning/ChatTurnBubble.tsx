@@ -110,15 +110,10 @@ export function ChatTurnBubble({
         <div className="flex items-start justify-between gap-2.5">
           <div className="space-y-1 min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <span
-                className={cn(
-                  "text-chip font-semibold tracking-tight",
-                  isRight ? "text-primary" : "text-foreground"
-                )}
-              >
+              <span className="text-chip tracking-tight text-muted-foreground/45">
                 {speaker.name}:
               </span>
-              <span className="text-chip text-muted-foreground font-mono">
+              <span className="text-chip text-muted-foreground/45 font-mono">
                 #{line.sequenceNumber}
               </span>
             </div>
