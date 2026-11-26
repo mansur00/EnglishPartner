@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Apply Secondary Color Shades to Vocabulary Retention Stage Bars
+- Requested by owner: Apply secondary color (`--sun-*`) shades to the Learning, Reviewing, and Mastered progress bars in Vocabulary Retention.
+- Changed:
+  - `src/components/analytics/ProgressDashboard.tsx`: Replaced `bg-chart-4`, `bg-warning`, `bg-chart-3` on the 3 stage breakdown bars with `bg-sun-300` (Learning), `bg-sun-500` (Reviewing), and `bg-sun-700` (Mastered).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Align /professions/[slug] Layout with /explore & Fix Next.js 16 Suspense Boundary
 - Requested by owner: Match `/professions/[slug]` inner page layout to `/explore` (header card with title/tagline/count, 2-col scenario grid, fixed right sidebar with Search, Track Details & Competencies, and FilterBar).
 - Changed:

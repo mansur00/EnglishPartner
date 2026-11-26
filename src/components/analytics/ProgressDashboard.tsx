@@ -225,9 +225,9 @@ export function ProgressDashboard() {
             {/* Stage Progress Breakdown */}
             <div className="space-y-3">
               {[
-                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-chart-4" },
-                { label: t("progress.stageReviewing"), count: metrics.vocabulary.reviewing, barColor: "bg-warning" },
-                { label: t("progress.stageMastered"), count: metrics.vocabulary.mastered, barColor: "bg-chart-3" },
+                { label: t("progress.stageLearning"), count: metrics.vocabulary.learning, barColor: "bg-sun-300" },
+                { label: t("progress.stageReviewing"), count: metrics.vocabulary.reviewing, barColor: "bg-sun-500" },
+                { label: t("progress.stageMastered"), count: metrics.vocabulary.mastered, barColor: "bg-sun-700" },
               ].map((stage, sIdx) => (
                 <div key={sIdx} className="space-y-1">
                   <div className="flex justify-between text-chip">
