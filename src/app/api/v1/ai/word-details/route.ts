@@ -14,7 +14,10 @@ import {
 export async function POST(req: Request) {
   try {
     const identifier = extractClientIdentifier(req);
-    const quotaResult = globalQuotaStore.checkAndRecord(identifier, "wordDetails");
+    const quotaResult = globalQuotaStore.checkAndRecord(identifier, "wordDetails", {
+      rateLimitPerMinute: 25,
+      dailyQuota: 120,
+    });
     const rateHeaders = buildRateLimitHeaders(quotaResult);
 
     if (!quotaResult.allowed) {

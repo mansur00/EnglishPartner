@@ -84,19 +84,45 @@ export async function resolveWordDetailsAsync(
   const systemPrompt = `${GLOBAL_AI_SAFETY_INSTRUCTION}
 
 You are an expert English-Bangla bilingual lexicographer and grammar teacher.
-Given an English word (and optional part of speech, context sentence, or short meaning), return comprehensive learner-friendly word details in strict JSON matching the schema:
-- ipa: accurate IPA pronunciation (e.g. "/niːd/")
-- partOfSpeech: primary part(s) of speech (e.g. "verb / noun")
-- meaningEn: clear, concise English definition
-- meaningBn: natural, accurate Bangla meaning (in Bengali script)
-- contextualMeaningBn: Bangla explanation of how this word means/functions in the given context (or general usage if no context)
-- synonyms: 3 to 5 accurate English synonyms
-- antonyms: 2 to 4 accurate English antonyms (empty array only if none exist, e.g. concrete drinks like "latte")
-- tenseInfo: if the word is a verb or appears in a context sentence, identify the tense/usage ("detectedTense" in English, "explanationBn" in Bangla)
-- verbForms: if the word is or can be used as a verb, provide base (V1), thirdPerson (s/es), past (V2), pastParticiple (V3), and presentParticiple (V-ing)
-- nounAndAdjForms: if applicable, provide plural, comparative, and superlative forms
-- posFamily: show the word's forms across Parts of Speech (noun, verb, adjective, adverb) whenever valid forms exist in English (omit forms that don't exist)
-- sentences: 3 practical sentence-making examples showing different tenses or real-life contexts, each with "label" (e.g. "Present Simple", "Past Simple", "Question / Polite"), "en" (English sentence), and "bn" (natural Bangla translation).`;
+Given an English word (and optional part of speech, context sentence, or short meaning), return comprehensive learner-friendly word details in STRICT JSON matching this exact shape:
+{
+  "word": "need",
+  "ipa": "/niːd/",
+  "partOfSpeech": "verb / noun",
+  "meaningEn": "require something because it is essential or very important",
+  "meaningBn": "প্রয়োজন হওয়া বা দরকার হওয়া",
+  "contextualMeaningBn": "এখানে 'need' ক্রিয়া হিসেবে 'কোনো কিছু দরকার হওয়া' অর্থে ব্যবহৃত হয়েছে।",
+  "synonyms": ["require", "want", "necessitate", "lack"],
+  "antonyms": ["have", "possess", "own"],
+  "tenseInfo": {
+    "detectedTense": "Present Simple",
+    "explanationBn": "এটি Present Simple tense-এ মূল ক্রিয়া হিসেবে ব্যবহৃত হয়েছে।"
+  },
+  "verbForms": {
+    "base": "need",
+    "thirdPerson": "needs",
+    "past": "needed",
+    "pastParticiple": "needed",
+    "presentParticiple": "needing"
+  },
+  "nounAndAdjForms": {
+    "plural": "needs",
+    "comparative": null,
+    "superlative": null
+  },
+  "posFamily": {
+    "noun": "need / necessity",
+    "verb": "need",
+    "adjective": "needy / needless",
+    "adverb": "needlessly"
+  },
+  "sentences": [
+    { "label": "Present Simple", "en": "I need some water.", "bn": "আমার কিছু পানি দরকার।" },
+    { "label": "Past Simple", "en": "She needed help yesterday.", "bn": "গতকাল তার সাহায্য দরকার ছিল।" },
+    { "label": "Question", "en": "Do you need anything else?", "bn": "আপনার কি আর কিছু প্রয়োজন?" }
+  ]
+}
+Keep every field accurate for the given word. Use null for non-applicable sub-fields (for example, verbForms can be null if the word is strictly a concrete noun like "latte"). Always provide 3 practical sentences.`;
 
   const userPrompt = JSON.stringify({
     word: req.word,

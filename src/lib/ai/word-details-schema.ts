@@ -22,39 +22,39 @@ export const WordDetailsSchema = z.object({
   meaningEn: z.string(),
   meaningBn: z.string(),
   contextualMeaningBn: z.string(),
-  synonyms: z.array(z.string()).max(6),
-  antonyms: z.array(z.string()).max(4),
+  synonyms: z.array(z.string()).default([]),
+  antonyms: z.array(z.string()).default([]),
   tenseInfo: z
     .object({
-      detectedTense: z.string().optional(),
-      explanationBn: z.string().optional(),
+      detectedTense: z.string().nullish(),
+      explanationBn: z.string().nullish(),
     })
-    .optional(),
+    .nullish(),
   verbForms: z
     .object({
-      base: z.string().optional(),
-      thirdPerson: z.string().optional(),
-      past: z.string().optional(),
-      pastParticiple: z.string().optional(),
-      presentParticiple: z.string().optional(),
+      base: z.string().nullish(),
+      thirdPerson: z.string().nullish(),
+      past: z.string().nullish(),
+      pastParticiple: z.string().nullish(),
+      presentParticiple: z.string().nullish(),
     })
-    .optional(),
+    .nullish(),
   nounAndAdjForms: z
     .object({
-      plural: z.string().optional(),
-      comparative: z.string().optional(),
-      superlative: z.string().optional(),
+      plural: z.string().nullish(),
+      comparative: z.string().nullish(),
+      superlative: z.string().nullish(),
     })
-    .optional(),
+    .nullish(),
   posFamily: z
     .object({
-      noun: z.string().optional(),
-      verb: z.string().optional(),
-      adjective: z.string().optional(),
-      adverb: z.string().optional(),
+      noun: z.string().nullish(),
+      verb: z.string().nullish(),
+      adjective: z.string().nullish(),
+      adverb: z.string().nullish(),
     })
-    .optional(),
-  sentences: z.array(WordSentenceExampleSchema).min(1).max(4),
+    .nullish(),
+  sentences: z.array(WordSentenceExampleSchema).min(1),
 });
 
 export type WordDetails = z.infer<typeof WordDetailsSchema>;

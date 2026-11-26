@@ -64,7 +64,7 @@ export class MemoryQuotaStore {
   checkAndRecord(
     identifier: string,
     feature: "sayIt" | "roleplayTurn" | "quiz" | "wordDetails",
-    config: QuotaConfig = DEFAULT_AI_QUOTAS[feature]
+    config: QuotaConfig = DEFAULT_AI_QUOTAS[feature] ?? DEFAULT_AI_QUOTAS.sayIt
   ): QuotaCheckResult {
     const now = this.nowProvider();
     const key = `${feature}:${identifier}`;
