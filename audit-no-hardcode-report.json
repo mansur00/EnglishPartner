@@ -106,57 +106,57 @@
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 187,
+      "line": 202,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 201,
+      "line": 216,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 218,
+      "line": 233,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 269,
+      "line": 284,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-label font-semibold text-foreground\">{stage.title}</span>"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 356,
+      "line": 371,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{activeTopic.title}</h2>"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 378,
+      "line": 393,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 395,
+      "line": 410,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 432,
+      "line": 447,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 477,
+      "line": 493,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-meta text-primary font-semibold\">"
+      "code": "<p className=\"text-meta text-primary font-semibold\" dir=\"ltr\">"
     },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",

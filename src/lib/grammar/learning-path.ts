@@ -140,6 +140,9 @@ export const GRAMMAR_STAGES: GrammarStage[] = [
   },
 ];
 
-export function getTopicRule(topic: GrammarTopic, locale: Locale): string {
-  return topic.rules[locale] || topic.rules.en;
+export function getTopicRule(topic: GrammarTopic, translationLocale: string): string {
+  if (translationLocale === "bn" || translationLocale === "hi" || translationLocale === "en") {
+    return topic.rules[translationLocale];
+  }
+  return topic.rules.en;
 }

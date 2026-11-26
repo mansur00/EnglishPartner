@@ -258,7 +258,7 @@ Entry format:
 (Agent: add entries below this line.)
 
 ### 2026-11-26, 8-Stage Grammar Learning Path (/grammar-path)
-- Requested by owner: Add a new Grammar Learning Path page to the left menu with 8 sequential stages (Foundation to Real Use), 3-step module flow (Rule in user's translate language only, 5-8 English examples, interactive sentence-making with AI check), level priority filters (School/Admission/IELTS/Spoken), and daily routine guidance.
+- Requested by owner: Add a new Grammar Learning Path page to the left menu with 8 sequential stages (Foundation to Real Use), 3-step module flow (Rule in user's translate language only, 5-8 English examples, interactive sentence-making with AI check), level priority filters (School/Admission/IELTS/Spoken), and daily routine guidance; fixed rules to follow `useTranslationLocale()` (`ecp_translation_locale`) instead of system UI `useLocale()`.
 - Changed:
   - `src/lib/grammar/learning-path.ts` & `src/lib/grammar/learning-path-data.ts`: Added 8 stages, 31 structured grammar topics with translated rules (`bn`, `hi`, `en`), English formulas, 5–6 examples per topic, and level priority metadata.
   - `src/lib/ai/grammar-check.ts` & `src/app/api/v1/ai/grammar-check/route.ts`: Added `POST /api/v1/ai/grammar-check` with `callStructuredLlm`, fallback evaluation, and quota enforcement (`grammarCheck` added to `src/lib/ai/llm-client.ts` and `src/lib/ratelimit/quota.ts`).

@@ -19,7 +19,9 @@ import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
 import { Input } from "@/components/ui/input";
 import { LocaleTitle } from "@/components/shared";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslationLocale } from "@/lib/i18n";
+import { useLiveTranslation } from "@/lib/i18n/use-live-translation";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import {
@@ -36,6 +38,8 @@ const COMPLETED_STORAGE_KEY = "ecp_grammar_path_completed_v1";
 
 export function GrammarPathClient() {
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
+  const ruleLocale = translationLocale === "none" ? "en" : translationLocale;
   const [selectedLevel, setSelectedLevel] = useState<GrammarLevelFilter>("all");
   const [expandedStage, setExpandedStage] = useState<number>(1);
   const [activeTopicId, setActiveTopicId] = useState<string>(GRAMMAR_TOPICS[0].id);
@@ -89,6 +93,17 @@ export function GrammarPathClient() {
     [activeTopicId]
   );
 
+  const needsLiveRuleTranslation =
+    ruleLocale !== "bn" && ruleLocale !== "hi" && ruleLocale !== "en";
+  const { translatedText: liveTranslatedRule } = useLiveTranslation(
+    needsLiveRuleTranslation ? activeTopic.rules.en : undefined,
+    ruleLocale
+  );
+  const displayedRule =
+    needsLiveRuleTranslation && liveTranslatedRule
+      ? liveTranslatedRule
+      : getTopicRule(activeTopic, ruleLocale);
+
   const handleSelectTopic = (topic: GrammarTopic) => {
     setActiveTopicId(topic.id);
     setExpandedStage(topic.stageNumber);
@@ -115,7 +130,7 @@ export function GrammarPathClient() {
           topicTitle: activeTopic.title,
           formula: activeTopic.formula,
           sentence: trimmed,
-          locale,
+          locale: ruleLocale,
         }),
       });
       const data = await res.json();
@@ -379,9 +394,9 @@ export function GrammarPathClient() {
                 {isBangla ? "নিয়ম বুঝুন (Rule)" : locale === "hi" ? "नियम समझें (Rule)" : "Understand the Rule"}
               </h3>
             </div>
-            <div className="p-4 rounded-panel bg-muted">
-              <p className={cn("text-body text-foreground leading-relaxed", isBangla && "text-subtitle-bn")}>
-                {getTopicRule(activeTopic, locale)}
+            <div className="p-4 rounded-panel bg-muted" dir={isRtlLanguage(ruleLocale) ? "rtl" : "ltr"}>
+              <p className={cn("text-body text-foreground leading-relaxed", ruleLocale === "bn" && "text-subtitle-bn")}>
+                {displayedRule}
               </p>
             </div>
           </div>
@@ -464,22 +479,23 @@ export function GrammarPathClient() {
                   "p-4 rounded-panel space-y-2",
                   checkResult.isCorrect ? "bg-muted" : "bg-muted"
                 )}
+                dir={isRtlLanguage(ruleLocale) ? "rtl" : "ltr"}
               >
                 <div className="flex items-center gap-2">
                   <Tag variant={checkResult.isCorrect ? "success" : "warning"} size="sm">
                     {checkResult.isCorrect ? "Great Job" : "Needs Polish"}
                   </Tag>
                 </div>
-                <p className={cn("text-body text-foreground", isBangla && "text-subtitle-bn")}>
+                <p className={cn("text-body text-foreground", ruleLocale === "bn" && "text-subtitle-bn")}>
                   {checkResult.feedback}
                 </p>
                 {checkResult.correctedSentence && (
-                  <p className="text-meta text-primary font-semibold">
+                  <p className="text-meta text-primary font-semibold" dir="ltr">
                     Suggested: &ldquo;{checkResult.correctedSentence}&rdquo;
                   </p>
                 )}
                 {checkResult.tip && (
-                  <p className={cn("text-meta text-muted-foreground", isBangla && "text-subtitle-bn")}>
+                  <p className={cn("text-meta text-muted-foreground", ruleLocale === "bn" && "text-subtitle-bn")}>
                     {checkResult.tip}
                   </p>
                 )}

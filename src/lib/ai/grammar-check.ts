@@ -6,7 +6,7 @@ export const GrammarCheckRequestSchema = z.object({
   topicTitle: z.string().min(1).max(160),
   formula: z.string().min(1).max(300),
   sentence: z.string().trim().min(2).max(400),
-  locale: z.enum(["bn", "hi", "en"]).default("bn"),
+  locale: z.string().min(2).max(16).default("bn"),
 });
 
 export type GrammarCheckRequest = z.infer<typeof GrammarCheckRequestSchema>;
@@ -66,7 +66,14 @@ function buildFallbackResponse(req: GrammarCheckRequest): GrammarCheckResponse {
 export async function checkGrammarSentenceAsync(
   req: GrammarCheckRequest
 ): Promise<GrammarCheckResponse> {
-  const langName = req.locale === "bn" ? "Bengali (বাংলা)" : req.locale === "hi" ? "Hindi (हिन्दी)" : "English";
+  const langMap: Record<string, string> = {
+    bn: "Bengali (বাংলা)",
+    hi: "Hindi (हिन्दी)",
+    ur: "Urdu (اردو)",
+    ar: "Arabic (العربية)",
+    en: "English",
+  };
+  const langName = langMap[req.locale] || req.locale;
 
   const systemPrompt = `You are a supportive English grammar coach.
 Evaluate the learner's English sentence against the target grammar topic.
