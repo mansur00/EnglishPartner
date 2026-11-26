@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Fix Ladder Conversation Layout Clipping Under Right Sidebar
+- Requested by owner: Fix layout clipping on `/conversations/[slug]` (Shopping Ladder steps) where the middle content overlapped underneath the fixed right sidebar (`w-80 xl:w-96`).
+- Changed:
+  - `src/app/(app)/conversations/[slug]/page.tsx`: Wrapped ladder step view in `w-full lg:pr-80 xl:pr-96` + `w-full px-4 sm:px-6 lg:px-9 py-6 pb-12 space-y-6` matching the regular scenario view and other 3-column pages.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Update App Logo & Favicon SVGs
 - Requested by owner: Update `logo.svg` and `favicon.svg` from `~/Downloads` into the project.
 - Changed:

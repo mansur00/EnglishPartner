@@ -10,7 +10,7 @@ import {
   CheckmarkCircle02Icon,
   Book01Icon,
 } from "@hugeicons/core-free-icons";
-import { PageContainer, LocaleTitle } from "@/components/shared";
+import { LocaleTitle } from "@/components/shared";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { SEED_DIALOGUES, ConversationVersionData } from "@/content/seed/dialogues";
 import {
@@ -67,7 +67,8 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
     };
 
     return (
-      <PageContainer className="space-y-6 pb-12">
+      <div className="w-full lg:pr-80 xl:pr-96">
+        <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-12 space-y-6">
         {/* Top Breadcrumb & Action */}
         <div className="flex items-center justify-between">
           <Link href="/explore/category/shopping-and-money">
@@ -128,7 +129,8 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
           step={ladderStep}
           ladderVersion={ladderVersion}
         />
-      </PageContainer>
+        </div>
+      </div>
     );
   }
 
