@@ -33,15 +33,16 @@ export const WordDetailsSchema = z.object({
   meaningEn: z.string(),
   meaningBn: z.string(),
   contextualMeaningBn: z.string(),
-  synonyms: z.array(TranslatedWordItemSchema).default([]),
-  antonyms: z.array(TranslatedWordItemSchema).default([]),
-  relatedWords: z.array(TranslatedWordItemSchema).default([]),
+  synonyms: z.array(TranslatedWordItemSchema).nullish().transform((v) => v ?? []),
+  antonyms: z.array(TranslatedWordItemSchema).nullish().transform((v) => v ?? []),
+  relatedWords: z.array(TranslatedWordItemSchema).nullish().transform((v) => v ?? []),
   tenseInfo: z
     .object({
       detectedTense: z.string().nullish(),
       explanationBn: z.string().nullish(),
     })
-    .nullish(),
+    .nullish()
+    .catch(undefined),
   verbForms: z
     .object({
       base: z.string().nullish(),
@@ -50,14 +51,16 @@ export const WordDetailsSchema = z.object({
       pastParticiple: z.string().nullish(),
       presentParticiple: z.string().nullish(),
     })
-    .nullish(),
+    .nullish()
+    .catch(undefined),
   nounAndAdjForms: z
     .object({
       plural: z.string().nullish(),
       comparative: z.string().nullish(),
       superlative: z.string().nullish(),
     })
-    .nullish(),
+    .nullish()
+    .catch(undefined),
   posFamily: z
     .object({
       noun: z.string().nullish(),
@@ -65,7 +68,8 @@ export const WordDetailsSchema = z.object({
       adjective: z.string().nullish(),
       adverb: z.string().nullish(),
     })
-    .nullish(),
+    .nullish()
+    .catch(undefined),
   sentences: z.array(WordSentenceExampleSchema).min(1),
   isFallback: z.boolean().optional(),
 });

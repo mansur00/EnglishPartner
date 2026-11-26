@@ -153,8 +153,8 @@ Keep every field accurate for the given word. Use null for non-applicable sub-fi
     schema: WordDetailsSchema,
     taskName: "wordDetails",
     temperature: 0.25,
-    maxTokens: 900,
-    timeoutMs: 12000,
+    maxTokens: 1400,
+    timeoutMs: 14000,
   });
 
   const resolved = result.success && result.data ? result.data : buildFallbackWordDetails(req);
