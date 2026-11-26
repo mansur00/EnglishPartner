@@ -11,7 +11,10 @@ import {
   Mic01Icon,
   StopIcon,
   Award01Icon,
+  AiLockIcon,
 } from "@hugeicons/core-free-icons";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLockedCard } from "@/components/auth/GuestLimitBanner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -70,6 +73,7 @@ export function PersonalizedPracticeCard({
   onPracticeMinutesEarned,
 }: PersonalizedPracticeCardProps) {
   const isBn = locale === "bn";
+  const { isGuest } = useSessionAccess();
   const translationLocale = useTranslationLocale();
   const showTranslation = translationLocale !== "none";
 
@@ -589,6 +593,7 @@ export function PersonalizedPracticeCard({
           {STEP_LABELS.map((step, idx) => {
             const isActive = activeStep === idx;
             const isDone = activeDayBlocksCompleted.includes(step.id);
+            const isStepLocked = isGuest && idx > 0;
             return (
               <Button
                 key={step.id}
@@ -598,9 +603,11 @@ export function PersonalizedPracticeCard({
                 onClick={() => setActiveStep(idx)}
                 className="gap-1.5"
               >
-                {isDone && (
+                {isStepLocked ? (
+                  <HugeiconsIcon icon={AiLockIcon} size={13} />
+                ) : isDone ? (
                   <HugeiconsIcon icon={CheckmarkCircle02Icon} size={13} />
-                )}
+                ) : null}
                 <span>{isBn ? step.bn : `${step.num}. ${step.en}`}</span>
               </Button>
             );
@@ -609,6 +616,13 @@ export function PersonalizedPracticeCard({
       </div>
 
       {/* ================= ACTIVE STEP CONTENT (ONLY 1 STEP VISIBLE) ================= */}
+      {isGuest && activeStep > 0 && (
+        <GuestLockedCard
+          titleEn={`Step ${activeStep + 1} is Locked in Guest Mode`}
+          titleBn={`ধাপ ${activeStep + 1} গেস্ট মোডে লক করা আছে`}
+          nextPath="/daily-practice"
+        />
+      )}
 
       {/* STEP 1: VOCABULARY IN CONTEXT */}
       {activeStep === 0 && (
@@ -677,7 +691,7 @@ export function PersonalizedPracticeCard({
       )}
 
       {/* STEP 2: SPEAKING-FOCUSED GRAMMAR */}
-      {activeStep === 1 && (
+      {!isGuest && activeStep === 1 && (
         <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
           <div>
             <Badge variant="info" size="sm">Step 2 of 5 · ~3 min</Badge>
@@ -746,7 +760,7 @@ export function PersonalizedPracticeCard({
       )}
 
       {/* STEP 3: QUICK RESPONSE DRILL */}
-      {activeStep === 2 && (
+      {!isGuest && activeStep === 2 && (
         <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
           <div>
             <Badge variant="warning" size="sm">Step 3 of 5 · ~4 min</Badge>
@@ -801,7 +815,7 @@ export function PersonalizedPracticeCard({
       )}
 
       {/* STEP 4: CORE SPEAKING PROMPT & 5-STEP AI FEEDBACK */}
-      {activeStep === 3 && (
+      {!isGuest && activeStep === 3 && (
         <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
@@ -997,7 +1011,7 @@ export function PersonalizedPracticeCard({
       )}
 
       {/* STEP 5: MINI AI ROLEPLAY (INLINE) */}
-      {activeStep === 4 && (
+      {!isGuest && activeStep === 4 && (
         <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>

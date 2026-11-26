@@ -16,6 +16,7 @@ import {
   BotIcon,
   CheckmarkBadge01Icon,
   Bookmark02Icon,
+  AiLockIcon,
 } from "@hugeicons/core-free-icons";
 import { PageContainer } from "@/components/shared/PageContainer";
 import { Card } from "@/components/ui/card";
@@ -29,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 import { LocaleTitle } from "@/components/shared";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
@@ -213,10 +215,11 @@ export function SpellMasterClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allWords, searchQuery, selectedCategory, selectedGroup, activeGroupCategories, progress.weakWords, progress.savedIds, dailyWordId]);
 
-  const visibleWords = useMemo(() => {
-    const cap = isGuest ? getGuestLimit(filteredWords.length, 5) : visibleCount;
-    return filteredWords.slice(0, Math.min(visibleCount, cap));
-  }, [filteredWords, visibleCount, isGuest, getGuestLimit]);
+  const visibleWords = useMemo(
+    () => filteredWords.slice(0, visibleCount),
+    [filteredWords, visibleCount]
+  );
+  const guestUnlockedCount = isGuest ? getGuestLimit(filteredWords.length, 5) : filteredWords.length;
 
   const toggleSaveWord = (wordId: string) => {
     setProgress((prev) => {
@@ -1059,8 +1062,31 @@ export function SpellMasterClient() {
 
           {/* Vocabulary-Style Compact 4-Column Word Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
-            {visibleWords.map((item) => {
-              const isSelected = selectedWord?.id === item.id;
+            {visibleWords.map((item, idx) => {
+              const isLocked = isGuest && idx >= guestUnlockedCount;
+              const isSelected = !isLocked && selectedWord?.id === item.id;
+              if (isLocked) {
+                return (
+                  <Link
+                    key={item.id}
+                    href="/auth/login?next=/spell-master"
+                    className="rounded-card border border-border bg-muted/25 p-3.5 flex items-center justify-between gap-2 opacity-70 hover:opacity-100 transition-all text-left"
+                  >
+                    <div className="min-w-0 space-y-0.5">
+                      <p className="text-label font-semibold text-foreground truncate">
+                        {item.word}
+                      </p>
+                      <p className="text-chip text-muted-foreground font-mono truncate">
+                        {item.syllables.join(" • ")}
+                      </p>
+                    </div>
+                    <Badge variant="warning" size="sm" className="shrink-0 gap-1">
+                      <HugeiconsIcon icon={AiLockIcon} size={12} />
+                      <span>{isBn ? "লক" : "Lock"}</span>
+                    </Badge>
+                  </Link>
+                );
+              }
               return (
                 <div
                   key={item.id}

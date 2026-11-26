@@ -2154,6 +2154,9 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, Guest Mode 100% Visible with 95% Locked State
+- Updated Guest mode across `ExploreClient.tsx`, `SpellMasterClient.tsx`, `SettingsClient.tsx`, and `PersonalizedPracticeCard.tsx` so **100% of items, sections, and steps are visible**, with the first **5% unlocked** for preview and the remaining **95% visibly locked** (`AiLockIcon` + `Locked · Log in` badge/overlay linking to `/auth/login`).
+
 ### 2026-11-27, Guest Mode Limited Settings (`SettingsClient.tsx`)
 - Restricted `/settings` in Guest mode (`!currentUser`) to show only basic preferences (**Language & Translation**, **Appearance**, and **About** + `GuestLimitBanner`), hiding **Audio & Speech Preferences**, **Daily Learning Goals & Level**, and **Data & Storage Management** until the user logs in.
 

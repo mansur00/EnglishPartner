@@ -29,6 +29,7 @@ import {
   Clock01Icon,
   Layers01Icon,
   CompassIcon,
+  AiLockIcon,
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import { ALL_PROFESSIONS, type ProfessionCefrLevel } from "@/lib/professions/registry";
@@ -141,11 +142,10 @@ export function ExploreClient() {
   );
 
   const paginatedScenarios = useMemo(() => {
-    const capped = isGuest
-      ? filteredScenarios.slice(0, getGuestLimit(filteredScenarios.length, 2))
-      : filteredScenarios;
-    return paginateItems(capped, { page: currentPage, pageSize });
-  }, [filteredScenarios, currentPage, pageSize, isGuest, getGuestLimit]);
+    return paginateItems(filteredScenarios, { page: currentPage, pageSize });
+  }, [filteredScenarios, currentPage, pageSize]);
+
+  const guestUnlockedCount = isGuest ? getGuestLimit(filteredScenarios.length, 2) : filteredScenarios.length;
 
   const handleResetFilters = () => {
     startTransition(() => {
@@ -431,14 +431,40 @@ export function ExploreClient() {
           ) : filteredScenarios.length > 0 ? (
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {paginatedScenarios.items.map((scenario) => (
-                  <ScenarioCard
-                    key={scenario.id}
-                    scenario={scenario}
-                    selectedLengthTierId={lengthType !== "all" ? lengthType : undefined}
-                    selectedStyle={style !== "all" ? style : undefined}
-                  />
-                ))}
+                {paginatedScenarios.items.map((scenario, idx) => {
+                  const globalIdx = (paginatedScenarios.currentPage - 1) * pageSize + idx;
+                  const isLocked = isGuest && globalIdx >= guestUnlockedCount;
+                  if (!isLocked) {
+                    return (
+                      <ScenarioCard
+                        key={scenario.id}
+                        scenario={scenario}
+                        selectedLengthTierId={lengthType !== "all" ? lengthType : undefined}
+                        selectedStyle={style !== "all" ? style : undefined}
+                      />
+                    );
+                  }
+                  return (
+                    <div key={scenario.id} className="relative rounded-card">
+                      <div className="opacity-60 pointer-events-none">
+                        <ScenarioCard
+                          scenario={scenario}
+                          selectedLengthTierId={lengthType !== "all" ? lengthType : undefined}
+                          selectedStyle={style !== "all" ? style : undefined}
+                        />
+                      </div>
+                      <Link
+                        href="/auth/login?next=/explore"
+                        className="absolute inset-0 z-10 rounded-card flex items-start justify-end p-3 bg-background/15 hover:bg-background/25 transition-colors"
+                      >
+                        <Badge variant="warning" size="sm" className="gap-1 shadow-xs">
+                          <HugeiconsIcon icon={AiLockIcon} size={13} />
+                          <span>{locale === "bn" ? "লকড (লগইন করুন)" : "Locked · Log in"}</span>
+                        </Badge>
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
 
               <FacetedPagination

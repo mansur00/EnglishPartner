@@ -501,20 +501,27 @@ export function SettingsClient() {
         </Card>
       </section>
 
-      {/* 3. Audio & Speech Preferences (Logged-in users only) */}
-      {currentUser && (
-        <>
+      {/* 3. Audio & Speech Preferences (100% visible; locked for Guest) */}
       <section className="space-y-4">
-        <div className="flex items-center gap-2.5">
-          <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
-            <HugeiconsIcon icon={VolumeHighIcon} size={18} />
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
+              <HugeiconsIcon icon={VolumeHighIcon} size={18} />
+            </div>
+            <h2 className="font-heading text-card-title text-foreground">
+              {t("settings.audioSection", locale)}
+            </h2>
           </div>
-          <h2 className="font-heading text-card-title text-foreground">
-            {t("settings.audioSection", locale)}
-          </h2>
+          {!currentUser && (
+            <Link href="/auth/login?next=/settings">
+              <Badge variant="warning" size="sm">
+                {locale === "bn" ? "লকড · লগইন করুন" : "Locked · Log in"}
+              </Badge>
+            </Link>
+          )}
         </div>
 
-        <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
+        <Card className={cn("bg-card p-5 md:p-6 space-y-6 shadow-card", !currentUser && "opacity-60 pointer-events-none")}>
           {/* Default Playback Speed & Auto-Play */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="space-y-2.5">
@@ -665,18 +672,27 @@ export function SettingsClient() {
         </Card>
       </section>
 
-      {/* 4. Daily Learning Goals & Level (Logged-in users only) */}
+      {/* 4. Daily Learning Goals & Level (100% visible; locked for Guest) */}
       <section className="space-y-4">
-        <div className="flex items-center gap-2.5">
-          <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
-            <HugeiconsIcon icon={Target02Icon} size={18} />
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
+              <HugeiconsIcon icon={Target02Icon} size={18} />
+            </div>
+            <h2 className="font-heading text-card-title text-foreground">
+              {t("settings.goalsSection", locale)}
+            </h2>
           </div>
-          <h2 className="font-heading text-card-title text-foreground">
-            {t("settings.goalsSection", locale)}
-          </h2>
+          {!currentUser && (
+            <Link href="/auth/login?next=/settings">
+              <Badge variant="warning" size="sm">
+                {locale === "bn" ? "লকড · লগইন করুন" : "Locked · Log in"}
+              </Badge>
+            </Link>
+          )}
         </div>
 
-        <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
+        <Card className={cn("bg-card p-5 md:p-6 space-y-6 shadow-card", !currentUser && "opacity-60 pointer-events-none")}>
           {/* Daily Speaking Goal */}
           <div className="space-y-2.5">
             <label className="block text-label text-foreground">
@@ -745,8 +761,6 @@ export function SettingsClient() {
           </div>
         </Card>
       </section>
-        </>
-      )}
 
       {/* 5. Appearance & Display */}
       <section className="space-y-4">
@@ -811,19 +825,27 @@ export function SettingsClient() {
         </Card>
       </section>
 
-      {/* 6. Data & Storage Management (Logged-in users only) */}
-      {currentUser && (
+      {/* 6. Data & Storage Management (100% visible; locked for Guest) */}
       <section className="space-y-4">
-        <div className="flex items-center gap-2.5">
-          <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
-            <HugeiconsIcon icon={Download04Icon} size={18} />
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center">
+              <HugeiconsIcon icon={Download04Icon} size={18} />
+            </div>
+            <h2 className="font-heading text-card-title text-foreground">
+              {t("settings.dataSection", locale)}
+            </h2>
           </div>
-          <h2 className="font-heading text-card-title text-foreground">
-            {t("settings.dataSection", locale)}
-          </h2>
+          {!currentUser && (
+            <Link href="/auth/login?next=/settings">
+              <Badge variant="warning" size="sm">
+                {locale === "bn" ? "লকড · লগইন করুন" : "Locked · Log in"}
+              </Badge>
+            </Link>
+          )}
         </div>
 
-        <Card className="bg-card p-5 md:p-6 space-y-6 shadow-card">
+        <Card className={cn("bg-card p-5 md:p-6 space-y-6 shadow-card", !currentUser && "opacity-60 pointer-events-none")}>
           {/* Storage Stats */}
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 rounded-panel bg-muted/60 space-y-1">
@@ -875,7 +897,6 @@ export function SettingsClient() {
           </div>
         </Card>
       </section>
-      )}
 
       {/* 7. About & Version Section */}
       <section className="space-y-4">
