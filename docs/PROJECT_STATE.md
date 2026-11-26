@@ -257,6 +257,16 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Supabase Schema Migration & Initial Data Setup
+- Requested by owner: Set up tables and seed data in Supabase project `ijlrseclqymuzdcrruoz`.
+- Changed:
+  - `.env.local` (gitignored): Added `DATABASE_URL` (Supabase Transaction/Session pooler URI).
+  - Applied all Drizzle migrations (`0000_round_puck.sql`, `0001_strange_gauntlet.sql`, `0002_elite_wrecker.sql`) via `npx drizzle-kit migrate`, creating all 26 tables in `public`.
+  - Seeded canonical reference data into Supabase: `languages` (2), `categories` (7), `professions` (5), `scenarios` (42), `scenario_categories` (79), `scenario_professions` (28).
+- Verified with: `npx drizzle-kit migrate` exit 0, Postgres row-count check, and Supabase REST `/rest/v1/scenarios` HTTP `200`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Apply Secondary Color Shades to Vocabulary Retention Stage Bars
 - Requested by owner: Apply secondary color (`--sun-*`) shades to the Learning, Reviewing, and Mastered progress bars in Vocabulary Retention.
 - Changed:
