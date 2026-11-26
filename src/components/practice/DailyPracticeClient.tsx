@@ -13,8 +13,6 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Calendar03Icon,
   CheckmarkCircle02Icon,
-  HeadphonesIcon,
-  BotIcon,
   SparklesIcon,
   Clock01Icon,
   ArrowRight01Icon,
@@ -151,91 +149,34 @@ export function DailyPracticeClient() {
   const quickWorkoutsContent = (
     <>
       <h2 className="text-chip uppercase tracking-wider text-muted-foreground">
-        {t("dailyPractice.quickWorkouts", locale)}
+        {locale === "bn" ? "চলমান শেখার পথ" : "Continue Learning Path"}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-3">
-        {/* Card 1: What Should I Say? */}
-        <Link
-          href="/what-should-i-say"
-          className="group block p-4 rounded-card bg-muted/50 border border-border hover:border-primary/40 hover:bg-muted transition-all space-y-2.5 cursor-pointer"
-        >
-          <div className="flex items-center justify-between">
-            <div className="size-9 rounded-control bg-status-warning-bg text-status-warning-ink flex items-center justify-center">
-              <HugeiconsIcon icon={SparklesIcon} size={18} />
-            </div>
-            <HugeiconsIcon
-              icon={ArrowRight01Icon}
-              size={18}
-              className="text-muted-foreground group-hover:text-primary transition-colors"
-            />
+      <Link
+        href="/explore/category/shopping-and-money"
+        className="group block p-4 rounded-card bg-muted/50 border border-border hover:border-primary/40 hover:bg-muted transition-all space-y-2.5 cursor-pointer"
+      >
+        <div className="flex items-center justify-between">
+          <div className="size-9 rounded-control bg-status-success-bg text-status-success-ink flex items-center justify-center">
+            <HugeiconsIcon icon={TaskDone01Icon} size={18} />
           </div>
-          <div>
-            <h3 className="font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors">
-              {t("nav.sayIt", locale)}
-            </h3>
-            <p className="text-chip text-muted-foreground mt-1">
-              {locale === "bn"
-                ? "যেকোনো বাস্তব পরিস্থিতিতে সাথে সাথে দরকারি ইংরেজি বাক্য খুঁজুন ও শুনুন।"
-                : "Instant context-based English phrases for any real-life situation."}
-            </p>
-          </div>
-        </Link>
-
-        {/* Card 2: AI Voice Partner */}
-        <Link
-          href="/roleplay"
-          className="group block p-4 rounded-card bg-muted/50 border border-border hover:border-primary/40 hover:bg-muted transition-all space-y-2.5 cursor-pointer"
-        >
-          <div className="flex items-center justify-between">
-            <div className="size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center">
-              <HugeiconsIcon icon={BotIcon} size={18} />
-            </div>
-            <HugeiconsIcon
-              icon={ArrowRight01Icon}
-              size={18}
-              className="text-muted-foreground group-hover:text-primary transition-colors"
-            />
-          </div>
-          <div>
-            <h3 className="font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors">
-              {t("nav.roleplay", locale)}
-            </h3>
-            <p className="text-chip text-muted-foreground mt-1">
-              {locale === "bn"
-                ? "১০টি বাস্তব বিষয় অথবা মুক্ত আড্ডায় মুখে বলে ইংরেজি কথোপকথন প্র্যাকটিস করুন।"
-                : "Practice real conversations aloud with 10 roleplay topics or freestyle mode."}
-            </p>
-          </div>
-        </Link>
-
-        {/* Card 3: Shopping Ladder */}
-        <Link
-          href="/explore/category/shopping-and-money"
-          className="group block p-4 rounded-card bg-muted/50 border border-border hover:border-primary/40 hover:bg-muted transition-all space-y-2.5 cursor-pointer"
-        >
-          <div className="flex items-center justify-between">
-            <div className="size-9 rounded-control bg-status-success-bg text-status-success-ink flex items-center justify-center">
-              <HugeiconsIcon icon={TaskDone01Icon} size={18} />
-            </div>
-            <HugeiconsIcon
-              icon={ArrowRight01Icon}
-              size={18}
-              className="text-muted-foreground group-hover:text-primary transition-colors"
-            />
-          </div>
-          <div>
-            <h3 className="font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors">
-              {locale === "bn" ? "শপিং ল্যাডার" : "Shopping Ladder"}
-            </h3>
-            <p className="text-chip text-muted-foreground mt-1">
-              {locale === "bn"
-                ? "দোকান, দামদর, ক্যাশিয়ার ও রিফান্ডের ধাপে ধাপে বাস্তব পরিস্থিতি আয়ত্ত করুন।"
-                : "20 step-by-step sequential scenarios from basic shopping to returns & checkout."}
-            </p>
-          </div>
-        </Link>
-      </div>
+          <HugeiconsIcon
+            icon={ArrowRight01Icon}
+            size={18}
+            className="text-muted-foreground group-hover:text-primary transition-colors"
+          />
+        </div>
+        <div>
+          <h3 className="font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors">
+            {locale === "bn" ? "শপিং ল্যাডার (২০ ধাপ)" : "Shopping Ladder (20 Steps)"}
+          </h3>
+          <p className="text-chip text-muted-foreground mt-1">
+            {locale === "bn"
+              ? "দোকান, দামদর, ক্যাশিয়ার ও রিফান্ডের ধাপে ধাপে বাস্তব পরিস্থিতি আয়ত্ত করুন।"
+              : "20 step-by-step sequential scenarios from basic shopping to returns & checkout."}
+          </p>
+        </div>
+      </Link>
     </>
   );
 
@@ -290,66 +231,12 @@ export function DailyPracticeClient() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-2">
-            <Link
-              href={`/conversations/${scenarioSlug}`}
-              className="group p-3 rounded-panel bg-card border border-border hover:border-primary/40 transition-colors flex items-center justify-between gap-2.5 cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <HugeiconsIcon icon={HeadphonesIcon} size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="font-heading text-label text-foreground group-hover:text-primary transition-colors truncate">
-                    {t("dailyPractice.listenStep", locale)}
-                  </h4>
-                  <p className="text-chip text-muted-foreground truncate">
-                    {t("dailyPractice.listenStepDesc", locale)}
-                  </p>
-                </div>
-              </div>
-              <HugeiconsIcon icon={ArrowRight01Icon} size={15} className="text-muted-foreground shrink-0" />
-            </Link>
-
-            <Link
-              href={`/conversations/${scenarioSlug}?mode=practice`}
-              className="group p-3 rounded-panel bg-card border border-border hover:border-primary/40 transition-colors flex items-center justify-between gap-2.5 cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <HugeiconsIcon icon={BotIcon} size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="font-heading text-label text-foreground group-hover:text-primary transition-colors truncate">
-                    {t("dailyPractice.speakStep", locale)}
-                  </h4>
-                  <p className="text-chip text-muted-foreground truncate">
-                    {t("dailyPractice.speakStepDesc", locale)}
-                  </p>
-                </div>
-              </div>
-              <HugeiconsIcon icon={ArrowRight01Icon} size={15} className="text-muted-foreground shrink-0" />
-            </Link>
-
-            <Link
-              href={`/conversations/${scenarioSlug}?tab=quiz`}
-              className="group p-3 rounded-panel bg-card border border-border hover:border-primary/40 transition-colors flex items-center justify-between gap-2.5 cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <HugeiconsIcon icon={SparklesIcon} size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="font-heading text-label text-foreground group-hover:text-primary transition-colors truncate">
-                    {t("dailyPractice.quizStep", locale)}
-                  </h4>
-                  <p className="text-chip text-muted-foreground truncate">
-                    {t("dailyPractice.quizStepDesc", locale)}
-                  </p>
-                </div>
-              </div>
-              <HugeiconsIcon icon={ArrowRight01Icon} size={15} className="text-muted-foreground shrink-0" />
-            </Link>
+          <div className="flex items-center gap-2 text-chip text-muted-foreground pt-1">
+            <span>1. {t("dailyPractice.listenStep", locale)}</span>
+            <span>·</span>
+            <span>2. {t("dailyPractice.speakStep", locale)}</span>
+            <span>·</span>
+            <span>3. {t("dailyPractice.quizStep", locale)}</span>
           </div>
 
           <div className="flex flex-col gap-2 pt-2 border-t border-border">

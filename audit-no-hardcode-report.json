@@ -220,25 +220,13 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 174,
+      "line": 170,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors\">"
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 201,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h3 className=\"font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 228,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h3 className=\"font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 358,
+      "line": 245,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className={cn(buttonVariants({ size: \"md\" }), \"w-full justify-center rounded-control font-semibold\")}"
     },
@@ -505,7 +493,7 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 401,
+      "line": 288,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
     },
@@ -859,62 +847,11 @@
       ]
     },
     {
-      "detail": "ClassName repeated 5 times",
-      "className": "text-chip text-muted-foreground truncate",
-      "files": [
-        "src/components/learning/NicheLadderRoadmap.tsx",
-        "src/components/navigation/LanguageSwitcher.tsx",
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "group block p-4 rounded-card bg-muted/50 border border-border hover:border-primary/40 hover:bg-muted transition-all space-y-2.5 cursor-pointer",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "text-muted-foreground group-hover:text-primary transition-colors",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
       "detail": "ClassName repeated 3 times",
       "className": "text-meta text-muted-foreground leading-relaxed",
       "files": [
         "src/components/practice/DailyPracticeClient.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "group p-3 rounded-panel bg-card border border-border hover:border-primary/40 transition-colors flex items-center justify-between gap-2.5 cursor-pointer",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "font-heading text-label text-foreground group-hover:text-primary transition-colors truncate",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
       ]
     },
     {
