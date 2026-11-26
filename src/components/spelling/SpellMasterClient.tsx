@@ -15,6 +15,7 @@ import {
   ArrowRight01Icon,
   BotIcon,
   CheckmarkBadge01Icon,
+  Bookmark02Icon,
 } from "@hugeicons/core-free-icons";
 import { PageContainer } from "@/components/shared/PageContainer";
 import { Card } from "@/components/ui/card";
@@ -29,11 +30,14 @@ import {
   CURATED_SPELL_WORDS,
   SPELLING_RULES,
   SPELL_BADGES,
+  SPELL_CATEGORIES,
+  SPELL_CATEGORY_GROUPS,
   SPELL_STORAGE_KEY,
   DEFAULT_SPELL_PROGRESS,
   getLevelFromXp,
   type SpellWord,
-  type SpellRuleCategory,
+  type SpellCategoryId,
+  type SpellCategoryGroupId,
   type SpellProgressState,
 } from "@/lib/spelling/spell-data";
 import type {
@@ -45,14 +49,8 @@ import type {
 type SpellTab = "learn" | "test" | "rules" | "ai" | "progress";
 type TestMode = "dictation" | "jumbled";
 
-const CATEGORY_LABELS: { id: "all" | SpellRuleCategory; label: string }[] = [
-  { id: "all", label: "All Words" },
-  { id: "common-traps", label: "Common Traps" },
-  { id: "i-before-e", label: "I Before E" },
-  { id: "silent-letter", label: "Silent Letters" },
-  { id: "double-consonant", label: "Double Consonant" },
-  { id: "suffix-rules", label: "Suffix Rules" },
-];
+const CATEGORY_MAP = new Map(SPELL_CATEGORIES.map((c) => [c.id, c]));
+const PAGE_BATCH = 48;
 
 function scrambleWord(word: string): string[] {
   const letters = word.split("");
@@ -76,7 +74,9 @@ export function SpellMasterClient() {
 
   // Learn Tab State
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<"all" | SpellRuleCategory>("all");
+  const [selectedGroup, setSelectedGroup] = useState<SpellCategoryGroupId>("all");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | SpellCategoryId>("all");
+  const [visibleCount, setVisibleCount] = useState(PAGE_BATCH);
   const [selectedWordId, setSelectedWordId] = useState<string>(CURATED_SPELL_WORDS[0].id);
   const [aiLookupLoading, setAiLookupLoading] = useState(false);
   const [aiLookupResult, setAiLookupResult] = useState<SpellLookupResponse | null>(null);
@@ -119,6 +119,7 @@ export function SpellMasterClient() {
             },
             weakWords: parsed.weakWords || {},
             masteredIds: Array.isArray(parsed.masteredIds) ? parsed.masteredIds : [],
+            savedIds: Array.isArray(parsed.savedIds) ? parsed.savedIds : [],
             customWords: Array.isArray(parsed.customWords) ? parsed.customWords : [],
           });
         }
@@ -146,11 +147,36 @@ export function SpellMasterClient() {
     [progress.customWords]
   );
 
+  const dailyWordId = useMemo(() => {
+    if (CURATED_SPELL_WORDS.length === 0) return "";
+    const dayIndex = nowMs > 0 ? Math.floor(nowMs / (24 * 60 * 60 * 1000)) : 0;
+    return CURATED_SPELL_WORDS[dayIndex % CURATED_SPELL_WORDS.length].id;
+  }, [nowMs]);
+
+  const wordMatchesCategory = (item: SpellWord, cat: "all" | SpellCategoryId) => {
+    if (cat === "all") return true;
+    if (cat === "my-mistakes") return Boolean(progress.weakWords[item.id]);
+    if (cat === "saved-words") return progress.savedIds.includes(item.id);
+    if (cat === "daily-word") return item.id === dailyWordId;
+    if (cat === "ai-added-words") return Boolean(item.isCustom);
+    return item.categories?.includes(cat) || item.ruleCategory === cat;
+  };
+
+  const activeGroupCategories = useMemo(() => {
+    if (selectedGroup === "all") return SPELL_CATEGORIES;
+    return SPELL_CATEGORIES.filter((c) => c.group === selectedGroup);
+  }, [selectedGroup]);
+
   const filteredWords = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return allWords.filter((item) => {
-      if (selectedCategory !== "all" && item.ruleCategory !== selectedCategory) {
-        return false;
+      if (selectedCategory !== "all") {
+        if (!wordMatchesCategory(item, selectedCategory)) return false;
+      } else if (selectedGroup !== "all") {
+        const matchesGroup = activeGroupCategories.some((c) =>
+          wordMatchesCategory(item, c.id)
+        );
+        if (!matchesGroup) return false;
       }
       if (q) {
         return (
@@ -161,7 +187,25 @@ export function SpellMasterClient() {
       }
       return true;
     });
-  }, [allWords, searchQuery, selectedCategory]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allWords, searchQuery, selectedCategory, selectedGroup, activeGroupCategories, progress.weakWords, progress.savedIds, dailyWordId]);
+
+  const visibleWords = useMemo(
+    () => filteredWords.slice(0, visibleCount),
+    [filteredWords, visibleCount]
+  );
+
+  const toggleSaveWord = (wordId: string) => {
+    setProgress((prev) => {
+      const exists = prev.savedIds.includes(wordId);
+      return {
+        ...prev,
+        savedIds: exists
+          ? prev.savedIds.filter((id) => id !== wordId)
+          : [wordId, ...prev.savedIds],
+      };
+    });
+  };
 
   // Spaced Repetition prioritized test queue (due weak words first)
   const testQueue = useMemo(() => {
@@ -239,12 +283,16 @@ export function SpellMasterClient() {
       setAiLookupResult(null);
       return;
     }
+    const validCats = (lookup.categories || []).filter((c): c is SpellCategoryId =>
+      CATEGORY_MAP.has(c as SpellCategoryId)
+    );
     const newWord: SpellWord = {
       id: `custom-${Date.now()}`,
       word: lookup.word,
       syllables: lookup.syllables,
       phonetic: lookup.phonetic,
       meaningBn: lookup.meaningBn,
+      categories: validCats.length > 0 ? [...new Set([...validCats, "ai-added-words" as SpellCategoryId])] : [lookup.ruleCategory, "ai-added-words"],
       ruleCategory: lookup.ruleCategory,
       commonMistake: lookup.commonMistake,
       mnemonicBn: lookup.mnemonicBn,
@@ -399,15 +447,38 @@ export function SpellMasterClient() {
   const wordDetailsSidebar = selectedWord ? (
     <div className="space-y-4">
       {/* Top Category & Difficulty */}
-      <div className="flex items-center justify-between gap-2">
-        <Badge variant="brand" size="sm">
-          {CATEGORY_LABELS.find((c) => c.id === selectedWord.ruleCategory)?.label ??
-            selectedWord.ruleCategory}
-        </Badge>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-1.5">
+          {(selectedWord.categories ?? [selectedWord.ruleCategory]).slice(0, 2).map((catId) => (
+            <Badge key={catId} variant="brand" size="sm">
+              {CATEGORY_MAP.get(catId)?.label ?? catId}
+            </Badge>
+          ))}
+        </div>
         <Badge variant="outline" size="sm">
           {selectedWord.difficulty}
         </Badge>
       </div>
+
+      {/* Save / Bookmark Button */}
+      <Button
+        type="button"
+        variant={progress.savedIds.includes(selectedWord.id) ? "default" : "outline"}
+        size="sm"
+        onClick={() => toggleSaveWord(selectedWord.id)}
+        className="w-full gap-2"
+      >
+        <HugeiconsIcon icon={Bookmark02Icon} size={16} />
+        <span>
+          {progress.savedIds.includes(selectedWord.id)
+            ? isBn
+              ? "সেভ করা হয়েছে"
+              : "Saved to My Words"
+            : isBn
+            ? "শব্দটি সেভ করুন"
+            : "Save Word"}
+        </span>
+      </Button>
 
       {/* Word Title + Listen Buttons */}
       <div className="flex items-start justify-between gap-2">
@@ -678,19 +749,62 @@ export function SpellMasterClient() {
               )}
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {CATEGORY_LABELS.map((cat) => (
+            {/* Group Tabs (6 Groups + All) */}
+            <div className="flex flex-wrap gap-1.5 border-b border-border/60 pb-2.5">
+              {SPELL_CATEGORY_GROUPS.map((grp) => (
+                <Button
+                  key={grp.id}
+                  type="button"
+                  size="xs"
+                  variant={selectedGroup === grp.id ? "default" : "outline"}
+                  onClick={() => {
+                    setSelectedGroup(grp.id);
+                    setSelectedCategory("all");
+                    setVisibleCount(PAGE_BATCH);
+                  }}
+                >
+                  {isBn ? grp.labelBn : grp.label}
+                </Button>
+              ))}
+            </div>
+
+            {/* Category Chips for Selected Group */}
+            <div className="flex flex-wrap gap-1.5">
+              <Button
+                type="button"
+                size="xs"
+                variant={selectedCategory === "all" ? "secondary" : "ghost"}
+                onClick={() => {
+                  setSelectedCategory("all");
+                  setVisibleCount(PAGE_BATCH);
+                }}
+              >
+                All ({selectedGroup === "all" ? allWords.length : filteredWords.length})
+              </Button>
+              {activeGroupCategories.map((cat) => (
                 <Button
                   key={cat.id}
                   type="button"
                   size="xs"
                   variant={selectedCategory === cat.id ? "secondary" : "ghost"}
-                  onClick={() => setSelectedCategory(cat.id)}
+                  onClick={() => {
+                    setSelectedCategory(cat.id);
+                    setVisibleCount(PAGE_BATCH);
+                  }}
                 >
                   {cat.label}
                 </Button>
               ))}
             </div>
+
+            {selectedCategory !== "all" && CATEGORY_MAP.get(selectedCategory) && (
+              <p className="text-chip text-muted-foreground">
+                {CATEGORY_MAP.get(selectedCategory)?.description} ·{" "}
+                <span className="font-mono text-primary">
+                  {filteredWords.length} words
+                </span>
+              </p>
+            )}
           </Card>
 
           {aiLookupError && (
@@ -738,7 +852,7 @@ export function SpellMasterClient() {
 
           {/* Vocabulary-Style Compact 4-Column Word Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
-            {filteredWords.map((item) => {
+            {visibleWords.map((item) => {
               const isSelected = selectedWord?.id === item.id;
               return (
                 <div
@@ -783,6 +897,19 @@ export function SpellMasterClient() {
               );
             })}
           </div>
+
+          {filteredWords.length > visibleCount && (
+            <div className="flex justify-center pt-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="md"
+                onClick={() => setVisibleCount((c) => c + PAGE_BATCH)}
+              >
+                Show More ({filteredWords.length - visibleCount} remaining)
+              </Button>
+            </div>
+          )}
         </div>
       )}
 

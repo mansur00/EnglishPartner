@@ -514,121 +514,121 @@
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 415,
+      "line": 486,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title font-semibold text-foreground\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 455,
+      "line": 526,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"px-2.5 py-1 rounded-control bg-primary/10 text-primary text-chip font-semibold hover:bg-primary/20 transition-colors cursor-pointer\""
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 468,
+      "line": 539,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground text-bangla\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 483,
+      "line": 554,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-primary font-semibold\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 706,
+      "line": 820,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip text-primary font-semibold\">AI Generated Word</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 763,
+      "line": 877,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 878,
+      "line": 1005,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"size-9 rounded-control bg-primary text-primary-foreground font-semibold text-label cursor-pointer\""
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 897,
+      "line": 1024,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "\"size-10 rounded-control border border-border font-semibold text-label transition-all cursor-pointer\","
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 919,
+      "line": 1046,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 font-semibold text-label\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 970,
+      "line": 1097,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-card-title text-foreground font-semibold\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 991,
+      "line": 1118,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"font-semibold\">{ex.word}</span>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1046,
+      "line": 1173,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-primary\">AI Diagnosis</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1054,
+      "line": 1181,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1059,
+      "line": 1186,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-semibold text-foreground\">{m.word}</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1068,
+      "line": 1195,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1075,
+      "line": 1202,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className={cn(\"text-label font-semibold text-foreground\", isBn && \"text-bangla\")}>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1172,
+      "line": 1299,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-primary\">Corrected Text</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1180,
+      "line": 1307,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"font-semibold text-primary\">{m.correct}</span>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1230,
+      "line": 1357,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground\">{w.word}</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1261,
+      "line": 1388,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-label font-semibold\">"
     },
@@ -865,13 +865,13 @@
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 791,
+      "line": 918,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<Card className=\"p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs max-w-2xl mx-auto\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 864,
+      "line": 991,
       "detail": "Hardcoded layout constant / magic number: h-12",
       "code": "<div className=\"min-h-12 rounded-panel border border-border bg-background p-3 flex flex-wrap items-center justify-center gap-2\">"
     },
@@ -1216,7 +1216,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 10 times",
+      "detail": "ClassName repeated 11 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",

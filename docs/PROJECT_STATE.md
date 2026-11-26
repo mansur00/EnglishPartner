@@ -257,6 +257,18 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Expand Spell Master to 35 Categories Across 6 Groups & 900+ Words
+- Requested by owner: Implement the full 35-category taxonomy (6 groups: Core Traps, Spelling Rules, Confusing Words, Exam & Goal, Bangla Special, Personal & Special) from `spell-master-categories.md` and expand the curated word bank to 500–700+ words.
+- Changed:
+  - `src/lib/spelling/spell-categories.ts`: Added 6 group definitions and all 35 category metadata entries.
+  - `src/lib/spelling/spell-words-bank.ts`: Built curated multi-category tagged word bank (916 unique words across all categories with syllables, Bengali meanings, common mistakes, mnemonics, and examples).
+  - `src/lib/spelling/spell-data.ts`: Re-exported categories, groups, and expanded word bank; added `savedIds` for `Saved Words` bookmarking.
+  - `src/lib/ai/spell-master.ts`: Added multi-category auto-tagging to AI word lookup.
+  - `src/components/spelling/SpellMasterClient.tsx`: Added 6 Group tabs + dynamic Category chips, `Save Word` bookmarking in the right sidebar, dynamic Personal filters (`My Mistakes`, `Saved Words`, `Daily Word`, `AI Added Words`), and `Show More` pagination (48 per batch).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Redesign Spell Master Word Grid & Fixed Right Details Sidebar
 - Requested by owner: Match Spell Master's word list layout to the Vocabulary deck view — compact word tiles in the middle content area (`grid-cols-4`) and full selected-word details in the fixed right sidebar (`w-80 xl:w-96`).
 - Changed:
