@@ -106,57 +106,57 @@
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 202,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 216,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 233,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 284,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-label font-semibold text-foreground\">{stage.title}</span>"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 371,
+      "line": 228,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{activeTopic.title}</h2>"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 393,
+      "line": 250,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 410,
+      "line": 267,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 447,
+      "line": 304,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 493,
+      "line": 350,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-meta text-primary font-semibold\" dir=\"ltr\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 391,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 440,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-label font-semibold text-foreground\">{stage.title}</span>"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 515,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 529,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
@@ -763,15 +763,15 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
-      "className": "flex items-center gap-2 text-label text-foreground font-semibold",
+      "detail": "ClassName repeated 4 times",
+      "className": "text-label font-semibold text-foreground",
       "files": [
         "src/components/grammar/GrammarPathClient.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
-      "className": "text-label font-semibold text-foreground",
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center gap-2 text-label text-foreground font-semibold",
       "files": [
         "src/components/grammar/GrammarPathClient.tsx"
       ]
