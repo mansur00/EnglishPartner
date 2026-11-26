@@ -778,47 +778,35 @@ export function SettingsClient() {
               {t("settings.themeMode", locale)}
             </label>
             <div className="flex flex-wrap gap-2.5">
-              <button
+              <Button
                 type="button"
+                variant={theme === "light" ? "default" : "outline"}
+                size="sm"
                 onClick={() => setTheme("light")}
-                className={cn(
-                  "flex items-center justify-center gap-2 px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
-                  theme === "light"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
               >
                 <HugeiconsIcon icon={Sun01Icon} size={17} />
                 <span>{t("settings.themeLight", locale)}</span>
-              </button>
+              </Button>
 
-              <button
+              <Button
                 type="button"
+                variant={theme === "dark" ? "default" : "outline"}
+                size="sm"
                 onClick={() => setTheme("dark")}
-                className={cn(
-                  "flex items-center justify-center gap-2 px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
-                  theme === "dark"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
               >
                 <HugeiconsIcon icon={Moon02Icon} size={17} />
                 <span>{t("settings.themeDark", locale)}</span>
-              </button>
+              </Button>
 
-              <button
+              <Button
                 type="button"
+                variant={theme === "system" ? "default" : "outline"}
+                size="sm"
                 onClick={() => setTheme("system")}
-                className={cn(
-                  "flex items-center justify-center gap-2 px-4 py-2 rounded-control text-label transition-all cursor-pointer whitespace-nowrap",
-                  theme === "system"
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/70 text-foreground hover:bg-muted"
-                )}
               >
                 <HugeiconsIcon icon={ComputerIcon} size={17} />
                 <span>{t("settings.themeSystem", locale)}</span>
-              </button>
+              </Button>
             </div>
           </div>
         </Card>

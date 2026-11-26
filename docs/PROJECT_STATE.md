@@ -2224,6 +2224,10 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, UX Audit Step 2: Button Consistency (`<Button>` Standardization)
+- Removed `rounded-pill` override from `<Button>` in `src/app/page.tsx` so CTA buttons consistently use `rounded-control` (12px).
+- Standardized mode tabs, back links, theme switcher, and icon action buttons from raw `<button>` elements to `<Button>` (`variant`, `size="sm" | "xs" | "icon-xs"`) across `src/app/(app)/vocabulary/page.tsx`, `src/components/practice/PracticeWorkspace.tsx`, `src/components/admin/ConversationEditorClient.tsx`, `src/components/settings/SettingsClient.tsx`, and `src/components/tools/RoleplayPartner.tsx`.
+
 ### 2026-11-27, UX Audit Step 1: Dropdown Consistency (`<Select>` Standardization)
 - Replaced all 9 remaining raw native `<select>` elements with shadcn/Base UI `<Select>` (`SelectTrigger`, `SelectContent`, `SelectItem`, `SelectValue`) across `src/app/(app)/quiz/page.tsx` (3), `src/components/discovery/ExploreClient.tsx` (2), `src/components/settings/SettingsClient.tsx` (2), `src/app/(app)/vocabulary/page.tsx` (1), and `src/components/admin/ConversationEditorClient.tsx` (1).
 - Removed `bg-card` from bordered `SelectTrigger` instances in `src/components/practice/PersonalizedPracticeCard.tsx` to satisfy the Background XOR Stroke rule.

@@ -361,35 +361,39 @@ export function ConversationEditorClient({
 
                 {/* Move & Delete Controls */}
                 <div className="flex items-center gap-1">
-                  <button
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="icon-xs"
                     onClick={() => handleMoveLine(index, "up")}
                     disabled={index === 0}
                     aria-label="Move Up"
-                    className="p-1.5 rounded-control text-muted-foreground hover:text-foreground disabled:opacity-30 cursor-pointer"
                     title="Move up"
                   >
                     <HugeiconsIcon icon={ArrowUp01Icon} size={15} />
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="icon-xs"
                     onClick={() => handleMoveLine(index, "down")}
                     disabled={index === version.lines.length - 1}
                     aria-label="Move Down"
-                    className="p-1.5 rounded-control text-muted-foreground hover:text-foreground disabled:opacity-30 cursor-pointer"
                     title="Move down"
                   >
                     <HugeiconsIcon icon={ArrowDown01Icon} size={15} />
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="icon-xs"
                     onClick={() => handleDeleteLine(index)}
                     aria-label="Delete line"
-                    className="p-1.5 rounded-control text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors ml-1 cursor-pointer"
+                    className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 ml-1"
                     title="Delete line"
                   >
                     <HugeiconsIcon icon={Delete01Icon} size={15} />
-                  </button>
+                  </Button>
                 </div>
               </div>
 

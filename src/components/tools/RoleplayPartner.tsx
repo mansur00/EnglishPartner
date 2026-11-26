@@ -954,20 +954,22 @@ export function RoleplayPartner() {
                     Custom
                   </span>
                 </button>
-                <button
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="icon-xs"
                   title={locale === "bn" ? "মুছে ফেলুন" : "Delete"}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteCustomScenario(sc.id);
                   }}
                   className={cn(
-                    "p-1 rounded-full hover:bg-destructive/20 hover:text-destructive cursor-pointer transition-colors shrink-0",
+                    "hover:bg-destructive/20 hover:text-destructive shrink-0",
                     isSelected ? "text-primary-foreground/80" : "text-muted-foreground"
                   )}
                 >
                   <HugeiconsIcon icon={Delete02Icon} size={12} />
-                </button>
+                </Button>
               </div>
             );
           })}

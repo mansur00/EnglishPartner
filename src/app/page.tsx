@@ -335,7 +335,7 @@ export default function LandingPage() {
               </p>
               <div className="pt-1">
                 <Link href="/dashboard">
-                  <Button size="md" className="rounded-pill px-6 gap-2">
+                  <Button size="md" className="px-6">
                     <span>Open Dashboard</span>
                     <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
                   </Button>

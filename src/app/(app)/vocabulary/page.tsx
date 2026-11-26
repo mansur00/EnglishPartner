@@ -327,15 +327,11 @@ function VocabularyContent() {
 
           {/* Row 2: Mode Tabs (Full-width single row) */}
           <div className="flex flex-wrap items-center gap-1.5 pt-3 border-t border-border/60">
-            <button
+            <Button
               type="button"
+              variant={activeView === "magic" ? "default" : "ghost"}
+              size="sm"
               onClick={() => setActiveView("magic")}
-              className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer whitespace-nowrap",
-                activeView === "magic"
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-              )}
             >
               <HugeiconsIcon icon={SparklesIcon} size={15} />
               <span className={locale === "bn" ? "text-bangla" : ""}>
@@ -343,33 +339,25 @@ function VocabularyContent() {
                   ? `ম্যাজিক কার্ডস (${MAGIC_CARDS.length})`
                   : `Magic Cards (${MAGIC_CARDS.length})`}
               </span>
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
+              variant={activeView === "words" ? "default" : "ghost"}
+              size="sm"
               onClick={() => setActiveView("words")}
-              className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer whitespace-nowrap",
-                activeView === "words"
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-              )}
             >
               <HugeiconsIcon icon={Book01Icon} size={15} />
               <span className={locale === "bn" ? "text-bangla" : ""}>
                 {t("vocabulary.savedWordsTab").replace("{count}", String(savedLemmas.length))}
               </span>
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
+              variant={activeView === "srs" ? "default" : "ghost"}
+              size="sm"
               onClick={() => setActiveView("srs")}
-              className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-control text-meta transition-all cursor-pointer whitespace-nowrap",
-                activeView === "srs"
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-              )}
             >
               <HugeiconsIcon icon={SparklesIcon} size={15} />
               <span className={locale === "bn" ? "text-bangla" : ""}>
@@ -380,7 +368,7 @@ function VocabularyContent() {
                   {dueCount} {t("vocabulary.dueBadge")}
                 </Pill>
               )}
-            </button>
+            </Button>
           </div>
 
           {/* Row 3: Search + Category Dropdown on One Line (when browsing Magic Cards) */}
@@ -553,20 +541,22 @@ function VocabularyContent() {
                 {/* Deck Header */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60">
                   <div className="space-y-1">
-                    <button
+                    <Button
                       type="button"
+                      variant="link"
+                      size="xs"
                       onClick={() => {
                         setActiveDeckSlug(null);
                         setMagicSearch("");
                         setSelectedMagicWord(null);
                       }}
-                      className="inline-flex items-center gap-1.5 text-chip text-primary hover:underline cursor-pointer mb-1"
+                      className="px-0 mb-1"
                     >
                       <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
                       <span>
                         {locale === "bn" ? "সব ৪০টি ম্যাজিক কার্ডে ফিরুন" : "Back to 40 Magic Cards"}
                       </span>
-                    </button>
+                    </Button>
                     <div className="flex items-center gap-2.5 flex-wrap">
                       <span className="text-page-title leading-none">{activeDeck.emoji}</span>
                       <h2 className="font-heading text-section-heading text-foreground">
@@ -738,20 +728,22 @@ function VocabularyContent() {
               <Card className="p-5 sm:p-6 bg-card rounded-card border border-border/60 shadow-card space-y-5">
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/60">
                   <div className="space-y-1">
-                    <button
+                    <Button
                       type="button"
+                      variant="link"
+                      size="xs"
                       onClick={() => {
                         setActiveSavedCatId(null);
                         setSavedSearch("");
                         setSelectedMagicWord(null);
                       }}
-                      className="inline-flex items-center gap-1.5 text-chip text-primary hover:underline cursor-pointer mb-1"
+                      className="px-0 mb-1"
                     >
                       <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
                       <span>
                         {locale === "bn" ? "সব সেভ করা ক্যাটাগরিতে ফিরুন" : "Back to Saved Categories"}
                       </span>
-                    </button>
+                    </Button>
                     <div className="flex items-center gap-2.5 flex-wrap">
                       <span className="text-page-title leading-none">{activeSavedCategory.emoji}</span>
                       <h2 className="font-heading text-section-heading text-foreground">

@@ -151,83 +151,65 @@ export function PracticeWorkspace({
     <div className="space-y-6">
       {/* Mode Tabs */}
       <div className="flex flex-wrap items-center gap-2 p-1.5 bg-card rounded-panel shadow-2xs">
-        <button
+        <Button
           type="button"
+          variant={activeTab === "quiz" ? "default" : "ghost"}
+          size="sm"
           onClick={() => setActiveTab("quiz")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
-            activeTab === "quiz"
-              ? "bg-primary text-primary-foreground shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          }`}
         >
           <HugeiconsIcon icon={VolumeHighIcon} size={16} />
           <span>{locale === "bn" ? "লিসেনিং কুইজ" : "Listening Quiz"}</span>
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="button"
+          variant={activeTab === "builder" ? "default" : "ghost"}
+          size="sm"
           onClick={() => setActiveTab("builder")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
-            activeTab === "builder"
-              ? "bg-primary text-primary-foreground shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          }`}
         >
           <HugeiconsIcon icon={Sorting01Icon} size={16} />
           <span>{locale === "bn" ? "সেন্টেন্স বিল্ডার" : "Sentence Builder"}</span>
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="button"
+          variant={activeTab === "order" ? "default" : "ghost"}
+          size="sm"
           onClick={() => setActiveTab("order")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
-            activeTab === "order"
-              ? "bg-primary text-primary-foreground shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          }`}
         >
           <HugeiconsIcon icon={SortByDown02Icon} size={16} />
           <span>{locale === "bn" ? "ডায়লগ ক্রমানুসার" : "Dialogue Order"}</span>
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="button"
+          variant={activeTab === "aloud" ? "default" : "ghost"}
+          size="sm"
           onClick={() => setActiveTab("aloud")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
-            activeTab === "aloud"
-              ? "bg-primary text-primary-foreground shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          }`}
         >
           <HugeiconsIcon icon={Mic01Icon} size={16} />
           <span>{locale === "bn" ? "উচ্চারণ ও পাঠ" : "Read Aloud"}</span>
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="button"
+          variant={activeTab === "roleplay" ? "default" : "ghost"}
+          size="sm"
           onClick={() => setActiveTab("roleplay")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
-            activeTab === "roleplay"
-              ? "bg-primary text-primary-foreground shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          }`}
         >
           <HugeiconsIcon icon={UserGroupIcon} size={16} />
           <span>{locale === "bn" ? "রোলপ্লে কথোপকথন" : "Roleplay Speaking"}</span>
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="button"
+          variant={activeTab === "blanks" ? "default" : "ghost"}
+          size="sm"
           onClick={() => setActiveTab("blanks")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-control text-meta transition-all cursor-pointer ${
-            activeTab === "blanks"
-              ? "bg-primary text-primary-foreground shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          }`}
         >
           <HugeiconsIcon icon={PlayCircle02Icon} size={16} />
           <span>{locale === "bn" ? "শূন্যস্থান পূরণ" : "Fill in the Blanks"}</span>
-        </button>
+        </Button>
       </div>
 
       {/* Active Mode Component */}

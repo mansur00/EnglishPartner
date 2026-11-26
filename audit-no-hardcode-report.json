@@ -36,31 +36,31 @@
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 404,
+      "line": 392,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"pl-9 h-11 bg-muted/40 border-border/60 rounded-control\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 417,
+      "line": 405,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 text-label\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 585,
+      "line": 575,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 766,
+      "line": 758,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 1041,
+      "line": 1033,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -198,13 +198,13 @@
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1124,
+      "line": 1126,
       "detail": "Arbitrary layout [Npx] utility: h-[calc(100dvh-11.5rem)], h-[calc(100dvh-7.5rem)], min-h-[420px]",
       "code": "<Card className=\"p-4 sm:p-6 bg-card rounded-card gap-4 h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)] min-h-[420px] flex flex-col justify-between shadow-xs\">"
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1643,
+      "line": 1645,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
