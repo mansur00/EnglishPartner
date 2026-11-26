@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Unified Soft-Gradient CTA + Nested Multi-Column Footer Card
+- Requested by owner: Update CTA and Footer to match the unified pastel-gradient container with centered CTA pills on top and nested white footer card (logo, pill email subscribe, 4 link columns, centered copyright) below.
+- Changed:
+  - `src/app/page.tsx`: Replaced Section 5 CTA and `<footer>` with unified gradient wrapper containing CTA (`Start Now`, `Explore Dialogues`) and nested footer card; removed unused `Mic01Icon` import.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Redesign Hero Section as 2-Column SaaS Layout with Right Widget Showcase
 - Requested by owner: Redesign Hero section with left-side text/CTAs and right-side interactive SaaS product widget (keeping `Our Features` and `{learning_ecosystem}` unchanged).
 - Changed:

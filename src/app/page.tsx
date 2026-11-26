@@ -13,7 +13,6 @@ import {
   Bookmark01Icon,
   Message01Icon,
   Search01Icon,
-  Mic01Icon,
 } from "@hugeicons/core-free-icons";
 
 const PROGRESS_BAR_HEIGHTS = [
@@ -607,99 +606,126 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Section 5 — Final Glowing Spotlight CTA Banner (Graphy Reference) */}
-        <section>
-          <div className="rounded-band bg-gradient-to-b from-brand-800 via-brand-900 to-brand-950 text-band-panel-ink p-10 sm:p-14 md:p-16 text-center space-y-5 shadow-sm relative overflow-hidden">
-            <h2 className="text-page-title font-heading text-band-panel-ink max-w-reading mx-auto">
-              Ready to speak English fluently?
+        {/* Section 5 & Footer — Unified Soft Gradient CTA + Nested Footer Card */}
+        <section className="rounded-band bg-gradient-to-br from-accent via-card to-sun-100/70 border border-border/60 p-4 sm:p-6 md:p-8 shadow-2xs space-y-10 md:space-y-12">
+          {/* Top Half: CTA */}
+          <div className="pt-8 pb-2 md:pt-12 md:pb-4 text-center space-y-5 max-w-reading mx-auto">
+            <h2 className="text-page-title font-heading text-foreground leading-tight">
+              Ready to Take Control
+              <br />
+              of Your English?
             </h2>
-            <p className="text-lead text-band-panel-ink/80 text-bangla max-w-reading mx-auto">
-              হাজারো শিক্ষার্থীর সাথে আজই বাস্তব সংলাপ, গ্রামার ও AI প্র্যাকটিস শুরু করুন।
+            <p className="text-meta text-muted-foreground text-bangla max-w-reading mx-auto leading-relaxed">
+              বাস্তব সংলাপ, ৮ ধাপের গ্রামার পাথ এবং AI রোলপ্লে পার্টনারের সাথে আজ থেকেই আত্মবিশ্বাসী ইংরেজি বলা শুরু করুন।
             </p>
-            <div className="pt-2">
+            <div className="pt-1 flex flex-wrap items-center justify-center gap-3">
               <Link href="/dashboard">
                 <Button
                   size="lg"
-                  className="rounded-control bg-card text-foreground hover:bg-card/90 px-7 shadow-sm text-label font-semibold"
+                  className="rounded-pill px-7 shadow-xs text-label font-semibold"
                 >
-                  Start for free
+                  Start Now
+                </Button>
+              </Link>
+              <Link href="/explore">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="rounded-pill px-6 bg-card text-foreground shadow-2xs text-label"
+                >
+                  Explore Dialogues
                 </Button>
               </Link>
             </div>
           </div>
+
+          {/* Bottom Half: Nested White Footer Card */}
+          <footer className="rounded-card bg-card border border-border/70 p-6 sm:p-8 md:p-10 shadow-xs space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+              {/* Left Brand & Email Subscribe */}
+              <div className="lg:col-span-4 space-y-4">
+                <Link href="/" className="inline-flex items-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/logo.svg"
+                    alt="English Partner"
+                    className="h-8 w-auto object-contain"
+                  />
+                </Link>
+                <p className="text-meta font-semibold text-foreground">
+                  Sign up to receive daily English tips.
+                </p>
+                <form
+                  action="/dashboard"
+                  className="rounded-pill border border-border bg-background p-1 flex items-center gap-2 max-w-sm"
+                >
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    aria-label="Email address"
+                    className="flex-1 min-w-0 bg-transparent px-3 py-1.5 text-meta text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                  <Button
+                    type="submit"
+                    size="sm"
+                    className="rounded-pill px-4 bg-foreground text-background hover:bg-foreground/90 text-chip font-semibold shrink-0"
+                  >
+                    Submit
+                  </Button>
+                </form>
+                <p className="text-chip text-muted-foreground leading-relaxed max-w-xs">
+                  By subscribing you agree to with our{" "}
+                  <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
+                    Privacy Policy
+                  </Link>{" "}
+                  and receive learning updates.
+                </p>
+              </div>
+
+              {/* Right Multi-Column Links */}
+              <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-meta">
+                <div className="space-y-2.5">
+                  <p className="text-chip font-semibold text-muted-foreground">Learning</p>
+                  <ul className="space-y-2 text-foreground">
+                    <li><Link href="/explore" className="hover:text-primary transition-colors">Explore</Link></li>
+                    <li><Link href="/grammar-path" className="hover:text-primary transition-colors">Grammar Path</Link></li>
+                    <li><Link href="/professions" className="hover:text-primary transition-colors">Career Tracks</Link></li>
+                  </ul>
+                </div>
+                <div className="space-y-2.5">
+                  <p className="text-chip font-semibold text-muted-foreground">Practice</p>
+                  <ul className="space-y-2 text-foreground">
+                    <li><Link href="/daily-practice" className="hover:text-primary transition-colors">Daily Practice</Link></li>
+                    <li><Link href="/roleplay" className="hover:text-primary transition-colors">AI Roleplay</Link></li>
+                    <li><Link href="/what-should-i-say" className="hover:text-primary transition-colors">What Should I Say?</Link></li>
+                    <li><Link href="/quiz" className="hover:text-primary transition-colors">Quiz</Link></li>
+                  </ul>
+                </div>
+                <div className="space-y-2.5">
+                  <p className="text-chip font-semibold text-muted-foreground">Account</p>
+                  <ul className="space-y-2 text-foreground">
+                    <li><Link href="/dashboard" className="hover:text-primary transition-colors">Dashboard</Link></li>
+                    <li><Link href="/vocabulary" className="hover:text-primary transition-colors">My Vocabulary</Link></li>
+                    <li><Link href="/progress" className="hover:text-primary transition-colors">My Progress</Link></li>
+                  </ul>
+                </div>
+                <div className="space-y-2.5">
+                  <p className="text-chip font-semibold text-muted-foreground">Legal</p>
+                  <ul className="space-y-2 text-foreground">
+                    <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+                    <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-border text-center text-chip text-muted-foreground">
+              © 2026 EnglishPartner by MansurVerse, All rights reserved.
+            </div>
+          </footer>
         </section>
       </main>
-
-      {/* Multi-Column SaaS Footer + Giant Watermark (Graphy Reference) */}
-      <footer className="container-app pt-4 pb-0 space-y-6 overflow-hidden">
-        <Card className="rounded-card bg-card border border-border shadow-xs p-8 md:p-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            {/* Brand Column */}
-            <div className="md:col-span-5 space-y-4">
-              <Link href="/" className="inline-flex items-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/logo.svg"
-                  alt="English Partner"
-                  className="h-9 w-auto object-contain"
-                />
-              </Link>
-              <p className="text-meta text-muted-foreground max-w-xs leading-relaxed">
-                EnglishPartner empowers Bangla speakers to master real-life English conversations, grammar, and career fluency.
-              </p>
-            </div>
-
-            {/* Link Columns */}
-            <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 text-meta">
-              <div className="space-y-2.5">
-                <p className="text-label font-semibold text-foreground">Product</p>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li><Link href="/explore" className="hover:text-foreground transition-colors">Explore</Link></li>
-                  <li><Link href="/grammar-path" className="hover:text-foreground transition-colors">Grammar Path</Link></li>
-                  <li><Link href="/roleplay" className="hover:text-foreground transition-colors">AI Partner</Link></li>
-                  <li><Link href="/professions" className="hover:text-foreground transition-colors">Career Tracks</Link></li>
-                </ul>
-              </div>
-              <div className="space-y-2.5">
-                <p className="text-label font-semibold text-foreground">Practice</p>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li><Link href="/daily-practice" className="hover:text-foreground transition-colors">Daily Practice</Link></li>
-                  <li><Link href="/what-should-i-say" className="hover:text-foreground transition-colors">What Should I Say?</Link></li>
-                  <li><Link href="/vocabulary" className="hover:text-foreground transition-colors">My Vocabulary</Link></li>
-                  <li><Link href="/quiz" className="hover:text-foreground transition-colors">Quiz</Link></li>
-                </ul>
-              </div>
-              <div className="space-y-2.5">
-                <p className="text-label font-semibold text-foreground">Account</p>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li><Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
-                  <li><Link href="/progress" className="hover:text-foreground transition-colors">My Progress</Link></li>
-                  <li><Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link></li>
-                  <li><Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-chip text-muted-foreground">
-            <span>© 2026 EnglishPartner by MansurVerse. All rights reserved.</span>
-            <div className="flex items-center gap-6">
-              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
-            </div>
-          </div>
-        </Card>
-
-        {/* Subtle Watermark Wordmark */}
-        <div
-          aria-hidden="true"
-          className="text-center select-none pointer-events-none py-2 opacity-10"
-        >
-          <span className="text-page-title font-heading tracking-tight text-foreground inline-block scale-y-150 scale-x-125">
-            EnglishPartner
-          </span>
-        </div>
-      </footer>
     </div>
   );
 }

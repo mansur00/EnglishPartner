@@ -64,135 +64,153 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 149,
+      "line": 148,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-accent text-accent-foreground text-chip font-semibold\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 166,
+      "line": 165,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"rounded-control px-7 gap-2 shadow-sm text-label font-semibold\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 205,
+      "line": 204,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 213,
+      "line": 212,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary text-primary-foreground text-chip font-semibold shrink-0\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 221,
+      "line": 220,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 236,
+      "line": 235,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"px-2 py-0.5 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold shrink-0\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 247,
+      "line": 246,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 250,
+      "line": 249,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-primary\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 267,
+      "line": 266,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 316,
+      "line": 315,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 417,
+      "line": 416,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"inline-flex items-center gap-2.5 px-6 py-3 rounded-control bg-primary text-primary-foreground shadow-sm text-label font-semibold\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 446,
+      "line": 445,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 450,
+      "line": 449,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"px-3 py-1 rounded-pill bg-primary text-primary-foreground text-chip font-semibold\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 483,
+      "line": 482,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip text-primary font-semibold flex items-center gap-1 shrink-0\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 506,
+      "line": 505,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 545,
+      "line": 544,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-chip font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 576,
+      "line": 575,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className={`inline-block px-3 py-1 rounded-control text-chip font-semibold ${"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 600,
+      "line": 599,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"pt-1 flex items-center justify-between text-chip text-primary font-semibold\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 623,
+      "line": 625,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "className=\"rounded-control bg-card text-foreground hover:bg-card/90 px-7 shadow-sm text-label font-semibold\""
+      "code": "className=\"rounded-pill px-7 shadow-xs text-label font-semibold\""
     },
     {
       "file": "src/app/page.tsx",
       "line": 655,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-label font-semibold text-foreground\">Product</p>"
+      "code": "<p className=\"text-meta font-semibold text-foreground\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 664,
+      "line": 672,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-label font-semibold text-foreground\">Practice</p>"
+      "code": "className=\"rounded-pill px-4 bg-foreground text-background hover:bg-foreground/90 text-chip font-semibold shrink-0\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 673,
+      "line": 689,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-label font-semibold text-foreground\">Account</p>"
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Learning</p>"
+    },
+    {
+      "file": "src/app/page.tsx",
+      "line": 697,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Practice</p>"
+    },
+    {
+      "file": "src/app/page.tsx",
+      "line": 706,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Account</p>"
+    },
+    {
+      "file": "src/app/page.tsx",
+      "line": 714,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground\">Legal</p>"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
@@ -577,81 +595,87 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 20,
+      "line": 19,
       "detail": "Hardcoded layout constant / magic number: h-12",
       "code": "\"h-12\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 22,
+      "line": 21,
       "detail": "Hardcoded layout constant / magic number: h-14",
       "code": "\"h-14\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 23,
+      "line": 22,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "\"h-10\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 24,
+      "line": 23,
       "detail": "Hardcoded layout constant / magic number: h-16",
       "code": "\"h-16\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 26,
+      "line": 25,
       "detail": "Hardcoded layout constant / magic number: h-12",
       "code": "\"h-12\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 28,
+      "line": 27,
       "detail": "Hardcoded layout constant / magic number: h-16",
       "code": "\"h-16\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 29,
+      "line": 28,
       "detail": "Hardcoded layout constant / magic number: h-14",
       "code": "\"h-14\","
     },
     {
       "file": "src/app/page.tsx",
-      "line": 96,
+      "line": 95,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "className=\"h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 254,
+      "line": 253,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "<div className=\"grid grid-cols-6 items-end gap-1.5 h-10\">"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 258,
+      "line": 257,
       "detail": "Hardcoded layout constant / magic number: h-8",
       "code": "<div className=\"h-8 rounded-t-control bg-sun-500\" />"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 259,
+      "line": 258,
       "detail": "Hardcoded layout constant / magic number: h-7",
       "code": "<div className=\"h-7 rounded-t-control bg-primary/60\" />"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 260,
+      "line": 259,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "<div className=\"h-10 rounded-t-control bg-primary\" />"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 595,
+      "line": 594,
       "detail": "Hardcoded layout constant / magic number: w-12",
       "code": "<span className=\"h-2 w-12 rounded-pill bg-primary/35\" />"
+    },
+    {
+      "file": "src/app/page.tsx",
+      "line": 652,
+      "detail": "Hardcoded layout constant / magic number: h-8",
+      "code": "className=\"h-8 w-auto object-contain\""
     },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
@@ -950,7 +974,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 7 times",
+      "detail": "ClassName repeated 4 times",
       "className": "text-label font-semibold text-foreground",
       "files": [
         "src/app/page.tsx",
@@ -999,6 +1023,20 @@
     {
       "detail": "ClassName repeated 3 times",
       "className": "px-2.5 py-1 rounded-pill bg-card border border-border",
+      "files": [
+        "src/app/page.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-page-title font-heading text-foreground leading-tight",
+      "files": [
+        "src/app/page.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "text-chip font-semibold text-muted-foreground",
       "files": [
         "src/app/page.tsx"
       ]
