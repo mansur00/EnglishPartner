@@ -15,6 +15,10 @@ export const buttonVariants = cva(
           "border-0 bg-transparent hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
           "bg-destructive text-destructive-foreground border-0 hover:bg-destructive/90 shadow-xs",
+        success:
+          "bg-status-success-bg text-status-success-ink border-0 hover:opacity-90 font-semibold",
+        warning:
+          "bg-status-warning-bg text-status-warning-ink border-0 hover:opacity-90 font-semibold",
         link: "border-0 bg-transparent text-primary underline-offset-4 hover:underline",
         // Extended & brand-specific variants
         cta: "bg-cta text-brand-950 border-0 hover:bg-sun-400 active:bg-sun-600 shadow-sm font-semibold",

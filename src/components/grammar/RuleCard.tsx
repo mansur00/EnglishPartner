@@ -123,8 +123,8 @@ export function RuleCardDialog({
 
         {/* Common Mistakes */}
         {rule.commonMistakes && rule.commonMistakes.length > 0 && (
-          <div className="p-3 rounded-control bg-destructive/10 space-y-1">
-            <span className="text-grammar-header text-destructive">
+          <div className="p-3 rounded-control bg-status-danger-bg space-y-1">
+            <span className="text-grammar-header text-status-danger-ink">
               {isBn ? "সাধারণ ভুল যা এড়িয়ে চলবেন:" : "Common Mistakes:"}
             </span>
             <ul className="space-y-1 text-chip text-foreground font-bangla text-bangla">

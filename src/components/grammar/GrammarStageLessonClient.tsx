@@ -213,7 +213,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                   size={16}
                   className={cn(
                     "shrink-0",
-                    isSelected ? "text-primary-foreground" : isDone ? "text-primary" : "text-muted-foreground"
+                    isSelected ? "text-primary-foreground" : isDone ? "text-status-success" : "text-muted-foreground"
                   )}
                 />
                 <span className="text-meta truncate">{lesson.title}</span>
@@ -268,7 +268,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
 
             <Button
               type="button"
-              variant={completedIds.includes(activeLesson.id) ? "default" : "outline"}
+              variant={completedIds.includes(activeLesson.id) ? "success" : "outline"}
               size="sm"
               onClick={() => toggleLessonCompleted(activeLesson.id)}
               className="gap-1.5"
@@ -504,7 +504,11 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                         {isChecking ? "Checking..." : "Check"}
                       </Button>
                     </form>
-                    {err && <p className="text-meta text-destructive">{err}</p>}
+                    {err && (
+                      <p className="p-2.5 rounded-control bg-status-danger-bg text-status-danger-ink text-meta">
+                        {err}
+                      </p>
+                    )}
                     {fb && (
                       <div
                         className="p-3 rounded-control bg-card space-y-1.5"
@@ -573,7 +577,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                               !isAnswered
                                 ? "outline"
                                 : isCorrectOpt
-                                ? "default"
+                                ? "success"
                                 : isSelected
                                 ? "destructive"
                                 : "outline"
@@ -647,9 +651,9 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                       {q.options.map((opt, oIdx) => {
                         const isSelected = chosen === oIdx;
                         const isCorrectOpt = oIdx === q.correctIndex;
-                        let variant: "default" | "outline" | "destructive" = isSelected ? "default" : "outline";
+                        let variant: "default" | "success" | "outline" | "destructive" = isSelected ? "default" : "outline";
                         if (quizSubmitted) {
-                          if (isCorrectOpt) variant = "default";
+                          if (isCorrectOpt) variant = "success";
                           else if (isSelected) variant = "destructive";
                           else variant = "outline";
                         }

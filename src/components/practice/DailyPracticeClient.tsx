@@ -202,7 +202,7 @@ export function DailyPracticeClient() {
           <div className="relative rounded-card overflow-hidden bg-card p-6 md:p-8 space-y-6 shadow-card">
             {/* Completion Banner if done */}
             {isCompleted && (
-              <div className="flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300">
+              <div className="flex items-center gap-3 p-4 rounded-panel bg-status-success-bg text-status-success-ink">
                 <HugeiconsIcon icon={CheckmarkCircle02Icon} size={22} className="shrink-0" />
                 <p className="text-label">
                   {t("dailyPractice.completedBanner", locale)}
@@ -320,7 +320,7 @@ export function DailyPracticeClient() {
                 <HugeiconsIcon
                   icon={isCompleted ? CheckmarkCircle02Icon : TaskDone01Icon}
                   size={18}
-                  className={cn(isCompleted && "text-emerald-600 dark:text-emerald-400")}
+                  className={cn(isCompleted && "text-status-success-ink")}
                 />
                 <span>
                   {isCompleted
@@ -412,7 +412,7 @@ export function DailyPracticeClient() {
             className="group block p-5 rounded-card bg-card shadow-card hover:shadow-md transition-shadow space-y-3 cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <div className="size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+              <div className="size-10 rounded-control bg-status-warning-bg text-status-warning-ink flex items-center justify-center">
                 <HugeiconsIcon icon={SparklesIcon} size={20} />
               </div>
               <HugeiconsIcon
@@ -439,7 +439,7 @@ export function DailyPracticeClient() {
             className="group block p-5 rounded-card bg-card shadow-card hover:shadow-md transition-shadow space-y-3 cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <div className="size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+              <div className="size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center">
                 <HugeiconsIcon icon={BotIcon} size={20} />
               </div>
               <HugeiconsIcon
@@ -466,7 +466,7 @@ export function DailyPracticeClient() {
             className="group block p-5 rounded-card bg-card shadow-card hover:shadow-md transition-shadow space-y-3 cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <div className="size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+              <div className="size-10 rounded-control bg-status-success-bg text-status-success-ink flex items-center justify-center">
                 <HugeiconsIcon icon={TaskDone01Icon} size={20} />
               </div>
               <HugeiconsIcon

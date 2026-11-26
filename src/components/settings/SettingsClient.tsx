@@ -243,7 +243,7 @@ export function SettingsClient() {
 
       {/* Success Notification Banner */}
       {showResetSuccess && (
-        <div className="flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all">
+        <div className="flex items-center gap-3 p-4 rounded-panel bg-status-success-bg text-status-success-ink transition-all">
           <HugeiconsIcon icon={CheckmarkCircle02Icon} size={20} className="shrink-0" />
           <p className="text-label font-medium">{t("settings.resetSuccess", locale)}</p>
         </div>
@@ -732,7 +732,7 @@ export function SettingsClient() {
             </div>
 
             <div className="p-4 rounded-panel bg-muted/60 space-y-1">
-              <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+              <div className="flex items-center gap-2 text-status-success-ink">
                 <HugeiconsIcon icon={TaskDone01Icon} size={18} />
                 <span className="text-chip font-medium uppercase tracking-wider">
                   {t("settings.completedStepsCount", locale)}

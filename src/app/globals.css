@@ -151,12 +151,16 @@ body {
   --color-overlay: var(--overlay-bg);
 
   /* Status Colors Inline Mapping */
+  --color-status-success: var(--success);
   --color-status-success-bg: var(--success-bg);
   --color-status-success-ink: var(--success-ink);
+  --color-status-warning: var(--warning);
   --color-status-warning-bg: var(--warning-bg);
   --color-status-warning-ink: var(--warning-ink);
+  --color-status-info: var(--info);
   --color-status-info-bg: var(--info-bg);
   --color-status-info-ink: var(--info-ink);
+  --color-status-danger: var(--danger);
   --color-status-danger-bg: var(--danger-bg);
   --color-status-danger-ink: var(--danger-ink);
 

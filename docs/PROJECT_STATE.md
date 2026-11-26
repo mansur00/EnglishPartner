@@ -257,6 +257,17 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Semantic Color Audit, Primitives & Variant Rollout
+- Requested by owner: Audit the webapp for semantic color usage, expand semantic color primitives/variants, and replace raw palette/dark-mode color classes.
+- Changed:
+  - `src/app/globals.css`: Added `--color-status-success`, `--color-status-warning`, `--color-status-info`, and `--color-status-danger` mappings to `@theme inline`.
+  - `src/components/ui/badge-variants.ts` & `src/components/ui/button-variants.ts`: Added `info` badge variant and `success` / `warning` button variants backed by semantic status tokens.
+  - `src/components/practice/DailyPracticeClient.tsx` & `src/components/settings/SettingsClient.tsx`: Replaced all 7 raw Tailwind `emerald`/`amber`/`purple` + `dark:` classes with `bg-status-success-bg`, `text-status-success-ink`, `bg-status-warning-bg`, `text-status-warning-ink`, and `bg-primary/10 text-primary`.
+  - `src/components/grammar/GrammarPathClient.tsx`, `GrammarStageLessonClient.tsx`, `RuleCard.tsx`: Applied semantic `status-info`, `status-warning`, `status-danger`, and `Button variant="success"` for tips, routine, errors, completion, and quiz/right-word correct feedback.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, 8-Stage Grammar Learning Path (/grammar-path)
 - Requested by owner: Add a new Grammar Learning Path page to the left menu with 8 sequential stages (Foundation to Real Use), 3-step module flow (Rule in user's translate language only, 5-8 English examples, interactive sentence-making with AI check), level priority filters (School/Admission/IELTS/Spoken), and daily routine guidance; fixed rules to follow `useTranslationLocale()` (`ecp_translation_locale`) and matched the fixed right-sidebar (`lg:pr-80 xl:pr-96` + `fixed right-0 top-header h-below-header w-80 xl:w-96`) layout used by Vocabulary and AI Partner.
 - Changed:

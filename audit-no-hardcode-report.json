@@ -1,48 +1,6 @@
 {
   "a_colors": [
     {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 205,
-      "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, text-emerald-300",
-      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 323,
-      "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
-      "code": "className={cn(isCompleted && \"text-emerald-600 dark:text-emerald-400\")}"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 415,
-      "detail": "Tailwind raw palette color: bg-amber-500/10, text-amber-600, text-amber-400",
-      "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 442,
-      "detail": "Tailwind raw palette color: bg-purple-500/10, text-purple-600, text-purple-400",
-      "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 469,
-      "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-600, text-emerald-400",
-      "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 246,
-      "detail": "Tailwind raw palette color: bg-emerald-500/10, text-emerald-800, text-emerald-300",
-      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all\">"
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 735,
-      "detail": "Tailwind raw palette color: text-emerald-600, text-emerald-400",
-      "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
-    },
-    {
       "file": "src/content/seed/magic-cards.ts",
       "line": 1872,
       "detail": "Hex literal: #4821",
@@ -108,13 +66,13 @@
       "file": "src/components/grammar/GrammarPathClient.tsx",
       "line": 112,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+      "code": "<div className=\"flex items-center gap-2 text-label font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
       "line": 126,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+      "code": "<div className=\"flex items-center gap-2 text-label font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
@@ -172,31 +130,31 @@
     },
     {
       "file": "src/components/grammar/GrammarStageLessonClient.tsx",
-      "line": 520,
+      "line": 524,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-meta text-primary font-semibold\" dir=\"ltr\">"
     },
     {
       "file": "src/components/grammar/GrammarStageLessonClient.tsx",
-      "line": 546,
+      "line": 550,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarStageLessonClient.tsx",
-      "line": 561,
+      "line": 565,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-body text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarStageLessonClient.tsx",
-      "line": 624,
+      "line": 628,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarStageLessonClient.tsx",
-      "line": 643,
+      "line": 647,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-body text-foreground font-semibold\">"
     },
@@ -823,13 +781,6 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
-      "className": "flex items-center gap-2 text-label text-foreground font-semibold",
-      "files": [
-        "src/components/grammar/GrammarPathClient.tsx"
-      ]
-    },
-    {
       "detail": "ClassName repeated 7 times",
       "className": "text-card-title text-foreground font-semibold",
       "files": [
@@ -963,49 +914,6 @@
       "code": "[\"Ticket\", \"noun\", \"/ˈtɪkɪt/\", \"Logged support request case\", \"Your support ticket is #4821.\"],"
     }
   ],
-  "h_dark_mode": [
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 205,
-      "detail": "Raw color with dark: prefix: dark:text-emerald-300",
-      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 323,
-      "detail": "Raw color with dark: prefix: dark:text-emerald-400",
-      "code": "className={cn(isCompleted && \"text-emerald-600 dark:text-emerald-400\")}"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 415,
-      "detail": "Raw color with dark: prefix: dark:text-amber-400",
-      "code": "<div className=\"size-10 rounded-control bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 442,
-      "detail": "Raw color with dark: prefix: dark:text-purple-400",
-      "code": "<div className=\"size-10 rounded-control bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 469,
-      "detail": "Raw color with dark: prefix: dark:text-emerald-400",
-      "code": "<div className=\"size-10 rounded-control bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center\">"
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 246,
-      "detail": "Raw color with dark: prefix: dark:text-emerald-300",
-      "code": "<div className=\"flex items-center gap-3 p-4 rounded-panel bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 transition-all\">"
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 735,
-      "detail": "Raw color with dark: prefix: dark:text-emerald-400",
-      "code": "<div className=\"flex items-center gap-2 text-emerald-600 dark:text-emerald-400\">"
-    }
-  ],
+  "h_dark_mode": [],
   "i_ui_primitives": []
 }

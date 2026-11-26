@@ -18,6 +18,8 @@ export const badgeVariants = cva(
           "border-0 bg-status-success-bg text-status-success-ink",
         warning:
           "border-0 bg-status-warning-bg text-status-warning-ink",
+        info:
+          "border-0 bg-status-info-bg text-status-info-ink",
         link: "border-0 bg-transparent text-primary underline-offset-4 hover:underline",
         // Additional brand & legacy variants
         brand:

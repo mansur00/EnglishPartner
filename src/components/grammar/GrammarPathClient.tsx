@@ -108,12 +108,12 @@ export function GrammarPathClient() {
 
         {/* Golden Sequence Trick + Daily Routine */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-          <div className="p-3.5 rounded-panel bg-muted space-y-1">
-            <div className="flex items-center gap-2 text-label text-foreground font-semibold">
-              <HugeiconsIcon icon={SparklesIcon} size={16} className="text-primary" />
+          <div className="p-3.5 rounded-panel bg-status-info-bg text-status-info-ink space-y-1">
+            <div className="flex items-center gap-2 text-label font-semibold">
+              <HugeiconsIcon icon={SparklesIcon} size={16} />
               <span>Golden Sequence Trick</span>
             </div>
-            <p className={cn("text-meta text-muted-foreground", isBangla && "text-subtitle-bn")}>
+            <p className={cn("text-meta opacity-90", isBangla && "text-subtitle-bn text-status-info-ink")}>
               {isBangla
                 ? '"Tense first, then Sentence, then Transformation." — Stage 1 থেকে 8 ধারাবাহিকভাবে এগোলে Voice বা Narration সহজ হয়ে যাবে।'
                 : locale === "hi"
@@ -122,12 +122,12 @@ export function GrammarPathClient() {
             </p>
           </div>
 
-          <div className="p-3.5 rounded-panel bg-muted space-y-1">
-            <div className="flex items-center gap-2 text-label text-foreground font-semibold">
-              <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" />
+          <div className="p-3.5 rounded-panel bg-status-warning-bg text-status-warning-ink space-y-1">
+            <div className="flex items-center gap-2 text-label font-semibold">
+              <HugeiconsIcon icon={Clock01Icon} size={16} />
               <span>Daily Routine (30–45 min)</span>
             </div>
-            <p className={cn("text-meta text-muted-foreground", isBangla && "text-subtitle-bn")}>
+            <p className={cn("text-meta opacity-90", isBangla && "text-subtitle-bn text-status-warning-ink")}>
               {isBangla
                 ? "প্রতিদিন ১টি ছোট টপিক (৩০–৪৫ মিনিট): নিয়ম ও শব্দ শিখুন → ৫টি বাক্য বানান → কুইজ দিন। পরের দিন ৫ মিনিট রিভাইজ করুন।"
                 : locale === "hi"
