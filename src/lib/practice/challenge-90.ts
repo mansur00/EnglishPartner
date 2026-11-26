@@ -217,6 +217,14 @@ export const ChallengeFeedbackSchema = z.object({
 
 export type ChallengeFeedback = z.infer<typeof ChallengeFeedbackSchema>;
 
+export const ChallengeRoleplayReplySchema = z.object({
+  aiReply: z.string().min(1),
+  quickTipEn: z.string().min(1),
+  isFallback: z.boolean().optional(),
+});
+
+export type ChallengeRoleplayReply = z.infer<typeof ChallengeRoleplayReplySchema>;
+
 export const Challenge90RequestSchema = z.discriminatedUnion("action", [
   z.object({
     action: z.literal("generate-prompt"),
@@ -233,9 +241,230 @@ export const Challenge90RequestSchema = z.discriminatedUnion("action", [
     level: z.enum(["beginner", "intermediate", "upper"]),
     locale: z.enum(["bn", "en"]).default("bn"),
   }),
+  z.object({
+    action: z.literal("roleplay-turn"),
+    day: z.number().int().min(1).max(90),
+    scenarioTitle: z.string().min(1),
+    history: z
+      .array(
+        z.object({
+          speaker: z.enum(["ai", "user"]),
+          text: z.string(),
+        })
+      )
+      .max(12),
+    userMessage: z.string().trim().min(1).max(1000),
+    level: z.enum(["beginner", "intermediate", "upper"]),
+  }),
 ]);
 
 export type Challenge90Request = z.infer<typeof Challenge90RequestSchema>;
+
+export interface ChallengeDayLesson {
+  vocabItems: { phrase: string; meaningEn: string; exampleEn: string }[];
+  grammarPattern: {
+    titleEn: string;
+    formula: string;
+    explanationEn: string;
+    examples: string[];
+  };
+  quickDrills: {
+    situationEn: string;
+    sampleAnswer: string;
+  }[];
+  roleplay: {
+    titleEn: string;
+    partnerRole: string;
+    openingLine: string;
+  };
+}
+
+const PHASE_DAY_LESSONS: Record<1 | 2 | 3, ChallengeDayLesson[]> = {
+  1: [
+    {
+      vocabItems: [
+        {
+          phrase: "wake up",
+          meaningEn: "stop sleeping and open your eyes",
+          exampleEn: "I usually wake up at 7 AM on weekdays.",
+        },
+        {
+          phrase: "get ready",
+          meaningEn: "prepare yourself to go out or start work",
+          exampleEn: "It takes me twenty minutes to get ready for work.",
+        },
+        {
+          phrase: "grab a bite",
+          meaningEn: "eat something quick",
+          exampleEn: "Let's grab a quick bite before the meeting starts.",
+        },
+      ],
+      grammarPattern: {
+        titleEn: "Present Simple for Daily Habits",
+        formula: "Usually / Every day + Subject + Verb (base/s)",
+        explanationEn: "Use Present Simple to talk naturally about things you do regularly.",
+        examples: [
+          "Usually, I drink a cup of tea before checking my phone.",
+          "She takes the bus to the office every morning.",
+        ],
+      },
+      quickDrills: [
+        {
+          situationEn: "Someone asks: 'What time do you usually start your day?'",
+          sampleAnswer: "I usually start my day around 7:30 AM with a quick breakfast.",
+        },
+        {
+          situationEn: "Ask a friend politely if they want to get coffee together.",
+          sampleAnswer: "Hey, would you like to grab a coffee before class?",
+        },
+      ],
+      roleplay: {
+        titleEn: "Morning Catch-Up at a Café",
+        partnerRole: "Friendly coworker",
+        openingLine: "Good morning! You look fresh today. What time did you wake up?",
+      },
+    },
+    {
+      vocabItems: [
+        {
+          phrase: "could I have",
+          meaningEn: "a polite way to order or ask for something",
+          exampleEn: "Hi, could I have an iced coffee, please?",
+        },
+        {
+          phrase: "for here or to go",
+          meaningEn: "eating inside the shop or taking it away",
+          exampleEn: "I'd like it to go, please, since I'm in a hurry.",
+        },
+        {
+          phrase: "keep the change",
+          meaningEn: "let the server keep the extra small money",
+          exampleEn: "Here is 500 taka—please keep the change.",
+        },
+      ],
+      grammarPattern: {
+        titleEn: "Polite Requests with 'Could I...' / 'Would you mind...'",
+        formula: "Could I + verb ... please?",
+        explanationEn: "Use 'Could I' instead of 'Give me' so your spoken English sounds warm and polite.",
+        examples: [
+          "Could I get a glass of water, please?",
+          "Could you speak a little more slowly, please?",
+        ],
+      },
+      quickDrills: [
+        {
+          situationEn: "You are at a restaurant and want the bill.",
+          sampleAnswer: "Excuse me, could we have the bill whenever you're ready?",
+        },
+        {
+          situationEn: "Ask a shopkeeper if they have a smaller size.",
+          sampleAnswer: "Excuse me, do you have this shirt in a medium size?",
+        },
+      ],
+      roleplay: {
+        titleEn: "Ordering at a Coffee Shop",
+        partnerRole: "Café Barista",
+        openingLine: "Welcome in! What can I get started for you today?",
+      },
+    },
+  ],
+  2: [
+    {
+      vocabItems: [
+        {
+          phrase: "looking forward to",
+          meaningEn: "feeling excited about something in the future",
+          exampleEn: "I'm really looking forward to the weekend trip.",
+        },
+        {
+          phrase: "catch up with",
+          meaningEn: "meet and talk about recent news",
+          exampleEn: "I'm planning to catch up with an old friend on Friday.",
+        },
+        {
+          phrase: "depends on",
+          meaningEn: "decided by another situation",
+          exampleEn: "We might go out, but it depends on the weather.",
+        },
+      ],
+      grammarPattern: {
+        titleEn: "Talking About Future Plans ('planning to' / 'going to')",
+        formula: "I'm planning to + verb ... because ...",
+        explanationEn: "Add 'because...' right after your plan to sound natural and complete.",
+        examples: [
+          "I'm planning to visit my family this Friday because we haven't met in weeks.",
+          "I'm going to start a new book tonight.",
+        ],
+      },
+      quickDrills: [
+        {
+          situationEn: "A friend asks: 'Any fun plans for the weekend?'",
+          sampleAnswer: "I'm planning to relax at home and catch up with some friends.",
+        },
+        {
+          situationEn: "Invite someone and give a reason.",
+          sampleAnswer: "Would you like to join us for dinner? We're trying a new place.",
+        },
+      ],
+      roleplay: {
+        titleEn: "Making Weekend Plans",
+        partnerRole: "Close friend",
+        openingLine: "Hey! It's almost the weekend. Are you doing anything fun?",
+      },
+    },
+  ],
+  3: [
+    {
+      vocabItems: [
+        {
+          phrase: "to be honest",
+          meaningEn: "used to share your real opinion politely",
+          exampleEn: "To be honest, I work much better early in the morning.",
+        },
+        {
+          phrase: "for instance",
+          meaningEn: "for example (natural in conversation)",
+          exampleEn: "For instance, when I start early, I finish my tasks by noon.",
+        },
+        {
+          phrase: "get back to you",
+          meaningEn: "reply later after checking details",
+          exampleEn: "Let me double-check that and get back to you this afternoon.",
+        },
+      ],
+      grammarPattern: {
+        titleEn: "Giving Opinions with Clear Reasons",
+        formula: "Personally, I prefer X because... / First of all...",
+        explanationEn: "Structure spoken opinions into 2 quick points so listeners follow easily.",
+        examples: [
+          "Personally, I prefer remote work because it saves two hours of traffic.",
+          "On the other hand, meeting in person is great for brainstorming.",
+        ],
+      },
+      quickDrills: [
+        {
+          situationEn: "A client asks a question you don't know the exact answer to yet.",
+          sampleAnswer: "That's a great question—let me double-check and get back to you today.",
+        },
+        {
+          situationEn: "Share your view on morning vs. night study/work.",
+          sampleAnswer: "Personally, I prefer mornings because my mind feels much fresher.",
+        },
+      ],
+      roleplay: {
+        titleEn: "Quick Team Sync at Work",
+        partnerRole: "Team Lead",
+        openingLine: "Thanks for joining! How is the project going, and do you need any support?",
+      },
+    },
+  ],
+};
+
+export function getChallengeDayLesson(day: number): ChallengeDayLesson {
+  const phase = getPhaseForDay(day).phase;
+  const list = PHASE_DAY_LESSONS[phase];
+  return list[(day - 1) % list.length];
+}
 
 const FALLBACK_PROMPTS_BY_PHASE: Record<1 | 2 | 3, ChallengePrompt[]> = {
   1: [
@@ -337,7 +566,36 @@ export function getFallbackChallengeFeedback(
 
 export async function runChallengeSpeakingActionAsync(
   req: Challenge90Request
-): Promise<ChallengePrompt | ChallengeFeedback> {
+): Promise<ChallengePrompt | ChallengeFeedback | ChallengeRoleplayReply> {
+  if (req.action === "roleplay-turn") {
+    const historyText = req.history
+      .slice(-6)
+      .map((m) => `${m.speaker === "ai" ? "Partner" : "Learner"}: ${m.text}`)
+      .join("\n");
+
+    const res = await callStructuredLlm({
+      taskName: "roleplayTurn",
+      systemPrompt: `You are a friendly English conversation partner in a short everyday roleplay: "${req.scenarioTitle}".
+Learner level: ${req.level}.
+Reply naturally in 1–2 short spoken sentences and ask a simple follow-up question to keep the conversation going.
+Also provide one short helpful tip (quickTipEn) if needed.
+Return JSON matching the schema strictly.`,
+      userPrompt: `Conversation so far:\n${historyText}\nLearner just said: "${req.userMessage}"`,
+      schema: ChallengeRoleplayReplySchema,
+      temperature: 0.6,
+      maxTokens: 300,
+    });
+
+    if (res.success && res.data) {
+      return { ...res.data, isFallback: false };
+    }
+    return {
+      aiReply: "That sounds great! Tell me a little more—what do you usually do next?",
+      quickTipEn: "Great response! Try adding one extra detail to keep the conversation flowing.",
+      isFallback: true,
+    };
+  }
+
   if (req.action === "generate-prompt") {
     const phase = getPhaseForDay(req.day);
     const systemPrompt = `You are a practical spoken-English coach for Bangladeshi learners.

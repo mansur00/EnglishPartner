@@ -2154,6 +2154,10 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, 90-Day Challenge Inline 5-Step Stepper (`PersonalizedPracticeCard.tsx`)
+- Refactored `PersonalizedPracticeCard.tsx` into a clean, uncluttered 5-step inline stepper (`1. Vocabulary`, `2. Grammar`, `3. Quick Drill`, `4. Speak & Coach`, `5. Mini Roleplay`) inside the single card—showing one step at a time with zero external page redirects.
+- Added `getChallengeDayLesson` and `"roleplay-turn"` action to `src/lib/practice/challenge-90.ts` with full `useTranslationLocale` + `useLiveTranslations` support across all 5 steps.
+
 ### 2026-11-27, Daily Practice Translate Language Audit (`useTranslationLocale` + `useLiveTranslations`)
 - Audited `/daily-practice` and wired `useTranslationLocale()` + `useLiveTranslations()` into `PersonalizedPracticeCard.tsx` (speaking prompt helper, starter phrase, 5-step AI feedback, and daily plan block descriptions), `ReviewQueue.tsx` (contextual meaning & example sentence translation on flip, respecting `"none"` for English-only practice), and `DailyPracticeClient.tsx` (AI Coach Insight).
 

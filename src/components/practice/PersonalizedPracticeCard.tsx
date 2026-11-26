@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import Link from "next/link";
+import React, { useMemo, useRef, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   SparklesIcon,
@@ -22,6 +21,7 @@ import { cn } from "@/lib/utils";
 import {
   CHALLENGE_PHASES,
   buildChallengeDayPlan,
+  getChallengeDayLesson,
   getFallbackChallengeFeedback,
   getFallbackChallengePrompt,
   type Challenge90State,
@@ -30,6 +30,7 @@ import {
   type ChallengeGoal,
   type ChallengeLevel,
   type ChallengePrompt,
+  type ChallengeRoleplayReply,
 } from "@/lib/practice/challenge-90";
 
 interface PersonalizedPracticeCardProps {
@@ -54,6 +55,14 @@ const LEVEL_OPTIONS: { id: ChallengeLevel; labelEn: string; labelBn: string }[] 
 
 const MINUTE_OPTIONS: ChallengeDailyMinutes[] = [15, 20, 30];
 
+const STEP_LABELS = [
+  { num: 1, id: "vocab-context", en: "Vocabulary", bn: "১. শব্দ ব্যবহার" },
+  { num: 2, id: "speaking-grammar", en: "Grammar", bn: "২. স্পোকেন গ্রামার" },
+  { num: 3, id: "quick-response", en: "Quick Drill", bn: "৩. তাৎক্ষণিক উত্তর" },
+  { num: 4, id: "core-speaking", en: "Speak & Coach", bn: "৪. মূল স্পিকিং" },
+  { num: 5, id: "ai-roleplay", en: "Roleplay", bn: "৫. মিনি রোলপ্লে" },
+] as const;
+
 export function PersonalizedPracticeCard({
   locale,
   challengeState,
@@ -64,14 +73,22 @@ export function PersonalizedPracticeCard({
   const translationLocale = useTranslationLocale();
   const showTranslation = translationLocale !== "none";
 
-  // Onboarding setup state (used when !challengeState.enrolled)
+  // Onboarding setup
   const [setupGoal, setSetupGoal] = useState<ChallengeGoal>(challengeState.goal);
   const [setupLevel, setSetupLevel] = useState<ChallengeLevel>(challengeState.level);
   const [setupMinutes, setSetupMinutes] = useState<ChallengeDailyMinutes>(
     challengeState.dailyMinutes
   );
 
-  // Active Day Speaking Prompt & 5-Step Feedback State
+  // Active Stepper (0..4) — shows ONE clean step at a time inside this card
+  const [activeStep, setActiveStep] = useState(0);
+
+  // Step 1–3 inline practice inputs
+  const [vocabSentence, setVocabSentence] = useState("");
+  const [grammarSentence, setGrammarSentence] = useState("");
+  const [drillAnswers, setDrillAnswers] = useState<Record<number, string>>({});
+
+  // Step 4: Core Speaking Prompt & 5-Step AI Feedback
   const [promptData, setPromptData] = useState<ChallengePrompt>(() =>
     getFallbackChallengePrompt(challengeState.currentDay)
   );
@@ -79,6 +96,20 @@ export function PersonalizedPracticeCard({
   const [learnerResponse, setLearnerResponse] = useState("");
   const [evaluating, setEvaluating] = useState(false);
   const [feedback, setFeedback] = useState<ChallengeFeedback | null>(null);
+
+  // Step 5: Mini AI Roleplay
+  const dayLesson = useMemo(
+    () => getChallengeDayLesson(challengeState.currentDay),
+    [challengeState.currentDay]
+  );
+  const [roleplayHistory, setRoleplayHistory] = useState<
+    { speaker: "ai" | "user"; text: string }[]
+  >(() => [{ speaker: "ai", text: dayLesson.roleplay.openingLine }]);
+  const [roleplayInput, setRoleplayInput] = useState("");
+  const [roleplayLoading, setRoleplayLoading] = useState(false);
+  const [roleplayTip, setRoleplayTip] = useState<string | null>(null);
+
+  // Voice Mic (shared for Step 4 & Step 5)
   const [isRecording, setIsRecording] = useState(false);
   const [micNote, setMicNote] = useState<string | null>(null);
   const recognitionRef = useRef<{ stop: () => void } | null>(null);
@@ -89,12 +120,18 @@ export function PersonalizedPracticeCard({
       ? challengeState.todayCompletedBlockIds
       : [];
 
-  const textsToTranslate = React.useMemo(() => {
+  // Live translation strings across all 5 steps when Translate Language != "none"
+  const textsToTranslate = useMemo(() => {
     if (!showTranslation) return [];
     const list = [
+      dayPlan.dailyObjectiveEn,
+      ...dayLesson.vocabItems.flatMap((v) => [v.meaningEn, v.exampleEn]),
+      dayLesson.grammarPattern.explanationEn,
+      ...dayLesson.grammarPattern.examples,
+      ...dayLesson.quickDrills.flatMap((d) => [d.situationEn, d.sampleAnswer]),
       promptData.promptEn,
       promptData.starterPhrase,
-      ...dayPlan.blocks.map((b) => b.descEn),
+      ...roleplayHistory.map((m) => m.text),
     ];
     if (feedback) {
       list.push(
@@ -104,13 +141,47 @@ export function PersonalizedPracticeCard({
         feedback.speakAgainPrompt
       );
     }
+    if (roleplayTip) list.push(roleplayTip);
     return list;
-  }, [showTranslation, promptData.promptEn, promptData.starterPhrase, dayPlan.blocks, feedback]);
+  }, [
+    showTranslation,
+    dayPlan.dailyObjectiveEn,
+    dayLesson,
+    promptData.promptEn,
+    promptData.starterPhrase,
+    roleplayHistory,
+    feedback,
+    roleplayTip,
+  ]);
 
   const { translations: liveMap } = useLiveTranslations(
     textsToTranslate,
     showTranslation ? translationLocale : "none"
   );
+
+  const markStepDone = (stepIdx: number) => {
+    const stepId = STEP_LABELS[stepIdx]?.id;
+    if (!stepId) return;
+    const baseIds =
+      challengeState.todayDayNumber === challengeState.currentDay
+        ? challengeState.todayCompletedBlockIds
+        : [];
+    if (!baseIds.includes(stepId)) {
+      onChallengeChange({
+        ...challengeState,
+        todayDayNumber: challengeState.currentDay,
+        todayCompletedBlockIds: [...baseIds, stepId],
+      });
+    }
+  };
+
+  const goToNextStep = () => {
+    markStepDone(activeStep);
+    onPracticeMinutesEarned(3);
+    if (activeStep < STEP_LABELS.length - 1) {
+      setActiveStep((s) => s + 1);
+    }
+  };
 
   const handleEnroll = () => {
     const next: Challenge90State = {
@@ -124,25 +195,12 @@ export function PersonalizedPracticeCard({
       todayCompletedBlockIds: [],
     };
     onChallengeChange(next);
+    setActiveStep(0);
     setPromptData(getFallbackChallengePrompt(1));
     setFeedback(null);
     setLearnerResponse("");
-  };
-
-  const handleToggleBlock = (blockId: string) => {
-    const baseIds =
-      challengeState.todayDayNumber === challengeState.currentDay
-        ? challengeState.todayCompletedBlockIds
-        : [];
-    const exists = baseIds.includes(blockId);
-    const updatedIds = exists
-      ? baseIds.filter((id) => id !== blockId)
-      : [...baseIds, blockId];
-    onChallengeChange({
-      ...challengeState,
-      todayDayNumber: challengeState.currentDay,
-      todayCompletedBlockIds: updatedIds,
-    });
+    const firstLesson = getChallengeDayLesson(1);
+    setRoleplayHistory([{ speaker: "ai", text: firstLesson.roleplay.openingLine }]);
   };
 
   const handleGeneratePrompt = async () => {
@@ -193,15 +251,47 @@ export function PersonalizedPracticeCard({
       setFeedback(getFallbackChallengeFeedback(learnerResponse, locale));
     } finally {
       setEvaluating(false);
-      // Mark core-speaking block completed automatically
-      if (!activeDayBlocksCompleted.includes("core-speaking")) {
-        handleToggleBlock("core-speaking");
-      }
+      markStepDone(3);
       onPracticeMinutesEarned(5);
     }
   };
 
-  const handleToggleMic = () => {
+  const handleSendRoleplayTurn = async () => {
+    const msg = roleplayInput.trim();
+    if (!msg) return;
+    const nextHistory = [...roleplayHistory, { speaker: "user" as const, text: msg }];
+    setRoleplayHistory(nextHistory);
+    setRoleplayInput("");
+    setRoleplayLoading(true);
+    try {
+      const res = await fetch("/api/v1/ai/challenge-90", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "roleplay-turn",
+          day: challengeState.currentDay,
+          scenarioTitle: dayLesson.roleplay.titleEn,
+          history: nextHistory,
+          userMessage: msg,
+          level: challengeState.level,
+        }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      const data: ChallengeRoleplayReply = await res.json();
+      setRoleplayHistory([...nextHistory, { speaker: "ai", text: data.aiReply }]);
+      setRoleplayTip(data.quickTipEn);
+      speakText(data.aiReply, { rate: 0.94 });
+    } catch {
+      const fallbackReply = "That makes sense! What would you say next in this situation?";
+      setRoleplayHistory([...nextHistory, { speaker: "ai", text: fallbackReply }]);
+    } finally {
+      setRoleplayLoading(false);
+      markStepDone(4);
+      onPracticeMinutesEarned(4);
+    }
+  };
+
+  const startVoiceMic = (onTranscript: (text: string) => void) => {
     if (isRecording && recognitionRef.current) {
       recognitionRef.current.stop();
       setIsRecording(false);
@@ -236,7 +326,7 @@ export function PersonalizedPracticeCard({
       setMicNote(
         isBn
           ? "এই ব্রাউজারে ভয়েস রেকর্ডিং সাপোর্ট নেই—নিচে টাইপ করে উত্তর দিন।"
-          : "Voice recognition is unavailable in this browser—type your spoken answer below."
+          : "Voice recognition is unavailable here—please type your spoken response."
       );
       return;
     }
@@ -252,14 +342,10 @@ export function PersonalizedPracticeCard({
         transcript += event.results[i][0]?.transcript ?? "";
         transcript += " ";
       }
-      setLearnerResponse(transcript.trim());
+      onTranscript(transcript.trim());
     };
-    recognition.onerror = () => {
-      setIsRecording(false);
-    };
-    recognition.onend = () => {
-      setIsRecording(false);
-    };
+    recognition.onerror = () => setIsRecording(false);
+    recognition.onend = () => setIsRecording(false);
     recognitionRef.current = recognition;
     recognition.start();
     setIsRecording(true);
@@ -285,9 +371,16 @@ export function PersonalizedPracticeCard({
       todayCompletedBlockIds: [],
       history: [entry, ...challengeState.history].slice(0, 30),
     });
+    setActiveStep(0);
+    setVocabSentence("");
+    setGrammarSentence("");
+    setDrillAnswers({});
     setPromptData(getFallbackChallengePrompt(nextDay));
     setFeedback(null);
     setLearnerResponse("");
+    const nextLesson = getChallengeDayLesson(nextDay);
+    setRoleplayHistory([{ speaker: "ai", text: nextLesson.roleplay.openingLine }]);
+    setRoleplayTip(null);
     onPracticeMinutesEarned(5);
   };
 
@@ -316,14 +409,13 @@ export function PersonalizedPracticeCard({
               </div>
               <p className="text-meta text-muted-foreground">
                 {isBn
-                  ? "প্রতিদিন ২০–৩০ মিনিট বাস্তব ইংরেজি বলার অভ্যাস গড়ুন—আপনার পারফরম্যান্স অনুযায়ী প্ল্যান বদলাবে।"
-                  : "Build a daily spoken-English habit in 20–30 min/day with an adaptive AI speaking plan."}
+                  ? "প্রতিদিন ১৫–৩০ মিনিট স্টেপ-বাই-স্টেপ এই কার্ডের ভেতরেই স্পিকিং প্র্যাকটিস করুন।"
+                  : "Practice step-by-step for 15–30 min/day right inside this card—no page switching."}
               </p>
             </div>
           </div>
         </div>
 
-        {/* 3 Phases Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {CHALLENGE_PHASES.map((p) => (
             <div
@@ -343,11 +435,10 @@ export function PersonalizedPracticeCard({
           ))}
         </div>
 
-        {/* Quick Personalization Setup */}
         <div className="rounded-panel bg-muted/25 border border-border/60 p-4 space-y-4">
           <div className="space-y-1.5">
             <p className="text-chip font-semibold text-foreground">
-              {isBn ? "১. আপনার মূল লক্ষ্য বেছে নিন:" : "1. Choose your spoken-English goal:"}
+              {isBn ? "১. আপনার মূল লক্ষ্য:" : "1. Choose your speaking goal:"}
             </p>
             <div className="flex flex-wrap gap-1.5">
               {GOAL_OPTIONS.map((g) => (
@@ -367,7 +458,7 @@ export function PersonalizedPracticeCard({
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="space-y-1.5">
               <p className="text-chip font-semibold text-foreground">
-                {isBn ? "২. বর্তমান স্পিকিং লেভেল:" : "2. Current speaking level:"}
+                {isBn ? "২. বর্তমান লেভেল:" : "2. Speaking level:"}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {LEVEL_OPTIONS.map((l) => (
@@ -407,8 +498,8 @@ export function PersonalizedPracticeCard({
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/60">
             <p className="text-chip text-muted-foreground">
               {isBn
-                ? "কোনো পরীক্ষা বা মুখস্থ পড়া নয়—শুধু বাস্তব কথোপকথন ও স্পিকিং প্র্যাকটিস।"
-                : "No academic exams or long essays—focused 100% on practical spoken English."}
+                ? "সব ৫টি স্টেপ (Vocabulary → Grammar → Quick Drill → Speaking → Roleplay) এই কার্ডেই হবে।"
+                : "All 5 daily steps run right here inside this card—no jumping between pages."}
             </p>
             <Button
               type="button"
@@ -426,7 +517,7 @@ export function PersonalizedPracticeCard({
     );
   }
 
-  // ==================== STATE B: ENROLLED ====================
+  // ==================== STATE B: ENROLLED (CLEAN 5-STEP STEPPER) ====================
   const completionPct = Math.round((challengeState.completedDays.length / 90) * 100);
 
   return (
@@ -450,12 +541,14 @@ export function PersonalizedPracticeCard({
               </Badge>
             </div>
             <h2 className="font-heading text-card-title text-foreground">
-              {isBn
-                ? "৯০-দিনের স্পোকেন ইংলিশ চ্যালেঞ্জ"
-                : "90-Day Spoken English Challenge"}
+              {isBn ? "আজকের ১৫–৩০ মিনিটের স্পোকেন প্ল্যান" : "Today's Guided Spoken Plan"}
             </h2>
             <p className={cn("text-meta text-muted-foreground", isBn && "text-bangla")}>
-              {isBn ? dayPlan.dailyObjectiveBn : dayPlan.dailyObjectiveEn}
+              {showTranslation && translationLocale !== "bn" && liveMap[dayPlan.dailyObjectiveEn]
+                ? liveMap[dayPlan.dailyObjectiveEn]
+                : isBn
+                  ? dayPlan.dailyObjectiveBn
+                  : dayPlan.dailyObjectiveEn}
             </p>
           </div>
 
@@ -469,325 +562,544 @@ export function PersonalizedPracticeCard({
             <HugeiconsIcon icon={Award01Icon} size={15} />
             <span>
               {isBn
-                ? `দিন ${challengeState.currentDay} সম্পন্ন করুন`
+                ? `দিন ${challengeState.currentDay} সম্পন্ন`
                 : `Complete Day ${challengeState.currentDay}`}
             </span>
           </Button>
         </div>
 
-        {/* 90-Day Progress Bar */}
+        {/* 90-Day Overall Bar */}
         <div className="space-y-1">
           <div className="flex items-center justify-between text-chip text-muted-foreground">
             <span>
-              {challengeState.completedDays.length} / 90{" "}
-              {isBn ? "দিন সম্পন্ন" : "days completed"}
+              {challengeState.completedDays.length} / 90 {isBn ? "দিন সম্পন্ন" : "days completed"}
             </span>
             <span className="font-mono">{completionPct}%</span>
           </div>
-          <div className="h-2 w-full rounded-pill bg-muted overflow-hidden">
+          <div className="h-1.5 w-full rounded-pill bg-muted overflow-hidden">
             <div
               className="h-full bg-primary transition-all"
               style={{ width: `${Math.max(2, completionPct)}%` }}
             />
           </div>
         </div>
+
+        {/* Clean 5-Step Stepper Navigation */}
+        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          {STEP_LABELS.map((step, idx) => {
+            const isActive = activeStep === idx;
+            const isDone = activeDayBlocksCompleted.includes(step.id);
+            return (
+              <Button
+                key={step.id}
+                type="button"
+                size="xs"
+                variant={isActive ? "default" : isDone ? "secondary" : "outline"}
+                onClick={() => setActiveStep(idx)}
+                className="gap-1.5"
+              >
+                {isDone && (
+                  <HugeiconsIcon icon={CheckmarkCircle02Icon} size={13} />
+                )}
+                <span>{isBn ? step.bn : `${step.num}. ${step.en}`}</span>
+              </Button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Inline AI Speaking Prompt & 5-Step Feedback */}
-      <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="success" size="sm">
-              {isBn ? "আজকের স্পিকিং প্রম্পট" : "Today's Speaking Prompt"}
-            </Badge>
-            <span className="text-chip font-semibold text-foreground">{promptData.topic}</span>
-          </div>
+      {/* ================= ACTIVE STEP CONTENT (ONLY 1 STEP VISIBLE) ================= */}
 
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="ghost"
-              size="xs"
-              onClick={() => speakText(promptData.promptEn, { rate: 0.92 })}
-              className="gap-1"
-            >
-              <HugeiconsIcon icon={VolumeHighIcon} size={14} />
-              <span>{isBn ? "শুনুন" : "Listen"}</span>
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="xs"
-              disabled={promptLoading}
-              onClick={handleGeneratePrompt}
-              className="gap-1"
-            >
-              <HugeiconsIcon
-                icon={promptLoading ? RefreshIcon : SparklesIcon}
-                size={13}
-                className={cn(promptLoading && "animate-spin")}
-              />
-              <span>{isBn ? "নতুন প্রম্পট" : "New Prompt"}</span>
-            </Button>
-          </div>
-        </div>
-
-        <div className="space-y-1.5">
-          <p className="text-lead font-semibold text-foreground">{promptData.promptEn}</p>
-          {showTranslation && (
-            <p className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
-              {translationLocale === "bn"
-                ? promptData.instructionBn
-                : liveMap[promptData.promptEn] ?? (isBn ? promptData.instructionBn : null)}
-            </p>
-          )}
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2 text-chip">
-          <span className="text-muted-foreground">
-            {isBn ? "শুরু করতে পারেন:" : "Starter:"}
-          </span>
-          <span className="px-2.5 py-1 rounded-control bg-card border border-border text-foreground italic">
-            &ldquo;{promptData.starterPhrase}&rdquo;
-          </span>
-          {showTranslation && liveMap[promptData.starterPhrase] && (
-            <span className="text-muted-foreground">
-              ({liveMap[promptData.starterPhrase]})
-            </span>
-          )}
-          {promptData.targetVocab.map((v) => (
-            <Badge key={v} variant="brand" size="sm">
-              {v}
-            </Badge>
-          ))}
-        </div>
-
-        {/* Voice Mic + Spoken Transcript Input */}
-        <div className="space-y-2">
-          <textarea
-            value={learnerResponse}
-            onChange={(e) => setLearnerResponse(e.target.value)}
-            rows={3}
-            placeholder={
-              isBn
-                ? "মাইক্রোফোন অন করে ইংরেজিতে বলুন, অথবা এখানে লিখুন..."
-                : "Tap Speak to record your voice, or type your spoken response here..."
-            }
-            className="w-full rounded-control border border-input bg-card px-3.5 py-2.5 text-body text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-ring"
-          />
-          {micNote && <p className="text-chip text-muted-foreground">{micNote}</p>}
-
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <Button
-              type="button"
-              variant={isRecording ? "destructive" : "outline"}
-              size="sm"
-              onClick={handleToggleMic}
-              className="gap-1.5"
-            >
-              <HugeiconsIcon icon={isRecording ? StopIcon : Mic01Icon} size={15} />
-              <span>
-                {isRecording
-                  ? isBn
-                    ? "রেকর্ডিং থামান"
-                    : "Stop Recording"
-                  : isBn
-                    ? "ভয়েসে বলুন (Mic)"
-                    : "Speak (Mic)"}
-              </span>
-            </Button>
-
-            <Button
-              type="button"
-              variant="cta"
-              size="sm"
-              disabled={evaluating || learnerResponse.trim().length < 2}
-              onClick={handleEvaluateResponse}
-              className="gap-1.5"
-            >
-              <HugeiconsIcon
-                icon={evaluating ? RefreshIcon : SparklesIcon}
-                size={15}
-                className={cn(evaluating && "animate-spin")}
-              />
-              <span>
-                {evaluating
-                  ? isBn
-                    ? "বিশ্লেষণ চলছে..."
-                    : "Checking..."
-                  : isBn
-                    ? "৫-ধাপের স্পিকিং ফিডব্যাক নিন"
-                    : "Get 5-Step Speaking Feedback"}
-              </span>
-            </Button>
-          </div>
-        </div>
-
-        {/* 5-Step Speaking Feedback */}
-        {feedback && (
-          <div className="rounded-panel bg-card border border-border p-4 space-y-3">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-label font-semibold text-foreground">
-                {isBn ? "AI স্পিকিং ফিডব্যাক" : "AI Speaking Feedback"}
-              </span>
-              <Badge
-                variant={
-                  feedback.rating === "Strong"
-                    ? "success"
-                    : feedback.rating === "Getting better"
-                      ? "warning"
-                      : "error"
-                }
-                size="sm"
-              >
-                {feedback.rating}
-              </Badge>
+      {/* STEP 1: VOCABULARY IN CONTEXT */}
+      {activeStep === 0 && (
+        <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
+          <div className="flex items-center justify-between gap-2">
+            <div>
+              <Badge variant="brand" size="sm">Step 1 of 5 · ~3 min</Badge>
+              <h3 className="text-label font-semibold text-foreground mt-1">
+                {isBn ? "বাক্যে শব্দের ব্যবহার (Vocabulary in Context)" : "Vocabulary in Context"}
+              </h3>
             </div>
+          </div>
 
-            <div className="space-y-2 text-meta">
-              <p className={cn("text-foreground", isBn && "text-bangla")}>
-                <span className="font-semibold">1. What you communicated: </span>
-                {showTranslation && liveMap[feedback.communicated]
-                  ? liveMap[feedback.communicated]
-                  : feedback.communicated}
-              </p>
-
-              <div className="rounded-control bg-status-success-bg/50 p-3 space-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {dayLesson.vocabItems.map((item) => (
+              <div
+                key={item.phrase}
+                className="rounded-card bg-card border border-border p-3.5 space-y-2"
+              >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-chip font-semibold text-status-success-ink">
-                    2. Natural Version
+                  <span className="text-label font-semibold text-primary">{item.phrase}</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="xs"
+                    onClick={() => speakText(item.exampleEn, { rate: 0.92 })}
+                  >
+                    <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+                  </Button>
+                </div>
+                <p className="text-chip text-muted-foreground">
+                  {showTranslation && liveMap[item.meaningEn]
+                    ? liveMap[item.meaningEn]
+                    : item.meaningEn}
+                </p>
+                <p className="text-meta text-foreground italic">&ldquo;{item.exampleEn}&rdquo;</p>
+                {showTranslation && liveMap[item.exampleEn] && (
+                  <p className="text-chip text-muted-foreground">{liveMap[item.exampleEn]}</p>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-chip font-semibold text-foreground">
+              {isBn
+                ? "উপরের যেকোনো ১টি ফ্রেজ দিয়ে নিজের একটি বাক্য বলুন বা লিখুন:"
+                : "Say or type 1 sentence using any phrase above:"}
+            </p>
+            <input
+              type="text"
+              value={vocabSentence}
+              onChange={(e) => setVocabSentence(e.target.value)}
+              placeholder="e.g. I usually wake up early to get ready for work..."
+              className="w-full rounded-control border border-input bg-card px-3.5 py-2 text-body text-foreground placeholder:text-muted-foreground"
+            />
+          </div>
+
+          <div className="flex justify-end">
+            <Button type="button" variant="cta" size="sm" onClick={goToNextStep} className="gap-1.5">
+              <span>{isBn ? "সম্পন্ন ও পরের ধাপ" : "Next: Spoken Grammar"}</span>
+              <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 2: SPEAKING-FOCUSED GRAMMAR */}
+      {activeStep === 1 && (
+        <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
+          <div>
+            <Badge variant="info" size="sm">Step 2 of 5 · ~3 min</Badge>
+            <h3 className="text-label font-semibold text-foreground mt-1">
+              {dayLesson.grammarPattern.titleEn}
+            </h3>
+            <p className="text-meta font-mono text-primary mt-1">
+              {dayLesson.grammarPattern.formula}
+            </p>
+            <p className="text-meta text-muted-foreground mt-1">
+              {showTranslation && liveMap[dayLesson.grammarPattern.explanationEn]
+                ? liveMap[dayLesson.grammarPattern.explanationEn]
+                : dayLesson.grammarPattern.explanationEn}
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            {dayLesson.grammarPattern.examples.map((ex, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between gap-2 rounded-control bg-card border border-border p-3"
+              >
+                <div>
+                  <p className="text-body text-foreground">&ldquo;{ex}&rdquo;</p>
+                  {showTranslation && liveMap[ex] && (
+                    <p className="text-chip text-muted-foreground">{liveMap[ex]}</p>
+                  )}
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  onClick={() => speakText(ex, { rate: 0.92 })}
+                >
+                  <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-chip font-semibold text-foreground">
+              {isBn
+                ? "এই স্ট্রাকচার দিয়ে নিজে ১টি বাক্য তৈরি করে বলুন বা লিখুন:"
+                : "Practice saying or typing your own sentence with this pattern:"}
+            </p>
+            <input
+              type="text"
+              value={grammarSentence}
+              onChange={(e) => setGrammarSentence(e.target.value)}
+              placeholder="Write or speak your sentence here..."
+              className="w-full rounded-control border border-input bg-card px-3.5 py-2 text-body text-foreground placeholder:text-muted-foreground"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <Button type="button" variant="outline" size="sm" onClick={() => setActiveStep(0)}>
+              {isBn ? "আগের ধাপ" : "Back"}
+            </Button>
+            <Button type="button" variant="cta" size="sm" onClick={goToNextStep} className="gap-1.5">
+              <span>{isBn ? "সম্পন্ন ও পরের ধাপ" : "Next: Quick Response Drill"}</span>
+              <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 3: QUICK RESPONSE DRILL */}
+      {activeStep === 2 && (
+        <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
+          <div>
+            <Badge variant="warning" size="sm">Step 3 of 5 · ~4 min</Badge>
+            <h3 className="text-label font-semibold text-foreground mt-1">
+              {isBn ? "তাৎক্ষণিক উত্তর অনুশীলন (Quick Response)" : "Quick Response Drill"}
+            </h3>
+          </div>
+
+          <div className="space-y-3">
+            {dayLesson.quickDrills.map((drill, idx) => (
+              <div key={idx} className="rounded-card bg-card border border-border p-4 space-y-2.5">
+                <p className="text-body font-semibold text-foreground">{drill.situationEn}</p>
+                {showTranslation && liveMap[drill.situationEn] && (
+                  <p className="text-chip text-muted-foreground">{liveMap[drill.situationEn]}</p>
+                )}
+                <input
+                  type="text"
+                  value={drillAnswers[idx] ?? ""}
+                  onChange={(e) =>
+                    setDrillAnswers((prev) => ({ ...prev, [idx]: e.target.value }))
+                  }
+                  placeholder={isBn ? "আপনার উত্তর লিখুন বা মুখে বলুন..." : "Type or say your quick reply..."}
+                  className="w-full rounded-control border border-input bg-muted/20 px-3 py-2 text-meta text-foreground"
+                />
+                <div className="flex items-center justify-between gap-2 text-chip text-muted-foreground">
+                  <span>
+                    Sample: <span className="text-primary italic">&ldquo;{drill.sampleAnswer}&rdquo;</span>
                   </span>
                   <Button
                     type="button"
                     variant="ghost"
                     size="xs"
-                    onClick={() => speakText(feedback.betterVersion, { rate: 0.9 })}
-                    className="gap-1"
+                    onClick={() => speakText(drill.sampleAnswer, { rate: 0.92 })}
                   >
                     <HugeiconsIcon icon={VolumeHighIcon} size={13} />
-                    <span>{isBn ? "শুনুন" : "Listen"}</span>
                   </Button>
                 </div>
-                <p className="text-body text-foreground font-semibold">
-                  &ldquo;{feedback.betterVersion}&rdquo;
-                </p>
-                {showTranslation && liveMap[feedback.betterVersion] && (
-                  <p className="text-chip text-muted-foreground">
-                    {liveMap[feedback.betterVersion]}
-                  </p>
-                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <Button type="button" variant="outline" size="sm" onClick={() => setActiveStep(1)}>
+              {isBn ? "আগের ধাপ" : "Back"}
+            </Button>
+            <Button type="button" variant="cta" size="sm" onClick={goToNextStep} className="gap-1.5">
+              <span>{isBn ? "সম্পন্ন ও পরের ধাপ" : "Next: Core Speaking"}</span>
+              <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 4: CORE SPEAKING PROMPT & 5-STEP AI FEEDBACK */}
+      {activeStep === 3 && (
+        <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="success" size="sm">Step 4 of 5 · Core Speaking</Badge>
+              <span className="text-chip font-semibold text-foreground">{promptData.topic}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="xs"
+                onClick={() => speakText(promptData.promptEn, { rate: 0.92 })}
+                className="gap-1"
+              >
+                <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+                <span>{isBn ? "শুনুন" : "Listen"}</span>
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="xs"
+                disabled={promptLoading}
+                onClick={handleGeneratePrompt}
+                className="gap-1"
+              >
+                <HugeiconsIcon
+                  icon={promptLoading ? RefreshIcon : SparklesIcon}
+                  size={13}
+                  className={cn(promptLoading && "animate-spin")}
+                />
+                <span>{isBn ? "নতুন প্রম্পট" : "New Prompt"}</span>
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <p className="text-lead font-semibold text-foreground">{promptData.promptEn}</p>
+            {showTranslation && (
+              <p className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
+                {translationLocale === "bn"
+                  ? promptData.instructionBn
+                  : liveMap[promptData.promptEn] ?? null}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-chip">
+            <span className="text-muted-foreground">{isBn ? "শুরু করতে পারেন:" : "Starter:"}</span>
+            <span className="px-2.5 py-1 rounded-control bg-card border border-border text-foreground italic">
+              &ldquo;{promptData.starterPhrase}&rdquo;
+            </span>
+            {promptData.targetVocab.map((v) => (
+              <Badge key={v} variant="brand" size="sm">{v}</Badge>
+            ))}
+          </div>
+
+          <div className="space-y-2">
+            <textarea
+              value={learnerResponse}
+              onChange={(e) => setLearnerResponse(e.target.value)}
+              rows={3}
+              placeholder={
+                isBn
+                  ? "মাইক্রোফোন অন করে ইংরেজিতে বলুন, অথবা এখানে লিখুন..."
+                  : "Tap Speak to record your voice, or type your spoken response here..."
+              }
+              className="w-full rounded-control border border-input bg-card px-3.5 py-2.5 text-body text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-ring"
+            />
+            {micNote && <p className="text-chip text-muted-foreground">{micNote}</p>}
+
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <Button
+                type="button"
+                variant={isRecording ? "destructive" : "outline"}
+                size="sm"
+                onClick={() => startVoiceMic(setLearnerResponse)}
+                className="gap-1.5"
+              >
+                <HugeiconsIcon icon={isRecording ? StopIcon : Mic01Icon} size={15} />
+                <span>
+                  {isRecording
+                    ? isBn ? "রেকর্ডিং থামান" : "Stop Recording"
+                    : isBn ? "ভয়েসে বলুন (Mic)" : "Speak (Mic)"}
+                </span>
+              </Button>
+
+              <Button
+                type="button"
+                variant="cta"
+                size="sm"
+                disabled={evaluating || learnerResponse.trim().length < 2}
+                onClick={handleEvaluateResponse}
+                className="gap-1.5"
+              >
+                <HugeiconsIcon
+                  icon={evaluating ? RefreshIcon : SparklesIcon}
+                  size={15}
+                  className={cn(evaluating && "animate-spin")}
+                />
+                <span>
+                  {evaluating
+                    ? isBn ? "বিশ্লেষণ চলছে..." : "Checking..."
+                    : isBn ? "৫-ধাপের ফিডব্যাক নিন" : "Get 5-Step Feedback"}
+                </span>
+              </Button>
+            </div>
+          </div>
+
+          {feedback && (
+            <div className="rounded-panel bg-card border border-border p-4 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-label font-semibold text-foreground">
+                  {isBn ? "AI স্পিকিং ফিডব্যাক" : "AI Speaking Feedback"}
+                </span>
+                <Badge
+                  variant={
+                    feedback.rating === "Strong"
+                      ? "success"
+                      : feedback.rating === "Getting better"
+                        ? "warning"
+                        : "error"
+                  }
+                  size="sm"
+                >
+                  {feedback.rating}
+                </Badge>
               </div>
 
-              <p className={cn("text-muted-foreground", isBn && "text-bangla")}>
-                <span className="font-semibold text-foreground">3. Key correction: </span>
-                {showTranslation && liveMap[feedback.keyCorrection]
-                  ? liveMap[feedback.keyCorrection]
-                  : feedback.keyCorrection}
-              </p>
+              <div className="space-y-2 text-meta">
+                <p className={cn("text-foreground", isBn && "text-bangla")}>
+                  <span className="font-semibold">1. What you communicated: </span>
+                  {showTranslation && liveMap[feedback.communicated]
+                    ? liveMap[feedback.communicated]
+                    : feedback.communicated}
+                </p>
 
-              <p className="text-muted-foreground">
-                <span className="font-semibold text-foreground">4. Useful expression: </span>
-                <Badge variant="brand" size="sm">
-                  {feedback.usefulExpression}
-                </Badge>
-              </p>
+                <div className="rounded-control bg-status-success-bg/50 p-3 space-y-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-chip font-semibold text-status-success-ink">
+                      2. Natural Version
+                    </span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="xs"
+                      onClick={() => speakText(feedback.betterVersion, { rate: 0.9 })}
+                      className="gap-1"
+                    >
+                      <HugeiconsIcon icon={VolumeHighIcon} size={13} />
+                      <span>{isBn ? "শুনুন" : "Listen"}</span>
+                    </Button>
+                  </div>
+                  <p className="text-body text-foreground font-semibold">
+                    &ldquo;{feedback.betterVersion}&rdquo;
+                  </p>
+                  {showTranslation && liveMap[feedback.betterVersion] && (
+                    <p className="text-chip text-muted-foreground">{liveMap[feedback.betterVersion]}</p>
+                  )}
+                </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-border/60">
-                <p className="text-chip text-primary font-semibold">
+                <p className={cn("text-muted-foreground", isBn && "text-bangla")}>
+                  <span className="font-semibold text-foreground">3. Key correction: </span>
+                  {showTranslation && liveMap[feedback.keyCorrection]
+                    ? liveMap[feedback.keyCorrection]
+                    : feedback.keyCorrection}
+                </p>
+
+                <p className="text-muted-foreground">
+                  <span className="font-semibold text-foreground">4. Useful expression: </span>
+                  <Badge variant="brand" size="sm">{feedback.usefulExpression}</Badge>
+                </p>
+
+                <p className="text-chip text-primary font-semibold pt-2 border-t border-border/60">
                   5. Speak again:{" "}
                   {showTranslation && liveMap[feedback.speakAgainPrompt]
                     ? liveMap[feedback.speakAgainPrompt]
                     : feedback.speakAgainPrompt}
                 </p>
-                <Button
-                  type="button"
-                  size="xs"
-                  variant="outline"
-                  onClick={() => {
-                    setFeedback(null);
-                    setLearnerResponse("");
-                  }}
-                >
-                  {isBn ? "আবার চেষ্টা করুন" : "Try Again"}
-                </Button>
               </div>
             </div>
+          )}
+
+          <div className="flex items-center justify-between">
+            <Button type="button" variant="outline" size="sm" onClick={() => setActiveStep(2)}>
+              {isBn ? "আগের ধাপ" : "Back"}
+            </Button>
+            <Button type="button" variant="cta" size="sm" onClick={goToNextStep} className="gap-1.5">
+              <span>{isBn ? "পরের ধাপ: মিনি রোলপ্লে" : "Next: Mini AI Roleplay"}</span>
+              <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+            </Button>
           </div>
-        )}
-      </div>
-
-      {/* Today's Adaptive Speaking-First Plan (Reusing Existing Modules) */}
-      <div className="space-y-2.5">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-label font-semibold text-foreground">
-            {isBn ? "আজকের স্পিকিং-ফার্স্ট প্ল্যান" : "Today's Speaking-First Plan"}
-          </h3>
-          <span className="text-chip text-muted-foreground">
-            {activeDayBlocksCompleted.length}/{dayPlan.blocks.length}{" "}
-            {isBn ? "সম্পন্ন" : "done"}
-          </span>
         </div>
+      )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-          {dayPlan.blocks.map((block) => {
-            const done = activeDayBlocksCompleted.includes(block.id);
-            return (
+      {/* STEP 5: MINI AI ROLEPLAY (INLINE) */}
+      {activeStep === 4 && (
+        <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <Badge variant="brand" size="sm">Step 5 of 5 · ~8 min</Badge>
+              <h3 className="text-label font-semibold text-foreground mt-1">
+                {dayLesson.roleplay.titleEn} ({dayLesson.roleplay.partnerRole})
+              </h3>
+            </div>
+          </div>
+
+          <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+            {roleplayHistory.map((m, idx) => (
               <div
-                key={block.id}
+                key={idx}
                 className={cn(
-                  "rounded-panel border p-3.5 flex items-start justify-between gap-3 transition-colors",
-                  done ? "bg-status-success-bg/35 border-status-success-ink/30" : "bg-card border-border"
+                  "rounded-card p-3 border text-meta space-y-1",
+                  m.speaker === "ai"
+                    ? "bg-card border-border mr-6"
+                    : "bg-primary/10 border-primary/25 ml-6"
                 )}
               >
-                <button
-                  type="button"
-                  onClick={() => handleToggleBlock(block.id)}
-                  className="flex items-start gap-2.5 text-left min-w-0 flex-1 cursor-pointer"
-                >
-                  <HugeiconsIcon
-                    icon={CheckmarkCircle02Icon}
-                    size={18}
-                    className={cn(
-                      "mt-0.5 shrink-0",
-                      done ? "text-status-success-ink" : "text-muted-foreground"
-                    )}
-                  />
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="text-meta font-semibold text-foreground">
-                        {isBn ? block.titleBn : block.titleEn}
-                      </span>
-                      {block.required && (
-                        <Badge variant="outline" size="sm">
-                          {isBn ? "মূল" : "Core"}
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-chip text-muted-foreground mt-0.5">
-                      {showTranslation && translationLocale !== "bn" && liveMap[block.descEn]
-                        ? liveMap[block.descEn]
-                        : isBn
-                          ? block.descBn
-                          : block.descEn}{" "}
-                      · ~{block.durationMin} min
-                    </p>
-                  </div>
-                </button>
-
-                {block.href !== "#challenge-90" && (
-                  <Link
-                    href={block.href}
-                    className="inline-flex items-center gap-1 text-chip font-semibold text-primary hover:underline shrink-0 pt-0.5"
-                  >
-                    <span>{block.moduleLabel}</span>
-                    <HugeiconsIcon icon={ArrowRight01Icon} size={12} />
-                  </Link>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-chip font-semibold text-muted-foreground">
+                    {m.speaker === "ai" ? dayLesson.roleplay.partnerRole : isBn ? "আপনি" : "You"}
+                  </span>
+                  {m.speaker === "ai" && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="xs"
+                      onClick={() => speakText(m.text, { rate: 0.94 })}
+                    >
+                      <HugeiconsIcon icon={VolumeHighIcon} size={13} />
+                    </Button>
+                  )}
+                </div>
+                <p className="text-body text-foreground">{m.text}</p>
+                {showTranslation && liveMap[m.text] && (
+                  <p className="text-chip text-muted-foreground">{liveMap[m.text]}</p>
                 )}
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          {roleplayTip && (
+            <p className="text-chip text-primary bg-primary/10 rounded-control px-3 py-2">
+              💡 {showTranslation && liveMap[roleplayTip] ? liveMap[roleplayTip] : roleplayTip}
+            </p>
+          )}
+
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="text"
+              value={roleplayInput}
+              onChange={(e) => setRoleplayInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendRoleplayTurn();
+                }
+              }}
+              placeholder={isBn ? "রোলপ্লে-তে আপনার উত্তর বলুন বা লিখুন..." : "Speak or type your reply..."}
+              className="flex-1 rounded-control border border-input bg-card px-3.5 py-2 text-body text-foreground"
+            />
+            <div className="flex items-center gap-2 shrink-0">
+              <Button
+                type="button"
+                variant={isRecording ? "destructive" : "outline"}
+                size="sm"
+                onClick={() => startVoiceMic(setRoleplayInput)}
+                className="gap-1"
+              >
+                <HugeiconsIcon icon={isRecording ? StopIcon : Mic01Icon} size={14} />
+                <span>{isRecording ? "Stop" : "Mic"}</span>
+              </Button>
+              <Button
+                type="button"
+                variant="cta"
+                size="sm"
+                disabled={roleplayLoading || roleplayInput.trim().length === 0}
+                onClick={handleSendRoleplayTurn}
+              >
+                {roleplayLoading ? "..." : isBn ? "পাঠান" : "Send"}
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-2 border-t border-border/60">
+            <Button type="button" variant="outline" size="sm" onClick={() => setActiveStep(3)}>
+              {isBn ? "আগের ধাপ" : "Back"}
+            </Button>
+            <Button type="button" variant="cta" size="sm" onClick={handleCompleteDay} className="gap-1.5">
+              <HugeiconsIcon icon={Award01Icon} size={15} />
+              <span>
+                {isBn
+                  ? `দিন ${challengeState.currentDay} শেষ করুন`
+                  : `Finish Day ${challengeState.currentDay}`}
+              </span>
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </Card>
   );
 }

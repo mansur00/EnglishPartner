@@ -424,99 +424,135 @@
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 336,
+      "line": 428,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 349,
+      "line": 440,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 369,
+      "line": 460,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 388,
+      "line": 479,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 503,
+      "line": 619,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-chip font-semibold text-foreground\">{promptData.topic}</span>"
+      "code": "<h3 className=\"text-label font-semibold text-foreground mt-1\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 536,
+      "line": 632,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-lead font-semibold text-foreground\">{promptData.promptEn}</p>"
+      "code": "<span className=\"text-label font-semibold text-primary\">{item.phrase}</span>"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 630,
+      "line": 656,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-label font-semibold text-foreground\">"
+      "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 649,
+      "line": 684,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"font-semibold\">1. What you communicated: </span>"
-    },
-    {
-      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 657,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-chip font-semibold text-status-success-ink\">"
-    },
-    {
-      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 671,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-body text-foreground font-semibold\">"
-    },
-    {
-      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 682,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"font-semibold text-foreground\">3. Key correction: </span>"
-    },
-    {
-      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 689,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"font-semibold text-foreground\">4. Useful expression: </span>"
-    },
-    {
-      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 696,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-chip text-primary font-semibold\">"
+      "code": "<h3 className=\"text-label font-semibold text-foreground mt-1\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
       "line": 722,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+      "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 757,
+      "line": 753,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-meta font-semibold text-foreground\">"
+      "code": "<h3 className=\"text-label font-semibold text-foreground mt-1\">"
     },
     {
       "file": "src/components/practice/PersonalizedPracticeCard.tsx",
-      "line": 780,
+      "line": 761,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "className=\"inline-flex items-center gap-1 text-chip font-semibold text-primary hover:underline shrink-0 pt-0.5\""
+      "code": "<p className=\"text-body font-semibold text-foreground\">{drill.situationEn}</p>"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 809,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-foreground\">{promptData.topic}</span>"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 841,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-lead font-semibold text-foreground\">{promptData.promptEn}</p>"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 916,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 935,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold\">1. What you communicated: </span>"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 943,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-status-success-ink\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 957,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-body text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 966,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-foreground\">3. Key correction: </span>"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 973,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-foreground\">4. Useful expression: </span>"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 977,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip text-primary font-semibold pt-2 border-t border-border/60\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 1005,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-label font-semibold text-foreground mt-1\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 1023,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-muted-foreground\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -1269,7 +1305,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 7 times",
+      "detail": "ClassName repeated 6 times",
       "className": "text-label font-semibold text-foreground",
       "files": [
         "src/app/page.tsx",
@@ -1348,10 +1384,11 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 5 times",
       "className": "text-chip font-semibold text-muted-foreground",
       "files": [
-        "src/app/page.tsx"
+        "src/app/page.tsx",
+        "src/components/practice/PersonalizedPracticeCard.tsx"
       ]
     },
     {
@@ -1384,7 +1421,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 14 times",
+      "detail": "ClassName repeated 15 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
@@ -1499,11 +1536,17 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
-      "className": "h-2 w-full rounded-pill bg-muted overflow-hidden",
+      "detail": "ClassName repeated 5 times",
+      "className": "rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4",
       "files": [
-        "src/components/practice/PersonalizedPracticeCard.tsx",
-        "src/components/quiz/QuizRunner.tsx"
+        "src/components/practice/PersonalizedPracticeCard.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "text-label font-semibold text-foreground mt-1",
+      "files": [
+        "src/components/practice/PersonalizedPracticeCard.tsx"
       ]
     },
     {
