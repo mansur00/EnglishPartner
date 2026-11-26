@@ -93,11 +93,37 @@ function applyProgressSnapshot(snapshot: Record<string, unknown>) {
   }
 }
 
+// Install synchronous Guest no-cache guard on browser load before child effects read localStorage
+let guestGuardInstalled = false;
+function ensureGuestNoCacheGuard() {
+  if (typeof window === "undefined" || guestGuardInstalled) return;
+  guestGuardInstalled = true;
+
+  const origSetItem = window.localStorage.setItem.bind(window.localStorage);
+  window.localStorage.setItem = function (key: string, value: string) {
+    // Block persisting any progress/session cache when in Guest mode (no active logged-in uid)
+    if (isProgressKey(key) && !window.localStorage.getItem("ecp_active_uid")) {
+      return;
+    }
+    return origSetItem(key, value);
+  };
+
+  if (!window.localStorage.getItem("ecp_active_uid")) {
+    clearProgressKeys();
+    try {
+      window.sessionStorage.clear();
+    } catch {
+      // Ignore sessionStorage errors
+    }
+  }
+}
+
 export function SessionIsolationProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  ensureGuestNoCacheGuard();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [ready, setReady] = useState(false);
   const [config, setConfig] = useState<AppConfigPayload>(DEFAULT_CONFIG);
@@ -141,6 +167,7 @@ export function SessionIsolationProvider({
         }
 
         if (prevUid !== profile.id) {
+          localStorage.setItem("ecp_active_uid", profile.id);
           clearProgressKeys();
           let hydrated: Record<string, unknown> | null = null;
           try {
@@ -163,7 +190,6 @@ export function SessionIsolationProvider({
           if (hydrated) {
             applyProgressSnapshot(hydrated);
           }
-          localStorage.setItem("ecp_active_uid", profile.id);
         }
         setUser(profile);
       }

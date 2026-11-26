@@ -2156,6 +2156,9 @@ Entry format:
 
 - Extended the 100% visible + 95% locked Guest mode across `GrammarPathClient.tsx` (Stage 1 unlocked, Stages 2–8 & AI Writing Checker locked), `RoleplayPartner.tsx` (1-turn 5% preview, then locked), `vocabulary/page.tsx` (first 5% Magic Decks unlocked, 95% locked), and `quiz/page.tsx` (first 5% quizzes unlocked, 95% locked).
 
+### 2026-11-27, Synchronous Guest No-Cache Guard (`SessionIsolationProvider.tsx`)
+- Added `ensureGuestNoCacheGuard()` running synchronously before child `useEffect` hooks so Guest mode (`!ecp_active_uid`) immediately clears any stray progress keys and blocks `localStorage.setItem` writes for all `ecp_*` progress keys (keeping UI preferences intact).
+
 ### 2026-11-27, Guest Mode 100% Visible with 95% Locked State
 - Updated Guest mode across `ExploreClient.tsx`, `SpellMasterClient.tsx`, `SettingsClient.tsx`, and `PersonalizedPracticeCard.tsx` so **100% of items, sections, and steps are visible**, with the first **5% unlocked** for preview and the remaining **95% visibly locked** (`AiLockIcon` + `Locked · Log in` badge/overlay linking to `/auth/login`).
 

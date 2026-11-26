@@ -256,7 +256,7 @@
     },
     {
       "file": "src/components/auth/SessionIsolationProvider.tsx",
-      "line": 248,
+      "line": 274,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<Link href=\"/auth/login\" className=\"text-primary font-semibold hover:underline ml-1\">"
     },
