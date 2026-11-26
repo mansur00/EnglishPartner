@@ -190,7 +190,7 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-panel border border-border p-3.5 space-y-2">
-            <p className="text-label font-semibold text-foreground">
+            <p className="text-label text-foreground">
               {isBn ? "দৈনিক AI লিমিট (প্রতি ইউজার)" : "AI Daily Limit (per user)"}
             </p>
             <div className="flex items-center gap-2">
@@ -221,7 +221,7 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
 
           <div className="rounded-panel border border-border p-3.5 space-y-2">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-label font-semibold text-foreground">
+              <p className="text-label text-foreground">
                 {isBn ? "গেস্ট প্রিভিউ (লগইন ছাড়া)" : "Guest Preview Access"}
               </p>
               <Switch
@@ -271,7 +271,7 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
 
         <div className="rounded-panel border border-border p-3.5 space-y-2.5">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-label font-semibold text-foreground">
+            <p className="text-label text-foreground">
               {isBn ? "সিস্টেম নোটিশ ব্যানার" : "System Notice Banner"}
             </p>
             <Switch
@@ -340,7 +340,7 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
             >
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <p className="text-label font-semibold text-foreground">
+                  <p className="text-label text-foreground">
                     {isBn ? feat.label_bn : feat.label}
                   </p>
                   <Badge variant={feat.enabled ? "success" : "neutral"} size="sm">
@@ -390,7 +390,7 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
               >
                 <div className="min-w-0 space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-label font-semibold text-foreground truncate">
+                    <p className="text-label text-foreground truncate">
                       {u.full_name || u.email}
                     </p>
                     <Badge variant={u.role === "admin" ? "brand" : "outline"} size="sm">

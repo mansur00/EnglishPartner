@@ -334,19 +334,19 @@ export function AdminPanelClient() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <Card className="p-4 bg-card border border-border rounded-card">
               <p className="text-chip text-muted-foreground">{isBn ? "মোট ইউজার" : "Total Users"}</p>
-              <p className="text-stat font-semibold text-foreground mt-1">{users.length}</p>
+              <p className="text-stat text-foreground mt-1">{users.length}</p>
             </Card>
             <Card className="p-4 bg-card border border-border rounded-card">
               <p className="text-chip text-muted-foreground">{isBn ? "আজ অ্যাক্টিভ" : "Active Today"}</p>
-              <p className="text-stat font-semibold text-status-success-ink mt-1">{activeTodayCount}</p>
+              <p className="text-stat text-status-success-ink mt-1">{activeTodayCount}</p>
             </Card>
             <Card className="p-4 bg-card border border-border rounded-card">
               <p className="text-chip text-muted-foreground">{isBn ? "৭+ দিন ইনঅ্যাক্টিভ" : "Inactive 7+ Days"}</p>
-              <p className="text-stat font-semibold text-status-warning-ink mt-1">{inactive7dCount}</p>
+              <p className="text-stat text-status-warning-ink mt-1">{inactive7dCount}</p>
             </Card>
             <Card className="p-4 bg-card border border-border rounded-card">
               <p className="text-chip text-muted-foreground">{isBn ? "বন্ধ অ্যাকাউন্ট" : "Disabled"}</p>
-              <p className="text-stat font-semibold text-destructive mt-1">
+              <p className="text-stat text-destructive mt-1">
                 {users.filter((u) => !u.is_active).length}
               </p>
             </Card>
@@ -396,7 +396,7 @@ export function AdminPanelClient() {
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     <div className="min-w-0 space-y-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-label font-semibold text-foreground">
+                        <p className="text-label text-foreground">
                           {u.full_name || u.email}
                         </p>
                         <Badge variant={u.role === "admin" ? "brand" : "outline"} size="sm">
@@ -467,7 +467,7 @@ export function AdminPanelClient() {
                   {/* Per-User Feature Override Drawer */}
                   {isEditingFeatures && managedUser && (
                     <div className="rounded-panel bg-muted/35 border border-border/60 p-3.5 space-y-2.5">
-                      <p className="text-chip font-semibold text-foreground">
+                      <p className="text-chip text-foreground">
                         {isBn
                           ? `${managedUser.full_name || managedUser.email}-এর জন্য ফিচার অন/অফ:`
                           : `Per-User Features for ${managedUser.full_name || managedUser.email}:`}
@@ -480,7 +480,7 @@ export function AdminPanelClient() {
                               key={feat.key}
                               className="flex items-center justify-between gap-2 rounded-control bg-card border border-border px-3 py-2"
                             >
-                              <span className="text-chip font-semibold text-foreground truncate">
+                              <span className="text-chip text-foreground truncate">
                                 {isBn ? feat.label_bn : feat.label}
                               </span>
                               <Switch
@@ -526,7 +526,7 @@ export function AdminPanelClient() {
               <div key={feat.key} className="py-3.5 flex items-center justify-between gap-4">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-label font-semibold text-foreground">
+                    <p className="text-label text-foreground">
                       {isBn ? feat.label_bn : feat.label}
                     </p>
                     <Badge variant={feat.enabled ? "success" : "neutral"} size="sm">
@@ -551,7 +551,7 @@ export function AdminPanelClient() {
         <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-panel border border-border p-3.5 space-y-2">
-              <p className="text-label font-semibold text-foreground">
+              <p className="text-label text-foreground">
                 {isBn ? "দৈনিক AI লিমিট (প্রতি ইউজার)" : "AI Daily Limit (per user)"}
               </p>
               <div className="flex items-center gap-2">
@@ -582,7 +582,7 @@ export function AdminPanelClient() {
 
             <div className="rounded-panel border border-border p-3.5 space-y-2">
               <div className="flex items-center justify-between gap-2">
-                <p className="text-label font-semibold text-foreground">
+                <p className="text-label text-foreground">
                   {isBn ? "গেস্ট প্রিভিউ (লগইন ছাড়া)" : "Guest Preview Access"}
                 </p>
                 <Switch
@@ -632,7 +632,7 @@ export function AdminPanelClient() {
 
           <div className="rounded-panel border border-border p-3.5 space-y-2.5">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-label font-semibold text-foreground">
+              <p className="text-label text-foreground">
                 {isBn ? "সিস্টেম নোটিশ ব্যানার" : "System Notice Banner"}
               </p>
               <Switch

@@ -77,7 +77,7 @@ export function ChatTurnBubble({
       {/* Speaker Avatar */}
       <div
         className={cn(
-          "size-9 sm:size-10 rounded-pill flex items-center justify-center text-label font-semibold border shrink-0 select-none shadow-2xs",
+          "size-9 sm:size-10 rounded-pill flex items-center justify-center text-label border shrink-0 select-none shadow-2xs",
           avatarColors[speaker.colorScheme] || avatarColors.brand
         )}
         title={`${speaker.name} (${speaker.role})`}

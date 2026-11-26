@@ -117,19 +117,19 @@ export function MagicWordSidebar({
             <span className="text-muted-foreground">
               {locale === "bn" ? "মোট ম্যাজিক কার্ড" : "Total Magic Cards"}
             </span>
-            <span className="font-mono font-semibold text-foreground">{totalCards}</span>
+            <span className="text-chip-mono text-foreground">{totalCards}</span>
           </div>
           <div className="flex items-center justify-between text-chip">
             <span className="text-muted-foreground">
               {locale === "bn" ? "মোট শব্দ" : "Curated Words"}
             </span>
-            <span className="font-mono font-semibold text-foreground">{totalWords}</span>
+            <span className="text-chip-mono text-foreground">{totalWords}</span>
           </div>
           <div className="flex items-center justify-between text-chip">
             <span className="text-muted-foreground">
               {locale === "bn" ? "নোটবুকে সেভ করা" : "Saved in Notebook"}
             </span>
-            <span className="font-mono font-semibold text-primary">{savedCount}</span>
+            <span className="text-chip-mono text-primary">{savedCount}</span>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ export function MagicWordSidebar({
       {/* Deck Context Pill */}
       {activeDeck && (
         <div className="flex items-center justify-between gap-2 pb-2 border-b border-border/60">
-          <span className="text-chip font-medium text-muted-foreground truncate">
+          <span className="text-chip text-muted-foreground truncate">
             {activeDeck.emoji} {activeDeck.title}
           </span>
           <Badge variant="brand" size="sm">
@@ -222,7 +222,7 @@ export function MagicWordSidebar({
       {/* Live Translation */}
       <div className="space-y-2 pb-3 border-b border-border/60">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+          <span className="text-chip text-foreground flex items-center gap-1.5">
             <HugeiconsIcon icon={TranslateIcon} size={14} className="text-primary" />
             {locale === "bn" ? "অনুবাদ" : "Translation"}
           </span>
@@ -248,7 +248,7 @@ export function MagicWordSidebar({
             )}
           >
             {translatedWord && (
-              <p className="text-label font-semibold text-primary">
+              <p className="text-label text-primary">
                 {translatedWord}
               </p>
             )}
@@ -261,7 +261,7 @@ export function MagicWordSidebar({
 
       {/* English Meaning */}
       <div className="space-y-1.5 pb-3 border-b border-border/60">
-        <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+        <span className="text-chip text-foreground flex items-center gap-1.5">
           <HugeiconsIcon icon={SparklesIcon} size={14} className="text-primary" />
           {locale === "bn" ? "ইংরেজি অর্থ" : "English Meaning"}
         </span>
@@ -273,7 +273,7 @@ export function MagicWordSidebar({
       {/* Example Sentence & Grammar */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+          <span className="text-chip text-foreground flex items-center gap-1.5">
             <HugeiconsIcon icon={BookOpen01Icon} size={14} className="text-primary" />
             {locale === "bn" ? "উদাহরণ ও গ্রামার" : "Example & Grammar"}
           </span>

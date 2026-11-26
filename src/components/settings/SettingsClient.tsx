@@ -273,7 +273,7 @@ export function SettingsClient() {
               <>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-meta font-semibold text-foreground truncate">
+                    <span className="text-label text-foreground truncate">
                       {currentUser.full_name || currentUser.email}
                     </span>
                     <Badge
@@ -330,7 +330,7 @@ export function SettingsClient() {
       {showResetSuccess && (
         <div className="flex items-center gap-3 p-4 rounded-panel bg-status-success-bg text-status-success-ink transition-all">
           <HugeiconsIcon icon={CheckmarkCircle02Icon} size={20} className="shrink-0" />
-          <p className="text-label font-medium">{t("settings.resetSuccess", locale)}</p>
+          <p className="text-meta">{t("settings.resetSuccess", locale)}</p>
         </div>
       )}
 
@@ -357,7 +357,7 @@ export function SettingsClient() {
                   {t("settings.systemLanguageDesc")}
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium">
+              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip">
                 {getLanguageMeta(locale)?.nativeName || locale.toUpperCase()}
               </span>
             </div>
@@ -425,7 +425,7 @@ export function SettingsClient() {
                   {t("settings.translationLanguageDesc")}
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium">
+              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip">
                 {translationLocale === "none"
                   ? t("settings.noTranslationOption")
                   : (getLanguageMeta(translationLocale)?.nativeName || translationLocale.toUpperCase())}
@@ -642,7 +642,7 @@ export function SettingsClient() {
                       : "bg-muted/50 border-transparent text-foreground hover:bg-muted"
                   )}
                 >
-                  <div className="font-heading text-label font-semibold">
+                  <div className="font-heading text-label">
                     {tone.label}
                   </div>
                   <div className="text-meta text-muted-foreground mt-0.5">
@@ -731,7 +731,7 @@ export function SettingsClient() {
                   type="button"
                   onClick={() => handleTargetLevelChange(item.lvl)}
                   className={cn(
-                    "min-h-control px-3 py-1.5 rounded-control text-label font-medium transition-all cursor-pointer text-center",
+                    "min-h-control px-3 py-1.5 rounded-control text-meta transition-all cursor-pointer text-center",
                     targetLevel === item.lvl
                       ? "bg-primary text-primary-foreground shadow-xs"
                       : "bg-muted/70 text-foreground hover:bg-muted"
@@ -834,11 +834,11 @@ export function SettingsClient() {
             <div className="p-4 rounded-panel bg-muted/60 space-y-1">
               <div className="flex items-center gap-2 text-primary">
                 <HugeiconsIcon icon={Bookmark02Icon} size={18} />
-                <span className="text-chip font-medium uppercase tracking-wider">
+                <span className="text-chip uppercase tracking-wider">
                   {t("settings.savedWordsCount", locale)}
                 </span>
               </div>
-              <div className="text-display font-semibold text-foreground">
+              <div className="text-display text-foreground">
                 {savedWordsCount}
               </div>
             </div>
@@ -846,11 +846,11 @@ export function SettingsClient() {
             <div className="p-4 rounded-panel bg-muted/60 space-y-1">
               <div className="flex items-center gap-2 text-status-success-ink">
                 <HugeiconsIcon icon={TaskDone01Icon} size={18} />
-                <span className="text-chip font-medium uppercase tracking-wider">
+                <span className="text-chip uppercase tracking-wider">
                   {t("settings.completedStepsCount", locale)}
                 </span>
               </div>
-              <div className="text-display font-semibold text-foreground">
+              <div className="text-display text-foreground">
                 {completedStepsCount}
               </div>
             </div>
@@ -894,7 +894,7 @@ export function SettingsClient() {
 
         <Card className="bg-card p-5 md:p-6 space-y-3 shadow-card">
           <div className="flex items-center justify-between">
-            <span className="text-label text-foreground font-medium">English Partner</span>
+            <span className="text-meta text-foreground">English Partner</span>
             <span className="text-chip text-muted-foreground font-mono">v1.2.0 (CEFR A1–C2)</span>
           </div>
           <p className="text-meta text-muted-foreground">

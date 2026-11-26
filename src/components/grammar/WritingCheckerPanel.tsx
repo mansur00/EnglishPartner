@@ -288,7 +288,7 @@ export function WritingCheckerPanel({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
                   {result.ielts.strengths.length > 0 && (
                     <div className="rounded-panel bg-primary/5 border border-primary/20 p-3.5 space-y-1.5">
-                      <p className="text-chip font-semibold text-primary">
+                      <p className="text-chip text-primary">
                         {isBn ? "ভালো দিকসমূহ" : "Strengths"}
                       </p>
                       <ul className={cn("space-y-1 text-meta text-foreground", isBn && "text-bangla")}>
@@ -300,7 +300,7 @@ export function WritingCheckerPanel({
                   )}
                   {result.ielts.improvements.length > 0 && (
                     <div className="rounded-panel bg-sun-100/70 border border-sun-300/60 p-3.5 space-y-1.5">
-                      <p className="text-chip font-semibold text-brand-950">
+                      <p className="text-chip text-brand-950">
                         {isBn ? "উন্নতির জায়গা" : "Key Improvements"}
                       </p>
                       <ul className={cn("space-y-1 text-meta text-foreground", isBn && "text-bangla")}>
@@ -380,7 +380,7 @@ export function WritingCheckerPanel({
                           {issue.original}
                         </span>
                         <span className="text-muted-foreground">→</span>
-                        <span className="font-semibold text-primary">
+                        <span className="text-label text-primary">
                           {issue.correction}
                         </span>
                       </div>
@@ -434,7 +434,7 @@ export function WritingCheckerPanel({
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
                       <div>
-                        <p className="text-label font-semibold text-foreground">
+                        <p className="text-label text-foreground">
                           {styleItem.title}
                         </p>
                         <p className="text-chip text-muted-foreground">
@@ -456,7 +456,7 @@ export function WritingCheckerPanel({
                     </p>
                   </div>
                   {copiedKey === styleItem.key && (
-                    <span className="text-chip text-primary font-semibold">Copied!</span>
+                    <span className="text-chip text-primary">Copied!</span>
                   )}
                 </div>
               ))}

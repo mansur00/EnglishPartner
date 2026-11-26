@@ -184,7 +184,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
         <Tag variant="brand" size="sm">
           Stage {stage.stageNumber}
         </Tag>
-        <h2 className="text-label font-semibold text-foreground">{stage.title}</h2>
+        <h2 className="text-label text-foreground">{stage.title}</h2>
         <p className="text-chip text-muted-foreground">{stage.subtitle}</p>
       </div>
 
@@ -343,7 +343,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
             {/* Inner Sub-Types in Detail */}
             <Card className="p-5 sm:p-6 bg-card border border-border space-y-4">
               <div className="space-y-1">
-                <h2 className="text-card-title text-foreground font-semibold">
+                <h2 className="text-card-title text-foreground">
                   Detailed Types & Sub-Rules ({activeLesson.subTypes.length})
                 </h2>
                 <p className="text-meta text-muted-foreground">
@@ -354,7 +354,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
               <div className="space-y-4">
                 {activeLesson.subTypes.map((sub, sIdx) => (
                   <div key={`${activeLesson.id}-sub-${sIdx}`} className="p-4 rounded-panel bg-muted/60 space-y-3">
-                    <h3 className="text-lead text-foreground font-semibold">{sub.name}</h3>
+                    <h3 className="text-lead text-foreground">{sub.name}</h3>
                     <p
                       className={cn(
                         "text-body text-foreground",
@@ -408,7 +408,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
             {/* 20-30 Word Bank */}
             <Card className="p-5 sm:p-6 bg-card border border-border space-y-3">
               <div className="flex items-center justify-between gap-2 flex-wrap">
-                <h2 className="text-card-title text-foreground font-semibold">
+                <h2 className="text-card-title text-foreground">
                   Word Bank ({activeLesson.wordBank.length} Words)
                 </h2>
                 <Pill variant="neutral" size="sm">
@@ -432,7 +432,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
 
             {/* Sentence Examples */}
             <Card className="p-5 sm:p-6 bg-card border border-border space-y-3">
-              <h2 className="text-card-title text-foreground font-semibold">
+              <h2 className="text-card-title text-foreground">
                 Sentence Examples ({activeLesson.sentenceExamples.length})
               </h2>
               <div className="space-y-2">
@@ -467,7 +467,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
         {activeTab === "sentences" && (
           <Card className="p-5 sm:p-6 bg-card border border-border space-y-5">
             <div className="space-y-1">
-              <h2 className="text-card-title text-foreground font-semibold">
+              <h2 className="text-card-title text-foreground">
                 Practice 1: Make 5 Sentences
               </h2>
               <p className="text-meta text-muted-foreground">
@@ -487,7 +487,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                         Sentence {idx + 1} / {activeLesson.sentencePrompts.length}
                       </Tag>
                     </div>
-                    <p className="text-body text-foreground font-semibold">{prompt}</p>
+                    <p className="text-body text-foreground">{prompt}</p>
                     <form onSubmit={(e) => handleCheckPromptSentence(idx, e)} className="flex flex-col sm:flex-row gap-2">
                       <Input
                         value={sentenceInputs[idx] || ""}
@@ -521,7 +521,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                           {fb.feedback}
                         </p>
                         {fb.correctedSentence && (
-                          <p className="text-meta text-primary font-semibold" dir="ltr">
+                          <p className="text-label text-primary" dir="ltr">
                             Suggested: &ldquo;{fb.correctedSentence}&rdquo;
                           </p>
                         )}
@@ -547,7 +547,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
         {activeTab === "rightWord" && (
           <Card className="p-5 sm:p-6 bg-card border border-border space-y-5">
             <div className="space-y-1">
-              <h2 className="text-card-title text-foreground font-semibold">
+              <h2 className="text-card-title text-foreground">
                 Practice 2: Choose the Right Word
               </h2>
               <p className="text-meta text-muted-foreground">
@@ -562,7 +562,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                 const isRight = chosen === q.correctIndex;
                 return (
                   <div key={`${activeLesson.id}-rw-${qIdx}`} className="p-4 rounded-panel bg-muted/50 space-y-3">
-                    <p className="text-body text-foreground font-semibold">
+                    <p className="text-body text-foreground">
                       {qIdx + 1}. {q.prompt}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -625,7 +625,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
           <Card className="p-5 sm:p-6 bg-card border border-border space-y-5">
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <div className="space-y-1">
-                <h2 className="text-card-title text-foreground font-semibold">
+                <h2 className="text-card-title text-foreground">
                   Final Quiz ({activeLesson.quizQuestions.length} Questions)
                 </h2>
                 <p className="text-meta text-muted-foreground">
@@ -644,7 +644,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                 const chosen = quizAnswers[qIdx];
                 return (
                   <div key={`${activeLesson.id}-qz-${qIdx}`} className="p-4 rounded-panel bg-muted/50 space-y-3">
-                    <p className="text-body text-foreground font-semibold">
+                    <p className="text-body text-foreground">
                       {qIdx + 1}. {q.question}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">

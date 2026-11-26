@@ -18,7 +18,7 @@ function FormChip({ label, value }: { label: string; value: string }) {
   return (
     <div className="px-2.5 py-1.5 rounded-control bg-muted/50 text-chip flex items-center justify-between gap-2">
       <span className="text-muted-foreground">{label}</span>
-      <span className="font-semibold text-foreground">{value}</span>
+      <span className="text-label text-foreground">{value}</span>
     </div>
   );
 }
@@ -37,13 +37,13 @@ function TranslatedWordList({
   if (items.length === 0) return null;
   return (
     <div className="space-y-1.5">
-      <span className={cn("text-chip font-semibold text-foreground block", isBn && "text-bangla")}>
+      <span className={cn("text-chip text-foreground block", isBn && "text-bangla")}>
         {title}
       </span>
       <div className="flex flex-wrap gap-1.5">
         {items.map((item) => (
           <Badge key={item.word} variant={variant} size="sm" className="text-chip gap-1 py-1 h-auto">
-            <span className="font-semibold">{item.word}</span>
+            <span className="text-label">{item.word}</span>
             {item.meaningBn && (
               <span className="text-muted-foreground text-bangla">({item.meaningBn})</span>
             )}
@@ -89,10 +89,10 @@ export function WordDetailsSections({
       {/* Direct Translated Word Meaning (when available) */}
       {details.wordMeaningBn && (
         <div className="p-3 rounded-panel bg-muted/40 space-y-1">
-          <span className={cn("text-chip font-semibold text-muted-foreground block", isBn && "text-bangla")}>
+          <span className={cn("text-chip text-muted-foreground block", isBn && "text-bangla")}>
             {isBn ? "শব্দের অনুবাদ অর্থ (Translated Meaning)" : "Translated Word Meaning"}
           </span>
-          <p className="text-meta font-semibold text-foreground text-bangla">
+          <p className="text-label text-foreground text-bangla">
             {details.wordMeaningBn}
           </p>
         </div>
@@ -128,7 +128,7 @@ export function WordDetailsSections({
       {(details.tenseInfo?.detectedTense || hasVerbForms || hasNounAdjForms) && (
         <div className="space-y-2 pt-2 border-t border-border/60">
           <div className="flex items-center justify-between gap-2 flex-wrap">
-            <span className={cn("text-chip font-semibold text-foreground flex items-center gap-1.5", isBn && "text-bangla")}>
+            <span className={cn("text-chip text-foreground flex items-center gap-1.5", isBn && "text-bangla")}>
               <HugeiconsIcon icon={BookOpen01Icon} size={14} className="text-primary" />
               {isBn ? "Tense ও শব্দের রূপ (Word Forms)" : "Tense & Word Forms"}
             </span>
@@ -184,7 +184,7 @@ export function WordDetailsSections({
       {/* Parts of Speech Family */}
       {hasPosFamily && details.posFamily && (
         <div className="space-y-2 pt-2 border-t border-border/60">
-          <span className={cn("text-chip font-semibold text-foreground block", isBn && "text-bangla")}>
+          <span className={cn("text-chip text-foreground block", isBn && "text-bangla")}>
             {isBn ? "Parts of Speech অনুযায়ী রূপ" : "Parts of Speech Forms"}
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -207,7 +207,7 @@ export function WordDetailsSections({
       {/* Sentence Making */}
       {details.sentences.length > 0 && (
         <div className="space-y-2 pt-2 border-t border-border/60">
-          <span className={cn("text-chip font-semibold text-foreground flex items-center gap-1.5", isBn && "text-bangla")}>
+          <span className={cn("text-chip text-foreground flex items-center gap-1.5", isBn && "text-bangla")}>
             <HugeiconsIcon icon={SparklesIcon} size={14} className="text-primary" />
             {isBn ? "বাক্য তৈরি (Sentence Making)" : "Sentence Making"}
           </span>

@@ -31,7 +31,7 @@ export function GuestLimitBanner({
             {isBn ? `গেস্ট প্রিভিউ (${previewPercent}%)` : `Guest Preview (${previewPercent}%)`}
           </Badge>
           {featureName && (
-            <span className="text-chip font-semibold text-foreground">{featureName}</span>
+            <span className="text-chip text-foreground">{featureName}</span>
           )}
         </div>
         <p className="text-meta text-foreground">

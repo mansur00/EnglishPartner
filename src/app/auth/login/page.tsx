@@ -174,7 +174,7 @@ function LoginForm() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === "signup" && (
               <div className="space-y-1.5">
-                <label className="text-chip font-semibold text-foreground">
+                <label className="text-chip text-foreground">
                   {isBn ? "আপনার নাম" : "Full Name"}
                 </label>
                 <Input
@@ -187,7 +187,7 @@ function LoginForm() {
             )}
 
             <div className="space-y-1.5">
-              <label className="text-chip font-semibold text-foreground">
+              <label className="text-chip text-foreground">
                 {isBn ? "ইমেইল" : "Email Address"}
               </label>
               <Input
@@ -202,7 +202,7 @@ function LoginForm() {
             {mode !== "reset" && (
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-chip font-semibold text-foreground">
+                  <label className="text-chip text-foreground">
                     {isBn ? "পাসওয়ার্ড" : "Password"}
                   </label>
                   {mode === "login" && (

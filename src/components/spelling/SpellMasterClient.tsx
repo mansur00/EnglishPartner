@@ -546,7 +546,7 @@ export function SpellMasterClient() {
       {/* Word Title + Listen Buttons */}
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h2 className="text-card-title font-semibold text-foreground">
+          <h2 className="text-card-title text-foreground">
             {selectedWord.word}
           </h2>
           <p className="text-chip font-mono text-muted-foreground mt-0.5">
@@ -586,7 +586,7 @@ export function SpellMasterClient() {
               key={idx}
               type="button"
               onClick={() => speakText(syl, { rate: 0.75 })}
-              className="px-2.5 py-1 rounded-control bg-primary/10 text-primary text-chip font-semibold hover:bg-primary/20 transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-control bg-primary/10 text-primary text-chip hover:bg-primary/20 transition-colors cursor-pointer"
             >
               {syl}
             </button>
@@ -599,7 +599,7 @@ export function SpellMasterClient() {
         <p className="text-chip text-muted-foreground">
           {isBn ? "বাংলা অর্থ" : "Bengali Meaning"}
         </p>
-        <p className="text-label font-semibold text-foreground text-bangla">
+        <p className="text-label text-foreground text-bangla">
           {selectedWord.meaningBn}
         </p>
       </div>
@@ -614,7 +614,7 @@ export function SpellMasterClient() {
             ✗ {selectedWord.commonMistake}
           </span>
           <span className="text-muted-foreground">→</span>
-          <span className="text-primary font-semibold">
+          <span className="text-label text-primary">
             ✓ {selectedWord.word}
           </span>
         </div>
@@ -692,7 +692,7 @@ export function SpellMasterClient() {
         <p className="text-chip text-muted-foreground">
           {RULE_PARTS.find((p) => p.id === selectedRule.part)?.label}
         </p>
-        <h2 className="text-card-title font-semibold text-foreground">
+        <h2 className="text-card-title text-foreground">
           {isBn ? selectedRule.titleBn : selectedRule.title}
         </h2>
         {isBn && (
@@ -733,7 +733,7 @@ export function SpellMasterClient() {
 
       {selectedRule.exceptions.length > 0 && (
         <div className="rounded-panel bg-muted/35 border border-border/60 p-3 space-y-1.5">
-          <p className="text-chip font-semibold text-foreground">
+          <p className="text-chip text-foreground">
             {isBn ? "ব্যতিক্রম (Exceptions):" : "Exceptions:"}
           </p>
           <p className="text-chip text-muted-foreground leading-relaxed">
@@ -743,7 +743,7 @@ export function SpellMasterClient() {
       )}
 
       {selectedRule.mnemonic && (
-        <p className="text-chip text-primary font-semibold">
+        <p className="text-chip text-primary">
           💡 {selectedRule.mnemonic}
         </p>
       )}
@@ -1019,7 +1019,7 @@ export function SpellMasterClient() {
                           setSelectedRuleId(r.id);
                           setActiveTab("rules");
                         }}
-                        className="px-2 py-0.5 rounded-pill bg-primary/10 text-primary text-chip font-semibold hover:bg-primary/20 transition-colors cursor-pointer"
+                        className="px-2 py-0.5 rounded-pill bg-primary/10 text-primary text-chip hover:bg-primary/20 transition-colors cursor-pointer"
                       >
                         {r.id}: {r.title}
                       </button>
@@ -1040,7 +1040,7 @@ export function SpellMasterClient() {
             <Card className="p-5 bg-accent/40 border border-primary/40 rounded-card space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <p className="text-chip text-primary font-semibold">AI Generated Word</p>
+                  <p className="text-chip text-primary">AI Generated Word</p>
                   <h3 className="text-card-title text-foreground">
                     {aiLookupResult.word}{" "}
                     <span className="text-meta font-mono text-muted-foreground">
@@ -1086,7 +1086,7 @@ export function SpellMasterClient() {
                     className="rounded-card border border-border bg-muted/25 p-3.5 flex items-center justify-between gap-2 opacity-70 hover:opacity-100 transition-all text-left"
                   >
                     <div className="min-w-0 space-y-0.5">
-                      <p className="text-label font-semibold text-foreground truncate">
+                      <p className="text-label text-foreground truncate">
                         {item.word}
                       </p>
                       <p className="text-chip text-muted-foreground font-mono truncate">
@@ -1120,7 +1120,7 @@ export function SpellMasterClient() {
                   )}
                 >
                   <div className="min-w-0 space-y-0.5">
-                    <p className="text-label font-semibold text-foreground truncate">
+                    <p className="text-label text-foreground truncate">
                       {item.word}
                     </p>
                     <p className="text-chip text-primary font-mono truncate">
@@ -1229,7 +1229,7 @@ export function SpellMasterClient() {
             </p>
             {showTestHint && currentWordRules[0] && (
               <div className="rounded-panel bg-card border border-border p-3 text-left space-y-1">
-                <p className="text-chip font-semibold text-primary">
+                <p className="text-chip text-primary">
                   {currentWordRules[0].id}: {currentWordRules[0].title}
                 </p>
                 <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
@@ -1270,7 +1270,7 @@ export function SpellMasterClient() {
                       onClick={() => {
                         setJumbledPicked((prev) => prev.filter((_, i) => i !== pos));
                       }}
-                      className="size-9 rounded-control bg-primary text-primary-foreground font-semibold text-label cursor-pointer"
+                      className="size-9 rounded-control bg-primary text-primary-foreground text-label cursor-pointer"
                     >
                       {jumbledPool[poolIdx]?.char}
                     </button>
@@ -1289,7 +1289,7 @@ export function SpellMasterClient() {
                       setJumbledPicked((prev) => [...prev, idx]);
                     }}
                     className={cn(
-                      "size-10 rounded-control border border-border font-semibold text-label transition-all cursor-pointer",
+                      "size-10 rounded-control border border-border text-label transition-all cursor-pointer",
                       item.used
                         ? "bg-muted text-muted-foreground/30 cursor-not-allowed"
                         : "bg-card hover:bg-accent text-foreground shadow-2xs"
@@ -1311,7 +1311,7 @@ export function SpellMasterClient() {
                   : "bg-destructive/10 border-destructive/30 text-foreground"
               )}
             >
-              <div className="flex items-center gap-2 font-semibold text-label">
+              <div className="flex items-center gap-2 text-label">
                 <HugeiconsIcon
                   icon={testFeedback.isCorrect ? CheckmarkCircle02Icon : Alert01Icon}
                   size={18}
@@ -1325,7 +1325,7 @@ export function SpellMasterClient() {
               {!testFeedback.isCorrect && currentWordRules[0] && (
                 <div className="mt-2 pt-2 border-t border-border/60 space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-chip font-semibold text-primary">
+                    <p className="text-chip text-primary">
                       {currentWordRules[0].id}: {currentWordRules[0].title}
                     </p>
                     <Badge
@@ -1387,7 +1387,7 @@ export function SpellMasterClient() {
           <Card className="p-4 sm:p-5 bg-card border border-border rounded-card space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 text-chip">
               <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
-                <span className="font-semibold text-foreground">Reliability:</span>
+                <span className="text-label text-foreground">Reliability:</span>
                 <span className="inline-flex items-center gap-1.5">
                   <Badge variant="success" size="sm">High</Badge>
                   <span>(প্রায় সব জায়গায় খাটে)</span>
@@ -1529,7 +1529,7 @@ export function SpellMasterClient() {
                           : "Low"}
                     </Badge>
                   </div>
-                  <p className="text-label font-semibold text-foreground line-clamp-2">
+                  <p className="text-label text-foreground line-clamp-2">
                     {isBn ? rule.titleBn : rule.title}
                   </p>
                 </div>
@@ -1580,7 +1580,7 @@ export function SpellMasterClient() {
             {coachResult ? (
               <div className="space-y-4">
                 <div className="rounded-panel bg-primary/5 border border-primary/20 p-4 space-y-1">
-                  <p className="text-chip font-semibold text-primary">AI Diagnosis</p>
+                  <p className="text-chip text-primary">AI Diagnosis</p>
                   <p className={cn("text-meta text-foreground leading-relaxed", isBn && "text-bangla")}>
                     {coachResult.diagnosis}
                   </p>
@@ -1588,12 +1588,12 @@ export function SpellMasterClient() {
 
                 {coachResult.memoryTips.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-chip font-semibold text-muted-foreground uppercase">
+                    <p className="text-chip text-muted-foreground uppercase">
                       Personalized Memory Tricks
                     </p>
                     {coachResult.memoryTips.map((m, idx) => (
                       <div key={idx} className="rounded-panel bg-muted/40 p-3 text-meta space-y-0.5">
-                        <p className="font-semibold text-foreground">{m.word}</p>
+                        <p className="text-label text-foreground">{m.word}</p>
                         <p className={cn("text-muted-foreground", isBn && "text-bangla")}>{m.tip}</p>
                       </div>
                     ))}
@@ -1602,14 +1602,14 @@ export function SpellMasterClient() {
 
                 {coachResult.quiz.length > 0 && (
                   <div className="space-y-3">
-                    <p className="text-chip font-semibold text-muted-foreground uppercase">
+                    <p className="text-chip text-muted-foreground uppercase">
                       Custom Practice Quiz
                     </p>
                     {coachResult.quiz.map((q, qIdx) => {
                       const picked = coachQuizAnswers[qIdx];
                       return (
                         <div key={qIdx} className="rounded-panel border border-border p-3.5 space-y-2.5">
-                          <p className={cn("text-label font-semibold text-foreground", isBn && "text-bangla")}>
+                          <p className={cn("text-label text-foreground", isBn && "text-bangla")}>
                             {qIdx + 1}. {q.question}
                           </p>
                           <div className="grid grid-cols-2 gap-2">
@@ -1706,7 +1706,7 @@ export function SpellMasterClient() {
             {textCheckResult && (
               <div className="space-y-3 pt-1">
                 <div className="rounded-panel bg-muted/40 border border-border/60 p-3.5 space-y-1">
-                  <p className="text-chip font-semibold text-primary">Corrected Text</p>
+                  <p className="text-chip text-primary">Corrected Text</p>
                   <p className="text-meta text-foreground">{textCheckResult.correctedText}</p>
                 </div>
                 {textCheckResult.mistakes.map((m, idx) => (
@@ -1714,7 +1714,7 @@ export function SpellMasterClient() {
                     <div className="flex items-center gap-2 text-label">
                       <span className="line-through text-destructive">{m.wrong}</span>
                       <span>→</span>
-                      <span className="font-semibold text-primary">{m.correct}</span>
+                      <span className="text-label text-primary">{m.correct}</span>
                     </div>
                     <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
                       {m.explanation}
@@ -1764,7 +1764,7 @@ export function SpellMasterClient() {
                     className="rounded-panel bg-muted/35 border border-border/60 p-3 flex items-center justify-between gap-3"
                   >
                     <div>
-                      <p className="text-label font-semibold text-foreground">{w.word}</p>
+                      <p className="text-label text-foreground">{w.word}</p>
                       <p className="text-chip text-muted-foreground">
                         Last wrong: <span className="text-destructive">{w.lastWrongAttempt}</span> ·{" "}
                         {w.mistakes}x missed
@@ -1795,7 +1795,7 @@ export function SpellMasterClient() {
                     )}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-label font-semibold">
+                      <span className="text-label">
                         {isBn ? badge.titleBn : badge.title}
                       </span>
                       <HugeiconsIcon
@@ -1812,7 +1812,7 @@ export function SpellMasterClient() {
 
             {Object.keys(progress.ruleMistakes || {}).length > 0 && (
               <div className="pt-3 border-t border-border/60 space-y-2">
-                <p className="text-chip font-semibold text-foreground uppercase">
+                <p className="text-chip text-foreground uppercase">
                   {isBn ? "যে রুলগুলোতে বেশি ভুল হচ্ছে" : "Weak Rules Tracker"}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -1829,7 +1829,7 @@ export function SpellMasterClient() {
                           setSelectedRuleId(rId);
                           setActiveTab("rules");
                         }}
-                        className="px-3 py-1 rounded-pill bg-destructive/10 text-destructive text-chip font-semibold cursor-pointer"
+                        className="px-3 py-1 rounded-pill bg-destructive/10 text-destructive text-chip cursor-pointer"
                       >
                         {rId} · {count}x missed
                       </button>

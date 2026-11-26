@@ -281,7 +281,7 @@ export function SessionIsolationProvider({
           <HugeiconsIcon icon={InformationCircleIcon} size={15} className="text-primary shrink-0" />
           <span>{config.system_notice}</span>
           {!user && (
-            <Link href="/auth/login" className="text-primary font-semibold hover:underline ml-1">
+            <Link href="/auth/login" className="text-label text-primary hover:underline ml-1">
               Log in
             </Link>
           )}

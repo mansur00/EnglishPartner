@@ -278,7 +278,7 @@ export function DailyPracticeClient() {
         </p>
         <Link
           href="/roleplay"
-          className="inline-flex items-center gap-1 text-chip font-semibold text-primary hover:underline"
+          className="inline-flex items-center gap-1 text-chip text-primary hover:underline"
         >
           <span>{locale === "bn" ? "AI Roleplay খুলুন" : "Open AI Roleplay"}</span>
           <HugeiconsIcon icon={ArrowRight01Icon} size={12} />
@@ -296,7 +296,7 @@ export function DailyPracticeClient() {
           </span>
         </div>
         <div>
-          <h3 className="font-heading text-label font-semibold text-foreground">
+          <h3 className="font-heading text-label text-foreground">
             {nextLesson.lessonTitle}
           </h3>
           <p className="text-chip text-muted-foreground mt-0.5">
@@ -333,7 +333,7 @@ export function DailyPracticeClient() {
                 )}
               />
               <div className="min-w-0 flex-1">
-                <p className="text-meta font-semibold text-foreground leading-snug">
+                <p className="text-label text-foreground leading-snug">
                   {locale === "bn" ? step.titleBn : step.titleEn}
                 </p>
                 <p className="text-chip text-muted-foreground mt-0.5">
@@ -367,7 +367,7 @@ export function DailyPracticeClient() {
               />
             </div>
             <div>
-              <h3 className="font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors">
+              <h3 className="font-heading text-label text-foreground group-hover:text-primary transition-colors">
                 {item.title}
               </h3>
               <p className="text-chip text-muted-foreground mt-1">{item.desc}</p>

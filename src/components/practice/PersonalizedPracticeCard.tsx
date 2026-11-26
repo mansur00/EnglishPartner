@@ -434,7 +434,7 @@ export function PersonalizedPracticeCard({
               key={p.phase}
               className="rounded-panel bg-muted/35 border border-border/60 px-3.5 py-2.5 flex items-center justify-between gap-2"
             >
-              <span className="text-meta font-semibold text-foreground truncate">
+              <span className="text-label text-foreground truncate">
                 {isBn ? p.titleBn : p.titleEn}
               </span>
               <Badge variant="outline" size="sm" className="shrink-0">
@@ -449,7 +449,7 @@ export function PersonalizedPracticeCard({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* 1. Speaking Goal Dropdown */}
             <div className="space-y-1.5">
-              <label className="text-chip font-semibold text-foreground block">
+              <label className="text-chip text-foreground block">
                 {isBn ? "১. আপনার মূল লক্ষ্য" : "1. Speaking Goal"}
               </label>
               <Select
@@ -476,7 +476,7 @@ export function PersonalizedPracticeCard({
 
             {/* 2. Speaking Level Dropdown */}
             <div className="space-y-1.5">
-              <label className="text-chip font-semibold text-foreground block">
+              <label className="text-chip text-foreground block">
                 {isBn ? "২. বর্তমান লেভেল" : "2. Speaking Level"}
               </label>
               <Select
@@ -503,7 +503,7 @@ export function PersonalizedPracticeCard({
 
             {/* 3. Daily Time Dropdown */}
             <div className="space-y-1.5">
-              <label className="text-chip font-semibold text-foreground block">
+              <label className="text-chip text-foreground block">
                 {isBn ? "৩. দৈনিক সময়" : "3. Daily Time"}
               </label>
               <Select
@@ -657,7 +657,7 @@ export function PersonalizedPracticeCard({
           <div className="flex items-center justify-between gap-2">
             <div>
               <Badge variant="brand" size="sm">Step 1 of 5 · ~3 min</Badge>
-              <h3 className="text-label font-semibold text-foreground mt-1">
+              <h3 className="text-label text-foreground mt-1">
                 {isBn ? "বাক্যে শব্দের ব্যবহার (Vocabulary in Context)" : "Vocabulary in Context"}
               </h3>
             </div>
@@ -670,7 +670,7 @@ export function PersonalizedPracticeCard({
                 className="rounded-card bg-card border border-border p-3.5 space-y-2"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-label font-semibold text-primary">{item.phrase}</span>
+                  <span className="text-label text-primary">{item.phrase}</span>
                   <Button
                     type="button"
                     variant="ghost"
@@ -694,7 +694,7 @@ export function PersonalizedPracticeCard({
           </div>
 
           <div className="space-y-2">
-            <p className="text-chip font-semibold text-foreground">
+            <p className="text-chip text-foreground">
               {isBn
                 ? "উপরের যেকোনো ১টি ফ্রেজ দিয়ে নিজের একটি বাক্য বলুন বা লিখুন:"
                 : "Say or type 1 sentence using any phrase above:"}
@@ -722,7 +722,7 @@ export function PersonalizedPracticeCard({
         <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
           <div>
             <Badge variant="info" size="sm">Step 2 of 5 · ~3 min</Badge>
-            <h3 className="text-label font-semibold text-foreground mt-1">
+            <h3 className="text-label text-foreground mt-1">
               {dayLesson.grammarPattern.titleEn}
             </h3>
             <p className="text-meta font-mono text-primary mt-1">
@@ -760,7 +760,7 @@ export function PersonalizedPracticeCard({
           </div>
 
           <div className="space-y-2">
-            <p className="text-chip font-semibold text-foreground">
+            <p className="text-chip text-foreground">
               {isBn
                 ? "এই স্ট্রাকচার দিয়ে নিজে ১টি বাক্য তৈরি করে বলুন বা লিখুন:"
                 : "Practice saying or typing your own sentence with this pattern:"}
@@ -791,7 +791,7 @@ export function PersonalizedPracticeCard({
         <div className="rounded-panel bg-muted/30 border border-border/60 p-4 sm:p-5 space-y-4">
           <div>
             <Badge variant="warning" size="sm">Step 3 of 5 · ~4 min</Badge>
-            <h3 className="text-label font-semibold text-foreground mt-1">
+            <h3 className="text-label text-foreground mt-1">
               {isBn ? "তাৎক্ষণিক উত্তর অনুশীলন (Quick Response)" : "Quick Response Drill"}
             </h3>
           </div>
@@ -799,7 +799,7 @@ export function PersonalizedPracticeCard({
           <div className="space-y-3">
             {dayLesson.quickDrills.map((drill, idx) => (
               <div key={idx} className="rounded-card bg-card border border-border p-4 space-y-2.5">
-                <p className="text-body font-semibold text-foreground">{drill.situationEn}</p>
+                <p className="text-body text-foreground">{drill.situationEn}</p>
                 {showTranslation && liveMap[drill.situationEn] && (
                   <p className="text-chip text-muted-foreground">{liveMap[drill.situationEn]}</p>
                 )}
@@ -847,7 +847,7 @@ export function PersonalizedPracticeCard({
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant="success" size="sm">Step 4 of 5 · Core Speaking</Badge>
-              <span className="text-chip font-semibold text-foreground">{promptData.topic}</span>
+              <span className="text-chip text-foreground">{promptData.topic}</span>
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -879,7 +879,7 @@ export function PersonalizedPracticeCard({
           </div>
 
           <div className="space-y-1.5">
-            <p className="text-lead font-semibold text-foreground">{promptData.promptEn}</p>
+            <p className="text-lead text-foreground">{promptData.promptEn}</p>
             {showTranslation && (
               <p className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
                 {translationLocale === "bn"
@@ -954,7 +954,7 @@ export function PersonalizedPracticeCard({
           {feedback && (
             <div className="rounded-panel bg-card border border-border p-4 space-y-3">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-label font-semibold text-foreground">
+                <span className="text-label text-foreground">
                   {isBn ? "AI স্পিকিং ফিডব্যাক" : "AI Speaking Feedback"}
                 </span>
                 <Badge
@@ -973,7 +973,7 @@ export function PersonalizedPracticeCard({
 
               <div className="space-y-2 text-meta">
                 <p className={cn("text-foreground", isBn && "text-bangla")}>
-                  <span className="font-semibold">1. What you communicated: </span>
+                  <span className="text-label">1. What you communicated: </span>
                   {showTranslation && liveMap[feedback.communicated]
                     ? liveMap[feedback.communicated]
                     : feedback.communicated}
@@ -981,7 +981,7 @@ export function PersonalizedPracticeCard({
 
                 <div className="rounded-control bg-status-success-bg/50 p-3 space-y-1">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-chip font-semibold text-status-success-ink">
+                    <span className="text-chip text-status-success-ink">
                       2. Natural Version
                     </span>
                     <Button
@@ -995,7 +995,7 @@ export function PersonalizedPracticeCard({
                       <span>{isBn ? "শুনুন" : "Listen"}</span>
                     </Button>
                   </div>
-                  <p className="text-body text-foreground font-semibold">
+                  <p className="text-body text-foreground">
                     &ldquo;{feedback.betterVersion}&rdquo;
                   </p>
                   {showTranslation && liveMap[feedback.betterVersion] && (
@@ -1004,18 +1004,18 @@ export function PersonalizedPracticeCard({
                 </div>
 
                 <p className={cn("text-muted-foreground", isBn && "text-bangla")}>
-                  <span className="font-semibold text-foreground">3. Key correction: </span>
+                  <span className="text-label text-foreground">3. Key correction: </span>
                   {showTranslation && liveMap[feedback.keyCorrection]
                     ? liveMap[feedback.keyCorrection]
                     : feedback.keyCorrection}
                 </p>
 
                 <p className="text-muted-foreground">
-                  <span className="font-semibold text-foreground">4. Useful expression: </span>
+                  <span className="text-label text-foreground">4. Useful expression: </span>
                   <Badge variant="brand" size="sm">{feedback.usefulExpression}</Badge>
                 </p>
 
-                <p className="text-chip text-primary font-semibold pt-2 border-t border-border/60">
+                <p className="text-chip text-primary pt-2 border-t border-border/60">
                   5. Speak again:{" "}
                   {showTranslation && liveMap[feedback.speakAgainPrompt]
                     ? liveMap[feedback.speakAgainPrompt]
@@ -1043,7 +1043,7 @@ export function PersonalizedPracticeCard({
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <Badge variant="brand" size="sm">Step 5 of 5 · ~8 min</Badge>
-              <h3 className="text-label font-semibold text-foreground mt-1">
+              <h3 className="text-label text-foreground mt-1">
                 {dayLesson.roleplay.titleEn} ({dayLesson.roleplay.partnerRole})
               </h3>
             </div>
@@ -1061,7 +1061,7 @@ export function PersonalizedPracticeCard({
                 )}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-chip font-semibold text-muted-foreground">
+                  <span className="text-chip text-muted-foreground">
                     {m.speaker === "ai" ? dayLesson.roleplay.partnerRole : isBn ? "আপনি" : "You"}
                   </span>
                   {m.speaker === "ai" && (

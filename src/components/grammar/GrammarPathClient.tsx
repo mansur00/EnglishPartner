@@ -168,7 +168,7 @@ export function GrammarPathClient() {
         <>
           {/* Level Priority Filter */}
           <Card className="p-4 sm:p-5 bg-card border border-border space-y-3">
-        <div className="flex items-center gap-2 text-label text-foreground font-semibold">
+        <div className="flex items-center gap-2 text-label text-foreground">
           <HugeiconsIcon icon={Layers01Icon} size={18} className="text-primary" />
           <span>Focus by Goal / Level Priority</span>
         </div>
@@ -235,7 +235,7 @@ export function GrammarPathClient() {
                   </Pill>
                 </div>
 
-                <h2 className="text-card-title text-foreground font-semibold">{stage.title}</h2>
+                <h2 className="text-card-title text-foreground">{stage.title}</h2>
 
                 <p
                   className={cn(

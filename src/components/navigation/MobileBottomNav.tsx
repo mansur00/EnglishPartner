@@ -56,7 +56,7 @@ export function MobileBottomNav() {
             className={cn(
               "flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-1.5 px-1 transition-colors btn-press",
               item.active
-                ? "text-primary font-semibold"
+                ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >

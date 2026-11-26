@@ -154,7 +154,7 @@ export function ConversationInspectorSidebar({
             {/* Length Tier Selector */}
             <div className="space-y-2">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+                <span className="text-chip text-foreground flex items-center gap-1.5">
                   <HugeiconsIcon icon={Layers01Icon} size={14} className="text-primary" />
                   {locale === "bn" ? `${effectiveLevel} দৈর্ঘ্য` : `${effectiveLevel} Length`}
                 </span>
@@ -185,7 +185,7 @@ export function ConversationInspectorSidebar({
 
             {/* Style Selector */}
             <div className="space-y-2">
-              <span className="text-chip font-semibold text-foreground block">
+              <span className="text-chip text-foreground block">
                 {locale === "bn" ? "কথোপকথনের ধরন (Style)" : "Conversation Style"}
               </span>
               <div className="grid grid-cols-3 gap-1.5">
@@ -219,7 +219,7 @@ export function ConversationInspectorSidebar({
           </>
         ) : versions.length > 1 ? (
           <div className="space-y-2">
-            <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+            <span className="text-chip text-foreground flex items-center gap-1.5">
               <HugeiconsIcon icon={Layers01Icon} size={14} className="text-primary" />
               {locale === "bn" ? "সংস্করণ" : "Version"}
             </span>
@@ -247,7 +247,7 @@ export function ConversationInspectorSidebar({
 
         {/* Grammar Controls */}
         <div className="space-y-2">
-          <span className="text-chip font-semibold text-foreground block">
+          <span className="text-chip text-foreground block">
             {locale === "bn" ? "গ্রামার হাইলাইট" : "Grammar Highlight"}
           </span>
           <div className="flex flex-wrap items-center gap-2">
@@ -287,7 +287,7 @@ export function ConversationInspectorSidebar({
                   <span>{locale === "bn" ? "শুনুন" : "Listen"}</span>
                 </Button>
               </div>
-              <p className="text-meta font-conversation font-medium text-foreground leading-relaxed">
+              <p className="text-meta font-conversation text-foreground leading-relaxed">
                 &ldquo;{selectedLine.englishText}&rdquo;
               </p>
             </div>
@@ -295,7 +295,7 @@ export function ConversationInspectorSidebar({
             {/* Translation Section */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+                <span className="text-chip text-foreground flex items-center gap-1.5">
                   <HugeiconsIcon icon={TranslateIcon} size={14} className="text-primary" />
                   {locale === "bn" ? "অনুবাদ" : "Translation"}
                 </span>
@@ -327,7 +327,7 @@ export function ConversationInspectorSidebar({
             {/* Grammar Section */}
             <div className="space-y-2.5 pt-2 border-t border-border/60">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-chip font-semibold text-foreground flex items-center gap-1.5">
+                <span className="text-chip text-foreground flex items-center gap-1.5">
                   <HugeiconsIcon icon={BookOpen01Icon} size={14} className="text-primary" />
                   {locale === "bn" ? "গ্রামার ও গঠন" : "Grammar & Structure"}
                 </span>
@@ -357,7 +357,7 @@ export function ConversationInspectorSidebar({
                       <HugeiconsIcon icon={SparklesIcon} size={13} className="text-primary" />
                       Tense:
                     </span>
-                    <span className="font-medium text-foreground text-right">
+                    <span className="text-meta text-foreground text-right">
                       {grammarEntry.structure.tenseName}
                     </span>
                   </div>

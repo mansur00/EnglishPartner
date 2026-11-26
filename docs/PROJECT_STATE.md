@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Systematic Typography & Font-Size Audit (`b_typography` -> 0)
+- Audited all 170 `b. Typography` violations reported by `scripts/check-tokens.mjs` across 20 files (`SpellMasterClient.tsx`, `app/page.tsx`, `PersonalizedPracticeCard.tsx`, `GrammarStageLessonClient.tsx`, `AdminPanelClient.tsx`, `SettingsClient.tsx`, `vocabulary/page.tsx`, `ConversationInspectorSidebar.tsx`, `WordDetailsSections.tsx`, `MagicWordSidebar.tsx`, `WritingCheckerPanel.tsx`, `AdminControlTab.tsx`, `DailyPracticeClient.tsx`, `auth/login/page.tsx`, `GrammarPathClient.tsx`, `GuestLimitBanner.tsx`, `SessionIsolationProvider.tsx`, `ChatTurnBubble.tsx`, `MobileBottomNav.tsx`, `RoleplayPartner.tsx`).
+- Removed redundant `font-semibold`/`font-medium` overrides on semantic typography tokens (`text-card-title`, `text-stat`, `text-display`, `text-label`, `text-chip`, `text-meta`), mapped `text-meta font-semibold` -> `text-label`, `text-label font-medium` -> `text-meta`, and replaced standalone `font-semibold`/`font-medium` classes with semantic `text-label`, `text-meta`, or `text-chip-mono` utilities.
+- Verified `b. Typography` violations reduced from `170` to `0`.
+
 ### 2026-11-27, Admin Panel Controls Audit & Live Enforcement
 - Audited `/admin-panel` controls (`Global Feature Controls`, `Per-User Features`, `AI Daily Limit`, `Disabled User`): DB writes worked, but several client routes and AI endpoints did not enforce them.
 - Added `FeatureDisabledCard` (`src/components/auth/FeatureDisabledCard.tsx`) and wired `useFeatureFlags()` enforcement into `DailyPracticeClient.tsx` (`challenge_90`), `GrammarPathClient.tsx` (`grammar_checker`), `RoleplayPartner.tsx` (`ai_partner`), `SpellMasterClient.tsx` (`spell_master`), and `quiz/page.tsx` (`quiz`).

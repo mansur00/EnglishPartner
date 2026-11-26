@@ -1104,7 +1104,7 @@ export function RoleplayPartner() {
           <Tag variant="brand" size="sm">
             {selectedScenario.id === "freestyle" ? "Freestyle" : selectedScenario.level}
           </Tag>
-          <span className="text-label font-semibold text-foreground truncate">
+          <span className="text-label text-foreground truncate">
             {locale === "bn" ? selectedScenario.titleBn : selectedScenario.title}
           </span>
         </div>

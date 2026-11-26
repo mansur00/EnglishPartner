@@ -91,7 +91,7 @@ export default function LandingPage() {
         <div className="rounded-band bg-card border border-border/60 shadow-2xs p-6 sm:p-10 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Text Content & CTAs */}
           <div className="lg:col-span-6 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-accent text-accent-foreground text-chip font-semibold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-accent text-accent-foreground text-chip">
               <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary" />
               <span>Spoken English &amp; Grammar for Bangla Speakers</span>
             </div>
@@ -108,7 +108,7 @@ export default function LandingPage() {
               <Link href="/dashboard">
                 <Button
                   size="lg"
-                  className="rounded-control px-7 gap-2 shadow-sm text-label font-semibold"
+                  className="rounded-control px-7 gap-2 shadow-sm text-label"
                 >
                   <HugeiconsIcon icon={SparklesIcon} size={18} />
                   <span>Start Learning Free</span>
@@ -176,7 +176,7 @@ export default function LandingPage() {
                   </div>
                   <div className="w-full rounded-panel bg-card border border-border px-4 py-3.5 shadow-sm flex items-center justify-between gap-3">
                     <div className="space-y-1">
-                      <p className="text-label font-semibold text-foreground">
+                      <p className="text-label text-foreground">
                         Asking for Price &amp; Product Details
                       </p>
                       <p className="text-chip text-muted-foreground text-bangla">
@@ -277,7 +277,7 @@ export default function LandingPage() {
             <Link href="/professions" className="block group">
               <Card className="h-full p-6 rounded-card bg-card shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-6">
                 <div className="rounded-panel bg-gradient-to-b from-muted/30 to-primary/10 border border-border/60 p-5 flex flex-col items-center justify-center gap-3 min-h-48">
-                  <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-control bg-primary text-primary-foreground shadow-sm text-label font-semibold">
+                  <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-control bg-primary text-primary-foreground shadow-sm text-label">
                     <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                     <span>Explore 5 Career Tracks</span>
                   </div>
@@ -315,7 +315,7 @@ export default function LandingPage() {
                   <div className="size-control rounded-control bg-card border border-border flex items-center justify-center text-primary shrink-0 shadow-2xs">
                     <HugeiconsIcon icon={node.icon} size={18} />
                   </div>
-                  <span className="text-chip font-semibold text-foreground truncate">
+                  <span className="text-chip text-foreground truncate">
                     {node.label}
                   </span>
                 </Link>
@@ -354,7 +354,7 @@ export default function LandingPage() {
                   <div className="size-control rounded-control bg-card border border-border flex items-center justify-center text-primary shrink-0 shadow-2xs">
                     <HugeiconsIcon icon={node.icon} size={18} />
                   </div>
-                  <span className="text-chip font-semibold text-foreground truncate">
+                  <span className="text-chip text-foreground truncate">
                     {node.label}
                   </span>
                 </Link>
@@ -395,11 +395,11 @@ export default function LandingPage() {
                 {/* Vertical Milestone & Fluency Curve Widget */}
                 <div className="rounded-panel bg-muted/35 border border-border/60 p-5 flex-1 flex flex-col justify-between gap-4 min-h-64">
                   <div className="self-end rounded-control bg-card border border-border px-3.5 py-2 shadow-xs flex items-center gap-2.5">
-                    <span className="size-7 rounded-pill bg-accent text-accent-foreground text-chip font-semibold flex items-center justify-center">
+                    <span className="size-7 rounded-pill bg-accent text-accent-foreground text-chip flex items-center justify-center">
                       A1
                     </span>
                     <div>
-                      <p className="text-chip font-semibold text-foreground">Stage 1: Foundation</p>
+                      <p className="text-chip text-foreground">Stage 1: Foundation</p>
                       <p className="text-chip text-muted-foreground">10 Guided Lessons</p>
                     </div>
                   </div>
@@ -417,7 +417,7 @@ export default function LandingPage() {
                     <p className="text-chip text-muted-foreground">Confidence Score</p>
                     <p className="text-card-title font-heading text-foreground">A1 → B2</p>
                     <div className="flex items-center gap-2 pt-1">
-                      <span className="size-6 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold flex items-center justify-center">
+                      <span className="size-6 rounded-pill bg-sun-500 text-brand-950 text-chip flex items-center justify-center">
                         BN
                       </span>
                       <span className="text-chip text-muted-foreground">Bilingual Support</span>
@@ -445,7 +445,7 @@ export default function LandingPage() {
                   <div className="sm:col-span-5 space-y-2">
                     <div className="rounded-control bg-card border border-border p-3 shadow-2xs space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className="size-6 rounded-pill bg-primary/15 text-primary text-chip font-semibold flex items-center justify-center">
+                        <span className="size-6 rounded-pill bg-primary/15 text-primary text-chip flex items-center justify-center">
                           01
                         </span>
                         <span className="h-2 w-24 rounded-pill bg-border" />
@@ -454,7 +454,7 @@ export default function LandingPage() {
                     </div>
                     <div className="rounded-control bg-card border border-border p-3 shadow-xs space-y-1.5 sm:translate-x-3">
                       <div className="flex items-center gap-2">
-                        <span className="size-6 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold flex items-center justify-center">
+                        <span className="size-6 rounded-pill bg-sun-500 text-brand-950 text-chip flex items-center justify-center">
                           02
                         </span>
                         <span className="h-2 w-28 rounded-pill bg-primary/30" />
@@ -472,16 +472,16 @@ export default function LandingPage() {
 
                   {/* Right Category Count Pills */}
                   <div className="sm:col-span-5 flex flex-wrap gap-2 justify-center sm:justify-start">
-                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip text-foreground shadow-2xs">
                       Shopping <span className="text-primary ml-1">20</span>
                     </span>
-                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip text-foreground shadow-2xs">
                       Travel <span className="text-primary ml-1">8</span>
                     </span>
-                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip text-foreground shadow-2xs">
                       Workplace <span className="text-primary ml-1">6</span>
                     </span>
-                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip text-foreground shadow-2xs">
                       Health <span className="text-primary ml-1">8</span>
                     </span>
                   </div>
@@ -507,7 +507,7 @@ export default function LandingPage() {
                     <HugeiconsIcon icon={Briefcase01Icon} size={20} />
                   </div>
                   <span className="h-0.5 w-5 bg-border" />
-                  <div className="size-12 rounded-control bg-card border border-border text-foreground flex items-center justify-center shadow-2xs text-chip font-semibold">
+                  <div className="size-12 rounded-control bg-card border border-border text-foreground flex items-center justify-center shadow-2xs text-chip">
                     5 Tracks
                   </div>
                   <span className="h-0.5 w-5 bg-border" />
@@ -533,16 +533,16 @@ export default function LandingPage() {
                 {/* Centered Cluster Widget */}
                 <div className="rounded-panel bg-muted/35 border border-border/60 p-5 flex items-center justify-center relative">
                   <div className="rounded-pill bg-card border border-border px-4 py-2.5 shadow-xs flex items-center gap-2">
-                    <span className="size-7 rounded-pill bg-primary text-primary-foreground text-chip font-semibold flex items-center justify-center">
+                    <span className="size-7 rounded-pill bg-primary text-primary-foreground text-chip flex items-center justify-center">
                       AI
                     </span>
-                    <span className="size-7 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold flex items-center justify-center">
+                    <span className="size-7 rounded-pill bg-sun-500 text-brand-950 text-chip flex items-center justify-center">
                       EN
                     </span>
-                    <span className="size-7 rounded-pill bg-accent text-accent-foreground text-chip font-semibold flex items-center justify-center">
+                    <span className="size-7 rounded-pill bg-accent text-accent-foreground text-chip flex items-center justify-center">
                       BN
                     </span>
-                    <span className="text-chip font-semibold text-foreground pl-1">
+                    <span className="text-chip text-foreground pl-1">
                       Live Feedback
                     </span>
                   </div>
@@ -568,7 +568,7 @@ export default function LandingPage() {
               <Link href="/dashboard">
                 <Button
                   size="lg"
-                  className="rounded-pill px-7 shadow-xs text-label font-semibold"
+                  className="rounded-pill px-7 shadow-xs text-label"
                 >
                   Start Now
                 </Button>
@@ -598,7 +598,7 @@ export default function LandingPage() {
                     className="h-8 w-auto object-contain"
                   />
                 </Link>
-                <p className="text-meta font-semibold text-foreground">
+                <p className="text-label text-foreground">
                   Sign up to receive daily English tips.
                 </p>
                 <form
@@ -615,7 +615,7 @@ export default function LandingPage() {
                   <Button
                     type="submit"
                     size="sm"
-                    className="rounded-pill px-4 bg-foreground text-background hover:bg-foreground/90 text-chip font-semibold shrink-0"
+                    className="rounded-pill px-4 bg-foreground text-background hover:bg-foreground/90 text-chip shrink-0"
                   >
                     Submit
                   </Button>
@@ -652,7 +652,7 @@ export default function LandingPage() {
               {/* Right Multi-Column Links */}
               <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-meta">
                 <div className="space-y-2.5">
-                  <p className="text-chip font-semibold text-muted-foreground">Learning</p>
+                  <p className="text-chip text-muted-foreground">Learning</p>
                   <ul className="space-y-2 text-foreground">
                     <li><Link href="/explore" className="hover:text-primary transition-colors">Explore</Link></li>
                     <li><Link href="/grammar-path" className="hover:text-primary transition-colors">Grammar Path</Link></li>
@@ -660,7 +660,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <div className="space-y-2.5">
-                  <p className="text-chip font-semibold text-muted-foreground">Practice</p>
+                  <p className="text-chip text-muted-foreground">Practice</p>
                   <ul className="space-y-2 text-foreground">
                     <li><Link href="/daily-practice" className="hover:text-primary transition-colors">Daily Practice</Link></li>
                     <li><Link href="/roleplay" className="hover:text-primary transition-colors">AI Roleplay</Link></li>
@@ -669,7 +669,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <div className="space-y-2.5">
-                  <p className="text-chip font-semibold text-muted-foreground">Account</p>
+                  <p className="text-chip text-muted-foreground">Account</p>
                   <ul className="space-y-2 text-foreground">
                     <li><Link href="/dashboard" className="hover:text-primary transition-colors">Dashboard</Link></li>
                     <li><Link href="/vocabulary" className="hover:text-primary transition-colors">My Vocabulary</Link></li>
@@ -677,7 +677,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <div className="space-y-2.5">
-                  <p className="text-chip font-semibold text-muted-foreground">Legal</p>
+                  <p className="text-chip text-muted-foreground">Legal</p>
                   <ul className="space-y-2 text-foreground">
                     <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
                     <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>

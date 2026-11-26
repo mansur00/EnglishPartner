@@ -474,7 +474,7 @@ function VocabularyContent() {
                               <span className="font-mono text-muted-foreground">
                                 {deck.words.length} {locale === "bn" ? "টি শব্দ" : "words"}
                               </span>
-                              <span className="text-primary font-semibold">
+                              <span className="text-label text-primary">
                                 {locale === "bn" ? "লগইন করে খুলুন →" : "Log in to unlock →"}
                               </span>
                             </div>
@@ -526,7 +526,7 @@ function VocabularyContent() {
                       </div>
 
                       <div className="flex items-center justify-between pt-3 border-t border-border/50 text-chip">
-                        <span className="font-mono text-primary font-medium">
+                        <span className="text-chip-mono text-primary">
                           {deck.words.length} {locale === "bn" ? "টি শব্দ" : "words"}
                         </span>
                         <span className="text-muted-foreground">
@@ -621,11 +621,11 @@ function VocabularyContent() {
                         )}
                       >
                         <div className="min-w-0">
-                          <p className="font-heading text-label font-semibold text-foreground truncate">
+                          <p className="font-heading text-label text-foreground truncate">
                             {w.word}
                           </p>
                           <div className="flex items-center gap-1.5 mt-1">
-                            <span className="text-chip text-primary font-medium">{w.pos}</span>
+                            <span className="text-chip text-primary">{w.pos}</span>
                             <span className="text-chip font-mono text-muted-foreground truncate">
                               {w.ipa}
                             </span>
@@ -694,7 +694,7 @@ function VocabularyContent() {
                           : "Your custom saved word collection"}
                       </p>
                     </div>
-                    <div className="pt-3 border-t border-border/50 text-chip text-primary font-medium">
+                    <div className="pt-3 border-t border-border/50 text-chip text-primary">
                       {locale === "bn" ? "ক্যাটাগরি খুলুন →" : "Open Category →"}
                     </div>
                   </Card>
@@ -716,7 +716,7 @@ function VocabularyContent() {
                   <div className="size-10 rounded-pill bg-primary/10 text-primary flex items-center justify-center">
                     <HugeiconsIcon icon={Add01Icon} size={20} />
                   </div>
-                  <p className="font-heading text-label font-semibold text-foreground">
+                  <p className="font-heading text-label text-foreground">
                     {locale === "bn" ? "নতুন ক্যাটাগরি তৈরি করুন" : "Create New Category"}
                   </p>
                   <p className="text-chip text-muted-foreground">
@@ -802,11 +802,11 @@ function VocabularyContent() {
                           )}
                         >
                           <div className="min-w-0">
-                            <p className="font-heading text-label font-semibold text-foreground truncate">
+                            <p className="font-heading text-label text-foreground truncate">
                               {w.word}
                             </p>
                             <div className="flex items-center gap-1.5 mt-1">
-                              <span className="text-chip text-primary font-medium">{w.pos}</span>
+                              <span className="text-chip text-primary">{w.pos}</span>
                               <span className="text-chip font-mono text-muted-foreground truncate">
                                 {w.ipa}
                               </span>
@@ -881,7 +881,7 @@ function VocabularyContent() {
                     <div className="flex items-center gap-2.5">
                       <span className="text-card-title">{cat.emoji}</span>
                       <div>
-                        <p className="text-label font-medium">{cat.name}</p>
+                        <p className="text-meta">{cat.name}</p>
                         <p className="text-chip text-muted-foreground font-mono">
                           {cat.lemmas.length} {locale === "bn" ? "শব্দ" : "words"}
                         </p>
@@ -896,7 +896,7 @@ function VocabularyContent() {
             </div>
 
             <div className="pt-3 border-t border-border/60 space-y-2.5">
-              <p className="text-chip font-semibold text-foreground">
+              <p className="text-chip text-foreground">
                 {locale === "bn" ? "+ নতুন ক্যাটাগরি তৈরি করে সেভ করুন" : "+ Create New Category & Save"}
               </p>
               <div className="flex items-center gap-1.5 flex-wrap">
