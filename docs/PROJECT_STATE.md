@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Update Dashboard Illustration SVG from Downloads
+- Requested by owner: Replace `public/dashboard-illustration.svg` with the updated `~/Downloads/dashboard-illustration.svg`.
+- Changed:
+  - `public/dashboard-illustration.svg`: Replaced with `~/Downloads/dashboard-illustration.svg`.
+- Verified with: `ls -lh`, `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Mobile-Only Responsive Polish for Dashboard & TodayPanel
 - Requested by owner: Fix text, icon+text alignment, and spacing on `/dashboard` for mobile viewports (`< sm` / `< md`) without altering desktop (`md:` / `lg:`) layout.
 - Changed:
