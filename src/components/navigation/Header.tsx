@@ -20,7 +20,6 @@ import {
   DashboardSquare01Icon,
   CompassIcon,
   Calendar03Icon,
-  Briefcase01Icon,
   Bookmark02Icon,
   SparklesIcon,
   BotIcon,
@@ -30,8 +29,10 @@ import {
   Login01Icon,
   BookOpen01Icon,
 } from "@hugeicons/core-free-icons";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/lib/supabase";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { getHeaderAccountState, type HeaderUser } from "./header-state";
 
 export type { HeaderUser };
@@ -43,28 +44,44 @@ export interface HeaderProps {
 export function Header({ user: initialUser }: HeaderProps = {}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<HeaderUser | null>(initialUser ?? null);
+  const [userRole, setUserRole] = useState<"user" | "admin" | null>(null);
   const pathname = usePathname();
+  const { isEnabled } = useFeatureFlags();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user: liveUser } }) => {
-      if (liveUser) {
-        setUser({
-          id: liveUser.id,
-          name: (liveUser.user_metadata?.name as string) || liveUser.email?.split("@")[0],
-          email: liveUser.email,
-        });
-      }
-    });
+    const supabase = createBrowserSupabaseClient();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const syncProfile = async () => {
+      try {
+        const res = await fetch("/api/v1/auth/me", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data?.user) {
+          setUser({
+            id: data.user.id,
+            name: data.user.full_name || data.user.email?.split("@")[0],
+            email: data.user.email,
+          });
+          setUserRole(data.user.role === "admin" ? "admin" : "user");
+        } else {
+          setUser(null);
+          setUserRole(null);
+        }
+      } catch {
+        // Ignore network errors
+      }
+    };
+
+    void syncProfile();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
-        setUser({
-          id: session.user.id,
-          name: (session.user.user_metadata?.name as string) || session.user.email?.split("@")[0],
-          email: session.user.email,
-        });
+        void syncProfile();
       } else {
         setUser(null);
+        setUserRole(null);
       }
     });
 
@@ -80,12 +97,17 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
     { name: t("nav.dailyPractice", locale), href: "/daily-practice", icon: Calendar03Icon },
     { name: t("nav.grammarPath", locale), href: "/grammar-path", icon: BookOpen01Icon },
     { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
-    { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon },
+    { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon, featureKey: "ai_partner" },
     { name: t("nav.vocabulary", locale), href: "/vocabulary", icon: Bookmark02Icon },
-    { name: locale === "bn" ? "বানান মাস্টার" : "Spell Master", href: "/spell-master", icon: SparklesIcon },
+    {
+      name: locale === "bn" ? "বানান মাস্টার" : "Spell Master",
+      href: "/spell-master",
+      icon: SparklesIcon,
+      featureKey: "spell_master",
+    },
     { name: t("nav.progress", locale), href: "/progress", icon: Analytics01Icon },
     { name: t("nav.settings", locale), href: "/settings", icon: Settings01Icon },
-  ];
+  ].filter((item) => !item.featureKey || isEnabled(item.featureKey));
 
   return (
     <header suppressHydrationWarning className="sticky top-0 z-header flex h-header w-full items-center justify-between gap-2 border-b border-border bg-card/90 backdrop-blur px-3 sm:px-4 md:px-6">
@@ -163,7 +185,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
         {account.isLoggedIn ? (
           <div className="flex items-center gap-1.5 sm:gap-2">
             <Link
-              href="/dashboard"
+              href="/settings"
               aria-label={account.profileLabel}
               className="flex items-center gap-2 h-control-sm px-2 sm:px-3 rounded-pill bg-muted/60 hover:bg-muted text-foreground transition-colors"
             >
@@ -173,6 +195,15 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
               <span className="hidden md:inline-block max-w-24 truncate text-label text-foreground">
                 {account.displayName}
               </span>
+              {userRole && (
+                <Badge
+                  variant={userRole === "admin" ? "brand" : "outline"}
+                  size="sm"
+                  className="hidden sm:inline-flex"
+                >
+                  {userRole === "admin" ? "Admin" : "User"}
+                </Badge>
+              )}
             </Link>
             <form action={account.signoutAction} method="POST" className="inline-flex">
               <Button

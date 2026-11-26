@@ -19,7 +19,7 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const nextPath = searchParams.get("next") || "/dashboard";
 
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "reset">("login");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +61,19 @@ function LoginForm() {
 
         router.push(nextPath);
         router.refresh();
+      } else if (mode === "reset") {
+        const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+          redirectTo: `${window.location.origin}/auth/login`,
+        });
+        if (error) {
+          setErrorMsg(error.message);
+          return;
+        }
+        setInfoMsg(
+          isBn
+            ? "পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে।"
+            : "Password reset link sent to your email."
+        );
       } else {
         const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
@@ -182,19 +195,36 @@ function LoginForm() {
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-chip font-semibold text-foreground">
-                {isBn ? "পাসওয়ার্ড" : "Password"}
-              </label>
-              <Input
-                type="password"
-                required
-                minLength={6}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-              />
-            </div>
+            {mode !== "reset" && (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-chip font-semibold text-foreground">
+                    {isBn ? "পাসওয়ার্ড" : "Password"}
+                  </label>
+                  {mode === "login" && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMode("reset");
+                        setErrorMsg(null);
+                        setInfoMsg(null);
+                      }}
+                      className="text-chip text-primary hover:underline cursor-pointer"
+                    >
+                      {isBn ? "পাসওয়ার্ড ভুলে গেছেন?" : "Forgot password?"}
+                    </button>
+                  )}
+                </div>
+                <Input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                />
+              </div>
+            )}
 
             {errorMsg && (
               <p className="text-meta text-destructive bg-destructive/10 rounded-control px-3 py-2">
@@ -224,9 +254,13 @@ function LoginForm() {
                     ? isBn
                       ? "লগইন করুন"
                       : "Sign In"
-                    : isBn
-                      ? "অ্যাকাউন্ট তৈরি করুন"
-                      : "Create Account"}
+                    : mode === "reset"
+                      ? isBn
+                        ? "রিসেট লিংক পাঠান"
+                        : "Send Reset Link"
+                      : isBn
+                        ? "অ্যাকাউন্ট তৈরি করুন"
+                        : "Create Account"}
               </span>
             </Button>
           </form>

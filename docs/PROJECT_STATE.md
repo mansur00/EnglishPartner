@@ -2154,6 +2154,11 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, Webapp Login Flow, `/login` Redirect & Role-Aware Header
+- Added `/login` (`src/app/login/page.tsx`) redirecting to `/auth/login` so Header `Log in` links and `tests/header-state.test.mjs` work seamlessly.
+- Added `"Forgot password?"` reset flow (`resetPasswordForEmail`) in `src/app/auth/login/page.tsx`.
+- Updated `Header.tsx` to use `createBrowserSupabaseClient()` + `/api/v1/auth/me` for live session + role (`Admin` / `User`) badge, link the profile pill to `/settings`, and filter `mobileNavLinks` with `useFeatureFlags()`.
+
 ### 2026-11-27, Supabase Auth Users (User & Admin), Unified Login & Admin Controls in Settings
 - Applied `supabase/migrations/20261127_profiles_and_features.sql` on live Supabase (`public.profiles` with `role: 'user' | 'admin'` & `is_active`, `public.feature_flags`, RLS policies, and `handle_new_user` trigger).
 - Seeded verified Supabase Auth accounts: `admin.englishpartner@gmail.com` (`admin`) and `user.englishpartner@gmail.com` (`user`).

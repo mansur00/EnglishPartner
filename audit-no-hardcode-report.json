@@ -64,12 +64,6 @@
     },
     {
       "file": "src/app/auth/login/page.tsx",
-      "line": 160,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<label className=\"text-chip font-semibold text-foreground\">"
-    },
-    {
-      "file": "src/app/auth/login/page.tsx",
       "line": 173,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-chip font-semibold text-foreground\">"
@@ -77,6 +71,12 @@
     {
       "file": "src/app/auth/login/page.tsx",
       "line": 186,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<label className=\"text-chip font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/app/auth/login/page.tsx",
+      "line": 201,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<label className=\"text-chip font-semibold text-foreground\">"
     },
@@ -1039,7 +1039,7 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 149,
+      "line": 171,
       "detail": "Hardcoded layout constant / magic number: h-7, h-10",
       "code": "className=\"h-7 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
