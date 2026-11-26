@@ -513,6 +513,114 @@
       "code": "<span className={cn(\"text-chip font-semibold text-foreground flex items-center gap-1.5\", isBn && \"text-bangla\")}>"
     },
     {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 565,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip text-primary font-semibold\">AI Generated Word</p>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 604,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 619,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-primary font-semibold\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 658,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip text-primary font-semibold\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 767,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"size-9 rounded-control bg-primary text-primary-foreground font-semibold text-label cursor-pointer\""
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 786,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "\"size-10 rounded-control border border-border font-semibold text-label transition-all cursor-pointer\","
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 808,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 font-semibold text-label\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 859,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 880,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold\">{ex.word}</span>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 935,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-primary\">AI Diagnosis</p>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 943,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 948,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"font-semibold text-foreground\">{m.word}</p>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 957,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 964,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className={cn(\"text-label font-semibold text-foreground\", isBn && \"text-bangla\")}>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 1061,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-primary\">Corrected Text</p>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 1069,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-primary\">{m.correct}</span>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 1119,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-label font-semibold text-foreground\">{w.word}</p>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 1150,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-label font-semibold\">"
+    },
+    {
       "file": "src/components/tools/RoleplayPartner.tsx",
       "line": 1093,
       "detail": "Direct font-weight utility in feature code: font-semibold",
@@ -685,7 +793,7 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 149,
+      "line": 150,
       "detail": "Hardcoded layout constant / magic number: h-7, h-10",
       "code": "className=\"h-7 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
@@ -742,6 +850,18 @@
       "line": 69,
       "detail": "Hardcoded layout constant / magic number: h-16",
       "code": "<div className=\"h-16 w-full rounded-panel bg-muted/60 animate-pulse\" />"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 680,
+      "detail": "Hardcoded layout constant / magic number: max-w-2xl",
+      "code": "<Card className=\"p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs max-w-2xl mx-auto\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 753,
+      "detail": "Hardcoded layout constant / magic number: h-12",
+      "code": "<div className=\"min-h-12 rounded-panel border border-border bg-background p-3 flex flex-wrap items-center justify-center gap-2\">"
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
@@ -868,6 +988,15 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "flex flex-col md:flex-row md:items-center justify-between gap-4",
+      "files": [
+        "src/app/(app)/quiz/page.tsx",
+        "src/components/analytics/ProgressDashboard.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none",
       "files": [
         "src/app/(app)/quiz/page.tsx",
@@ -961,12 +1090,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "text-label font-semibold text-foreground",
       "files": [
         "src/app/page.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
-        "src/components/grammar/WritingCheckerPanel.tsx"
+        "src/components/grammar/WritingCheckerPanel.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {
@@ -985,13 +1115,14 @@
       ]
     },
     {
-      "detail": "ClassName repeated 7 times",
+      "detail": "ClassName repeated 8 times",
       "className": "text-meta text-muted-foreground text-bangla",
       "files": [
         "src/app/page.tsx",
         "src/components/practice/ListeningQuizCard.tsx",
         "src/components/quiz/QuizResultDetailClient.tsx",
-        "src/components/quiz/QuizRunner.tsx"
+        "src/components/quiz/QuizRunner.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {
@@ -1071,19 +1202,21 @@
       ]
     },
     {
-      "detail": "ClassName repeated 8 times",
+      "detail": "ClassName repeated 10 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
         "src/components/grammar/WritingCheckerPanel.tsx",
-        "src/components/settings/SettingsClient.tsx"
+        "src/components/settings/SettingsClient.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 5 times",
       "className": "size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
       "files": [
-        "src/components/dashboard/DashboardClient.tsx"
+        "src/components/dashboard/DashboardClient.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {
@@ -1110,11 +1243,20 @@
       ]
     },
     {
-      "detail": "ClassName repeated 7 times",
+      "detail": "ClassName repeated 3 times",
+      "className": "h-full bg-primary transition-all duration-300",
+      "files": [
+        "src/components/grammar/GrammarPathClient.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 9 times",
       "className": "text-card-title text-foreground font-semibold",
       "files": [
         "src/components/grammar/GrammarPathClient.tsx",
-        "src/components/grammar/GrammarStageLessonClient.tsx"
+        "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {
@@ -1133,10 +1275,19 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 5 times",
       "className": "p-4 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs",
       "files": [
-        "src/components/grammar/WritingCheckerPanel.tsx"
+        "src/components/grammar/WritingCheckerPanel.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "text-card-title font-mono text-foreground",
+      "files": [
+        "src/components/grammar/WritingCheckerPanel.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {
@@ -1176,6 +1327,27 @@
       "className": "bg-card p-5 md:p-6 space-y-6 shadow-card",
       "files": [
         "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "rounded-panel bg-muted/40 border border-border/60 px-3 py-2 text-center",
+      "files": [
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center justify-center gap-1 text-chip text-muted-foreground",
+      "files": [
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "p-5 bg-card border border-border rounded-card space-y-4 shadow-xs",
+      "files": [
+        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {

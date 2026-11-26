@@ -82,6 +82,12 @@ export function Sidebar() {
       active: pathname === "/vocabulary",
     },
     {
+      name: locale === "bn" ? "বানান মাস্টার" : "Spell Master",
+      href: "/spell-master",
+      icon: SparklesIcon,
+      active: pathname.startsWith("/spell-master"),
+    },
+    {
       name: locale === "bn" ? "কুইজ" : "Quiz",
       href: "/quiz",
       icon: CheckmarkBadge01Icon,

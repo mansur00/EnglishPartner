@@ -257,6 +257,17 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Add Spell Master (/spell-master) with Syllables, Tests, Rules & AI Coach
+- Requested by owner: Create a new `Spell Master` page in the left sidebar right after `My Vocabulary` with syllable/audio learning, dictation & jumbled-letter tests, common mistake traps, 5 spelling rules, spaced repetition for weak words, AI word search & add, gamification (level/XP/streak/badges), and AI Spell Master (pattern diagnosis, custom quiz, paste-text spell checker).
+- Changed:
+  - `src/lib/spelling/spell-data.ts`: Added 60 curated spelling words across 5 categories, 5 spelling rules, 6 badges, level helper, and `localStorage` state types.
+  - `src/lib/ai/spell-master.ts` & `src/app/api/v1/ai/spell-master/route.ts`: Added `lookup`, `coach`, and `check-text` AI actions with Zod schemas, rate limiting, and deterministic offline fallbacks.
+  - `src/components/spelling/SpellMasterClient.tsx` & `src/app/(app)/spell-master/page.tsx`: Built 5-tab Spell Master workspace using `speakText` (`speech-engine.ts`) for normal & slow syllable pronunciation.
+  - `src/components/navigation/Sidebar.tsx` & `src/components/navigation/Header.tsx`: Added `Spell Master` (`/spell-master`) right after `My Vocabulary` in both desktop sidebar and mobile drawer.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Add AI Grammar & Writing Checker Tab to /grammar-path
 - Requested by owner: Build AI Grammar and Writing Checker inside `/grammar-path` with a top tab switcher (`8-Stage Grammar Path` | `AI Grammar & Writing Checker`), error detection + Bangla/English explanations, Formal/Casual/IELTS style rewrites, and IELTS Writing Task 1 / Task 2 band score + 4-criteria feedback.
 - Changed:

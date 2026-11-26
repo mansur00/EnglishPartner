@@ -83,6 +83,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
     { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
     { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon },
     { name: t("nav.vocabulary", locale), href: "/vocabulary", icon: Bookmark02Icon },
+    { name: locale === "bn" ? "বানান মাস্টার" : "Spell Master", href: "/spell-master", icon: SparklesIcon },
     { name: t("nav.progress", locale), href: "/progress", icon: Analytics01Icon },
     { name: t("nav.settings", locale), href: "/settings", icon: Settings01Icon },
   ];
