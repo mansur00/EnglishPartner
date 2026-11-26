@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { GRAMMAR_STAGES } from "@/lib/grammar/learning-path";
 import { getLessonsByStage, getStageBySlug } from "@/lib/grammar/learning-path-data";
@@ -9,7 +10,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function GrammarStagePage({
+async function GrammarStageContent({
   params,
 }: {
   params: Promise<{ stage: string }>;
@@ -24,4 +25,16 @@ export default async function GrammarStagePage({
   const lessons = getLessonsByStage(stage.stageNumber);
 
   return <GrammarStageLessonClient stage={stage} lessons={lessons} />;
+}
+
+export default function GrammarStagePage({
+  params,
+}: {
+  params: Promise<{ stage: string }>;
+}) {
+  return (
+    <Suspense fallback={null}>
+      <GrammarStageContent params={params} />
+    </Suspense>
+  );
 }
