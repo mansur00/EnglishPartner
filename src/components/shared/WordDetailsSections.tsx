@@ -23,6 +23,37 @@ function FormChip({ label, value }: { label: string; value: string }) {
   );
 }
 
+function TranslatedWordList({
+  title,
+  items,
+  variant = "neutral",
+  isBn,
+}: {
+  title: string;
+  items: { word: string; meaningBn: string }[];
+  variant?: "neutral" | "peach" | "brand";
+  isBn: boolean;
+}) {
+  if (items.length === 0) return null;
+  return (
+    <div className="space-y-1.5">
+      <span className={cn("text-chip font-semibold text-foreground block", isBn && "text-bangla")}>
+        {title}
+      </span>
+      <div className="flex flex-wrap gap-1.5">
+        {items.map((item) => (
+          <Badge key={item.word} variant={variant} size="sm" className="text-chip gap-1 py-1 h-auto">
+            <span className="font-semibold">{item.word}</span>
+            {item.meaningBn && (
+              <span className="text-muted-foreground text-bangla">({item.meaningBn})</span>
+            )}
+          </Badge>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function WordDetailsSections({
   details,
   isLoading,
@@ -55,38 +86,41 @@ export function WordDetailsSections({
 
   return (
     <div className="space-y-3.5">
-      {/* Synonyms & Antonyms */}
-      {(details.synonyms.length > 0 || details.antonyms.length > 0) && (
-        <div className="space-y-2 pt-2 border-t border-border/60">
-          {details.synonyms.length > 0 && (
-            <div className="space-y-1.5">
-              <span className={cn("text-chip font-semibold text-foreground block", isBn && "text-bangla")}>
-                {isBn ? "সমার্থক শব্দ (Synonyms)" : "Synonyms"}
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {details.synonyms.map((syn) => (
-                  <Badge key={syn} variant="neutral" size="sm" className="text-chip">
-                    {syn}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
+      {/* Direct Translated Word Meaning (when available) */}
+      {details.wordMeaningBn && (
+        <div className="p-3 rounded-panel bg-muted/40 space-y-1">
+          <span className={cn("text-chip font-semibold text-muted-foreground block", isBn && "text-bangla")}>
+            {isBn ? "শব্দের অনুবাদ অর্থ (Translated Meaning)" : "Translated Word Meaning"}
+          </span>
+          <p className="text-meta font-semibold text-foreground text-bangla">
+            {details.wordMeaningBn}
+          </p>
+        </div>
+      )}
 
-          {details.antonyms.length > 0 && (
-            <div className="space-y-1.5">
-              <span className={cn("text-chip font-semibold text-foreground block", isBn && "text-bangla")}>
-                {isBn ? "বিপরীত শব্দ (Antonyms)" : "Antonyms"}
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {details.antonyms.map((ant) => (
-                  <Badge key={ant} variant="peach" size="sm" className="text-chip">
-                    {ant}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
+      {/* Related Words, Synonyms & Antonyms (with Bangla Translations) */}
+      {(details.relatedWords.length > 0 ||
+        details.synonyms.length > 0 ||
+        details.antonyms.length > 0) && (
+        <div className="space-y-2.5 pt-2 border-t border-border/60">
+          <TranslatedWordList
+            title={isBn ? "সম্পর্কিত শব্দ ও অর্থ (Related Words)" : "Related Words & Meanings"}
+            items={details.relatedWords}
+            variant="brand"
+            isBn={isBn}
+          />
+          <TranslatedWordList
+            title={isBn ? "সমার্থক শব্দ ও অর্থ (Synonyms)" : "Synonyms"}
+            items={details.synonyms}
+            variant="neutral"
+            isBn={isBn}
+          />
+          <TranslatedWordList
+            title={isBn ? "বিপরীত শব্দ ও অর্থ (Antonyms)" : "Antonyms"}
+            items={details.antonyms}
+            variant="peach"
+            isBn={isBn}
+          />
         </div>
       )}
 

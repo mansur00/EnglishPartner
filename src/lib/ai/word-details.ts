@@ -30,6 +30,7 @@ function buildFallbackWordDetails(req: WordDetailsRequest): WordDetails {
     word: cleanWord,
     ipa: `/${lower}/`,
     partOfSpeech: req.partOfSpeech || "general",
+    wordMeaningBn: `"${cleanWord}" — প্রাসঙ্গিক ইংরেজি শব্দ।`,
     meaningEn: req.existingMeaning || `Common English ${pos} "${cleanWord}" used in everyday conversation.`,
     meaningBn: `"${cleanWord}" — প্রাসঙ্গিক ইংরেজি শব্দ।`,
     contextualMeaningBn: req.contextSentence
@@ -37,6 +38,8 @@ function buildFallbackWordDetails(req: WordDetailsRequest): WordDetails {
       : `"${cleanWord}" — দৈনন্দিন কথোপকথনে ব্যবহৃত শব্দ।`,
     synonyms: [],
     antonyms: [],
+    relatedWords: [],
+    isFallback: true,
     tenseInfo: isVerb
       ? {
           detectedTense: "Base / Present",
@@ -89,11 +92,24 @@ Given an English word (and optional part of speech, context sentence, or short m
   "word": "need",
   "ipa": "/niːd/",
   "partOfSpeech": "verb / noun",
+  "wordMeaningBn": "প্রয়োজন / দরকার / অভাব",
   "meaningEn": "require something because it is essential or very important",
-  "meaningBn": "প্রয়োজন হওয়া বা দরকার হওয়া",
+  "meaningBn": "কোনো কিছু প্রয়োজন হওয়া বা দরকার হওয়া",
   "contextualMeaningBn": "এখানে 'need' ক্রিয়া হিসেবে 'কোনো কিছু দরকার হওয়া' অর্থে ব্যবহৃত হয়েছে।",
-  "synonyms": ["require", "want", "necessitate", "lack"],
-  "antonyms": ["have", "possess", "own"],
+  "synonyms": [
+    { "word": "require", "meaningBn": "প্রয়োজন হওয়া" },
+    { "word": "want", "meaningBn": "চাওয়া" },
+    { "word": "necessitate", "meaningBn": "আবশ্যক করা" }
+  ],
+  "antonyms": [
+    { "word": "have", "meaningBn": "থাকা" },
+    { "word": "possess", "meaningBn": "অধিকারী হওয়া" }
+  ],
+  "relatedWords": [
+    { "word": "necessity", "meaningBn": "প্রয়োজনীয়তা" },
+    { "word": "essential", "meaningBn": "অপরিহার্য" },
+    { "word": "urgent", "meaningBn": "জরুরি" }
+  ],
   "tenseInfo": {
     "detectedTense": "Present Simple",
     "explanationBn": "এটি Present Simple tense-এ মূল ক্রিয়া হিসেবে ব্যবহৃত হয়েছে।"

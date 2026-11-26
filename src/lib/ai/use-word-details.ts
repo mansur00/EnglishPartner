@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { WordDetails, WordDetailsRequest } from "./word-details-schema";
 
-const STORAGE_KEY = "ecp_word_details_cache_v1";
+const STORAGE_KEY = "ecp_word_details_cache_v2";
 const MAX_CACHED_WORDS = 100;
 const memoryCache = new Map<string, WordDetails>();
 
@@ -72,8 +72,10 @@ export function useWordDetails(
       .then((res) => (res.ok ? res.json() : null))
       .then((data: WordDetails | null) => {
         if (controller.signal.aborted || !data) return;
-        memoryCache.set(wordKey, data);
-        writeToStorage(wordKey, data);
+        if (!data.isFallback) {
+          memoryCache.set(wordKey, data);
+          writeToStorage(wordKey, data);
+        }
         setFetched({ key: wordKey, data });
       })
       .catch(() => {
