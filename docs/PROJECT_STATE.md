@@ -257,6 +257,16 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Set Landing Container to 1320px & Use hero-illustration.svg
+- Requested by owner: Set landing page content area max-width to `1320px` and replace the Hero right-side widget with `~/Downloads/hero-illustration.svg`.
+- Changed:
+  - `public/hero-illustration.svg`: Imported from `~/Downloads/hero-illustration.svg`.
+  - `src/app/globals.css`: Added `@utility container-landing` (`max-width: 1320px`).
+  - `src/app/page.tsx`: Switched header, hero, and `<main>` to `container-landing`; replaced right-side hero widget stack with `/hero-illustration.svg`.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Unified Soft-Gradient CTA + Nested Multi-Column Footer Card
 - Requested by owner: Update CTA and Footer to match the unified pastel-gradient container with centered CTA pills on top and nested white footer card (logo, pill email subscribe, 4 link columns, centered copyright) below.
 - Changed:

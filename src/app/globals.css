@@ -299,6 +299,11 @@ body {
   margin-inline: auto;
   padding-inline: var(--container-px);
 }
+@utility container-landing {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
 @utility overlap-band {
   margin-top: var(--band-overlap);
 }

@@ -86,7 +86,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Top Navigation Bar */}
       <header className="sticky top-0 z-header w-full border-b border-border bg-card/90 backdrop-blur">
-        <div className="container-app h-header flex items-center justify-between gap-4">
+        <div className="container-landing h-header flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center group shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -140,8 +140,8 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Section 1 — 2-Column SaaS Hero (Left Content + Right Interactive Widget) */}
-      <section className="container-app pt-8 pb-4 md:pt-12 md:pb-8">
+      {/* Section 1 — 2-Column SaaS Hero (Left Content + Right Illustration) */}
+      <section className="container-landing pt-8 pb-4 md:pt-12 md:pb-8">
         <div className="rounded-band bg-card border border-border/60 shadow-2xs p-6 sm:p-10 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Text Content & CTAs */}
           <div className="lg:col-span-6 space-y-6 text-left">
@@ -191,101 +191,19 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Right Column: SaaS Product Widget Showcase */}
-          <div className="lg:col-span-6">
-            <div className="rounded-card bg-muted/40 border border-border/70 p-4 sm:p-5 space-y-3.5 shadow-xs">
-              {/* Top Active Scenario Bar */}
-              <div className="rounded-panel bg-card border border-border px-4 py-3 flex items-center justify-between gap-3 shadow-2xs">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="size-tile rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                    <HugeiconsIcon icon={Message01Icon} size={18} />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-label font-semibold text-foreground truncate">
-                      Asking for Price &amp; Product Details
-                    </p>
-                    <p className="text-chip text-muted-foreground truncate">
-                      Shopping Ladder • Step 02 / 20
-                    </p>
-                  </div>
-                </div>
-                <span className="px-2.5 py-1 rounded-pill bg-primary text-primary-foreground text-chip font-semibold shrink-0">
-                  A1
-                </span>
-              </div>
-
-              {/* Middle Dialogue + AI Suggestion Widget */}
-              <div className="rounded-panel bg-card border border-border p-4 space-y-3 shadow-2xs">
-                <div className="space-y-1.5">
-                  <p className="text-label font-semibold text-foreground">
-                    &ldquo;Excuse me, do you have this shirt in medium?&rdquo;
-                  </p>
-                  <p className="text-chip text-muted-foreground text-bangla">
-                    মাফ করবেন, এই শার্টটি কি মিডিয়াম সাইজে আছে?
-                  </p>
-                </div>
-
-                <div className="rounded-control bg-accent/60 border border-border/60 px-3.5 py-2.5 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <HugeiconsIcon icon={BotIcon} size={16} className="text-primary shrink-0" />
-                    <span className="text-chip text-foreground truncate">
-                      AI Reply: &ldquo;Yes, let me check the rack for you!&rdquo;
-                    </span>
-                  </div>
-                  <span className="px-2 py-0.5 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold shrink-0">
-                    US / UK
-                  </span>
-                </div>
-              </div>
-
-              {/* Bottom 2-Column Mini Analytics & Grammar Widgets */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Mini Progress Widget */}
-                <div className="rounded-panel bg-card border border-border p-3.5 space-y-2.5 shadow-2xs">
-                  <div className="flex items-center justify-between">
-                    <span className="text-chip font-semibold text-foreground">
-                      SM-2 Retention
-                    </span>
-                    <span className="text-chip font-semibold text-primary">
-                      65%
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-6 items-end gap-1.5 h-10">
-                    <div className="h-4 rounded-t-control bg-sun-300" />
-                    <div className="h-6 rounded-t-control bg-sun-400" />
-                    <div className="h-5 rounded-t-control bg-sun-300" />
-                    <div className="h-8 rounded-t-control bg-sun-500" />
-                    <div className="h-7 rounded-t-control bg-primary/60" />
-                    <div className="h-10 rounded-t-control bg-primary" />
-                  </div>
-                </div>
-
-                {/* Mini Grammar Highlight Widget */}
-                <div className="rounded-panel bg-card border border-border p-3.5 space-y-2 shadow-2xs">
-                  <div className="flex items-center justify-between">
-                    <span className="text-chip font-semibold text-foreground">
-                      Grammar Path
-                    </span>
-                    <span className="px-2 py-0.5 rounded-pill bg-accent text-accent-foreground text-chip">
-                      8 Stages
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    <span className="px-2 py-0.5 rounded-pill bg-muted text-chip text-foreground">
-                      Polite Request
-                    </span>
-                    <span className="px-2 py-0.5 rounded-pill bg-sun-200 text-brand-950 text-chip">
-                      Interrogative
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Right Column: Hero Illustration */}
+          <div className="lg:col-span-6 flex items-center justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero-illustration.svg"
+              alt="English Partner learning illustration"
+              className="w-full h-auto max-w-lg mx-auto object-contain"
+            />
           </div>
         </div>
       </section>
 
-      <main className="flex-1 container-app py-14 md:py-20 space-y-20 md:space-y-24">
+      <main className="flex-1 container-landing py-14 md:py-20 space-y-20 md:space-y-24">
         {/* Section 2 — Bento Features Grid with Live Mini-UI Previews */}
         <section className="space-y-8">
           <div className="text-center max-w-reading mx-auto space-y-2.5">
