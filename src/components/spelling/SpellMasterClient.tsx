@@ -98,6 +98,7 @@ export function SpellMasterClient() {
   const [rulePart, setRulePart] = useState<RulePartId>("all");
   const [ruleReliability, setRuleReliability] = useState<"all" | RuleReliability>("all");
   const [ruleSearch, setRuleSearch] = useState("");
+  const [selectedRuleId, setSelectedRuleId] = useState<string>(SPELLING_RULES_55[0].id);
 
   // Test Tab State
   const [testMode, setTestMode] = useState<TestMode>("dictation");
@@ -280,6 +281,11 @@ export function SpellMasterClient() {
       return true;
     });
   }, [rulePart, ruleReliability, ruleSearch]);
+
+  const selectedRule = useMemo(
+    () => filteredRules.find((r) => r.id === selectedRuleId) ?? filteredRules[0] ?? null,
+    [filteredRules, selectedRuleId]
+  );
 
   const levelInfo = getLevelFromXp(progress.xp);
   const weakList = Object.values(progress.weakWords).sort((a, b) => b.mistakes - a.mistakes);
@@ -646,8 +652,111 @@ export function SpellMasterClient() {
     </div>
   ) : null;
 
+  const ruleDetailsSidebar = selectedRule ? (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <Badge variant="brand" size="sm" className="font-mono">
+            {selectedRule.id}
+          </Badge>
+          <Badge variant="outline" size="sm">
+            {selectedRule.reliability === "high"
+              ? "🟢 High"
+              : selectedRule.reliability === "medium"
+                ? "🟡 Medium"
+                : "🔴 Low (Guideline)"}
+          </Badge>
+        </div>
+        <HugeiconsIcon icon={BookOpen01Icon} size={18} className="text-primary shrink-0" />
+      </div>
+
+      <div className="space-y-1">
+        <p className="text-chip text-muted-foreground">
+          {RULE_PARTS.find((p) => p.id === selectedRule.part)?.label}
+        </p>
+        <h2 className="text-card-title font-semibold text-foreground">
+          {isBn ? selectedRule.titleBn : selectedRule.title}
+        </h2>
+        {isBn && (
+          <p className="text-meta text-muted-foreground">{selectedRule.title}</p>
+        )}
+      </div>
+
+      <div className="rounded-panel bg-muted/40 border border-border/60 p-3 space-y-1.5">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {isBn ? "নিয়মের ব্যাখ্যা" : "Rule Explanation"}
+        </p>
+        <p className={cn("text-meta text-foreground leading-relaxed", isBn && "text-bangla")}>
+          {isBn ? selectedRule.summaryBn : selectedRule.summaryEn}
+        </p>
+      </div>
+
+      {selectedRule.reliability === "low" && (
+        <p className="text-chip text-sun-700 bg-sun-100/70 rounded-control px-3 py-2 text-bangla">
+          ⚠️ এটি শুধু একটি গাইডলাইন—অডিও শুনে ও অনুশীলন করে মুখস্থ করাই বেশি কার্যকর।
+        </p>
+      )}
+
+      <div className="space-y-2 pt-2 border-t border-border/60">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {isBn ? "উদাহরণ (Examples)" : "Examples"}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {selectedRule.examples.map((ex, i) => (
+            <span
+              key={i}
+              className="px-2.5 py-1 rounded-control bg-muted/50 text-chip text-foreground font-mono"
+            >
+              {ex}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {selectedRule.exceptions.length > 0 && (
+        <div className="rounded-panel bg-muted/35 border border-border/60 p-3 space-y-1.5">
+          <p className="text-chip font-semibold text-foreground">
+            {isBn ? "ব্যতিক্রম (Exceptions):" : "Exceptions:"}
+          </p>
+          <p className="text-chip text-muted-foreground leading-relaxed">
+            {selectedRule.exceptions.join(" · ")}
+          </p>
+        </div>
+      )}
+
+      {selectedRule.mnemonic && (
+        <p className="text-chip text-primary font-semibold">
+          💡 {selectedRule.mnemonic}
+        </p>
+      )}
+
+      {selectedRule.categories.length > 0 && (
+        <Button
+          type="button"
+          variant="cta"
+          size="sm"
+          className="w-full gap-2"
+          onClick={() => {
+            setSelectedGroup("all");
+            setSelectedCategory(selectedRule.categories[0]);
+            setVisibleCount(PAGE_BATCH);
+            setActiveTab("learn");
+          }}
+        >
+          <span>{isBn ? "এই নিয়মের শব্দ প্র্যাকটিস করুন" : "Practice Words for this Rule"}</span>
+          <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+        </Button>
+      )}
+    </div>
+  ) : null;
+
   return (
-    <div className={cn("w-full", activeTab === "learn" && "lg:pr-80 xl:pr-96")}>
+    <div
+      className={cn(
+        "w-full",
+        (activeTab === "learn" || activeTab === "rules") && "lg:pr-80 xl:pr-96"
+      )}
+    >
       <PageContainer className="py-5 sm:py-6 space-y-5 pb-24 md:pb-16">
       {/* Top Header & Gamification Bar */}
       <Card className="p-4 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs">
@@ -871,6 +980,7 @@ export function SpellMasterClient() {
                         onClick={() => {
                           setRulePart(r.part);
                           setRuleSearch(r.id);
+                          setSelectedRuleId(r.id);
                           setActiveTab("rules");
                         }}
                         className="px-2 py-0.5 rounded-pill bg-primary/10 text-primary text-chip font-semibold hover:bg-primary/20 transition-colors cursor-pointer"
@@ -1288,72 +1398,54 @@ export function SpellMasterClient() {
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredRules.map((rule) => (
-              <Card
-                key={rule.id}
-                className="p-4 sm:p-5 bg-card border border-border rounded-card flex flex-col justify-between gap-3.5 shadow-xs"
-              >
-                <div className="space-y-2.5">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="space-y-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant="brand" size="sm" className="font-mono">
-                          {rule.id}
-                        </Badge>
-                        <Badge variant="outline" size="sm">
-                          {rule.reliability === "high"
-                            ? "🟢 High"
-                            : rule.reliability === "medium"
-                            ? "🟡 Medium"
-                            : "🔴 Low (Guideline)"}
-                        </Badge>
-                      </div>
-                      <h3 className="text-card-title text-foreground font-semibold">
-                        {isBn ? rule.titleBn : rule.title}
-                      </h3>
-                    </div>
-                    <HugeiconsIcon icon={BookOpen01Icon} size={18} className="text-primary shrink-0" />
-                  </div>
+          {/* Mobile Selected Rule Details Card */}
+          {ruleDetailsSidebar && (
+            <Card className="lg:hidden p-4 bg-card border border-border rounded-card shadow-xs">
+              {ruleDetailsSidebar}
+            </Card>
+          )}
 
-                  <p className={cn("text-meta text-muted-foreground leading-relaxed", isBn && "text-bangla")}>
-                    {isBn ? rule.summaryBn : rule.summaryEn}
-                  </p>
-
-                  {rule.reliability === "low" && (
-                    <p className="text-chip text-sun-700 bg-sun-100/70 rounded-control px-3 py-1.5 text-bangla">
-                      ⚠️ এটি শুধু একটি গাইডলাইন—অডিও শুনে ও অনুশীলন করে মুখস্থ করাই বেশি কার্যকর।
-                    </p>
+          {/* Compact Rule Title Grid (Details in Right Sidebar) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+            {filteredRules.map((rule) => {
+              const isSelected = selectedRule?.id === rule.id;
+              return (
+                <div
+                  key={rule.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setSelectedRuleId(rule.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedRuleId(rule.id);
+                    }
+                  }}
+                  className={cn(
+                    "rounded-card border p-3.5 flex flex-col justify-between gap-2 transition-all cursor-pointer text-left",
+                    isSelected
+                      ? "border-primary bg-primary/10 shadow-2xs"
+                      : "border-border bg-card hover:bg-muted/40"
                   )}
-
-                  <div className="flex flex-wrap gap-1.5">
-                    {rule.examples.map((ex, i) => (
-                      <span
-                        key={i}
-                        className="px-2.5 py-1 rounded-control bg-muted/50 text-chip text-foreground font-mono"
-                      >
-                        {ex}
-                      </span>
-                    ))}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge variant="brand" size="sm" className="font-mono">
+                      {rule.id}
+                    </Badge>
+                    <span className="text-chip text-muted-foreground">
+                      {rule.reliability === "high"
+                        ? "🟢 High"
+                        : rule.reliability === "medium"
+                          ? "🟡 Medium"
+                          : "🔴 Low"}
+                    </span>
                   </div>
-                </div>
-
-                {rule.exceptions.length > 0 && (
-                  <div className="rounded-panel bg-muted/35 border border-border/60 p-3 space-y-1">
-                    <p className="text-chip font-semibold text-foreground">Exceptions:</p>
-                    <p className="text-chip text-muted-foreground">
-                      {rule.exceptions.join(" · ")}
-                    </p>
-                  </div>
-                )}
-
-                {rule.mnemonic && (
-                  <p className="text-chip text-primary font-semibold">
-                    💡 {rule.mnemonic}
+                  <p className="text-label font-semibold text-foreground line-clamp-2">
+                    {isBn ? rule.titleBn : rule.title}
                   </p>
-                )}
-              </Card>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -1645,6 +1737,7 @@ export function SpellMasterClient() {
                         onClick={() => {
                           setRulePart("all");
                           setRuleSearch(rId);
+                          setSelectedRuleId(rId);
                           setActiveTab("rules");
                         }}
                         className="px-3 py-1 rounded-pill bg-destructive/10 text-destructive text-chip font-semibold cursor-pointer"
@@ -1660,10 +1753,15 @@ export function SpellMasterClient() {
       )}
     </PageContainer>
 
-      {/* Fixed Right Sidebar: Selected Word Details (Vocabulary Layout) */}
+      {/* Fixed Right Sidebar: Selected Word or Rule Details */}
       {activeTab === "learn" && wordDetailsSidebar && (
         <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4">
           {wordDetailsSidebar}
+        </aside>
+      )}
+      {activeTab === "rules" && ruleDetailsSidebar && (
+        <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4">
+          {ruleDetailsSidebar}
         </aside>
       )}
     </div>
