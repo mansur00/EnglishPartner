@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Redesign Who It's For as 4-Card Asymmetric Bento Grid
+- Requested by owner: Redesign Section 4 (`Who It's For`) into a 4-card asymmetric Bento Grid with widget previews (1 tall left card, 1 wide top-right card, 2 bottom-right cards).
+- Changed:
+  - `src/app/page.tsx`: Replaced Section 4 4-column divided card with 12-column asymmetric Bento Grid (`lg:col-span-4 lg:row-span-2` Students & Beginners, `lg:col-span-8` Travelers & Daily Speakers pipeline, `lg:col-span-4` Freelancers & Remote Tech strip, `lg:col-span-4` Job Seekers AI Feedback cluster).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Set Landing Container to 1320px & Use hero-illustration.svg
 - Requested by owner: Set landing page content area max-width to `1320px` and replace the Hero right-side widget with `~/Downloads/hero-illustration.svg`.
 - Changed:

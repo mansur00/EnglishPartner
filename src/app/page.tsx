@@ -42,45 +42,6 @@ const ECOSYSTEM_RIGHT = [
   { href: "/vocabulary", icon: Bookmark01Icon, label: "SM-2 Vocab" },
 ];
 
-const PASTEL_AUDIENCE_CARDS = [
-  {
-    topic: "shopping",
-    badge: "Students & Beginners (A1–A2)",
-    title: "Build Confidence From Zero With Bangla Support",
-    bnText:
-      "সহজ বাংলা ব্যাখ্যা, ২০ ধাপের গাইডেড ল্যাডার এবং গ্রামার ফাউন্ডেশন দিয়ে জড়তা কাটিয়ে ইংরেজি বলা শুরু করুন।",
-    cta: "Start Foundation",
-    href: "/grammar-path",
-  },
-  {
-    topic: "travel",
-    badge: "Travelers & Daily Speakers",
-    title: "Handle Airports, Shopping & Everyday Talks",
-    bnText:
-      "বিমানবন্দর, হোটেল বুকিং, হাসপাতাল ও দোকানে সাবলীলভাবে কথা বলার জন্য বাস্তব জীবনের ৪২+ প্রাসঙ্গিক সংলাপ।",
-    cta: "Explore Scenarios",
-    href: "/explore",
-  },
-  {
-    topic: "workplace",
-    badge: "Freelancers & Remote Tech",
-    title: "Speak Fluently in Client Calls & Standups",
-    bnText:
-      "UI/UX Designer, Software Engineer ও ফ্রিল্যান্সারদের জন্য ক্লায়েন্ট ডিসকভারি, ফিডব্যাক ও মিটিং অনুশীলন।",
-    cta: "View Career Tracks",
-    href: "/professions",
-  },
-  {
-    topic: "social",
-    badge: "Job Seekers & Interviewees",
-    title: "Sound Natural, Polite & Ready for Interviews",
-    bnText:
-      "AI পার্টনারের সাথে রোলপ্লে এবং 'What Should I Say?' দিয়ে যেকোনো পরিস্থিতির উপযুক্ত উত্তর তৈরি করুন।",
-    cta: "Practice With AI",
-    href: "/roleplay",
-  },
-];
-
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
@@ -468,59 +429,192 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Section 4 — Who It's For (4-Column Divided Card Reference) */}
-        <section className="rounded-card bg-card border border-border/60 shadow-2xs overflow-hidden">
-          <div className="px-6 pt-10 pb-8 text-center max-w-reading mx-auto space-y-2.5">
+        {/* Section 4 — Who It's For (4-Card Asymmetric Bento Grid Reference) */}
+        <section className="space-y-8">
+          <div className="text-center max-w-reading mx-auto space-y-2.5">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-card border border-border text-chip text-muted-foreground shadow-2xs">
+              Who It&apos;s For
+            </span>
             <h2 className="text-page-title font-heading text-foreground leading-tight">
               Built for Every Learner.
               <br />
               Structured From Day One.
             </h2>
-            <p className="text-meta text-muted-foreground text-bangla">
-              আপনার লক্ষ্য যেটাই হোক—সহজ বাংলা গাইডলাইন ও বাস্তব অনুশীলনে দ্রুত উন্নতি করুন।
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border border-t border-border">
-            {PASTEL_AUDIENCE_CARDS.map((card, idx) => (
-              <Link
-                key={card.title}
-                href={card.href}
-                className="p-6 flex flex-col justify-between gap-6 hover:bg-muted/25 transition-colors group"
-              >
-                <div className="space-y-3">
-                  <span
-                    className={`inline-block px-3 py-1 rounded-control text-chip font-semibold ${
-                      idx === 0
-                        ? "bg-foreground text-background"
-                        : "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    {card.badge}
-                  </span>
-                  <h3 className="text-label font-heading text-foreground group-hover:text-primary transition-colors">
-                    {card.title}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            {/* 1. Left Tall Card (4 cols, 2 rows): Students & Beginners */}
+            <Link
+              href="/grammar-path"
+              className="lg:col-span-4 lg:row-span-2 block group"
+            >
+              <Card className="h-full p-6 rounded-card bg-card border border-border/70 shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-6">
+                <div className="space-y-2">
+                  <h3 className="text-card-title font-heading text-foreground group-hover:text-primary transition-colors">
+                    Students &amp; Beginners
                   </h3>
                   <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
-                    {card.bnText}
+                    সহজ বাংলা ব্যাখ্যা, ২০ ধাপের গাইডেড ল্যাডার ও গ্রামার ফাউন্ডেশন দিয়ে শূন্য থেকে ইংরেজি বলা শুরু করুন।
                   </p>
                 </div>
 
-                {/* Minimal Wireframe Preview Box */}
-                <div className="rounded-panel bg-muted/40 border border-border/60 p-4 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="h-2 w-12 rounded-pill bg-primary/35" />
-                    <span className="h-2 w-6 rounded-pill bg-muted-foreground/25" />
+                {/* Vertical Milestone & Fluency Curve Widget */}
+                <div className="rounded-panel bg-muted/35 border border-border/60 p-5 flex-1 flex flex-col justify-between gap-4 min-h-64">
+                  <div className="self-end rounded-control bg-card border border-border px-3.5 py-2 shadow-xs flex items-center gap-2.5">
+                    <span className="size-7 rounded-pill bg-accent text-accent-foreground text-chip font-semibold flex items-center justify-center">
+                      A1
+                    </span>
+                    <div>
+                      <p className="text-chip font-semibold text-foreground">Stage 1: Foundation</p>
+                      <p className="text-chip text-muted-foreground">10 Guided Lessons</p>
+                    </div>
                   </div>
-                  <div className="h-2 w-full rounded-pill bg-border" />
-                  <div className="h-2 w-4/5 rounded-pill bg-border/70" />
-                  <div className="pt-1 flex items-center justify-between text-chip text-primary font-semibold">
-                    <span>{card.cta}</span>
-                    <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
+
+                  {/* Rising Progress Steps */}
+                  <div className="flex items-end gap-2 h-20 px-2">
+                    <div className="flex-1 h-6 rounded-t-control bg-primary/20" />
+                    <div className="flex-1 h-9 rounded-t-control bg-primary/35" />
+                    <div className="flex-1 h-12 rounded-t-control bg-primary/50" />
+                    <div className="flex-1 h-16 rounded-t-control bg-primary/75" />
+                    <div className="flex-1 h-20 rounded-t-control bg-primary" />
+                  </div>
+
+                  <div className="rounded-control bg-card border border-border p-3.5 shadow-sm space-y-1">
+                    <p className="text-chip text-muted-foreground">Confidence Score</p>
+                    <p className="text-card-title font-heading text-foreground">A1 → B2</p>
+                    <div className="flex items-center gap-2 pt-1">
+                      <span className="size-6 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold flex items-center justify-center">
+                        BN
+                      </span>
+                      <span className="text-chip text-muted-foreground">Bilingual Support</span>
+                    </div>
                   </div>
                 </div>
-              </Link>
-            ))}
+              </Card>
+            </Link>
+
+            {/* 2. Right Top Wide Card (8 cols): Travelers & Daily Speakers */}
+            <Link href="/explore" className="lg:col-span-8 block group">
+              <Card className="h-full p-6 rounded-card bg-card border border-border/70 shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-6">
+                <div className="space-y-2 max-w-reading">
+                  <h3 className="text-card-title font-heading text-foreground group-hover:text-primary transition-colors">
+                    Travelers &amp; Daily Speakers
+                  </h3>
+                  <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
+                    দোকান, বিমানবন্দর, হোটেল, হাসপাতাল ও দৈনন্দিন কথোপকথনের জন্য ৪২+ বাস্তব পরিস্থিতি অনুযায়ী সাজানো সংলাপ।
+                  </p>
+                </div>
+
+                {/* Horizontal Pipeline Visual */}
+                <div className="rounded-panel bg-muted/35 border border-border/60 p-5 grid grid-cols-1 sm:grid-cols-11 items-center gap-4">
+                  {/* Left Mini Scenario Cards */}
+                  <div className="sm:col-span-5 space-y-2">
+                    <div className="rounded-control bg-card border border-border p-3 shadow-2xs space-y-1.5">
+                      <div className="flex items-center gap-2">
+                        <span className="size-6 rounded-pill bg-primary/15 text-primary text-chip font-semibold flex items-center justify-center">
+                          01
+                        </span>
+                        <span className="h-2 w-24 rounded-pill bg-border" />
+                      </div>
+                      <div className="h-2 w-full rounded-pill bg-muted" />
+                    </div>
+                    <div className="rounded-control bg-card border border-border p-3 shadow-xs space-y-1.5 sm:translate-x-3">
+                      <div className="flex items-center gap-2">
+                        <span className="size-6 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold flex items-center justify-center">
+                          02
+                        </span>
+                        <span className="h-2 w-28 rounded-pill bg-primary/30" />
+                      </div>
+                      <div className="h-2 w-4/5 rounded-pill bg-muted" />
+                    </div>
+                  </div>
+
+                  {/* Center Hub Icon */}
+                  <div className="sm:col-span-1 flex justify-center">
+                    <div className="size-9 rounded-control bg-primary text-primary-foreground flex items-center justify-center shadow-xs">
+                      <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
+                    </div>
+                  </div>
+
+                  {/* Right Category Count Pills */}
+                  <div className="sm:col-span-5 flex flex-wrap gap-2 justify-center sm:justify-start">
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                      Shopping <span className="text-primary ml-1">20</span>
+                    </span>
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                      Travel <span className="text-primary ml-1">8</span>
+                    </span>
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                      Workplace <span className="text-primary ml-1">6</span>
+                    </span>
+                    <span className="px-3 py-1.5 rounded-control bg-card border border-border text-chip font-semibold text-foreground shadow-2xs">
+                      Health <span className="text-primary ml-1">8</span>
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </Link>
+
+            {/* 3. Right Bottom Left Card (4 cols): Freelancers & Remote Tech */}
+            <Link href="/professions" className="lg:col-span-4 block group">
+              <Card className="h-full p-6 rounded-card bg-card border border-border/70 shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-6">
+                <div className="space-y-2">
+                  <h3 className="text-card-title font-heading text-foreground group-hover:text-primary transition-colors">
+                    Freelancers &amp; Remote Tech
+                  </h3>
+                  <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
+                    UI/UX Designer, Software Engineer ও ফ্রিল্যান্সারদের জন্য ক্লায়েন্ট মিটিং ও প্রফেশনাল ট্র্যাক।
+                  </p>
+                </div>
+
+                {/* Connected 3-Node Strip */}
+                <div className="rounded-panel bg-muted/35 border border-border/60 p-5 flex items-center justify-center gap-3">
+                  <div className="size-12 rounded-control bg-primary text-primary-foreground flex items-center justify-center shadow-xs">
+                    <HugeiconsIcon icon={Briefcase01Icon} size={20} />
+                  </div>
+                  <span className="h-0.5 w-5 bg-border" />
+                  <div className="size-12 rounded-control bg-card border border-border text-foreground flex items-center justify-center shadow-2xs text-chip font-semibold">
+                    5 Tracks
+                  </div>
+                  <span className="h-0.5 w-5 bg-border" />
+                  <div className="size-12 rounded-control bg-sun-500 text-brand-950 flex items-center justify-center shadow-xs">
+                    <HugeiconsIcon icon={BookOpen01Icon} size={20} />
+                  </div>
+                </div>
+              </Card>
+            </Link>
+
+            {/* 4. Right Bottom Right Card (4 cols): Job Seekers & Interviewees */}
+            <Link href="/roleplay" className="lg:col-span-4 block group">
+              <Card className="h-full p-6 rounded-card bg-card border border-border/70 shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-6">
+                <div className="space-y-2">
+                  <h3 className="text-card-title font-heading text-foreground group-hover:text-primary transition-colors">
+                    Job Seekers &amp; Interviewees
+                  </h3>
+                  <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
+                    AI পার্টনারের সাথে রোলপ্লে ও &lsquo;What Should I Say?&rsquo; দিয়ে ইন্টারভিউ প্রস্তুতি নিন।
+                  </p>
+                </div>
+
+                {/* Centered Cluster Widget */}
+                <div className="rounded-panel bg-muted/35 border border-border/60 p-5 flex items-center justify-center relative">
+                  <div className="rounded-pill bg-card border border-border px-4 py-2.5 shadow-xs flex items-center gap-2">
+                    <span className="size-7 rounded-pill bg-primary text-primary-foreground text-chip font-semibold flex items-center justify-center">
+                      AI
+                    </span>
+                    <span className="size-7 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold flex items-center justify-center">
+                      EN
+                    </span>
+                    <span className="size-7 rounded-pill bg-accent text-accent-foreground text-chip font-semibold flex items-center justify-center">
+                      BN
+                    </span>
+                    <span className="text-chip font-semibold text-foreground pl-1">
+                      Live Feedback
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </Link>
           </div>
         </section>
 
