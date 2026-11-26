@@ -2156,6 +2156,11 @@ Entry format:
 
 - Extended the 100% visible + 95% locked Guest mode across `GrammarPathClient.tsx` (Stage 1 unlocked, Stages 2–8 & AI Writing Checker locked), `RoleplayPartner.tsx` (1-turn 5% preview, then locked), `vocabulary/page.tsx` (first 5% Magic Decks unlocked, 95% locked), and `quiz/page.tsx` (first 5% quizzes unlocked, 95% locked).
 
+### 2026-11-27, Dedicated Admin Panel (`/admin-panel`), Activity Days & Per-User Feature Controls
+- Added `supabase/migrations/20261127_user_activity_and_features.sql` (`last_active_at`, `disabled_features` on `public.profiles`) and heartbeat tracking in `src/lib/auth/session.ts`.
+- Created dedicated `/admin-panel` (`src/components/admin/AdminPanelClient.tsx` + `src/app/(app)/admin-panel/page.tsx`) with 3 tabs (**Users & Activity** showing `Active today` / `Active Xd ago` / `Inactive X days` + per-user feature toggles, **Global Feature Controls**, and **AI Quota, Guest & Notice**).
+- Added `Admin Panel` link to `Sidebar.tsx` (visible only when `user.role === "admin"`), updated `useFeatureFlags` to enforce per-user `disabled_features`, and kept `/settings` focused on Learner Settings with a quick link to `/admin-panel`.
+
 ### 2026-11-27, Instant Signup Without Email Confirmation (`/api/v1/auth/signup`)
 - Added `POST /api/v1/auth/signup` creating immediately confirmed Supabase Auth users (`email_confirmed_at = now()`) + `public.profiles` rows via `DATABASE_URL`, and updated `src/app/auth/login/page.tsx` so new users sign up and log in immediately without sending confirmation emails or hitting Supabase email rate limits.
 

@@ -8,12 +8,14 @@ export interface UserProfile {
   full_name: string | null;
   role: AppUserRole;
   is_active: boolean;
+  last_active_at?: string | null;
+  disabled_features?: string[];
   created_at?: string;
 }
 
 /**
  * Resolves the currently authenticated Supabase user and their `public.profiles` row.
- * Returns null if unauthenticated.
+ * Also refreshes `last_active_at` if stale (> 5 min).
  */
 export async function getCurrentUserProfile(): Promise<UserProfile | null> {
   try {
@@ -27,7 +29,7 @@ export async function getCurrentUserProfile(): Promise<UserProfile | null> {
 
     const { data: profile } = await supabase
       .from("profiles")
-      .select("id, email, full_name, role, is_active, created_at")
+      .select("id, email, full_name, role, is_active, last_active_at, disabled_features, created_at")
       .eq("id", user.id)
       .single();
 
@@ -41,7 +43,19 @@ export async function getCurrentUserProfile(): Promise<UserProfile | null> {
           "Learner",
         role: "user",
         is_active: true,
+        disabled_features: [],
       };
+    }
+
+    // Heartbeat: update last_active_at if > 5 minutes old
+    const lastMs = profile.last_active_at ? new Date(profile.last_active_at).getTime() : 0;
+    if (Date.now() - lastMs > 5 * 60 * 1000) {
+      const nowIso = new Date().toISOString();
+      await supabase
+        .from("profiles")
+        .update({ last_active_at: nowIso })
+        .eq("id", user.id);
+      profile.last_active_at = nowIso;
     }
 
     return {
@@ -50,6 +64,10 @@ export async function getCurrentUserProfile(): Promise<UserProfile | null> {
       full_name: profile.full_name,
       role: profile.role === "admin" ? "admin" : "user",
       is_active: profile.is_active !== false,
+      last_active_at: profile.last_active_at,
+      disabled_features: Array.isArray(profile.disabled_features)
+        ? profile.disabled_features.filter((x): x is string => typeof x === "string")
+        : [],
       created_at: profile.created_at,
     };
   } catch {

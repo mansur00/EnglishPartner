@@ -6,6 +6,7 @@ const UpdateUserSchema = z.object({
   userId: z.string().uuid(),
   role: z.enum(["user", "admin"]).optional(),
   is_active: z.boolean().optional(),
+  disabled_features: z.array(z.string()).optional(),
 });
 
 export async function GET() {
@@ -20,7 +21,7 @@ export async function GET() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, email, full_name, role, is_active, created_at")
+    .select("id, email, full_name, role, is_active, last_active_at, disabled_features, created_at")
     .order("created_at", { ascending: true });
 
   if (error) {
@@ -48,7 +49,7 @@ export async function PATCH(req: Request) {
     );
   }
 
-  const { userId, role, is_active } = parsed.data;
+  const { userId, role, is_active, disabled_features } = parsed.data;
   if (userId === current.id && (role === "user" || is_active === false)) {
     return Response.json(
       { error: "Cannot demote or disable your own admin account." },
@@ -59,13 +60,14 @@ export async function PATCH(req: Request) {
   const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
   if (role !== undefined) updates.role = role;
   if (is_active !== undefined) updates.is_active = is_active;
+  if (disabled_features !== undefined) updates.disabled_features = disabled_features;
 
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("profiles")
     .update(updates)
     .eq("id", userId)
-    .select("id, email, full_name, role, is_active, created_at")
+    .select("id, email, full_name, role, is_active, last_active_at, disabled_features, created_at")
     .single();
 
   if (error) {

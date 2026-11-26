@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { t, useLocale } from "@/lib/i18n";
 import { useFeatureFlags } from "@/lib/features/use-feature-flags";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { HugeiconsIcon } from "@hugeicons/react";
 import type { IconSvgElement } from "@hugeicons/react";
 import {
@@ -34,6 +35,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const locale = useLocale();
   const { isEnabled } = useFeatureFlags();
+  const { user } = useSessionAccess();
 
   const navItems: NavItem[] = [
     {
@@ -108,6 +110,16 @@ export function Sidebar() {
       icon: Settings01Icon,
       active: pathname === "/settings",
     },
+    ...(user?.role === "admin"
+      ? [
+          {
+            name: locale === "bn" ? "অ্যাডমিন প্যানেল" : "Admin Panel",
+            href: "/admin-panel",
+            icon: Briefcase01Icon,
+            active: pathname.startsWith("/admin-panel"),
+          },
+        ]
+      : []),
   ];
 
   return (

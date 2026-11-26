@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
-import { AdminControlTab } from "@/components/settings/AdminControlTab";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import type { UserProfile } from "@/lib/auth/session";
@@ -68,7 +67,6 @@ export function SettingsClient() {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
-  const [settingsTab, setSettingsTab] = useState<"learner" | "admin">("learner");
 
   // Settings State
   const [audioSpeed, setAudioSpeed] = useState("1.0x");
@@ -138,7 +136,6 @@ export function SettingsClient() {
     const supabase = createBrowserSupabaseClient();
     await supabase.auth.signOut();
     setCurrentUser(null);
-    setSettingsTab("learner");
     router.refresh();
   };
 
@@ -309,33 +306,19 @@ export function SettingsClient() {
           </div>
         </div>
 
-        {/* Admin vs Learner Settings Switcher (Only visible to Admin) */}
+        {/* Direct link to separate Admin Panel for Admin users */}
         {currentUser?.role === "admin" && (
           <div className="flex flex-wrap items-center gap-2">
-            <Button
-              type="button"
-              size="sm"
-              variant={settingsTab === "learner" ? "default" : "outline"}
-              onClick={() => setSettingsTab("learner")}
-            >
-              {locale === "bn" ? "সাধারণ সেটিংস" : "Learner Settings"}
-            </Button>
-            <Button
-              type="button"
-              size="sm"
-              variant={settingsTab === "admin" ? "default" : "outline"}
-              onClick={() => setSettingsTab("admin")}
-            >
-              {locale === "bn" ? "অ্যাডমিন কন্ট্রোল (ইউজার ও ফিচার)" : "Admin Controls (Users & Features)"}
-            </Button>
+            <Link href="/admin-panel">
+              <Button type="button" size="sm" variant="cta">
+                {locale === "bn" ? "অ্যাডমিন প্যানেল খুলুন →" : "Open Admin Panel →"}
+              </Button>
+            </Link>
           </div>
         )}
       </div>
 
-      {currentUser?.role === "admin" && settingsTab === "admin" ? (
-        <AdminControlTab currentUserId={currentUser.id} locale={locale} />
-      ) : (
-        <>
+      <>
           {!currentUser && (
             <GuestLimitBanner
               featureName={locale === "bn" ? "গেস্ট সেটিংস (সীমিত)" : "Guest Settings (Limited)"}
@@ -951,8 +934,7 @@ export function SettingsClient() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-        </>
-      )}
+      </>
     </PageContainer>
   );
 }
