@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Redesign Hero Section as 2-Column SaaS Layout with Right Widget Showcase
+- Requested by owner: Redesign Hero section with left-side text/CTAs and right-side interactive SaaS product widget (keeping `Our Features` and `{learning_ecosystem}` unchanged).
+- Changed:
+  - `src/app/page.tsx`: Replaced centered Hero with 12-column split SaaS Hero (`lg:col-span-6` left text/CTA/metrics + `lg:col-span-6` right widget stack showing active Shopping Ladder card, dialogue + AI Reply + US/UK pill, SM-2 Retention bar chart, and Grammar Path chips).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Update Landing Page Hero, Who It's For, CTA & Footer per References
 - Requested by owner: Keep `Our Features` and `{learning_ecosystem}` unchanged; redesign Hero (light airy floating-badge cluster), `Who It's For` (4-column divided card with wireframe boxes), CTA banner (deep brand spotlight), and multi-column SaaS Footer with subtle watermark wordmark.
 - Changed:

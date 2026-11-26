@@ -141,90 +141,147 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Section 1 — Light Airy Hero (Paywall Reference) */}
-      <section className="container-app pt-6 md:pt-8">
-        <div className="rounded-band bg-card border border-border/60 shadow-2xs px-4 sm:px-8 md:px-12 py-12 md:py-16 text-center space-y-8 relative overflow-hidden">
-          {/* Floating Learner & Feature Cluster */}
-          <div className="max-w-reading mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
-            {/* Left Floating Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-background border border-border shadow-xs text-chip">
-              <span className="size-6 rounded-pill bg-sun-200 text-brand-950 flex items-center justify-center font-semibold">
-                <HugeiconsIcon icon={BookOpen01Icon} size={13} />
-              </span>
-              <span className="text-foreground font-semibold">8 Grammar Stages</span>
+      {/* Section 1 — 2-Column SaaS Hero (Left Content + Right Interactive Widget) */}
+      <section className="container-app pt-8 pb-4 md:pt-12 md:pb-8">
+        <div className="rounded-band bg-card border border-border/60 shadow-2xs p-6 sm:p-10 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Text Content & CTAs */}
+          <div className="lg:col-span-6 space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-accent text-accent-foreground text-chip font-semibold">
+              <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary" />
+              <span>Spoken English &amp; Grammar for Bangla Speakers</span>
             </div>
 
-            {/* Avatar / Learner Node 1 */}
-            <div className="relative">
-              <div className="size-11 rounded-pill bg-primary/15 border border-primary/30 flex items-center justify-center text-primary font-semibold text-label shadow-2xs">
-                A1
-              </div>
-              <span className="absolute -bottom-1 -right-1 size-5 rounded-pill bg-primary text-primary-foreground flex items-center justify-center text-chip shadow-2xs">
-                +
-              </span>
-            </div>
-
-            {/* Center Featured Node */}
-            <div className="relative">
-              <div className="size-16 rounded-pill bg-gradient-to-br from-primary to-brand-800 text-primary-foreground flex flex-col items-center justify-center shadow-sm">
-                <HugeiconsIcon icon={Mic01Icon} size={22} />
-                <span className="text-chip font-semibold leading-none mt-0.5">Speak</span>
-              </div>
-              <span className="absolute -bottom-1 -right-1 size-6 rounded-pill bg-sun-500 text-brand-950 flex items-center justify-center text-chip font-semibold shadow-2xs">
-                +
-              </span>
-            </div>
-
-            {/* Avatar / Learner Node 2 */}
-            <div className="relative">
-              <div className="size-12 rounded-pill bg-accent border border-border flex items-center justify-center text-accent-foreground font-semibold text-label shadow-2xs">
-                B2
-              </div>
-              <span className="absolute -bottom-1 -right-1 size-5 rounded-pill bg-primary text-primary-foreground flex items-center justify-center text-chip shadow-2xs">
-                +
-              </span>
-            </div>
-
-            {/* Right Floating Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-background border border-border shadow-xs text-chip">
-              <span className="size-6 rounded-pill bg-primary/15 text-primary flex items-center justify-center font-semibold">
-                <HugeiconsIcon icon={BotIcon} size={13} />
-              </span>
-              <span className="text-foreground font-semibold">+42 Dialogues</span>
-            </div>
-          </div>
-
-          {/* Headline & Bangla Subtitle */}
-          <div className="max-w-reading mx-auto space-y-4">
             <h1 className="text-page-title font-heading tracking-tight text-foreground leading-tight">
-              Speak Real-Life English With Confidence Today
+              Speak Real-Life English With Confidence — From Bangla to Fluency
             </h1>
-            <p className="text-lead text-muted-foreground text-bangla max-w-reading mx-auto leading-relaxed">
-              বাস্তব জীবনের সংলাপ, বাংলা অনুবাদ, ৮ ধাপের গ্রামার পাথ এবং AI রোলপ্লে পার্টনারের মাধ্যমে সাবলীল ইংরেজি শিখুন।
+
+            <p className="text-lead text-muted-foreground text-bangla leading-relaxed">
+              বাস্তব জীবনের সংলাপ, বাংলা অনুবাদ, ৮ ধাপের গ্রামার পাথ এবং AI রোলপ্লে পার্টনারের মাধ্যমে দ্রুত ও সাবলীল ইংরেজি শিখুন।
             </p>
+
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  className="rounded-control px-7 gap-2 shadow-sm text-label font-semibold"
+                >
+                  <HugeiconsIcon icon={SparklesIcon} size={18} />
+                  <span>Start Learning Free</span>
+                </Button>
+              </Link>
+              <Link href="/explore">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="rounded-control px-6 gap-2 text-label text-bangla"
+                >
+                  <span>কথোপকথন এক্সপ্লোর করুন</span>
+                  <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
+                </Button>
+              </Link>
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-chip text-muted-foreground">
+              <span>42+ Real-Life Scenarios</span>
+              <span>•</span>
+              <span>8 Grammar Stages</span>
+              <span>•</span>
+              <span>5 Career Tracks</span>
+              <span>•</span>
+              <span>CEFR A1–C2</span>
+            </div>
           </div>
 
-          {/* Primary Pill CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
-            <Link href="/dashboard">
-              <Button
-                size="lg"
-                className="rounded-pill px-8 gap-2.5 shadow-sm text-label font-semibold"
-              >
-                <HugeiconsIcon icon={SparklesIcon} size={18} />
-                <span>Start Learning Free</span>
-              </Button>
-            </Link>
-            <Link href="/explore">
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-pill px-6 gap-2 text-label text-bangla"
-              >
-                <span>কথোপকথন দেখুন</span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
-              </Button>
-            </Link>
+          {/* Right Column: SaaS Product Widget Showcase */}
+          <div className="lg:col-span-6">
+            <div className="rounded-card bg-muted/40 border border-border/70 p-4 sm:p-5 space-y-3.5 shadow-xs">
+              {/* Top Active Scenario Bar */}
+              <div className="rounded-panel bg-card border border-border px-4 py-3 flex items-center justify-between gap-3 shadow-2xs">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="size-tile rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <HugeiconsIcon icon={Message01Icon} size={18} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-label font-semibold text-foreground truncate">
+                      Asking for Price &amp; Product Details
+                    </p>
+                    <p className="text-chip text-muted-foreground truncate">
+                      Shopping Ladder • Step 02 / 20
+                    </p>
+                  </div>
+                </div>
+                <span className="px-2.5 py-1 rounded-pill bg-primary text-primary-foreground text-chip font-semibold shrink-0">
+                  A1
+                </span>
+              </div>
+
+              {/* Middle Dialogue + AI Suggestion Widget */}
+              <div className="rounded-panel bg-card border border-border p-4 space-y-3 shadow-2xs">
+                <div className="space-y-1.5">
+                  <p className="text-label font-semibold text-foreground">
+                    &ldquo;Excuse me, do you have this shirt in medium?&rdquo;
+                  </p>
+                  <p className="text-chip text-muted-foreground text-bangla">
+                    মাফ করবেন, এই শার্টটি কি মিডিয়াম সাইজে আছে?
+                  </p>
+                </div>
+
+                <div className="rounded-control bg-accent/60 border border-border/60 px-3.5 py-2.5 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <HugeiconsIcon icon={BotIcon} size={16} className="text-primary shrink-0" />
+                    <span className="text-chip text-foreground truncate">
+                      AI Reply: &ldquo;Yes, let me check the rack for you!&rdquo;
+                    </span>
+                  </div>
+                  <span className="px-2 py-0.5 rounded-pill bg-sun-500 text-brand-950 text-chip font-semibold shrink-0">
+                    US / UK
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom 2-Column Mini Analytics & Grammar Widgets */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Mini Progress Widget */}
+                <div className="rounded-panel bg-card border border-border p-3.5 space-y-2.5 shadow-2xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-chip font-semibold text-foreground">
+                      SM-2 Retention
+                    </span>
+                    <span className="text-chip font-semibold text-primary">
+                      65%
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-6 items-end gap-1.5 h-10">
+                    <div className="h-4 rounded-t-control bg-sun-300" />
+                    <div className="h-6 rounded-t-control bg-sun-400" />
+                    <div className="h-5 rounded-t-control bg-sun-300" />
+                    <div className="h-8 rounded-t-control bg-sun-500" />
+                    <div className="h-7 rounded-t-control bg-primary/60" />
+                    <div className="h-10 rounded-t-control bg-primary" />
+                  </div>
+                </div>
+
+                {/* Mini Grammar Highlight Widget */}
+                <div className="rounded-panel bg-card border border-border p-3.5 space-y-2 shadow-2xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-chip font-semibold text-foreground">
+                      Grammar Path
+                    </span>
+                    <span className="px-2 py-0.5 rounded-pill bg-accent text-accent-foreground text-chip">
+                      8 Stages
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    <span className="px-2 py-0.5 rounded-pill bg-muted text-chip text-foreground">
+                      Polite Request
+                    </span>
+                    <span className="px-2 py-0.5 rounded-pill bg-sun-200 text-brand-950 text-chip">
+                      Interrogative
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
