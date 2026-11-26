@@ -157,6 +157,7 @@ export default function ExplorePage() {
         <CategoryPills
           selectedCategory={selectedCategory}
           onSelectCategory={handleCategorySelect}
+          wrap
         />
       </div>
 
@@ -172,6 +173,7 @@ export default function ExplorePage() {
           onReset={handleResetFilters}
           isFiltered={isFiltered}
           embedded
+          sidebar
         />
       </div>
     </>

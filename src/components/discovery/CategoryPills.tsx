@@ -8,16 +8,23 @@ import { useLocale } from "@/lib/i18n";
 interface CategoryPillsProps {
   selectedCategory: string;
   onSelectCategory: (slug: string) => void;
+  wrap?: boolean;
 }
 
 export function CategoryPills({
   selectedCategory,
   onSelectCategory,
+  wrap = false,
 }: CategoryPillsProps) {
   const locale = useLocale();
 
   return (
-    <div className="flex items-center gap-2.5 overflow-x-auto pb-2 pt-1 no-scrollbar scroll-smooth">
+    <div
+      className={cn(
+        "flex items-center gap-2 pt-1",
+        wrap ? "flex-wrap" : "overflow-x-auto pb-2 no-scrollbar scroll-smooth"
+      )}
+    >
       {CATEGORIES_LIST.map((cat) => {
         const isSelected = selectedCategory === cat.slug;
         const theme = getCategoryTheme(cat.slug);

@@ -23,6 +23,7 @@ interface FilterBarProps {
   onReset: () => void;
   isFiltered: boolean;
   embedded?: boolean;
+  sidebar?: boolean;
 }
 
 export function FilterBar({
@@ -35,6 +36,7 @@ export function FilterBar({
   onReset,
   isFiltered,
   embedded = false,
+  sidebar = false,
 }: FilterBarProps) {
   const locale = useLocale();
   const visibleTiers = getLengthTiersForLevel(level);
@@ -53,19 +55,21 @@ export function FilterBar({
   return (
     <div
       className={
-        embedded
+        sidebar
+          ? "flex flex-col gap-2.5 w-full"
+          : embedded
           ? "flex flex-wrap items-center gap-3"
           : "sticky top-header z-10 flex flex-wrap items-center gap-3 p-4 rounded-card bg-card/95 backdrop-blur shadow-xs border-0"
       }
     >
-      <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-label mr-1">
-        <HugeiconsIcon icon={FilterIcon} size={16} className="text-primary" />
+      <div className="flex items-center gap-2 text-muted-foreground uppercase tracking-wider text-chip mr-1">
+        <HugeiconsIcon icon={FilterIcon} size={15} className="text-primary" />
         <span>{t("discovery.filters", locale)}</span>
       </div>
 
       {/* Level Filter (A1 - C2) */}
       <Select value={level} onValueChange={handleLevelChange}>
-        <SelectTrigger className="w-52 h-control-md text-label border border-input bg-transparent">
+        <SelectTrigger className={sidebar ? "w-full h-control-md text-label border border-input bg-transparent" : "w-52 h-control-md text-label border border-input bg-transparent"}>
           <SelectValue>
             {(val) => {
               if (!val || val === "all") return t("discovery.allLevels", locale);
@@ -97,7 +101,7 @@ export function FilterBar({
         value={lengthType}
         onValueChange={(val) => setLengthType((val as string) || "all")}
       >
-        <SelectTrigger className="w-52 h-control-md text-label border border-input bg-transparent">
+        <SelectTrigger className={sidebar ? "w-full h-control-md text-label border border-input bg-transparent" : "w-52 h-control-md text-label border border-input bg-transparent"}>
           <SelectValue>
             {(val) => {
               if (!val || val === "all") return t("discovery.anyLength", locale);
@@ -126,7 +130,7 @@ export function FilterBar({
         value={style}
         onValueChange={(val) => setStyle((val as string) || "all")}
       >
-        <SelectTrigger className="w-48 h-control-md text-label border border-input bg-transparent">
+        <SelectTrigger className={sidebar ? "w-full h-control-md text-label border border-input bg-transparent" : "w-48 h-control-md text-label border border-input bg-transparent"}>
           <SelectValue>
             {(val) => {
               if (!val || val === "all") return t("discovery.anyStyle", locale);
@@ -153,7 +157,11 @@ export function FilterBar({
           variant="destructive"
           size="sm"
           onClick={onReset}
-          className="btn-press h-control-md text-label gap-1.5 ml-auto px-4 rounded-control"
+          className={
+            sidebar
+              ? "btn-press h-control-md text-label gap-1.5 w-full px-4 rounded-control"
+              : "btn-press h-control-md text-label gap-1.5 ml-auto px-4 rounded-control"
+          }
         >
           <HugeiconsIcon icon={Cancel01Icon} size={16} />
           <span>{t("discovery.resetFilters", locale)}</span>
