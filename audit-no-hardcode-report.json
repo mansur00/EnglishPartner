@@ -64,25 +64,13 @@
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 112,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label font-semibold\">"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 126,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<div className=\"flex items-center gap-2 text-label font-semibold\">"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 143,
+      "line": 113,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 206,
+      "line": 172,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{stage.title}</h2>"
     },
@@ -391,13 +379,13 @@
     },
     {
       "file": "src/app/(app)/professions/page.tsx",
-      "line": 90,
+      "line": 89,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/app/(app)/professions/page.tsx",
-      "line": 118,
+      "line": 117,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
@@ -612,15 +600,6 @@
     },
     {
       "detail": "ClassName repeated 3 times",
-      "className": "p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs",
-      "files": [
-        "src/app/(app)/professions/page.tsx",
-        "src/components/grammar/GrammarPathClient.tsx",
-        "src/components/tools/WhatShouldISay.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
       "className": "flex items-center justify-between flex-wrap gap-2",
       "files": [
         "src/app/(app)/professions/page.tsx",
@@ -792,11 +771,10 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 3 times",
       "className": "flex items-center justify-between gap-2 flex-wrap",
       "files": [
         "src/components/grammar/GrammarLegend.tsx",
-        "src/components/grammar/GrammarPathClient.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
         "src/components/shared/WordDetailsSections.tsx"
       ]

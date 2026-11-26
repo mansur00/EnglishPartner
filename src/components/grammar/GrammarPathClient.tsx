@@ -5,8 +5,6 @@ import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ArrowRight01Icon,
-  CheckmarkCircle02Icon,
-  Clock01Icon,
   Layers01Icon,
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
@@ -66,23 +64,18 @@ export function GrammarPathClient() {
 
   return (
     <PageContainer className="py-6 space-y-6 pb-16">
-      {/* Header & Progress Overview */}
-      <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
+      {/* Compact Header & Progress Overview */}
+      <Card className="p-5 sm:p-6 bg-card border border-border space-y-3.5 shadow-xs">
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-2">
-            <Tag variant="brand" size="sm">
-              8 Stages · {totalCount} Detailed Lessons
-            </Tag>
-            <Pill variant="neutral" size="sm">
-              Rules · Word Bank · 5 Sentences · 10 Quiz
-            </Pill>
-          </div>
+          <Tag variant="brand" size="sm">
+            8 Stages · {totalCount} Lessons
+          </Tag>
           <Pill variant="brand" size="sm">
             {completedCount} / {totalCount} Completed ({progressPercent}%)
           </Pill>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           <LocaleTitle
             as="h1"
             titleEn="Grammar Learning Path"
@@ -91,14 +84,13 @@ export function GrammarPathClient() {
           />
           <p className={cn("text-meta text-muted-foreground", isBangla && "text-subtitle-bn")}>
             {isBangla
-              ? "সহজ থেকে অ্যাডভান্সড পর্যন্ত ৮টি ধাপে সম্পূর্ণ ইংরেজি গ্রামার। প্রতিটি Stage-এ ঢুকে প্রতিটি টাইপের বিস্তারিত নিয়ম, ২০-৩০টি শব্দ, ৫টি বাক্য তৈরি, সঠিক শব্দ বাছাই এবং ১০ নম্বরের কুইজ দিয়ে শিখুন।"
+              ? "সহজ থেকে অ্যাডভান্সড পর্যন্ত ৮টি ধাপে সম্পূর্ণ ইংরেজি গ্রামার — প্রতিটি লেসনে বিস্তারিত নিয়ম, উদাহরণ ও কুইজ।"
               : locale === "hi"
-              ? "बेसिक से एडवांस्ड तक 8 चरणों में विस्तृत अंग्रेजी ग्रामर। हर Stage में हर प्रकार के नियम, शब्द भंडार, 5 वाक्य बनाना और 10 प्रश्नों की क्विज़ शामिल है।"
-              : "Master English grammar in depth across 8 structured stages. Each stage opens detailed lessons with sub-types, 20–30 word banks, 5 sentence-making prompts, right-word exercises, and a 10-question quiz."}
+              ? "बेसिक से एडवांस्ड तक 8 चरणों में विस्तृत अंग्रेजी ग्रामर।"
+              : "Master English grammar step by step across 8 stages — rules, examples, practice, and quizzes."}
           </p>
         </div>
 
-        {/* Progress Bar */}
         <div className="w-full h-2 rounded-pill bg-muted overflow-hidden">
           <div
             className="h-full bg-primary transition-all duration-300"
@@ -106,35 +98,13 @@ export function GrammarPathClient() {
           />
         </div>
 
-        {/* Golden Sequence Trick + Daily Routine */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-          <div className="p-3.5 rounded-panel bg-status-info-bg text-status-info-ink space-y-1">
-            <div className="flex items-center gap-2 text-label font-semibold">
-              <HugeiconsIcon icon={SparklesIcon} size={16} />
-              <span>Golden Sequence Trick</span>
-            </div>
-            <p className={cn("text-meta opacity-90", isBangla && "text-subtitle-bn text-status-info-ink")}>
-              {isBangla
-                ? '"Tense first, then Sentence, then Transformation." — Stage 1 থেকে 8 ধারাবাহিকভাবে এগোলে Voice বা Narration সহজ হয়ে যাবে।'
-                : locale === "hi"
-                ? '"Tense first, then Sentence, then Transformation." — Stage 1 से 8 तक क्रम से आगे बढ़ें।'
-                : '"Tense first, then Sentence, then Transformation." — Follow Stages 1–8 in sequence.'}
-            </p>
-          </div>
-
-          <div className="p-3.5 rounded-panel bg-status-warning-bg text-status-warning-ink space-y-1">
-            <div className="flex items-center gap-2 text-label font-semibold">
-              <HugeiconsIcon icon={Clock01Icon} size={16} />
-              <span>Daily Routine (30–45 min)</span>
-            </div>
-            <p className={cn("text-meta opacity-90", isBangla && "text-subtitle-bn text-status-warning-ink")}>
-              {isBangla
-                ? "প্রতিদিন ১টি ছোট টপিক (৩০–৪৫ মিনিট): নিয়ম ও শব্দ শিখুন → ৫টি বাক্য বানান → কুইজ দিন। পরের দিন ৫ মিনিট রিভাইজ করুন।"
-                : locale === "hi"
-                ? "रोज़ 1 टॉपिक (30–45 मिनट): नियम सीखें → 5 वाक्य बनाएं → क्विज़ दें। अगले दिन 5 मिनट दोहराएं।"
-                : "One topic per day (30–45 min): Study rules & words → Make 5 sentences → Take the 10-question quiz."}
-            </p>
-          </div>
+        <div className="flex items-center gap-2 text-chip text-muted-foreground pt-0.5">
+          <HugeiconsIcon icon={SparklesIcon} size={15} className="text-primary shrink-0" />
+          <span className={cn(isBangla && "text-bangla")}>
+            {isBangla
+              ? '"Tense first, then Sentence, then Transformation" — প্রতিদিন ১টি লেসন (৩০–৪৫ মি.) অনুশীলন করুন।'
+              : '"Tense first, then Sentence, then Transformation" — 1 lesson/day (30–45 min).'}
+          </span>
         </div>
       </Card>
 
@@ -165,7 +135,7 @@ export function GrammarPathClient() {
         </p>
       </Card>
 
-      {/* 8 Stage Cards Grid */}
+      {/* Clean 8 Stage Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {GRAMMAR_STAGES.map((stage) => {
           const lessons = getLessonsByStage(stage.stageNumber);
@@ -178,19 +148,16 @@ export function GrammarPathClient() {
             <Card
               key={stage.stageNumber}
               className={cn(
-                "p-5 sm:p-6 bg-card border border-border flex flex-col justify-between gap-4 transition-all",
+                "p-5 bg-card border border-border flex flex-col justify-between gap-4 transition-all",
                 !isRecommended && "opacity-60"
               )}
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <Tag variant="brand" size="sm">
                       Stage {stage.stageNumber}
                     </Tag>
-                    <Pill variant="neutral" size="sm">
-                      {stage.focusTag}
-                    </Pill>
                     {isRecommended && selectedLevel !== "all" && (
                       <Tag variant="success" size="sm">
                         Priority
@@ -202,40 +169,17 @@ export function GrammarPathClient() {
                   </Pill>
                 </div>
 
-                <div className="space-y-1">
-                  <h2 className="text-card-title text-foreground font-semibold">{stage.title}</h2>
-                  <p className="text-meta text-primary">{stage.subtitle}</p>
-                </div>
+                <h2 className="text-card-title text-foreground font-semibold">{stage.title}</h2>
 
                 <p
                   className={cn(
-                    "text-meta text-muted-foreground leading-relaxed",
-                    ruleLocale === "bn" && "text-subtitle-bn"
+                    "text-meta text-muted-foreground line-clamp-2",
+                    ruleLocale === "bn" && "text-bangla"
                   )}
                   dir={isRtlLanguage(ruleLocale) ? "rtl" : "ltr"}
                 >
                   {getTranslatedText(stage.description, ruleLocale)}
                 </p>
-
-                {/* Lesson Chips Preview */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {lessons.slice(0, 5).map((lesson) => {
-                    const isDone = completedIds.includes(lesson.id);
-                    return (
-                      <Pill key={lesson.id} variant={isDone ? "brand" : "neutral"} size="sm">
-                        {isDone && (
-                          <HugeiconsIcon icon={CheckmarkCircle02Icon} size={12} className="mr-1 inline" />
-                        )}
-                        {lesson.title.replace(/^\d+\.\s*/, "")}
-                      </Pill>
-                    );
-                  })}
-                  {lessons.length > 5 && (
-                    <Pill variant="neutral" size="sm">
-                      +{lessons.length - 5} more
-                    </Pill>
-                  )}
-                </div>
               </div>
 
               <div className="space-y-3 pt-2 border-t border-border">

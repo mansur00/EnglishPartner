@@ -257,6 +257,15 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Simplify Grammar Path & Professional English Cards for UX
+- Requested by owner: Reduce visual clutter and excessive text on `/grammar-path` stage cards/header and `/professions` career cards.
+- Changed:
+  - `src/components/grammar/GrammarPathClient.tsx`: Compacted header card (removed 2 large tip boxes into 1 concise tip line) and simplified Stage 1–8 cards (removed redundant subtitle, lesson preview chips, and extra badges; kept Stage badge, lesson count, 2-line description, progress bar, and Start Lesson button).
+  - `src/app/(app)/professions/page.tsx`: Simplified career cards (removed long description and 3-item competencies checklist from index cards; kept icon, title, CEFR level, 2-line tagline, scenario/hours meta, and Start Path button).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Fix Ladder Conversation Layout Clipping Under Right Sidebar
 - Requested by owner: Fix layout clipping on `/conversations/[slug]` (Shopping Ladder steps) where the middle content overlapped underneath the fixed right sidebar (`w-80 xl:w-96`).
 - Changed:
