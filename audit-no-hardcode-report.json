@@ -400,9 +400,33 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 138,
+      "line": 223,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"font-heading text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 260,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-meta font-semibold text-foreground leading-snug\">"
+    },
+    {
+      "file": "src/components/practice/DailyPracticeClient.tsx",
+      "line": 294,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 169,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip font-semibold text-muted-foreground\">"
+    },
+    {
+      "file": "src/components/practice/PersonalizedPracticeCard.tsx",
+      "line": 258,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-lead font-semibold text-foreground\">{activeQuestion.prompt}</p>"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -859,7 +883,7 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 164,
+      "line": 320,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
     },
@@ -1080,12 +1104,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 15 times",
+      "detail": "ClassName repeated 17 times",
       "className": "font-heading text-card-title text-foreground",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
         "src/components/learning/ConversationReader.tsx",
         "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/practice/PersonalizedPracticeCard.tsx",
         "src/components/settings/SettingsClient.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
@@ -1231,29 +1256,32 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 5 times",
       "className": "text-chip font-semibold text-muted-foreground",
       "files": [
-        "src/app/page.tsx"
+        "src/app/page.tsx",
+        "src/components/practice/PersonalizedPracticeCard.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 6 times",
+      "detail": "ClassName repeated 7 times",
       "className": "text-chip font-mono text-muted-foreground",
       "files": [
         "src/components/admin/AdminDashboardClient.tsx",
         "src/components/learning/ConversationInspectorSidebar.tsx",
         "src/components/learning/ReviewSummary.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
         "src/components/quiz/QuizRunner.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
       "files": [
         "src/components/analytics/ProgressDashboard.tsx",
         "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/practice/PersonalizedPracticeCard.tsx",
         "src/components/tools/WhatShouldISay.tsx"
       ]
     },
@@ -1265,11 +1293,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 12 times",
+      "detail": "ClassName repeated 13 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
         "src/components/grammar/WritingCheckerPanel.tsx",
+        "src/components/practice/PersonalizedPracticeCard.tsx",
         "src/components/settings/SettingsClient.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
       ]

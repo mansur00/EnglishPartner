@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useLocale, t } from "@/lib/i18n";
 import { TodayPanel } from "@/components/shared";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
+import { PersonalizedPracticeCard } from "@/components/practice/PersonalizedPracticeCard";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { Card } from "@/components/ui/card";
@@ -16,9 +18,15 @@ import {
   Bookmark02Icon,
   BookOpen01Icon,
   CheckmarkBadge01Icon,
+  CheckmarkCircle02Icon,
   CompassIcon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
+import {
+  buildDailyPlan,
+  detectWeakAreas,
+  type UserProgressSnapshot,
+} from "@/lib/practice/personalized-generator";
 
 export function DailyPracticeClient() {
   const locale = useLocale();
@@ -26,6 +34,12 @@ export function DailyPracticeClient() {
   const [streak, setStreak] = useState(3);
   const [minutesCompleted, setMinutesCompleted] = useState(8);
   const [minutesGoal, setMinutesGoal] = useState(15);
+  const [weakWords, setWeakWords] = useState<
+    { word: string; mistakes: number; ruleCategory: string }[]
+  >([]);
+  const [ruleMistakesCount, setRuleMistakesCount] = useState(0);
+  const [quizLowCategories, setQuizLowCategories] = useState<string[]>([]);
+  const [completedGrammarIds, setCompletedGrammarIds] = useState<string[]>([]);
 
   const formattedDate = new Intl.DateTimeFormat(locale === "bn" ? "bn-BD" : "en-US", {
     weekday: "long",
@@ -52,11 +66,93 @@ export function DailyPracticeClient() {
             setSavedLemmas(parsed);
           }
         }
+
+        const spellRaw = localStorage.getItem("ecp_spell_master_v1");
+        if (spellRaw) {
+          const spellParsed = JSON.parse(spellRaw);
+          if (spellParsed?.weakWords && typeof spellParsed.weakWords === "object") {
+            const list = Object.values(spellParsed.weakWords) as {
+              word: string;
+              mistakes: number;
+              ruleCategory: string;
+            }[];
+            setWeakWords(list.filter((w) => w && typeof w.word === "string"));
+          }
+          if (spellParsed?.ruleMistakes && typeof spellParsed.ruleMistakes === "object") {
+            const totalRuleMistakes = Object.values(
+              spellParsed.ruleMistakes as Record<string, number>
+            ).reduce((sum, n) => sum + (typeof n === "number" ? n : 0), 0);
+            setRuleMistakesCount(totalRuleMistakes);
+          }
+        }
+
+        const quizRaw = localStorage.getItem("ecp_quiz_results_v1");
+        if (quizRaw) {
+          const quizParsed = JSON.parse(quizRaw);
+          if (Array.isArray(quizParsed)) {
+            const lowCats = quizParsed
+              .filter(
+                (q: { score?: number; total?: number; category?: string }) =>
+                  typeof q?.score === "number" &&
+                  typeof q?.total === "number" &&
+                  q.total > 0 &&
+                  q.score / q.total < 0.7 &&
+                  typeof q.category === "string"
+              )
+              .map((q: { category: string }) => q.category);
+            setQuizLowCategories(lowCats);
+          }
+        }
+
+        const grammarRaw = localStorage.getItem("ecp_grammar_path_completed_v1");
+        if (grammarRaw) {
+          const grammarParsed = JSON.parse(grammarRaw);
+          if (Array.isArray(grammarParsed)) {
+            setCompletedGrammarIds(
+              grammarParsed.filter((id): id is string => typeof id === "string")
+            );
+          }
+        }
       } catch {
         // LocalStorage access fallback
       }
     });
   }, []);
+
+  const progressSnapshot = useMemo<UserProgressSnapshot>(
+    () => ({
+      weakWords,
+      ruleMistakesCount,
+      quizLowCategories,
+      completedGrammarIds,
+      savedVocabCount: savedLemmas.length,
+      todayMinutes: minutesCompleted,
+    }),
+    [
+      weakWords,
+      ruleMistakesCount,
+      quizLowCategories,
+      completedGrammarIds,
+      savedLemmas.length,
+      minutesCompleted,
+    ]
+  );
+
+  const weakAreas = useMemo(() => detectWeakAreas(progressSnapshot), [progressSnapshot]);
+  const { nextLesson, planSteps } = useMemo(
+    () => buildDailyPlan(progressSnapshot),
+    [progressSnapshot]
+  );
+
+  const addPracticeMinutes = (mins: number) => {
+    const updated = minutesCompleted + mins;
+    setMinutesCompleted(updated);
+    try {
+      localStorage.setItem("ecp_today_minutes", updated.toString());
+    } catch {
+      // Best effort
+    }
+  };
 
   const handleAddStarterWords = () => {
     const starter = ["reservation", "discount", "receipt", "recommendation", "appointment"];
@@ -113,7 +209,67 @@ export function DailyPracticeClient() {
 
   const continueLearningSidebar = (
     <>
-      <h2 className="text-chip uppercase tracking-wider text-muted-foreground">
+      {/* Next Recommended Lesson */}
+      <div className="rounded-card bg-primary/10 border border-primary/25 p-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <Badge variant="brand" size="sm">
+            {locale === "bn" ? "পরবর্তী লেসন" : "Next Lesson"}
+          </Badge>
+          <span className="text-chip font-mono text-muted-foreground">
+            {nextLesson.completedCount}/{nextLesson.totalCount}
+          </span>
+        </div>
+        <div>
+          <h3 className="font-heading text-label font-semibold text-foreground">
+            {nextLesson.lessonTitle}
+          </h3>
+          <p className="text-chip text-muted-foreground mt-0.5">
+            {locale === "bn" ? nextLesson.reasonBn : nextLesson.reasonEn}
+          </p>
+        </div>
+        <Link
+          href={nextLesson.href}
+          className={cn(buttonVariants({ variant: "cta", size: "sm" }), "w-full gap-1.5")}
+        >
+          <span>{locale === "bn" ? "লেসন শুরু করুন" : "Start Next Lesson"}</span>
+          <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+        </Link>
+      </div>
+
+      {/* Today's Daily Plan */}
+      <div className="space-y-2">
+        <h2 className="text-chip uppercase tracking-wider text-muted-foreground">
+          {locale === "bn" ? "আজকের ডেইলি প্ল্যান" : "Today's Daily Plan"}
+        </h2>
+        <div className="space-y-2">
+          {planSteps.map((step) => (
+            <Link
+              key={step.id}
+              href={step.href}
+              className="flex items-start gap-2.5 p-3 rounded-panel bg-muted/40 border border-border/60 hover:border-primary/40 transition-colors"
+            >
+              <HugeiconsIcon
+                icon={CheckmarkCircle02Icon}
+                size={16}
+                className={cn(
+                  "mt-0.5 shrink-0",
+                  step.completed ? "text-status-success-ink" : "text-muted-foreground"
+                )}
+              />
+              <div className="min-w-0 flex-1">
+                <p className="text-meta font-semibold text-foreground leading-snug">
+                  {locale === "bn" ? step.titleBn : step.titleEn}
+                </p>
+                <p className="text-chip text-muted-foreground mt-0.5">
+                  {step.tag} · ~{step.durationMin} min
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <h2 className="text-chip uppercase tracking-wider text-muted-foreground pt-1">
         {locale === "bn" ? "শেখা চালিয়ে যান" : "Continue Learning Path"}
       </h2>
 
@@ -176,8 +332,16 @@ export function DailyPracticeClient() {
           </div>
         </Card>
 
-        {/* 2. Spaced Repetition (SRS) Review Section */}
-        <Card className="p-5 sm:p-6 bg-card border border-border space-y-5 shadow-xs">
+        {/* 2. Personalized Practice Generator */}
+        <PersonalizedPracticeCard
+          locale={locale === "bn" ? "bn" : "en"}
+          weakAreas={weakAreas}
+          weakWords={weakWords.map((w) => w.word)}
+          onPracticeMinutesEarned={addPracticeMinutes}
+        />
+
+        {/* 3. Spaced Repetition (SRS) Review Section */}
+        <Card id="srs-review" className="p-5 sm:p-6 bg-card border border-border space-y-5 shadow-xs">
           <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
             <div className="size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
               <HugeiconsIcon icon={Bookmark02Icon} size={18} />
