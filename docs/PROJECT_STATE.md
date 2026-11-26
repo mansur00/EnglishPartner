@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Update Landing Page Hero, Who It's For, CTA & Footer per References
+- Requested by owner: Keep `Our Features` and `{learning_ecosystem}` unchanged; redesign Hero (light airy floating-badge cluster), `Who It's For` (4-column divided card with wireframe boxes), CTA banner (deep brand spotlight), and multi-column SaaS Footer with subtle watermark wordmark.
+- Changed:
+  - `src/app/page.tsx`: Updated Section 1 (Hero), Section 4 (`Who It's For`), Section 5 (Final CTA Banner), and `<footer>` while keeping Section 2 (`Our Features`) and Section 3 (`{learning_ecosystem}`) untouched.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Upgrade Landing Page with Bento Previews, Ecosystem Hub & Pastel 2x2 Cards
 - Requested by owner: Replace generic card layout on `/` with high-craft SaaS sections inspired by the uploaded Bento, AI reply, Connected Ecosystem, and 2x2 pastel workflow references.
 - Changed:

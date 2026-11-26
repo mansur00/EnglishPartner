@@ -4,20 +4,15 @@ import { Card } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  PlayCircleIcon,
-  ShoppingBag01Icon,
   Briefcase01Icon,
   ArrowRight01Icon,
   BookOpen01Icon,
-  CheckmarkCircle02Icon,
   SparklesIcon,
   BotIcon,
-  GraduationCapIcon,
   Calendar01Icon,
   Bookmark01Icon,
   Message01Icon,
   Search01Icon,
-  Airplane01Icon,
   Mic01Icon,
 } from "@hugeicons/core-free-icons";
 
@@ -146,63 +141,90 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Section 1 — Hero Band */}
-      <section className="bg-gradient-to-b from-brand-800 to-brand-900 text-band-panel-ink rounded-band pt-12 pb-16 md:pt-16 md:pb-20 px-4 sm:px-6 md:px-8">
-        <div className="max-w-reading mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill text-chip bg-band-panel text-band-panel-ink shadow-2xs backdrop-blur-xs">
-            <HugeiconsIcon icon={SparklesIcon} size={16} className="text-sun-500" />
-            <span>Spoken English &amp; Grammar Platform for Bangla Speakers</span>
+      {/* Section 1 — Light Airy Hero (Paywall Reference) */}
+      <section className="container-app pt-6 md:pt-8">
+        <div className="rounded-band bg-card border border-border/60 shadow-2xs px-4 sm:px-8 md:px-12 py-12 md:py-16 text-center space-y-8 relative overflow-hidden">
+          {/* Floating Learner & Feature Cluster */}
+          <div className="max-w-reading mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+            {/* Left Floating Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-background border border-border shadow-xs text-chip">
+              <span className="size-6 rounded-pill bg-sun-200 text-brand-950 flex items-center justify-center font-semibold">
+                <HugeiconsIcon icon={BookOpen01Icon} size={13} />
+              </span>
+              <span className="text-foreground font-semibold">8 Grammar Stages</span>
+            </div>
+
+            {/* Avatar / Learner Node 1 */}
+            <div className="relative">
+              <div className="size-11 rounded-pill bg-primary/15 border border-primary/30 flex items-center justify-center text-primary font-semibold text-label shadow-2xs">
+                A1
+              </div>
+              <span className="absolute -bottom-1 -right-1 size-5 rounded-pill bg-primary text-primary-foreground flex items-center justify-center text-chip shadow-2xs">
+                +
+              </span>
+            </div>
+
+            {/* Center Featured Node */}
+            <div className="relative">
+              <div className="size-16 rounded-pill bg-gradient-to-br from-primary to-brand-800 text-primary-foreground flex flex-col items-center justify-center shadow-sm">
+                <HugeiconsIcon icon={Mic01Icon} size={22} />
+                <span className="text-chip font-semibold leading-none mt-0.5">Speak</span>
+              </div>
+              <span className="absolute -bottom-1 -right-1 size-6 rounded-pill bg-sun-500 text-brand-950 flex items-center justify-center text-chip font-semibold shadow-2xs">
+                +
+              </span>
+            </div>
+
+            {/* Avatar / Learner Node 2 */}
+            <div className="relative">
+              <div className="size-12 rounded-pill bg-accent border border-border flex items-center justify-center text-accent-foreground font-semibold text-label shadow-2xs">
+                B2
+              </div>
+              <span className="absolute -bottom-1 -right-1 size-5 rounded-pill bg-primary text-primary-foreground flex items-center justify-center text-chip shadow-2xs">
+                +
+              </span>
+            </div>
+
+            {/* Right Floating Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-background border border-border shadow-xs text-chip">
+              <span className="size-6 rounded-pill bg-primary/15 text-primary flex items-center justify-center font-semibold">
+                <HugeiconsIcon icon={BotIcon} size={13} />
+              </span>
+              <span className="text-foreground font-semibold">+42 Dialogues</span>
+            </div>
           </div>
 
-          <h1 className="text-page-title font-heading tracking-tight text-band-panel-ink max-w-reading mx-auto leading-tight">
-            Speak Real-Life English With Confidence — From Bangla to Fluency
-          </h1>
+          {/* Headline & Bangla Subtitle */}
+          <div className="max-w-reading mx-auto space-y-4">
+            <h1 className="text-page-title font-heading tracking-tight text-foreground leading-tight">
+              Speak Real-Life English With Confidence Today
+            </h1>
+            <p className="text-lead text-muted-foreground text-bangla max-w-reading mx-auto leading-relaxed">
+              বাস্তব জীবনের সংলাপ, বাংলা অনুবাদ, ৮ ধাপের গ্রামার পাথ এবং AI রোলপ্লে পার্টনারের মাধ্যমে সাবলীল ইংরেজি শিখুন।
+            </p>
+          </div>
 
-          <p className="text-lead text-band-panel-ink/85 text-bangla max-w-reading mx-auto leading-relaxed">
-            বাস্তব জীবনের সংলাপ, বাংলা অনুবাদ, ৮ ধাপের গ্রামার পাথ, AI রোলপ্লে পার্টনার এবং স্মার্ট ভোকাবুলারি অনুশীলনের মাধ্যমে সাবলীল ইংরেজি শিখুন।
-          </p>
-
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <Link href="/dashboard" className="w-full sm:w-auto">
+          {/* Primary Pill CTA */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+            <Link href="/dashboard">
               <Button
-                variant="cta"
                 size="lg"
-                className="w-full sm:w-auto text-lead rounded-control shadow-sm gap-2.5 px-8"
+                className="rounded-pill px-8 gap-2.5 shadow-sm text-label font-semibold"
               >
-                <HugeiconsIcon icon={PlayCircleIcon} size={22} />
+                <HugeiconsIcon icon={SparklesIcon} size={18} />
                 <span>Start Learning Free</span>
               </Button>
             </Link>
-
-            <Link href="/explore" className="w-full sm:w-auto">
+            <Link href="/explore">
               <Button
-                variant="secondary"
+                variant="outline"
                 size="lg"
-                className="w-full sm:w-auto text-body rounded-control bg-band-panel text-band-panel-ink border-band-panel-border gap-2 text-bangla"
+                className="rounded-pill px-6 gap-2 text-label text-bangla"
               >
-                <HugeiconsIcon icon={BookOpen01Icon} size={20} />
-                <span>কথোপকথন এক্সপ্লোর করুন</span>
+                <span>কথোপকথন দেখুন</span>
+                <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
               </Button>
             </Link>
-          </div>
-
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-chip text-band-panel-ink/80">
-            <span className="flex items-center gap-1.5">
-              <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="text-sun-500" />
-              42+ Real-Life Scenarios
-            </span>
-            <span className="flex items-center gap-1.5">
-              <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="text-sun-500" />
-              8-Stage Grammar Path
-            </span>
-            <span className="flex items-center gap-1.5">
-              <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="text-sun-500" />
-              AI Roleplay &amp; US/UK Audio
-            </span>
-            <span className="flex items-center gap-1.5">
-              <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="text-sun-500" />
-              CEFR Aligned (A1 – C2)
-            </span>
           </div>
         </div>
       </section>
@@ -472,160 +494,153 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Section 4 — 2x2 Pastel Topic Cards (Who It's For & What You'll Learn) */}
-        <section className="space-y-8">
-          <div className="text-center max-w-reading mx-auto space-y-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-card border border-border text-chip text-muted-foreground shadow-2xs">
-              <HugeiconsIcon icon={GraduationCapIcon} size={14} className="text-primary" />
-              Who It&apos;s For
-            </span>
-            <h2 className="text-page-title font-heading text-foreground">
-              Supercharge Your English Journey
+        {/* Section 4 — Who It's For (4-Column Divided Card Reference) */}
+        <section className="rounded-card bg-card border border-border/60 shadow-2xs overflow-hidden">
+          <div className="px-6 pt-10 pb-8 text-center max-w-reading mx-auto space-y-2.5">
+            <h2 className="text-page-title font-heading text-foreground leading-tight">
+              Built for Every Learner.
+              <br />
+              Structured From Day One.
             </h2>
-            <p className="text-body text-muted-foreground text-bangla">
-              শিক্ষার্থী, চাকরিরপ্রার্থী, ফ্রিল্যান্সার বা ভ্রমণকারী—প্রত্যেকের প্রয়োজন অনুযায়ী সাজানো লার্নিং পাথ।
+            <p className="text-meta text-muted-foreground text-bangla">
+              আপনার লক্ষ্য যেটাই হোক—সহজ বাংলা গাইডলাইন ও বাস্তব অনুশীলনে দ্রুত উন্নতি করুন।
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {PASTEL_AUDIENCE_CARDS.map((card) => (
-              <Link key={card.title} href={card.href} className="block group">
-                <Card
-                  data-topic={card.topic}
-                  className="h-full p-6 md:p-7 rounded-card bg-topic-surface border border-topic-border/50 shadow-2xs hover:shadow-xs transition-shadow flex flex-col justify-between gap-6"
-                >
-                  <div className="space-y-3">
-                    <span className="inline-block px-3 py-1 rounded-control bg-card text-chip font-semibold text-foreground shadow-2xs">
-                      {card.badge}
-                    </span>
-                    <h3 className="text-card-title font-heading text-foreground">
-                      {card.title}
-                    </h3>
-                    <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
-                      {card.bnText}
-                    </p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border border-t border-border">
+            {PASTEL_AUDIENCE_CARDS.map((card, idx) => (
+              <Link
+                key={card.title}
+                href={card.href}
+                className="p-6 flex flex-col justify-between gap-6 hover:bg-muted/25 transition-colors group"
+              >
+                <div className="space-y-3">
+                  <span
+                    className={`inline-block px-3 py-1 rounded-control text-chip font-semibold ${
+                      idx === 0
+                        ? "bg-foreground text-background"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {card.badge}
+                  </span>
+                  <h3 className="text-label font-heading text-foreground group-hover:text-primary transition-colors">
+                    {card.title}
+                  </h3>
+                  <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
+                    {card.bnText}
+                  </p>
+                </div>
 
-                  <div className="flex items-center gap-1.5 text-label font-semibold text-foreground underline underline-offset-4 group-hover:text-primary transition-colors">
-                    <span>{card.cta}</span>
-                    <HugeiconsIcon icon={ArrowRight01Icon} size={15} />
+                {/* Minimal Wireframe Preview Box */}
+                <div className="rounded-panel bg-muted/40 border border-border/60 p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="h-2 w-12 rounded-pill bg-primary/35" />
+                    <span className="h-2 w-6 rounded-pill bg-muted-foreground/25" />
                   </div>
-                </Card>
+                  <div className="h-2 w-full rounded-pill bg-border" />
+                  <div className="h-2 w-4/5 rounded-pill bg-border/70" />
+                  <div className="pt-1 flex items-center justify-between text-chip text-primary font-semibold">
+                    <span>{card.cta}</span>
+                    <HugeiconsIcon icon={ArrowRight01Icon} size={13} />
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* Section 5 — 3 Simple Steps + Final CTA */}
-        <section className="space-y-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                step: "01",
-                icon: ShoppingBag01Icon,
-                title: "Choose a Scenario or Track",
-                bnText: "আপনার লেভেল বা পেশা অনুযায়ী সংলাপ, গ্রামার স্টেজ অথবা ক্যারিয়ার ট্র্যাক বেছে নিন।",
-              },
-              {
-                step: "02",
-                icon: Mic01Icon,
-                title: "Listen, Read & Speak Aloud",
-                bnText: "অডিও ও বাংলা অর্থ দেখে AI রোলপ্লে পার্টনারের সাথে সরাসরি ইংরেজিতে কথা বলুন।",
-              },
-              {
-                step: "03",
-                icon: Airplane01Icon,
-                title: "Retain & Level Up Daily",
-                bnText: "SM-2 ভোকাবুলারি, ডেইলি প্র্যাকটিস ও কুইজের মাধ্যমে প্রতিদিন আত্মবিশ্বাস বাড়ান।",
-              },
-            ].map((item) => (
-              <Card
-                key={item.step}
-                className="p-6 rounded-card bg-card shadow-2xs space-y-3"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="size-tile rounded-control bg-primary/10 text-primary flex items-center justify-center">
-                    <HugeiconsIcon icon={item.icon} size={20} />
-                  </div>
-                  <span className="text-card-title font-mono text-muted-foreground">
-                    {item.step}
-                  </span>
-                </div>
-                <h3 className="text-card-title font-heading text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
-                  {item.bnText}
-                </p>
-              </Card>
-            ))}
-          </div>
-
-          <Card className="bg-gradient-to-b from-brand-800 to-brand-900 text-band-panel-ink rounded-card p-8 md:p-12 text-center space-y-5 shadow-xs">
+        {/* Section 5 — Final Glowing Spotlight CTA Banner (Graphy Reference) */}
+        <section>
+          <div className="rounded-band bg-gradient-to-b from-brand-800 via-brand-900 to-brand-950 text-band-panel-ink p-10 sm:p-14 md:p-16 text-center space-y-5 shadow-sm relative overflow-hidden">
             <h2 className="text-page-title font-heading text-band-panel-ink max-w-reading mx-auto">
-              Ready to Start Speaking English Today?
+              Ready to speak English fluently?
             </h2>
-            <p className="text-lead text-band-panel-ink/85 text-bangla max-w-reading mx-auto">
-              আজ থেকেই ডেইলি প্র্যাকটিস, সংলাপ এবং AI পার্টনারের সাথে আপনার ইংরেজি শেখা শুরু করুন।
+            <p className="text-lead text-band-panel-ink/80 text-bangla max-w-reading mx-auto">
+              হাজারো শিক্ষার্থীর সাথে আজই বাস্তব সংলাপ, গ্রামার ও AI প্র্যাকটিস শুরু করুন।
             </p>
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-              <Link href="/dashboard" className="w-full sm:w-auto">
+            <div className="pt-2">
+              <Link href="/dashboard">
                 <Button
-                  variant="cta"
                   size="lg"
-                  className="w-full sm:w-auto text-lead rounded-control shadow-sm gap-2 px-8"
+                  className="rounded-control bg-card text-foreground hover:bg-card/90 px-7 shadow-sm text-label font-semibold"
                 >
-                  <HugeiconsIcon icon={PlayCircleIcon} size={20} />
-                  <span>Go to Dashboard</span>
-                </Button>
-              </Link>
-              <Link href="/daily-practice" className="w-full sm:w-auto">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="w-full sm:w-auto text-body rounded-control bg-band-panel text-band-panel-ink border-band-panel-border gap-2 text-bangla"
-                >
-                  <span>ডেইলি প্র্যাকটিস শুরু করুন</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                  Start for free
                 </Button>
               </Link>
             </div>
-          </Card>
+          </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card py-8">
-        <div className="container-app flex flex-col md:flex-row items-center justify-between gap-4 text-chip text-muted-foreground">
-          <div className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.svg"
-              alt="English Partner"
-              className="h-7 w-auto object-contain"
-            />
+      {/* Multi-Column SaaS Footer + Giant Watermark (Graphy Reference) */}
+      <footer className="container-app pt-4 pb-0 space-y-6 overflow-hidden">
+        <Card className="rounded-card bg-card border border-border shadow-xs p-8 md:p-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            {/* Brand Column */}
+            <div className="md:col-span-5 space-y-4">
+              <Link href="/" className="inline-flex items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo.svg"
+                  alt="English Partner"
+                  className="h-9 w-auto object-contain"
+                />
+              </Link>
+              <p className="text-meta text-muted-foreground max-w-xs leading-relaxed">
+                EnglishPartner empowers Bangla speakers to master real-life English conversations, grammar, and career fluency.
+              </p>
+            </div>
+
+            {/* Link Columns */}
+            <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 text-meta">
+              <div className="space-y-2.5">
+                <p className="text-label font-semibold text-foreground">Product</p>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li><Link href="/explore" className="hover:text-foreground transition-colors">Explore</Link></li>
+                  <li><Link href="/grammar-path" className="hover:text-foreground transition-colors">Grammar Path</Link></li>
+                  <li><Link href="/roleplay" className="hover:text-foreground transition-colors">AI Partner</Link></li>
+                  <li><Link href="/professions" className="hover:text-foreground transition-colors">Career Tracks</Link></li>
+                </ul>
+              </div>
+              <div className="space-y-2.5">
+                <p className="text-label font-semibold text-foreground">Practice</p>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li><Link href="/daily-practice" className="hover:text-foreground transition-colors">Daily Practice</Link></li>
+                  <li><Link href="/what-should-i-say" className="hover:text-foreground transition-colors">What Should I Say?</Link></li>
+                  <li><Link href="/vocabulary" className="hover:text-foreground transition-colors">My Vocabulary</Link></li>
+                  <li><Link href="/quiz" className="hover:text-foreground transition-colors">Quiz</Link></li>
+                </ul>
+              </div>
+              <div className="space-y-2.5">
+                <p className="text-label font-semibold text-foreground">Account</p>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li><Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
+                  <li><Link href="/progress" className="hover:text-foreground transition-colors">My Progress</Link></li>
+                  <li><Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-chip text-muted-foreground">
             <span>© 2026 EnglishPartner by MansurVerse. All rights reserved.</span>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link href="/explore" className="hover:text-foreground transition-colors">
-              Explore
-            </Link>
-            <Link href="/grammar-path" className="hover:text-foreground transition-colors">
-              Grammar Path
-            </Link>
-            <Link href="/roleplay" className="hover:text-foreground transition-colors">
-              AI Partner
-            </Link>
-            <Link href="/professions" className="hover:text-foreground transition-colors">
-              Professions
-            </Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
-              Terms of Service
-            </Link>
-          </div>
+        </Card>
+
+        {/* Subtle Watermark Wordmark */}
+        <div
+          aria-hidden="true"
+          className="text-center select-none pointer-events-none py-2 opacity-10"
+        >
+          <span className="text-page-title font-heading tracking-tight text-foreground inline-block scale-y-150 scale-x-125">
+            EnglishPartner
+          </span>
         </div>
       </footer>
     </div>
