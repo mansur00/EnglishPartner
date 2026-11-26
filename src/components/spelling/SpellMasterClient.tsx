@@ -1216,8 +1216,9 @@ export function SpellMasterClient() {
               </Badge>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2.5">
-              <div className="relative flex-1">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-2.5">
+              {/* 1. Rule Search Input */}
+              <div className="relative flex-1 min-w-0">
                 <HugeiconsIcon
                   icon={Search01Icon}
                   size={16}
@@ -1235,40 +1236,55 @@ export function SpellMasterClient() {
                   className="pl-9"
                 />
               </div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {(
-                  [
-                    { id: "all", label: "All" },
-                    { id: "high", label: "🟢 High" },
-                    { id: "medium", label: "🟡 Medium" },
-                    { id: "low", label: "🔴 Low" },
-                  ] as const
-                ).map((rel) => (
-                  <Button
-                    key={rel.id}
-                    type="button"
-                    size="xs"
-                    variant={ruleReliability === rel.id ? "default" : "outline"}
-                    onClick={() => setRuleReliability(rel.id)}
-                  >
-                    {rel.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
 
-            <div className="flex flex-wrap gap-1.5">
-              {RULE_PARTS.map((p) => (
-                <Button
-                  key={p.id}
-                  type="button"
-                  size="xs"
-                  variant={rulePart === p.id ? "secondary" : "ghost"}
-                  onClick={() => setRulePart(p.id)}
-                >
-                  {p.label}
-                </Button>
-              ))}
+              {/* 2. Rule Group / Category Dropdown */}
+              <Select
+                value={rulePart}
+                onValueChange={(val) => setRulePart((val ?? "all") as RulePartId)}
+              >
+                <SelectTrigger className="w-full lg:w-56 shrink-0">
+                  <SelectValue>
+                    {RULE_PARTS.find((p) => p.id === rulePart)?.label ?? "All Rules (55)"}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {RULE_PARTS.map((p) => (
+                    <SelectItem key={p.id} value={p.id}>
+                      {p.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* 3. Reliability Dropdown */}
+              <Select
+                value={ruleReliability}
+                onValueChange={(val) =>
+                  setRuleReliability((val ?? "all") as "all" | RuleReliability)
+                }
+              >
+                <SelectTrigger className="w-full lg:w-44 shrink-0">
+                  <SelectValue>
+                    {ruleReliability === "high"
+                      ? "🟢 High"
+                      : ruleReliability === "medium"
+                        ? "🟡 Medium"
+                        : ruleReliability === "low"
+                          ? "🔴 Low"
+                          : isBn
+                            ? "সব Reliability"
+                            : "All Reliability"}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">
+                    {isBn ? "সব Reliability" : "All Reliability"}
+                  </SelectItem>
+                  <SelectItem value="high">🟢 High</SelectItem>
+                  <SelectItem value="medium">🟡 Medium</SelectItem>
+                  <SelectItem value="low">🔴 Low</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </Card>
 

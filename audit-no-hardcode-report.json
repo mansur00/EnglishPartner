@@ -592,43 +592,31 @@
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1296,
+      "line": 1312,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"text-card-title text-foreground font-semibold\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1327,
+      "line": 1343,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground\">Exceptions:</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1335,
+      "line": 1351,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip text-primary font-semibold\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1386,
+      "line": 1402,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-primary\">AI Diagnosis</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1394,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
-    },
-    {
-      "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1399,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<p className=\"font-semibold text-foreground\">{m.word}</p>"
-    },
-    {
-      "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1408,
+      "line": 1410,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
     },
@@ -636,41 +624,53 @@
       "file": "src/components/spelling/SpellMasterClient.tsx",
       "line": 1415,
       "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"font-semibold text-foreground\">{m.word}</p>"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 1424,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-muted-foreground uppercase\">"
+    },
+    {
+      "file": "src/components/spelling/SpellMasterClient.tsx",
+      "line": 1431,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className={cn(\"text-label font-semibold text-foreground\", isBn && \"text-bangla\")}>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1512,
+      "line": 1528,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-primary\">Corrected Text</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1520,
+      "line": 1536,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"font-semibold text-primary\">{m.correct}</span>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1570,
+      "line": 1586,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-label font-semibold text-foreground\">{w.word}</p>"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1601,
+      "line": 1617,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-label font-semibold\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1618,
+      "line": 1634,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground uppercase\">"
     },
     {
       "file": "src/components/spelling/SpellMasterClient.tsx",
-      "line": 1634,
+      "line": 1650,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "className=\"px-3 py-1 rounded-pill bg-destructive/10 text-destructive text-chip font-semibold cursor-pointer\""
     },
