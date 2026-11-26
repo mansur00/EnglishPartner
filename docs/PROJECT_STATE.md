@@ -1870,7 +1870,7 @@ Entry format:
 
 ### 2026-11-26, Comprehensive AI Word Intelligence (Popup & Vocabulary Sidebar)
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
-- Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in both `WordDetailPopover.tsx` and `MagicWordSidebar.tsx`.
+- Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions

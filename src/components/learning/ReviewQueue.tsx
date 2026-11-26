@@ -28,6 +28,8 @@ import {
 import type { VocabularyEntry } from "@/content/seed/vocabulary";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n";
+import { useWordDetails } from "@/lib/ai/use-word-details";
+import { WordDetailsSections } from "@/components/shared/WordDetailsSections";
 
 interface ReviewQueueProps {
   savedLemmas: string[];
@@ -117,6 +119,26 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
       exampleSentenceBn: `কথোপকথনে "${lemma}" শব্দটি ব্যবহারের অনুশীলন করুন।`,
     };
   }, [currentSRSItem]);
+
+  const wordDetailsReq = useMemo(
+    () =>
+      currentVocabEntry && isFlipped
+        ? {
+            word: currentVocabEntry.word,
+            partOfSpeech: currentVocabEntry.partOfSpeech,
+            contextSentence: currentVocabEntry.exampleSentence?.startsWith("Practice using")
+              ? undefined
+              : currentVocabEntry.exampleSentence,
+            existingMeaning: currentVocabEntry.generalMeaningEn,
+          }
+        : null,
+    [currentVocabEntry, isFlipped]
+  );
+
+  const { details: wordDetails, isLoading: isLoadingWordDetails } = useWordDetails(
+    wordDetailsReq,
+    Boolean(currentVocabEntry && isFlipped)
+  );
 
   const handleSpeak = useCallback((text: string) => {
     speakText(text);
@@ -332,6 +354,13 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                   </p>
                 </div>
               )}
+
+              {/* Rich Word Intelligence: Translated Meaning, Related Words, Synonyms/Antonyms, Tense/POS Forms, Sentence Making */}
+              <WordDetailsSections
+                details={wordDetails}
+                isLoading={isLoadingWordDetails}
+                locale={locale}
+              />
             </div>
           )}
         </div>
