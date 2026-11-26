@@ -5,13 +5,29 @@ import {
   type SpellCategoryGroupId,
 } from "./spell-categories";
 import { CURATED_SPELL_WORDS } from "./spell-words-bank";
+import {
+  SPELLING_RULES_55,
+  RULE_PARTS,
+  getRulesForCategories,
+  areSpellingVariantsEqual,
+  type SpellRuleItem,
+  type RulePartId,
+  type RuleReliability,
+} from "./spell-rules-data";
 
 export {
   SPELL_CATEGORIES,
   SPELL_CATEGORY_GROUPS,
   CURATED_SPELL_WORDS,
+  SPELLING_RULES_55,
+  RULE_PARTS,
+  getRulesForCategories,
+  areSpellingVariantsEqual,
   type SpellCategoryId,
   type SpellCategoryGroupId,
+  type SpellRuleItem,
+  type RulePartId,
+  type RuleReliability,
 };
 
 export type SpellRuleCategory =
@@ -67,6 +83,7 @@ export interface SpellProgressState {
   savedIds: string[];
   weakWords: Record<string, WeakWordRecord>;
   mistakePatterns: Record<SpellRuleCategory, number>;
+  ruleMistakes: Record<string, number>;
   customWords: SpellWord[];
 }
 
@@ -87,6 +104,7 @@ export const DEFAULT_SPELL_PROGRESS: SpellProgressState = {
     "double-consonant": 0,
     "suffix-rules": 0,
   },
+  ruleMistakes: {},
   customWords: [],
 };
 

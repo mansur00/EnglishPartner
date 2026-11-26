@@ -257,6 +257,16 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Implement 55 Spelling Rules (R1–R55) with Reliability, Exceptions & Test Integration
+- Requested by owner: Update Spell Master rules to all 55 rules (`R1–R55`) with `🟢 High`, `🟡 Medium`, `🔴 Low` reliability badges, dedicated exceptions, rule hints & wrong-answer rule cards in Spelling Test, UK/US spelling acceptance, category rule links, and weak-rule tracking.
+- Changed:
+  - `src/lib/spelling/spell-rules-data.ts`: Added complete `R1–R55` registry (`SPELLING_RULES_55`), `RULE_PARTS`, `getRulesForCategories`, and `areSpellingVariantsEqual` (UK/US variant equivalence).
+  - `src/lib/spelling/spell-data.ts`: Re-exported 55-rule helpers and added `ruleMistakes` to `SpellProgressState`.
+  - `src/components/spelling/SpellMasterClient.tsx`: Updated Rules tab with Reliability Legend, Part & Reliability filters, rule search, Exceptions cards, and Low-reliability warnings; added Rule Hint button, UK/US acceptance, and wrong-answer Rule Cards in Spelling Test; added category rule pills on Learn tab and Weak Rules Tracker on Tab 5.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Expand Spell Master to 35 Categories Across 6 Groups & 900+ Words
 - Requested by owner: Implement the full 35-category taxonomy (6 groups: Core Traps, Spelling Rules, Confusing Words, Exam & Goal, Bangla Special, Personal & Special) from `spell-master-categories.md` and expand the curated word bank to 500–700+ words.
 - Changed:

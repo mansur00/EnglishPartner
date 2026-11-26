@@ -28,7 +28,10 @@ import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import {
   CURATED_SPELL_WORDS,
-  SPELLING_RULES,
+  SPELLING_RULES_55,
+  RULE_PARTS,
+  getRulesForCategories,
+  areSpellingVariantsEqual,
   SPELL_BADGES,
   SPELL_CATEGORIES,
   SPELL_CATEGORY_GROUPS,
@@ -38,6 +41,8 @@ import {
   type SpellWord,
   type SpellCategoryId,
   type SpellCategoryGroupId,
+  type RulePartId,
+  type RuleReliability,
   type SpellProgressState,
 } from "@/lib/spelling/spell-data";
 import type {
@@ -82,11 +87,17 @@ export function SpellMasterClient() {
   const [aiLookupResult, setAiLookupResult] = useState<SpellLookupResponse | null>(null);
   const [aiLookupError, setAiLookupError] = useState<string | null>(null);
 
+  // Rules Tab State
+  const [rulePart, setRulePart] = useState<RulePartId>("all");
+  const [ruleReliability, setRuleReliability] = useState<"all" | RuleReliability>("all");
+  const [ruleSearch, setRuleSearch] = useState("");
+
   // Test Tab State
   const [testMode, setTestMode] = useState<TestMode>("dictation");
   const [testIndex, setTestIndex] = useState(0);
   const [typedAnswer, setTypedAnswer] = useState("");
   const [jumbledPicked, setJumbledPicked] = useState<number[]>([]);
+  const [showTestHint, setShowTestHint] = useState(false);
   const [nowMs, setNowMs] = useState(0);
   const [testFeedback, setTestFeedback] = useState<{
     isCorrect: boolean;
@@ -117,6 +128,7 @@ export function SpellMasterClient() {
               ...DEFAULT_SPELL_PROGRESS.mistakePatterns,
               ...(parsed.mistakePatterns || {}),
             },
+            ruleMistakes: parsed.ruleMistakes || {},
             weakWords: parsed.weakWords || {},
             masteredIds: Array.isArray(parsed.masteredIds) ? parsed.masteredIds : [],
             savedIds: Array.isArray(parsed.savedIds) ? parsed.savedIds : [],
@@ -234,9 +246,33 @@ export function SpellMasterClient() {
     if (nextMode) setTestMode(nextMode);
     setJumbledPicked([]);
     setTypedAnswer("");
+    setShowTestHint(false);
     setTestFeedback(null);
     setNowMs(Date.now());
   };
+
+  const currentWordRules = useMemo(
+    () => getRulesForCategories(currentTestWord.categories ?? [currentTestWord.ruleCategory]),
+    [currentTestWord]
+  );
+
+  const filteredRules = useMemo(() => {
+    const q = ruleSearch.trim().toLowerCase();
+    return SPELLING_RULES_55.filter((r) => {
+      if (rulePart !== "all" && r.part !== rulePart) return false;
+      if (ruleReliability !== "all" && r.reliability !== ruleReliability) return false;
+      if (q) {
+        return (
+          r.id.toLowerCase().includes(q) ||
+          r.title.toLowerCase().includes(q) ||
+          r.titleBn.toLowerCase().includes(q) ||
+          r.summaryEn.toLowerCase().includes(q) ||
+          r.examples.some((ex) => ex.toLowerCase().includes(q))
+        );
+      }
+      return true;
+    });
+  }, [rulePart, ruleReliability, ruleSearch]);
 
   const levelInfo = getLevelFromXp(progress.xp);
   const weakList = Object.values(progress.weakWords).sort((a, b) => b.mistakes - a.mistakes);
@@ -319,7 +355,7 @@ export function SpellMasterClient() {
         : jumbledPicked.map((i) => jumbledPool[i]?.char ?? "").join("");
 
     if (!userAttempt) return;
-    const isCorrect = userAttempt.toLowerCase() === currentTestWord.word.toLowerCase();
+    const isCorrect = areSpellingVariantsEqual(userAttempt, currentTestWord.word);
 
     if (isCorrect) {
       setProgress((prev) => {
@@ -359,9 +395,14 @@ export function SpellMasterClient() {
     } else {
       setProgress((prev) => {
         const existing = prev.weakWords[currentTestWord.id];
+        const nextRuleMistakes = { ...(prev.ruleMistakes || {}) };
+        for (const r of currentWordRules.slice(0, 2)) {
+          nextRuleMistakes[r.id] = (nextRuleMistakes[r.id] || 0) + 1;
+        }
         return {
           ...prev,
           streak: 0,
+          ruleMistakes: nextRuleMistakes,
           mistakePatterns: {
             ...prev.mistakePatterns,
             [currentTestWord.ruleCategory]:
@@ -798,12 +839,33 @@ export function SpellMasterClient() {
             </div>
 
             {selectedCategory !== "all" && CATEGORY_MAP.get(selectedCategory) && (
-              <p className="text-chip text-muted-foreground">
-                {CATEGORY_MAP.get(selectedCategory)?.description} ·{" "}
-                <span className="font-mono text-primary">
-                  {filteredWords.length} words
-                </span>
-              </p>
+              <div className="space-y-1.5 pt-1">
+                <p className="text-chip text-muted-foreground">
+                  {CATEGORY_MAP.get(selectedCategory)?.description} ·{" "}
+                  <span className="font-mono text-primary">
+                    {filteredWords.length} words
+                  </span>
+                </p>
+                {getRulesForCategories([selectedCategory]).length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="text-chip text-muted-foreground">Rules:</span>
+                    {getRulesForCategories([selectedCategory]).map((r) => (
+                      <button
+                        key={r.id}
+                        type="button"
+                        onClick={() => {
+                          setRulePart(r.part);
+                          setRuleSearch(r.id);
+                          setActiveTab("rules");
+                        }}
+                        className="px-2 py-0.5 rounded-pill bg-primary/10 text-primary text-chip font-semibold hover:bg-primary/20 transition-colors cursor-pointer"
+                      >
+                        {r.id}: {r.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             )}
           </Card>
 
@@ -964,11 +1026,33 @@ export function SpellMasterClient() {
               >
                 {isBn ? "সিলেবল ভেঙে শুনুন" : "Slow Syllables"}
               </Button>
+              {currentWordRules.length > 0 && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="md"
+                  onClick={() => setShowTestHint((v) => !v)}
+                >
+                  {showTestHint
+                    ? isBn ? "হিন্ট লুকান" : "Hide Hint"
+                    : isBn ? "নিয়মের হিন্ট" : "Rule Hint"}
+                </Button>
+              )}
             </div>
             <p className="text-chip text-muted-foreground">
-              Hint: {currentTestWord.syllables.length} syllables ·{" "}
+              {currentTestWord.syllables.length} syllables ·{" "}
               {currentTestWord.word.length} letters
             </p>
+            {showTestHint && currentWordRules[0] && (
+              <div className="rounded-panel bg-card border border-border p-3 text-left space-y-1">
+                <p className="text-chip font-semibold text-primary">
+                  {currentWordRules[0].id}: {currentWordRules[0].title}
+                </p>
+                <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
+                  {isBn ? currentWordRules[0].summaryBn : currentWordRules[0].summaryEn}
+                </p>
+              </div>
+            )}
           </div>
 
           {testMode === "dictation" ? (
@@ -1054,6 +1138,22 @@ export function SpellMasterClient() {
               <p className={cn("text-meta text-muted-foreground", isBn && "text-bangla")}>
                 💡 {testFeedback.mnemonic}
               </p>
+              {!testFeedback.isCorrect && currentWordRules[0] && (
+                <div className="mt-2 pt-2 border-t border-border/60 space-y-1">
+                  <p className="text-chip font-semibold text-primary">
+                    {currentWordRules[0].id}: {currentWordRules[0].title} (
+                    {currentWordRules[0].reliability === "high"
+                      ? "🟢 High"
+                      : currentWordRules[0].reliability === "medium"
+                      ? "🟡 Medium"
+                      : "🔴 Guideline"}
+                    )
+                  </p>
+                  <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
+                    {isBn ? currentWordRules[0].summaryBn : currentWordRules[0].summaryEn}
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
@@ -1084,48 +1184,146 @@ export function SpellMasterClient() {
         </Card>
       )}
 
-      {/* TAB 3: SPELLING RULES */}
+      {/* TAB 3: SPELLING RULES (55 RULES WITH RELIABILITY & EXCEPTIONS) */}
       {activeTab === "rules" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {SPELLING_RULES.map((rule) => (
-            <Card
-              key={rule.id}
-              className="p-5 bg-card border border-border rounded-card space-y-3.5 shadow-xs"
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="space-y-1">
-                  <h3 className="text-card-title text-foreground font-semibold">
-                    {isBn ? rule.titleBn : rule.title}
-                  </h3>
-                  <p className="text-chip font-mono text-primary">{rule.formula}</p>
-                </div>
-                <HugeiconsIcon icon={BookOpen01Icon} size={20} className="text-primary shrink-0" />
+        <div className="space-y-4">
+          {/* Reliability Legend + Filters */}
+          <Card className="p-4 sm:p-5 bg-card border border-border rounded-card space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-chip">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="font-semibold text-foreground">Reliability:</span>
+                <span>🟢 High (প্রায় সব জায়গায় খাটে)</span>
+                <span>🟡 Medium (কিছু ব্যতিক্রম আছে)</span>
+                <span>🔴 Low (শুধু গাইডলাইন, মুখস্থ ভালো)</span>
               </div>
+              <Badge variant="outline" size="sm" className="font-mono">
+                {filteredRules.length} / {SPELLING_RULES_55.length} Rules
+              </Badge>
+            </div>
 
-              <p className={cn("text-meta text-muted-foreground leading-relaxed", isBn && "text-bangla")}>
-                {isBn ? rule.explanationBn : rule.explanationEn}
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {rule.examples.map((ex) => (
-                  <button
-                    key={ex.word}
+            <div className="flex flex-col sm:flex-row gap-2.5">
+              <div className="relative flex-1">
+                <HugeiconsIcon
+                  icon={Search01Icon}
+                  size={16}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+                <Input
+                  type="text"
+                  value={ruleSearch}
+                  onChange={(e) => setRuleSearch(e.target.value)}
+                  placeholder={
+                    isBn
+                      ? "রুল নম্বর (R6), নাম বা উদাহরণ খুঁজুন..."
+                      : "Search rule (R6), keyword, or example..."
+                  }
+                  className="pl-9"
+                />
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {(
+                  [
+                    { id: "all", label: "All" },
+                    { id: "high", label: "🟢 High" },
+                    { id: "medium", label: "🟡 Medium" },
+                    { id: "low", label: "🔴 Low" },
+                  ] as const
+                ).map((rel) => (
+                  <Button
+                    key={rel.id}
                     type="button"
-                    onClick={() => speakWord(ex.word)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-muted/50 hover:bg-accent text-chip text-foreground cursor-pointer transition-colors"
+                    size="xs"
+                    variant={ruleReliability === rel.id ? "default" : "outline"}
+                    onClick={() => setRuleReliability(rel.id)}
                   >
-                    <HugeiconsIcon icon={VolumeHighIcon} size={13} className="text-primary" />
-                    <span className="font-semibold">{ex.word}</span>
-                    <span className="text-muted-foreground">({ex.note})</span>
-                  </button>
+                    {rel.label}
+                  </Button>
                 ))}
               </div>
+            </div>
 
-              <p className="text-chip text-muted-foreground border-t border-border/60 pt-2">
-                Note: {rule.exceptionNote}
-              </p>
-            </Card>
-          ))}
+            <div className="flex flex-wrap gap-1.5">
+              {RULE_PARTS.map((p) => (
+                <Button
+                  key={p.id}
+                  type="button"
+                  size="xs"
+                  variant={rulePart === p.id ? "secondary" : "ghost"}
+                  onClick={() => setRulePart(p.id)}
+                >
+                  {p.label}
+                </Button>
+              ))}
+            </div>
+          </Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredRules.map((rule) => (
+              <Card
+                key={rule.id}
+                className="p-4 sm:p-5 bg-card border border-border rounded-card flex flex-col justify-between gap-3.5 shadow-xs"
+              >
+                <div className="space-y-2.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="space-y-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge variant="brand" size="sm" className="font-mono">
+                          {rule.id}
+                        </Badge>
+                        <Badge variant="outline" size="sm">
+                          {rule.reliability === "high"
+                            ? "🟢 High"
+                            : rule.reliability === "medium"
+                            ? "🟡 Medium"
+                            : "🔴 Low (Guideline)"}
+                        </Badge>
+                      </div>
+                      <h3 className="text-card-title text-foreground font-semibold">
+                        {isBn ? rule.titleBn : rule.title}
+                      </h3>
+                    </div>
+                    <HugeiconsIcon icon={BookOpen01Icon} size={18} className="text-primary shrink-0" />
+                  </div>
+
+                  <p className={cn("text-meta text-muted-foreground leading-relaxed", isBn && "text-bangla")}>
+                    {isBn ? rule.summaryBn : rule.summaryEn}
+                  </p>
+
+                  {rule.reliability === "low" && (
+                    <p className="text-chip text-sun-700 bg-sun-100/70 rounded-control px-3 py-1.5 text-bangla">
+                      ⚠️ এটি শুধু একটি গাইডলাইন—অডিও শুনে ও অনুশীলন করে মুখস্থ করাই বেশি কার্যকর।
+                    </p>
+                  )}
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {rule.examples.map((ex, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-control bg-muted/50 text-chip text-foreground font-mono"
+                      >
+                        {ex}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {rule.exceptions.length > 0 && (
+                  <div className="rounded-panel bg-muted/35 border border-border/60 p-3 space-y-1">
+                    <p className="text-chip font-semibold text-foreground">Exceptions:</p>
+                    <p className="text-chip text-muted-foreground">
+                      {rule.exceptions.join(" · ")}
+                    </p>
+                  </div>
+                )}
+
+                {rule.mnemonic && (
+                  <p className="text-chip text-primary font-semibold">
+                    💡 {rule.mnemonic}
+                  </p>
+                )}
+              </Card>
+            ))}
+          </div>
         </div>
       )}
 
@@ -1399,6 +1597,33 @@ export function SpellMasterClient() {
                 );
               })}
             </div>
+
+            {Object.keys(progress.ruleMistakes || {}).length > 0 && (
+              <div className="pt-3 border-t border-border/60 space-y-2">
+                <p className="text-chip font-semibold text-foreground uppercase">
+                  {isBn ? "যে রুলগুলোতে বেশি ভুল হচ্ছে" : "Weak Rules Tracker"}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {Object.entries(progress.ruleMistakes)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 6)
+                    .map(([rId, count]) => (
+                      <button
+                        key={rId}
+                        type="button"
+                        onClick={() => {
+                          setRulePart("all");
+                          setRuleSearch(rId);
+                          setActiveTab("rules");
+                        }}
+                        className="px-3 py-1 rounded-pill bg-destructive/10 text-destructive text-chip font-semibold cursor-pointer"
+                      >
+                        {rId} · {count}x missed
+                      </button>
+                    ))}
+                </div>
+              </div>
+            )}
           </Card>
         </div>
       )}
