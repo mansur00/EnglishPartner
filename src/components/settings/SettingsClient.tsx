@@ -363,9 +363,9 @@ export function SettingsClient() {
                   {t("settings.systemLanguageDesc")}
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip">
+              <Badge variant="secondary" size="sm">
                 {getLanguageMeta(locale)?.nativeName || locale.toUpperCase()}
-              </span>
+              </Badge>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">
@@ -436,11 +436,11 @@ export function SettingsClient() {
                   {t("settings.translationLanguageDesc")}
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip">
+              <Badge variant="secondary" size="sm">
                 {translationLocale === "none"
                   ? t("settings.noTranslationOption")
                   : (getLanguageMeta(translationLocale)?.nativeName || translationLocale.toUpperCase())}
-              </span>
+              </Badge>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">

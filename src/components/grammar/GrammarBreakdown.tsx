@@ -69,7 +69,7 @@ export function GrammarBreakdown({
                     <td className="p-2">
                       <span className="inline-flex items-center gap-1 font-bangla text-bangla">
                         <span
-                          className="size-1.5 rounded-full inline-block"
+                          className="size-1.5 rounded-pill inline-block"
                           style={{
                             backgroundColor: `var(--gram-pos-${tok.pos}-ink, var(--brand-800))`,
                           }}

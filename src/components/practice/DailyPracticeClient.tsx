@@ -461,7 +461,7 @@ export function DailyPracticeClient() {
             />
           ) : (
             <div className="p-6 text-center rounded-panel bg-muted/30 border border-border/60 space-y-4">
-              <div className="mx-auto size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+              <div className="mx-auto size-12 rounded-pill bg-primary/10 text-primary flex items-center justify-center">
                 <HugeiconsIcon icon={Bookmark02Icon} size={24} />
               </div>
               <div className="space-y-1 max-w-md mx-auto">

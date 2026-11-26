@@ -875,16 +875,16 @@ export function RoleplayPartner() {
             />
             <span className="truncate">{locale === "bn" ? "উন্মুক্ত আড্ডা (Freestyle)" : "Freestyle Talking"}</span>
           </span>
-          <span
+          <Pill
+            size="sm"
+            variant="neutral"
             className={cn(
-              "px-1.5 py-0.5 rounded-pill text-chip leading-none shrink-0 font-mono",
-              selectedScenario.id === "freestyle"
-                ? "bg-primary-foreground/20 text-primary-foreground"
-                : "bg-muted text-muted-foreground"
+              "leading-none shrink-0 font-mono",
+              selectedScenario.id === "freestyle" && "bg-primary-foreground/20 text-primary-foreground"
             )}
           >
             {locale === "bn" ? "মুক্ত" : "Open"}
-          </span>
+          </Pill>
         </button>
 
         {/* Scrollable Roleplay Scenarios */}
@@ -908,16 +908,16 @@ export function RoleplayPartner() {
                 )}
               >
                 <span className="truncate">{scTitle}</span>
-                <span
+                <Pill
+                  size="sm"
+                  variant="neutral"
                   className={cn(
-                    "px-1.5 py-0.5 rounded-pill text-chip leading-none uppercase font-mono shrink-0",
-                    isSelected
-                      ? "bg-primary-foreground/20 text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
+                    "leading-none uppercase font-mono shrink-0",
+                    isSelected && "bg-primary-foreground/20 text-primary-foreground"
                   )}
                 >
                   {sc.level}
-                </span>
+                </Pill>
               </button>
             );
           })}
@@ -943,16 +943,16 @@ export function RoleplayPartner() {
                   className="flex-1 min-w-0 flex items-center justify-between gap-2 cursor-pointer text-left"
                 >
                   <span className="truncate">{sc.title}</span>
-                  <span
+                  <Pill
+                    size="sm"
+                    variant="neutral"
                     className={cn(
-                      "px-1.5 py-0.5 rounded-pill text-chip leading-none uppercase font-mono shrink-0",
-                      isSelected
-                        ? "bg-primary-foreground/20 text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
+                      "leading-none uppercase font-mono shrink-0",
+                      isSelected && "bg-primary-foreground/20 text-primary-foreground"
                     )}
                   >
                     Custom
-                  </span>
+                  </Pill>
                 </button>
                 <Button
                   type="button"

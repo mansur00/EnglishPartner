@@ -2224,6 +2224,10 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, UX Audit Step 3: Pill / Badge / Tag Consistency
+- Replaced all 6 remaining `rounded-full` classes with `rounded-pill` / `pill` across `GrammarBreakdown.tsx`, `GrammarLegend.tsx`, `DailyPracticeClient.tsx`, and `ThemeToggle.tsx`.
+- Converted inline status/language/level pill `<span>`s to `<Badge>` and `<Pill>` in `SettingsClient.tsx` and `RoleplayPartner.tsx`.
+
 ### 2026-11-27, UX Audit Step 2: Button Consistency (`<Button>` Standardization)
 - Removed `rounded-pill` override from `<Button>` in `src/app/page.tsx` so CTA buttons consistently use `rounded-control` (12px).
 - Standardized mode tabs, back links, theme switcher, and icon action buttons from raw `<button>` elements to `<Button>` (`variant`, `size="sm" | "xs" | "icon-xs"`) across `src/app/(app)/vocabulary/page.tsx`, `src/components/practice/PracticeWorkspace.tsx`, `src/components/admin/ConversationEditorClient.tsx`, `src/components/settings/SettingsClient.tsx`, and `src/components/tools/RoleplayPartner.tsx`.

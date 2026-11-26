@@ -121,7 +121,7 @@ export function GrammarLegend({
               {/* Category indicator: POS dot, Role underline indicator, or Tense bar */}
               {cat.layer === "pos" && (
                 <span
-                  className="size-2 rounded-full shrink-0"
+                  className="size-2 rounded-pill shrink-0"
                   style={{
                     backgroundColor: `var(--gram-pos-${cat.id}-ink, var(--brand-800))`,
                   }}

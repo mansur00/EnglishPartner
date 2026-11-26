@@ -18,8 +18,8 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button variant="ghost" size="icon" className="size-11 rounded-full" disabled>
-        <span className="w-5 h-5 rounded-full bg-muted animate-pulse" />
+      <Button variant="ghost" size="icon" pill className="size-11" disabled>
+        <span className="w-5 h-5 rounded-pill bg-muted animate-pulse" />
       </Button>
     );
   }
@@ -30,9 +30,10 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
+      pill
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className="btn-press size-11 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
+      className="btn-press size-11 text-muted-foreground hover:text-foreground hover:bg-muted"
     >
       {isDark ? (
         <HugeiconsIcon icon={Sun01Icon} size={20} className="text-sun-500" />
