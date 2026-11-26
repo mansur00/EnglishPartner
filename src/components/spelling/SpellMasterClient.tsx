@@ -22,6 +22,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { LocaleTitle } from "@/components/shared";
 import { useLocale } from "@/lib/i18n";
 import { speakText } from "@/lib/audio/speech-engine";
@@ -809,33 +816,49 @@ export function SpellMasterClient() {
               ))}
             </div>
 
-            {/* Category Chips for Selected Group */}
-            <div className="flex flex-wrap gap-1.5">
-              <Button
-                type="button"
-                size="xs"
-                variant={selectedCategory === "all" ? "secondary" : "ghost"}
-                onClick={() => {
-                  setSelectedCategory("all");
+            {/* Subcategory Dropdown for Selected Group */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="text-meta text-muted-foreground">
+                {isBn ? "সাব-ক্যাটাগরি:" : "Subcategory:"}
+              </span>
+              <Select
+                value={selectedCategory}
+                onValueChange={(val) => {
+                  setSelectedCategory((val ?? "all") as SpellCategoryId | "all");
                   setVisibleCount(PAGE_BATCH);
                 }}
               >
-                All ({selectedGroup === "all" ? allWords.length : filteredWords.length})
-              </Button>
-              {activeGroupCategories.map((cat) => (
+                <SelectTrigger size="sm" className="w-full sm:w-72">
+                  <SelectValue>
+                    {selectedCategory === "all"
+                      ? `All (${selectedGroup === "all" ? allWords.length : filteredWords.length})`
+                      : CATEGORY_MAP.get(selectedCategory)?.label ?? selectedCategory}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">
+                    All ({selectedGroup === "all" ? allWords.length : filteredWords.length})
+                  </SelectItem>
+                  {activeGroupCategories.map((cat) => (
+                    <SelectItem key={cat.id} value={cat.id}>
+                      {cat.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {selectedCategory !== "all" && (
                 <Button
-                  key={cat.id}
                   type="button"
                   size="xs"
-                  variant={selectedCategory === cat.id ? "secondary" : "ghost"}
+                  variant="ghost"
                   onClick={() => {
-                    setSelectedCategory(cat.id);
+                    setSelectedCategory("all");
                     setVisibleCount(PAGE_BATCH);
                   }}
                 >
-                  {cat.label}
+                  {isBn ? "রিসেট" : "Reset"}
                 </Button>
-              ))}
+              )}
             </div>
 
             {selectedCategory !== "all" && CATEGORY_MAP.get(selectedCategory) && (

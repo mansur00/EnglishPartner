@@ -2154,6 +2154,9 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, Spell Master Subcategory Dropdown (`SpellMasterClient.tsx`)
+- Replaced the multi-row subcategory pill list in `/spell-master` (`Learn` tab) with a compact shadcn/Base UI `Select` dropdown (`Subcategory` / `সাব-ক্যাটাগরি`) plus an inline `Reset` button when a subcategory is active.
+
 ### 2026-11-17, state file created
 - Requested by owner: keep a running md file of everything updated or in progress, so instructions survive between sessions
 - Changed: this file added (docs/PROJECT_STATE.md)
