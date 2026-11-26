@@ -11,10 +11,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
 import {
   notifyFeatureFlagsUpdated,
   type FeatureFlagItem,
 } from "@/lib/features/use-feature-flags";
+import { notifyAppConfigUpdated } from "@/components/auth/SessionIsolationProvider";
+import type { AppConfigPayload } from "@/app/api/v1/app-config/route";
 import type { UserProfile } from "@/lib/auth/session";
 
 interface AdminControlTabProps {
@@ -26,6 +29,13 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
   const isBn = locale === "bn";
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [features, setFeatures] = useState<FeatureFlagItem[]>([]);
+  const [appConfig, setAppConfig] = useState<AppConfigPayload>({
+    ai_daily_limit: 50,
+    guest_preview_enabled: true,
+    guest_preview_percent: 5,
+    system_notice_enabled: false,
+    system_notice: "",
+  });
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
@@ -33,9 +43,10 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
   const loadAdminData = useCallback(async () => {
     setLoading(true);
     try {
-      const [uRes, fRes] = await Promise.all([
+      const [uRes, fRes, cRes] = await Promise.all([
         fetch("/api/v1/admin/users", { cache: "no-store" }),
         fetch("/api/v1/features", { cache: "no-store" }),
+        fetch("/api/v1/app-config", { cache: "no-store" }),
       ]);
       if (uRes.ok) {
         const uData = await uRes.json();
@@ -44,6 +55,10 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
       if (fRes.ok) {
         const fData = await fRes.json();
         setFeatures(fData.items ?? []);
+      }
+      if (cRes.ok) {
+        const cData = await cRes.json();
+        if (cData?.config) setAppConfig(cData.config);
       }
     } finally {
       setLoading(false);
@@ -102,6 +117,28 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
     }
   };
 
+  const handleSaveAppConfig = async (patch: Partial<AppConfigPayload>) => {
+    setBusyId("app-config");
+    setStatusMsg(null);
+    try {
+      const res = await fetch("/api/v1/app-config", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patch),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setStatusMsg(data.error || "Config update failed");
+        return;
+      }
+      if (data?.config) setAppConfig(data.config);
+      notifyAppConfigUpdated();
+      setStatusMsg(isBn ? "সিস্টেম কনফিগারেশন সেভ হয়েছে।" : "System settings saved.");
+    } finally {
+      setBusyId(null);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -132,6 +169,150 @@ export function AdminControlTab({ currentUserId, locale }: AdminControlTabProps)
           <span>{isBn ? "রিফ্রেশ" : "Refresh"}</span>
         </Button>
       </div>
+
+      {/* 0. AI Limits, Guest Access & System Notice */}
+      <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs">
+        <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
+          <div className="size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center">
+            <HugeiconsIcon icon={Settings01Icon} size={18} />
+          </div>
+          <div>
+            <h2 className="font-heading text-card-title text-foreground">
+              {isBn ? "AI লিমিট, গেস্ট প্রিভিউ ও সিস্টেম নোটিশ" : "AI Quota, Guest Preview & System Notice"}
+            </h2>
+            <p className="text-meta text-muted-foreground">
+              {isBn
+                ? "দৈনিক AI লিমিট, গেস্ট ৫% প্রিভিউ এবং গ্লোবাল নোটিশ ব্যানার নিয়ন্ত্রণ করুন।"
+                : "Control daily AI limits, Guest preview access, and global announcement banner."}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-panel border border-border p-3.5 space-y-2">
+            <p className="text-label font-semibold text-foreground">
+              {isBn ? "দৈনিক AI লিমিট (প্রতি ইউজার)" : "AI Daily Limit (per user)"}
+            </p>
+            <div className="flex items-center gap-2">
+              <Input
+                type="number"
+                min={1}
+                max={1000}
+                value={appConfig.ai_daily_limit}
+                onChange={(e) =>
+                  setAppConfig((p) => ({
+                    ...p,
+                    ai_daily_limit: Math.max(1, parseInt(e.target.value || "50", 10)),
+                  }))
+                }
+                className="w-28"
+              />
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                disabled={busyId === "app-config"}
+                onClick={() => handleSaveAppConfig({ ai_daily_limit: appConfig.ai_daily_limit })}
+              >
+                {isBn ? "সেভ" : "Save"}
+              </Button>
+            </div>
+          </div>
+
+          <div className="rounded-panel border border-border p-3.5 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-label font-semibold text-foreground">
+                {isBn ? "গেস্ট প্রিভিউ (লগইন ছাড়া)" : "Guest Preview Access"}
+              </p>
+              <Switch
+                checked={appConfig.guest_preview_enabled}
+                disabled={busyId === "app-config"}
+                onCheckedChange={(checked) =>
+                  handleSaveAppConfig({ guest_preview_enabled: checked })
+                }
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-chip text-muted-foreground">
+                {isBn ? "লিমিট (%):" : "Limit (%):"}
+              </span>
+              <Input
+                type="number"
+                min={1}
+                max={100}
+                value={appConfig.guest_preview_percent}
+                onChange={(e) =>
+                  setAppConfig((p) => ({
+                    ...p,
+                    guest_preview_percent: Math.min(
+                      100,
+                      Math.max(1, parseInt(e.target.value || "5", 10))
+                    ),
+                  }))
+                }
+                className="w-24"
+              />
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                disabled={busyId === "app-config"}
+                onClick={() =>
+                  handleSaveAppConfig({
+                    guest_preview_percent: appConfig.guest_preview_percent,
+                  })
+                }
+              >
+                {isBn ? "সেভ" : "Save"}
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-panel border border-border p-3.5 space-y-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-label font-semibold text-foreground">
+              {isBn ? "সিস্টেম নোটিশ ব্যানার" : "System Notice Banner"}
+            </p>
+            <Switch
+              checked={appConfig.system_notice_enabled}
+              disabled={busyId === "app-config"}
+              onCheckedChange={(checked) =>
+                handleSaveAppConfig({ system_notice_enabled: checked })
+              }
+            />
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Input
+              type="text"
+              value={appConfig.system_notice}
+              onChange={(e) =>
+                setAppConfig((p) => ({ ...p, system_notice: e.target.value }))
+              }
+              placeholder={
+                isBn
+                  ? "সব ইউজারের জন্য একটি নোটিশ লিখুন..."
+                  : "Write a global announcement banner for all users..."
+              }
+              className="flex-1"
+            />
+            <Button
+              type="button"
+              size="sm"
+              variant="cta"
+              disabled={busyId === "app-config"}
+              onClick={() =>
+                handleSaveAppConfig({
+                  system_notice: appConfig.system_notice,
+                  system_notice_enabled: appConfig.system_notice_enabled,
+                })
+              }
+            >
+              {isBn ? "নোটিশ আপডেট" : "Publish Notice"}
+            </Button>
+          </div>
+        </div>
+      </Card>
 
       {/* 1. Feature Controls */}
       <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs">

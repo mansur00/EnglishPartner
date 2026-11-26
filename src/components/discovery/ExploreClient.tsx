@@ -4,6 +4,8 @@ import { useState, useMemo, useTransition, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { t, useTranslations } from "@/lib/i18n";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { ScenarioCard } from "@/components/discovery/ScenarioCard";
 import { CategoryPills } from "@/components/discovery/CategoryPills";
 import { FilterBar } from "@/components/discovery/FilterBar";
@@ -49,6 +51,7 @@ const CEFR_LEVELS: readonly ("all" | ProfessionCefrLevel)[] = [
 
 export function ExploreClient() {
   const { locale, t: tKey } = useTranslations();
+  const { isGuest, config, getGuestLimit } = useSessionAccess();
   const searchParams = useSearchParams();
   const initialTab: ExploreTab =
     searchParams.get("tab") === "professional" ? "professional" : "conversations";
@@ -138,8 +141,11 @@ export function ExploreClient() {
   );
 
   const paginatedScenarios = useMemo(() => {
-    return paginateItems(filteredScenarios, { page: currentPage, pageSize });
-  }, [filteredScenarios, currentPage, pageSize]);
+    const capped = isGuest
+      ? filteredScenarios.slice(0, getGuestLimit(filteredScenarios.length, 2))
+      : filteredScenarios;
+    return paginateItems(capped, { page: currentPage, pageSize });
+  }, [filteredScenarios, currentPage, pageSize, isGuest, getGuestLimit]);
 
   const handleResetFilters = () => {
     startTransition(() => {
@@ -395,6 +401,14 @@ export function ExploreClient() {
         <Card className="lg:hidden p-4 sm:p-5 bg-card border border-border space-y-4 shadow-xs">
           {sidebarControls}
         </Card>
+
+        {isGuest && (
+          <GuestLimitBanner
+            previewPercent={config.guest_preview_percent}
+            featureName={locale === "bn" ? "Explore" : "Explore Conversations"}
+            nextPath="/explore"
+          />
+        )}
 
         {/* TAB 1: ALL CONVERSATIONS */}
         {activeTab === "conversations" ? (

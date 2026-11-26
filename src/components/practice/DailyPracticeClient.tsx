@@ -6,6 +6,8 @@ import { useLocale, useTranslationLocale, useLiveTranslations, t } from "@/lib/i
 import { TodayPanel } from "@/components/shared";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { PersonalizedPracticeCard } from "@/components/practice/PersonalizedPracticeCard";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button-variants";
@@ -37,6 +39,7 @@ import {
 export function DailyPracticeClient() {
   const locale = useLocale();
   const translationLocale = useTranslationLocale();
+  const { isGuest, config } = useSessionAccess();
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
   const [streak, setStreak] = useState(3);
   const [minutesCompleted, setMinutesCompleted] = useState(8);
@@ -401,6 +404,14 @@ export function DailyPracticeClient() {
             />
           </div>
         </Card>
+
+        {isGuest && (
+          <GuestLimitBanner
+            previewPercent={config.guest_preview_percent}
+            featureName={locale === "bn" ? "ডেইলি প্র্যাকটিস ও ৯০-দিনের চ্যালেঞ্জ" : "Daily Practice & 90-Day Challenge"}
+            nextPath="/daily-practice"
+          />
+        )}
 
         {/* 2. 90-Day Personalized Spoken English Challenge */}
         <PersonalizedPracticeCard

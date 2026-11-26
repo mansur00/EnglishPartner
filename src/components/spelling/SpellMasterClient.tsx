@@ -30,6 +30,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LocaleTitle } from "@/components/shared";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { useLocale } from "@/lib/i18n";
 import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
@@ -79,6 +81,7 @@ function scrambleWord(word: string): string[] {
 export function SpellMasterClient() {
   const locale = useLocale();
   const isBn = locale === "bn";
+  const { isGuest, config, getGuestLimit } = useSessionAccess();
 
   const [activeTab, setActiveTab] = useState<SpellTab>("learn");
   const [progress, setProgress] = useState<SpellProgressState>(DEFAULT_SPELL_PROGRESS);
@@ -210,10 +213,10 @@ export function SpellMasterClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allWords, searchQuery, selectedCategory, selectedGroup, activeGroupCategories, progress.weakWords, progress.savedIds, dailyWordId]);
 
-  const visibleWords = useMemo(
-    () => filteredWords.slice(0, visibleCount),
-    [filteredWords, visibleCount]
-  );
+  const visibleWords = useMemo(() => {
+    const cap = isGuest ? getGuestLimit(filteredWords.length, 5) : visibleCount;
+    return filteredWords.slice(0, Math.min(visibleCount, cap));
+  }, [filteredWords, visibleCount, isGuest, getGuestLimit]);
 
   const toggleSaveWord = (wordId: string) => {
     setProgress((prev) => {
@@ -864,6 +867,14 @@ export function SpellMasterClient() {
           </Button>
         ))}
       </div>
+
+      {isGuest && (
+        <GuestLimitBanner
+          previewPercent={config.guest_preview_percent}
+          featureName={isBn ? "Spell Master" : "Spell Master"}
+          nextPath="/spell-master"
+        />
+      )}
 
       {/* TAB 1: LEARN & SYLLABLES + AI SEARCH & ADD */}
       {activeTab === "learn" && (

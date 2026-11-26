@@ -2154,6 +2154,13 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, Session Isolation, Guest 5% Preview & Full Admin Controls
+- Added `supabase/migrations/20261127_app_settings_and_progress.sql` (`public.app_settings` + `public.user_app_state` with RLS) and API routes `/api/v1/app-config` and `/api/v1/user/progress`.
+- Added `SessionIsolationProvider.tsx` in `src/app/(app)/layout.tsx`:
+  - **Guest Mode:** Clears temporary progress on browser reload / pagehide so Guest sessions never persist; enforces configurable 5% preview (`getGuestLimit`) with `GuestLimitBanner.tsx` in `ExploreClient.tsx`, `DailyPracticeClient.tsx`, and `SpellMasterClient.tsx`.
+  - **Logged-in Mode:** Isolates progress per `user.id` (`ecp_u_<uid>`) and syncs to Supabase `public.user_app_state`.
+- Upgraded `AdminControlTab.tsx` in `/settings` with **AI Daily Limit**, **Guest Preview % Toggle**, and **System Notice Banner** controls alongside User Management and Feature Flags.
+
 ### 2026-11-27, Webapp Login Flow, `/login` Redirect & Role-Aware Header
 - Added `/login` (`src/app/login/page.tsx`) redirecting to `/auth/login` so Header `Log in` links and `tests/header-state.test.mjs` work seamlessly.
 - Added `"Forgot password?"` reset flow (`resetPasswordForEmail`) in `src/app/auth/login/page.tsx`.
