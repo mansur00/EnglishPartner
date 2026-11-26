@@ -456,7 +456,7 @@ export function PersonalizedPracticeCard({
                 value={setupGoal}
                 onValueChange={(val) => setSetupGoal((val ?? "everyday") as ChallengeGoal)}
               >
-                <SelectTrigger className="w-full bg-card">
+                <SelectTrigger className="w-full">
                   <SelectValue>
                     {(() => {
                       const g = GOAL_OPTIONS.find((o) => o.id === setupGoal);
@@ -483,7 +483,7 @@ export function PersonalizedPracticeCard({
                 value={setupLevel}
                 onValueChange={(val) => setSetupLevel((val ?? "beginner") as ChallengeLevel)}
               >
-                <SelectTrigger className="w-full bg-card">
+                <SelectTrigger className="w-full">
                   <SelectValue>
                     {(() => {
                       const l = LEVEL_OPTIONS.find((o) => o.id === setupLevel);
@@ -512,7 +512,7 @@ export function PersonalizedPracticeCard({
                   setSetupMinutes(Number(val ?? 20) as ChallengeDailyMinutes)
                 }
               >
-                <SelectTrigger className="w-full bg-card">
+                <SelectTrigger className="w-full">
                   <SelectValue>{setupMinutes} min/day</SelectValue>
                 </SelectTrigger>
                 <SelectContent>

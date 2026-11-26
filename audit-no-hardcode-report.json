@@ -12,55 +12,55 @@
   "d_layout_magic": [
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 125,
+      "line": 131,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"pl-9 h-11\""
     },
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 136,
+      "line": 144,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label\""
     },
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 165,
+      "line": 180,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label capitalize\""
     },
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 185,
+      "line": 203,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label capitalize\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 398,
+      "line": 404,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"pl-9 h-11 bg-muted/40 border-border/60 rounded-control\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 409,
+      "line": 417,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border/60 bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 576,
+      "line": 585,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 757,
+      "line": 766,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 1032,
+      "line": 1041,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -90,21 +90,21 @@
     },
     {
       "file": "src/components/discovery/ExploreClient.tsx",
-      "line": 193,
+      "line": 199,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full pl-11 pr-11 text-body h-11\""
     },
     {
       "file": "src/components/discovery/ExploreClient.tsx",
-      "line": 271,
+      "line": 278,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label\""
     },
     {
       "file": "src/components/discovery/ExploreClient.tsx",
-      "line": 304,
+      "line": 321,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label\""
     },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
@@ -144,37 +144,37 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 265,
+      "line": 271,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 377,
+      "line": 383,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 386,
+      "line": 396,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
-    },
-    {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 447,
-      "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 text-label\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
       "line": 458,
       "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+      "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 720,
+      "line": 471,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 text-label\""
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 736,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<div className=\"grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-2xl\">"
     },
@@ -272,13 +272,6 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
-      "className": "absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none",
-      "files": [
-        "src/app/(app)/quiz/page.tsx"
-      ]
-    },
-    {
       "detail": "ClassName repeated 8 times",
       "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
       "files": [
@@ -296,15 +289,6 @@
       "className": "text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none",
       "files": [
         "src/app/(app)/vocabulary/page.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 5 times",
-      "className": "text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none",
-      "files": [
-        "src/app/(app)/vocabulary/page.tsx",
-        "src/components/discovery/ExploreClient.tsx",
-        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
@@ -594,14 +578,6 @@
         "src/components/practice/ReadAloudCard.tsx",
         "src/components/shared/WordDetailsSections.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 4 times",
-      "className": "w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring",
-      "files": [
-        "src/components/discovery/ExploreClient.tsx",
-        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {

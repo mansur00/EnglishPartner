@@ -22,6 +22,13 @@ import { canEditScenario, UserRole } from "@/lib/auth/roles";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ConversationEditorClientProps {
   scenario: ScenarioItem;
@@ -328,17 +335,28 @@ export function ConversationEditorClient({
                   </span>
 
                   {/* Speaker Selector */}
-                  <select
+                  <Select
                     value={line.speakerId}
-                    onChange={(e) => handleLineChange(index, "speakerId", e.target.value)}
-                    className="text-chip px-2.5 py-1.5 rounded-control border border-border bg-card text-foreground focus:outline-hidden focus:border-primary cursor-pointer"
+                    onValueChange={(val) => {
+                      if (val) handleLineChange(index, "speakerId", val);
+                    }}
                   >
-                    {version.speakers.map((spk) => (
-                      <option key={spk.id} value={spk.id}>
-                        {spk.name} ({spk.nameBn}) — {spk.role}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger size="sm" className="text-chip">
+                      <SelectValue>
+                        {(() => {
+                          const spk = version.speakers.find((s) => s.id === line.speakerId);
+                          return spk ? `${spk.name} (${spk.nameBn}) — ${spk.role}` : line.speakerId;
+                        })()}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {version.speakers.map((spk) => (
+                        <SelectItem key={spk.id} value={spk.id}>
+                          {spk.name} ({spk.nameBn}) — {spk.role}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Move & Delete Controls */}

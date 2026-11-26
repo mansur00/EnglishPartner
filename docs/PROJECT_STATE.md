@@ -2224,6 +2224,10 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, UX Audit Step 1: Dropdown Consistency (`<Select>` Standardization)
+- Replaced all 9 remaining raw native `<select>` elements with shadcn/Base UI `<Select>` (`SelectTrigger`, `SelectContent`, `SelectItem`, `SelectValue`) across `src/app/(app)/quiz/page.tsx` (3), `src/components/discovery/ExploreClient.tsx` (2), `src/components/settings/SettingsClient.tsx` (2), `src/app/(app)/vocabulary/page.tsx` (1), and `src/components/admin/ConversationEditorClient.tsx` (1).
+- Removed `bg-card` from bordered `SelectTrigger` instances in `src/components/practice/PersonalizedPracticeCard.tsx` to satisfy the Background XOR Stroke rule.
+
 ### 2026-11-27, Systematic Typography & Font-Size Audit (`b_typography` -> 0)
 - Audited all 170 `b. Typography` violations reported by `scripts/check-tokens.mjs` across 20 files (`SpellMasterClient.tsx`, `app/page.tsx`, `PersonalizedPracticeCard.tsx`, `GrammarStageLessonClient.tsx`, `AdminPanelClient.tsx`, `SettingsClient.tsx`, `vocabulary/page.tsx`, `ConversationInspectorSidebar.tsx`, `WordDetailsSections.tsx`, `MagicWordSidebar.tsx`, `WritingCheckerPanel.tsx`, `AdminControlTab.tsx`, `DailyPracticeClient.tsx`, `auth/login/page.tsx`, `GrammarPathClient.tsx`, `GuestLimitBanner.tsx`, `SessionIsolationProvider.tsx`, `ChatTurnBubble.tsx`, `MobileBottomNav.tsx`, `RoleplayPartner.tsx`).
 - Removed redundant `font-semibold`/`font-medium` overrides on semantic typography tokens (`text-card-title`, `text-stat`, `text-display`, `text-label`, `text-chip`, `text-meta`), mapped `text-meta font-semibold` -> `text-label`, `text-label font-medium` -> `text-meta`, and replaced standalone `font-semibold`/`font-medium` classes with semantic `text-label`, `text-meta`, or `text-chip-mono` utilities.

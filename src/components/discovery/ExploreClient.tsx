@@ -18,6 +18,13 @@ import { InputGroup, InputGroupPrefix, InputGroupSuffix } from "@/components/ui/
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Search01Icon,
@@ -25,7 +32,6 @@ import {
   Cancel01Icon,
   Briefcase01Icon,
   ArrowRight01Icon,
-  ArrowDown01Icon,
   Clock01Icon,
   Layers01Icon,
   CompassIcon,
@@ -263,13 +269,28 @@ export function ExploreClient() {
           <p className="text-chip text-muted-foreground">
             {locale === "bn" ? "ট্র্যাক:" : "Track:"}
           </p>
-          <div className="relative">
-            <select
+          <Select
+            value={selectedProfCat}
+            onValueChange={(val) => setSelectedProfCat(val ?? "all")}
+          >
+            <SelectTrigger
               aria-label={locale === "bn" ? "ক্যারিয়ার ট্র্যাক নির্বাচন করুন" : "Select career track"}
-              value={selectedProfCat}
-              onChange={(e) => setSelectedProfCat(e.target.value)}
-              className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full h-11 text-label"
             >
+              <SelectValue>
+                {(() => {
+                  const found = [
+                    { id: "all", labelEn: "All Tracks", labelBn: "সব ট্র্যাক" },
+                    { id: "tech", labelEn: "Tech & Engineering", labelBn: "টেক ও ইঞ্জিনিয়ারিং" },
+                    { id: "business", labelEn: "Business & Freelance", labelBn: "ব্যবসা ও ফ্রিল্যান্সিং" },
+                    { id: "service", labelEn: "Healthcare", labelBn: "স্বাস্থ্যসেবা" },
+                    { id: "education", labelEn: "Education", labelBn: "শিক্ষা" },
+                  ].find((c) => c.id === selectedProfCat);
+                  return found ? (locale === "bn" ? found.labelBn : found.labelEn) : "All Tracks";
+                })()}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
               {[
                 { id: "all", labelEn: "All Tracks", labelBn: "সব ট্র্যাক" },
                 { id: "tech", labelEn: "Tech & Engineering", labelBn: "টেক ও ইঞ্জিনিয়ারিং" },
@@ -277,34 +298,41 @@ export function ExploreClient() {
                 { id: "service", labelEn: "Healthcare", labelBn: "স্বাস্থ্যসেবা" },
                 { id: "education", labelEn: "Education", labelBn: "শিক্ষা" },
               ].map((cat) => (
-                <option key={cat.id} value={cat.id}>
+                <SelectItem key={cat.id} value={cat.id}>
                   {locale === "bn" ? cat.labelBn : cat.labelEn}
-                </option>
+                </SelectItem>
               ))}
-            </select>
-            <HugeiconsIcon
-              icon={ArrowDown01Icon}
-              size={16}
-              className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-            />
-          </div>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="space-y-2">
           <p className="text-chip text-muted-foreground">
             {locale === "bn" ? "CEFR লেভেল:" : "CEFR Level:"}
           </p>
-          <div className="relative">
-            <select
+          <Select
+            value={selectedProfLevel}
+            onValueChange={(val) =>
+              setSelectedProfLevel((val ?? "all") as "all" | ProfessionCefrLevel)
+            }
+          >
+            <SelectTrigger
               aria-label={locale === "bn" ? "CEFR লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
-              value={selectedProfLevel}
-              onChange={(e) =>
-                setSelectedProfLevel(e.target.value as "all" | ProfessionCefrLevel)
-              }
-              className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full h-11 text-label"
             >
+              <SelectValue>
+                {selectedProfLevel === "all"
+                  ? locale === "bn"
+                    ? "সব লেভেল (A1–C2)"
+                    : "All Levels (A1–C2)"
+                  : userTargetLevel === selectedProfLevel
+                    ? `${selectedProfLevel} (${locale === "bn" ? "আপনার লক্ষ্য" : "Your Target"})`
+                    : selectedProfLevel}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
               {CEFR_LEVELS.map((lvl) => (
-                <option key={lvl} value={lvl}>
+                <SelectItem key={lvl} value={lvl}>
                   {lvl === "all"
                     ? locale === "bn"
                       ? "সব লেভেল (A1–C2)"
@@ -312,15 +340,10 @@ export function ExploreClient() {
                     : userTargetLevel === lvl
                       ? `${lvl} (${locale === "bn" ? "আপনার লক্ষ্য" : "Your Target"})`
                       : lvl}
-                </option>
+                </SelectItem>
               ))}
-            </select>
-            <HugeiconsIcon
-              icon={ArrowDown01Icon}
-              size={16}
-              className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-            />
-          </div>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     );

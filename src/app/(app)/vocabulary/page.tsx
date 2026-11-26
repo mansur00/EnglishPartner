@@ -10,7 +10,6 @@ import {
   Search01Icon,
   Login01Icon,
   ArrowLeft01Icon,
-  ArrowDown01Icon,
   Add01Icon,
   CheckmarkCircle02Icon,
   AiLockIcon,
@@ -23,6 +22,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -399,26 +405,29 @@ function VocabularyContent() {
                 />
               </div>
 
-              <div className="md:col-span-5 relative">
-                <select
-                  aria-label={locale === "bn" ? "কার্ড ক্যাটাগরি নির্বাচন করুন" : "Filter Magic Cards by category"}
+              <div className="md:col-span-5">
+                <Select
                   value={magicCategory}
-                  onChange={(e) =>
-                    setMagicCategory(e.target.value as MagicCardCategory | "all")
+                  onValueChange={(val) =>
+                    setMagicCategory((val ?? "all") as MagicCardCategory | "all")
                   }
-                  className="w-full h-11 appearance-none rounded-control border border-border/60 bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
                 >
-                  {MAGIC_CARD_CATEGORIES.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.label}
-                    </option>
-                  ))}
-                </select>
-                <HugeiconsIcon
-                  icon={ArrowDown01Icon}
-                  size={16}
-                  className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                />
+                  <SelectTrigger
+                    aria-label={locale === "bn" ? "কার্ড ক্যাটাগরি নির্বাচন করুন" : "Filter Magic Cards by category"}
+                    className="w-full h-11 text-label"
+                  >
+                    <SelectValue>
+                      {MAGIC_CARD_CATEGORIES.find((c) => c.id === magicCategory)?.label ?? "All"}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {MAGIC_CARD_CATEGORIES.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.id}>
+                        {cat.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           )}

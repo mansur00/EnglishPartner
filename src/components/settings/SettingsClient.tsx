@@ -10,6 +10,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import type { UserProfile } from "@/lib/auth/session";
@@ -37,7 +44,6 @@ import {
   Bookmark02Icon,
   TaskDone01Icon,
   Search01Icon,
-  ArrowDown01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 import {
@@ -378,36 +384,41 @@ export function SettingsClient() {
                 />
               </div>
 
-              <div className="md:col-span-6 relative">
-                <select
-                  aria-label={t("settings.systemLanguage")}
+              <div className="md:col-span-6">
+                <Select
                   value={locale}
-                  onChange={(e) => handleLocaleChange(e.target.value as SupportedLocale)}
-                  className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+                  onValueChange={(val) => {
+                    if (val) handleLocaleChange(val as SupportedLocale);
+                  }}
                 >
-                  {(() => {
-                    const results = searchGlobalLanguages(sysLangSearch);
-                    if (results.length === 0) {
-                      return (
-                        <option value={locale} disabled>
-                          {locale === "bn" ? "কোনো ভাষা পাওয়া যায়নি" : "No matching language"}
-                        </option>
-                      );
-                    }
-                    return results.map((lang) => (
-                      <option key={lang.code} value={lang.code}>
-                        {lang.name !== lang.nativeName
-                          ? `${lang.nativeName} (${lang.name})`
-                          : lang.nativeName}
-                      </option>
-                    ));
-                  })()}
-                </select>
-                <HugeiconsIcon
-                  icon={ArrowDown01Icon}
-                  size={16}
-                  className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                />
+                  <SelectTrigger
+                    aria-label={t("settings.systemLanguage")}
+                    className="w-full h-11 text-label"
+                  >
+                    <SelectValue>
+                      {getLanguageMeta(locale)?.nativeName || locale.toUpperCase()}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(() => {
+                      const results = searchGlobalLanguages(sysLangSearch);
+                      if (results.length === 0) {
+                        return (
+                          <SelectItem value={locale} disabled>
+                            {locale === "bn" ? "কোনো ভাষা পাওয়া যায়নি" : "No matching language"}
+                          </SelectItem>
+                        );
+                      }
+                      return results.map((lang) => (
+                        <SelectItem key={lang.code} value={lang.code}>
+                          {lang.name !== lang.nativeName
+                            ? `${lang.nativeName} (${lang.name})`
+                            : lang.nativeName}
+                        </SelectItem>
+                      ));
+                    })()}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
@@ -448,36 +459,41 @@ export function SettingsClient() {
                 />
               </div>
 
-              <div className="md:col-span-6 relative">
-                <select
-                  aria-label={t("settings.translationLanguage")}
+              <div className="md:col-span-6">
+                <Select
                   value={translationLocale}
-                  onChange={(e) =>
-                    handleTranslationLocaleChange(e.target.value as TranslationLocale)
-                  }
-                  className="w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+                  onValueChange={(val) => {
+                    if (val) handleTranslationLocaleChange(val as TranslationLocale);
+                  }}
                 >
-                  {(!transLangSearch.trim() ||
-                    "off english only none no translation".includes(
-                      transLangSearch.trim().toLowerCase()
-                    )) && (
-                    <option value="none">{t("settings.noTranslationOption")}</option>
-                  )}
-                  {searchGlobalLanguages(transLangSearch)
-                    .filter((l) => l.code !== "en")
-                    .map((lang) => (
-                      <option key={lang.code} value={lang.code}>
-                        {lang.name !== lang.nativeName
-                          ? `${lang.nativeName} (${lang.name})`
-                          : lang.nativeName}
-                      </option>
-                    ))}
-                </select>
-                <HugeiconsIcon
-                  icon={ArrowDown01Icon}
-                  size={16}
-                  className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                />
+                  <SelectTrigger
+                    aria-label={t("settings.translationLanguage")}
+                    className="w-full h-11 text-label"
+                  >
+                    <SelectValue>
+                      {translationLocale === "none"
+                        ? t("settings.noTranslationOption")
+                        : (getLanguageMeta(translationLocale)?.nativeName || translationLocale.toUpperCase())}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(!transLangSearch.trim() ||
+                      "off english only none no translation".includes(
+                        transLangSearch.trim().toLowerCase()
+                      )) && (
+                      <SelectItem value="none">{t("settings.noTranslationOption")}</SelectItem>
+                    )}
+                    {searchGlobalLanguages(transLangSearch)
+                      .filter((l) => l.code !== "en")
+                      .map((lang) => (
+                        <SelectItem key={lang.code} value={lang.code}>
+                          {lang.name !== lang.nativeName
+                            ? `${lang.nativeName} (${lang.name})`
+                            : lang.nativeName}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>

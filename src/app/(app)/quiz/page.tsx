@@ -8,6 +8,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
 import {
   CONVERSATION_STYLES,
@@ -23,7 +30,6 @@ import {
   Search01Icon,
   PlayCircleIcon,
   SparklesIcon,
-  ArrowDown01Icon,
   AiLockIcon,
 } from "@hugeicons/core-free-icons";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
@@ -126,75 +132,90 @@ export default function QuizHubPage() {
             />
           </div>
 
-          <div className="md:col-span-3 relative">
-            <select
-              aria-label={locale === "bn" ? "লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
+          <div className="md:col-span-3">
+            <Select
               value={selectedLevel}
-              onChange={(e) =>
-                setSelectedLevel(e.target.value as "ALL" | CefrLevelCode)
+              onValueChange={(val) =>
+                setSelectedLevel((val ?? "ALL") as "ALL" | CefrLevelCode)
               }
-              className="w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
             >
-              {ALL_LEVELS.map((lvl) => {
-                const qCount = lvl === "ALL" ? null : getQuestionCountForLevel(lvl);
-                return (
-                  <option key={lvl} value={lvl}>
-                    {lvl === "ALL"
-                      ? locale === "bn"
-                        ? "সব লেভেল (A1–C2)"
-                        : "Level: All (A1–C2)"
-                      : `${lvl} (${qCount} ${locale === "bn" ? "প্রশ্ন" : "Q"})`}
-                  </option>
-                );
-              })}
-            </select>
-            <HugeiconsIcon
-              icon={ArrowDown01Icon}
-              size={16}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-            />
+              <SelectTrigger
+                aria-label={locale === "bn" ? "লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
+                className="w-full h-11 text-label"
+              >
+                <SelectValue>
+                  {selectedLevel === "ALL"
+                    ? locale === "bn"
+                      ? "সব লেভেল (A1–C2)"
+                      : "Level: All (A1–C2)"
+                    : `${selectedLevel} (${getQuestionCountForLevel(selectedLevel)} ${locale === "bn" ? "প্রশ্ন" : "Q"})`}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {ALL_LEVELS.map((lvl) => {
+                  const qCount = lvl === "ALL" ? null : getQuestionCountForLevel(lvl);
+                  return (
+                    <SelectItem key={lvl} value={lvl}>
+                      {lvl === "ALL"
+                        ? locale === "bn"
+                          ? "সব লেভেল (A1–C2)"
+                          : "Level: All (A1–C2)"
+                        : `${lvl} (${qCount} ${locale === "bn" ? "প্রশ্ন" : "Q"})`}
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className="md:col-span-2 relative">
-            <select
-              aria-label={locale === "bn" ? "স্টাইল নির্বাচন করুন" : "Select conversation style"}
+          <div className="md:col-span-2">
+            <Select
               value={selectedStyle}
-              onChange={(e) =>
-                setSelectedStyle(e.target.value as ConversationStyle)
+              onValueChange={(val) =>
+                setSelectedStyle((val ?? "casual") as ConversationStyle)
               }
-              className="w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
             >
-              {CONVERSATION_STYLES.map((st) => (
-                <option key={st} value={st} className="capitalize">
-                  {locale === "bn" ? `স্টাইল: ${st}` : `Style: ${st}`}
-                </option>
-              ))}
-            </select>
-            <HugeiconsIcon
-              icon={ArrowDown01Icon}
-              size={16}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-            />
+              <SelectTrigger
+                aria-label={locale === "bn" ? "স্টাইল নির্বাচন করুন" : "Select conversation style"}
+                className="w-full h-11 text-label capitalize"
+              >
+                <SelectValue>
+                  {locale === "bn" ? `স্টাইল: ${selectedStyle}` : `Style: ${selectedStyle}`}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {CONVERSATION_STYLES.map((st) => (
+                  <SelectItem key={st} value={st} className="capitalize">
+                    {locale === "bn" ? `স্টাইল: ${st}` : `Style: ${st}`}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className="md:col-span-2 relative">
-            <select
-              aria-label={locale === "bn" ? "দৈর্ঘ্য নির্বাচন করুন" : "Select conversation length"}
-              value={selectedLengthIdx}
-              onChange={(e) => setSelectedLengthIdx(Number(e.target.value))}
-              className="w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+          <div className="md:col-span-2">
+            <Select
+              value={String(selectedLengthIdx)}
+              onValueChange={(val) => setSelectedLengthIdx(Number(val ?? 0))}
             >
-              {LENGTH_KEYS.map((len, idx) => (
-                <option key={len} value={idx} className="capitalize">
-                  {locale === "bn" ? `দৈর্ঘ্য: ${len}` : `Length: ${len}`}
-                </option>
-              ))}
-            </select>
-            <HugeiconsIcon
-              icon={ArrowDown01Icon}
-              size={16}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-            />
+              <SelectTrigger
+                aria-label={locale === "bn" ? "দৈর্ঘ্য নির্বাচন করুন" : "Select conversation length"}
+                className="w-full h-11 text-label capitalize"
+              >
+                <SelectValue>
+                  {locale === "bn"
+                    ? `দৈর্ঘ্য: ${LENGTH_KEYS[selectedLengthIdx] ?? LENGTH_KEYS[0]}`
+                    : `Length: ${LENGTH_KEYS[selectedLengthIdx] ?? LENGTH_KEYS[0]}`}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {LENGTH_KEYS.map((len, idx) => (
+                  <SelectItem key={len} value={String(idx)} className="capitalize">
+                    {locale === "bn" ? `দৈর্ঘ্য: ${len}` : `Length: ${len}`}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </Card>
