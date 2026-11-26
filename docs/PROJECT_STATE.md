@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Redesign Spell Master Word Grid & Fixed Right Details Sidebar
+- Requested by owner: Match Spell Master's word list layout to the Vocabulary deck view — compact word tiles in the middle content area (`grid-cols-4`) and full selected-word details in the fixed right sidebar (`w-80 xl:w-96`).
+- Changed:
+  - `src/components/spelling/SpellMasterClient.tsx`: Replaced verbose 2-column word cards on the Learn tab with compact 4-column selectable word tiles (word, syllable breakdown, speaker button) and moved full word details (phonetic, Listen/Slow audio, clickable syllable pills, Bangla meaning, common mistake trap, mnemonic, example sentence, and Test This Word CTA) into the fixed right sidebar (`lg:flex`) + mobile inline fallback (`lg:hidden`).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Add Spell Master (/spell-master) with Syllables, Tests, Rules & AI Coach
 - Requested by owner: Create a new `Spell Master` page in the left sidebar right after `My Vocabulary` with syllable/audio learning, dictation & jumbled-letter tests, common mistake traps, 5 spelling rules, spaced repetition for weak words, AI word search & add, gamification (level/XP/streak/badges), and AI Spell Master (pattern diagnosis, custom quiz, paste-text spell checker).
 - Changed:

@@ -77,6 +77,7 @@ export function SpellMasterClient() {
   // Learn Tab State
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<"all" | SpellRuleCategory>("all");
+  const [selectedWordId, setSelectedWordId] = useState<string>(CURATED_SPELL_WORDS[0].id);
   const [aiLookupLoading, setAiLookupLoading] = useState(false);
   const [aiLookupResult, setAiLookupResult] = useState<SpellLookupResponse | null>(null);
   const [aiLookupError, setAiLookupError] = useState<string | null>(null);
@@ -387,8 +388,148 @@ export function SpellMasterClient() {
     }
   };
 
+  const selectedWord = useMemo(
+    () =>
+      filteredWords.find((w) => w.id === selectedWordId) ??
+      filteredWords[0] ??
+      allWords[0],
+    [filteredWords, selectedWordId, allWords]
+  );
+
+  const wordDetailsSidebar = selectedWord ? (
+    <div className="space-y-4">
+      {/* Top Category & Difficulty */}
+      <div className="flex items-center justify-between gap-2">
+        <Badge variant="brand" size="sm">
+          {CATEGORY_LABELS.find((c) => c.id === selectedWord.ruleCategory)?.label ??
+            selectedWord.ruleCategory}
+        </Badge>
+        <Badge variant="outline" size="sm">
+          {selectedWord.difficulty}
+        </Badge>
+      </div>
+
+      {/* Word Title + Listen Buttons */}
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <h2 className="text-card-title font-semibold text-foreground">
+            {selectedWord.word}
+          </h2>
+          <p className="text-chip font-mono text-muted-foreground mt-0.5">
+            {selectedWord.phonetic}
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <Button
+            type="button"
+            variant="outline"
+            size="xs"
+            onClick={() => speakWord(selectedWord.word, false)}
+            className="gap-1"
+          >
+            <HugeiconsIcon icon={VolumeHighIcon} size={14} />
+            <span>Listen</span>
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
+            onClick={() => speakSyllables(selectedWord)}
+          >
+            Slow
+          </Button>
+        </div>
+      </div>
+
+      {/* Syllable Breakdown Pills */}
+      <div className="space-y-1.5 pt-2 border-t border-border/60">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {isBn ? "সিলেবল বিভাজন" : "Syllables"}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {selectedWord.syllables.map((syl, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => speakText(syl, { rate: 0.75 })}
+              className="px-2.5 py-1 rounded-control bg-primary/10 text-primary text-chip font-semibold hover:bg-primary/20 transition-colors cursor-pointer"
+            >
+              {syl}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Bangla Meaning */}
+      <div className="rounded-panel bg-muted/40 border border-border/60 p-3.5 space-y-1">
+        <p className="text-chip text-muted-foreground">
+          {isBn ? "বাংলা অর্থ" : "Bengali Meaning"}
+        </p>
+        <p className="text-label font-semibold text-foreground text-bangla">
+          {selectedWord.meaningBn}
+        </p>
+      </div>
+
+      {/* Common Mistake Trap */}
+      <div className="rounded-panel bg-muted/40 border border-border/60 p-3.5 space-y-2">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {isBn ? "সাধারণ ভুল ও মেমরি ট্রিক" : "Common Mistake & Trick"}
+        </p>
+        <div className="flex flex-wrap items-center gap-2 text-label">
+          <span className="text-destructive line-through">
+            ✗ {selectedWord.commonMistake}
+          </span>
+          <span className="text-muted-foreground">→</span>
+          <span className="text-primary font-semibold">
+            ✓ {selectedWord.word}
+          </span>
+        </div>
+        <p className={cn("text-meta text-muted-foreground leading-relaxed", isBn && "text-bangla")}>
+          💡 {isBn ? selectedWord.mnemonicBn : selectedWord.mnemonicEn}
+        </p>
+      </div>
+
+      {/* Example Sentence */}
+      <div className="space-y-1.5 pt-2 border-t border-border/60">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-chip uppercase tracking-wider text-muted-foreground">
+            Example
+          </p>
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
+            onClick={() => speakWord(selectedWord.exampleSentence, false)}
+            className="gap-1"
+          >
+            <HugeiconsIcon icon={VolumeHighIcon} size={13} />
+            <span>Play</span>
+          </Button>
+        </div>
+        <p className="text-meta text-foreground italic leading-relaxed">
+          &ldquo;{selectedWord.exampleSentence}&rdquo;
+        </p>
+      </div>
+
+      <Button
+        type="button"
+        variant="cta"
+        size="sm"
+        className="w-full"
+        onClick={() => {
+          const idx = testQueue.findIndex((w) => w.id === selectedWord.id);
+          resetTestTurn(idx >= 0 ? idx : 0);
+          setActiveTab("test");
+        }}
+      >
+        {isBn ? "এই শব্দটি টেস্ট করুন" : "Test This Word"}
+      </Button>
+    </div>
+  ) : null;
+
   return (
-    <PageContainer className="py-5 sm:py-6 space-y-5 pb-24 md:pb-16">
+    <div className={cn("w-full", activeTab === "learn" && "lg:pr-80 xl:pr-96")}>
+      <PageContainer className="py-5 sm:py-6 space-y-5 pb-24 md:pb-16">
       {/* Top Header & Gamification Bar */}
       <Card className="p-4 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -588,87 +729,57 @@ export function SpellMasterClient() {
             </Card>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Mobile Selected Word Details Card */}
+          {wordDetailsSidebar && (
+            <Card className="lg:hidden p-4 bg-card border border-border rounded-card shadow-xs">
+              {wordDetailsSidebar}
+            </Card>
+          )}
+
+          {/* Vocabulary-Style Compact 4-Column Word Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredWords.map((item) => {
-              const isMastered = progress.masteredIds.includes(item.id);
-              const isWeak = Boolean(progress.weakWords[item.id]);
+              const isSelected = selectedWord?.id === item.id;
               return (
-                <Card
+                <div
                   key={item.id}
-                  className="p-4 sm:p-5 bg-card border border-border rounded-card flex flex-col justify-between gap-3.5 shadow-xs"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setSelectedWordId(item.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedWordId(item.id);
+                    }
+                  }}
+                  className={cn(
+                    "rounded-card border p-3.5 flex items-center justify-between gap-2 transition-all cursor-pointer text-left",
+                    isSelected
+                      ? "border-primary bg-primary/10 shadow-2xs"
+                      : "border-border bg-card hover:bg-muted/40"
+                  )}
                 >
-                  <div className="space-y-2.5">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-card-title text-foreground font-semibold">
-                            {item.word}
-                          </h3>
-                          {item.isCustom && (
-                            <Badge variant="brand" size="sm">AI Added</Badge>
-                          )}
-                          {isMastered && (
-                            <Badge variant="accent" size="sm">Mastered</Badge>
-                          )}
-                          {isWeak && (
-                            <Badge variant="outline" size="sm">Needs Review</Badge>
-                          )}
-                        </div>
-                        <p className="text-chip font-mono text-muted-foreground mt-0.5">
-                          {item.phonetic} ·{" "}
-                          <span className="text-primary font-semibold">
-                            {item.syllables.join(" • ")}
-                          </span>
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="xs"
-                          onClick={() => speakWord(item.word, false)}
-                          title="Listen Normal"
-                          className="gap-1"
-                        >
-                          <HugeiconsIcon icon={VolumeHighIcon} size={14} />
-                          <span>Speak</span>
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="xs"
-                          onClick={() => speakSyllables(item)}
-                          title="Listen Syllable by Syllable"
-                        >
-                          Slow
-                        </Button>
-                      </div>
-                    </div>
-
-                    <p className="text-label text-foreground text-bangla">
-                      {item.meaningBn}
+                  <div className="min-w-0 space-y-0.5">
+                    <p className="text-label font-semibold text-foreground truncate">
+                      {item.word}
                     </p>
-
-                    <div className="rounded-panel bg-muted/40 border border-border/60 p-3 space-y-1.5 text-meta">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-chip text-destructive line-through">
-                          ✗ {item.commonMistake}
-                        </span>
-                        <span className="text-chip text-primary font-semibold">
-                          ✓ {item.word}
-                        </span>
-                      </div>
-                      <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
-                        💡 {isBn ? item.mnemonicBn : item.mnemonicEn}
-                      </p>
-                    </div>
+                    <p className="text-chip text-primary font-mono truncate">
+                      {item.syllables.join(" • ")}
+                    </p>
                   </div>
-
-                  <p className="text-chip text-muted-foreground italic border-t border-border/60 pt-2">
-                    &ldquo;{item.exampleSentence}&rdquo;
-                  </p>
-                </Card>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedWordId(item.id);
+                      speakWord(item.word, false);
+                    }}
+                    aria-label={`Listen to ${item.word}`}
+                    className="size-8 rounded-pill flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted transition-colors shrink-0 cursor-pointer"
+                  >
+                    <HugeiconsIcon icon={VolumeHighIcon} size={16} />
+                  </button>
+                </div>
               );
             })}
           </div>
@@ -1165,5 +1276,13 @@ export function SpellMasterClient() {
         </div>
       )}
     </PageContainer>
+
+      {/* Fixed Right Sidebar: Selected Word Details (Vocabulary Layout) */}
+      {activeTab === "learn" && wordDetailsSidebar && (
+        <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4">
+          {wordDetailsSidebar}
+        </aside>
+      )}
+    </div>
   );
 }
