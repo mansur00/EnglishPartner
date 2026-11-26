@@ -132,6 +132,11 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
                 );
               })}
             </nav>
+
+            <div className="mt-6 pt-4 border-t border-border flex items-center justify-between gap-2">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
           </SheetContent>
         </Sheet>
 
@@ -146,13 +151,13 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
         </Link>
       </div>
 
-      {/* Right Controls: Grammar Toggle Slot, Language, Theme, User Profile */}
+      {/* Right Controls: Language & Theme (hidden on mobile), User Profile / Login */}
       <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-        {/* Language Switcher */}
-        <LanguageSwitcher />
-
-        {/* Theme Toggle (Dark / Light) */}
-        <ThemeToggle />
+        {/* Language Switcher & Theme Toggle (desktop/tablet only) */}
+        <div className="hidden md:flex items-center gap-2.5">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
 
         {/* Account State: Logged-in Avatar & Log out vs Log in */}
         {account.isLoggedIn ? (

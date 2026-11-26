@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Hide LanguageSwitcher & ThemeToggle on Mobile Top Header
+- Requested by owner: Hide language switcher and dark/light mode toggle on the mobile top nav bar while keeping Login/Account visible.
+- Changed:
+  - `src/components/navigation/Header.tsx`: Wrapped `LanguageSwitcher` and `ThemeToggle` in `hidden md:flex items-center gap-2.5` on the top header and placed them inside the mobile `SheetContent` drawer instead.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Add Landing Footer Contact Info & Fix Mobile Top/Bottom Nav Responsiveness
 - Requested by owner: Add email (`mansurproverse@gmail.com`) and phone (`+8801575040095`) to landing footer, and fix mobile responsiveness of the app shell top bar and bottom navigation bar.
 - Changed:
