@@ -257,6 +257,17 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, 8-Stage Grammar Learning Path (/grammar-path)
+- Requested by owner: Add a new Grammar Learning Path page to the left menu with 8 sequential stages (Foundation to Real Use), 3-step module flow (Rule in user's translate language only, 5-8 English examples, interactive sentence-making with AI check), level priority filters (School/Admission/IELTS/Spoken), and daily routine guidance.
+- Changed:
+  - `src/lib/grammar/learning-path.ts` & `src/lib/grammar/learning-path-data.ts`: Added 8 stages, 31 structured grammar topics with translated rules (`bn`, `hi`, `en`), English formulas, 5–6 examples per topic, and level priority metadata.
+  - `src/lib/ai/grammar-check.ts` & `src/app/api/v1/ai/grammar-check/route.ts`: Added `POST /api/v1/ai/grammar-check` with `callStructuredLlm`, fallback evaluation, and quota enforcement (`grammarCheck` added to `src/lib/ai/llm-client.ts` and `src/lib/ratelimit/quota.ts`).
+  - `src/components/grammar/GrammarPathClient.tsx` & `src/app/(app)/grammar-path/page.tsx`: Built interactive 8-stage roadmap + 3-step workspace with Web Speech audio and `localStorage` completion tracking.
+  - `src/components/navigation/Sidebar.tsx`, `src/components/navigation/Header.tsx`, `messages/{en,bn,hi}.json`, `tests/multi-language-coverage.test.mjs`: Added `nav.grammarPath` (312 keys, 100% parity) and left menu / mobile drawer links.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-24, Elimination of SSR / Client Hydration Mismatches in i18n & Navigation
 - Requested by owner: Fix hydration mismatch recoverable error in `Header.tsx` (`aria-label="নেভিগেশন মেনু খুলুন"` vs `"Open navigation menu"`, and `"লগইন"` vs `"Log in"`).
 - Changed:

@@ -39,9 +39,9 @@ describe("Milestone 4B: Multi-Language Strategy & Translation Parity", () => {
   const hiKeys = flattenKeys(hiMessages);
 
   it("should have 100% key parity across EN, BN, and HI messages", () => {
-    assert.equal(enKeys.length, 311, "Expected 311 English message keys");
-    assert.equal(bnKeys.length, 311, "Expected 311 Bengali message keys");
-    assert.equal(hiKeys.length, 311, "Expected 311 Hindi message keys");
+    assert.equal(enKeys.length, 312, "Expected 312 English message keys");
+    assert.equal(bnKeys.length, 312, "Expected 312 Bengali message keys");
+    assert.equal(hiKeys.length, 312, "Expected 312 Hindi message keys");
 
     const missingInBn = enKeys.filter((k) => !bnKeys.includes(k));
     const missingInHi = enKeys.filter((k) => !hiKeys.includes(k));

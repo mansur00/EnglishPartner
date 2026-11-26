@@ -38,6 +38,10 @@ export const DEFAULT_AI_QUOTAS = {
     rateLimitPerMinute: 25,
     dailyQuota: 120,
   },
+  grammarCheck: {
+    rateLimitPerMinute: 20,
+    dailyQuota: 100,
+  },
   roleplayTurn: {
     rateLimitPerMinute: 10,
     dailyQuota: 100, // 5 sessions * 20 turns
@@ -63,7 +67,7 @@ export class MemoryQuotaStore {
    */
   checkAndRecord(
     identifier: string,
-    feature: "sayIt" | "roleplayTurn" | "quiz" | "wordDetails",
+    feature: "sayIt" | "roleplayTurn" | "quiz" | "wordDetails" | "grammarCheck",
     config: QuotaConfig = DEFAULT_AI_QUOTAS[feature] ?? DEFAULT_AI_QUOTAS.sayIt
   ): QuotaCheckResult {
     const now = this.nowProvider();

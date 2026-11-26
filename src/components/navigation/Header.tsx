@@ -28,6 +28,7 @@ import {
   Settings01Icon,
   Logout01Icon,
   Login01Icon,
+  BookOpen01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
@@ -77,6 +78,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
     { name: t("nav.dashboard", locale), href: "/dashboard", icon: DashboardSquare01Icon },
     { name: t("nav.explore", locale), href: "/explore", icon: CompassIcon },
     { name: t("nav.dailyPractice", locale), href: "/daily-practice", icon: Calendar03Icon },
+    { name: t("nav.grammarPath", locale), href: "/grammar-path", icon: BookOpen01Icon },
     { name: t("nav.professionalEnglish", locale), href: "/professions", icon: Briefcase01Icon },
     { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
     { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon },

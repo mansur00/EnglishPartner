@@ -17,6 +17,7 @@ import {
   Settings01Icon,
   SparklesIcon,
   CheckmarkBadge01Icon,
+  BookOpen01Icon,
 } from "@hugeicons/core-free-icons";
 
 interface NavItem {
@@ -49,6 +50,12 @@ export function Sidebar() {
       href: "/daily-practice",
       icon: Calendar03Icon,
       active: pathname === "/daily-practice",
+    },
+    {
+      name: t("nav.grammarPath", locale),
+      href: "/grammar-path",
+      icon: BookOpen01Icon,
+      active: pathname.startsWith("/grammar-path"),
     },
     {
       name: t("nav.professionalEnglish", locale),

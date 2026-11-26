@@ -105,6 +105,60 @@
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 187,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 201,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 218,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 269,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-label font-semibold text-foreground\">{stage.title}</span>"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 356,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{activeTopic.title}</h2>"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 378,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 395,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 432,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarPathClient.tsx",
+      "line": 477,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-meta text-primary font-semibold\">"
+    },
+    {
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 80,
       "detail": "Direct font-weight utility in feature code: font-semibold",
@@ -427,7 +481,7 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 147,
+      "line": 149,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "className=\"h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
@@ -525,11 +579,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs",
       "files": [
         "src/app/(app)/explore/page.tsx",
         "src/app/(app)/professions/page.tsx",
+        "src/components/grammar/GrammarPathClient.tsx",
         "src/components/tools/WhatShouldISay.tsx"
       ]
     },
@@ -540,6 +595,15 @@
         "src/app/(app)/explore/page.tsx",
         "src/app/(app)/vocabulary/page.tsx",
         "src/components/admin/AdminDashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center justify-between flex-wrap gap-2",
+      "files": [
+        "src/app/(app)/professions/page.tsx",
+        "src/components/grammar/GrammarPathClient.tsx",
+        "src/components/tools/WhatShouldISay.tsx"
       ]
     },
     {
@@ -696,6 +760,29 @@
       "className": "btn-press w-full sm:w-auto gap-2 cursor-pointer",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center gap-2 text-label text-foreground font-semibold",
+      "files": [
+        "src/components/grammar/GrammarPathClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "text-label font-semibold text-foreground",
+      "files": [
+        "src/components/grammar/GrammarPathClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-chip text-muted-foreground truncate",
+      "files": [
+        "src/components/grammar/GrammarPathClient.tsx",
+        "src/components/learning/NicheLadderRoadmap.tsx",
+        "src/components/navigation/LanguageSwitcher.tsx"
       ]
     },
     {
