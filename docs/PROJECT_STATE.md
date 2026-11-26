@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Upgrade Landing Page with Bento Previews, Ecosystem Hub & Pastel 2x2 Cards
+- Requested by owner: Replace generic card layout on `/` with high-craft SaaS sections inspired by the uploaded Bento, AI reply, Connected Ecosystem, and 2x2 pastel workflow references.
+- Changed:
+  - `src/app/page.tsx`: Upgraded Section 2 to a 5-card Bento Grid featuring live mini-UI previews (stacked 20-step ladder cards, AI reply generator bubble preview, Grammar Path search/chips preview, Career Tracks spotlight, and full-width SM-2 retention bar chart); added Section 3 Connected Learning Ecosystem hub (`{learning_ecosystem}`); added Section 4 2x2 pastel `data-topic` audience/outcome cards; retained Section 5 3-step How It Works + Final CTA + `/logo.svg` header/footer.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Redesign 6-Section SaaS Landing Page & Update Logo
 - Requested by owner: Redesign `/` landing page into a 5-6 section SaaS landing page with the updated `/logo.svg` logo, live feature links (removing "Soon" stubs), learning outcomes, target audiences, how-it-works steps, and final CTA.
 - Changed:
