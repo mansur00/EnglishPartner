@@ -257,12 +257,21 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Align /professions/[slug] Layout with /explore & Fix Next.js 16 Suspense Boundary
+- Requested by owner: Match `/professions/[slug]` inner page layout to `/explore` (header card with title/tagline/count, 2-col scenario grid, fixed right sidebar with Search, Track Details & Competencies, and FilterBar).
+- Changed:
+  - `src/components/professions/ProfessionScenariosGrid.tsx`: Added Search input (`InputGroup` with `Search01Icon` + clear button) to the fixed right sidebar above Track Details & Competencies + `FilterBar`, aligned header card structure with `/explore` (back link + title + tagline subtitle + CEFR/scenario count badges), and updated scenario grid spacing to `gap-5`.
+  - `src/app/(app)/professions/[slug]/page.tsx`: Wrapped async `params` access inside `<Suspense fallback={<ProfessionLoadingFallback />}>` to resolve Next.js 16 `instant-shell-url-data` warning/error.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, `npm test` (220/220 passing), and `curl` HTTP 200 check on `/professions/ui-ux-designer`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Move Profession Detail Track Info & FilterBar to Fixed Right Sidebar
 - Requested by owner: Move track tagline, description, competencies checklist, and FilterBar on `/professions/[slug]` into a fixed right sidebar (`w-80 xl:w-96`) matching Explore, Vocabulary, Daily Practice, and Grammar Path.
 - Changed:
   - `src/components/professions/ProfessionScenariosGrid.tsx` & `src/app/(app)/professions/[slug]/page.tsx`: Migrated to `w-full lg:pr-80 xl:pr-96` middle content area + fixed right `<aside>` (`fixed right-0 top-header h-below-header w-80 xl:w-96`) containing track details, competencies, and `sidebar` FilterBar, with `lg:hidden` mobile fallback.
 - Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
-- Commit: pending
+- Commit: `afee984`
 - Open questions / follow-ups: none.
 
 ### 2026-11-26, Simplify Grammar Path & Professional English Cards for UX

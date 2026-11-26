@@ -8,12 +8,19 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  InputGroup,
+  InputGroupPrefix,
+  InputGroupSuffix,
+} from "@/components/ui/input-group";
 import { LocaleTitle } from "@/components/shared";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ArrowLeft01Icon,
-  Briefcase01Icon,
+  Cancel01Icon,
   CheckmarkCircle02Icon,
+  Search01Icon,
   SearchXIcon,
 } from "@hugeicons/core-free-icons";
 import { getLengthTierById } from "@/lib/content/length-tiers";
@@ -31,12 +38,22 @@ export function ProfessionScenariosGrid({
   scenarios,
 }: ProfessionScenariosGridProps) {
   const locale = useLocale();
+  const [searchQuery, setSearchQuery] = useState("");
   const [level, setLevel] = useState("all");
   const [lengthType, setLengthType] = useState("all");
   const [style, setStyle] = useState("all");
 
   const filtered = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
     return scenarios.filter((item) => {
+      if (q) {
+        const matchesQuery =
+          item.title.toLowerCase().includes(q) ||
+          item.titleBn.toLowerCase().includes(q) ||
+          item.description.toLowerCase().includes(q) ||
+          item.descriptionBn.toLowerCase().includes(q);
+        if (!matchesQuery) return false;
+      }
       if (level !== "all" && item.level !== level) return false;
       if (lengthType !== "all") {
         const tier = getLengthTierById(lengthType);
@@ -44,11 +61,16 @@ export function ProfessionScenariosGrid({
       }
       return true;
     });
-  }, [scenarios, level, lengthType]);
+  }, [scenarios, searchQuery, level, lengthType]);
 
-  const isFiltered = level !== "all" || lengthType !== "all" || style !== "all";
+  const isFiltered =
+    searchQuery.trim() !== "" ||
+    level !== "all" ||
+    lengthType !== "all" ||
+    style !== "all";
 
   const handleReset = () => {
+    setSearchQuery("");
     setLevel("all");
     setLengthType("all");
     setStyle("all");
@@ -56,26 +78,55 @@ export function ProfessionScenariosGrid({
 
   const sidebarContent = (
     <>
+      {/* Search Input */}
+      <div className="space-y-2">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {locale === "bn" ? "অনুসন্ধান" : "Search"}
+        </p>
+        <InputGroup className="bg-muted/30">
+          <InputGroupPrefix>
+            <HugeiconsIcon
+              icon={Search01Icon}
+              size={18}
+              className="text-muted-foreground"
+            />
+          </InputGroupPrefix>
+          <Input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={t("discovery.searchPlaceholder", locale)}
+            variant="ghost"
+            inputSize="default"
+            className="w-full pl-11 pr-11 text-body h-11"
+          />
+          {searchQuery && (
+            <InputGroupSuffix>
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                aria-label="Clear search"
+                className="p-1.5 rounded-control text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+              >
+                <HugeiconsIcon icon={Cancel01Icon} size={18} />
+              </button>
+            </InputGroupSuffix>
+          )}
+        </InputGroup>
+      </div>
+
       {/* Track Details & Competencies */}
-      <div className="space-y-3">
+      <div className="space-y-3 pt-2 border-t border-border/60">
         <p className="text-chip uppercase tracking-wider text-muted-foreground">
           {locale === "bn" ? "ট্র্যাক বিবরণ" : "Track Details"}
         </p>
 
-        <div className="p-3.5 rounded-panel bg-muted/50 space-y-2.5">
-          <LocaleTitle
-            as="p"
-            titleEn={profession.tagline}
-            titleBn={profession.taglineBn}
-            className="text-label font-semibold text-primary"
-          />
-          <LocaleTitle
-            as="p"
-            titleEn={profession.description || profession.descriptionBn}
-            titleBn={profession.descriptionBn}
-            className="text-meta text-muted-foreground leading-relaxed"
-          />
-        </div>
+        <LocaleTitle
+          as="p"
+          titleEn={profession.description || profession.descriptionBn}
+          titleBn={profession.descriptionBn}
+          className="text-meta text-muted-foreground leading-relaxed"
+        />
 
         <div className="space-y-2 pt-1">
           <p className="text-chip uppercase tracking-wider text-muted-foreground">
@@ -100,7 +151,7 @@ export function ProfessionScenariosGrid({
       </div>
 
       {/* Filters */}
-      <div className="pt-4 border-t border-border/60">
+      <div className="pt-3 border-t border-border/60">
         <FilterBar
           level={level}
           setLevel={setLevel}
@@ -121,55 +172,53 @@ export function ProfessionScenariosGrid({
     <div className="w-full lg:pr-80 xl:pr-96">
       {/* ================= MIDDLE CONTENT AREA ================= */}
       <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-16 space-y-6">
-        <div className="space-y-3">
-          <Link href="/professions">
-            <Button variant="ghost" size="sm" className="btn-back-nav text-label">
-              <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+        {/* Explore-Style Header Card */}
+        <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <Link
+                href="/professions"
+                className="inline-flex items-center gap-1.5 text-meta text-muted-foreground hover:text-foreground transition-colors mb-2"
+              >
+                <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+                <LocaleTitle
+                  as="span"
+                  titleEn="All Career Tracks"
+                  titleBn="সব প্রফেশনাল পাথ"
+                />
+              </Link>
               <LocaleTitle
-                as="span"
-                titleEn="All Career Tracks"
-                titleBn="সব প্রফেশনাল পাথ"
+                as="h1"
+                titleEn={profession.name}
+                titleBn={profession.nameBn}
+                className="text-page-title text-foreground"
               />
-            </Button>
-          </Link>
-
-          {/* Compact Header Card */}
-          <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-2.5 shadow-xs">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2">
-                <Badge variant="brand" size="sm" className="gap-1 text-chip">
-                  <HugeiconsIcon icon={Briefcase01Icon} size={12} />
-                  <LocaleTitle
-                    as="span"
-                    titleEn="Professional Career Track"
-                    titleBn="পেশাগত ক্যারিয়ার ট্র্যাক"
-                  />
-                </Badge>
-                <Badge variant="accent" size="sm" className="text-chip">
-                  {profession.targetCefr}
-                </Badge>
-              </div>
+              <LocaleTitle
+                as="p"
+                titleEn={profession.tagline}
+                titleBn={profession.taglineBn}
+                className="text-meta text-muted-foreground mt-1"
+              />
+            </div>
+            <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+              <Badge variant="accent" size="sm" className="text-chip">
+                {profession.targetCefr}
+              </Badge>
               <Badge variant="outline" size="sm" className="font-mono">
-                {filtered.length} {locale === "bn" ? "টি দৃশ্যপট" : "Scenarios"}
+                {filtered.length} {locale === "bn" ? "টি দৃশ্যপট" : `scenario${filtered.length !== 1 ? "s" : ""}`}
               </Badge>
             </div>
+          </div>
+        </Card>
 
-            <LocaleTitle
-              as="h1"
-              titleEn={profession.name}
-              titleBn={profession.nameBn}
-              className="text-page-title text-foreground"
-            />
-          </Card>
-        </div>
-
-        {/* Mobile/Tablet Details & Filters Fallback */}
-        <Card className="lg:hidden p-4 sm:p-5 bg-card border border-border space-y-4">
+        {/* Mobile/Tablet Search, Details & Filters Fallback */}
+        <Card className="lg:hidden p-4 sm:p-5 bg-card border border-border space-y-4 shadow-xs">
           {sidebarContent}
         </Card>
 
+        {/* Scenarios Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {filtered.map((scenario) => (
               <ScenarioCard
                 key={scenario.id}
@@ -185,11 +234,11 @@ export function ProfessionScenariosGrid({
             title={t("discovery.noConversationsFound", locale)}
             description={
               locale === "bn"
-                ? "এই লেভেলের জন্য কোনো দৃশ্যপট নেই। ফিল্টার রিসেট করুন।"
-                : "No scenarios match this level filter in this career track."
+                ? "এই ফিল্টারের জন্য কোনো দৃশ্যপট নেই। ফিল্টার রিসেট করুন।"
+                : "No scenarios match your current search or filter."
             }
             action={
-              <Button variant="outline" size="sm" onClick={handleReset}>
+              <Button variant="outline" size="md" onClick={handleReset} className="btn-press rounded-control">
                 {t("discovery.resetFilters", locale)}
               </Button>
             }
