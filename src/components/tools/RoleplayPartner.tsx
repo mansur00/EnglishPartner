@@ -62,6 +62,8 @@ import type {
   TranscriptTurn,
 } from "@/lib/ai/roleplay-schema";
 import { cn } from "@/lib/utils";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner, GuestLockedCard } from "@/components/auth/GuestLimitBanner";
 
 interface RoleplayScenario {
   id: string;
@@ -300,6 +302,7 @@ function FeedbackSectionHeader({ children }: { children: React.ReactNode }) {
 
 export function RoleplayPartner() {
   const { locale, t } = useTranslations();
+  const { isGuest, config, getGuestLimit } = useSessionAccess();
   const [selectedScenario, setSelectedScenario] = useState<RoleplayScenario>(FREESTYLE_SCENARIO);
   const [customScenarios, setCustomScenarios] = useState<RoleplayScenario[]>([]);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -1280,6 +1283,22 @@ export function RoleplayPartner() {
               </div>
             )}
 
+            {isGuest && (
+              <GuestLimitBanner
+                previewPercent={config.guest_preview_percent}
+                featureName={locale === "bn" ? "AI পার্টনার রোলপ্লে" : "AI Partner Roleplay"}
+                nextPath="/roleplay"
+              />
+            )}
+
+            {isGuest && messages.filter((m) => m.speaker === "learner").length >= getGuestLimit(20, 1) && (
+              <GuestLockedCard
+                titleEn="5% Guest Preview Complete — Log in to Continue"
+                titleBn="গেস্ট প্রিভিউ (৫%) শেষ — বাকি ৯৫% আনলক করতে লগইন করুন"
+                nextPath="/roleplay"
+              />
+            )}
+
             {/* Input Form with Voice Speech Integration */}
             <form
               onSubmit={(e) => {
@@ -1304,7 +1323,11 @@ export function RoleplayPartner() {
                       ? (locale === "bn" ? "এআই ভাবছে..." : "AI is thinking...")
                       : (locale === "bn" ? "আপনার উত্তর লিখুন বা মুখে বলতে মাইকে চাপুন..." : "Type your response or tap mic to speak...")
                   }
-                  disabled={isLoading || messages.filter((m) => m.speaker === "learner").length >= 20}
+                  disabled={
+                    isLoading ||
+                    messages.filter((m) => m.speaker === "learner").length >= 20 ||
+                    (isGuest && messages.filter((m) => m.speaker === "learner").length >= getGuestLimit(20, 1))
+                  }
                   variant="ghost"
                   className="rounded-control text-label pr-24"
                 />
@@ -1314,7 +1337,11 @@ export function RoleplayPartner() {
                     variant={isListening ? "destructive" : "ghost"}
                     size="sm"
                     onClick={toggleSpeechRecognition}
-                    disabled={isLoading || messages.filter((m) => m.speaker === "learner").length >= 20}
+                    disabled={
+                    isLoading ||
+                    messages.filter((m) => m.speaker === "learner").length >= 20 ||
+                    (isGuest && messages.filter((m) => m.speaker === "learner").length >= getGuestLimit(20, 1))
+                  }
                     title={isListening ? "Stop listening" : "Speak your message"}
                     className={cn(
                       "rounded-control text-chip px-2",

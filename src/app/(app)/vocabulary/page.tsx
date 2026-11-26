@@ -13,7 +13,11 @@ import {
   ArrowDown01Icon,
   Add01Icon,
   CheckmarkCircle02Icon,
+  AiLockIcon,
 } from "@hugeicons/core-free-icons";
+import Link from "next/link";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -69,6 +73,7 @@ export default function VocabularyPage() {
 
 function VocabularyContent() {
   const { locale, t } = useTranslations();
+  const { isGuest, config, getGuestLimit } = useSessionAccess();
   const [activeView, setActiveView] = useState<"magic" | "words" | "srs">("magic");
   const [magicCategory, setMagicCategory] = useState<"all" | MagicCardCategory>("all");
   const [magicSearch, setMagicSearch] = useState("");
@@ -423,9 +428,61 @@ function VocabularyContent() {
           <div className="space-y-5">
             {!activeDeck ? (
               <>
+                {isGuest && (
+                  <GuestLimitBanner
+                    previewPercent={config.guest_preview_percent}
+                    featureName={locale === "bn" ? "ম্যাজিক কার্ডস (Vocabulary)" : "Magic Cards"}
+                    nextPath="/vocabulary"
+                  />
+                )}
                 {/* 40 Magic Cards Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                  {filteredMagicCards.map((deck) => (
+                  {filteredMagicCards.map((deck, idx) => {
+                    const guestUnlockedCount = getGuestLimit(filteredMagicCards.length, 2);
+                    const isLocked = isGuest && idx >= guestUnlockedCount;
+                    if (isLocked) {
+                      return (
+                        <Link
+                          key={deck.id}
+                          href="/auth/login?next=/vocabulary"
+                          className="block"
+                        >
+                          <Card className="p-5 bg-card rounded-card border border-border/60 opacity-65 hover:opacity-95 transition-all flex flex-col justify-between gap-3 h-full">
+                            <div className="space-y-2.5">
+                              <div className="flex items-center justify-between gap-2">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-page-title leading-none">{deck.emoji}</span>
+                                  <Badge variant="neutral" size="sm" className="font-mono">
+                                    #{String(deck.number).padStart(2, "0")}
+                                  </Badge>
+                                </div>
+                                <Badge variant="warning" size="sm" className="gap-1">
+                                  <HugeiconsIcon icon={AiLockIcon} size={12} />
+                                  <span>{locale === "bn" ? "লকড" : "Locked"}</span>
+                                </Badge>
+                              </div>
+                              <div>
+                                <h3 className="font-heading text-card-title text-foreground">
+                                  {deck.title}
+                                </h3>
+                                <p className="text-chip text-muted-foreground mt-1 leading-relaxed">
+                                  {deck.tagline}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between pt-3 border-t border-border/50 text-chip">
+                              <span className="font-mono text-muted-foreground">
+                                {deck.words.length} {locale === "bn" ? "টি শব্দ" : "words"}
+                              </span>
+                              <span className="text-primary font-semibold">
+                                {locale === "bn" ? "লগইন করে খুলুন →" : "Log in to unlock →"}
+                              </span>
+                            </div>
+                          </Card>
+                        </Link>
+                      );
+                    }
+                    return (
                     <Card
                       key={deck.id}
                       role="button"
@@ -477,7 +534,8 @@ function VocabularyContent() {
                         </span>
                       </div>
                     </Card>
-                  ))}
+                    );
+                  })}
                 </div>
               </>
             ) : (

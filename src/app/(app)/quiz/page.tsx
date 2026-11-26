@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { PageContainer, CefrChip } from "@/components/shared";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +24,10 @@ import {
   PlayCircleIcon,
   SparklesIcon,
   ArrowDown01Icon,
+  AiLockIcon,
 } from "@hugeicons/core-free-icons";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 
 const ALL_LEVELS: ("ALL" | CefrLevelCode)[] = [
   "ALL",
@@ -39,6 +43,7 @@ const LENGTH_KEYS = ["short", "medium", "long", "story"] as const;
 
 export default function QuizHubPage() {
   const { locale } = useTranslations();
+  const { isGuest, config, getGuestLimit } = useSessionAccess();
   const [selectedLevel, setSelectedLevel] = useState<"ALL" | CefrLevelCode>("ALL");
   const [selectedStyle, setSelectedStyle] = useState<ConversationStyle>("neutral");
   const [selectedLengthIdx, setSelectedLengthIdx] = useState<number>(0);
@@ -184,8 +189,18 @@ export default function QuizHubPage() {
       </Card>
 
       {/* Quiz Grid */}
+      {isGuest && (
+        <GuestLimitBanner
+          previewPercent={config.guest_preview_percent}
+          featureName={locale === "bn" ? "কুইজ (Quiz)" : "Practice Quizzes"}
+          nextPath="/quiz"
+        />
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {filteredScenarios.map((sc) => {
+        {filteredScenarios.map((sc, idx) => {
+          const guestUnlockedCount = getGuestLimit(filteredScenarios.length, 2);
+          const isLocked = isGuest && idx >= guestUnlockedCount;
           const qCount = getQuestionCountForLevel(sc.level);
           const tiers = getLengthTiersForLevel(sc.level);
           const tier = tiers[selectedLengthIdx] || getDefaultLengthTierForLevel(sc.level);
@@ -194,7 +209,10 @@ export default function QuizHubPage() {
           return (
             <Card
               key={sc.id}
-              className="p-5 bg-card border border-border flex flex-col justify-between gap-4"
+              className={cn(
+                "p-5 bg-card border border-border flex flex-col justify-between gap-4",
+                isLocked && "opacity-70"
+              )}
             >
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between gap-2">
@@ -216,16 +234,25 @@ export default function QuizHubPage() {
                 <span className="text-chip text-muted-foreground capitalize">
                   {selectedStyle} • {LENGTH_KEYS[selectedLengthIdx]}
                 </span>
-                <Link href={playHref}>
-                  <Button
-                    size="sm"
-                    variant="cta"
-                    className="gap-1.5 cursor-pointer"
-                  >
-                    <HugeiconsIcon icon={PlayCircleIcon} size={15} />
-                    <span>{locale === "bn" ? "কুইজ শুরু" : "Start Quiz"}</span>
-                  </Button>
-                </Link>
+                {isLocked ? (
+                  <Link href="/auth/login?next=/quiz">
+                    <Button size="sm" variant="outline" className="gap-1.5 cursor-pointer">
+                      <HugeiconsIcon icon={AiLockIcon} size={14} />
+                      <span>{locale === "bn" ? "লকড · লগইন" : "Locked · Log in"}</span>
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href={playHref}>
+                    <Button
+                      size="sm"
+                      variant="cta"
+                      className="gap-1.5 cursor-pointer"
+                    >
+                      <HugeiconsIcon icon={PlayCircleIcon} size={15} />
+                      <span>{locale === "bn" ? "কুইজ শুরু" : "Start Quiz"}</span>
+                    </Button>
+                  </Link>
+                )}
               </div>
             </Card>
           );

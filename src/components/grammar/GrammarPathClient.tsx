@@ -7,8 +7,12 @@ import {
   ArrowRight01Icon,
   Layers01Icon,
   SparklesIcon,
+  AiLockIcon,
 } from "@hugeicons/core-free-icons";
 import { PageContainer } from "@/components/shared/PageContainer";
+import { Badge } from "@/components/ui/badge";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner, GuestLockedCard } from "@/components/auth/GuestLimitBanner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
@@ -31,6 +35,7 @@ export const COMPLETED_STORAGE_KEY = "ecp_grammar_path_completed_v1";
 export function GrammarPathClient() {
   const locale = useLocale();
   const translationLocale = useTranslationLocale();
+  const { isGuest, config, getGuestLimit } = useSessionAccess();
   const ruleLocale = translationLocale === "none" ? "en" : translationLocale;
 
   const [activeTab, setActiveTab] = useState<"path" | "checker">("path");
@@ -134,8 +139,24 @@ export function GrammarPathClient() {
         </Button>
       </div>
 
+      {isGuest && (
+        <GuestLimitBanner
+          previewPercent={config.guest_preview_percent}
+          featureName={isBangla ? "গ্রামার পাথ" : "Grammar Path"}
+          nextPath="/grammar-path"
+        />
+      )}
+
       {activeTab === "checker" ? (
-        <WritingCheckerPanel defaultLocale={ruleLocale} />
+        isGuest ? (
+          <GuestLockedCard
+            titleEn="AI Grammar & Writing Checker is Locked"
+            titleBn="AI গ্রামার ও রাইটিং চেকার লগইন করলে আনলক হবে"
+            nextPath="/grammar-path"
+          />
+        ) : (
+          <WritingCheckerPanel defaultLocale={ruleLocale} />
+        )
       ) : (
         <>
           {/* Level Priority Filter */}
@@ -167,7 +188,9 @@ export function GrammarPathClient() {
 
       {/* Clean 8 Stage Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {GRAMMAR_STAGES.map((stage) => {
+        {GRAMMAR_STAGES.map((stage, stageIdx) => {
+          const guestUnlockedCount = getGuestLimit(GRAMMAR_STAGES.length, 1);
+          const isLocked = isGuest && stageIdx >= guestUnlockedCount;
           const lessons = getLessonsByStage(stage.stageNumber);
           const doneInStage = lessons.filter((l) => completedIds.includes(l.id)).length;
           const stagePercent = lessons.length > 0 ? Math.round((doneInStage / lessons.length) * 100) : 0;
@@ -179,7 +202,7 @@ export function GrammarPathClient() {
               key={stage.stageNumber}
               className={cn(
                 "p-5 bg-card border border-border flex flex-col justify-between gap-4 transition-all",
-                !isRecommended && "opacity-60"
+                (!isRecommended || isLocked) && "opacity-65"
               )}
             >
               <div className="space-y-2.5">
@@ -188,7 +211,13 @@ export function GrammarPathClient() {
                     <Tag variant="brand" size="sm">
                       Stage {stage.stageNumber}
                     </Tag>
-                    {isRecommended && selectedLevel !== "all" && (
+                    {isLocked && (
+                      <Badge variant="warning" size="sm" className="gap-1">
+                        <HugeiconsIcon icon={AiLockIcon} size={12} />
+                        <span>{isBangla ? "লকড" : "Locked"}</span>
+                      </Badge>
+                    )}
+                    {!isLocked && isRecommended && selectedLevel !== "all" && (
                       <Tag variant="success" size="sm">
                         Priority
                       </Tag>
@@ -219,12 +248,21 @@ export function GrammarPathClient() {
                     style={{ width: `${stagePercent}%` }}
                   />
                 </div>
-                <Link href={`/grammar-path/${stage.slug}`} className="block">
-                  <Button type="button" className="w-full justify-between">
-                    <span>{doneInStage > 0 ? "Continue Lesson" : "Start Lesson"}</span>
-                    <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
-                  </Button>
-                </Link>
+                {isLocked ? (
+                  <Link href="/auth/login?next=/grammar-path" className="block">
+                    <Button type="button" variant="outline" className="w-full justify-between">
+                      <span>{isBangla ? "লগইন করে আনলক করুন" : "Locked · Log in to Unlock"}</span>
+                      <HugeiconsIcon icon={AiLockIcon} size={16} />
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href={`/grammar-path/${stage.slug}`} className="block">
+                    <Button type="button" className="w-full justify-between">
+                      <span>{doneInStage > 0 ? "Continue Lesson" : "Start Lesson"}</span>
+                      <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                    </Button>
+                  </Link>
+                )}
               </div>
             </Card>
           );

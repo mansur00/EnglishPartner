@@ -10,55 +10,61 @@
   "b_typography": [
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 472,
+      "line": 477,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-primary font-semibold\">"
+    },
+    {
+      "file": "src/app/(app)/vocabulary/page.tsx",
+      "line": 529,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"font-mono text-primary font-medium\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 566,
+      "line": 624,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 570,
+      "line": 628,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip text-primary font-medium\">{w.pos}</span>"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 639,
+      "line": 697,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<div className=\"pt-3 border-t border-border/50 text-chip text-primary font-medium\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 661,
+      "line": 719,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 747,
+      "line": 805,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"font-heading text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 751,
+      "line": 809,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip text-primary font-medium\">{w.pos}</span>"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 826,
+      "line": 884,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<p className=\"text-label font-medium\">{cat.name}</p>"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 841,
+      "line": 899,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
@@ -256,13 +262,13 @@
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 143,
+      "line": 164,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 202,
+      "line": 231,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{stage.title}</h2>"
     },
@@ -904,7 +910,7 @@
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1093,
+      "line": 1096,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<span className=\"text-label font-semibold text-foreground truncate\">"
     },
@@ -961,55 +967,55 @@
   "d_layout_magic": [
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 109,
+      "line": 114,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"pl-9 h-11\""
     },
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 120,
+      "line": 125,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 149,
+      "line": 154,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/app/(app)/quiz/page.tsx",
-      "line": 169,
+      "line": 174,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-background pl-3.5 pr-9 text-label text-foreground capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 393,
+      "line": 398,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"pl-9 h-11 bg-muted/40 border-border/60 rounded-control\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 404,
+      "line": 409,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border/60 bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 518,
+      "line": 576,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 699,
+      "line": 757,
       "detail": "Hardcoded layout constant / magic number: w-64",
       "code": "<div className=\"relative w-full sm:w-64\">"
     },
     {
       "file": "src/app/(app)/vocabulary/page.tsx",
-      "line": 974,
+      "line": 1032,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -1147,13 +1153,13 @@
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1110,
+      "line": 1113,
       "detail": "Arbitrary layout [Npx] utility: h-[calc(100dvh-11.5rem)], h-[calc(100dvh-7.5rem)], min-h-[420px]",
       "code": "<Card className=\"p-4 sm:p-6 bg-card rounded-card gap-4 h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)] min-h-[420px] flex flex-col justify-between shadow-xs\">"
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1605,
+      "line": 1632,
       "detail": "Arbitrary layout [Npx] utility: h-[85vh]",
       "code": "className=\"lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background\""
     },
@@ -1256,7 +1262,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 21 times",
+      "detail": "ClassName repeated 22 times",
       "className": "font-heading text-card-title text-foreground",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
