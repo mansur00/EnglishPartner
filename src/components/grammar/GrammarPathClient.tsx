@@ -24,6 +24,7 @@ import {
   type GrammarLevelFilter,
 } from "@/lib/grammar/learning-path";
 import { GRAMMAR_LESSONS, getLessonsByStage } from "@/lib/grammar/learning-path-data";
+import { WritingCheckerPanel } from "@/components/grammar/WritingCheckerPanel";
 
 export const COMPLETED_STORAGE_KEY = "ecp_grammar_path_completed_v1";
 
@@ -32,6 +33,7 @@ export function GrammarPathClient() {
   const translationLocale = useTranslationLocale();
   const ruleLocale = translationLocale === "none" ? "en" : translationLocale;
 
+  const [activeTab, setActiveTab] = useState<"path" | "checker">("path");
   const [selectedLevel, setSelectedLevel] = useState<GrammarLevelFilter>("all");
   const [completedIds, setCompletedIds] = useState<string[]>([]);
 
@@ -108,8 +110,36 @@ export function GrammarPathClient() {
         </div>
       </Card>
 
-      {/* Level Priority Filter */}
-      <Card className="p-4 sm:p-5 bg-card border border-border space-y-3">
+      {/* Top Tab Switcher */}
+      <div className="flex flex-wrap items-center gap-2">
+        <Button
+          type="button"
+          size="md"
+          variant={activeTab === "path" ? "default" : "outline"}
+          onClick={() => setActiveTab("path")}
+          className="gap-2"
+        >
+          <HugeiconsIcon icon={Layers01Icon} size={17} />
+          <span>{isBangla ? "৮-ধাপের গ্রামার পাথ" : "8-Stage Grammar Path"}</span>
+        </Button>
+        <Button
+          type="button"
+          size="md"
+          variant={activeTab === "checker" ? "default" : "outline"}
+          onClick={() => setActiveTab("checker")}
+          className="gap-2"
+        >
+          <HugeiconsIcon icon={SparklesIcon} size={17} />
+          <span>{isBangla ? "AI গ্রামার ও রাইটিং চেকার" : "AI Grammar & Writing Checker"}</span>
+        </Button>
+      </div>
+
+      {activeTab === "checker" ? (
+        <WritingCheckerPanel defaultLocale={ruleLocale} />
+      ) : (
+        <>
+          {/* Level Priority Filter */}
+          <Card className="p-4 sm:p-5 bg-card border border-border space-y-3">
         <div className="flex items-center gap-2 text-label text-foreground font-semibold">
           <HugeiconsIcon icon={Layers01Icon} size={18} className="text-primary" />
           <span>Focus by Goal / Level Priority</span>
@@ -200,6 +230,8 @@ export function GrammarPathClient() {
           );
         })}
       </div>
+        </>
+      )}
     </PageContainer>
   );
 }

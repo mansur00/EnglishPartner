@@ -226,13 +226,13 @@
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 113,
+      "line": 143,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 172,
+      "line": 202,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{stage.title}</h2>"
     },
@@ -307,6 +307,36 @@
       "line": 647,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-body text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/WritingCheckerPanel.tsx",
+      "line": 291,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-primary\">"
+    },
+    {
+      "file": "src/components/grammar/WritingCheckerPanel.tsx",
+      "line": 303,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-chip font-semibold text-brand-950\">"
+    },
+    {
+      "file": "src/components/grammar/WritingCheckerPanel.tsx",
+      "line": 383,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"font-semibold text-primary\">"
+    },
+    {
+      "file": "src/components/grammar/WritingCheckerPanel.tsx",
+      "line": 437,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/grammar/WritingCheckerPanel.tsx",
+      "line": 459,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-chip text-primary font-semibold\">Copied!</span>"
     },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
@@ -792,12 +822,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 6 times",
       "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
       "files": [
         "src/app/(app)/explore/page.tsx",
         "src/app/(app)/vocabulary/page.tsx",
         "src/components/admin/AdminDashboardClient.tsx",
+        "src/components/grammar/WritingCheckerPanel.tsx",
         "src/components/professions/ProfessionScenariosGrid.tsx"
       ]
     },
@@ -931,6 +962,15 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "text-label font-semibold text-foreground",
+      "files": [
+        "src/app/page.tsx",
+        "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/grammar/WritingCheckerPanel.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "text-chip text-muted-foreground text-bangla",
       "files": [
         "src/app/page.tsx",
@@ -1031,10 +1071,11 @@
       ]
     },
     {
-      "detail": "ClassName repeated 7 times",
+      "detail": "ClassName repeated 8 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
+        "src/components/grammar/WritingCheckerPanel.tsx",
         "src/components/settings/SettingsClient.tsx"
       ]
     },
@@ -1089,6 +1130,13 @@
       "className": "p-5 sm:p-6 bg-card border border-border space-y-3",
       "files": [
         "src/components/grammar/GrammarStageLessonClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "p-4 sm:p-6 bg-card border border-border rounded-card space-y-4 shadow-xs",
+      "files": [
+        "src/components/grammar/WritingCheckerPanel.tsx"
       ]
     },
     {

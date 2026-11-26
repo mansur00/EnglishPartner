@@ -257,6 +257,17 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Add AI Grammar & Writing Checker Tab to /grammar-path
+- Requested by owner: Build AI Grammar and Writing Checker inside `/grammar-path` with a top tab switcher (`8-Stage Grammar Path` | `AI Grammar & Writing Checker`), error detection + Bangla/English explanations, Formal/Casual/IELTS style rewrites, and IELTS Writing Task 1 / Task 2 band score + 4-criteria feedback.
+- Changed:
+  - `src/lib/ai/writing-checker.ts`: Added `WritingCheckRequestSchema`, `WritingCheckResponseSchema`, `checkWritingAsync` via `callStructuredLlm`, and deterministic offline fallback.
+  - `src/app/api/v1/ai/writing-check/route.ts`: Added rate-limited `POST /api/v1/ai/writing-check` endpoint.
+  - `src/components/grammar/WritingCheckerPanel.tsx`: Built interactive checker UI with `General Check` / `IELTS Task 1` / `IELTS Task 2` mode toggle, `বাংলা ব্যাখ্যা` / `English` explanation toggle, mistake breakdown, 3-style rewrite cards with copy buttons, and IELTS band score + criteria cards.
+  - `src/components/grammar/GrammarPathClient.tsx`: Added 2-tab switcher (`8-Stage Grammar Path` | `AI Grammar & Writing Checker`).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Update Dashboard Illustration SVG from Downloads
 - Requested by owner: Replace `public/dashboard-illustration.svg` with the updated `~/Downloads/dashboard-illustration.svg`.
 - Changed:
