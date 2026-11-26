@@ -43,7 +43,10 @@ export function Sidebar() {
       name: t("nav.explore", locale),
       href: "/explore",
       icon: CompassIcon,
-      active: pathname.startsWith("/explore") || pathname.startsWith("/conversations"),
+      active:
+        pathname.startsWith("/explore") ||
+        pathname.startsWith("/conversations") ||
+        pathname.startsWith("/professions"),
     },
     {
       name: t("nav.dailyPractice", locale),
@@ -56,12 +59,6 @@ export function Sidebar() {
       href: "/grammar-path",
       icon: BookOpen01Icon,
       active: pathname.startsWith("/grammar-path"),
-    },
-    {
-      name: t("nav.professionalEnglish", locale),
-      href: "/professions",
-      icon: Briefcase01Icon,
-      active: pathname.startsWith("/professions"),
     },
     {
       name: t("nav.sayIt", locale),

@@ -888,24 +888,6 @@
   "c_radius": [],
   "d_layout_magic": [
     {
-      "file": "src/app/(app)/explore/page.tsx",
-      "line": 132,
-      "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full pl-11 pr-11 text-body h-11\""
-    },
-    {
-      "file": "src/app/(app)/professions/page.tsx",
-      "line": 89,
-      "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
-    },
-    {
-      "file": "src/app/(app)/professions/page.tsx",
-      "line": 117,
-      "detail": "Hardcoded layout constant / magic number: h-11",
-      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
-    },
-    {
       "file": "src/app/(app)/quiz/page.tsx",
       "line": 109,
       "detail": "Hardcoded layout constant / magic number: h-11",
@@ -984,6 +966,24 @@
       "code": "className=\"h-8 w-auto object-contain\""
     },
     {
+      "file": "src/components/discovery/ExploreClient.tsx",
+      "line": 187,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full pl-11 pr-11 text-body h-11\""
+    },
+    {
+      "file": "src/components/discovery/ExploreClient.tsx",
+      "line": 265,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+    },
+    {
+      "file": "src/components/discovery/ExploreClient.tsx",
+      "line": 298,
+      "detail": "Hardcoded layout constant / magic number: h-11",
+      "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
+    },
+    {
       "file": "src/components/learning/ChatTurnBubble.tsx",
       "line": 102,
       "detail": "Arbitrary layout [Npx] utility: max-w-[85%], max-w-[78%]",
@@ -1003,7 +1003,7 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 150,
+      "line": 149,
       "detail": "Hardcoded layout constant / magic number: h-7, h-10",
       "code": "className=\"h-7 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
@@ -1113,82 +1113,14 @@
       ]
     },
     {
-      "detail": "ClassName repeated 11 times",
-      "className": "text-chip uppercase tracking-wider text-muted-foreground",
-      "files": [
-        "src/app/(app)/explore/page.tsx",
-        "src/components/practice/DailyPracticeClient.tsx",
-        "src/components/professions/ProfessionScenariosGrid.tsx",
-        "src/components/spelling/SpellMasterClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 6 times",
-      "className": "space-y-2 pt-2 border-t border-border/60",
-      "files": [
-        "src/app/(app)/explore/page.tsx",
-        "src/components/practice/ReadAloudCard.tsx",
-        "src/components/shared/WordDetailsSections.tsx",
-        "src/components/spelling/SpellMasterClient.tsx"
-      ]
-    },
-    {
       "detail": "ClassName repeated 5 times",
       "className": "w-full px-4 sm:px-6 lg:px-9 py-6 pb-16 space-y-6",
       "files": [
-        "src/app/(app)/explore/page.tsx",
         "src/app/(app)/professions/[slug]/page.tsx",
         "src/app/(app)/vocabulary/page.tsx",
+        "src/components/discovery/ExploreClient.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
         "src/components/professions/ProfessionScenariosGrid.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 4 times",
-      "className": "p-5 sm:p-6 bg-card border border-border shadow-xs",
-      "files": [
-        "src/app/(app)/explore/page.tsx",
-        "src/components/analytics/ProgressDashboard.tsx",
-        "src/components/practice/DailyPracticeClient.tsx",
-        "src/components/professions/ProfessionScenariosGrid.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 7 times",
-      "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
-      "files": [
-        "src/app/(app)/explore/page.tsx",
-        "src/app/(app)/vocabulary/page.tsx",
-        "src/components/admin/AdminDashboardClient.tsx",
-        "src/components/grammar/WritingCheckerPanel.tsx",
-        "src/components/practice/PersonalizedPracticeCard.tsx",
-        "src/components/professions/ProfessionScenariosGrid.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "flex items-center justify-between flex-wrap gap-2",
-      "files": [
-        "src/app/(app)/professions/page.tsx",
-        "src/components/grammar/GrammarPathClient.tsx",
-        "src/components/tools/WhatShouldISay.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 4 times",
-      "className": "w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring",
-      "files": [
-        "src/app/(app)/professions/page.tsx",
-        "src/components/settings/SettingsClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 5 times",
-      "className": "text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none",
-      "files": [
-        "src/app/(app)/professions/page.tsx",
-        "src/app/(app)/vocabulary/page.tsx",
-        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
@@ -1224,10 +1156,31 @@
       ]
     },
     {
+      "detail": "ClassName repeated 7 times",
+      "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/admin/AdminDashboardClient.tsx",
+        "src/components/discovery/ExploreClient.tsx",
+        "src/components/grammar/WritingCheckerPanel.tsx",
+        "src/components/practice/PersonalizedPracticeCard.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 3 times",
       "className": "text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none",
       "files": [
         "src/app/(app)/vocabulary/page.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 5 times",
+      "className": "text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/discovery/ExploreClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
@@ -1404,6 +1357,15 @@
       ]
     },
     {
+      "detail": "ClassName repeated 3 times",
+      "className": "p-5 sm:p-6 bg-card border border-border shadow-xs",
+      "files": [
+        "src/components/analytics/ProgressDashboard.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 4 times",
       "className": "size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
       "files": [
@@ -1451,6 +1413,34 @@
       "className": "btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 12 times",
+      "className": "text-chip uppercase tracking-wider text-muted-foreground",
+      "files": [
+        "src/components/discovery/ExploreClient.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 6 times",
+      "className": "space-y-2 pt-2 border-t border-border/60",
+      "files": [
+        "src/components/discovery/ExploreClient.tsx",
+        "src/components/practice/ReadAloudCard.tsx",
+        "src/components/shared/WordDetailsSections.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring",
+      "files": [
+        "src/components/discovery/ExploreClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {

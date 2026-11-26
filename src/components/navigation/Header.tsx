@@ -79,7 +79,6 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
     { name: t("nav.explore", locale), href: "/explore", icon: CompassIcon },
     { name: t("nav.dailyPractice", locale), href: "/daily-practice", icon: Calendar03Icon },
     { name: t("nav.grammarPath", locale), href: "/grammar-path", icon: BookOpen01Icon },
-    { name: t("nav.professionalEnglish", locale), href: "/professions", icon: Briefcase01Icon },
     { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
     { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon },
     { name: t("nav.vocabulary", locale), href: "/vocabulary", icon: Bookmark02Icon },
