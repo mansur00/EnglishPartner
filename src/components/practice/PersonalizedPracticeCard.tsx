@@ -18,6 +18,13 @@ import { GuestLockedCard } from "@/components/auth/GuestLimitBanner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { speakText } from "@/lib/audio/speech-engine";
 import { useLiveTranslations, useTranslationLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -420,90 +427,110 @@ export function PersonalizedPracticeCard({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {/* Compact 3-Phase Roadmap Strip */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           {CHALLENGE_PHASES.map((p) => (
             <div
               key={p.phase}
-              className="rounded-panel bg-muted/35 border border-border/60 p-3.5 space-y-1.5"
+              className="rounded-panel bg-muted/35 border border-border/60 px-3.5 py-2.5 flex items-center justify-between gap-2"
             >
-              <Badge variant="outline" size="sm">
+              <span className="text-meta font-semibold text-foreground truncate">
+                {isBn ? p.titleBn : p.titleEn}
+              </span>
+              <Badge variant="outline" size="sm" className="shrink-0">
                 {p.dayRange}
               </Badge>
-              <h3 className="text-label font-semibold text-foreground">
-                {isBn ? p.titleBn : p.titleEn}
-              </h3>
-              <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
-                {isBn ? p.goalBn : p.goalEn}
-              </p>
             </div>
           ))}
         </div>
 
+        {/* Clean 3-Dropdown Setup Row + Start CTA */}
         <div className="rounded-panel bg-muted/25 border border-border/60 p-4 space-y-4">
-          <div className="space-y-1.5">
-            <p className="text-chip font-semibold text-foreground">
-              {isBn ? "১. আপনার মূল লক্ষ্য:" : "1. Choose your speaking goal:"}
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {GOAL_OPTIONS.map((g) => (
-                <Button
-                  key={g.id}
-                  type="button"
-                  size="xs"
-                  variant={setupGoal === g.id ? "default" : "outline"}
-                  onClick={() => setSetupGoal(g.id)}
-                >
-                  {isBn ? g.labelBn : g.labelEn}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {/* 1. Speaking Goal Dropdown */}
             <div className="space-y-1.5">
-              <p className="text-chip font-semibold text-foreground">
-                {isBn ? "২. বর্তমান লেভেল:" : "2. Speaking level:"}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {LEVEL_OPTIONS.map((l) => (
-                  <Button
-                    key={l.id}
-                    type="button"
-                    size="xs"
-                    variant={setupLevel === l.id ? "default" : "outline"}
-                    onClick={() => setSetupLevel(l.id)}
-                  >
-                    {isBn ? l.labelBn : l.labelEn}
-                  </Button>
-                ))}
-              </div>
+              <label className="text-chip font-semibold text-foreground block">
+                {isBn ? "১. আপনার মূল লক্ষ্য" : "1. Speaking Goal"}
+              </label>
+              <Select
+                value={setupGoal}
+                onValueChange={(val) => setSetupGoal((val ?? "everyday") as ChallengeGoal)}
+              >
+                <SelectTrigger className="w-full bg-card">
+                  <SelectValue>
+                    {(() => {
+                      const g = GOAL_OPTIONS.find((o) => o.id === setupGoal);
+                      return g ? (isBn ? g.labelBn : g.labelEn) : "Everyday Fluency";
+                    })()}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {GOAL_OPTIONS.map((g) => (
+                    <SelectItem key={g.id} value={g.id}>
+                      {isBn ? g.labelBn : g.labelEn}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
+            {/* 2. Speaking Level Dropdown */}
             <div className="space-y-1.5">
-              <p className="text-chip font-semibold text-foreground">
-                {isBn ? "৩. দৈনিক সময়:" : "3. Daily commitment:"}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {MINUTE_OPTIONS.map((m) => (
-                  <Button
-                    key={m}
-                    type="button"
-                    size="xs"
-                    variant={setupMinutes === m ? "default" : "outline"}
-                    onClick={() => setSetupMinutes(m)}
-                  >
-                    {m} min/day
-                  </Button>
-                ))}
-              </div>
+              <label className="text-chip font-semibold text-foreground block">
+                {isBn ? "২. বর্তমান লেভেল" : "2. Speaking Level"}
+              </label>
+              <Select
+                value={setupLevel}
+                onValueChange={(val) => setSetupLevel((val ?? "beginner") as ChallengeLevel)}
+              >
+                <SelectTrigger className="w-full bg-card">
+                  <SelectValue>
+                    {(() => {
+                      const l = LEVEL_OPTIONS.find((o) => o.id === setupLevel);
+                      return l ? (isBn ? l.labelBn : l.labelEn) : "Beginner";
+                    })()}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {LEVEL_OPTIONS.map((l) => (
+                    <SelectItem key={l.id} value={l.id}>
+                      {isBn ? l.labelBn : l.labelEn}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* 3. Daily Time Dropdown */}
+            <div className="space-y-1.5">
+              <label className="text-chip font-semibold text-foreground block">
+                {isBn ? "৩. দৈনিক সময়" : "3. Daily Time"}
+              </label>
+              <Select
+                value={String(setupMinutes)}
+                onValueChange={(val) =>
+                  setSetupMinutes(Number(val ?? 20) as ChallengeDailyMinutes)
+                }
+              >
+                <SelectTrigger className="w-full bg-card">
+                  <SelectValue>{setupMinutes} min/day</SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {MINUTE_OPTIONS.map((m) => (
+                    <SelectItem key={m} value={String(m)}>
+                      {m} min/day
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/60">
             <p className="text-chip text-muted-foreground">
               {isBn
-                ? "সব ৫টি স্টেপ (Vocabulary → Grammar → Quick Drill → Speaking → Roleplay) এই কার্ডেই হবে।"
-                : "All 5 daily steps run right here inside this card—no jumping between pages."}
+                ? "৫টি স্টেপ (Vocabulary → Grammar → Drill → Speaking → Roleplay) এই কার্ডেই হবে।"
+                : "All 5 daily steps run right inside this card—no page switching."}
             </p>
             <Button
               type="button"

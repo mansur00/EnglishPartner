@@ -2156,6 +2156,9 @@ Entry format:
 
 - Extended the 100% visible + 95% locked Guest mode across `GrammarPathClient.tsx` (Stage 1 unlocked, Stages 2–8 & AI Writing Checker locked), `RoleplayPartner.tsx` (1-turn 5% preview, then locked), `vocabulary/page.tsx` (first 5% Magic Decks unlocked, 95% locked), and `quiz/page.tsx` (first 5% quizzes unlocked, 95% locked).
 
+### 2026-11-27, Clean Dropdown Onboarding for 90-Day Challenge (`PersonalizedPracticeCard.tsx`)
+- Simplified the Not-Enrolled 90-Day Challenge card by replacing the bulky phase description boxes and 10 pill buttons with a compact 3-phase strip and 3 aligned `Select` dropdowns (`Speaking Goal`, `Speaking Level`, `Daily Time`) in one clean row.
+
 ### 2026-11-27, Dedicated Admin Panel (`/admin-panel`), Activity Days & Per-User Feature Controls
 - Added `supabase/migrations/20261127_user_activity_and_features.sql` (`last_active_at`, `disabled_features` on `public.profiles`) and heartbeat tracking in `src/lib/auth/session.ts`.
 - Created dedicated `/admin-panel` (`src/components/admin/AdminPanelClient.tsx` + `src/app/(app)/admin-panel/page.tsx`) with 3 tabs (**Users & Activity** showing `Active today` / `Active Xd ago` / `Inactive X days` + per-user feature toggles, **Global Feature Controls**, and **AI Quota, Guest & Notice**).
