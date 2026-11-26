@@ -106,57 +106,99 @@
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 170,
+      "line": 112,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 219,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<span className=\"text-label font-semibold text-foreground\">{stage.title}</span>"
-    },
-    {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 294,
+      "line": 126,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 308,
+      "line": 143,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"flex items-center gap-2 text-label text-foreground font-semibold\">"
     },
     {
       "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 384,
+      "line": 206,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{activeTopic.title}</h2>"
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">{stage.title}</h2>"
     },
     {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 406,
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 187,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+      "code": "<h2 className=\"text-label font-semibold text-foreground\">{stage.title}</h2>"
     },
     {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 423,
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 346,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
     },
     {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 460,
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 357,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "<h3 className=\"text-label font-semibold text-foreground\">"
+      "code": "<h3 className=\"text-lead text-foreground font-semibold\">{sub.name}</h3>"
     },
     {
-      "file": "src/components/grammar/GrammarPathClient.tsx",
-      "line": 503,
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 411,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 435,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 470,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 490,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-body text-foreground font-semibold\">{prompt}</p>"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 520,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<p className=\"text-meta text-primary font-semibold\" dir=\"ltr\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 546,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 561,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-body text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 624,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<h2 className=\"text-card-title text-foreground font-semibold\">"
+    },
+    {
+      "file": "src/components/grammar/GrammarStageLessonClient.tsx",
+      "line": 643,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-body text-foreground font-semibold\">"
     },
     {
       "file": "src/components/learning/ChatTurnBubble.tsx",
@@ -624,6 +666,14 @@
       ]
     },
     {
+      "detail": "ClassName repeated 4 times",
+      "className": "p-5 sm:p-6 bg-card border border-border space-y-5",
+      "files": [
+        "src/app/(app)/quiz/page.tsx",
+        "src/components/grammar/GrammarStageLessonClient.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 3 times",
       "className": "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none",
       "files": [
@@ -763,6 +813,16 @@
       ]
     },
     {
+      "detail": "ClassName repeated 4 times",
+      "className": "flex items-center justify-between gap-2 flex-wrap",
+      "files": [
+        "src/components/grammar/GrammarLegend.tsx",
+        "src/components/grammar/GrammarPathClient.tsx",
+        "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/shared/WordDetailsSections.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 3 times",
       "className": "flex items-center gap-2 text-label text-foreground font-semibold",
       "files": [
@@ -770,19 +830,26 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
-      "className": "text-label font-semibold text-foreground",
+      "detail": "ClassName repeated 7 times",
+      "className": "text-card-title text-foreground font-semibold",
       "files": [
-        "src/components/grammar/GrammarPathClient.tsx"
+        "src/components/grammar/GrammarPathClient.tsx",
+        "src/components/grammar/GrammarStageLessonClient.tsx"
       ]
     },
     {
       "detail": "ClassName repeated 3 times",
-      "className": "text-chip text-muted-foreground truncate",
+      "className": "p-5 sm:p-6 bg-card border border-border space-y-4",
       "files": [
-        "src/components/grammar/GrammarPathClient.tsx",
-        "src/components/learning/NicheLadderRoadmap.tsx",
-        "src/components/navigation/LanguageSwitcher.tsx"
+        "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/quiz/QuizResultDetailClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "p-5 sm:p-6 bg-card border border-border space-y-3",
+      "files": [
+        "src/components/grammar/GrammarStageLessonClient.tsx"
       ]
     },
     {
