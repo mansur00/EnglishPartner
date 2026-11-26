@@ -1642,7 +1642,7 @@ export function RoleplayPartner() {
       <Sheet open={isMobileControlsOpen} onOpenChange={setIsMobileControlsOpen}>
         <SheetContent
           side="bottom"
-          className="lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background"
+          className="lg:hidden max-h-dialog overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background"
         >
           <SheetHeader className="pb-3 border-b border-border/60 text-left">
             <SheetTitle className="text-card-title text-foreground">

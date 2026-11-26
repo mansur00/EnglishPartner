@@ -389,7 +389,7 @@ function VocabularyContent() {
                       ? "৪০টি ম্যাজিক কার্ড বা শব্দ খুঁজুন..."
                       : "Search 40 magic cards or words..."
                   }
-                  className="pl-9 h-11 bg-muted/40 border-border/60 rounded-control"
+                  className="pl-9 h-control-lg bg-muted/40 border-border/60 rounded-control"
                 />
               </div>
 
@@ -402,7 +402,7 @@ function VocabularyContent() {
                 >
                   <SelectTrigger
                     aria-label={locale === "bn" ? "কার্ড ক্যাটাগরি নির্বাচন করুন" : "Filter Magic Cards by category"}
-                    className="w-full h-11 text-label"
+                    className="w-full h-control-lg text-label"
                   >
                     <SelectValue>
                       {MAGIC_CARD_CATEGORIES.find((c) => c.id === magicCategory)?.label ?? "All"}
@@ -572,7 +572,7 @@ function VocabularyContent() {
                     <p className="text-chip text-muted-foreground">{activeDeck.tagline}</p>
                   </div>
 
-                  <div className="relative w-full sm:w-64">
+                  <div className="relative w-full sm:w-sidebar">
                     <HugeiconsIcon
                       icon={Search01Icon}
                       size={15}
@@ -755,7 +755,7 @@ function VocabularyContent() {
                     </div>
                   </div>
 
-                  <div className="relative w-full sm:w-64">
+                  <div className="relative w-full sm:w-sidebar">
                     <HugeiconsIcon
                       icon={Search01Icon}
                       size={15}
@@ -1030,7 +1030,7 @@ function VocabularyContent() {
       <Sheet open={isMobileWordSheetOpen} onOpenChange={setIsMobileWordSheetOpen}>
         <SheetContent
           side="bottom"
-          className="lg:hidden max-h-[85vh] overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background"
+          className="lg:hidden max-h-dialog overflow-y-auto rounded-t-card p-4 sm:p-5 bg-background"
         >
           <SheetHeader className="pb-3 border-b border-border/60 text-left">
             <SheetTitle className="text-card-title text-foreground">

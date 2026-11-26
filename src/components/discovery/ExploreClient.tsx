@@ -196,7 +196,7 @@ export function ExploreClient() {
               placeholder={t("discovery.searchPlaceholder", locale)}
               variant="ghost"
               inputSize="default"
-              className="w-full pl-11 pr-11 text-body h-11"
+              className="w-full pl-11 pr-11 text-body h-control-lg"
             />
             {searchQuery && (
               <InputGroupSuffix>
@@ -275,7 +275,7 @@ export function ExploreClient() {
           >
             <SelectTrigger
               aria-label={locale === "bn" ? "ক্যারিয়ার ট্র্যাক নির্বাচন করুন" : "Select career track"}
-              className="w-full h-11 text-label"
+              className="w-full h-control-lg text-label"
             >
               <SelectValue>
                 {(() => {
@@ -318,7 +318,7 @@ export function ExploreClient() {
           >
             <SelectTrigger
               aria-label={locale === "bn" ? "CEFR লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
-              className="w-full h-11 text-label"
+              className="w-full h-control-lg text-label"
             >
               <SelectValue>
                 {selectedProfLevel === "all"

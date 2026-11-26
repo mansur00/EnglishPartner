@@ -2224,6 +2224,9 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, UX Audit Step 5: Layout Magic Constants (`d_layout_magic` 35 -> 7)
+- Replaced 28 hardcoded layout/control sizing classes (`h-11`, `max-h-[85vh]`, `max-w-2xl`, `sm:w-64`, `min-h-12`, `h-8`, `h-16`) with semantic `globals.css` utilities (`h-control-lg`, `h-control-sm`, `max-h-dialog`, `max-w-reading`, `sm:w-sidebar`, `min-h-tap`) across 12 files (`quiz/page.tsx`, `vocabulary/page.tsx`, `ExploreClient.tsx`, `ConversationInspectorSidebar.tsx`, `ConversationReader.tsx`, `DailyPracticeClient.tsx`, `ProfessionScenariosGrid.tsx`, `SettingsClient.tsx`, `WordDetailsSections.tsx`, `SpellMasterClient.tsx`, `RoleplayPartner.tsx`, `WhatShouldISay.tsx`).
+
 ### 2026-11-27, UX Audit Step 4: Long Title & Long Description Overflow Guards
 - Added `min-w-0`, `truncate`, `line-clamp-2`, and `break-words` overflow protection on card headers, titles, and descriptions across `ScenarioCard.tsx`, `src/app/(app)/quiz/page.tsx`, `src/app/(app)/vocabulary/page.tsx`, and `GrammarPathClient.tsx`.
 

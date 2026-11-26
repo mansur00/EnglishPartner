@@ -393,7 +393,7 @@ export function DailyPracticeClient() {
               <h1 className="font-heading text-page-title text-foreground">
                 {t("dailyPractice.title", locale)}
               </h1>
-              <p className="text-body text-muted-foreground max-w-2xl">
+              <p className="text-body text-muted-foreground max-w-reading">
                 {t("dailyPractice.subtitle", locale)}
               </p>
             </div>

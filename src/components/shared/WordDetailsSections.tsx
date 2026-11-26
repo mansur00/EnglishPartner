@@ -66,7 +66,7 @@ export function WordDetailsSections({
     return (
       <div className="space-y-2.5 pt-2">
         <div className="h-4 w-36 rounded-control bg-muted animate-pulse" />
-        <div className="h-16 w-full rounded-panel bg-muted/60 animate-pulse" />
+        <div className="h-control-lg w-full rounded-panel bg-muted/60 animate-pulse" />
         <div className="h-20 w-full rounded-panel bg-muted/60 animate-pulse" />
       </div>
     );

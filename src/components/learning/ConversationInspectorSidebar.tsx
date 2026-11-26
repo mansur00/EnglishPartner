@@ -281,7 +281,7 @@ export function ConversationInspectorSidebar({
                   variant="outline"
                   size="sm"
                   onClick={() => speakText(selectedLine.englishText, { lang: accent })}
-                  className="h-8 px-2.5 text-chip gap-1.5 rounded-control"
+                  className="h-control-sm px-2.5 text-chip gap-1.5 rounded-control"
                 >
                   <HugeiconsIcon icon={VolumeHighIcon} size={14} />
                   <span>{locale === "bn" ? "শুনুন" : "Listen"}</span>

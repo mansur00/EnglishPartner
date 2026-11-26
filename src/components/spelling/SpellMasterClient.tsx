@@ -1161,7 +1161,7 @@ export function SpellMasterClient() {
 
       {/* TAB 2: SPELLING TEST (AUDIO DICTATION & JUMBLED LETTERS) */}
       {activeTab === "test" && (
-        <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs max-w-2xl mx-auto">
+        <Card className="p-5 sm:p-6 bg-card border border-border rounded-card space-y-5 shadow-xs max-w-reading mx-auto">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Button
@@ -1256,7 +1256,7 @@ export function SpellMasterClient() {
           ) : (
             <div className="space-y-4">
               {/* Selected Letters Slot */}
-              <div className="min-h-12 rounded-panel border border-border bg-background p-3 flex flex-wrap items-center justify-center gap-2">
+              <div className="min-h-tap rounded-panel border border-border bg-background p-3 flex flex-wrap items-center justify-center gap-2">
                 {jumbledPicked.length === 0 ? (
                   <span className="text-chip text-muted-foreground">
                     {isBn ? "নিচের অক্ষরগুলোতে ক্লিক করে শব্দ তৈরি করুন" : "Tap letters below to build the word"}

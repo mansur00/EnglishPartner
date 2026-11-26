@@ -190,7 +190,7 @@ export function WhatShouldISay() {
               }
               variant="ghost"
               inputSize="default"
-              className="w-full pl-10 pr-10 text-body h-11"
+              className="w-full pl-10 pr-10 text-body h-control-lg"
             />
             {intentInput && (
               <InputGroupSuffix>
@@ -212,7 +212,7 @@ export function WhatShouldISay() {
             onClick={() => handleSearch()}
             disabled={!intentInput.trim() || isLoading}
             loading={isLoading}
-            className="h-11 px-5 rounded-control gap-1.5 text-label btn-press shrink-0 cursor-pointer"
+            className="h-control-lg px-5 rounded-control gap-1.5 text-label btn-press shrink-0 cursor-pointer"
           >
             <HugeiconsIcon icon={SentIcon} size={15} />
             <span>Show Options</span>

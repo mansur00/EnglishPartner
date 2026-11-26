@@ -98,7 +98,7 @@ export function ProfessionScenariosGrid({
             placeholder={t("discovery.searchPlaceholder", locale)}
             variant="ghost"
             inputSize="default"
-            className="w-full pl-11 pr-11 text-body h-11"
+            className="w-full pl-11 pr-11 text-body h-control-lg"
           />
           {searchQuery && (
             <InputGroupSuffix>

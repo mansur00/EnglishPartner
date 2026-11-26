@@ -128,7 +128,7 @@ export default function QuizHubPage() {
                   ? "কথোপকথন কুইজ খুঁজুন..."
                   : "Search conversation quizzes..."
               }
-              className="pl-9 h-11"
+              className="pl-9 h-control-lg"
             />
           </div>
 
@@ -141,7 +141,7 @@ export default function QuizHubPage() {
             >
               <SelectTrigger
                 aria-label={locale === "bn" ? "লেভেল নির্বাচন করুন" : "Filter by CEFR level"}
-                className="w-full h-11 text-label"
+                className="w-full h-control-lg text-label"
               >
                 <SelectValue>
                   {selectedLevel === "ALL"
@@ -177,7 +177,7 @@ export default function QuizHubPage() {
             >
               <SelectTrigger
                 aria-label={locale === "bn" ? "স্টাইল নির্বাচন করুন" : "Select conversation style"}
-                className="w-full h-11 text-label capitalize"
+                className="w-full h-control-lg text-label capitalize"
               >
                 <SelectValue>
                   {locale === "bn" ? `স্টাইল: ${selectedStyle}` : `Style: ${selectedStyle}`}
@@ -200,7 +200,7 @@ export default function QuizHubPage() {
             >
               <SelectTrigger
                 aria-label={locale === "bn" ? "দৈর্ঘ্য নির্বাচন করুন" : "Select conversation length"}
-                className="w-full h-11 text-label capitalize"
+                className="w-full h-control-lg text-label capitalize"
               >
                 <SelectValue>
                   {locale === "bn"

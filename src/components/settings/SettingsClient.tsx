@@ -268,7 +268,7 @@ export function SettingsClient() {
             <h1 className="font-heading text-page-title text-foreground">
               {t("settings.title", locale)}
             </h1>
-            <p className="text-body text-muted-foreground max-w-2xl">
+            <p className="text-body text-muted-foreground max-w-reading">
               {t("settings.subtitle", locale)}
             </p>
           </div>
@@ -380,7 +380,7 @@ export function SettingsClient() {
                   value={sysLangSearch}
                   onChange={(e) => setSysLangSearch(e.target.value)}
                   placeholder={locale === "bn" ? "যেকোনো ভাষা খুঁজুন (যেমন: English, Arabic, Hindi)..." : "Search any language (e.g. English, Bengali, Arabic)..."}
-                  className="w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full h-control-lg pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
 
@@ -393,7 +393,7 @@ export function SettingsClient() {
                 >
                   <SelectTrigger
                     aria-label={t("settings.systemLanguage")}
-                    className="w-full h-11 text-label"
+                    className="w-full h-control-lg text-label"
                   >
                     <SelectValue>
                       {getLanguageMeta(locale)?.nativeName || locale.toUpperCase()}
@@ -455,7 +455,7 @@ export function SettingsClient() {
                   value={transLangSearch}
                   onChange={(e) => setTransLangSearch(e.target.value)}
                   placeholder={locale === "bn" ? "অনুবাদের ভাষা খুঁজুন (যেমন: Bengali, Hindi, Urdu)..." : "Search translation language..."}
-                  className="w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full h-control-lg pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
 
@@ -468,7 +468,7 @@ export function SettingsClient() {
                 >
                   <SelectTrigger
                     aria-label={t("settings.translationLanguage")}
-                    className="w-full h-11 text-label"
+                    className="w-full h-control-lg text-label"
                   >
                     <SelectValue>
                       {translationLocale === "none"
@@ -733,7 +733,7 @@ export function SettingsClient() {
                 {t("settings.targetLevelDesc", locale)}
               </p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-2xl">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-reading">
               {[
                 { lvl: "A1", labelBn: "A1 শিক্ষানবিস", labelEn: "A1 Beginner" },
                 { lvl: "A2", labelBn: "A2 প্রাথমিক", labelEn: "A2 Elementary" },
