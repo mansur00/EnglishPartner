@@ -41,8 +41,8 @@ export function DailyPracticeClient() {
   const translationLocale = useTranslationLocale();
   const { isGuest, config } = useSessionAccess();
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
-  const [streak, setStreak] = useState(3);
-  const [minutesCompleted, setMinutesCompleted] = useState(8);
+  const [streak, setStreak] = useState(0);
+  const [minutesCompleted, setMinutesCompleted] = useState(0);
   const [minutesGoal, setMinutesGoal] = useState(15);
   const [weakWords, setWeakWords] = useState<
     { word: string; mistakes: number; ruleCategory: string }[]

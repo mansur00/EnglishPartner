@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { t, useTranslations } from "@/lib/i18n";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -26,6 +27,31 @@ import {
 
 export function DashboardClient() {
   const { locale } = useTranslations();
+  const { isGuest } = useSessionAccess();
+  const [streak, setStreak] = useState(0);
+  const [minutesCompleted, setMinutesCompleted] = useState(0);
+  const [minutesGoal, setMinutesGoal] = useState(15);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      if (isGuest) {
+        setStreak(0);
+        setMinutesCompleted(0);
+        setMinutesGoal(15);
+        return;
+      }
+      try {
+        const s = localStorage.getItem("ecp_streak_count");
+        const m = localStorage.getItem("ecp_today_minutes");
+        const g = localStorage.getItem("ecp_daily_goal_mins");
+        setStreak(s ? parseInt(s, 10) || 0 : 0);
+        setMinutesCompleted(m ? parseInt(m, 10) || 0 : 0);
+        setMinutesGoal(g ? parseInt(g, 10) || 15 : 15);
+      } catch {
+        // Ignore storage errors
+      }
+    });
+  }, [isGuest]);
 
   return (
     <PageContainer className="py-4 sm:py-6 space-y-5 sm:space-y-6 pb-24 md:pb-16">
@@ -41,7 +67,11 @@ export function DashboardClient() {
             </p>
           </div>
 
-          <TodayPanel />
+          <TodayPanel
+            streak={streak}
+            minutesCompleted={minutesCompleted}
+            minutesGoal={minutesGoal}
+          />
         </div>
       </HeroBand>
 

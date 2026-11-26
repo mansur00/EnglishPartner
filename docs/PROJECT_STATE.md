@@ -2156,6 +2156,13 @@ Entry format:
 
 - Extended the 100% visible + 95% locked Guest mode across `GrammarPathClient.tsx` (Stage 1 unlocked, Stages 2–8 & AI Writing Checker locked), `RoleplayPartner.tsx` (1-turn 5% preview, then locked), `vocabulary/page.tsx` (first 5% Magic Decks unlocked, 95% locked), and `quiz/page.tsx` (first 5% quizzes unlocked, 95% locked).
 
+### 2026-11-27, Remove Hard-Coded Demo Progress Stats Across Dashboard, Daily Practice & Progress
+- Audited and removed all hard-coded demo stats that made Guest mode appear cached:
+  - `TodayPanel.tsx`: Changed defaults from `streak=1, minutesCompleted=7, minutesGoal=10` to `0, 0, 15`.
+  - `DailyPracticeClient.tsx`: Changed initial `streak=3, minutesCompleted=8` to `0, 0`.
+  - `DashboardClient.tsx`: Wired `TodayPanel` to real `localStorage` stats when logged in and `0` when Guest.
+  - `ProgressDashboard.tsx`: Replaced hard-coded `INITIAL_LEARNER_STATS` (`5 days active`, `75 min`, `86%`, `8 words`) with real computed stats from `localStorage` when logged in and `0` (`EMPTY_LEARNER_STATS`) + `GuestLimitBanner` when Guest.
+
 ### 2026-11-27, Synchronous Guest No-Cache Guard (`SessionIsolationProvider.tsx`)
 - Added `ensureGuestNoCacheGuard()` running synchronously before child `useEffect` hooks so Guest mode (`!ecp_active_uid`) immediately clears any stray progress keys and blocks `localStorage.setItem` writes for all `ecp_*` progress keys (keeping UI preferences intact).
 

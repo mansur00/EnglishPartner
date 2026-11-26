@@ -15,9 +15,9 @@ export interface TodayPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function TodayPanel({
   className,
-  streak = 1,
-  minutesCompleted = 7,
-  minutesGoal = 10,
+  streak = 0,
+  minutesCompleted = 0,
+  minutesGoal = 15,
   variant = "band",
   ...props
 }: TodayPanelProps) {

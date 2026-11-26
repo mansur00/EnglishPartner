@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   FireIcon,
@@ -27,50 +29,116 @@ import {
   type RecommendationContext,
 } from "@/lib/analytics/progress-metrics";
 
-// Sample active learner state
-const INITIAL_LEARNER_STATS: LearnerRawStats = {
-  currentStreak: 5,
-  bestStreak: 12,
-  practiceTimeMinutes: 75,
-  completedScenariosCount: 3,
+const EMPTY_LEARNER_STATS: LearnerRawStats = {
+  currentStreak: 0,
+  bestStreak: 0,
+  practiceTimeMinutes: 0,
+  completedScenariosCount: 0,
   totalScenariosAvailable: 20,
-  totalQuizAnswers: 28,
-  correctQuizAnswers: 24,
-  userVocabularyItems: [
-    { reviewStage: 1 },
-    { reviewStage: 2 },
-    { reviewStage: 2 },
-    { reviewStage: 3 },
-    { reviewStage: 4 },
-    { reviewStage: 5 },
-    { reviewStage: 6 },
-    { reviewStage: 7 },
-  ],
+  totalQuizAnswers: 0,
+  correctQuizAnswers: 0,
+  userVocabularyItems: [],
   weeklyMinutes: [
-    { day: "Sat", dayBn: "শনি", minutes: 10, isToday: false },
-    { day: "Sun", dayBn: "রবি", minutes: 15, isToday: false },
-    { day: "Mon", dayBn: "সোম", minutes: 12, isToday: false },
-    { day: "Tue", dayBn: "মঙ্গল", minutes: 18, isToday: false },
-    { day: "Wed", dayBn: "বুধ", minutes: 20, isToday: false },
+    { day: "Sat", dayBn: "শনি", minutes: 0, isToday: false },
+    { day: "Sun", dayBn: "রবি", minutes: 0, isToday: false },
+    { day: "Mon", dayBn: "সোম", minutes: 0, isToday: false },
+    { day: "Tue", dayBn: "মঙ্গল", minutes: 0, isToday: false },
+    { day: "Wed", dayBn: "বুধ", minutes: 0, isToday: false },
     { day: "Thu", dayBn: "বৃহঃ", minutes: 0, isToday: false },
-    { day: "Fri", dayBn: "শুক্র", minutes: 15, isToday: true },
+    { day: "Fri", dayBn: "শুক্র", minutes: 0, isToday: true },
   ],
 };
 
-const INITIAL_CONTEXT: RecommendationContext = {
+const EMPTY_CONTEXT: RecommendationContext = {
   lastCompletedStepSlug: "shopping-money-step-01",
-  lastCompletedStepNumber: 1,
-  nextStepSlug: "shopping-money-step-02",
-  nextStepTitle: "Asking for a Discount",
-  dueVocabularyCount: 3,
-  quizAccuracy: 86,
+  lastCompletedStepNumber: 0,
+  nextStepSlug: "shopping-money-step-01",
+  nextStepTitle: "Start Your First Conversation",
+  dueVocabularyCount: 0,
+  quizAccuracy: 0,
   hasTriedRoleplay: false,
 };
 
 export function ProgressDashboard() {
   const { locale, t } = useTranslations();
-  const [stats] = useState<LearnerRawStats>(INITIAL_LEARNER_STATS);
-  const [context] = useState<RecommendationContext>(INITIAL_CONTEXT);
+  const { isGuest, config } = useSessionAccess();
+  const [stats, setStats] = useState<LearnerRawStats>(EMPTY_LEARNER_STATS);
+  const [context, setContext] = useState<RecommendationContext>(EMPTY_CONTEXT);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      if (isGuest) {
+        setStats(EMPTY_LEARNER_STATS);
+        setContext(EMPTY_CONTEXT);
+        return;
+      }
+      try {
+        const streak = parseInt(localStorage.getItem("ecp_streak_count") || "0", 10) || 0;
+        const todayMins = parseInt(localStorage.getItem("ecp_today_minutes") || "0", 10) || 0;
+
+        const stepsRaw = localStorage.getItem("ecp_completed_steps");
+        const completedSteps = stepsRaw ? JSON.parse(stepsRaw) : [];
+        const completedCount = Array.isArray(completedSteps) ? completedSteps.length : 0;
+
+        const quizRaw = localStorage.getItem("ecp_quiz_results_v1");
+        const quizList = quizRaw ? JSON.parse(quizRaw) : [];
+        let totalQ = 0;
+        let correctQ = 0;
+        if (Array.isArray(quizList)) {
+          for (const q of quizList) {
+            if (typeof q?.total === "number" && typeof q?.score === "number") {
+              totalQ += q.total;
+              correctQ += q.score;
+            }
+          }
+        }
+
+        const srsRaw = localStorage.getItem("ecp_vocabulary_srs");
+        const srsObj = srsRaw ? JSON.parse(srsRaw) : {};
+        const vocabItems =
+          srsObj && typeof srsObj === "object"
+            ? Object.values(srsObj).map((item: unknown) => ({
+                reviewStage:
+                  typeof (item as { reviewStage?: number })?.reviewStage === "number"
+                    ? (item as { reviewStage: number }).reviewStage
+                    : 0,
+              }))
+            : [];
+
+        const accuracy = totalQ > 0 ? Math.round((correctQ / totalQ) * 100) : 0;
+        const todayIdx = new Date().getDay(); // 0=Sun..6=Sat
+        const satFirstIdx = (todayIdx + 1) % 7;
+
+        setStats({
+          currentStreak: streak,
+          bestStreak: streak,
+          practiceTimeMinutes: todayMins,
+          completedScenariosCount: completedCount,
+          totalScenariosAvailable: 20,
+          totalQuizAnswers: totalQ,
+          correctQuizAnswers: correctQ,
+          userVocabularyItems: vocabItems,
+          weeklyMinutes: (EMPTY_LEARNER_STATS.weeklyMinutes ?? []).map((d, i) => ({
+            ...d,
+            minutes: i === satFirstIdx ? todayMins : 0,
+            isToday: i === satFirstIdx,
+          })),
+        });
+
+        setContext({
+          lastCompletedStepSlug: "shopping-money-step-01",
+          lastCompletedStepNumber: completedCount,
+          nextStepSlug: "shopping-money-step-01",
+          nextStepTitle: "Shopping & Everyday Practice",
+          dueVocabularyCount: vocabItems.length,
+          quizAccuracy: accuracy,
+          hasTriedRoleplay: todayMins > 0,
+        });
+      } catch {
+        setStats(EMPTY_LEARNER_STATS);
+      }
+    });
+  }, [isGuest]);
 
   const metrics = computeProgressMetrics(stats);
   const recommendations = generatePersonalizedRecommendations(context);
@@ -119,6 +187,13 @@ export function ProgressDashboard() {
 
   return (
     <div className="space-y-6 w-full">
+      {isGuest && (
+        <GuestLimitBanner
+          previewPercent={config.guest_preview_percent}
+          featureName={locale === "bn" ? "আমার অগ্রগতি (Progress)" : "My Learning Progress"}
+          nextPath="/progress"
+        />
+      )}
       {/* Unified Header Card */}
       <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
