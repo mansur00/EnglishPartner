@@ -111,7 +111,7 @@ export default function LandingPage() {
               <span>Spoken English &amp; Grammar for Bangla Speakers</span>
             </div>
 
-            <h1 className="text-page-title font-heading tracking-tight text-foreground leading-tight">
+            <h1 className="text-landing-heading tracking-tight text-foreground leading-tight">
               Speak Real-Life English With Confidence — From Bangla to Fluency
             </h1>
 
@@ -172,7 +172,7 @@ export default function LandingPage() {
               <HugeiconsIcon icon={SparklesIcon} size={14} className="text-primary" />
               Our Features
             </span>
-            <h2 className="text-page-title font-heading text-foreground">
+            <h2 className="text-landing-heading text-foreground">
               Features to Accelerate Your Fluency
             </h2>
             <p className="text-body text-muted-foreground text-bangla">
@@ -393,7 +393,7 @@ export default function LandingPage() {
               <span className="inline-block px-3 py-1 rounded-pill bg-accent text-accent-foreground text-chip font-mono">
                 {"{learning_ecosystem}"}
               </span>
-              <h2 className="text-page-title font-heading text-foreground leading-tight">
+              <h2 className="text-landing-heading text-foreground leading-tight">
                 All Your English Practice Connected
               </h2>
               <p className="text-meta text-muted-foreground text-bangla leading-relaxed">
@@ -435,7 +435,7 @@ export default function LandingPage() {
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-card border border-border text-chip text-muted-foreground shadow-2xs">
               Who It&apos;s For
             </span>
-            <h2 className="text-page-title font-heading text-foreground leading-tight">
+            <h2 className="text-landing-heading text-foreground leading-tight">
               Built for Every Learner.
               <br />
               Structured From Day One.
@@ -622,7 +622,7 @@ export default function LandingPage() {
         <section className="rounded-band bg-gradient-to-br from-accent via-card to-sun-100/70 border border-border/60 p-4 sm:p-6 md:p-8 shadow-2xs space-y-10 md:space-y-12">
           {/* Top Half: CTA */}
           <div className="pt-8 pb-2 md:pt-12 md:pb-4 text-center space-y-5 max-w-reading mx-auto">
-            <h2 className="text-page-title font-heading text-foreground leading-tight">
+            <h2 className="text-landing-heading text-foreground leading-tight">
               Ready to Take Control
               <br />
               of Your English?

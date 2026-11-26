@@ -39,7 +39,8 @@ if grep -rnE "font-(bold|extrabold|black|\[[7-9]00\])" src/; then
   echo "❌ Error: font-bold or weight 700+ found!"
   FAILED=1
 fi
-if grep -rnE "(font-weight:\s*[7-9]00|fontWeight:\s*['\"]?[7-9]00)" src/; then
+# Owner-approved exception: globals.css defines text-landing-heading (weight 700 for landing h1/h2 only)
+if grep -rnE --exclude="globals.css" "(font-weight:\s*[7-9]00|fontWeight:\s*['\"]?[7-9]00)" src/; then
   echo "❌ Error: Inline font-weight 700+ found!"
   FAILED=1
 fi

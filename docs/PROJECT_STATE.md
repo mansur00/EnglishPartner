@@ -257,6 +257,17 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Use Nunito Bold (700) Exclusively for Landing Page h1 & h2
+- Requested by owner: Approved exception to max-600 weight rule exclusively for landing page `h1` and `h2` (`Nunito 700`).
+- Changed:
+  - `src/app/layout.tsx`: Added `"700"` to `Nunito` Google font weights.
+  - `src/app/globals.css`: Added `@utility text-landing-heading` (`font-family: var(--font-heading)`, `font-weight: 700`).
+  - `src/app/page.tsx`: Applied `text-landing-heading` to landing `h1` and `h2` headings (`h3` and all other pages remain `600`).
+  - `scripts/check-ui-sizes.sh`: Excluded `globals.css` from inline `font-weight: 700+` grep check so only the semantic token in `globals.css` is permitted.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Redesign Who It's For as 4-Card Asymmetric Bento Grid
 - Requested by owner: Redesign Section 4 (`Who It's For`) into a 4-card asymmetric Bento Grid with widget previews (1 tall left card, 1 wide top-right card, 2 bottom-right cards).
 - Changed:

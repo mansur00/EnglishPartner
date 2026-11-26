@@ -15,7 +15,7 @@ const manrope = Manrope({
 
 const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-nunito",
   display: "swap",
 });

@@ -304,6 +304,14 @@ body {
   margin-inline: auto;
   padding-inline: var(--container-px);
 }
+/* Owner-approved exception: landing page h1 & h2 only use Nunito 700 */
+@utility text-landing-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 2.125rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
 @utility overlap-band {
   margin-top: var(--band-overlap);
 }
