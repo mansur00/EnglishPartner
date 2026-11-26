@@ -238,9 +238,9 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 400,
+      "line": 358,
       "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "className={cn(buttonVariants({ size: \"lg\" }), \"rounded-control font-semibold\")}"
+      "code": "className={cn(buttonVariants({ size: \"md\" }), \"w-full justify-center rounded-control font-semibold\")}"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -505,15 +505,9 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 256,
+      "line": 401,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 322,
-      "detail": "Hardcoded layout constant / magic number: max-w-3xl",
-      "code": "<p className=\"text-body text-muted-foreground max-w-3xl leading-relaxed\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -597,7 +591,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "text-chip uppercase tracking-wider text-muted-foreground",
       "files": [
         "src/app/(app)/explore/page.tsx",
@@ -706,7 +700,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 16 times",
+      "detail": "ClassName repeated 15 times",
       "className": "font-heading text-card-title text-foreground",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
@@ -823,12 +817,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 5 times",
       "className": "flex items-center justify-between gap-2 flex-wrap",
       "files": [
         "src/components/grammar/GrammarLegend.tsx",
         "src/components/grammar/GrammarPathClient.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
         "src/components/shared/WordDetailsSections.tsx"
       ]
     },
@@ -864,6 +859,15 @@
       ]
     },
     {
+      "detail": "ClassName repeated 5 times",
+      "className": "text-chip text-muted-foreground truncate",
+      "files": [
+        "src/components/learning/NicheLadderRoadmap.tsx",
+        "src/components/navigation/LanguageSwitcher.tsx",
+        "src/components/practice/DailyPracticeClient.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 3 times",
       "className": "group block p-4 rounded-card bg-muted/50 border border-border hover:border-primary/40 hover:bg-muted transition-all space-y-2.5 cursor-pointer",
       "files": [
@@ -885,29 +889,30 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
-      "className": "size-9 rounded-control bg-primary/10 text-primary flex items-center justify-center",
+      "detail": "ClassName repeated 3 times",
+      "className": "text-meta text-muted-foreground leading-relaxed",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/vocabulary/MagicWordSidebar.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "group p-3 rounded-panel bg-card border border-border hover:border-primary/40 transition-colors flex items-center justify-between gap-2.5 cursor-pointer",
       "files": [
         "src/components/practice/DailyPracticeClient.tsx"
       ]
     },
     {
       "detail": "ClassName repeated 3 times",
-      "className": "group p-4 rounded-panel bg-muted/60 hover:bg-muted transition-colors flex flex-col justify-between space-y-3 cursor-pointer",
+      "className": "size-8 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
       "files": [
         "src/components/practice/DailyPracticeClient.tsx"
       ]
     },
     {
       "detail": "ClassName repeated 3 times",
-      "className": "font-heading text-card-title text-foreground group-hover:text-primary transition-colors",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "flex items-center gap-1 text-chip text-primary",
+      "className": "font-heading text-label text-foreground group-hover:text-primary transition-colors truncate",
       "files": [
         "src/components/practice/DailyPracticeClient.tsx"
       ]
