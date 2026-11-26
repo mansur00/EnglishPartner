@@ -8,6 +8,8 @@ import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { PersonalizedPracticeCard } from "@/components/practice/PersonalizedPracticeCard";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
+import { FeatureDisabledCard } from "@/components/auth/FeatureDisabledCard";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button-variants";
@@ -40,6 +42,7 @@ export function DailyPracticeClient() {
   const locale = useLocale();
   const translationLocale = useTranslationLocale();
   const { isGuest, config } = useSessionAccess();
+  const { isEnabled } = useFeatureFlags();
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
   const [streak, setStreak] = useState(0);
   const [minutesCompleted, setMinutesCompleted] = useState(0);
@@ -414,12 +417,18 @@ export function DailyPracticeClient() {
         )}
 
         {/* 2. 90-Day Personalized Spoken English Challenge */}
-        <PersonalizedPracticeCard
-          locale={locale === "bn" ? "bn" : "en"}
-          challengeState={challengeState}
-          onChallengeChange={handleChallengeChange}
-          onPracticeMinutesEarned={addPracticeMinutes}
-        />
+        {isEnabled("challenge_90") ? (
+          <PersonalizedPracticeCard
+            locale={locale === "bn" ? "bn" : "en"}
+            challengeState={challengeState}
+            onChallengeChange={handleChallengeChange}
+            onPracticeMinutesEarned={addPracticeMinutes}
+          />
+        ) : (
+          <FeatureDisabledCard
+            featureName={locale === "bn" ? "৯০-দিনের স্পোকেন চ্যালেঞ্জ" : "90-Day Spoken Challenge"}
+          />
+        )}
 
         {/* 3. Spaced Repetition (SRS) Review Section */}
         <Card id="srs-review" className="p-5 sm:p-6 bg-card border border-border space-y-5 shadow-xs">

@@ -33,6 +33,8 @@ import {
 import Link from "next/link";
 import { LocaleTitle } from "@/components/shared";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
+import { FeatureDisabledCard } from "@/components/auth/FeatureDisabledCard";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
 import { useLocale } from "@/lib/i18n";
 import { speakText } from "@/lib/audio/speech-engine";
@@ -84,6 +86,7 @@ export function SpellMasterClient() {
   const locale = useLocale();
   const isBn = locale === "bn";
   const { isGuest, config, getGuestLimit } = useSessionAccess();
+  const { isEnabled } = useFeatureFlags();
 
   const [activeTab, setActiveTab] = useState<SpellTab>("learn");
   const [progress, setProgress] = useState<SpellProgressState>(DEFAULT_SPELL_PROGRESS);
@@ -764,6 +767,16 @@ export function SpellMasterClient() {
       )}
     </div>
   ) : null;
+
+  if (!isEnabled("spell_master")) {
+    return (
+      <PageContainer className="py-6">
+        <FeatureDisabledCard
+          featureName={isBn ? "স্পেল মাস্টার" : "Spell Master"}
+        />
+      </PageContainer>
+    );
+  }
 
   return (
     <div

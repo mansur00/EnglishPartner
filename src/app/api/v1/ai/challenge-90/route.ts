@@ -7,6 +7,7 @@ import {
   extractClientIdentifier,
   buildRateLimitHeaders,
 } from "../../../../../lib/ratelimit/quota";
+import { getServerAiDailyLimit } from "../../../../../lib/features/server-config";
 
 /**
  * POST /api/v1/ai/challenge-90
@@ -17,7 +18,7 @@ export async function POST(req: Request) {
     const identifier = extractClientIdentifier(req);
     const quotaResult = globalQuotaStore.checkAndRecord(identifier, "grammarCheck", {
       rateLimitPerMinute: 20,
-      dailyQuota: 100,
+      dailyQuota: await getServerAiDailyLimit(),
     });
     const rateHeaders = buildRateLimitHeaders(quotaResult);
 

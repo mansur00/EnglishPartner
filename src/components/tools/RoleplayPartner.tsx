@@ -64,6 +64,8 @@ import type {
 import { cn } from "@/lib/utils";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { GuestLimitBanner, GuestLockedCard } from "@/components/auth/GuestLimitBanner";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
+import { FeatureDisabledCard } from "@/components/auth/FeatureDisabledCard";
 
 interface RoleplayScenario {
   id: string;
@@ -303,6 +305,7 @@ function FeedbackSectionHeader({ children }: { children: React.ReactNode }) {
 export function RoleplayPartner() {
   const { locale, t } = useTranslations();
   const { isGuest, config, getGuestLimit } = useSessionAccess();
+  const { isEnabled } = useFeatureFlags();
   const [selectedScenario, setSelectedScenario] = useState<RoleplayScenario>(FREESTYLE_SCENARIO);
   const [customScenarios, setCustomScenarios] = useState<RoleplayScenario[]>([]);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -1084,6 +1087,14 @@ export function RoleplayPartner() {
       </div>
     </div>
   );
+
+  if (!isEnabled("ai_partner")) {
+    return (
+      <FeatureDisabledCard
+        featureName={locale === "bn" ? "AI পার্টনার রোলপ্লে" : "AI Partner Roleplay"}
+      />
+    );
+  }
 
   return (
     <div className="space-y-4">

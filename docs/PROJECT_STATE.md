@@ -2224,6 +2224,12 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Admin Panel Controls Audit & Live Enforcement
+- Audited `/admin-panel` controls (`Global Feature Controls`, `Per-User Features`, `AI Daily Limit`, `Disabled User`): DB writes worked, but several client routes and AI endpoints did not enforce them.
+- Added `FeatureDisabledCard` (`src/components/auth/FeatureDisabledCard.tsx`) and wired `useFeatureFlags()` enforcement into `DailyPracticeClient.tsx` (`challenge_90`), `GrammarPathClient.tsx` (`grammar_checker`), `RoleplayPartner.tsx` (`ai_partner`), `SpellMasterClient.tsx` (`spell_master`), and `quiz/page.tsx` (`quiz`).
+- Added `getServerAiDailyLimit()` & `invalidateServerAiLimitCache()` in `src/lib/features/server-config.ts`, invalidated on `PATCH /api/v1/app-config`, and wired dynamic `dailyQuota` into `/api/v1/ai/challenge-90`, `/api/v1/ai/spell-master`, and `/api/v1/ai/personalized-practice`.
+- Updated `SessionIsolationProvider.tsx` so users whose `profile.is_active === false` are immediately signed out, have progress keys cleared, and are redirected to `/auth/login?disabled=1`.
+
 ### 2026-11-27, Spell Master Rules Tab Master-Detail Sidebar (`SpellMasterClient.tsx`)
 - Replaced full rule cards in the Spelling Rules tab with compact title-only cards (`R1..R55` + reliability + title) in the middle grid and moved full rule details (explanation, low-reliability note, examples, exceptions, and "Practice Words for this Rule" CTA) into the fixed right sidebar (plus mobile inline card), matching the Learn & Syllables layout.
 

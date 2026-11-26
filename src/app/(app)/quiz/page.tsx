@@ -28,6 +28,8 @@ import {
 } from "@hugeicons/core-free-icons";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
+import { FeatureDisabledCard } from "@/components/auth/FeatureDisabledCard";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
 
 const ALL_LEVELS: ("ALL" | CefrLevelCode)[] = [
   "ALL",
@@ -44,6 +46,7 @@ const LENGTH_KEYS = ["short", "medium", "long", "story"] as const;
 export default function QuizHubPage() {
   const { locale } = useTranslations();
   const { isGuest, config, getGuestLimit } = useSessionAccess();
+  const { isEnabled } = useFeatureFlags();
   const [selectedLevel, setSelectedLevel] = useState<"ALL" | CefrLevelCode>("ALL");
   const [selectedStyle, setSelectedStyle] = useState<ConversationStyle>("neutral");
   const [selectedLengthIdx, setSelectedLengthIdx] = useState<number>(0);
@@ -61,6 +64,14 @@ export default function QuizHubPage() {
       );
     });
   }, [selectedLevel, searchQuery]);
+
+  if (!isEnabled("quiz")) {
+    return (
+      <PageContainer className="py-6">
+        <FeatureDisabledCard featureName={locale === "bn" ? "কুইজ (Quiz)" : "Quiz"} />
+      </PageContainer>
+    );
+  }
 
   return (
     <PageContainer className="py-6 space-y-6 pb-16">

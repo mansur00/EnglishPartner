@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUserProfile } from "@/lib/auth/session";
+import { invalidateServerAiLimitCache } from "@/lib/features/server-config";
 
 export interface AppConfigPayload {
   ai_daily_limit: number;
@@ -91,5 +92,6 @@ export async function PATCH(req: Request) {
     }
   }
 
+  invalidateServerAiLimitCache();
   return GET();
 }

@@ -157,6 +157,16 @@ export function SessionIsolationProvider({
         }
         clearProgressKeys();
         setUser(null);
+      } else if (profile.is_active === false) {
+        // Force sign out if Admin disabled this account
+        const supabase = createBrowserSupabaseClient();
+        await supabase.auth.signOut();
+        localStorage.removeItem("ecp_active_uid");
+        clearProgressKeys();
+        setUser(null);
+        if (typeof window !== "undefined") {
+          window.location.href = "/auth/login?disabled=1";
+        }
       } else {
         // Logged-in user: isolate progress per user_id + hydrate from Supabase
         if (prevUid && prevUid !== profile.id) {

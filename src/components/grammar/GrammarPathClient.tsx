@@ -13,6 +13,8 @@ import { PageContainer } from "@/components/shared/PageContainer";
 import { Badge } from "@/components/ui/badge";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { GuestLimitBanner, GuestLockedCard } from "@/components/auth/GuestLimitBanner";
+import { FeatureDisabledCard } from "@/components/auth/FeatureDisabledCard";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
@@ -36,6 +38,7 @@ export function GrammarPathClient() {
   const locale = useLocale();
   const translationLocale = useTranslationLocale();
   const { isGuest, config, getGuestLimit } = useSessionAccess();
+  const { isEnabled } = useFeatureFlags();
   const ruleLocale = translationLocale === "none" ? "en" : translationLocale;
 
   const [activeTab, setActiveTab] = useState<"path" | "checker">("path");
@@ -148,7 +151,11 @@ export function GrammarPathClient() {
       )}
 
       {activeTab === "checker" ? (
-        isGuest ? (
+        !isEnabled("grammar_checker") ? (
+          <FeatureDisabledCard
+            featureName={isBangla ? "AI গ্রামার ও রাইটিং চেকার" : "AI Grammar & Writing Checker"}
+          />
+        ) : isGuest ? (
           <GuestLockedCard
             titleEn="AI Grammar & Writing Checker is Locked"
             titleBn="AI গ্রামার ও রাইটিং চেকার লগইন করলে আনলক হবে"
