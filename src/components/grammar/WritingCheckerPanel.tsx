@@ -15,6 +15,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import type {
   WritingCheckResponse,
@@ -135,7 +136,7 @@ export function WritingCheckerPanel({
 
         {/* Textarea */}
         <div className="space-y-2">
-          <textarea
+          <Textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={6}
@@ -149,7 +150,7 @@ export function WritingCheckerPanel({
                 ? "আপনার IELTS Writing Task উত্তরটি এখানে লিখুন বা পেস্ট করুন..."
                 : "Paste your IELTS Writing response here for band score & feedback..."
             }
-            className="w-full rounded-panel border border-border bg-background p-4 text-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 resize-y"
+            className="p-4 resize-y"
           />
 
           <div className="flex flex-wrap items-center justify-between gap-2 text-chip text-muted-foreground">

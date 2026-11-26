@@ -17,6 +17,7 @@ import {
 } from "@/lib/i18n/languages";
 import { useTranslations } from "@/lib/i18n";
 import { Tag } from "@/components/ui/tag";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 interface TranslationOptionProps {
@@ -174,15 +175,16 @@ export function LanguageSwitcher() {
               <HugeiconsIcon
                 icon={Search01Icon}
                 size={15}
-                className="absolute left-2.5 text-muted-foreground pointer-events-none"
+                className="absolute left-2.5 text-muted-foreground pointer-events-none z-10"
               />
-              <input
+              <Input
                 ref={searchInputRef}
                 type="text"
+                inputSize="sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={locale === "bn" ? "ভাষা খুঁজুন (যেমন: Arabic, Urdu)..." : "Search language..."}
-                className="w-full h-control-sm pl-8 pr-3 rounded-control bg-muted/60 text-chip text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+                className="pl-8 text-chip"
               />
             </div>
           </div>

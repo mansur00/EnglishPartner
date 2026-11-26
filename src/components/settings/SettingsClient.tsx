@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { PageContainer } from "@/components/shared";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
 import {
@@ -373,14 +374,14 @@ export function SettingsClient() {
                 <HugeiconsIcon
                   icon={Search01Icon}
                   size={16}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10"
                 />
-                <input
+                <Input
                   type="text"
                   value={sysLangSearch}
                   onChange={(e) => setSysLangSearch(e.target.value)}
                   placeholder={locale === "bn" ? "যেকোনো ভাষা খুঁজুন (যেমন: English, Arabic, Hindi)..." : "Search any language (e.g. English, Bengali, Arabic)..."}
-                  className="w-full h-control-lg pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="pl-9 h-control-lg text-label"
                 />
               </div>
 
@@ -448,14 +449,14 @@ export function SettingsClient() {
                 <HugeiconsIcon
                   icon={Search01Icon}
                   size={16}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10"
                 />
-                <input
+                <Input
                   type="text"
                   value={transLangSearch}
                   onChange={(e) => setTransLangSearch(e.target.value)}
                   placeholder={locale === "bn" ? "অনুবাদের ভাষা খুঁজুন (যেমন: Bengali, Hindi, Urdu)..." : "Search translation language..."}
-                  className="w-full h-control-lg pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="pl-9 h-control-lg text-label"
                 />
               </div>
 

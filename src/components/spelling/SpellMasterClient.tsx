@@ -23,6 +23,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -1673,12 +1674,11 @@ export function SpellMasterClient() {
               </p>
             </div>
 
-            <textarea
+            <Textarea
               rows={5}
               value={pasteText}
               onChange={(e) => setPasteText(e.target.value)}
               placeholder="Example: I will definately recieve the seperate calender tommorow."
-              className="w-full rounded-panel border border-border bg-background p-3.5 text-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
             />
 
             <Button

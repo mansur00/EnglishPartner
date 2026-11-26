@@ -6,7 +6,7 @@ export const inputVariants = cva(
     variants: {
       variant: {
         outline:
-          "border border-input bg-transparent text-foreground dark:bg-transparent disabled:bg-muted/30 focus:rainbow-border focus:border-0 focus-visible:rainbow-border focus-visible:border-0 outline-none focus:outline-none focus-visible:outline-none shadow-xs focus:shadow-none ring-0 focus:ring-0",
+          "border border-input bg-transparent text-foreground dark:bg-transparent disabled:bg-muted/30 outline-none focus:outline-none focus-visible:outline-none shadow-xs focus:shadow-none ring-0 focus:ring-0",
         filled:
           "border border-transparent bg-muted/60 hover:bg-muted focus-visible:bg-card disabled:bg-muted/30 focus:outline-none focus-visible:outline-none",
         ghost:

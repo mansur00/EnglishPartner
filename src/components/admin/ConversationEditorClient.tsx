@@ -22,6 +22,8 @@ import { canEditScenario, UserRole } from "@/lib/auth/roles";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -404,12 +406,12 @@ export function ConversationEditorClient({
                   <label className="text-chip text-foreground block">
                     English Text:
                   </label>
-                  <textarea
+                  <Textarea
                     rows={2}
                     value={line.englishText}
                     onChange={(e) => handleLineChange(index, "englishText", e.target.value)}
                     placeholder="Enter spoken English sentence..."
-                    className="w-full p-2.5 rounded-control border border-border text-body font-sans text-foreground focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
+                    className="p-2.5 font-sans"
                   />
                 </div>
 
@@ -418,12 +420,12 @@ export function ConversationEditorClient({
                   <label className="text-chip text-foreground block text-bangla">
                     প্রাসঙ্গিক বাংলা অনুবাদ:
                   </label>
-                  <textarea
+                  <Textarea
                     rows={2}
                     value={line.translationBn}
                     onChange={(e) => handleLineChange(index, "translationBn", e.target.value)}
                     placeholder="সাবলীল ও প্রাসঙ্গিক বাংলা অনুবাদ লিখুন..."
-                    className="w-full p-2.5 rounded-control border border-border text-body text-bangla text-foreground focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary"
+                    className="p-2.5 text-bangla"
                   />
                 </div>
               </div>
@@ -431,12 +433,13 @@ export function ConversationEditorClient({
               {/* Optional Learning Note & Audio Status */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 text-chip text-muted-foreground">
                 <div className="flex-1 w-full">
-                  <input
+                  <Input
                     type="text"
+                    inputSize="sm"
                     value={line.learningNote || ""}
                     onChange={(e) => handleLineChange(index, "learningNote", e.target.value)}
                     placeholder="শিক্ষণীয় ব্যাকরণ নোট (ঐচ্ছিক)..."
-                    className="w-full px-3 py-1.5 rounded-control border border-border text-chip bg-muted/40 text-foreground focus:outline-hidden focus:border-primary"
+                    className="text-chip"
                   />
                 </div>
 

@@ -12,25 +12,25 @@
   "d_layout_magic": [
     {
       "file": "src/app/page.tsx",
-      "line": 41,
+      "line": 43,
       "detail": "Hardcoded layout constant / magic number: h-10",
       "code": "className=\"h-9 sm:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
     {
       "file": "src/app/page.tsx",
-      "line": 411,
+      "line": 413,
       "detail": "Hardcoded layout constant / magic number: h-12",
       "code": "<div className=\"flex-1 h-12 rounded-t-control bg-primary/50\" />"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 412,
+      "line": 414,
       "detail": "Hardcoded layout constant / magic number: h-16",
       "code": "<div className=\"flex-1 h-16 rounded-t-control bg-primary/75\" />"
     },
     {
       "file": "src/app/page.tsx",
-      "line": 598,
+      "line": 600,
       "detail": "Hardcoded layout constant / magic number: h-8",
       "code": "className=\"h-8 w-auto object-contain\""
     },
@@ -93,14 +93,6 @@
         "src/app/(app)/quiz/page.tsx",
         "src/components/analytics/ProgressDashboard.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none",
-      "files": [
-        "src/app/(app)/quiz/page.tsx",
-        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {

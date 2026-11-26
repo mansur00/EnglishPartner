@@ -18,6 +18,8 @@ import { GuestLockedCard } from "@/components/auth/GuestLimitBanner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -699,12 +701,11 @@ export function PersonalizedPracticeCard({
                 ? "উপরের যেকোনো ১টি ফ্রেজ দিয়ে নিজের একটি বাক্য বলুন বা লিখুন:"
                 : "Say or type 1 sentence using any phrase above:"}
             </p>
-            <input
+            <Input
               type="text"
               value={vocabSentence}
               onChange={(e) => setVocabSentence(e.target.value)}
               placeholder="e.g. I usually wake up early to get ready for work..."
-              className="w-full rounded-control border border-input bg-card px-3.5 py-2 text-body text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
@@ -765,12 +766,11 @@ export function PersonalizedPracticeCard({
                 ? "এই স্ট্রাকচার দিয়ে নিজে ১টি বাক্য তৈরি করে বলুন বা লিখুন:"
                 : "Practice saying or typing your own sentence with this pattern:"}
             </p>
-            <input
+            <Input
               type="text"
               value={grammarSentence}
               onChange={(e) => setGrammarSentence(e.target.value)}
               placeholder="Write or speak your sentence here..."
-              className="w-full rounded-control border border-input bg-card px-3.5 py-2 text-body text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
@@ -803,14 +803,14 @@ export function PersonalizedPracticeCard({
                 {showTranslation && liveMap[drill.situationEn] && (
                   <p className="text-chip text-muted-foreground">{liveMap[drill.situationEn]}</p>
                 )}
-                <input
+                <Input
                   type="text"
+                  inputSize="sm"
                   value={drillAnswers[idx] ?? ""}
                   onChange={(e) =>
                     setDrillAnswers((prev) => ({ ...prev, [idx]: e.target.value }))
                   }
                   placeholder={isBn ? "আপনার উত্তর লিখুন বা মুখে বলুন..." : "Type or say your quick reply..."}
-                  className="w-full rounded-control border border-input bg-muted/20 px-3 py-2 text-meta text-foreground"
                 />
                 <div className="flex items-center justify-between gap-2 text-chip text-muted-foreground">
                   <span>
@@ -900,7 +900,7 @@ export function PersonalizedPracticeCard({
           </div>
 
           <div className="space-y-2">
-            <textarea
+            <Textarea
               value={learnerResponse}
               onChange={(e) => setLearnerResponse(e.target.value)}
               rows={3}
@@ -909,7 +909,6 @@ export function PersonalizedPracticeCard({
                   ? "মাইক্রোফোন অন করে ইংরেজিতে বলুন, অথবা এখানে লিখুন..."
                   : "Tap Speak to record your voice, or type your spoken response here..."
               }
-              className="w-full rounded-control border border-input bg-card px-3.5 py-2.5 text-body text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-ring"
             />
             {micNote && <p className="text-chip text-muted-foreground">{micNote}</p>}
 
@@ -1090,19 +1089,20 @@ export function PersonalizedPracticeCard({
           )}
 
           <div className="flex flex-col sm:flex-row gap-2">
-            <input
-              type="text"
-              value={roleplayInput}
-              onChange={(e) => setRoleplayInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSendRoleplayTurn();
-                }
-              }}
-              placeholder={isBn ? "রোলপ্লে-তে আপনার উত্তর বলুন বা লিখুন..." : "Speak or type your reply..."}
-              className="flex-1 rounded-control border border-input bg-card px-3.5 py-2 text-body text-foreground"
-            />
+            <div className="flex-1 min-w-0">
+              <Input
+                type="text"
+                value={roleplayInput}
+                onChange={(e) => setRoleplayInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendRoleplayTurn();
+                  }
+                }}
+                placeholder={isBn ? "রোলপ্লে-তে আপনার উত্তর বলুন বা লিখুন..." : "Speak or type your reply..."}
+              />
+            </div>
             <div className="flex items-center gap-2 shrink-0">
               <Button
                 type="button"

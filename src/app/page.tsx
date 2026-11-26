@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { InputGroup } from "@/components/ui/input-group";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -603,22 +605,26 @@ export default function LandingPage() {
                 </p>
                 <form
                   action="/dashboard"
-                  className="rounded-pill border border-border bg-background p-1 flex items-center gap-2 max-w-sm"
+                  className="max-w-sm"
                 >
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    aria-label="Email address"
-                    className="flex-1 min-w-0 bg-transparent px-3 py-1.5 text-meta text-foreground placeholder:text-muted-foreground focus:outline-none"
-                  />
-                  <Button
-                    type="submit"
-                    size="sm"
-                    className="rounded-pill px-4 bg-foreground text-background hover:bg-foreground/90 text-chip shrink-0"
-                  >
-                    Submit
-                  </Button>
+                  <InputGroup className="rounded-pill bg-background p-1 flex items-center gap-2">
+                    <Input
+                      type="email"
+                      name="email"
+                      variant="ghost"
+                      inputSize="sm"
+                      placeholder="Enter your email"
+                      aria-label="Email address"
+                      className="flex-1 min-w-0 px-3 text-meta"
+                    />
+                    <Button
+                      type="submit"
+                      size="sm"
+                      className="rounded-pill px-4 bg-foreground text-background hover:bg-foreground/90 text-chip shrink-0"
+                    >
+                      Submit
+                    </Button>
+                  </InputGroup>
                 </form>
                 <p className="text-chip text-muted-foreground leading-relaxed max-w-xs">
                   By subscribing you agree to with our{" "}

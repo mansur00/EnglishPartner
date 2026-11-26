@@ -2224,6 +2224,12 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Systematic Animated Rainbow Focus on All Input & Textarea Fields
+- Root cause fixed: `<input>`/`<textarea>` are void/replaced elements that cannot render `::before` pseudo-elements (so `focus:rainbow-border` in `input-variants.ts` never rendered on standalone `<Input>`).
+- Updated `src/components/ui/input.tsx` so non-ghost `<Input>` variants wrap `<InputPrimitive>` in a `data-slot="input-wrapper"` container that applies the frozen `.rainbow-border` on focus/typing (while `variant="ghost"` delegates to `<InputGroup>`).
+- Created `src/components/ui/textarea.tsx` with the same `data-slot="textarea-wrapper"` `.rainbow-border` focus behavior.
+- Replaced all 14 remaining raw text `<input>` and `<textarea>` fields across `src/app/page.tsx`, `SettingsClient.tsx`, `LanguageSwitcher.tsx`, `WritingCheckerPanel.tsx`, `ConversationEditorClient.tsx`, `PersonalizedPracticeCard.tsx`, and `SpellMasterClient.tsx` with `<Input>`, `<InputGroup>`, and `<Textarea>`.
+
 ### 2026-11-27, UX Audit Step 5: Layout Magic Constants (`d_layout_magic` 35 -> 7)
 - Replaced 28 hardcoded layout/control sizing classes (`h-11`, `max-h-[85vh]`, `max-w-2xl`, `sm:w-64`, `min-h-12`, `h-8`, `h-16`) with semantic `globals.css` utilities (`h-control-lg`, `h-control-sm`, `max-h-dialog`, `max-w-reading`, `sm:w-sidebar`, `min-h-tap`) across 12 files (`quiz/page.tsx`, `vocabulary/page.tsx`, `ExploreClient.tsx`, `ConversationInspectorSidebar.tsx`, `ConversationReader.tsx`, `DailyPracticeClient.tsx`, `ProfessionScenariosGrid.tsx`, `SettingsClient.tsx`, `WordDetailsSections.tsx`, `SpellMasterClient.tsx`, `RoleplayPartner.tsx`, `WhatShouldISay.tsx`).
 
