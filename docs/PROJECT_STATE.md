@@ -258,7 +258,7 @@ Entry format:
 (Agent: add entries below this line.)
 
 ### 2026-11-26, Daily Practice Fixed Right Sidebar Layout
-- Requested by owner: Move Today's Conversation Challenge and unique Continue Learning Path card on `/daily-practice` into a clean fixed right sidebar (`w-80 xl:w-96`) without duplicate links/actions, matching Vocabulary, AI Partner, Grammar Path, and Explore.
+- Requested by owner: Remove Today's Conversation Challenge card and show only the 4 Continue Learning Path cards (Conversation, Grammar, Vocabulary, Quiz) in the fixed right sidebar (`w-80 xl:w-96`) on `/daily-practice`.
 - Changed:
   - `src/components/practice/DailyPracticeClient.tsx`: Migrated from `PageContainer` to full-width middle content area (`w-full lg:pr-80 xl:pr-96`) + fixed right `<aside>` (`fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4`) with `lg:hidden` mobile fallback.
 - Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).

@@ -220,15 +220,9 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 170,
+      "line": 138,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<h3 className=\"font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors\">"
-    },
-    {
-      "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 245,
-      "detail": "Direct font-weight utility in feature code: font-semibold",
-      "code": "className={cn(buttonVariants({ size: \"md\" }), \"w-full justify-center rounded-control font-semibold\")}"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
@@ -493,7 +487,7 @@
     },
     {
       "file": "src/components/practice/DailyPracticeClient.tsx",
-      "line": 288,
+      "line": 164,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
     },
@@ -579,7 +573,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
+      "detail": "ClassName repeated 3 times",
       "className": "text-chip uppercase tracking-wider text-muted-foreground",
       "files": [
         "src/app/(app)/explore/page.tsx",
@@ -805,13 +799,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 5 times",
+      "detail": "ClassName repeated 4 times",
       "className": "flex items-center justify-between gap-2 flex-wrap",
       "files": [
         "src/components/grammar/GrammarLegend.tsx",
         "src/components/grammar/GrammarPathClient.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
-        "src/components/practice/DailyPracticeClient.tsx",
         "src/components/shared/WordDetailsSections.tsx"
       ]
     },
@@ -843,14 +836,6 @@
       "className": "text-chip font-semibold text-foreground flex items-center gap-1.5",
       "files": [
         "src/components/learning/ConversationInspectorSidebar.tsx",
-        "src/components/vocabulary/MagicWordSidebar.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "text-meta text-muted-foreground leading-relaxed",
-      "files": [
-        "src/components/practice/DailyPracticeClient.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },
