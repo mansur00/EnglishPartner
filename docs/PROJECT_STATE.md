@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Move Profession Detail Track Info & FilterBar to Fixed Right Sidebar
+- Requested by owner: Move track tagline, description, competencies checklist, and FilterBar on `/professions/[slug]` into a fixed right sidebar (`w-80 xl:w-96`) matching Explore, Vocabulary, Daily Practice, and Grammar Path.
+- Changed:
+  - `src/components/professions/ProfessionScenariosGrid.tsx` & `src/app/(app)/professions/[slug]/page.tsx`: Migrated to `w-full lg:pr-80 xl:pr-96` middle content area + fixed right `<aside>` (`fixed right-0 top-header h-below-header w-80 xl:w-96`) containing track details, competencies, and `sidebar` FilterBar, with `lg:hidden` mobile fallback.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Simplify Grammar Path & Professional English Cards for UX
 - Requested by owner: Reduce visual clutter and excessive text on `/grammar-path` stage cards/header and `/professions` career cards.
 - Changed:

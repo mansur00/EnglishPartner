@@ -207,6 +207,12 @@
       "code": "<h3 className=\"font-heading text-label font-semibold text-foreground group-hover:text-primary transition-colors\">"
     },
     {
+      "file": "src/components/professions/ProfessionScenariosGrid.tsx",
+      "line": 70,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "className=\"text-label font-semibold text-primary\""
+    },
+    {
       "file": "src/components/settings/SettingsClient.tsx",
       "line": 248,
       "detail": "Direct font-weight utility in feature code: font-medium",
@@ -555,11 +561,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 5 times",
       "className": "text-chip uppercase tracking-wider text-muted-foreground",
       "files": [
         "src/app/(app)/explore/page.tsx",
-        "src/components/practice/DailyPracticeClient.tsx"
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx"
       ]
     },
     {
@@ -572,12 +579,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "w-full px-4 sm:px-6 lg:px-9 py-6 pb-16 space-y-6",
       "files": [
         "src/app/(app)/explore/page.tsx",
         "src/app/(app)/vocabulary/page.tsx",
-        "src/components/grammar/GrammarStageLessonClient.tsx"
+        "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx"
       ]
     },
     {
@@ -771,11 +779,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "flex items-center justify-between gap-2 flex-wrap",
       "files": [
         "src/components/grammar/GrammarLegend.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx",
         "src/components/shared/WordDetailsSections.tsx"
       ]
     },
@@ -817,6 +826,14 @@
         "src/components/practice/HideSpeakerPractice.tsx",
         "src/components/practice/SentenceBuilderCard.tsx",
         "src/components/quiz/QuizRunner.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-meta text-muted-foreground leading-relaxed",
+      "files": [
+        "src/components/professions/ProfessionScenariosGrid.tsx",
+        "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },
     {
