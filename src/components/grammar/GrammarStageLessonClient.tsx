@@ -331,8 +331,8 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
               >
                 <p
                   className={cn(
-                    "text-body text-foreground leading-relaxed",
-                    ruleLocale === "bn" && "text-subtitle-bn"
+                    "text-body text-foreground",
+                    ruleLocale === "bn" && "text-bangla"
                   )}
                 >
                   {displayedOverviewRule}
@@ -357,8 +357,8 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                     <h3 className="text-lead text-foreground font-semibold">{sub.name}</h3>
                     <p
                       className={cn(
-                        "text-body text-foreground leading-relaxed",
-                        ruleLocale === "bn" && "text-subtitle-bn"
+                        "text-body text-foreground",
+                        ruleLocale === "bn" && "text-bangla"
                       )}
                       dir={isRtlLanguage(ruleLocale) ? "rtl" : "ltr"}
                     >
@@ -513,7 +513,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                         <Tag variant={fb.isCorrect ? "success" : "warning"} size="sm">
                           {fb.isCorrect ? "Correct" : "Needs Polish"}
                         </Tag>
-                        <p className={cn("text-meta text-foreground", ruleLocale === "bn" && "text-subtitle-bn")}>
+                        <p className={cn("text-body text-foreground", ruleLocale === "bn" && "text-bangla")}>
                           {fb.feedback}
                         </p>
                         {fb.correctedSentence && (
@@ -595,7 +595,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                         <Tag variant={isRight ? "success" : "warning"} size="sm">
                           {isRight ? "Correct!" : "Review Rule"}
                         </Tag>
-                        <p className={cn("text-meta text-foreground", ruleLocale === "bn" && "text-subtitle-bn")}>
+                        <p className={cn("text-body text-foreground", ruleLocale === "bn" && "text-bangla")}>
                           {getTranslatedText(q.explanation, ruleLocale)}
                         </p>
                       </div>
@@ -673,7 +673,7 @@ export function GrammarStageLessonClient({ stage, lessons }: GrammarStageLessonC
                         className="p-3 rounded-control bg-card"
                         dir={isRtlLanguage(ruleLocale) ? "rtl" : "ltr"}
                       >
-                        <p className={cn("text-meta text-foreground", ruleLocale === "bn" && "text-subtitle-bn")}>
+                        <p className={cn("text-body text-foreground", ruleLocale === "bn" && "text-bangla")}>
                           {getTranslatedText(q.explanation, ruleLocale)}
                         </p>
                       </div>
