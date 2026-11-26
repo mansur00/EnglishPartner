@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Redesign 6-Section SaaS Landing Page & Update Logo
+- Requested by owner: Redesign `/` landing page into a 5-6 section SaaS landing page with the updated `/logo.svg` logo, live feature links (removing "Soon" stubs), learning outcomes, target audiences, how-it-works steps, and final CTA.
+- Changed:
+  - `src/app/page.tsx`: Replaced old `[EP]` badge logo with `/logo.svg` in header and footer; replaced disabled "Soon" nav buttons with live links (`/explore`, `/grammar-path`, `/roleplay`, `/professions`, `/daily-practice`); built 6 structured SaaS sections (Hero Band, Overlapping Quick-Start Paths, 6 Core Platform Features, 4 Learning Outcomes, 4 Target Audiences, 3-Step How It Works + Final CTA Banner).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Supabase Schema Migration & Initial Data Setup
 - Requested by owner: Set up tables and seed data in Supabase project `ijlrseclqymuzdcrruoz`.
 - Changed:
