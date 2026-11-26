@@ -257,6 +257,15 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Mobile-Only Responsive Polish for Dashboard & TodayPanel
+- Requested by owner: Fix text, icon+text alignment, and spacing on `/dashboard` for mobile viewports (`< sm` / `< md`) without altering desktop (`md:` / `lg:`) layout.
+- Changed:
+  - `src/components/dashboard/DashboardClient.tsx`: Used mobile-first `p-4 sm:p-6`, `gap-4 sm:gap-5`, `flex-wrap` on card header icon+badge rows, `inline-flex items-center justify-center` with `shrink-0` icons on full-width mobile CTA buttons, and `max-h-48 sm:max-h-64` on the illustration; desktop classes remain identical.
+  - `src/components/shared/TodayPanel.tsx`: Aligned streak flame icon, number, and label cleanly (`items-center`) and spread 7 weekday markers evenly on mobile (`justify-between sm:justify-start w-full sm:w-auto`).
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Hide LanguageSwitcher & ThemeToggle on Mobile Top Header
 - Requested by owner: Hide language switcher and dark/light mode toggle on the mobile top nav bar while keeping Login/Account visible.
 - Changed:

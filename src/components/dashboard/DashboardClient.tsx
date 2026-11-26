@@ -28,15 +28,15 @@ export function DashboardClient() {
   const { locale } = useTranslations();
 
   return (
-    <PageContainer className="py-6 space-y-6 pb-16">
+    <PageContainer className="py-4 sm:py-6 space-y-5 sm:space-y-6 pb-24 md:pb-16">
       {/* 1. Rounded Deep-Violet Hero Banner Card */}
-      <HeroBand className="rounded-card p-6 md:p-7 shadow-card">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
+      <HeroBand className="rounded-card p-4 sm:p-6 md:p-7 shadow-card">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+          <div className="space-y-1">
             <h1 className="text-page-title text-band-panel-ink">
               {t("dashboard.heroTitle", locale)}
             </h1>
-            <p className="text-meta text-band-panel-ink/80 mt-1.5">
+            <p className="text-meta text-band-panel-ink/80">
               {t("dashboard.heroSubtitle", locale)}
             </p>
           </div>
@@ -46,15 +46,15 @@ export function DashboardClient() {
       </HeroBand>
 
       {/* 2. Row 1: Level Assessment Quiz Card + AI Partner CTA Card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {/* Level Assessment Quiz Card */}
-        <Card className="p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
+        <Card className="p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <HugeiconsIcon icon={SparklesIcon} size={20} />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2">
                 <Badge variant="brand" size="sm">
                   {locale === "bn" ? "৪০ প্রশ্ন • এআই কুইজ" : "40 Questions • AI"}
                 </Badge>
@@ -78,18 +78,18 @@ export function DashboardClient() {
 
           <div className="pt-2">
             <Link href="/dashboard/level-assessment" className="block w-full sm:w-auto">
-              <Button variant="cta" size="md" className="btn-press w-full sm:w-auto gap-2 cursor-pointer">
+              <Button variant="cta" size="md" className="btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer">
                 <span>{locale === "bn" ? "লেভেল কুইজ শুরু করুন" : "Start Level Quiz"}</span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                <HugeiconsIcon icon={ArrowRight01Icon} size={18} className="shrink-0" />
               </Button>
             </Link>
           </div>
         </Card>
 
         {/* AI Partner CTA Card */}
-        <Card className="p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
+        <Card className="p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <HugeiconsIcon icon={BotIcon} size={20} />
               </div>
@@ -114,9 +114,9 @@ export function DashboardClient() {
 
           <div className="pt-2">
             <Link href="/roleplay" className="block w-full sm:w-auto">
-              <Button variant="default" size="md" className="btn-press w-full sm:w-auto gap-2 cursor-pointer">
+              <Button variant="default" size="md" className="btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer">
                 <span>{locale === "bn" ? "এআই পার্টনারে যান" : "Open AI Partner"}</span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                <HugeiconsIcon icon={ArrowRight01Icon} size={18} className="shrink-0" />
               </Button>
             </Link>
           </div>
@@ -127,9 +127,9 @@ export function DashboardClient() {
       <div className="rainbow-border rounded-card">
         <TopicCard
           topic="shopping"
-          className="p-6 md:p-8"
+          className="p-4 sm:p-6 md:p-8"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
             {/* Left Column: Concise Daily Conversation Focus & CTAs */}
             <div className="lg:col-span-7 space-y-3.5">
               <div className="flex flex-wrap items-center gap-2">
@@ -152,17 +152,17 @@ export function DashboardClient() {
                   : "Practice real-life English speaking every day."}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-1">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1">
                 <Link href="/daily-practice" className="w-full sm:w-auto">
-                  <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto shadow-xs gap-2 cursor-pointer">
-                    <HugeiconsIcon icon={PlayCircleIcon} size={20} />
+                  <Button variant="cta" size="lg" className="btn-press w-full sm:w-auto inline-flex items-center justify-center shadow-xs gap-2 cursor-pointer">
+                    <HugeiconsIcon icon={PlayCircleIcon} size={20} className="shrink-0" />
                     <span>{locale === "bn" ? "দৈনিক অনুশীলন" : "Start Daily Practice"}</span>
                   </Button>
                 </Link>
                 <Link href="/explore" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto gap-2 cursor-pointer">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer">
                     <span>{locale === "bn" ? "সব কথোপকথন" : "Browse All"}</span>
-                    <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                    <HugeiconsIcon icon={ArrowRight01Icon} size={18} className="shrink-0" />
                   </Button>
                 </Link>
               </div>
@@ -170,12 +170,12 @@ export function DashboardClient() {
 
             {/* Right Column: Drive Illustration SVG */}
             <div className="lg:col-span-5 flex items-center justify-center">
-              <div className="w-full rounded-panel bg-card/85 p-4 flex items-center justify-center">
+              <div className="w-full rounded-panel bg-card/85 p-3 sm:p-4 flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/dashboard-illustration.svg"
                   alt="Daily English Conversation Practice"
-                  className="w-full max-h-64 object-contain"
+                  className="w-full max-h-48 sm:max-h-64 object-contain"
                 />
               </div>
             </div>
@@ -184,11 +184,11 @@ export function DashboardClient() {
       </div>
 
       {/* 4. Row 3: Vocabulary CTA Card + Quiz CTA Card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {/* Vocabulary CTA Card */}
-        <Card className="p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
+        <Card className="p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <HugeiconsIcon icon={Bookmark02Icon} size={20} />
               </div>
@@ -213,18 +213,18 @@ export function DashboardClient() {
 
           <div className="pt-2">
             <Link href="/vocabulary" className="block w-full sm:w-auto">
-              <Button variant="default" size="md" className="btn-press w-full sm:w-auto gap-2 cursor-pointer">
+              <Button variant="default" size="md" className="btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer">
                 <span>{locale === "bn" ? "শব্দভান্ডার দেখুন" : "Open Vocabulary"}</span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                <HugeiconsIcon icon={ArrowRight01Icon} size={18} className="shrink-0" />
               </Button>
             </Link>
           </div>
         </Card>
 
         {/* Quiz CTA Card */}
-        <Card className="p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
+        <Card className="p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <HugeiconsIcon icon={CheckmarkBadge01Icon} size={20} />
               </div>
@@ -249,9 +249,9 @@ export function DashboardClient() {
 
           <div className="pt-2">
             <Link href="/quiz" className="block w-full sm:w-auto">
-              <Button variant="default" size="md" className="btn-press w-full sm:w-auto gap-2 cursor-pointer">
+              <Button variant="default" size="md" className="btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer">
                 <span>{locale === "bn" ? "কুইজ প্র্যাকটিস করুন" : "Open Quiz Practice"}</span>
-                <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+                <HugeiconsIcon icon={ArrowRight01Icon} size={18} className="shrink-0" />
               </Button>
             </Link>
           </div>

@@ -1025,9 +1025,17 @@
     },
     {
       "detail": "ClassName repeated 4 times",
-      "className": "p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs",
+      "className": "p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 7 times",
+      "className": "flex flex-wrap items-center justify-between gap-2",
+      "files": [
+        "src/components/dashboard/DashboardClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {
@@ -1046,7 +1054,7 @@
     },
     {
       "detail": "ClassName repeated 4 times",
-      "className": "btn-press w-full sm:w-auto gap-2 cursor-pointer",
+      "className": "btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
       ]
@@ -1118,13 +1126,6 @@
     {
       "detail": "ClassName repeated 4 times",
       "className": "bg-card p-5 md:p-6 space-y-6 shadow-card",
-      "files": [
-        "src/components/settings/SettingsClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/settings/SettingsClient.tsx"
       ]

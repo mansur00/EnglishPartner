@@ -43,18 +43,18 @@ export function TodayPanel({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={FireIcon} size={20} className="text-sun-500 shrink-0" />
-          <div className="flex items-baseline gap-1.5">
-            <span className={cn("text-stat", isCard ? "text-foreground" : "text-band-panel-ink")}>
+          <div className="flex items-center gap-1.5">
+            <span className={cn("text-stat leading-none", isCard ? "text-foreground" : "text-band-panel-ink")}>
               {streak}
             </span>
-            <span className={cn("text-meta", isCard ? "text-muted-foreground" : "text-band-panel-ink/90")}>
+            <span className={cn("text-meta leading-none", isCard ? "text-muted-foreground" : "text-band-panel-ink/90")}>
               {t("dashboard.dayStreak", locale)}
             </span>
           </div>
         </div>
 
         {/* 7 Weekday Markers */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between sm:justify-start gap-1.5 w-full sm:w-auto">
           {daysOfWeek.map((day, idx) => {
             const isDone = idx === currentDayIndex;
             const isPast = idx < currentDayIndex;
