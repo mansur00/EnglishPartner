@@ -2154,6 +2154,9 @@ Entry format:
 - Added `src/lib/ai/word-details-schema.ts`, `src/lib/ai/word-details.ts`, `src/app/api/v1/ai/word-details/route.ts`, and `src/lib/ai/use-word-details.ts` (Groq-backed with server + client `localStorage` caching `ecp_word_details_cache_v2`, guarding against caching fallback responses).
 - Added shared `src/components/shared/WordDetailsSections.tsx` displaying Direct Translated Word Meaning (`wordMeaningBn`), Related Words with Bangla translations, Synonyms & Antonyms with Bangla translations, Tense & Verb Forms (`V1`, `s/es`, `V2`, `V3`, `-ing`), Noun/Adj Forms (`Plural`, `Comparative`, `Superlative`), Parts of Speech family (`Noun`, `Verb`, `Adjective`, `Adverb`), and multi-tense Sentence Making examples (EN + BN + audio) in `WordDetailPopover.tsx`, `MagicWordSidebar.tsx`, and `ReviewQueue.tsx` (Spaced Repetition Vocabulary Review).
 
+### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
+- Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
+
 ### 2026-11-27, Spell Master Rules Tab Master-Detail Sidebar (`SpellMasterClient.tsx`)
 - Replaced full rule cards in the Spelling Rules tab with compact title-only cards (`R1..R55` + reliability + title) in the middle grid and moved full rule details (explanation, low-reliability note, examples, exceptions, and "Practice Words for this Rule" CTA) into the fixed right sidebar (plus mobile inline card), matching the Learn & Syllables layout.
 

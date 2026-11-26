@@ -659,12 +659,21 @@ export function SpellMasterClient() {
           <Badge variant="brand" size="sm" className="font-mono">
             {selectedRule.id}
           </Badge>
-          <Badge variant="outline" size="sm">
+          <Badge
+            variant={
+              selectedRule.reliability === "high"
+                ? "success"
+                : selectedRule.reliability === "medium"
+                  ? "warning"
+                  : "error"
+            }
+            size="sm"
+          >
             {selectedRule.reliability === "high"
-              ? "🟢 High"
+              ? "High"
               : selectedRule.reliability === "medium"
-                ? "🟡 Medium"
-                : "🔴 Low (Guideline)"}
+                ? "Medium"
+                : "Low (Guideline)"}
           </Badge>
         </div>
         <HugeiconsIcon icon={BookOpen01Icon} size={18} className="text-primary shrink-0" />
@@ -1265,15 +1274,27 @@ export function SpellMasterClient() {
               </p>
               {!testFeedback.isCorrect && currentWordRules[0] && (
                 <div className="mt-2 pt-2 border-t border-border/60 space-y-1">
-                  <p className="text-chip font-semibold text-primary">
-                    {currentWordRules[0].id}: {currentWordRules[0].title} (
-                    {currentWordRules[0].reliability === "high"
-                      ? "🟢 High"
-                      : currentWordRules[0].reliability === "medium"
-                      ? "🟡 Medium"
-                      : "🔴 Guideline"}
-                    )
-                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-chip font-semibold text-primary">
+                      {currentWordRules[0].id}: {currentWordRules[0].title}
+                    </p>
+                    <Badge
+                      variant={
+                        currentWordRules[0].reliability === "high"
+                          ? "success"
+                          : currentWordRules[0].reliability === "medium"
+                            ? "warning"
+                            : "error"
+                      }
+                      size="sm"
+                    >
+                      {currentWordRules[0].reliability === "high"
+                        ? "High"
+                        : currentWordRules[0].reliability === "medium"
+                          ? "Medium"
+                          : "Guideline"}
+                    </Badge>
+                  </div>
                   <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
                     {isBn ? currentWordRules[0].summaryBn : currentWordRules[0].summaryEn}
                   </p>
@@ -1315,11 +1336,20 @@ export function SpellMasterClient() {
           {/* Reliability Legend + Filters */}
           <Card className="p-4 sm:p-5 bg-card border border-border rounded-card space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 text-chip">
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
                 <span className="font-semibold text-foreground">Reliability:</span>
-                <span>🟢 High (প্রায় সব জায়গায় খাটে)</span>
-                <span>🟡 Medium (কিছু ব্যতিক্রম আছে)</span>
-                <span>🔴 Low (শুধু গাইডলাইন, মুখস্থ ভালো)</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Badge variant="success" size="sm">High</Badge>
+                  <span>(প্রায় সব জায়গায় খাটে)</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Badge variant="warning" size="sm">Medium</Badge>
+                  <span>(কিছু ব্যতিক্রম আছে)</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Badge variant="error" size="sm">Low</Badge>
+                  <span>(শুধু গাইডলাইন, মুখস্থ ভালো)</span>
+                </span>
               </div>
               <Badge variant="outline" size="sm" className="font-mono">
                 {filteredRules.length} / {SPELLING_RULES_55.length} Rules
@@ -1376,11 +1406,11 @@ export function SpellMasterClient() {
                 <SelectTrigger className="w-full lg:w-44 shrink-0">
                   <SelectValue>
                     {ruleReliability === "high"
-                      ? "🟢 High"
+                      ? "High"
                       : ruleReliability === "medium"
-                        ? "🟡 Medium"
+                        ? "Medium"
                         : ruleReliability === "low"
-                          ? "🔴 Low"
+                          ? "Low"
                           : isBn
                             ? "সব Reliability"
                             : "All Reliability"}
@@ -1390,9 +1420,9 @@ export function SpellMasterClient() {
                   <SelectItem value="all">
                     {isBn ? "সব Reliability" : "All Reliability"}
                   </SelectItem>
-                  <SelectItem value="high">🟢 High</SelectItem>
-                  <SelectItem value="medium">🟡 Medium</SelectItem>
-                  <SelectItem value="low">🔴 Low</SelectItem>
+                  <SelectItem value="high">High</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                  <SelectItem value="low">Low</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -1432,13 +1462,22 @@ export function SpellMasterClient() {
                     <Badge variant="brand" size="sm" className="font-mono">
                       {rule.id}
                     </Badge>
-                    <span className="text-chip text-muted-foreground">
+                    <Badge
+                      variant={
+                        rule.reliability === "high"
+                          ? "success"
+                          : rule.reliability === "medium"
+                            ? "warning"
+                            : "error"
+                      }
+                      size="sm"
+                    >
                       {rule.reliability === "high"
-                        ? "🟢 High"
+                        ? "High"
                         : rule.reliability === "medium"
-                          ? "🟡 Medium"
-                          : "🔴 Low"}
-                    </span>
+                          ? "Medium"
+                          : "Low"}
+                    </Badge>
                   </div>
                   <p className="text-label font-semibold text-foreground line-clamp-2">
                     {isBn ? rule.titleBn : rule.title}
