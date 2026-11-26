@@ -63,6 +63,24 @@
       "code": "<p className=\"text-chip font-semibold text-foreground\">"
     },
     {
+      "file": "src/app/auth/login/page.tsx",
+      "line": 160,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<label className=\"text-chip font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/app/auth/login/page.tsx",
+      "line": 173,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<label className=\"text-chip font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/app/auth/login/page.tsx",
+      "line": 186,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<label className=\"text-chip font-semibold text-foreground\">"
+    },
+    {
       "file": "src/app/page.tsx",
       "line": 94,
       "detail": "Direct font-weight utility in feature code: font-semibold",
@@ -555,62 +573,80 @@
       "code": "<span className=\"text-chip font-semibold text-muted-foreground\">"
     },
     {
-      "file": "src/components/settings/SettingsClient.tsx",
-      "line": 248,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<p className=\"text-label font-medium\">{t(\"settings.resetSuccess\", locale)}</p>"
+      "file": "src/components/settings/AdminControlTab.tsx",
+      "line": 162,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-label font-semibold text-foreground\">"
+    },
+    {
+      "file": "src/components/settings/AdminControlTab.tsx",
+      "line": 212,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<p className=\"text-label font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 275,
-      "detail": "Direct font-weight utility in feature code: font-medium",
-      "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
+      "line": 278,
+      "detail": "Direct font-weight utility in feature code: font-semibold",
+      "code": "<span className=\"text-meta font-semibold text-foreground truncate\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
       "line": 343,
       "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<p className=\"text-label font-medium\">{t(\"settings.resetSuccess\", locale)}</p>"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 370,
+      "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 551,
+      "line": 438,
+      "detail": "Direct font-weight utility in feature code: font-medium",
+      "code": "<span className=\"px-2.5 py-1 rounded-pill bg-primary/10 text-primary text-chip font-medium\">"
+    },
+    {
+      "file": "src/components/settings/SettingsClient.tsx",
+      "line": 646,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"font-heading text-label font-semibold\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 631,
+      "line": 726,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "\"min-h-control px-3 py-1.5 rounded-control text-label font-medium transition-all cursor-pointer text-center\","
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 725,
+      "line": 820,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip font-medium uppercase tracking-wider\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 729,
+      "line": 824,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-display font-semibold text-foreground\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 737,
+      "line": 832,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-chip font-medium uppercase tracking-wider\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 741,
+      "line": 836,
       "detail": "Direct font-weight utility in feature code: font-semibold",
       "code": "<div className=\"text-display font-semibold text-foreground\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 785,
+      "line": 880,
       "detail": "Direct font-weight utility in feature code: font-medium",
       "code": "<span className=\"text-label text-foreground font-medium\">English Partner</span>"
     },
@@ -1021,37 +1057,37 @@
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 239,
+      "line": 267,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<p className=\"text-body text-muted-foreground max-w-2xl\">"
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 292,
+      "line": 387,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 301,
+      "line": 396,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 362,
+      "line": 457,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 pl-9 pr-3 rounded-control border border-border bg-muted/40 text-label text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 373,
+      "line": 468,
       "detail": "Hardcoded layout constant / magic number: h-11",
       "code": "className=\"w-full h-11 appearance-none rounded-control border border-border bg-muted/40 pl-3.5 pr-9 text-label text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring\""
     },
     {
       "file": "src/components/settings/SettingsClient.tsx",
-      "line": 617,
+      "line": 712,
       "detail": "Hardcoded layout constant / magic number: max-w-2xl",
       "code": "<div className=\"grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-2xl\">"
     },
@@ -1184,13 +1220,14 @@
       ]
     },
     {
-      "detail": "ClassName repeated 17 times",
+      "detail": "ClassName repeated 19 times",
       "className": "font-heading text-card-title text-foreground",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
         "src/components/learning/ConversationReader.tsx",
         "src/components/practice/DailyPracticeClient.tsx",
         "src/components/practice/PersonalizedPracticeCard.tsx",
+        "src/components/settings/AdminControlTab.tsx",
         "src/components/settings/SettingsClient.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
@@ -1244,6 +1281,15 @@
       ]
     },
     {
+      "detail": "ClassName repeated 3 times",
+      "className": "font-heading text-page-title text-foreground",
+      "files": [
+        "src/app/auth/login/page.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 5 times",
       "className": "text-label text-muted-foreground hover:text-foreground transition-colors",
       "files": [
@@ -1258,13 +1304,14 @@
       ]
     },
     {
-      "detail": "ClassName repeated 6 times",
+      "detail": "ClassName repeated 7 times",
       "className": "text-label font-semibold text-foreground",
       "files": [
         "src/app/page.tsx",
         "src/components/grammar/GrammarStageLessonClient.tsx",
         "src/components/grammar/WritingCheckerPanel.tsx",
         "src/components/practice/PersonalizedPracticeCard.tsx",
+        "src/components/settings/AdminControlTab.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
@@ -1383,12 +1430,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 15 times",
+      "detail": "ClassName repeated 16 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
         "src/components/grammar/WritingCheckerPanel.tsx",
         "src/components/practice/PersonalizedPracticeCard.tsx",
+        "src/components/settings/AdminControlTab.tsx",
         "src/components/settings/SettingsClient.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
       ]
@@ -1516,6 +1564,14 @@
       ]
     },
     {
+      "detail": "ClassName repeated 3 times",
+      "className": "flex items-center gap-2.5 pb-3 border-b border-border/60",
+      "files": [
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/settings/AdminControlTab.tsx"
+      ]
+    },
+    {
       "detail": "ClassName repeated 4 times",
       "className": "flex items-center justify-between text-chip text-muted-foreground",
       "files": [
@@ -1545,6 +1601,15 @@
       "files": [
         "src/components/professions/ProfessionScenariosGrid.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "text-label font-semibold text-foreground truncate",
+      "files": [
+        "src/components/settings/AdminControlTab.tsx",
+        "src/components/spelling/SpellMasterClient.tsx",
+        "src/components/tools/RoleplayPartner.tsx"
       ]
     },
     {

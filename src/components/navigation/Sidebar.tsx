@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { t, useLocale } from "@/lib/i18n";
+import { useFeatureFlags } from "@/lib/features/use-feature-flags";
 import { HugeiconsIcon } from "@hugeicons/react";
 import type { IconSvgElement } from "@hugeicons/react";
 import {
@@ -26,11 +27,13 @@ interface NavItem {
   icon: IconSvgElement;
   active: boolean;
   comingSoon?: boolean;
+  featureKey?: string;
 }
 
 export function Sidebar() {
   const pathname = usePathname();
   const locale = useLocale();
+  const { isEnabled } = useFeatureFlags();
 
   const navItems: NavItem[] = [
     {
@@ -71,6 +74,7 @@ export function Sidebar() {
       href: "/roleplay",
       icon: BotIcon,
       active: pathname === "/roleplay",
+      featureKey: "ai_partner",
     },
     {
       name: t("nav.vocabulary", locale),
@@ -83,12 +87,14 @@ export function Sidebar() {
       href: "/spell-master",
       icon: SparklesIcon,
       active: pathname.startsWith("/spell-master"),
+      featureKey: "spell_master",
     },
     {
       name: locale === "bn" ? "কুইজ" : "Quiz",
       href: "/quiz",
       icon: CheckmarkBadge01Icon,
       active: pathname.startsWith("/quiz"),
+      featureKey: "quiz",
     },
     {
       name: t("nav.progress", locale),
@@ -111,7 +117,9 @@ export function Sidebar() {
           {t("nav.menu", locale)}
         </span>
         <nav className="space-y-1 pt-1.5" aria-label={t("nav.mainNav", locale)}>
-          {navItems.map((item) => {
+          {navItems
+            .filter((item) => !item.featureKey || isEnabled(item.featureKey))
+            .map((item) => {
             if (item.comingSoon) {
               return (
                 <div

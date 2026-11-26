@@ -1,12 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "@/lib/i18n";
 import { useTheme } from "next-themes";
 import { PageContainer } from "@/components/shared";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card } from "@/components/ui/card";
+import { AdminControlTab } from "@/components/settings/AdminControlTab";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
+import type { UserProfile } from "@/lib/auth/session";
 import {
   Dialog,
   DialogContent,
@@ -59,6 +65,9 @@ import {
 export function SettingsClient() {
   const { locale, setLocale, translationLocale, setTranslationLocale, t } = useTranslations();
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+  const [settingsTab, setSettingsTab] = useState<"learner" | "admin">("learner");
 
   // Settings State
   const [audioSpeed, setAudioSpeed] = useState("1.0x");
@@ -113,7 +122,24 @@ export function SettingsClient() {
         // LocalStorage access fallback
       }
     });
+
+    fetch("/api/v1/auth/me", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.user) {
+          setCurrentUser(data.user);
+        }
+      })
+      .catch(() => {});
   }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createBrowserSupabaseClient();
+    await supabase.auth.signOut();
+    setCurrentUser(null);
+    setSettingsTab("learner");
+    router.refresh();
+  };
 
   // Handlers
   const handleLocaleChange = (newLocale: SupportedLocale) => {
@@ -227,19 +253,88 @@ export function SettingsClient() {
 
   return (
     <PageContainer className="py-6 space-y-8 pb-16">
-      {/* 1. Page Header */}
-      <div className="border-b border-border pb-6 space-y-1.5">
-        <div className="flex items-center gap-2 text-chip text-muted-foreground uppercase tracking-wider">
-          <HugeiconsIcon icon={Settings01Icon} size={16} className="text-primary shrink-0" />
-          <span>{locale === "bn" ? "অ্যাপ সেটিংস" : "App Preferences"}</span>
+      {/* 1. Page Header + Account & Role Banner */}
+      <div className="border-b border-border pb-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 text-chip text-muted-foreground uppercase tracking-wider">
+              <HugeiconsIcon icon={Settings01Icon} size={16} className="text-primary shrink-0" />
+              <span>{locale === "bn" ? "অ্যাপ সেটিংস" : "App Preferences"}</span>
+            </div>
+            <h1 className="font-heading text-page-title text-foreground">
+              {t("settings.title", locale)}
+            </h1>
+            <p className="text-body text-muted-foreground max-w-2xl">
+              {t("settings.subtitle", locale)}
+            </p>
+          </div>
+
+          {/* Account Status Card */}
+          <div className="rounded-panel border border-border bg-muted/30 px-4 py-3 flex items-center gap-3 shrink-0">
+            {currentUser ? (
+              <>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-meta font-semibold text-foreground truncate">
+                      {currentUser.full_name || currentUser.email}
+                    </span>
+                    <Badge
+                      variant={currentUser.role === "admin" ? "brand" : "outline"}
+                      size="sm"
+                    >
+                      {currentUser.role === "admin" ? "Admin" : "User"}
+                    </Badge>
+                  </div>
+                  <p className="text-chip text-muted-foreground font-mono truncate">
+                    {currentUser.email}
+                  </p>
+                </div>
+                <Button type="button" variant="outline" size="xs" onClick={handleSignOut}>
+                  {locale === "bn" ? "লগআউট" : "Sign out"}
+                </Button>
+              </>
+            ) : (
+              <>
+                <span className="text-meta text-muted-foreground">
+                  {locale === "bn" ? "গেস্ট মোড" : "Guest mode"}
+                </span>
+                <Link href="/auth/login?next=/settings">
+                  <Button type="button" variant="cta" size="xs">
+                    {locale === "bn" ? "লগইন করুন" : "Log in"}
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
-        <h1 className="font-heading text-page-title text-foreground">
-          {t("settings.title", locale)}
-        </h1>
-        <p className="text-body text-muted-foreground max-w-2xl">
-          {t("settings.subtitle", locale)}
-        </p>
+
+        {/* Admin vs Learner Settings Switcher (Only visible to Admin) */}
+        {currentUser?.role === "admin" && (
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={settingsTab === "learner" ? "default" : "outline"}
+              onClick={() => setSettingsTab("learner")}
+            >
+              {locale === "bn" ? "সাধারণ সেটিংস" : "Learner Settings"}
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              variant={settingsTab === "admin" ? "default" : "outline"}
+              onClick={() => setSettingsTab("admin")}
+            >
+              {locale === "bn" ? "অ্যাডমিন কন্ট্রোল (ইউজার ও ফিচার)" : "Admin Controls (Users & Features)"}
+            </Button>
+          </div>
+        )}
       </div>
+
+      {currentUser?.role === "admin" && settingsTab === "admin" ? (
+        <AdminControlTab currentUserId={currentUser.id} locale={locale} />
+      ) : (
+        <>
 
       {/* Success Notification Banner */}
       {showResetSuccess && (
@@ -822,6 +917,8 @@ export function SettingsClient() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+        </>
+      )}
     </PageContainer>
   );
 }
