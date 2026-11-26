@@ -751,76 +751,81 @@ export function SpellMasterClient() {
       {activeTab === "learn" && (
         <div className="space-y-4">
           <Card className="p-4 sm:p-5 bg-card border border-border rounded-card space-y-3">
-            <div className="flex flex-col sm:flex-row gap-2.5">
-              <div className="relative flex-1">
-                <HugeiconsIcon
-                  icon={Search01Icon}
-                  size={18}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
-                />
-                <Input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    setAiLookupResult(null);
-                    setAiLookupError(null);
-                  }}
-                  placeholder={
-                    isBn
-                      ? "যেকোনো ইংরেজি শব্দ খুঁজুন বা AI দিয়ে যোগ করুন..."
-                      : "Search any English word or ask AI to add it..."
-                  }
-                  className="pl-10"
-                />
-              </div>
-              {searchQuery.trim().length >= 2 && (
-                <Button
-                  type="button"
-                  variant="cta"
-                  size="md"
-                  onClick={handleAiLookup}
-                  disabled={aiLookupLoading}
-                  className="gap-2 shrink-0"
-                >
+            <div className="flex flex-col lg:flex-row lg:items-center gap-2.5">
+              {/* 1. Search Input (+ Ask AI button when >= 2 chars) */}
+              <div className="flex flex-1 min-w-0 flex-col sm:flex-row gap-2">
+                <div className="relative flex-1 min-w-0">
                   <HugeiconsIcon
-                    icon={aiLookupLoading ? RefreshIcon : SparklesIcon}
-                    size={16}
-                    className={cn(aiLookupLoading && "animate-spin")}
+                    icon={Search01Icon}
+                    size={18}
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
                   />
-                  <span>
-                    {aiLookupLoading
-                      ? "Searching AI..."
-                      : `Ask AI: "${searchQuery.trim()}"`}
-                  </span>
-                </Button>
-              )}
-            </div>
+                  <Input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setAiLookupResult(null);
+                      setAiLookupError(null);
+                    }}
+                    placeholder={
+                      isBn
+                        ? "যেকোনো ইংরেজি শব্দ খুঁজুন বা AI দিয়ে যোগ করুন..."
+                        : "Search any English word or ask AI to add it..."
+                    }
+                    className="pl-10"
+                  />
+                </div>
+                {searchQuery.trim().length >= 2 && (
+                  <Button
+                    type="button"
+                    variant="cta"
+                    size="md"
+                    onClick={handleAiLookup}
+                    disabled={aiLookupLoading}
+                    className="gap-2 shrink-0"
+                  >
+                    <HugeiconsIcon
+                      icon={aiLookupLoading ? RefreshIcon : SparklesIcon}
+                      size={16}
+                      className={cn(aiLookupLoading && "animate-spin")}
+                    />
+                    <span>
+                      {aiLookupLoading
+                        ? "Searching AI..."
+                        : `Ask AI: "${searchQuery.trim()}"`}
+                    </span>
+                  </Button>
+                )}
+              </div>
 
-            {/* Group Tabs (6 Groups + All) */}
-            <div className="flex flex-wrap gap-1.5 border-b border-border/60 pb-2.5">
-              {SPELL_CATEGORY_GROUPS.map((grp) => (
-                <Button
-                  key={grp.id}
-                  type="button"
-                  size="xs"
-                  variant={selectedGroup === grp.id ? "default" : "outline"}
-                  onClick={() => {
-                    setSelectedGroup(grp.id);
-                    setSelectedCategory("all");
-                    setVisibleCount(PAGE_BATCH);
-                  }}
-                >
-                  {isBn ? grp.labelBn : grp.label}
-                </Button>
-              ))}
-            </div>
+              {/* 2. Main Category Dropdown */}
+              <Select
+                value={selectedGroup}
+                onValueChange={(val) => {
+                  setSelectedGroup((val ?? "all") as SpellCategoryGroupId | "all");
+                  setSelectedCategory("all");
+                  setVisibleCount(PAGE_BATCH);
+                }}
+              >
+                <SelectTrigger className="w-full lg:w-52 shrink-0">
+                  <SelectValue>
+                    {(() => {
+                      const grp = SPELL_CATEGORY_GROUPS.find((g) => g.id === selectedGroup);
+                      return grp ? (isBn ? grp.labelBn : grp.label) : "All Categories";
+                    })()}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {SPELL_CATEGORY_GROUPS.map((grp) => (
+                    <SelectItem key={grp.id} value={grp.id}>
+                      {isBn ? grp.labelBn : grp.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-            {/* Subcategory Dropdown for Selected Group */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="text-meta text-muted-foreground">
-                {isBn ? "সাব-ক্যাটাগরি:" : "Subcategory:"}
-              </span>
+              {/* 3. Subcategory Dropdown */}
               <Select
                 value={selectedCategory}
                 onValueChange={(val) => {
@@ -828,16 +833,16 @@ export function SpellMasterClient() {
                   setVisibleCount(PAGE_BATCH);
                 }}
               >
-                <SelectTrigger size="sm" className="w-full sm:w-72">
+                <SelectTrigger className="w-full lg:w-56 shrink-0">
                   <SelectValue>
                     {selectedCategory === "all"
-                      ? `All (${selectedGroup === "all" ? allWords.length : filteredWords.length})`
+                      ? `${isBn ? "সব সাব-ক্যাটাগরি" : "All Subcategories"} (${selectedGroup === "all" ? allWords.length : filteredWords.length})`
                       : CATEGORY_MAP.get(selectedCategory)?.label ?? selectedCategory}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">
-                    All ({selectedGroup === "all" ? allWords.length : filteredWords.length})
+                    {isBn ? "সব সাব-ক্যাটাগরি" : "All Subcategories"} ({selectedGroup === "all" ? allWords.length : filteredWords.length})
                   </SelectItem>
                   {activeGroupCategories.map((cat) => (
                     <SelectItem key={cat.id} value={cat.id}>
@@ -846,19 +851,6 @@ export function SpellMasterClient() {
                   ))}
                 </SelectContent>
               </Select>
-              {selectedCategory !== "all" && (
-                <Button
-                  type="button"
-                  size="xs"
-                  variant="ghost"
-                  onClick={() => {
-                    setSelectedCategory("all");
-                    setVisibleCount(PAGE_BATCH);
-                  }}
-                >
-                  {isBn ? "রিসেট" : "Reset"}
-                </Button>
-              )}
             </div>
 
             {selectedCategory !== "all" && CATEGORY_MAP.get(selectedCategory) && (
