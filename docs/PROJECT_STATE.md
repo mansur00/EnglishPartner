@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Remove Smart Progress Tracking Card from Our Features Bento Grid
+- Requested by owner: Remove the full-width `Smart Progress Tracking & SM-2 Vocabulary` card from the `Our Features` section on `/`.
+- Changed:
+  - `src/app/page.tsx`: Removed Bento Card 5 (`Smart Progress Tracking & SM-2 Vocabulary`) and unused `PROGRESS_BAR_HEIGHTS` constant, keeping the 2x2 Bento grid of 4 core feature cards.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test`.
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Use Nunito Bold (700) Exclusively for Landing Page h1 & h2
 - Requested by owner: Approved exception to max-600 weight rule exclusively for landing page `h1` and `h2` (`Nunito 700`).
 - Changed:

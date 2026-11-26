@@ -15,21 +15,6 @@ import {
   Search01Icon,
 } from "@hugeicons/core-free-icons";
 
-const PROGRESS_BAR_HEIGHTS = [
-  "h-12",
-  "h-20",
-  "h-14",
-  "h-10",
-  "h-16",
-  "h-28",
-  "h-12",
-  "h-24",
-  "h-16",
-  "h-14",
-  "h-18",
-  "h-20",
-];
-
 const ECOSYSTEM_LEFT = [
   { href: "/explore", icon: Message01Icon, label: "42+ Dialogues" },
   { href: "/grammar-path", icon: BookOpen01Icon, label: "8-Stage Grammar" },
@@ -310,57 +295,6 @@ export default function LandingPage() {
                   <p className="text-meta text-muted-foreground text-bangla">
                     ক্লায়েন্ট মিটিং, টেক হ্যান্ডঅফ, কোড রিভিউ এবং প্রফেশনাল ইমেইল/কথোপকথনের বিশেষ ট্র্যাক।
                   </p>
-                </div>
-              </Card>
-            </Link>
-
-            {/* Bento Card 5 (Full Width): Progress Tracking & SM-2 Chart */}
-            <Link href="/progress" className="block group md:col-span-2">
-              <Card className="p-6 md:p-7 rounded-card bg-card shadow-2xs hover:shadow-xs transition-shadow space-y-6">
-                <div className="rounded-panel bg-muted/35 border border-border/60 p-5 md:p-6 space-y-4">
-                  <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <div>
-                      <p className="text-chip text-muted-foreground">Vocabulary &amp; Fluency</p>
-                      <p className="text-label font-semibold text-foreground">
-                        SM-2 Spaced Repetition &amp; Daily Streak
-                      </p>
-                    </div>
-                    <span className="px-3 py-1 rounded-pill bg-primary text-primary-foreground text-chip font-semibold">
-                      65% Retained
-                    </span>
-                  </div>
-
-                  {/* Clean Visual Bar Chart */}
-                  <div className="relative pt-4">
-                    <div className="grid grid-cols-12 items-end gap-2 sm:gap-3 h-32">
-                      {PROGRESS_BAR_HEIGHTS.map((hClass, idx) => (
-                        <div
-                          key={idx}
-                          className={`w-full rounded-t-control transition-all ${hClass} ${
-                            idx === 5
-                              ? "bg-primary shadow-xs"
-                              : idx === 7
-                              ? "bg-sun-500"
-                              : "bg-primary/20"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-                  <div className="space-y-1.5">
-                    <h3 className="text-card-title font-heading text-foreground group-hover:text-primary transition-colors">
-                      Smart Progress Tracking &amp; SM-2 Vocabulary
-                    </h3>
-                    <p className="text-meta text-muted-foreground text-bangla">
-                      শেখা শব্দগুলো মুখস্থ না করে বৈজ্ঞানিক স্পেসড রিপিটেশন, কুইজ ও প্রগ্রেস চার্টের মাধ্যমে দীর্ঘদিন মনে রাখুন।
-                    </p>
-                  </div>
-                  <span className="text-chip text-primary font-semibold flex items-center gap-1 shrink-0">
-                    View Analytics <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
-                  </span>
                 </div>
               </Card>
             </Link>
