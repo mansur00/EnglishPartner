@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { useLocale, t } from "@/lib/i18n";
+import { useLocale, useTranslationLocale, useLiveTranslations, t } from "@/lib/i18n";
 import { TodayPanel } from "@/components/shared";
 import { ReviewQueue } from "@/components/learning/ReviewQueue";
 import { PersonalizedPracticeCard } from "@/components/practice/PersonalizedPracticeCard";
@@ -36,6 +36,7 @@ import {
 
 export function DailyPracticeClient() {
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
   const [savedLemmas, setSavedLemmas] = useState<string[]>([]);
   const [streak, setStreak] = useState(3);
   const [minutesCompleted, setMinutesCompleted] = useState(8);
@@ -182,6 +183,16 @@ export function DailyPracticeClient() {
 
   const topWeakArea = weakAreas[0];
   const challengePhase = getPhaseForDay(challengeState.currentDay);
+  const coachTextEn = challengeState.enrolled
+    ? `${challengePhase.titleEn} — Focus today's speaking session on ${topWeakArea ? topWeakArea.labelEn : "natural flow"} with live roleplay.`
+    : "Enroll in the 90-Day Spoken English Challenge for an adaptive daily speaking plan.";
+
+  const { translations: sidebarTranslations } = useLiveTranslations(
+    translationLocale !== "none" && translationLocale !== "bn"
+      ? [coachTextEn, nextLesson.reasonEn]
+      : [],
+    translationLocale !== "none" && translationLocale !== "bn" ? translationLocale : "none"
+  );
 
   const handleAddStarterWords = () => {
     const starter = ["reservation", "discount", "receipt", "recommendation", "appointment"];
@@ -249,13 +260,15 @@ export function DailyPracticeClient() {
           </span>
         </div>
         <p className="text-meta text-foreground leading-snug">
-          {challengeState.enrolled
-            ? locale === "bn"
-              ? `${challengePhase.titleBn} — আজকের স্পোকেন প্র্যাকটিসে ${topWeakArea ? topWeakArea.labelBn : "বাক্য গঠন"} উন্নত করতে AI পার্টনারের সাথে কথা বলুন।`
-              : `${challengePhase.titleEn} — Focus today's speaking session on ${topWeakArea ? topWeakArea.labelEn : "natural flow"} with live roleplay.`
-            : locale === "bn"
-              ? "৯০-দিনের স্পোকেন ইংলিশ চ্যালেঞ্জ শুরু করলে আপনার স্পিকিং অগ্রগতি অনুযায়ী প্রতিদিন কাস্টম প্ল্যান পাবেন।"
-              : "Enroll in the 90-Day Spoken English Challenge for an adaptive daily speaking plan."}
+          {translationLocale !== "none" && translationLocale !== "bn" && sidebarTranslations[coachTextEn]
+            ? sidebarTranslations[coachTextEn]
+            : challengeState.enrolled
+              ? locale === "bn"
+                ? `${challengePhase.titleBn} — আজকের স্পোকেন প্র্যাকটিসে ${topWeakArea ? topWeakArea.labelBn : "বাক্য গঠন"} উন্নত করতে AI পার্টনারের সাথে কথা বলুন।`
+                : coachTextEn
+              : locale === "bn"
+                ? "৯০-দিনের স্পোকেন ইংলিশ চ্যালেঞ্জ শুরু করলে আপনার স্পিকিং অগ্রগতি অনুযায়ী প্রতিদিন কাস্টম প্ল্যান পাবেন।"
+                : coachTextEn}
         </p>
         <Link
           href="/roleplay"

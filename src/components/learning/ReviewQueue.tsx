@@ -27,7 +27,7 @@ import {
 } from "@/content/seed/vocabulary";
 import type { VocabularyEntry } from "@/content/seed/vocabulary";
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslationLocale, useLiveTranslations } from "@/lib/i18n";
 import { useWordDetails } from "@/lib/ai/use-word-details";
 import { WordDetailsSections } from "@/components/shared/WordDetailsSections";
 
@@ -40,6 +40,7 @@ const STORAGE_KEY = "ecp_vocabulary_srs";
 
 export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps) {
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
   const [srsMap, setSrsMap] = useState<Record<string, UserVocabularySRSItem>>({});
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -197,6 +198,20 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
     [currentSRSItem, srsMap, currentIndex, dueItems.length, onReviewCompleted]
   );
 
+  const textsToTranslate = useMemo(() => {
+    if (translationLocale === "none" || !currentVocabEntry) return [];
+    const list: string[] = [];
+    if (currentVocabEntry.word) list.push(currentVocabEntry.word);
+    if (currentVocabEntry.exampleSentence) list.push(currentVocabEntry.exampleSentence);
+    if (wordDetails?.meaningEn) list.push(wordDetails.meaningEn);
+    return list;
+  }, [translationLocale, currentVocabEntry, wordDetails]);
+
+  const { translations: liveMap } = useLiveTranslations(
+    textsToTranslate,
+    translationLocale !== "none" ? translationLocale : "none"
+  );
+
   if (!isLoaded) {
     return (
       <div className="card-practice p-8 text-center text-meta text-muted-foreground">
@@ -319,19 +334,27 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
           ) : (
             <div className="space-y-5 pt-2 border-t border-border animate-in fade-in duration-200">
               {/* Meaning Section */}
-              <div className="space-y-1.5">
-                <span className="text-chip-bn">
-                  {locale === "bn" ? "প্রাসঙ্গিক অর্থ:" : "Contextual Meaning:"}
-                </span>
-                <p className="text-card-title-bn text-foreground">
-                  {currentVocabEntry.contextualMeaningBn}
-                </p>
-                {currentVocabEntry.generalMeaningBn !== currentVocabEntry.contextualMeaningBn && (
-                  <p className="text-meta-lead-bn text-muted-foreground">
-                    সাধারণ অর্থ: {currentVocabEntry.generalMeaningBn}
+              {translationLocale !== "none" && (
+                <div className="space-y-1.5">
+                  <span className="text-chip-bn">
+                    {locale === "bn" ? "প্রাসঙ্গিক অর্থ:" : "Contextual Meaning:"}
+                  </span>
+                  <p className="text-card-title-bn text-foreground">
+                    {translationLocale === "bn"
+                      ? currentVocabEntry.contextualMeaningBn
+                      : liveMap[currentVocabEntry.word] ??
+                        liveMap[wordDetails?.meaningEn ?? ""] ??
+                        wordDetails?.meaningEn ??
+                        currentVocabEntry.contextualMeaningBn}
                   </p>
-                )}
-              </div>
+                  {translationLocale === "bn" &&
+                    currentVocabEntry.generalMeaningBn !== currentVocabEntry.contextualMeaningBn && (
+                      <p className="text-meta-lead-bn text-muted-foreground">
+                        সাধারণ অর্থ: {currentVocabEntry.generalMeaningBn}
+                      </p>
+                    )}
+                </div>
+              )}
 
               {/* Example Sentence Section */}
               {currentVocabEntry.exampleSentence && (
@@ -352,6 +375,11 @@ export function ReviewQueue({ savedLemmas, onReviewCompleted }: ReviewQueueProps
                   <p className="text-body text-foreground font-sans">
                     &ldquo;{currentVocabEntry.exampleSentence}&rdquo;
                   </p>
+                  {translationLocale !== "none" && liveMap[currentVocabEntry.exampleSentence] && (
+                    <p className="text-meta text-muted-foreground">
+                      {liveMap[currentVocabEntry.exampleSentence]}
+                    </p>
+                  )}
                 </div>
               )}
 
