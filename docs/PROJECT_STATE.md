@@ -257,6 +257,14 @@ Entry format:
 
 (Agent: add entries below this line.)
 
+### 2026-11-26, Explore Page Fixed Right Sidebar Layout
+- Requested by owner: Move Search, Category Pills, and Filter Bar on `/explore` into a fixed right sidebar (`w-80 xl:w-96`) matching Vocabulary, AI Partner, and Grammar Path, keeping the scenarios grid in the middle content area (`lg:pr-80 xl:pr-96`).
+- Changed:
+  - `src/app/(app)/explore/page.tsx`: Migrated from `PageContainer` to full-width middle content area (`w-full lg:pr-80 xl:pr-96`) + fixed right `<aside>` (`fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4`) with `lg:hidden` mobile fallback.
+- Verified with: `npm run check:frozen`, `npm run lint:ui`, `npx tsc --noEmit`, `npm run lint`, and `npm test` (220/220 passing).
+- Commit: pending
+- Open questions / follow-ups: none.
+
 ### 2026-11-26, Green (#55B266) + Amber (#FFCC66) Eye-Comfort Color System
 - Requested by owner: Update the central design system tokens (zero hardcoding in components) to the Green (`#55B266` / `#2F7D42` action / `#6FC47F` dark) + Amber (`#FFCC66` / `#FFD580` dark) + Warm Off-White (`#FBFAF6`) / Deep Green-Black (`#121714`) WCAG-verified palette, including Grammar POS tokens.
 - Changed:

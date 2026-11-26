@@ -19,7 +19,7 @@ import {
   Cancel01Icon,
 } from "@hugeicons/core-free-icons";
 import { SEED_SCENARIOS } from "@/content/seed/scenarios";
-import { PageContainer, LocaleTitle } from "@/components/shared";
+import { LocaleTitle } from "@/components/shared";
 import { paginateItems } from "@/lib/pagination/faceted-pagination";
 import { FacetedPagination } from "@/components/discovery/FacetedPagination";
 import { getLengthTierById } from "@/lib/content/length-tiers";
@@ -101,32 +101,13 @@ export default function ExplorePage() {
     });
   };
 
-  return (
-    <PageContainer className="py-6 space-y-6 pb-16">
-      {/* Unified Header, Search, Categories & Filters Card */}
-      <Card className="p-5 sm:p-6 bg-card border border-border space-y-4 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <LocaleTitle
-              as="h1"
-              titleEn="Explore Conversations"
-              titleBn="কথোপকথন অন্বেষণ করুন"
-              className="text-page-title text-foreground"
-            />
-            <LocaleTitle
-              as="p"
-              titleEn="Explore and practice natural dialogues crafted for everyday real-world situations."
-              titleBn="বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন।"
-              className="text-meta text-muted-foreground mt-1"
-            />
-          </div>
-          <Badge variant="outline" size="sm" className="shrink-0 font-mono self-start sm:self-center">
-            {filteredScenarios.length} {locale === "bn" ? "কথোপকথন" : `conversation${filteredScenarios.length !== 1 ? "s" : ""}`}
-            {filteredScenarios.length > pageSize ? ` • ${paginatedScenarios.currentPage}/${paginatedScenarios.totalPages}` : ""}
-          </Badge>
-        </div>
-
-        {/* Search Input with Rainbow Border on Focus & Clear Button */}
+  const sidebarControls = (
+    <>
+      {/* Search Input with Rainbow Border on Focus & Clear Button */}
+      <div className="space-y-2">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {locale === "bn" ? "অনুসন্ধান" : "Search"}
+        </p>
         <InputGroup className="bg-muted/30">
           <InputGroupPrefix>
             <HugeiconsIcon
@@ -166,30 +147,68 @@ export default function ExplorePage() {
             </InputGroupSuffix>
           )}
         </InputGroup>
+      </div>
 
-        {/* Category Horizontal Pills */}
-        <div className="pt-1">
-          <CategoryPills
-            selectedCategory={selectedCategory}
-            onSelectCategory={handleCategorySelect}
-          />
-        </div>
+      {/* Category Pills */}
+      <div className="space-y-2 pt-2 border-t border-border/60">
+        <p className="text-chip uppercase tracking-wider text-muted-foreground">
+          {locale === "bn" ? "বিষয়সমূহ" : "Categories"}
+        </p>
+        <CategoryPills
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleCategorySelect}
+        />
+      </div>
 
-        {/* Embedded Filter Bar */}
-        <div className="pt-3 border-t border-border/60">
-          <FilterBar
-            level={level}
-            setLevel={(l) => startTransition(() => { setLevel(l); setCurrentPage(1); })}
-            lengthType={lengthType}
-            setLengthType={(len) => startTransition(() => { setLengthType(len); setCurrentPage(1); })}
-            style={style}
-            setStyle={(st) => startTransition(() => { setStyle(st); setCurrentPage(1); })}
-            onReset={handleResetFilters}
-            isFiltered={isFiltered}
-            embedded
-          />
-        </div>
-      </Card>
+      {/* Embedded Filter Bar */}
+      <div className="pt-3 border-t border-border/60">
+        <FilterBar
+          level={level}
+          setLevel={(l) => startTransition(() => { setLevel(l); setCurrentPage(1); })}
+          lengthType={lengthType}
+          setLengthType={(len) => startTransition(() => { setLengthType(len); setCurrentPage(1); })}
+          style={style}
+          setStyle={(st) => startTransition(() => { setStyle(st); setCurrentPage(1); })}
+          onReset={handleResetFilters}
+          isFiltered={isFiltered}
+          embedded
+        />
+      </div>
+    </>
+  );
+
+  return (
+    <div className="w-full lg:pr-80 xl:pr-96">
+      {/* ================= MIDDLE CONTENT AREA ================= */}
+      <div className="w-full px-4 sm:px-6 lg:px-9 py-6 pb-16 space-y-6">
+        {/* Explore Header Card */}
+        <Card className="p-5 sm:p-6 bg-card border border-border shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <LocaleTitle
+                as="h1"
+                titleEn="Explore Conversations"
+                titleBn="কথোপকথন অন্বেষণ করুন"
+                className="text-page-title text-foreground"
+              />
+              <LocaleTitle
+                as="p"
+                titleEn="Explore and practice natural dialogues crafted for everyday real-world situations."
+                titleBn="বাস্তব জীবনের পরিস্থিতি অনুযায়ী কথোপকথন অনুসন্ধান ও অনুশীলন করুন।"
+                className="text-meta text-muted-foreground mt-1"
+              />
+            </div>
+            <Badge variant="outline" size="sm" className="shrink-0 font-mono self-start sm:self-center">
+              {filteredScenarios.length} {locale === "bn" ? "কথোপকথন" : `conversation${filteredScenarios.length !== 1 ? "s" : ""}`}
+              {filteredScenarios.length > pageSize ? ` • ${paginatedScenarios.currentPage}/${paginatedScenarios.totalPages}` : ""}
+            </Badge>
+          </div>
+        </Card>
+
+        {/* Mobile/Tablet Search & Filters Fallback */}
+        <Card className="lg:hidden p-4 sm:p-5 bg-card border border-border space-y-4 shadow-xs">
+          {sidebarControls}
+        </Card>
 
       {/* Scenarios Grid / Skeletons / Empty State */}
       {isPending ? (
@@ -248,6 +267,12 @@ export default function ExplorePage() {
           }
         />
       )}
-    </PageContainer>
+      </div>
+
+      {/* ================= FIXED RIGHT SIDEBAR ================= */}
+      <aside className="hidden lg:flex flex-col fixed right-0 top-header h-below-header w-80 xl:w-96 border-l border-border bg-card z-sidebar overflow-y-auto p-4 space-y-5">
+        {sidebarControls}
+      </aside>
+    </div>
   );
 }
