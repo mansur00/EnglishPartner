@@ -324,13 +324,13 @@ export function AudioBooksClient() {
               <Link key={item.id} href={href} className="group block h-full">
                 <Card
                   className={cn(
-                    "card-hover h-full p-0 gap-0 overflow-hidden bg-card border border-border rounded-card shadow-xs flex flex-col justify-between transition-all group-hover:border-primary/50",
+                    "card-hover h-full p-1 gap-0 overflow-hidden bg-card border border-border rounded-card shadow-xs flex flex-col justify-between transition-all group-hover:border-primary/50",
                     isLocked && "opacity-75"
                   )}
                 >
                   {/* Card Thumbnail */}
                   <div>
-                    <div className="relative aspect-video w-full bg-muted/60 border-b border-border overflow-hidden flex items-center justify-center">
+                    <div className="relative aspect-video w-full rounded-panel bg-muted/60 overflow-hidden flex items-center justify-center">
                       {item.thumbnailUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
