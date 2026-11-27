@@ -4,7 +4,7 @@
  * Strategy: Network-first for dynamic content with offline cache fallback for core shell.
  */
 
-const CACHE_NAME = "english-partner-v1";
+const CACHE_NAME = "english-partner-v2";
 const STATIC_SHELL_URLS = [
   "/",
   "/dashboard",
@@ -42,8 +42,15 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(event.request.url);
 
-  // Skip API and analytics calls from caching
-  if (url.pathname.startsWith("/api/")) return;
+  // Skip API, Next.js build chunks, and localhost dev requests from caching
+  if (
+    url.pathname.startsWith("/api/") ||
+    url.pathname.startsWith("/_next/") ||
+    url.hostname === "localhost" ||
+    url.hostname === "127.0.0.1"
+  ) {
+    return;
+  }
 
   event.respondWith(
     fetch(event.request)

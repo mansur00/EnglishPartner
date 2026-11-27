@@ -107,18 +107,19 @@ test('KI-12 E2E: Keyboard focus navigation and accessibility in Conversation Rea
         timeout: 15000
       });
 
-      // Find an interactive word button in ConversationTurn
-      const wordButton = await page.$('button[role="button"][tabindex="0"]');
-      if (!wordButton) {
-        // Fallback: look for span with role=button
-        const spanButton = await page.$('[role="button"][tabindex="0"]');
-        assert.ok(spanButton, 'Expected interactive word element with role="button"');
-        await spanButton.focus();
-        await page.keyboard.press('Enter');
-      } else {
-        await wordButton.focus();
-        await page.keyboard.press('Enter');
+      // Ensure grammar tokens are visible if Grammar Highlight switch defaults to off
+      let spanButton = await page.$('.gram-token[role="button"][tabindex="0"]');
+      if (!spanButton) {
+        const grammarSwitch = await page.$('[role="switch"]');
+        if (grammarSwitch) {
+          await grammarSwitch.click();
+          await new Promise((r) => setTimeout(r, 300));
+        }
+        spanButton = await page.$('.gram-token[role="button"][tabindex="0"]');
       }
+      assert.ok(spanButton, 'Expected interactive word element (.gram-token[role="button"])');
+      await spanButton.focus();
+      await page.keyboard.press('Enter');
 
       // Allow dialog animation
       await new Promise(r => setTimeout(r, 400));

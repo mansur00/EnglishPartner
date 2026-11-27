@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Fix Stale PWA Service Worker Cache & GitHub CI E2E Failure
+- Updated `src/components/pwa/PwaRegister.tsx` to unregister Service Workers and clear caches in development / `localhost`, registering `/sw.js` only in production.
+- Bumped `public/sw.js` `CACHE_NAME` to `english-partner-v2` and excluded `/_next/` and `localhost` from SW caching.
+- Fixed `tests/e2e/keyboard-focus.spec.mjs` Test 2 to target `.gram-token[role="button"][tabindex="0"]` (enabling Grammar toggle if off) instead of matching `ChatTurnBubble`'s outer `role="button"`.
+
 ### 2026-11-27, Audio Books Thumbnail Card Grid & Inner Synced Reader (`/audiobooks/[id]`)
 - Updated `/audiobooks` (`AudioBooksClient.tsx`) to a clean **Thumbnail + Title Card Grid** (removed all word-count badges/labels; supports 1000–5000+ word stories).
 - Added optional **Thumbnail Image** upload (`JPG/PNG/WEBP` saved to `public/images/audiobooks/`) in `store.ts` & `POST /api/v1/audiobooks` (50MB audio limit), with default cover fallback.
