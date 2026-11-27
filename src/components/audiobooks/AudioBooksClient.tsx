@@ -324,7 +324,7 @@ export function AudioBooksClient() {
               <Link key={item.id} href={href} className="group block h-full">
                 <Card
                   className={cn(
-                    "card-hover h-full p-1 gap-0 overflow-hidden bg-card border border-border rounded-card shadow-xs flex flex-col justify-between transition-all group-hover:border-primary/50",
+                    "card-hover h-full p-0.5 md:p-0.5 gap-0 overflow-hidden bg-card border border-border rounded-card shadow-xs flex flex-col justify-between transition-all group-hover:border-primary/50",
                     isLocked && "opacity-75"
                   )}
                 >

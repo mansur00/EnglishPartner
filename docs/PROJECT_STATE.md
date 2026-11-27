@@ -2225,7 +2225,7 @@ Entry format:
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
 ### 2026-11-27, Compact Audio Book Cards (Flush Thumbnail, Title-Only)
-- Updated `AudioBooksClient.tsx` cards with `p-1 gap-0` (4px outer card frame) and `rounded-panel` thumbnail container, keeping only the title and compact footer.
+- Updated `AudioBooksClient.tsx` cards with `p-0.5 md:p-0.5 gap-0` (2px outer card frame overriding `Card`'s `md:p-6`) and `rounded-panel` thumbnail container, keeping only the title and compact footer.
 
 ### 2026-11-27, Fix Next.js 16 Cache Components Prerender Error on `/audiobooks/[id]`
 - Added `generateStaticParams()` (from `SEED_AUDIOBOOKS`) and `<Suspense>` boundary in `src/app/(app)/audiobooks/[id]/page.tsx` to satisfy Next.js 16 `cacheComponents: true` build gate (`CLIENT_HOOK_DYNAMIC`), unblocking `npm run build` and GitHub Actions CI.
