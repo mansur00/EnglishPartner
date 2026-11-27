@@ -324,7 +324,7 @@ export function AudioBooksClient() {
               <Link key={item.id} href={href} className="group block h-full">
                 <Card
                   className={cn(
-                    "card-hover h-full overflow-hidden bg-card border border-border rounded-card shadow-xs flex flex-col justify-between transition-all group-hover:border-primary/50",
+                    "card-hover h-full p-0 gap-0 overflow-hidden bg-card border border-border rounded-card shadow-xs flex flex-col justify-between transition-all group-hover:border-primary/50",
                     isLocked && "opacity-75"
                   )}
                 >
@@ -366,19 +366,16 @@ export function AudioBooksClient() {
                       )}
                     </div>
 
-                    {/* Card Title & Short Summary */}
-                    <div className="p-4 sm:p-5 space-y-2 min-w-0">
-                      <h2 className="text-card-title text-foreground group-hover:text-primary transition-colors line-clamp-2 break-words">
+                    {/* Card Title Only */}
+                    <div className="p-3.5 sm:p-4 min-w-0">
+                      <h2 className="text-label text-foreground group-hover:text-primary transition-colors line-clamp-2 break-words">
                         {isBn && item.titleBn ? item.titleBn : item.title}
                       </h2>
-                      <p className="text-meta text-muted-foreground line-clamp-2">
-                        {isBn && item.descriptionBn ? item.descriptionBn : item.description}
-                      </p>
                     </div>
                   </div>
 
                   {/* Card Footer */}
-                  <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-border/60 flex items-center justify-between gap-2 text-chip">
+                  <div className="px-3.5 sm:px-4 pb-3.5 pt-2.5 border-t border-border/60 flex items-center justify-between gap-2 text-chip">
                     <Badge variant="neutral" size="sm" className="truncate">
                       {item.kind === "story_book"
                         ? isBn
