@@ -12,7 +12,7 @@ import { LocaleContext } from "./context.ts";
 
 export function LocaleProvider({
   children,
-  initialLocale = "bn",
+  initialLocale = "en",
   initialTranslationLocale = "bn",
 }: {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ export function LocaleProvider({
     if (isValidGlobalLanguage(initialLocale) && initialLocale !== "none") {
       return initialLocale;
     }
-    return "bn";
+    return "en";
   });
 
   const [translationLocale, setTranslationLocaleState] = useState<TranslationLocale>(() => {

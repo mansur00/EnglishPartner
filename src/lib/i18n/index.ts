@@ -36,10 +36,10 @@ function resolvePath(obj: MessageTree, path: string): string | undefined {
 
 /**
  * Meaning-based message lookup with fallback to English and key.
- * Deterministic default locale is "bn" for hydration safety.
+ * Deterministic default system locale is "en" for hydration safety.
  */
 export function t(key: string, locale?: Locale): string {
-  const targetLocale = locale || "bn";
+  const targetLocale = locale || "en";
   const dict = dictionaries[targetLocale] || dictionaries.en;
   const translated = resolvePath(dict, key);
   if (translated) return translated;

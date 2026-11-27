@@ -9,11 +9,11 @@ export function useLocaleContext(): LocaleContextValue {
   const ctx = useContext(LocaleContext);
   if (!ctx) {
     return {
-      locale: "bn",
+      locale: "en",
       setLocale: () => {},
       translationLocale: "bn",
       setTranslationLocale: () => {},
-      t: (key: string, overrideLocale?: SupportedLocale) => translate(key, overrideLocale || "bn"),
+      t: (key: string, overrideLocale?: SupportedLocale) => translate(key, overrideLocale || "en"),
     };
   }
   return ctx;

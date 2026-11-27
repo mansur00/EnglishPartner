@@ -2224,6 +2224,9 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Default System Language (`en`) & Default Translation Language (`bn`)
+- Updated `src/lib/i18n/provider.tsx`, `src/lib/i18n/use-locale.ts`, and `src/lib/i18n/index.ts` so System Language defaults to `"en"` (English) while Translation Language defaults to `"bn"` (Bangla) for all new/guest/logged-in users unless overridden.
+
 ### 2026-11-27, Priority-Ordered Dashboard & Left Sidebar Navigation
 - Reordered `DashboardClient.tsx` by learning-path priority:
   1. Hero Banner + Today Streak/Goal
