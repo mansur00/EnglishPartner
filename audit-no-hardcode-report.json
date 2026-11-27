@@ -150,7 +150,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 6 times",
+      "detail": "ClassName repeated 8 times",
       "className": "text-chip text-muted-foreground font-mono",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",

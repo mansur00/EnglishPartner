@@ -148,6 +148,14 @@ export function SessionIsolationProvider({
 
       if (!profile) {
         // Guest rule: no session persistence across reloads
+        const prevSessionKey =
+          typeof window !== "undefined" ? sessionStorage.getItem("ecp_session_key") : null;
+        if (prevSessionKey) {
+          sessionStorage.removeItem("ecp_session_key");
+          void fetch(`/api/v1/auth/session?sessionKey=${encodeURIComponent(prevSessionKey)}`, {
+            method: "DELETE",
+          }).catch(() => {});
+        }
         if (prevUid) {
           localStorage.setItem(
             `ecp_u_${prevUid}`,
@@ -202,6 +210,24 @@ export function SessionIsolationProvider({
           }
         }
         setUser(profile);
+
+        // Record / refresh login activity session in Supabase
+        if (typeof window !== "undefined") {
+          let sKey = sessionStorage.getItem("ecp_session_key");
+          if (!sKey) {
+            sKey = `sess-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+            sessionStorage.setItem("ecp_session_key", sKey);
+          }
+          const ua = navigator.userAgent;
+          const deviceLabel = /Mobile|Android|iPhone/i.test(ua)
+            ? "Mobile Browser"
+            : "Desktop Browser";
+          void fetch("/api/v1/auth/session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionKey: sKey, deviceLabel }),
+          }).catch(() => {});
+        }
       }
     } catch {
       setUser(null);

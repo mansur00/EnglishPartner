@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-28, Admin Panel Role Tabs, Session Tracking & Right Sidebar Inspector
+- Added `moderator` role support (`supabase/migrations/20261128_user_sessions.sql`, `src/lib/auth/session.ts`) and `public.user_sessions` table to record per-login active/inactive sessions.
+- Added `/api/v1/auth/session` (`POST` heartbeat, `DELETE` sign-out) wired into `SessionIsolationProvider.tsx`, plus `/api/v1/admin/users/[id]/sessions` (`GET`) and `DELETE /api/v1/admin/users`.
+- Updated `AdminPanelClient.tsx` with separate `Users` vs `Admins & Moderators` sub-tabs and a Right Sidebar (`Sheet`) opening on user tap with session count, active/inactive login history, role selector, account enable/disable/delete, and per-user feature toggles.
+
 ### 2026-11-27, Default System Language (`en`) & Default Translation Language (`bn`)
 - Updated `src/lib/i18n/provider.tsx`, `src/lib/i18n/use-locale.ts`, and `src/lib/i18n/index.ts` so System Language defaults to `"en"` (English) while Translation Language defaults to `"bn"` (Bangla) for all new/guest/logged-in users unless overridden.
 

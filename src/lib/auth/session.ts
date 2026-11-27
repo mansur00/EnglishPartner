@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 
-export type AppUserRole = "user" | "admin";
+export type AppUserRole = "user" | "moderator" | "admin";
 
 export interface UserProfile {
   id: string;
@@ -11,6 +11,8 @@ export interface UserProfile {
   last_active_at?: string | null;
   disabled_features?: string[];
   created_at?: string;
+  session_count?: number;
+  active_session_count?: number;
 }
 
 /**

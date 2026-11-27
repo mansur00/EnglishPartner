@@ -9,6 +9,9 @@ import {
   RefreshIcon,
   SparklesIcon,
   AiLockIcon,
+  Delete02Icon,
+  Clock01Icon,
+  Shield01Icon,
 } from "@hugeicons/core-free-icons";
 import { PageContainer } from "@/components/shared";
 import { Card } from "@/components/ui/card";
@@ -16,6 +19,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { useLocale } from "@/lib/i18n";
 import { useSessionAccess, notifyAppConfigUpdated } from "@/components/auth/SessionIsolationProvider";
 import {
@@ -23,10 +40,22 @@ import {
   type FeatureFlagItem,
 } from "@/lib/features/use-feature-flags";
 import type { AppConfigPayload } from "@/app/api/v1/app-config/route";
-import type { UserProfile } from "@/lib/auth/session";
+import type { AppUserRole, UserProfile } from "@/lib/auth/session";
 
 type AdminTab = "users" | "features" | "system";
+type UserRoleTab = "learners" | "staff";
 type UserFilter = "all" | "active" | "inactive" | "disabled";
+
+interface UserSessionRecord {
+  id: string;
+  user_id: string;
+  session_key: string;
+  started_at: string;
+  last_seen_at: string;
+  ended_at: string | null;
+  is_active: boolean;
+  device_label: string | null;
+}
 
 function getActivityMeta(lastActiveAt?: string | null, nowMs?: number) {
   if (!lastActiveAt || !nowMs) {
@@ -73,9 +102,12 @@ export function AdminPanelClient() {
   const { user: currentUser, ready } = useSessionAccess();
 
   const [activeTab, setActiveTab] = useState<AdminTab>("users");
+  const [roleTab, setRoleTab] = useState<UserRoleTab>("learners");
   const [userFilter, setUserFilter] = useState<UserFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedUserForFeatures, setSelectedUserForFeatures] = useState<string | null>(null);
+  const [inspectedUserId, setInspectedUserId] = useState<string | null>(null);
+  const [userSessions, setUserSessions] = useState<UserSessionRecord[]>([]);
+  const [loadingSessions, setLoadingSessions] = useState(false);
 
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [features, setFeatures] = useState<FeatureFlagItem[]>([]);
@@ -127,7 +159,7 @@ export function AdminPanelClient() {
 
   const handleUpdateUser = async (
     userId: string,
-    patch: { role?: "user" | "admin"; is_active?: boolean; disabled_features?: string[] }
+    patch: { role?: AppUserRole; is_active?: boolean; disabled_features?: string[] }
   ) => {
     setBusyId(userId);
     setStatusMsg(null);
@@ -194,9 +226,63 @@ export function AdminPanelClient() {
     }
   };
 
+  const openUserInspector = useCallback(async (userId: string) => {
+    setInspectedUserId(userId);
+    setLoadingSessions(true);
+    setUserSessions([]);
+    try {
+      const res = await fetch(`/api/v1/admin/users/${encodeURIComponent(userId)}/sessions`, {
+        cache: "no-store",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setUserSessions(Array.isArray(data.sessions) ? data.sessions : []);
+      }
+    } catch {
+      // Ignore session fetch errors
+    } finally {
+      setLoadingSessions(false);
+    }
+  }, []);
+
+  const handleDeleteUser = async (userId: string) => {
+    setBusyId(userId);
+    setStatusMsg(null);
+    try {
+      const res = await fetch(`/api/v1/admin/users?userId=${encodeURIComponent(userId)}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setStatusMsg(data.error || "Delete failed");
+        return;
+      }
+      setUsers((prev) => prev.filter((u) => u.id !== userId));
+      if (inspectedUserId === userId) {
+        setInspectedUserId(null);
+      }
+      setStatusMsg(isBn ? "ইউজার অ্যাকাউন্ট ডিলিট হয়েছে।" : "User account deleted.");
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const learnersCount = useMemo(
+    () => users.filter((u) => u.role === "user").length,
+    [users]
+  );
+  const staffCount = useMemo(
+    () => users.filter((u) => u.role === "admin" || u.role === "moderator").length,
+    [users]
+  );
+
   const filteredUsers = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return users.filter((u) => {
+      const isStaff = u.role === "admin" || u.role === "moderator";
+      if (roleTab === "learners" && isStaff) return false;
+      if (roleTab === "staff" && !isStaff) return false;
+
       const meta = getActivityMeta(u.last_active_at, nowMs);
       if (userFilter === "active" && (!u.is_active || meta.isInactive7d)) return false;
       if (userFilter === "inactive" && !meta.isInactive7d) return false;
@@ -207,7 +293,7 @@ export function AdminPanelClient() {
         (u.full_name ?? "").toLowerCase().includes(q)
       );
     });
-  }, [users, userFilter, searchQuery, nowMs]);
+  }, [users, roleTab, userFilter, searchQuery, nowMs]);
 
   const activeTodayCount = useMemo(
     () =>
@@ -247,7 +333,7 @@ export function AdminPanelClient() {
     );
   }
 
-  const managedUser = users.find((u) => u.id === selectedUserForFeatures) ?? null;
+  const inspectedUser = users.find((u) => u.id === inspectedUserId) ?? null;
 
   return (
     <PageContainer className="py-6 space-y-6 pb-16">
@@ -352,10 +438,39 @@ export function AdminPanelClient() {
             </Card>
           </div>
 
+          {/* Role Separation Sub-Tabs: Users vs Admins & Moderators */}
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={roleTab === "learners" ? "default" : "outline"}
+              onClick={() => setRoleTab("learners")}
+              className="gap-1.5"
+            >
+              <HugeiconsIcon icon={UserGroupIcon} size={15} />
+              <span>{isBn ? `সাধারণ ইউজার (${learnersCount})` : `Users (${learnersCount})`}</span>
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              variant={roleTab === "staff" ? "default" : "outline"}
+              onClick={() => setRoleTab("staff")}
+              className="gap-1.5"
+            >
+              <HugeiconsIcon icon={Shield01Icon} size={15} />
+              <span>
+                {isBn
+                  ? `অ্যাডমিন ও মডারেটর (${staffCount})`
+                  : `Admins & Moderators (${staffCount})`}
+              </span>
+            </Button>
+          </div>
+
           {/* Search & Filter */}
           <Card className="p-4 bg-card border border-border rounded-card flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <Input
               type="text"
+              inputSize="sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isBn ? "ইমেইল বা নাম দিয়ে খুঁজুন..." : "Search by email or name..."}
@@ -383,71 +498,97 @@ export function AdminPanelClient() {
             </div>
           </Card>
 
-          {/* Users List */}
+          {/* Users List (Tap any row to open Right Sidebar Session Inspector) */}
           <div className="space-y-3">
-            {filteredUsers.map((u) => {
-              const isSelf = u.id === currentUser?.id;
-              const activity = getActivityMeta(u.last_active_at, nowMs);
-              const disabledList = u.disabled_features ?? [];
-              const isEditingFeatures = selectedUserForFeatures === u.id;
+            {filteredUsers.length === 0 ? (
+              <Card className="p-6 text-center text-meta text-muted-foreground">
+                {isBn ? "এই ট্যাবে কোনো ইউজার পাওয়া যায়নি।" : "No users found in this tab."}
+              </Card>
+            ) : (
+              filteredUsers.map((u) => {
+                const isSelf = u.id === currentUser?.id;
+                const activity = getActivityMeta(u.last_active_at, nowMs);
+                const disabledList = u.disabled_features ?? [];
+                const isInspected = inspectedUserId === u.id;
 
-              return (
-                <Card key={u.id} className="p-4 bg-card border border-border rounded-card space-y-3">
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-                    <div className="min-w-0 space-y-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-label text-foreground">
-                          {u.full_name || u.email}
-                        </p>
-                        <Badge variant={u.role === "admin" ? "brand" : "outline"} size="sm">
-                          {u.role.toUpperCase()}
-                        </Badge>
-                        <Badge variant={u.is_active ? "success" : "error"} size="sm">
-                          {u.is_active ? "Enabled" : "Disabled"}
-                        </Badge>
-                        <Badge variant={activity.variant} size="sm">
-                          {isBn ? activity.labelBn : activity.labelEn}
-                        </Badge>
-                        {disabledList.length > 0 && (
-                          <Badge variant="warning" size="sm">
-                            {disabledList.length} feature(s) off
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="text-chip text-muted-foreground font-mono">
-                        {u.email}
-                        {u.last_active_at &&
-                          ` · Last active: ${new Date(u.last_active_at).toLocaleDateString()}`}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2 shrink-0">
-                      <Button
-                        type="button"
-                        size="xs"
-                        variant={isEditingFeatures ? "default" : "outline"}
-                        onClick={() =>
-                          setSelectedUserForFeatures(isEditingFeatures ? null : u.id)
-                        }
-                      >
-                        {isBn ? "ফিচার কন্ট্রোল" : "User Features"}
-                      </Button>
-
-                      {!isSelf && (
-                        <>
-                          <Button
-                            type="button"
-                            size="xs"
-                            variant="outline"
-                            disabled={busyId === u.id}
-                            onClick={() =>
-                              handleUpdateUser(u.id, {
-                                role: u.role === "admin" ? "user" : "admin",
-                              })
+                return (
+                  <Card
+                    key={u.id}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => void openUserInspector(u.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        void openUserInspector(u.id);
+                      }
+                    }}
+                    className={`p-4 rounded-card transition-all cursor-pointer ${
+                      isInspected
+                        ? "bg-primary/5 border border-primary shadow-xs"
+                        : "bg-card border border-border hover:border-primary/40"
+                    }`}
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                      <div className="min-w-0 space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-label text-foreground">
+                            {u.full_name || u.email}
+                          </p>
+                          <Badge
+                            variant={
+                              u.role === "admin"
+                                ? "brand"
+                                : u.role === "moderator"
+                                  ? "info"
+                                  : "outline"
                             }
+                            size="sm"
                           >
-                            {u.role === "admin" ? "Make User" : "Make Admin"}
-                          </Button>
+                            {u.role.toUpperCase()}
+                          </Badge>
+                          <Badge variant={u.is_active ? "success" : "error"} size="sm">
+                            {u.is_active ? "Enabled" : "Disabled"}
+                          </Badge>
+                          <Badge variant={activity.variant} size="sm">
+                            {isBn ? activity.labelBn : activity.labelEn}
+                          </Badge>
+                          <Badge variant="neutral" size="sm" className="font-mono">
+                            {u.session_count ?? 0}{" "}
+                            {(u.session_count ?? 0) === 1 ? "session" : "sessions"}
+                          </Badge>
+                          {(u.active_session_count ?? 0) > 0 && (
+                            <Badge variant="success" size="sm" className="font-mono">
+                              {u.active_session_count} live
+                            </Badge>
+                          )}
+                          {disabledList.length > 0 && (
+                            <Badge variant="warning" size="sm">
+                              {disabledList.length} off
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-chip text-muted-foreground font-mono">
+                          {u.email}
+                          {u.last_active_at &&
+                            ` · Last active: ${new Date(u.last_active_at).toLocaleDateString()}`}
+                        </p>
+                      </div>
+
+                      <div
+                        className="flex flex-wrap items-center gap-2 shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Button
+                          type="button"
+                          size="xs"
+                          variant={isInspected ? "default" : "outline"}
+                          onClick={() => void openUserInspector(u.id)}
+                        >
+                          {isBn ? "সেশন ও কন্ট্রোল" : "Sessions & Controls"}
+                        </Button>
+
+                        {!isSelf && (
                           <Button
                             type="button"
                             size="xs"
@@ -459,51 +600,13 @@ export function AdminPanelClient() {
                           >
                             {u.is_active ? "Disable" : "Enable"}
                           </Button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Per-User Feature Override Drawer */}
-                  {isEditingFeatures && managedUser && (
-                    <div className="rounded-panel bg-muted/35 border border-border/60 p-3.5 space-y-2.5">
-                      <p className="text-chip text-foreground">
-                        {isBn
-                          ? `${managedUser.full_name || managedUser.email}-এর জন্য ফিচার অন/অফ:`
-                          : `Per-User Features for ${managedUser.full_name || managedUser.email}:`}
-                      </p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-                        {features.map((feat) => {
-                          const userAllowed = !disabledList.includes(feat.key);
-                          return (
-                            <div
-                              key={feat.key}
-                              className="flex items-center justify-between gap-2 rounded-control bg-card border border-border px-3 py-2"
-                            >
-                              <span className="text-chip text-foreground truncate">
-                                {isBn ? feat.label_bn : feat.label}
-                              </span>
-                              <Switch
-                                checked={userAllowed}
-                                disabled={busyId === u.id}
-                                onCheckedChange={(checked) => {
-                                  const nextDisabled = checked
-                                    ? disabledList.filter((k) => k !== feat.key)
-                                    : [...new Set([...disabledList, feat.key])];
-                                  void handleUpdateUser(u.id, {
-                                    disabled_features: nextDisabled,
-                                  });
-                                }}
-                              />
-                            </div>
-                          );
-                        })}
+                        )}
                       </div>
                     </div>
-                  )}
-                </Card>
-              );
-            })}
+                  </Card>
+                );
+              })
+            )}
           </div>
         </div>
       )}
@@ -675,6 +778,222 @@ export function AdminPanelClient() {
           </div>
         </Card>
       )}
+
+      {/* Right Sidebar Sheet: User Sessions, Role & Feature Controls */}
+      <Sheet
+        open={Boolean(inspectedUser)}
+        onOpenChange={(open) => {
+          if (!open) setInspectedUserId(null);
+        }}
+      >
+        <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto p-6 space-y-5">
+          {inspectedUser && (
+            <>
+              <SheetHeader className="pb-3 border-b border-border text-left">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge
+                    variant={
+                      inspectedUser.role === "admin"
+                        ? "brand"
+                        : inspectedUser.role === "moderator"
+                          ? "info"
+                          : "outline"
+                    }
+                    size="sm"
+                  >
+                    {inspectedUser.role.toUpperCase()}
+                  </Badge>
+                  <Badge variant={inspectedUser.is_active ? "success" : "error"} size="sm">
+                    {inspectedUser.is_active ? "Enabled" : "Disabled"}
+                  </Badge>
+                </div>
+                <SheetTitle className="text-card-title text-foreground">
+                  {inspectedUser.full_name || inspectedUser.email}
+                </SheetTitle>
+                <SheetDescription className="font-mono text-chip">
+                  {inspectedUser.email}
+                </SheetDescription>
+              </SheetHeader>
+
+              {/* Session Summary Counts */}
+              <div className="grid grid-cols-3 gap-2.5">
+                <Card className="p-3 bg-muted/40 border border-border rounded-control text-center">
+                  <p className="text-chip text-muted-foreground">
+                    {isBn ? "মোট সেশন" : "Total"}
+                  </p>
+                  <p className="text-card-title text-foreground mt-0.5 font-mono">
+                    {userSessions.length || inspectedUser.session_count || 0}
+                  </p>
+                </Card>
+                <Card className="p-3 bg-status-success-bg/50 border border-border rounded-control text-center">
+                  <p className="text-chip text-status-success-ink">
+                    {isBn ? "অ্যাক্টিভ" : "Active"}
+                  </p>
+                  <p className="text-card-title text-status-success-ink mt-0.5 font-mono">
+                    {userSessions.filter((s) => s.is_active).length}
+                  </p>
+                </Card>
+                <Card className="p-3 bg-muted/40 border border-border rounded-control text-center">
+                  <p className="text-chip text-muted-foreground">
+                    {isBn ? "ইনঅ্যাক্টিভ" : "Inactive"}
+                  </p>
+                  <p className="text-card-title text-muted-foreground mt-0.5 font-mono">
+                    {userSessions.filter((s) => !s.is_active).length}
+                  </p>
+                </Card>
+              </div>
+
+              {/* Login & Session History */}
+              <div className="space-y-2.5">
+                <div className="flex items-center gap-2 text-label text-foreground">
+                  <HugeiconsIcon icon={Clock01Icon} size={16} className="text-primary" />
+                  <span>{isBn ? "লগইন ও সেশন অ্যাক্টিভিটি" : "Login & Session History"}</span>
+                </div>
+
+                {loadingSessions ? (
+                  <p className="text-meta text-muted-foreground">
+                    {isBn ? "সেশন লোড হচ্ছে..." : "Loading sessions..."}
+                  </p>
+                ) : userSessions.length === 0 ? (
+                  <div className="p-4 rounded-panel bg-muted/30 border border-border text-meta text-muted-foreground">
+                    {isBn
+                      ? "এখনো কোনো সেশন লগ পাওয়া যায়নি। ইউজার পরবর্তী লগইন/অ্যাক্টিভিটিতে সেশন রেকর্ড হবে।"
+                      : "No recorded sessions yet. Sessions are logged automatically on next user login/activity."}
+                  </div>
+                ) : (
+                  <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+                    {userSessions.map((sess) => (
+                      <div
+                        key={sess.id}
+                        className="p-3 rounded-control bg-card border border-border flex items-center justify-between gap-2"
+                      >
+                        <div className="min-w-0 space-y-0.5">
+                          <p className="text-chip text-foreground truncate">
+                            {sess.device_label || "Web Browser"}
+                          </p>
+                          <p className="text-chip text-muted-foreground font-mono">
+                            In: {new Date(sess.started_at).toLocaleString()}
+                          </p>
+                          <p className="text-chip text-muted-foreground font-mono">
+                            Seen: {new Date(sess.last_seen_at).toLocaleString()}
+                          </p>
+                        </div>
+                        <Badge
+                          variant={sess.is_active ? "success" : "neutral"}
+                          size="sm"
+                          className="shrink-0"
+                        >
+                          {sess.is_active ? "Active" : "Inactive"}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Role & Account Controls */}
+              {inspectedUser.id !== currentUser?.id && (
+                <div className="space-y-3 pt-3 border-t border-border">
+                  <div className="space-y-1.5">
+                    <label className="text-chip text-foreground block">
+                      {isBn ? "ইউজার রোল পরিবর্তন করুন" : "Assign Role"}
+                    </label>
+                    <Select
+                      value={inspectedUser.role}
+                      onValueChange={(val) => {
+                        if (val) {
+                          void handleUpdateUser(inspectedUser.id, {
+                            role: val as AppUserRole,
+                          });
+                        }
+                      }}
+                    >
+                      <SelectTrigger size="sm" className="w-full text-label">
+                        <SelectValue>{inspectedUser.role.toUpperCase()}</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="user">USER (Learner)</SelectItem>
+                        <SelectItem value="moderator">MODERATOR</SelectItem>
+                        <SelectItem value="admin">ADMIN</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant={inspectedUser.is_active ? "destructive" : "default"}
+                      disabled={busyId === inspectedUser.id}
+                      onClick={() =>
+                        void handleUpdateUser(inspectedUser.id, {
+                          is_active: !inspectedUser.is_active,
+                        })
+                      }
+                      className="flex-1"
+                    >
+                      {inspectedUser.is_active
+                        ? isBn
+                          ? "অ্যাকাউন্ট বন্ধ করুন"
+                          : "Disable Account"
+                        : isBn
+                          ? "অ্যাকাউন্ট চালু করুন"
+                          : "Enable Account"}
+                    </Button>
+
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      disabled={busyId === inspectedUser.id}
+                      onClick={() => void handleDeleteUser(inspectedUser.id)}
+                      className="text-destructive border-destructive/30 hover:bg-destructive/10 gap-1"
+                    >
+                      <HugeiconsIcon icon={Delete02Icon} size={15} />
+                      <span>{isBn ? "ডিলিট" : "Delete"}</span>
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Per-User Feature Controls */}
+              <div className="space-y-2.5 pt-3 border-t border-border">
+                <p className="text-label text-foreground">
+                  {isBn ? "প্রতি-ইউজার ফিচার কন্ট্রোল" : "Per-User Feature Access"}
+                </p>
+                <div className="space-y-2">
+                  {features.map((feat) => {
+                    const disabledList = inspectedUser.disabled_features ?? [];
+                    const userAllowed = !disabledList.includes(feat.key);
+                    return (
+                      <div
+                        key={feat.key}
+                        className="flex items-center justify-between gap-2 rounded-control bg-muted/30 border border-border px-3 py-2"
+                      >
+                        <span className="text-chip text-foreground truncate">
+                          {isBn ? feat.label_bn : feat.label}
+                        </span>
+                        <Switch
+                          checked={userAllowed}
+                          disabled={busyId === inspectedUser.id}
+                          onCheckedChange={(checked) => {
+                            const nextDisabled = checked
+                              ? disabledList.filter((k) => k !== feat.key)
+                              : [...new Set([...disabledList, feat.key])];
+                            void handleUpdateUser(inspectedUser.id, {
+                              disabled_features: nextDisabled,
+                            });
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
     </PageContainer>
   );
 }
