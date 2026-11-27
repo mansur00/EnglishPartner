@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupPrefix, InputGroupSuffix } from "@/components/ui/input-group";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tag } from "@/components/ui/tag";
-import { Pill } from "@/components/ui/pill";
 import {
   Select,
   SelectContent,

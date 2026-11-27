@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Full System, Build, UX & Supabase Audit
+- Verified `npm run grammar:check` (130 categories, 18 rules, 339 tokens) and `npm run build` (185/185 pages, 0 errors).
+- Verified Supabase REST tables (`profiles`, `feature_flags`, `app_settings` all HTTP 200) and live `/api/v1/features` + `/api/v1/app-config` endpoints.
+- Removed unused `Pill` import in `src/components/discovery/ExploreClient.tsx`.
+
 ### 2026-11-27, Systematic Animated Rainbow Focus on All Input & Textarea Fields
 - Root cause fixed: `<input>`/`<textarea>` are void/replaced elements that cannot render `::before` pseudo-elements (so `focus:rainbow-border` in `input-variants.ts` never rendered on standalone `<Input>`).
 - Updated `src/components/ui/input.tsx` so non-ghost `<Input>` variants wrap `<InputPrimitive>` in a `data-slot="input-wrapper"` container that applies the frozen `.rainbow-border` on focus/typing (while `variant="ghost"` delegates to `<InputGroup>`).
