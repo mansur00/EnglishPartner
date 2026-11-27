@@ -97,12 +97,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 8 times",
+      "detail": "ClassName repeated 9 times",
       "className": "flex flex-col sm:flex-row sm:items-center justify-between gap-3",
       "files": [
         "src/app/(app)/vocabulary/page.tsx",
         "src/components/admin/AdminDashboardClient.tsx",
         "src/components/admin/AdminPanelClient.tsx",
+        "src/components/audiobooks/AudioBookUploadClient.tsx",
         "src/components/discovery/ExploreClient.tsx",
         "src/components/grammar/WritingCheckerPanel.tsx",
         "src/components/practice/PersonalizedPracticeCard.tsx",
@@ -138,6 +139,14 @@
         "src/components/settings/AdminControlTab.tsx",
         "src/components/settings/SettingsClient.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "size-10 rounded-pill bg-primary/10 text-primary flex items-center justify-center",
+      "files": [
+        "src/app/(app)/vocabulary/page.tsx",
+        "src/components/audiobooks/AudioBookUploadClient.tsx"
       ]
     },
     {
@@ -354,10 +363,11 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "p-8 text-center text-meta text-muted-foreground",
       "files": [
         "src/components/audiobooks/AudioBookReaderClient.tsx",
+        "src/components/audiobooks/AudioBookUploadClient.tsx",
         "src/components/audiobooks/AudioBooksClient.tsx",
         "src/components/shared/LoadingBox.tsx"
       ]
@@ -379,6 +389,23 @@
       "files": [
         "src/components/audiobooks/AudioBookReaderClient.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "p-5 bg-card border border-border rounded-card shadow-xs space-y-3",
+      "files": [
+        "src/components/audiobooks/AudioBookUploadClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 4 times",
+      "className": "text-chip text-muted-foreground truncate",
+      "files": [
+        "src/components/audiobooks/AudioBookUploadClient.tsx",
+        "src/components/learning/NicheLadderRoadmap.tsx",
+        "src/components/navigation/LanguageSwitcher.tsx",
+        "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },
     {
@@ -493,15 +520,6 @@
       "className": "text-chip text-foreground flex items-center gap-1.5",
       "files": [
         "src/components/learning/ConversationInspectorSidebar.tsx",
-        "src/components/vocabulary/MagicWordSidebar.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 3 times",
-      "className": "text-chip text-muted-foreground truncate",
-      "files": [
-        "src/components/learning/NicheLadderRoadmap.tsx",
-        "src/components/navigation/LanguageSwitcher.tsx",
         "src/components/vocabulary/MagicWordSidebar.tsx"
       ]
     },

@@ -47,6 +47,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - images/media (*.svg, *.png, *.jpg, *.jpeg, *.gif, *.webp)
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api/v1/audiobooks|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

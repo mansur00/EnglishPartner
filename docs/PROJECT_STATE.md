@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Audio Books Upload Inner Page (`/audiobooks/upload`), Control Height Parity & Upload Fix
+- Replaced the upload modal popup with a dedicated 2-column studio page `/audiobooks/upload` (`src/app/(app)/audiobooks/upload/page.tsx` + `src/components/audiobooks/AudioBookUploadClient.tsx`) featuring styled Thumbnail Cover (live preview) & Audio File (50MB) dropzones.
+- Fixed `/audiobooks` control bar height consistency (`Button size="sm"`, `Input inputSize="sm"`, `SelectTrigger size="sm"` all matching `h-control-sm`) and aligned card heights (`flex flex-col h-full` + `flex-1` title slot).
+- Fixed `POST /api/v1/audiobooks` multipart file detection (`isUploadedFileLike`), made `description` optional, and excluded `/api/v1/audiobooks` from `proxy.ts` middleware body buffering so large audio uploads succeed reliably.
+
 ### 2026-11-27, Compact Audio Book Cards (Flush Thumbnail, Title-Only)
 - Updated `AudioBooksClient.tsx` cards with `p-0.5 md:p-0.5 gap-0` (2px outer card frame overriding `Card`'s `md:p-6`) and `rounded-panel` thumbnail container, keeping only the title and compact footer.
 
