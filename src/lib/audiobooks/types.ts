@@ -11,6 +11,7 @@ export interface AudioBookItem {
   descriptionBn: string;
   level: AudioBookLevel;
   category: string;
+  thumbnailUrl?: string;
   audioUrl?: string;
   durationLabel?: string;
   storyText?: string;

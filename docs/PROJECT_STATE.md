@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Audio Books Thumbnail Card Grid & Inner Synced Reader (`/audiobooks/[id]`)
+- Updated `/audiobooks` (`AudioBooksClient.tsx`) to a clean **Thumbnail + Title Card Grid** (removed all word-count badges/labels; supports 1000–5000+ word stories).
+- Added optional **Thumbnail Image** upload (`JPG/PNG/WEBP` saved to `public/images/audiobooks/`) in `store.ts` & `POST /api/v1/audiobooks` (50MB audio limit), with default cover fallback.
+- Created inner reader page `/audiobooks/[id]` (`AudioBookReaderClient.tsx`) with **Middle Content Area** (full story text with live sentence highlight & auto-scroll synced to audio/TTS, or listening focus view) and **Fixed Right Sidebar** (Play/Pause, -10s/+10s, progress scrubber, Voice Sync, speed 0.75x–1.5x, Admin delete).
+
 ### 2026-11-27, Audio Books & Synced Story Books (`/audiobooks`)
 - Added `/audiobooks` (`src/app/(app)/audiobooks/page.tsx` + `src/components/audiobooks/AudioBooksClient.tsx`) linked from Sidebar and mobile Header drawer.
 - Supports 2 modes: **Audio Only** (local MP3/WAV/M4A/OGG uploads with speed 0.75x–1.5x & -10s/+10s seek) and **Story Book (400–1000 words)** (4 curated starter stories + Admin uploads with live sentence-by-sentence highlight & auto-scroll synced to uploaded audio OR built-in TTS voice).

@@ -56,11 +56,10 @@
   "e_inline_styles": [],
   "f_duplication": [
     {
-      "detail": "ClassName repeated 7 times",
+      "detail": "ClassName repeated 6 times",
       "className": "flex flex-wrap items-center justify-between gap-3",
       "files": [
         "src/app/(app)/dashboard/level-assessment/page.tsx",
-        "src/components/audiobooks/AudioBooksClient.tsx",
         "src/components/learning/AudioPlayer.tsx",
         "src/components/practice/ReadAloudCard.tsx",
         "src/components/quiz/ConversationQuizPlayClient.tsx",
@@ -233,6 +232,15 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "flex items-center gap-2 text-chip text-muted-foreground",
+      "files": [
+        "src/app/page.tsx",
+        "src/components/audiobooks/AudioBookReaderClient.tsx",
+        "src/components/discovery/ExploreClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "px-3 py-1 rounded-pill bg-card border border-border text-chip text-foreground",
       "files": [
         "src/app/page.tsx"
@@ -347,6 +355,34 @@
     },
     {
       "detail": "ClassName repeated 3 times",
+      "className": "p-8 text-center text-meta text-muted-foreground",
+      "files": [
+        "src/components/audiobooks/AudioBookReaderClient.tsx",
+        "src/components/audiobooks/AudioBooksClient.tsx",
+        "src/components/shared/LoadingBox.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 13 times",
+      "className": "text-chip uppercase tracking-wider text-muted-foreground",
+      "files": [
+        "src/components/audiobooks/AudioBookReaderClient.tsx",
+        "src/components/discovery/ExploreClient.tsx",
+        "src/components/practice/DailyPracticeClient.tsx",
+        "src/components/professions/ProfessionScenariosGrid.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "lg:hidden p-4 bg-card border border-border rounded-card shadow-xs",
+      "files": [
+        "src/components/audiobooks/AudioBookReaderClient.tsx",
+        "src/components/spelling/SpellMasterClient.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
       "className": "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10",
       "files": [
         "src/components/audiobooks/AudioBooksClient.tsx",
@@ -392,16 +428,6 @@
       "className": "btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
-      ]
-    },
-    {
-      "detail": "ClassName repeated 12 times",
-      "className": "text-chip uppercase tracking-wider text-muted-foreground",
-      "files": [
-        "src/components/discovery/ExploreClient.tsx",
-        "src/components/practice/DailyPracticeClient.tsx",
-        "src/components/professions/ProfessionScenariosGrid.tsx",
-        "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
     {

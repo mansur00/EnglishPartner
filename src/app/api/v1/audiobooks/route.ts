@@ -5,12 +5,15 @@ import {
   getAllAudioBooks,
   readCustomAudioBooks,
   saveUploadedAudioFile,
+  saveUploadedThumbnailFile,
   writeCustomAudioBooks,
 } from "@/lib/audiobooks/store";
-import { countWords, type AudioBookItem } from "@/lib/audiobooks/types";
+import type { AudioBookItem } from "@/lib/audiobooks/types";
 
-const MAX_AUDIO_BYTES = 30 * 1024 * 1024; // 30 MB
+const MAX_AUDIO_BYTES = 50 * 1024 * 1024; // 50 MB for longer 1000-5000 word stories
+const MAX_THUMB_BYTES = 5 * 1024 * 1024; // 5 MB
 const ALLOWED_AUDIO_EXTS = new Set([".mp3", ".wav", ".m4a", ".ogg", ".webm"]);
+const ALLOWED_IMAGE_EXTS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
 const CreateAudioBookSchema = z.object({
   kind: z.enum(["audio_only", "story_book"]),
@@ -20,7 +23,7 @@ const CreateAudioBookSchema = z.object({
   descriptionBn: z.string().trim().max(600).optional(),
   level: z.enum(["A1", "A2", "B1", "B2", "C1"]).default("A2"),
   category: z.string().trim().min(2).max(80).default("Listening"),
-  summaryBn: z.string().trim().max(1200).optional(),
+  summaryBn: z.string().trim().max(2000).optional(),
   storyText: z.string().trim().optional(),
   durationLabel: z.string().trim().max(40).optional(),
 });
@@ -65,47 +68,65 @@ export async function POST(req: Request) {
     }
 
     const data = parsed.data;
-    const fileEntry = formData.get("audioFile");
-    const hasFile = fileEntry instanceof File && fileEntry.size > 0;
+    const audioEntry = formData.get("audioFile");
+    const hasAudio = audioEntry instanceof File && audioEntry.size > 0;
+    const thumbEntry = formData.get("thumbnailFile");
+    const hasThumb = thumbEntry instanceof File && thumbEntry.size > 0;
 
-    if (data.kind === "audio_only" && !hasFile) {
+    if (data.kind === "audio_only" && !hasAudio) {
       return Response.json(
         { error: "AUDIO_REQUIRED", message: "Please upload an audio file for Audio Only mode." },
         { status: 400 }
       );
     }
 
-    if (data.kind === "story_book") {
-      const wc = countWords(data.storyText ?? "");
-      if (wc < 50) {
-        return Response.json(
-          { error: "STORY_TOO_SHORT", message: "Story text should have at least 50 words (recommended 400–1000 words)." },
-          { status: 400 }
-        );
-      }
+    if (data.kind === "story_book" && (!data.storyText || data.storyText.length < 20)) {
+      return Response.json(
+        { error: "STORY_REQUIRED", message: "Please provide the story text for Story Book mode." },
+        { status: 400 }
+      );
     }
 
     let audioUrl: string | undefined;
-    if (hasFile) {
-      const dotIdx = fileEntry.name.lastIndexOf(".");
-      const ext = dotIdx >= 0 ? fileEntry.name.slice(dotIdx).toLowerCase() : "";
+    if (hasAudio) {
+      const dotIdx = audioEntry.name.lastIndexOf(".");
+      const ext = dotIdx >= 0 ? audioEntry.name.slice(dotIdx).toLowerCase() : "";
       if (!ALLOWED_AUDIO_EXTS.has(ext)) {
         return Response.json(
-          { error: "UNSUPPORTED_AUDIO_FORMAT", message: "Supported formats: MP3, WAV, M4A, OGG, WEBM." },
+          { error: "UNSUPPORTED_AUDIO_FORMAT", message: "Supported audio formats: MP3, WAV, M4A, OGG, WEBM." },
           { status: 400 }
         );
       }
-      if (fileEntry.size > MAX_AUDIO_BYTES) {
+      if (audioEntry.size > MAX_AUDIO_BYTES) {
         return Response.json(
-          { error: "FILE_TOO_LARGE", message: "Maximum audio file size is 30MB." },
+          { error: "FILE_TOO_LARGE", message: "Maximum audio file size is 50MB." },
           { status: 400 }
         );
       }
-      const arrayBuf = await fileEntry.arrayBuffer();
-      audioUrl = saveUploadedAudioFile(fileEntry.name, Buffer.from(arrayBuf));
+      const arrayBuf = await audioEntry.arrayBuffer();
+      audioUrl = saveUploadedAudioFile(audioEntry.name, Buffer.from(arrayBuf));
     }
 
-    const wordCount = data.storyText ? countWords(data.storyText) : undefined;
+    let thumbnailUrl: string | undefined;
+    if (hasThumb) {
+      const dotIdx = thumbEntry.name.lastIndexOf(".");
+      const ext = dotIdx >= 0 ? thumbEntry.name.slice(dotIdx).toLowerCase() : "";
+      if (!ALLOWED_IMAGE_EXTS.has(ext)) {
+        return Response.json(
+          { error: "UNSUPPORTED_IMAGE_FORMAT", message: "Supported thumbnail formats: JPG, PNG, WEBP." },
+          { status: 400 }
+        );
+      }
+      if (thumbEntry.size > MAX_THUMB_BYTES) {
+        return Response.json(
+          { error: "THUMB_TOO_LARGE", message: "Maximum thumbnail image size is 5MB." },
+          { status: 400 }
+        );
+      }
+      const arrayBuf = await thumbEntry.arrayBuffer();
+      thumbnailUrl = saveUploadedThumbnailFile(thumbEntry.name, Buffer.from(arrayBuf));
+    }
+
     const newItem: AudioBookItem = {
       id: `ab-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       kind: data.kind,
@@ -115,11 +136,11 @@ export async function POST(req: Request) {
       descriptionBn: data.descriptionBn || data.description,
       level: data.level,
       category: data.category,
+      thumbnailUrl,
       audioUrl,
       durationLabel: data.durationLabel,
       storyText: data.storyText,
       summaryBn: data.summaryBn,
-      wordCount,
       createdAt: new Date().toISOString(),
       isBuiltIn: false,
     };
