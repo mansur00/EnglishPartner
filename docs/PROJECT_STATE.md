@@ -2224,6 +2224,16 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Priority-Ordered Dashboard & Left Sidebar Navigation
+- Reordered `DashboardClient.tsx` by learning-path priority:
+  1. Hero Banner + Today Streak/Goal
+  2. Priority 1 (Full-width Rainbow): Daily English Conversations (`/daily-practice`, `/explore`)
+  3. Priority 2 (Core Speaking & Listening): AI Conversation Partner (`/roleplay`) + Audio Books & Story Books (`/audiobooks`)
+  4. Priority 3 (Core Foundations): Grammar Path (`/grammar-path`) + Vocabulary & Magic Cards (`/vocabulary`) + Spell Master (`/spell-master`)
+  5. Priority 4 (Assessment, Tools & Career): Level Assessment Quiz + Conversation Quiz Practice + What Should I Say? + Career & Profession Tracks (`/professions`)
+- Wired `useFeatureFlags()` (`isEnabled`) into Dashboard cards so Admin feature toggles hide disabled modules consistently.
+- Reordered `Sidebar.tsx` and mobile `Header.tsx` drawer to match the same learning-path priority (`Dashboard -> Daily Practice -> Explore -> AI Partner -> Audio Books -> Grammar Path -> My Vocabulary -> Spell Master -> Quiz -> What Should I Say? -> My Progress -> Settings`).
+
 ### 2026-11-27, Audio Books Upload Inner Page (`/audiobooks/upload`), Control Height Parity & Upload Fix
 - Replaced the upload modal popup with a dedicated 2-column studio page `/audiobooks/upload` (`src/app/(app)/audiobooks/upload/page.tsx` + `src/components/audiobooks/AudioBookUploadClient.tsx`) featuring styled Thumbnail Cover (live preview) & Audio File (50MB) dropzones.
 - Fixed `/audiobooks` control bar height consistency (`Button size="sm"`, `Input inputSize="sm"`, `SelectTrigger size="sm"` all matching `h-control-sm`) and aligned card heights (`flex flex-col h-full` + `flex-1` title slot).

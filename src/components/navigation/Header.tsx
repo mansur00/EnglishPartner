@@ -94,11 +94,15 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
 
   const mobileNavLinks = [
     { name: t("nav.dashboard", locale), href: "/dashboard", icon: DashboardSquare01Icon },
-    { name: t("nav.explore", locale), href: "/explore", icon: CompassIcon },
     { name: t("nav.dailyPractice", locale), href: "/daily-practice", icon: Calendar03Icon },
-    { name: t("nav.grammarPath", locale), href: "/grammar-path", icon: BookOpen01Icon },
-    { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
+    { name: t("nav.explore", locale), href: "/explore", icon: CompassIcon },
     { name: t("nav.roleplay", locale), href: "/roleplay", icon: BotIcon, featureKey: "ai_partner" },
+    {
+      name: locale === "bn" ? "অডিও বুক" : "Audio Books",
+      href: "/audiobooks",
+      icon: HeadphonesIcon,
+    },
+    { name: t("nav.grammarPath", locale), href: "/grammar-path", icon: BookOpen01Icon },
     { name: t("nav.vocabulary", locale), href: "/vocabulary", icon: Bookmark02Icon },
     {
       name: locale === "bn" ? "বানান মাস্টার" : "Spell Master",
@@ -106,11 +110,7 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
       icon: SparklesIcon,
       featureKey: "spell_master",
     },
-    {
-      name: locale === "bn" ? "অডিও বুক" : "Audio Books",
-      href: "/audiobooks",
-      icon: HeadphonesIcon,
-    },
+    { name: t("nav.sayIt", locale), href: "/what-should-i-say", icon: SparklesIcon },
     { name: t("nav.progress", locale), href: "/progress", icon: Analytics01Icon },
     { name: t("nav.settings", locale), href: "/settings", icon: Settings01Icon },
   ].filter((item) => !item.featureKey || isEnabled(item.featureKey));

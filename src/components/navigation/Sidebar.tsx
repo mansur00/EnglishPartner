@@ -46,6 +46,12 @@ export function Sidebar() {
       active: pathname.startsWith("/dashboard"),
     },
     {
+      name: t("nav.dailyPractice", locale),
+      href: "/daily-practice",
+      icon: Calendar03Icon,
+      active: pathname === "/daily-practice",
+    },
+    {
       name: t("nav.explore", locale),
       href: "/explore",
       icon: CompassIcon,
@@ -55,29 +61,23 @@ export function Sidebar() {
         pathname.startsWith("/professions"),
     },
     {
-      name: t("nav.dailyPractice", locale),
-      href: "/daily-practice",
-      icon: Calendar03Icon,
-      active: pathname === "/daily-practice",
+      name: t("nav.roleplay", locale),
+      href: "/roleplay",
+      icon: BotIcon,
+      active: pathname === "/roleplay",
+      featureKey: "ai_partner",
+    },
+    {
+      name: locale === "bn" ? "অডিও বুক" : "Audio Books",
+      href: "/audiobooks",
+      icon: HeadphonesIcon,
+      active: pathname.startsWith("/audiobooks"),
     },
     {
       name: t("nav.grammarPath", locale),
       href: "/grammar-path",
       icon: BookOpen01Icon,
       active: pathname.startsWith("/grammar-path"),
-    },
-    {
-      name: t("nav.sayIt", locale),
-      href: "/what-should-i-say",
-      icon: SparklesIcon,
-      active: pathname === "/what-should-i-say",
-    },
-    {
-      name: t("nav.roleplay", locale),
-      href: "/roleplay",
-      icon: BotIcon,
-      active: pathname === "/roleplay",
-      featureKey: "ai_partner",
     },
     {
       name: t("nav.vocabulary", locale),
@@ -93,17 +93,17 @@ export function Sidebar() {
       featureKey: "spell_master",
     },
     {
-      name: locale === "bn" ? "অডিও বুক" : "Audio Books",
-      href: "/audiobooks",
-      icon: HeadphonesIcon,
-      active: pathname.startsWith("/audiobooks"),
-    },
-    {
       name: locale === "bn" ? "কুইজ" : "Quiz",
       href: "/quiz",
       icon: CheckmarkBadge01Icon,
       active: pathname.startsWith("/quiz"),
       featureKey: "quiz",
+    },
+    {
+      name: t("nav.sayIt", locale),
+      href: "/what-should-i-say",
+      icon: SparklesIcon,
+      active: pathname === "/what-should-i-say",
     },
     {
       name: t("nav.progress", locale),

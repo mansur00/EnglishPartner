@@ -417,14 +417,14 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
-      "className": "p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs",
+      "detail": "ClassName repeated 9 times",
+      "className": "p-4 sm:p-6 bg-card border border-border rounded-card flex flex-col justify-between space-y-4 shadow-xs h-full",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 16 times",
+      "detail": "ClassName repeated 21 times",
       "className": "flex flex-wrap items-center justify-between gap-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
@@ -436,7 +436,7 @@
       ]
     },
     {
-      "detail": "ClassName repeated 5 times",
+      "detail": "ClassName repeated 10 times",
       "className": "size-10 rounded-control bg-primary/10 text-primary flex items-center justify-center shrink-0",
       "files": [
         "src/components/dashboard/DashboardClient.tsx",
@@ -444,15 +444,24 @@
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
-      "className": "text-body text-muted-foreground leading-relaxed",
+      "detail": "ClassName repeated 10 times",
+      "className": "text-card-title text-foreground line-clamp-2 break-words",
       "files": [
-        "src/components/dashboard/DashboardClient.tsx"
+        "src/components/dashboard/DashboardClient.tsx",
+        "src/components/grammar/GrammarPathClient.tsx"
       ]
     },
     {
-      "detail": "ClassName repeated 4 times",
-      "className": "btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 cursor-pointer",
+      "detail": "ClassName repeated 3 times",
+      "className": "text-body text-muted-foreground leading-relaxed line-clamp-2",
+      "files": [
+        "src/components/dashboard/DashboardClient.tsx",
+        "src/components/discovery/ScenarioCard.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 7 times",
+      "className": "text-meta text-muted-foreground leading-relaxed line-clamp-2",
       "files": [
         "src/components/dashboard/DashboardClient.tsx"
       ]
