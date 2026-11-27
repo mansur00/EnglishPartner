@@ -2224,6 +2224,11 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-27, Audio Books & Synced Story Books (`/audiobooks`)
+- Added `/audiobooks` (`src/app/(app)/audiobooks/page.tsx` + `src/components/audiobooks/AudioBooksClient.tsx`) linked from Sidebar and mobile Header drawer.
+- Supports 2 modes: **Audio Only** (local MP3/WAV/M4A/OGG uploads with speed 0.75x–1.5x & -10s/+10s seek) and **Story Book (400–1000 words)** (4 curated starter stories + Admin uploads with live sentence-by-sentence highlight & auto-scroll synced to uploaded audio OR built-in TTS voice).
+- Added local persistence (`src/lib/audiobooks/store.ts`, `data/audiobooks.json`, `public/audio/audiobooks/`) and Admin-only upload/delete API (`src/app/api/v1/audiobooks/route.ts`), plus Guest 5% preview lock via `useSessionAccess()`.
+
 ### 2026-11-27, Full System, Build, UX & Supabase Audit
 - Verified `npm run grammar:check` (130 categories, 18 rules, 339 tokens) and `npm run build` (185/185 pages, 0 errors).
 - Verified Supabase REST tables (`profiles`, `feature_flags`, `app_settings` all HTTP 200) and live `/api/v1/features` + `/api/v1/app-config` endpoints.

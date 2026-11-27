@@ -28,6 +28,7 @@ import {
   Logout01Icon,
   Login01Icon,
   BookOpen01Icon,
+  HeadphonesIcon,
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -104,6 +105,11 @@ export function Header({ user: initialUser }: HeaderProps = {}) {
       href: "/spell-master",
       icon: SparklesIcon,
       featureKey: "spell_master",
+    },
+    {
+      name: locale === "bn" ? "অডিও বুক" : "Audio Books",
+      href: "/audiobooks",
+      icon: HeadphonesIcon,
     },
     { name: t("nav.progress", locale), href: "/progress", icon: Analytics01Icon },
     { name: t("nav.settings", locale), href: "/settings", icon: Settings01Icon },

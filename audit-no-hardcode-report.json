@@ -42,7 +42,7 @@
     },
     {
       "file": "src/components/navigation/Header.tsx",
-      "line": 171,
+      "line": 177,
       "detail": "Hardcoded layout constant / magic number: h-7, h-10",
       "code": "className=\"h-7 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity\""
     },
@@ -56,10 +56,11 @@
   "e_inline_styles": [],
   "f_duplication": [
     {
-      "detail": "ClassName repeated 6 times",
+      "detail": "ClassName repeated 7 times",
       "className": "flex flex-wrap items-center justify-between gap-3",
       "files": [
         "src/app/(app)/dashboard/level-assessment/page.tsx",
+        "src/components/audiobooks/AudioBooksClient.tsx",
         "src/components/learning/AudioPlayer.tsx",
         "src/components/practice/ReadAloudCard.tsx",
         "src/components/quiz/ConversationQuizPlayClient.tsx",
@@ -87,11 +88,12 @@
       ]
     },
     {
-      "detail": "ClassName repeated 3 times",
+      "detail": "ClassName repeated 4 times",
       "className": "flex flex-col md:flex-row md:items-center justify-between gap-4",
       "files": [
         "src/app/(app)/quiz/page.tsx",
         "src/components/analytics/ProgressDashboard.tsx",
+        "src/components/audiobooks/AudioBooksClient.tsx",
         "src/components/spelling/SpellMasterClient.tsx"
       ]
     },
@@ -341,6 +343,14 @@
         "src/components/practice/DailyPracticeClient.tsx",
         "src/components/practice/PersonalizedPracticeCard.tsx",
         "src/components/tools/WhatShouldISay.tsx"
+      ]
+    },
+    {
+      "detail": "ClassName repeated 3 times",
+      "className": "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10",
+      "files": [
+        "src/components/audiobooks/AudioBooksClient.tsx",
+        "src/components/settings/SettingsClient.tsx"
       ]
     },
     {

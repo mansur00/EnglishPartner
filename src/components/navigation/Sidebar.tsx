@@ -20,6 +20,7 @@ import {
   SparklesIcon,
   CheckmarkBadge01Icon,
   BookOpen01Icon,
+  HeadphonesIcon,
 } from "@hugeicons/core-free-icons";
 
 interface NavItem {
@@ -90,6 +91,12 @@ export function Sidebar() {
       icon: SparklesIcon,
       active: pathname.startsWith("/spell-master"),
       featureKey: "spell_master",
+    },
+    {
+      name: locale === "bn" ? "অডিও বুক" : "Audio Books",
+      href: "/audiobooks",
+      icon: HeadphonesIcon,
+      active: pathname.startsWith("/audiobooks"),
     },
     {
       name: locale === "bn" ? "কুইজ" : "Quiz",
