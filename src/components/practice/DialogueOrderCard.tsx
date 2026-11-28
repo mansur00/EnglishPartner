@@ -224,10 +224,10 @@ export function DialogueOrderCard({
                 isSelected
                   ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                   : isMisplaced
-                  ? "border-destructive/60 bg-destructive/5"
-                  : isTurnCorrect
-                  ? "border-success/60 bg-success-bg/20"
-                  : "border-border bg-card hover:border-border/80"
+                    ? "border-destructive/60 bg-destructive/5"
+                    : isTurnCorrect
+                      ? "border-success/60 bg-success-bg/20"
+                      : "border-border bg-card hover:border-border/80"
               )}
             >
               {/* Left: Position & Speaker */}
@@ -239,8 +239,8 @@ export function DialogueOrderCard({
                     isMisplaced
                       ? "bg-destructive/15 text-destructive"
                       : isTurnCorrect
-                      ? "bg-success-bg text-success"
-                      : "bg-muted text-muted-foreground"
+                        ? "bg-success-bg text-success"
+                        : "bg-muted text-muted-foreground"
                   )}
                   title="Click to select for swap"
                 >

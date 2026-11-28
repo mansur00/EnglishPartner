@@ -2224,6 +2224,9 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-28, Landing Page Full-Width Hero & Footer Backgrounds
+- Updated `src/app/page.tsx` so Section 1 (Hero) and Section 5 + Footer span full viewport width (`w-full`) edge-to-edge while keeping inner content centered inside `container-landing`.
+
 ### 2026-11-28, Admin Panel Role Tabs, Session Tracking & Right Sidebar Inspector
 - Added `moderator` role support (`supabase/migrations/20261128_user_sessions.sql`, `src/lib/auth/session.ts`) and `public.user_sessions` table to record per-login active/inactive sessions.
 - Added `/api/v1/auth/session` (`POST` heartbeat, `DELETE` sign-out) wired into `SessionIsolationProvider.tsx`, plus `/api/v1/admin/users/[id]/sessions` (`GET`) and `DELETE /api/v1/admin/users`.

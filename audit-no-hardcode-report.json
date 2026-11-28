@@ -30,7 +30,7 @@
     },
     {
       "file": "src/app/page.tsx",
-      "line": 600,
+      "line": 602,
       "detail": "Hardcoded layout constant / magic number: h-8",
       "code": "className=\"h-8 w-auto object-contain\""
     },

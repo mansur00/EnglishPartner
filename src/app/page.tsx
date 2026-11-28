@@ -88,9 +88,9 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Section 1 — 2-Column SaaS Hero (Left Content + Right Illustration) */}
-      <section className="container-landing pt-8 pb-4 md:pt-12 md:pb-8">
-        <div className="rounded-band bg-card border border-border/60 shadow-2xs p-6 sm:p-10 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      {/* Section 1 — Full-Width 2-Column SaaS Hero */}
+      <section className="w-full bg-card border-b border-border/60">
+        <div className="container-landing py-10 sm:py-14 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Text Content & CTAs */}
           <div className="lg:col-span-6 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-accent text-accent-foreground text-chip">
@@ -553,9 +553,11 @@ export default function LandingPage() {
             </Link>
           </div>
         </section>
+      </main>
 
-        {/* Section 5 & Footer — Unified Soft Gradient CTA + Nested Footer Card */}
-        <section className="rounded-band bg-gradient-to-br from-accent via-card to-sun-100/70 border border-border/60 p-4 sm:p-6 md:p-8 shadow-2xs space-y-10 md:space-y-12">
+      {/* Section 5 & Footer — Full-Width Soft Gradient CTA + Nested Footer Card */}
+      <section className="w-full bg-gradient-to-br from-accent via-card to-sun-100/70 border-t border-border/60 py-10 md:py-14">
+        <div className="container-landing space-y-10 md:space-y-12">
           {/* Top Half: CTA */}
           <div className="pt-8 pb-2 md:pt-12 md:pb-4 text-center space-y-5 max-w-reading mx-auto">
             <h2 className="text-landing-heading text-foreground leading-tight">
@@ -696,8 +698,8 @@ export default function LandingPage() {
               © 2026 EnglishPartner by MansurVerse, All rights reserved.
             </div>
           </footer>
-        </section>
-      </main>
+        </div>
+      </section>
     </div>
   );
 }
