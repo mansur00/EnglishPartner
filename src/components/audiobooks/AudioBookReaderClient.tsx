@@ -21,7 +21,8 @@ import { CefrChip, type CefrLevel } from "@/components/shared";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslationLocale, useLiveTranslation } from "@/lib/i18n";
+import { getLanguageMeta, isRtlLanguage } from "@/lib/i18n/languages";
 import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { speakText, stopSpeech } from "@/lib/audio/speech-engine";
 import {
@@ -46,6 +47,7 @@ interface AudioBookReaderClientProps {
 export function AudioBookReaderClient({ bookId }: AudioBookReaderClientProps) {
   const router = useRouter();
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
   const isBn = locale === "bn";
   const { isGuest, getGuestLimit } = useSessionAccess();
 
@@ -54,6 +56,17 @@ export function AudioBookReaderClient({ bookId }: AudioBookReaderClientProps) {
   const [tabCount, setTabCount] = useState<number>(1);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const needsLiveSummary =
+    Boolean(item?.description) &&
+    translationLocale !== "none" &&
+    translationLocale !== "bn";
+  const { translatedText: liveSummary } = useLiveTranslation(
+    needsLiveSummary ? item?.description : undefined,
+    needsLiveSummary ? translationLocale : "none"
+  );
+  const transLangMeta =
+    translationLocale !== "none" ? getLanguageMeta(translationLocale) : null;
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
@@ -488,7 +501,9 @@ export function AudioBookReaderClient({ bookId }: AudioBookReaderClientProps) {
               {isBn && item.descriptionBn ? item.descriptionBn : item.description}
             </p>
 
-            {item.summaryBn && !isLocked && (
+            {translationLocale !== "none" &&
+              (translationLocale === "bn" ? item.summaryBn : item.description) &&
+              !isLocked && (
               <div className="pt-1">
                 <Button
                   type="button"
@@ -500,17 +515,25 @@ export function AudioBookReaderClient({ bookId }: AudioBookReaderClientProps) {
                   <span>
                     {showBnSummary
                       ? isBn
-                        ? "বাংলা সারসংক্ষেপ লুকান"
-                        : "Hide Bangla Summary"
+                        ? "অনুবাদ সারসংক্ষেপ লুকান"
+                        : `Hide ${transLangMeta?.nativeName || "Translated"} Summary`
                       : isBn
-                        ? "বাংলা সারসংক্ষেপ দেখুন"
-                        : "Show Bangla Summary"}
+                        ? "অনুবাদ সারসংক্ষেপ দেখুন"
+                        : `Show ${transLangMeta?.nativeName || "Translated"} Summary`}
                   </span>
                 </Button>
 
                 {showBnSummary && (
-                  <div className="mt-3 p-3.5 rounded-panel bg-primary/5 border border-primary/20 text-meta text-foreground text-bangla">
-                    {item.summaryBn}
+                  <div
+                    dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                    className={cn(
+                      "mt-3 p-3.5 rounded-panel bg-primary/5 border border-primary/20 text-meta text-foreground",
+                      translationLocale === "bn" && "text-bangla"
+                    )}
+                  >
+                    {translationLocale === "bn"
+                      ? item.summaryBn
+                      : liveSummary || item.description}
                   </div>
                 )}
               </div>

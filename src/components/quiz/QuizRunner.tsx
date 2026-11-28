@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useTranslations } from "@/lib/i18n";
+import { useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   RefreshIcon,
@@ -61,7 +62,7 @@ export function QuizRunner({
   style,
   onSubmittedChange,
 }: QuizRunnerProps) {
-  const { locale } = useTranslations();
+  const { locale, translationLocale } = useTranslations();
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [submittedResult, setSubmittedResult] =
     useState<QuizSessionResult | null>(null);
@@ -70,6 +71,22 @@ export function QuizRunner({
   const answeredCount = Object.keys(answers).length;
   const isSubmitted = submittedResult !== null;
   const progressPct = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+
+  const needsLive = translationLocale !== "none" && translationLocale !== "bn";
+  const liveTexts = useMemo(() => {
+    if (!needsLive) return [];
+    const list: string[] = [];
+    for (const q of questions) {
+      if (q.prompt) list.push(q.prompt);
+      if (isSubmitted && q.explanation) list.push(q.explanation);
+    }
+    return list;
+  }, [needsLive, questions, isSubmitted]);
+
+  const { translations: liveMap } = useLiveTranslations(
+    liveTexts,
+    needsLive ? translationLocale : "none"
+  );
 
   const handleSelectOption = (questionId: string, optionIdx: number) => {
     if (isSubmitted || isRefreshing) return;
@@ -396,9 +413,17 @@ export function QuizRunner({
                   <h3 className="text-card-title text-foreground leading-snug">
                     {q.prompt}
                   </h3>
-                  {locale === "bn" && q.promptBn && (
+                  {translationLocale === "bn" && q.promptBn && (
                     <p className="text-meta text-muted-foreground text-bangla">
                       {q.promptBn}
+                    </p>
+                  )}
+                  {needsLive && liveMap[q.prompt] && (
+                    <p
+                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                      className="text-meta text-muted-foreground"
+                    >
+                      {liveMap[q.prompt]}
                     </p>
                   )}
                 </div>
@@ -506,10 +531,19 @@ export function QuizRunner({
 
               {/* Explanation shown ONLY after Submit */}
               {isSubmitted && (
-                <div className="rounded-control bg-muted/45 border border-border/70 p-3 text-meta text-foreground leading-relaxed">
-                  {locale === "bn" && q.explanationBn
-                    ? q.explanationBn
-                    : q.explanation}
+                <div className="rounded-control bg-muted/45 border border-border/70 p-3 text-meta text-foreground leading-relaxed space-y-1">
+                  <p>{q.explanation}</p>
+                  {translationLocale === "bn" && q.explanationBn && (
+                    <p className="text-muted-foreground text-bangla">{q.explanationBn}</p>
+                  )}
+                  {needsLive && q.explanation && liveMap[q.explanation] && (
+                    <p
+                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                      className="text-muted-foreground"
+                    >
+                      {liveMap[q.explanation]}
+                    </p>
+                  )}
                 </div>
               )}
             </Card>

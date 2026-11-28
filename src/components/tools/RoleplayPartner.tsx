@@ -303,7 +303,8 @@ function FeedbackSectionHeader({ children }: { children: React.ReactNode }) {
 }
 
 export function RoleplayPartner() {
-  const { locale, t } = useTranslations();
+  const { locale, translationLocale, t } = useTranslations();
+  const effectiveLearnerLang = translationLocale === "none" ? "en" : translationLocale;
   const { isGuest, config, getGuestLimit } = useSessionAccess();
   const { isEnabled } = useFeatureFlags();
   const [selectedScenario, setSelectedScenario] = useState<RoleplayScenario>(FREESTYLE_SCENARIO);
@@ -606,7 +607,7 @@ export function RoleplayPartner() {
           style: "casual",
           transcript,
           learner_message: text,
-          explanation_language: "bn",
+          explanation_language: effectiveLearnerLang,
         }),
       });
 
@@ -695,7 +696,7 @@ export function RoleplayPartner() {
           scenario_title: selectedScenario.title,
           level: selectedScenario.level,
           transcript,
-          learner_language: "bn",
+          learner_language: effectiveLearnerLang,
         }),
       });
 
@@ -706,7 +707,7 @@ export function RoleplayPartner() {
         const fallbackFb = generateRoleplayFeedback({
           scenario_title: selectedScenario.title,
           level: selectedScenario.level,
-          learner_language: "bn",
+          learner_language: effectiveLearnerLang,
           transcript,
         });
         setFeedback(fallbackFb);

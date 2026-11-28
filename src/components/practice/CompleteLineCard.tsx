@@ -12,7 +12,7 @@ import {
   RefreshIcon,
 } from "@hugeicons/core-free-icons";
 import { CompleteLineExercise } from "@/content/seed/exercises";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslationLocale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
 import { Pill } from "@/components/ui/pill";
@@ -25,6 +25,7 @@ interface CompleteLineCardProps {
 
 export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProps) {
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   const [hasChecked, setHasChecked] = useState(false);
@@ -211,7 +212,7 @@ export function CompleteLineCard({ exercises, onComplete }: CompleteLineCardProp
             />
             <span>{isCorrect ? "চমৎকার! সঠিক হয়েছে।" : "সঠিক উত্তর নয়"}</span>
           </div>
-          <p>{currentItem.explanationBn}</p>
+          {translationLocale === "bn" && <p>{currentItem.explanationBn}</p>}
         </div>
       )}
 

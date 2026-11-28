@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PageContainer } from "@/components/shared";
@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getQuizSessionResult } from "@/lib/quiz/storage";
 import type { QuizSessionResult } from "@/lib/quiz/types";
-import { useTranslations } from "@/lib/i18n";
+import { useTranslations, useLiveTranslations } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -21,10 +22,26 @@ import {
 export function QuizResultDetailClient() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("sessionId");
-  const { locale } = useTranslations();
+  const { locale, translationLocale } = useTranslations();
   const [result, setResult] = useState<QuizSessionResult | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [filter, setFilter] = useState<"all" | "wrong" | "correct">("wrong");
+
+  const needsLive = translationLocale !== "none" && translationLocale !== "bn";
+  const liveTexts = useMemo(() => {
+    if (!needsLive || !result) return [];
+    const list: string[] = [];
+    for (const q of result.questions) {
+      if (q.prompt) list.push(q.prompt);
+      if (q.explanation) list.push(q.explanation);
+    }
+    return list;
+  }, [needsLive, result]);
+
+  const { translations: liveMap } = useLiveTranslations(
+    liveTexts,
+    needsLive ? translationLocale : "none"
+  );
 
   useEffect(() => {
     const found = sessionId ? getQuizSessionResult(sessionId) : null;
@@ -244,9 +261,17 @@ export function QuizResultDetailClient() {
                       )}
                     </div>
                     <h2 className="text-card-title text-foreground">{q.prompt}</h2>
-                    {locale === "bn" && q.promptBn && (
+                    {translationLocale === "bn" && q.promptBn && (
                       <p className="text-meta text-muted-foreground text-bangla">
                         {q.promptBn}
+                      </p>
+                    )}
+                    {needsLive && liveMap[q.prompt] && (
+                      <p
+                        dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                        className="text-meta text-muted-foreground"
+                      >
+                        {liveMap[q.prompt]}
                       </p>
                     )}
                   </div>
@@ -291,10 +316,16 @@ export function QuizResultDetailClient() {
                   </div>
                 </div>
 
-                <div className="p-3 rounded-control bg-muted/40 border border-border/60 text-meta text-muted-foreground">
-                  {locale === "bn" && q.explanationBn
-                    ? q.explanationBn
-                    : q.explanation}
+                <div className="p-3 rounded-control bg-muted/40 border border-border/60 text-meta text-muted-foreground space-y-1">
+                  <p className="text-foreground">{q.explanation}</p>
+                  {translationLocale === "bn" && q.explanationBn && (
+                    <p className="text-bangla">{q.explanationBn}</p>
+                  )}
+                  {needsLive && q.explanation && liveMap[q.explanation] && (
+                    <p dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}>
+                      {liveMap[q.explanation]}
+                    </p>
+                  )}
                 </div>
               </Card>
             );

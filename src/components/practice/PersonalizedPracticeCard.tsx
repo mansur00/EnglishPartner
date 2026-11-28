@@ -576,11 +576,11 @@ export function PersonalizedPracticeCard({
             <h2 className="font-heading text-card-title text-foreground">
               {isBn ? "আজকের ১৫–৩০ মিনিটের স্পোকেন প্ল্যান" : "Today's Guided Spoken Plan"}
             </h2>
-            <p className={cn("text-meta text-muted-foreground", isBn && "text-bangla")}>
-              {showTranslation && translationLocale !== "bn" && liveMap[dayPlan.dailyObjectiveEn]
-                ? liveMap[dayPlan.dailyObjectiveEn]
-                : isBn
-                  ? dayPlan.dailyObjectiveBn
+            <p className={cn("text-meta text-muted-foreground", translationLocale === "bn" && "text-bangla")}>
+              {translationLocale === "bn"
+                ? dayPlan.dailyObjectiveBn
+                : showTranslation && liveMap[dayPlan.dailyObjectiveEn]
+                  ? liveMap[dayPlan.dailyObjectiveEn]
                   : dayPlan.dailyObjectiveEn}
             </p>
           </div>

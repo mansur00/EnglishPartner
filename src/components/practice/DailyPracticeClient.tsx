@@ -266,15 +266,13 @@ export function DailyPracticeClient() {
           </span>
         </div>
         <p className="text-meta text-foreground leading-snug">
-          {translationLocale !== "none" && translationLocale !== "bn" && sidebarTranslations[coachTextEn]
-            ? sidebarTranslations[coachTextEn]
-            : challengeState.enrolled
-              ? locale === "bn"
-                ? `${challengePhase.titleBn} — আজকের স্পোকেন প্র্যাকটিসে ${topWeakArea ? topWeakArea.labelBn : "বাক্য গঠন"} উন্নত করতে AI পার্টনারের সাথে কথা বলুন।`
-                : coachTextEn
-              : locale === "bn"
-                ? "৯০-দিনের স্পোকেন ইংলিশ চ্যালেঞ্জ শুরু করলে আপনার স্পিকিং অগ্রগতি অনুযায়ী প্রতিদিন কাস্টম প্ল্যান পাবেন।"
-                : coachTextEn}
+          {translationLocale === "bn"
+            ? challengeState.enrolled
+              ? `${challengePhase.titleBn} — আজকের স্পোকেন প্র্যাকটিসে ${topWeakArea ? topWeakArea.labelBn : "বাক্য গঠন"} উন্নত করতে AI পার্টনারের সাথে কথা বলুন।`
+              : "৯০-দিনের স্পোকেন ইংলিশ চ্যালেঞ্জ শুরু করলে আপনার স্পিকিং অগ্রগতি অনুযায়ী প্রতিদিন কাস্টম প্ল্যান পাবেন।"
+            : translationLocale !== "none" && sidebarTranslations[coachTextEn]
+              ? sidebarTranslations[coachTextEn]
+              : coachTextEn}
         </p>
         <Link
           href="/roleplay"

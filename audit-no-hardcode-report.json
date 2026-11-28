@@ -48,7 +48,7 @@
     },
     {
       "file": "src/components/tools/RoleplayPartner.tsx",
-      "line": 1126,
+      "line": 1127,
       "detail": "Arbitrary layout [Npx] utility: h-[calc(100dvh-11.5rem)], h-[calc(100dvh-7.5rem)], min-h-[420px]",
       "code": "<Card className=\"p-4 sm:p-6 bg-card rounded-card gap-4 h-[calc(100dvh-11.5rem)] lg:h-[calc(100dvh-7.5rem)] min-h-[420px] flex flex-col justify-between shadow-xs\">"
     }
@@ -229,14 +229,13 @@
       ]
     },
     {
-      "detail": "ClassName repeated 8 times",
+      "detail": "ClassName repeated 7 times",
       "className": "text-meta text-muted-foreground text-bangla",
       "files": [
         "src/app/page.tsx",
         "src/components/practice/ListeningQuizCard.tsx",
         "src/components/quiz/QuizResultDetailClient.tsx",
-        "src/components/quiz/QuizRunner.tsx",
-        "src/components/spelling/SpellMasterClient.tsx"
+        "src/components/quiz/QuizRunner.tsx"
       ]
     },
     {

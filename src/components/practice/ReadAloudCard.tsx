@@ -30,7 +30,8 @@ import { Button } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { Tag } from "@/components/ui/tag";
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslationLocale, useLiveTranslation } from "@/lib/i18n";
+import { isRtlLanguage } from "@/lib/i18n/languages";
 
 interface ReadAloudCardProps {
   exercises: ReadAloudExercise[];
@@ -64,6 +65,7 @@ interface WindowWithSpeech extends Window {
 
 export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
@@ -87,6 +89,11 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
   const recognitionRef = useRef<BrowserSpeechRecognition | null>(null);
 
   const currentItem = exercises[currentIndex] || exercises[0];
+  const needsLive = translationLocale !== "none" && translationLocale !== "bn";
+  const { translatedText: liveTranslation } = useLiveTranslation(
+    needsLive ? currentItem?.targetSentence : undefined,
+    needsLive ? translationLocale : "none"
+  );
 
   // Cleanup recorded audio blob URLs and timer on unmount
   useEffect(() => {
@@ -338,11 +345,21 @@ export function ReadAloudCard({ exercises, onComplete }: ReadAloudCardProps) {
           &ldquo;{currentItem.targetSentence}&rdquo;
         </h2>
 
-        <p className="text-subtitle-bn text-muted-foreground">
-          {currentItem.translationBn}
-        </p>
+        {translationLocale !== "none" && (
+          <p
+            dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+            className={cn(
+              "text-subtitle-bn text-muted-foreground",
+              translationLocale === "bn" && "text-bangla"
+            )}
+          >
+            {translationLocale === "bn"
+              ? currentItem.translationBn
+              : liveTranslation || ""}
+          </p>
+        )}
 
-        {currentItem.explanationBn && (
+        {translationLocale === "bn" && currentItem.explanationBn && (
           <p className="text-meta-bn pt-1 border-t border-border/50">
             💡 <strong>উচ্চারণ নির্দেশিকা:</strong> {currentItem.explanationBn}
           </p>

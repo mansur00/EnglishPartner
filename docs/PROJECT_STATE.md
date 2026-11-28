@@ -2224,6 +2224,14 @@ Entry format:
 ### 2026-11-27, Spell Master Colored Reliability Text Pills (`SpellMasterClient.tsx`)
 - Replaced emoji circles (`🟢`, `🟡`, `🔴`) on rule reliability indicators with semantic colored `Badge` text pills (`success` green for `High`, `warning` orange for `Medium`, `error` red for `Low`) across the legend, dropdown, rule title cards, right sidebar, and test feedback.
 
+### 2026-11-28, Systematic Translation Language Audit & Hardcoded Bangla Removal
+- Fixed `useLiveTranslations` (`src/lib/i18n/use-live-translation.ts`) to clear stale previous-language entries when `targetLang` switches.
+- Fixed `DailyPracticeClient.tsx` & `PersonalizedPracticeCard.tsx` so `translationLocale === "bn"` renders Bangla insights/objectives even when System Language `locale === "en"`, and non-Bangla `translationLocale` uses `useLiveTranslations`.
+- Fixed `RoleplayPartner.tsx` by replacing 4 hardcoded `"bn"` `explanation_language`/`learner_language` API payloads with `translationLocale === "none" ? "en" : translationLocale`.
+- Updated `QuizRunner.tsx` and `QuizResultDetailClient.tsx` to follow `translationLocale` (curated `*Bn` for `"bn"`, `useLiveTranslations` + RTL support for other languages, English-only for `"none"`) instead of gating on `locale === "bn"`.
+- Updated `SpellMasterClient.tsx` to respect `translationLocale` across Learn, AI Lookup, Test, and Rules views using curated Bangla fields for `"bn"`, `useLiveTranslations` for other languages, and hiding meanings when `"none"`.
+- Updated `AudioBookReaderClient.tsx`, `ReadAloudCard.tsx`, and `CompleteLineCard.tsx` to respect `translationLocale` + `useLiveTranslation` instead of hardcoding Bangla summaries/translations.
+
 ### 2026-11-28, Landing Page Full-Width Hero & Footer Backgrounds
 - Updated `src/app/page.tsx` so Section 1 (Hero) and Section 5 + Footer span full viewport width (`w-full`) edge-to-edge while keeping inner content centered inside `container-landing`.
 

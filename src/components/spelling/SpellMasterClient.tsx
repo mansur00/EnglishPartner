@@ -37,7 +37,8 @@ import { useSessionAccess } from "@/components/auth/SessionIsolationProvider";
 import { useFeatureFlags } from "@/lib/features/use-feature-flags";
 import { FeatureDisabledCard } from "@/components/auth/FeatureDisabledCard";
 import { GuestLimitBanner } from "@/components/auth/GuestLimitBanner";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslationLocale, useLiveTranslations } from "@/lib/i18n";
+import { getLanguageMeta, isRtlLanguage } from "@/lib/i18n/languages";
 import { speakText } from "@/lib/audio/speech-engine";
 import { cn } from "@/lib/utils";
 import {
@@ -85,7 +86,11 @@ function scrambleWord(word: string): string[] {
 
 export function SpellMasterClient() {
   const locale = useLocale();
+  const translationLocale = useTranslationLocale();
   const isBn = locale === "bn";
+  const needsLiveTrans = translationLocale !== "none" && translationLocale !== "bn";
+  const transLangMeta =
+    translationLocale !== "none" ? getLanguageMeta(translationLocale) : null;
   const { isGuest, config, getGuestLimit } = useSessionAccess();
   const { isEnabled } = useFeatureFlags();
 
@@ -295,6 +300,41 @@ export function SpellMasterClient() {
   const selectedRule = useMemo(
     () => filteredRules.find((r) => r.id === selectedRuleId) ?? filteredRules[0] ?? null,
     [filteredRules, selectedRuleId]
+  );
+
+  const selectedWordObj = useMemo(
+    () => allWords.find((w) => w.id === selectedWordId) ?? filteredWords[0] ?? CURATED_SPELL_WORDS[0],
+    [allWords, filteredWords, selectedWordId]
+  );
+
+  const liveTransTexts = useMemo(() => {
+    if (!needsLiveTrans) return [];
+    const list: string[] = [];
+    if (selectedWordObj) {
+      list.push(
+        selectedWordObj.word,
+        selectedWordObj.mnemonicEn,
+        selectedWordObj.exampleSentence
+      );
+    }
+    if (currentTestWord) {
+      list.push(currentTestWord.word);
+    }
+    if (currentWordRules[0]?.summaryEn) {
+      list.push(currentWordRules[0].summaryEn);
+    }
+    if (selectedRule) {
+      list.push(selectedRule.title, selectedRule.summaryEn);
+    }
+    if (aiLookupResult) {
+      list.push(aiLookupResult.word, aiLookupResult.mnemonicEn);
+    }
+    return list;
+  }, [needsLiveTrans, selectedWordObj, currentTestWord, currentWordRules, selectedRule, aiLookupResult]);
+
+  const { translations: liveTransMap } = useLiveTranslations(
+    liveTransTexts,
+    needsLiveTrans ? translationLocale : "none"
   );
 
   const levelInfo = getLevelFromXp(progress.xp);
@@ -595,15 +635,29 @@ export function SpellMasterClient() {
         </div>
       </div>
 
-      {/* Bangla Meaning */}
-      <div className="rounded-panel bg-muted/40 border border-border/60 p-3.5 space-y-1">
-        <p className="text-chip text-muted-foreground">
-          {isBn ? "বাংলা অর্থ" : "Bengali Meaning"}
-        </p>
-        <p className="text-label text-foreground text-bangla">
-          {selectedWord.meaningBn}
-        </p>
-      </div>
+      {/* Translation Meaning */}
+      {translationLocale !== "none" && (
+        <div className="rounded-panel bg-muted/40 border border-border/60 p-3.5 space-y-1">
+          <p className="text-chip text-muted-foreground">
+            {translationLocale === "bn"
+              ? isBn
+                ? "বাংলা অর্থ"
+                : "Bengali Meaning"
+              : `${transLangMeta?.nativeName || translationLocale.toUpperCase()} Meaning`}
+          </p>
+          <p
+            dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+            className={cn(
+              "text-label text-foreground",
+              translationLocale === "bn" && "text-bangla"
+            )}
+          >
+            {translationLocale === "bn"
+              ? selectedWord.meaningBn
+              : liveTransMap[selectedWord.word] || "…"}
+          </p>
+        </div>
+      )}
 
       {/* Common Mistake Trap */}
       <div className="rounded-panel bg-muted/40 border border-border/60 p-3.5 space-y-2">
@@ -619,8 +673,19 @@ export function SpellMasterClient() {
             ✓ {selectedWord.word}
           </span>
         </div>
-        <p className={cn("text-meta text-muted-foreground leading-relaxed", isBn && "text-bangla")}>
-          💡 {isBn ? selectedWord.mnemonicBn : selectedWord.mnemonicEn}
+        <p
+          dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+          className={cn(
+            "text-meta text-muted-foreground leading-relaxed",
+            translationLocale === "bn" && "text-bangla"
+          )}
+        >
+          💡{" "}
+          {translationLocale === "bn"
+            ? selectedWord.mnemonicBn
+            : needsLiveTrans && liveTransMap[selectedWord.mnemonicEn]
+              ? liveTransMap[selectedWord.mnemonicEn]
+              : selectedWord.mnemonicEn}
         </p>
       </div>
 
@@ -644,6 +709,14 @@ export function SpellMasterClient() {
         <p className="text-meta text-foreground italic leading-relaxed">
           &ldquo;{selectedWord.exampleSentence}&rdquo;
         </p>
+        {needsLiveTrans && liveTransMap[selectedWord.exampleSentence] && (
+          <p
+            dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+            className="text-chip text-muted-foreground"
+          >
+            {liveTransMap[selectedWord.exampleSentence]}
+          </p>
+        )}
       </div>
 
       <Button
@@ -705,8 +778,18 @@ export function SpellMasterClient() {
         <p className="text-chip uppercase tracking-wider text-muted-foreground">
           {isBn ? "নিয়মের ব্যাখ্যা" : "Rule Explanation"}
         </p>
-        <p className={cn("text-meta text-foreground leading-relaxed", isBn && "text-bangla")}>
-          {isBn ? selectedRule.summaryBn : selectedRule.summaryEn}
+        <p
+          dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+          className={cn(
+            "text-meta text-foreground leading-relaxed",
+            translationLocale === "bn" && "text-bangla"
+          )}
+        >
+          {translationLocale === "bn"
+            ? selectedRule.summaryBn
+            : needsLiveTrans && liveTransMap[selectedRule.summaryEn]
+              ? liveTransMap[selectedRule.summaryEn]
+              : selectedRule.summaryEn}
         </p>
       </div>
 
@@ -1048,9 +1131,19 @@ export function SpellMasterClient() {
                       ({aiLookupResult.syllables.join(" • ")})
                     </span>
                   </h3>
-                  <p className="text-meta text-muted-foreground text-bangla">
-                    {aiLookupResult.meaningBn}
-                  </p>
+                  {translationLocale !== "none" && (
+                    <p
+                      dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                      className={cn(
+                        "text-meta text-muted-foreground",
+                        translationLocale === "bn" && "text-bangla"
+                      )}
+                    >
+                      {translationLocale === "bn"
+                        ? aiLookupResult.meaningBn
+                        : liveTransMap[aiLookupResult.word] || "…"}
+                    </p>
+                  )}
                 </div>
                 <Button
                   type="button"
@@ -1061,8 +1154,19 @@ export function SpellMasterClient() {
                   + Add to Word List
                 </Button>
               </div>
-              <p className="text-meta text-foreground text-bangla">
-                💡 {isBn ? aiLookupResult.mnemonicBn : aiLookupResult.mnemonicEn}
+              <p
+                dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                className={cn(
+                  "text-meta text-foreground",
+                  translationLocale === "bn" && "text-bangla"
+                )}
+              >
+                💡{" "}
+                {translationLocale === "bn"
+                  ? aiLookupResult.mnemonicBn
+                  : needsLiveTrans && liveTransMap[aiLookupResult.mnemonicEn]
+                    ? liveTransMap[aiLookupResult.mnemonicEn]
+                    : aiLookupResult.mnemonicEn}
               </p>
             </Card>
           )}
@@ -1188,10 +1292,22 @@ export function SpellMasterClient() {
           </div>
 
           <div className="rounded-panel bg-muted/35 border border-border/60 p-5 text-center space-y-3">
-            <p className="text-chip text-muted-foreground">
-              {isBn ? "অর্থ:" : "Meaning:"}{" "}
-              <strong className="text-foreground text-bangla">{currentTestWord.meaningBn}</strong>
-            </p>
+            {translationLocale !== "none" && (
+              <p className="text-chip text-muted-foreground">
+                {isBn ? "অর্থ:" : "Meaning:"}{" "}
+                <strong
+                  dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                  className={cn(
+                    "text-foreground",
+                    translationLocale === "bn" && "text-bangla"
+                  )}
+                >
+                  {translationLocale === "bn"
+                    ? currentTestWord.meaningBn
+                    : liveTransMap[currentTestWord.word] || "…"}
+                </strong>
+              </p>
+            )}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               <Button
                 type="button"
@@ -1233,8 +1349,18 @@ export function SpellMasterClient() {
                 <p className="text-chip text-primary">
                   {currentWordRules[0].id}: {currentWordRules[0].title}
                 </p>
-                <p className={cn("text-chip text-muted-foreground", isBn && "text-bangla")}>
-                  {isBn ? currentWordRules[0].summaryBn : currentWordRules[0].summaryEn}
+                <p
+                  dir={isRtlLanguage(translationLocale) ? "rtl" : "ltr"}
+                  className={cn(
+                    "text-chip text-muted-foreground",
+                    translationLocale === "bn" && "text-bangla"
+                  )}
+                >
+                  {translationLocale === "bn"
+                    ? currentWordRules[0].summaryBn
+                    : needsLiveTrans && liveTransMap[currentWordRules[0].summaryEn]
+                      ? liveTransMap[currentWordRules[0].summaryEn]
+                      : currentWordRules[0].summaryEn}
                 </p>
               </div>
             )}

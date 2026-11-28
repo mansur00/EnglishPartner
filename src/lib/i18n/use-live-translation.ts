@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 
 const memoryCache = new Map<string, string>();
 
@@ -46,10 +46,14 @@ function writeLocalCache(lang: string, updates: Record<string, string>) {
 export function useLiveTranslations(texts: string[], targetLang: string) {
   const [resolvedMap, setResolvedMap] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
+  const prevTargetLangRef = useRef<string>(targetLang);
 
   const textsKey = useMemo(() => texts.filter(Boolean).join("||"), [texts]);
 
   useEffect(() => {
+    const langChanged = prevTargetLangRef.current !== targetLang;
+    prevTargetLangRef.current = targetLang;
+
     if (!targetLang || targetLang === "none" || targetLang === "en" || !textsKey) {
       queueMicrotask(() => {
         setResolvedMap({});
@@ -79,9 +83,9 @@ export function useLiveTranslations(texts: string[], targetLang: string) {
       }
     }
 
-    if (Object.keys(initial).length > 0) {
+    if (langChanged || Object.keys(initial).length > 0) {
       queueMicrotask(() => {
-        setResolvedMap((prev) => ({ ...prev, ...initial }));
+        setResolvedMap((prev) => (langChanged ? initial : { ...prev, ...initial }));
       });
     }
 
